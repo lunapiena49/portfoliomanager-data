@@ -1,0 +1,59 @@
+---
+// Shared landing page shell used by all 6 language routes
+import type { Translations, Locale } from '../i18n/index';
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Hero from './Hero.astro';
+import Features from './Features.astro';
+import Brokers from './Brokers.astro';
+import PrivacySecurity from './PrivacySecurity.astro';
+import HowItWorks from './HowItWorks.astro';
+import WebDemoSection from './WebDemoSection.astro';
+import FAQ from './FAQ.astro';
+import DisclaimerBox from './DisclaimerBox.astro';
+import About from './About.astro';
+import NewsletterBand from './NewsletterBand.astro';
+import Footer from './Footer.astro';
+import Modal from './Modal.astro';
+
+interface Props {
+  t: Translations;
+  lang: Locale;
+  // 'pre' = before Play Store launch, 'live' = after
+  launchState?: 'pre' | 'live';
+  playStoreUrl?: string;
+}
+
+const {
+  t,
+  lang,
+  launchState = 'pre',
+  playStoreUrl = 'https://play.google.com/store/apps/details?id=app.plurifin.portfoliomanager',
+} = Astro.props;
+---
+<Layout
+  title={t.meta.title}
+  description={t.meta.description}
+  ogTitle={t.meta.ogTitle}
+  ogDescription={t.meta.ogDescription}
+  lang={lang}
+  canonicalPath={lang === 'it' ? '' : lang}
+>
+  <Navbar t={t} currentLang={lang} />
+
+  <main id="main">
+    <Hero t={t} launchState={launchState} playStoreUrl={playStoreUrl} />
+    <Features t={t} />
+    <Brokers t={t} />
+    <PrivacySecurity t={t} lang={lang} />
+    <HowItWorks t={t} />
+    <WebDemoSection t={t} lang={lang} launchState={launchState} playStoreUrl={playStoreUrl} />
+    <FAQ t={t} />
+    <DisclaimerBox t={t} lang={lang} />
+    <About t={t} />
+    <NewsletterBand t={t} />
+  </main>
+
+  <Footer t={t} currentLang={lang} />
+  <Modal t={t} />
+</Layout>

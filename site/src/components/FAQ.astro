@@ -1,0 +1,94 @@
+---
+import type { Translations } from '../i18n/index';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
+
+const items = [
+  { q: t.faq.q1, a: t.faq.a1 },
+  { q: t.faq.q2, a: t.faq.a2 },
+  { q: t.faq.q3, a: t.faq.a3 },
+  { q: t.faq.q4, a: t.faq.a4 },
+  { q: t.faq.q5, a: t.faq.a5 },
+  { q: t.faq.q6, a: t.faq.a6 },
+  { q: t.faq.q7, a: t.faq.a7 },
+  { q: t.faq.q8, a: t.faq.a8 },
+];
+---
+<section class="section" id="faq" aria-labelledby="faq-h2">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2 id="faq-h2">{t.faq.h2}</h2>
+    </div>
+    <div class="faq" role="list">
+      {items.map((item, i) => (
+        <div class="faq-item reveal" style={`transition-delay: ${i * 40}ms`} role="listitem">
+          <button
+            class="faq-q"
+            aria-expanded="false"
+            aria-controls={`faq-a-${i}`}
+          >
+            <span>{item.q}</span>
+            <svg class="chev" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"/>
+            </svg>
+          </button>
+          <div class="faq-a" id={`faq-a-${i}`} role="region">
+            <p>{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-head { text-align: center; margin-bottom: 48px; }
+  .section-head h2 { margin: 0; }
+  .faq { max-width: 820px; margin: 0 auto; }
+  .faq-item { border-top: 1px solid var(--divider); }
+  .faq-item:last-child { border-bottom: 1px solid var(--divider); }
+  .faq-q {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding: 22px 0;
+    text-align: left;
+    color: var(--text);
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color .15s;
+    background: none;
+    border: none;
+    font-family: inherit;
+  }
+  .faq-q:hover { color: var(--primary); }
+  .faq-q .chev { transition: transform .25s ease; color: var(--text-3); flex-shrink: 0; }
+  .faq-item.open .faq-q .chev { transform: rotate(180deg); color: var(--primary); }
+  .faq-item.open .faq-q { color: var(--primary); }
+  .faq-a {
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height .35s ease, padding .25s ease;
+    color: var(--text-2);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  .faq-item.open .faq-a { max-height: 400px; padding: 0 0 22px; }
+  .faq-a p { margin: 0; }
+</style>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const btn = item.querySelector('.faq-q') as HTMLButtonElement | null;
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(isOpen));
+    });
+  });
+</script>

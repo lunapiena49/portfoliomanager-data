@@ -1,0 +1,63 @@
+---
+import en from '../../i18n/en';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'scope', label: '1. Scope' },
+  { id: 'no-advice', label: '2. Not financial advice' },
+  { id: 'ai', label: '3. AI content' },
+  { id: 'accuracy', label: '4. Data accuracy' },
+  { id: 'liability', label: '5. Limitation of liability' },
+  { id: 'contact', label: '6. Contact' },
+];
+---
+<LegalLayout t={en} lang="en" pageTitle="Financial disclaimer" tocItems={toc}>
+  <p class="meta">Last updated: 28 April 2026 · Version 1.0</p>
+
+  <div class="callout">
+    <strong>In short:</strong> Portfolio Manager is an informational tool. It is not financial advice,
+    does not manage capital, does not execute orders. AI analyses are informational examples,
+    not recommendations. Decisions remain entirely with the user.
+  </div>
+
+  <h2 id="scope">1. Scope</h2>
+  <p>This disclaimer applies to the Portfolio Manager mobile application (Android, iOS, Web, Desktop),
+  the PluriFin website and any content produced by the application, including AI-generated analyses (Gemini).</p>
+  <p>PluriFin is Filippo Salemi, a private individual based in Italy. Not a regulated investment
+  services firm under the Italian TUF (Legislative Decree 58/1998) or MiFID II (2014/65/EU).</p>
+
+  <h2 id="no-advice">2. Not financial advice</h2>
+  <p>All content in Portfolio Manager -- including performance calculations, allocation analyses,
+  rebalancing suggestions and any other output -- is provided for <strong>informational and
+  educational purposes only</strong>. It does not constitute:</p>
+  <ul>
+    <li>financial, investment, tax or legal advice;</li>
+    <li>personalised investment recommendation under TUF or MiFID II;</li>
+    <li>offer, solicitation or contractual proposal relating to financial instruments.</li>
+  </ul>
+  <p>Investment decisions remain <strong>entirely with the user</strong>.</p>
+
+  <h2 id="ai">3. AI content (Google Gemini)</h2>
+  <p>The app optionally enables Google Gemini to generate portfolio analyses using your own API key.
+  Responses are <strong>automatically generated</strong> and may contain errors or outdated information.
+  PluriFin is not responsible for Gemini-generated content. AI content does not replace professional advice.</p>
+
+  <h2 id="accuracy">4. Market data accuracy</h2>
+  <p>Market data (prices, movers) is provided by third-party providers (EODHD, FMP) with the user's
+  API key or via public snapshots. Such data may be delayed or inaccurate. PluriFin gives no warranty
+  as to the accuracy of market data.</p>
+
+  <h2 id="liability">5. Limitation of liability</h2>
+  <p>To the fullest extent permitted by applicable law, PluriFin (Filippo Salemi) will not be liable
+  for any losses, direct or indirect damages, or economic harm of any kind arising from use of
+  the application or reliance on its contents.</p>
+
+  <h2 id="contact">6. Contact</h2>
+  <p>Questions about this disclaimer: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+
+  <hr />
+  <div class="note">
+    The final disclaimer is under legal review (Wave W3 of the development plan).
+    This text is a preliminary informational version.
+  </div>
+</LegalLayout>

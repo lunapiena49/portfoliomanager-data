@@ -1,0 +1,151 @@
+---
+import it from '../i18n/it';
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Formspree contact endpoint -- replace PLACEHOLDER_CONTACT_ID with real ID at launch
+const FORMSPREE_CONTACT = 'https://formspree.io/f/PLACEHOLDER_CONTACT_ID';
+---
+<Layout title="Contatti -- PluriFin" description="Contatta PluriFin per supporto o informazioni." lang="it">
+  <nav class="nav" role="navigation">
+    <div class="wrap nav-inner">
+      <a href={`${base}/`} class="brand" aria-label="PluriFin home">
+        <span class="brand-mark" aria-hidden="true">P</span>
+        <span class="brand-name">PluriFin</span>
+      </a>
+      <span class="nav-spacer"></span>
+      <a href={`${base}/`} class="nav-back">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
+        Torna alla home
+      </a>
+    </div>
+  </nav>
+
+  <main id="main">
+    <div class="wrap contact-wrap">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <p class="eyebrow">Contatti</p>
+          <h1>Scrivici</h1>
+          <p class="intro">Per supporto tecnico, domande o richieste GDPR. Risponderemo entro 2-3 giorni lavorativi.</p>
+          <div class="contact-cards">
+            <div class="contact-card">
+              <strong>Email generale</strong>
+              <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>
+            </div>
+            <div class="contact-card">
+              <strong>Richieste GDPR</strong>
+              <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>
+            </div>
+            <div class="contact-card">
+              <strong>GitHub</strong>
+              <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-form-wrap">
+          <form id="contactForm" action={FORMSPREE_CONTACT} method="POST" novalidate class="contact-form">
+            <input type="hidden" name="_subject" value="Contatto - PluriFin" />
+
+            <div class="form-row">
+              <label for="contactName">Nome *</label>
+              <input type="text" id="contactName" name="name" required autocomplete="name" placeholder="Mario Rossi" />
+            </div>
+            <div class="form-row">
+              <label for="contactEmail">Email *</label>
+              <input type="email" id="contactEmail" name="email" required autocomplete="email" placeholder="mario@example.com" />
+            </div>
+            <div class="form-row">
+              <label for="contactSubject">Oggetto *</label>
+              <select id="contactSubject" name="subject" required>
+                <option value="">Seleziona...</option>
+                <option value="support">Supporto tecnico</option>
+                <option value="gdpr">Richiesta GDPR</option>
+                <option value="feedback">Feedback / Suggerimento</option>
+                <option value="press">Press / Media</option>
+                <option value="other">Altro</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <label for="contactMsg">Messaggio *</label>
+              <textarea id="contactMsg" name="message" required rows="5" placeholder="Descrivi la tua richiesta..."></textarea>
+            </div>
+            <div class="form-row gdpr-row">
+              <input type="checkbox" id="contactGdpr" name="gdpr" required />
+              <label for="contactGdpr">Acconsento al trattamento dei dati per rispondere alla mia richiesta.
+                <a href="/privacy">Privacy Policy</a>
+              </label>
+            </div>
+            <button type="submit" class="btn btn-primary btn-full">Invia messaggio</button>
+            <div class="success-msg" id="contactSuccess" hidden role="status" aria-live="polite">
+              Messaggio inviato! Ti risponderemo entro 2-3 giorni lavorativi.
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer t={it} currentLang="it" />
+</Layout>
+
+<style>
+  .nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(248,249,250,.92); backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav-inner { display: flex; align-items: center; gap: 24px; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; }
+  .brand-mark { width: 30px; height: 30px; border-radius: 8px; background: linear-gradient(135deg,var(--primary),var(--accent)); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 14px; }
+  .brand-name { font-weight: 600; font-size: 16px; }
+  .nav-spacer { flex: 1; }
+  .nav-back { font-size: 14px; color: var(--text-2); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+  .nav-back:hover { color: var(--text); }
+  .contact-wrap { padding: 64px 0 96px; }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 64px; align-items: flex-start; }
+  .contact-info h1 { margin: 0 0 14px; }
+  .intro { color: var(--text-2); font-size: 17px; line-height: 1.65; margin-bottom: 32px; }
+  .contact-cards { display: flex; flex-direction: column; gap: 14px; }
+  .contact-card { background: #fff; border: 1px solid var(--divider); border-radius: var(--radius); padding: 16px 18px; }
+  .contact-card strong { display: block; font-size: 13px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
+  .contact-card a { font-size: 15px; font-weight: 500; }
+  .contact-form { background: #fff; border: 1px solid var(--divider); border-radius: var(--radius-xl); padding: 40px; }
+  .form-row { margin-bottom: 18px; }
+  .form-row label { display: block; font-size: 13px; font-weight: 500; color: var(--text); margin-bottom: 6px; }
+  .form-row input[type="text"],
+  .form-row input[type="email"],
+  .form-row select,
+  .form-row textarea {
+    width: 100%; padding: 10px 14px;
+    border: 1px solid var(--divider); border-radius: 8px;
+    font-size: 15px; font-family: inherit; color: var(--text); background: #fff;
+    transition: border-color .15s;
+  }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus {
+    border-color: var(--primary); outline: 2px solid rgba(30,136,229,.15); outline-offset: 0;
+  }
+  .form-row textarea { resize: vertical; min-height: 120px; }
+  .gdpr-row { display: flex; gap: 10px; align-items: flex-start; }
+  .gdpr-row input { margin-top: 3px; flex-shrink: 0; }
+  .gdpr-row label { font-size: 13px !important; color: var(--text-2); line-height: 1.5; }
+  .btn-full { width: 100%; justify-content: center; margin-top: 8px; }
+  .success-msg { margin-top: 16px; padding: 14px 16px; background: rgba(76,175,80,.08); border: 1px solid rgba(76,175,80,.2); border-radius: var(--radius); font-size: 15px; font-weight: 500; color: #2E7D32; }
+  @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; gap: 36px; } }
+</style>
+
+<script>
+  const form = document.getElementById('contactForm') as HTMLFormElement | null;
+  const success = document.getElementById('contactSuccess');
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+        if (res.ok && success) { form.reset(); success.hidden = false; }
+      } catch { form.submit(); }
+    });
+  }
+</script>

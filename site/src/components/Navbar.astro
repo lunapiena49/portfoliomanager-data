@@ -1,0 +1,286 @@
+---
+import type { Translations, Locale } from '../i18n/index';
+import { LOCALES, LOCALE_NAMES } from '../i18n/index';
+
+interface Props {
+  t: Translations;
+  currentLang: Locale;
+}
+
+const { t, currentLang } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function langUrl(l: Locale) {
+  return l === 'it' ? `${base}/` : `${base}/${l}/`;
+}
+---
+<nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+  <div class="wrap nav-inner">
+    <a href={`${base}/`} class="brand" aria-label="PluriFin home">
+      <span class="brand-mark" aria-hidden="true">P</span>
+      <span class="brand-name">PluriFin</span>
+    </a>
+
+    <div class="nav-links" role="list">
+      <a href="#features" role="listitem">{t.nav.features}</a>
+      <a href="#privacy" role="listitem">{t.nav.privacy}</a>
+      <a href="#brokers" role="listitem">{t.nav.brokers}</a>
+      <a href="#faq" role="listitem">{t.nav.faq}</a>
+    </div>
+
+    <span class="nav-spacer" aria-hidden="true"></span>
+
+    <div class="nav-right">
+      <!-- Language switcher -->
+      <div class="lang-tog" id="langTog" tabindex="0" role="button"
+           aria-haspopup="listbox" aria-expanded="false" aria-label={t.nav.langLabel}>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="9"/>
+          <path d="M3 12h18"/>
+          <path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>
+        </svg>
+        {currentLang.toUpperCase()}
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </div>
+      <div class="lang-menu" id="langMenu" role="listbox" aria-label={t.nav.langLabel}>
+        {LOCALES.map(l => (
+          <a href={langUrl(l)} role="option" class={l === currentLang ? 'active' : ''} aria-selected={l === currentLang}>
+            <span>{LOCALE_NAMES[l]}</span>
+            <span class="code">{l.toUpperCase()}</span>
+          </a>
+        ))}
+      </div>
+
+      <a href={`${base}/app/`} class="btn btn-ghost">{t.nav.openApp}</a>
+      <button class="btn btn-primary" id="openModal" aria-haspopup="dialog">{t.nav.notifyLaunch}</button>
+    </div>
+
+    <!-- Mobile hamburger -->
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-controls="mobileMenu"
+            aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu" role="menu" aria-hidden="true">
+    <div class="wrap">
+      <a href="#features" role="menuitem">{t.nav.features}</a>
+      <a href="#privacy" role="menuitem">{t.nav.privacy}</a>
+      <a href="#brokers" role="menuitem">{t.nav.brokers}</a>
+      <a href="#faq" role="menuitem">{t.nav.faq}</a>
+      <div class="mobile-divider" aria-hidden="true"></div>
+      <a href={`${base}/app/`} role="menuitem">{t.nav.openApp}</a>
+      <button class="btn btn-primary w-full" id="openModalMobile" aria-haspopup="dialog">
+        {t.nav.notifyLaunch}
+      </button>
+    </div>
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(248, 249, 250, .92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--divider);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 68px;
+    position: relative;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text);
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .brand-mark {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+  .brand-name { font-weight: 600; font-size: 16px; letter-spacing: -0.01em; }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-links a {
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+    border-radius: var(--radius-sm);
+    transition: color .15s, background .15s;
+  }
+  .nav-links a:hover { color: var(--text); background: rgba(0,0,0,.04); }
+  .nav-spacer { flex: 1; }
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: relative;
+  }
+  .lang-tog {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 7px 10px;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-2);
+    cursor: pointer;
+    user-select: none;
+    transition: background .15s, color .15s;
+    letter-spacing: .04em;
+  }
+  .lang-tog:hover { background: rgba(0,0,0,.05); color: var(--text); }
+  .lang-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 100px;
+    background: #fff;
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-elev);
+    padding: 6px;
+    min-width: 180px;
+    z-index: 100;
+  }
+  .lang-menu.open { display: block; }
+  .lang-menu a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: var(--text-2);
+    transition: background .12s, color .12s;
+  }
+  .lang-menu a:hover { background: var(--bg); color: var(--text); }
+  .lang-menu a.active { color: var(--primary); font-weight: 600; }
+  .lang-menu .code { font-size: 11px; font-weight: 600; letter-spacing: .06em; color: var(--text-3); }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    margin-left: 4px;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .25s, opacity .2s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .mobile-menu {
+    display: none;
+    border-top: 1px solid var(--divider);
+    padding: 16px 0;
+    background: rgba(248,249,250,.97);
+  }
+  .mobile-menu.open { display: block; }
+  .mobile-menu a {
+    display: block;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--text);
+    border-bottom: 1px solid var(--divider-soft);
+  }
+  .mobile-divider { height: 1px; background: var(--divider); margin: 12px 0; }
+  .w-full { width: 100%; justify-content: center; margin-top: 12px; }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .nav-right .btn-ghost { display: none; }
+    .nav-right .btn-primary { display: none; }
+    .hamburger { display: flex; }
+  }
+  @media (max-width: 560px) {
+    .lang-tog { display: none; }
+  }
+</style>
+
+<script>
+  // Language switcher toggle
+  const tog = document.getElementById('langTog');
+  const menu = document.getElementById('langMenu');
+  if (tog && menu) {
+    tog.addEventListener('click', () => {
+      const isOpen = menu.classList.toggle('open');
+      tog.setAttribute('aria-expanded', String(isOpen));
+    });
+    tog.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        const isOpen = menu.classList.toggle('open');
+        tog.setAttribute('aria-expanded', String(isOpen));
+      }
+    });
+    document.addEventListener('click', (e) => {
+      if (!tog.contains(e.target as Node) && !menu.contains(e.target as Node)) {
+        menu.classList.remove('open');
+        tog.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  // Hamburger / mobile menu
+  const ham = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  if (ham && mobileMenu) {
+    ham.addEventListener('click', () => {
+      const isOpen = mobileMenu.classList.toggle('open');
+      ham.classList.toggle('open');
+      ham.setAttribute('aria-expanded', String(isOpen));
+      mobileMenu.setAttribute('aria-hidden', String(!isOpen));
+    });
+    // Close on anchor click
+    mobileMenu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        mobileMenu.classList.remove('open');
+        ham.classList.remove('open');
+        ham.setAttribute('aria-expanded', 'false');
+        mobileMenu.setAttribute('aria-hidden', 'true');
+      });
+    });
+  }
+
+  // Open modal from mobile CTA
+  document.getElementById('openModalMobile')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-modal'));
+  });
+  document.getElementById('openModal')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-modal'));
+  });
+</script>

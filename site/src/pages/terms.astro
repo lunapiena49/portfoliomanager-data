@@ -1,0 +1,58 @@
+---
+import it from '../i18n/it';
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'acceptance', label: '1. Accettazione' },
+  { id: 'service', label: '2. Descrizione del servizio' },
+  { id: 'license', label: '3. Licenza d\'uso' },
+  { id: 'restrictions', label: '4. Restrizioni' },
+  { id: 'data', label: '5. Dati e privacy' },
+  { id: 'changes', label: '6. Modifiche' },
+  { id: 'contact', label: '7. Contatti' },
+];
+---
+<LegalLayout t={it} lang="it" pageTitle="Termini di servizio" tocItems={toc}>
+  <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
+
+  <h2 id="acceptance">1. Accettazione dei termini</h2>
+  <p>Utilizzando l'applicazione Portfolio Manager o il sito web PluriFin, l'utente accetta i presenti
+  Termini di servizio. Se non li accetta, e' pregato di non utilizzare il servizio.</p>
+
+  <h2 id="service">2. Descrizione del servizio</h2>
+  <p>Portfolio Manager e' un'applicazione di tracking e analisi di portafoglio di investimenti.
+  Il servizio consente di importare estratti conto da broker, visualizzare performance, generare
+  analisi con AI (opzionale) e pianificare obiettivi finanziari. <strong>Non esegue ordini di
+  acquisto o vendita di strumenti finanziari</strong>.</p>
+
+  <h2 id="license">3. Licenza d'uso</h2>
+  <p>PluriFin concede all'utente una licenza personale, non esclusiva, non trasferibile e revocabile
+  per utilizzare l'applicazione a scopo personale, non commerciale.</p>
+
+  <h2 id="restrictions">4. Restrizioni</h2>
+  <p>E' vietato:</p>
+  <ul>
+    <li>distribuire, rivendere o sublicenziare l'applicazione;</li>
+    <li>decompilare, disassemblare o effettuare reverse engineering del codice;</li>
+    <li>utilizzare l'applicazione per scopi illegali o in violazione dei diritti di terzi;</li>
+    <li>utilizzare l'applicazione per fornire servizi di consulenza finanziaria a terzi.</li>
+  </ul>
+
+  <h2 id="data">5. Dati e privacy</h2>
+  <p>Il trattamento dei dati personali e' descritto nella <a href="/privacy">Privacy Policy</a>.
+  Tutti i dati del portafoglio restano esclusivamente sul dispositivo dell'utente.</p>
+
+  <h2 id="changes">6. Modifiche ai termini</h2>
+  <p>PluriFin si riserva di modificare i presenti termini. Le modifiche sostanziali saranno
+  comunicate tramite il sito o l'applicazione. L'utilizzo continuato dopo la notifica costituisce
+  accettazione delle modifiche.</p>
+
+  <h2 id="contact">7. Contatti</h2>
+  <p>Per domande sui Termini di servizio: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+
+  <hr />
+  <div class="note">
+    Il testo definitivo dei Termini di servizio e' in fase di revisione legale (Wave W3 del piano di sviluppo).
+    Il presente testo e' una versione preliminare informativa.
+  </div>
+</LegalLayout>

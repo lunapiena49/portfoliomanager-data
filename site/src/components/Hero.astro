@@ -1,0 +1,370 @@
+---
+import type { Translations } from '../i18n/index';
+
+interface Props {
+  t: Translations;
+  launchState?: 'pre' | 'live';
+  playStoreUrl?: string;
+}
+
+const { t, launchState = 'pre', playStoreUrl = '#' } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<section class="hero" aria-labelledby="hero-h1">
+  <div class="wrap hero-grid">
+
+    <!-- Copy -->
+    <div class="hero-copy reveal in">
+      <h1 id="hero-h1">
+        {t.hero.h1Line1}<br>
+        {t.hero.h1Line2}
+      </h1>
+      <p class="hero-sub">{t.hero.sub}</p>
+
+      <div class="cta-row" id="ctaRow">
+        {launchState === 'pre' ? (
+          <>
+            <button class="btn btn-primary" id="openModalHero" aria-haspopup="dialog">
+              {t.hero.ctaPre1}
+            </button>
+            <a class="btn btn-outline" href={`${base}/app/`}>{t.hero.ctaPre2}</a>
+            <span class="btn-disabled" aria-disabled="true" title={t.hero.ctaPre3} role="img" aria-label={t.hero.ctaPre3}>
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+                <path d="M3 3l8.5 9L3 21V3z"/>
+              </svg>
+              <span class="meta">
+                <span>{t.hero.comingSoon}</span>
+                <b>Google Play</b>
+              </span>
+            </span>
+          </>
+        ) : (
+          <>
+            <a class="btn-store-active" href={playStoreUrl} rel="noopener noreferrer">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3 3l8.5 9L3 21V3z" opacity=".9"/>
+              </svg>
+              <span class="meta">
+                <span>{t.hero.availableOn}</span>
+                <b>Google Play</b>
+              </span>
+            </a>
+            <a class="btn btn-outline" href={`${base}/app/`}>{t.hero.ctaLive2}</a>
+            <button class="btn btn-ghost" id="openModalHero" aria-haspopup="dialog">
+              {t.hero.ctaLive3}
+            </button>
+          </>
+        )}
+      </div>
+
+      <div class="hero-foot" role="list" aria-label="Key facts">
+        <span class="check" role="listitem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          {t.hero.trust1}
+        </span>
+        <span class="check" role="listitem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          {t.hero.trust2}
+        </span>
+        <span class="check" role="listitem">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+          {t.hero.trust3}
+        </span>
+      </div>
+    </div>
+
+    <!-- Phone mockup -->
+    <div class="hero-stage reveal in" aria-hidden="true">
+      <div class="phone" role="img" aria-label="App screenshot">
+        <div class="island"></div>
+        <div class="phone-screen">
+          <!-- Status bar -->
+          <div class="status-bar">
+            <span>9:41</span>
+            <div class="icons">
+              <svg width="14" height="10" viewBox="0 0 18 12" fill="currentColor">
+                <path d="M9 12c1.7 0 3.3-.7 4.5-1.8L9 6 4.5 10.2C5.7 11.3 7.3 12 9 12z"/>
+                <path d="M14.7 8.6L18 5.4C15.6 3 12.4 1.5 9 1.5S2.4 3 0 5.4l3.3 3.2C5 7 6.9 6 9 6s4 1 5.7 2.6z" opacity=".5"/>
+              </svg>
+              <svg width="14" height="10" viewBox="0 0 16 12" fill="currentColor">
+                <path d="M0 9.6h2.4V12H0zM3.6 7.2H6V12H3.6zM7.2 4.8h2.4V12H7.2z"/>
+                <path d="M10.8 2.4h2.4V12h-2.4zM14.4 0h2.4v12h-2.4z" opacity=".4"/>
+              </svg>
+              <svg width="22" height="11" viewBox="0 0 24 12" fill="none" stroke="currentColor" stroke-width="1">
+                <rect x=".5" y=".5" width="20" height="11" rx="2.5"/>
+                <rect x="2" y="2" width="14" height="8" rx="1" fill="currentColor"/>
+                <path d="M22 4v4" stroke-linecap="round"/>
+              </svg>
+            </div>
+          </div>
+          <!-- App header -->
+          <div class="app-head">
+            <div><div class="title">Portafoglio principale</div></div>
+            <div class="menu">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="6" r="1.4"/><circle cx="12" cy="12" r="1.4"/><circle cx="12" cy="18" r="1.4"/>
+              </svg>
+            </div>
+          </div>
+          <!-- Balance -->
+          <div class="app-balance">
+            <div class="lbl">Valore totale</div>
+            <div class="val">€ 84.327,18</div>
+            <div class="delta">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+                <polyline points="6 15 12 9 18 15"/>
+              </svg>
+              <span>+ €1.842,60</span>
+              <span class="pill">+2,23%</span>
+            </div>
+          </div>
+          <!-- Chart -->
+          <div class="app-chart">
+            <svg viewBox="0 0 280 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="gline" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#34D399" stop-opacity=".4"/>
+                  <stop offset="100%" stop-color="#34D399" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0 60 C20 55,35 65,55 50 S90 30,110 38 S145 56,165 42 S200 18,225 28 S260 12,280 18 L280 80 L0 80 Z" fill="url(#gline)"/>
+              <path d="M0 60 C20 55,35 65,55 50 S90 30,110 38 S145 56,165 42 S200 18,225 28 S260 12,280 18" fill="none" stroke="#34D399" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <!-- Time tabs -->
+          <div class="app-tabs">
+            <span class="on">1G</span><span>1S</span><span>1M</span><span>3M</span><span>1A</span><span>MAX</span>
+          </div>
+          <!-- Holdings header -->
+          <div class="holdings-h">
+            <span class="h">POSIZIONI</span>
+            <span class="more">Vedi tutto</span>
+          </div>
+          <!-- Holdings list -->
+          <div class="app-list">
+            <div class="holding">
+              <div class="ico b">AAPL</div>
+              <div class="name"><span class="t">Apple Inc.</span><span class="s">12 azioni · NASDAQ</span></div>
+              <div class="price"><span class="v">€22.140</span><span class="d up">+1,4%</span></div>
+            </div>
+            <div class="holding">
+              <div class="ico g">MSFT</div>
+              <div class="name"><span class="t">Microsoft</span><span class="s">8 azioni · NASDAQ</span></div>
+              <div class="price"><span class="v">€18.320</span><span class="d up">+0,8%</span></div>
+            </div>
+            <div class="holding">
+              <div class="ico p">AMZN</div>
+              <div class="name"><span class="t">Amazon.com</span><span class="s">5 azioni · NASDAQ</span></div>
+              <div class="price"><span class="v">€12.650</span><span class="d down">-0,3%</span></div>
+            </div>
+          </div>
+          <!-- Tab bar -->
+          <div class="app-tabbar">
+            <svg class="ti on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+            <svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+            <svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/></svg>
+            <svg class="ti" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M20 21a8 8 0 1 0-16 0"/></svg>
+          </div>
+        </div>
+      </div>
+      <!-- Floating chips -->
+      <div class="float-chip chip-1">
+        <span class="dot"></span>
+        <span>Dati sul dispositivo</span>
+      </div>
+      <div class="float-chip chip-2">
+        <div class="arrow">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true">
+            <polyline points="20 6 9 17 4 12"/>
+          </svg>
+        </div>
+        <div class="meta">
+          <span class="l">AI Gemini</span>
+          <span class="v">Analisi attiva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 96px 0 80px;
+    overflow: hidden;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 440px;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-copy { max-width: 580px; }
+  .hero-copy h1 { margin-bottom: 24px; }
+  .hero-sub {
+    font-size: 18px;
+    color: var(--text-2);
+    line-height: 1.65;
+    max-width: 54ch;
+    margin-bottom: 36px;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .hero-foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-2);
+  }
+  .check svg { color: var(--success); flex-shrink: 0; }
+
+  /* Phone mockup */
+  .hero-stage {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone {
+    width: 280px;
+    height: 580px;
+    border-radius: 40px;
+    background: #0E1116;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,.5), 0 0 0 1px rgba(255,255,255,.08), inset 0 0 0 2px rgba(255,255,255,.05);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .island {
+    position: absolute;
+    top: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 88px;
+    height: 26px;
+    background: #000;
+    border-radius: 13px;
+    z-index: 10;
+  }
+  .phone-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .status-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 48px 20px 8px;
+    color: var(--app-text);
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .status-bar .icons { display: flex; align-items: center; gap: 5px; }
+  .app-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 20px 12px;
+    color: var(--app-text);
+  }
+  .app-head .title { font-size: 14px; font-weight: 600; }
+  .app-head .menu { color: var(--app-muted); }
+  .app-balance { padding: 0 22px 12px; }
+  .app-balance .lbl { font-size: 11px; color: var(--app-muted); font-weight: 500; text-transform: uppercase; letter-spacing: .06em; }
+  .app-balance .val { font-size: 26px; font-weight: 700; color: var(--app-text); letter-spacing: -0.02em; margin-top: 4px; font-variant-numeric: tabular-nums; }
+  .app-balance .delta { display: inline-flex; align-items: center; gap: 6px; margin-top: 6px; color: var(--app-green); font-size: 13px; font-weight: 600; }
+  .app-balance .delta .pill { background: rgba(52,211,153,.14); padding: 2px 7px; border-radius: 6px; font-size: 11px; }
+  .app-chart { margin: 6px 22px 16px; height: 74px; border-radius: 10px; background: linear-gradient(180deg,rgba(52,211,153,.08),transparent); position: relative; overflow: hidden; }
+  .app-chart svg { width: 100%; height: 100%; }
+  .app-tabs { display: flex; gap: 6px; padding: 0 22px 14px; font-size: 11px; }
+  .app-tabs span { padding: 6px 12px; border-radius: 999px; color: var(--app-muted); background: transparent; font-weight: 500; }
+  .app-tabs span.on { background: var(--app-surf); color: var(--app-text); font-weight: 600; }
+  .holdings-h { padding: 0 22px 8px; display: flex; justify-content: space-between; align-items: center; }
+  .holdings-h .h { font-size: 11px; color: var(--app-muted); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
+  .holdings-h .more { color: var(--primary-light); font-size: 11px; font-weight: 600; }
+  .app-list { flex: 1; padding: 0 14px; display: flex; flex-direction: column; gap: 2px; }
+  .holding { display: flex; align-items: center; gap: 12px; padding: 9px 8px; border-radius: 8px; }
+  .holding .ico { width: 32px; height: 32px; border-radius: 8px; background: var(--app-surf); display: grid; place-items: center; font-size: 11px; font-weight: 700; color: var(--app-text); flex-shrink: 0; }
+  .holding .ico.b { background: rgba(30,136,229,.18); color: #79B4FF; }
+  .holding .ico.g { background: rgba(52,211,153,.18); color: #5BE3B0; }
+  .holding .ico.p { background: rgba(177,123,255,.18); color: #C9A6FF; }
+  .holding .name { flex: 1; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+  .holding .name .t { font-size: 13px; font-weight: 600; color: var(--app-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .holding .name .s { font-size: 11px; color: var(--app-muted); font-weight: 500; }
+  .holding .price { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; font-variant-numeric: tabular-nums; }
+  .holding .price .v { font-size: 13px; font-weight: 600; color: var(--app-text); }
+  .holding .price .d { font-size: 11px; font-weight: 600; }
+  .holding .price .d.up { color: var(--app-green); }
+  .holding .price .d.down { color: var(--app-red); }
+  .app-tabbar { display: flex; justify-content: space-around; padding: 12px 0 18px; border-top: 1px solid rgba(255,255,255,.06); background: var(--app-dark); }
+  .app-tabbar .ti { width: 22px; height: 22px; color: var(--app-muted); }
+  .app-tabbar .ti.on { color: var(--primary-light); }
+
+  /* Floating chips */
+  .float-chip {
+    position: absolute;
+    background: #fff;
+    border: 1px solid var(--divider);
+    border-radius: 10px;
+    padding: 10px 14px;
+    box-shadow: var(--shadow-elev);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    z-index: 2;
+  }
+  .chip-1 { top: 80px; right: -20px; transform: rotate(2deg); }
+  .chip-1 .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px rgba(0,191,165,.15); flex-shrink: 0; }
+  .chip-2 { bottom: 90px; left: -30px; transform: rotate(-3deg); }
+  .chip-2 .arrow { width: 28px; height: 28px; border-radius: 8px; background: rgba(76,175,80,.12); display: grid; place-items: center; color: var(--success); flex-shrink: 0; }
+  .chip-2 .meta { display: flex; flex-direction: column; gap: 2px; }
+  .chip-2 .meta .l { font-size: 11px; color: var(--text-3); }
+  .chip-2 .meta .v { font-size: 13px; font-weight: 600; color: var(--text); }
+
+  @media (max-width: 1080px) {
+    .hero-grid { grid-template-columns: 1fr 380px; gap: 48px; }
+  }
+  @media (max-width: 860px) {
+    .hero { padding: 64px 0 56px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+    .hero-copy { max-width: 100%; }
+    .hero-stage { justify-content: center; }
+    .float-chip { display: none; }
+  }
+  @media (max-width: 480px) {
+    .phone { width: 260px; height: 540px; }
+  }
+</style>
+
+<script>
+  document.getElementById('openModalHero')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-modal'));
+  });
+</script>

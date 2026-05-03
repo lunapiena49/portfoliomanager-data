@@ -1,0 +1,56 @@
+---
+import en from '../../i18n/en';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'acceptance', label: '1. Acceptance' },
+  { id: 'service', label: '2. Service description' },
+  { id: 'license', label: '3. License' },
+  { id: 'restrictions', label: '4. Restrictions' },
+  { id: 'data', label: '5. Data & privacy' },
+  { id: 'changes', label: '6. Changes' },
+  { id: 'contact', label: '7. Contact' },
+];
+---
+<LegalLayout t={en} lang="en" pageTitle="Terms of Service" tocItems={toc}>
+  <p class="meta">Last updated: 28 April 2026 · Version 1.0</p>
+
+  <h2 id="acceptance">1. Acceptance</h2>
+  <p>By using Portfolio Manager or the PluriFin website, you accept these Terms of Service. If you
+  do not accept them, please do not use the service.</p>
+
+  <h2 id="service">2. Service description</h2>
+  <p>Portfolio Manager is a portfolio tracking and analysis application. It allows you to import
+  broker statements, view performance, generate AI analyses (optional) and plan financial goals.
+  <strong>It does not execute buy or sell orders</strong>.</p>
+
+  <h2 id="license">3. License</h2>
+  <p>PluriFin grants you a personal, non-exclusive, non-transferable, revocable licence to use the
+  application for personal, non-commercial purposes.</p>
+
+  <h2 id="restrictions">4. Restrictions</h2>
+  <p>You may not:</p>
+  <ul>
+    <li>distribute, resell or sublicense the application;</li>
+    <li>decompile, disassemble or reverse-engineer the code;</li>
+    <li>use the application for illegal purposes or to infringe third-party rights;</li>
+    <li>use the application to provide financial advisory services to third parties.</li>
+  </ul>
+
+  <h2 id="data">5. Data & privacy</h2>
+  <p>Data processing is described in the <a href="/en/privacy">Privacy Policy</a>. All portfolio
+  data stays exclusively on your device.</p>
+
+  <h2 id="changes">6. Changes</h2>
+  <p>PluriFin reserves the right to modify these terms. Material changes will be communicated via
+  the site or application. Continued use after notification constitutes acceptance.</p>
+
+  <h2 id="contact">7. Contact</h2>
+  <p>Questions about the Terms: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+
+  <hr />
+  <div class="note">
+    The final Terms of Service are under legal review (Wave W3 of the development plan).
+    This text is a preliminary informational version.
+  </div>
+</LegalLayout>

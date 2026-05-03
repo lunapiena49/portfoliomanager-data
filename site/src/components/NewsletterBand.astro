@@ -1,0 +1,54 @@
+---
+import type { Translations } from '../i18n/index';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
+---
+<section class="section newsletter-section" id="avvisami" aria-labelledby="newsletter-h2">
+  <div class="wrap">
+    <div class="newsletter-band reveal">
+      <div>
+        <h2 id="newsletter-h2">{t.newsletter.h2}</h2>
+        <p>{t.newsletter.sub}</p>
+      </div>
+      <button class="btn btn-primary" id="openModalNewsletter" aria-haspopup="dialog">
+        {t.newsletter.cta}
+      </button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .newsletter-section { padding: 64px 0; }
+  .newsletter-band {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: var(--radius-xl);
+    padding: 56px 48px;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: center;
+  }
+  .newsletter-band h2 { color: #fff; margin-bottom: 8px; font-size: clamp(24px, 2.8vw, 32px); }
+  .newsletter-band p { color: rgba(255,255,255,.85); font-size: 16px; max-width: 50ch; margin: 0; }
+  .newsletter-band .btn-primary {
+    background: #fff;
+    color: var(--primary-dark);
+    box-shadow: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .newsletter-band .btn-primary:hover { background: #f0f4ff; color: var(--primary-dark); }
+
+  @media (max-width: 768px) {
+    .newsletter-band { grid-template-columns: 1fr; padding: 36px 28px; }
+    .newsletter-band .btn-primary { width: 100%; justify-content: center; }
+  }
+</style>
+
+<script>
+  document.getElementById('openModalNewsletter')?.addEventListener('click', () => {
+    document.dispatchEvent(new CustomEvent('open-modal'));
+  });
+</script>

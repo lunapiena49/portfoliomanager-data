@@ -1,0 +1,18 @@
+---
+import pt from '../../i18n/pt';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+const toc = [{ id: 'overview', label: '1. Visao geral' },{ id: 'dados', label: '2. Dados' },{ id: 'direitos', label: '3. Direitos' },{ id: 'contacto', label: '4. Contacto' }];
+---
+<LegalLayout t={pt} lang="pt" pageTitle="Politica de Privacidade" tocItems={toc}>
+  <p class="meta">Ultima atualizacao: 28 de abril de 2026 · Versao 1.0</p>
+  <div class="callout"><strong>Em resumo:</strong> Portfolio Manager nao recolhe dados de carteira. Tudo fica cifrado no seu dispositivo.</div>
+  <h2 id="overview">1. Visao geral</h2>
+  <p>PluriFin (Filippo Salemi, pessoa singular, Italia) trata apenas os dados necessarios para o funcionamento do site (newsletter via Formspree com consentimento, formulario de contacto). Nenhum dado de carteira e transmitido a um servidor PluriFin.</p>
+  <h2 id="dados">2. Dados recolhidos</h2>
+  <p>Dados da app: apenas locais, cifrados AES-256. Site: email newsletter (consentimento), formulario de contacto (Formspree, EUA, CCE), logs do GitHub Pages.</p>
+  <h2 id="direitos">3. Direitos</h2>
+  <p>Pode exercer os seus direitos RGPD (acesso, retificacao, apagamento...) escrevendo para <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <h2 id="contacto">4. Contacto</h2>
+  <p><a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Texto legal definitivo pendente de revisao juridica (Wave W3).</div>
+</LegalLayout>

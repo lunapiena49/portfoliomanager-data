@@ -1,0 +1,79 @@
+---
+import en from '../../i18n/en';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'overview', label: '1. Overview' },
+  { id: 'data', label: '2. Data collected' },
+  { id: 'processing', label: '3. Processing purposes' },
+  { id: 'third-parties', label: '4. Third parties' },
+  { id: 'rights', label: '5. User rights' },
+  { id: 'contact', label: '6. Contact' },
+  { id: 'changes', label: '7. Changes' },
+];
+---
+<LegalLayout t={en} lang="en" pageTitle="Privacy Policy" tocItems={toc}>
+  <p class="meta">Last updated: 28 April 2026 · Version 1.0</p>
+
+  <div class="callout">
+    <strong>In short:</strong> Portfolio Manager is designed to collect no data.
+    Portfolios, positions and goals stay on your device. There is no app server.
+    Calls to external services (Gemini, EODHD, FMP) only happen if you activate the
+    respective optional features, with your own API key.
+  </div>
+
+  <h2 id="overview">1. Overview</h2>
+  <p>This privacy notice describes how PluriFin (Filippo Salemi, a private individual based in Italy)
+  processes personal data in connection with the Portfolio Manager application and the related website.</p>
+  <p>The data controller is <strong>Filippo Salemi</strong>, reachable at
+  <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>. For GDPR-specific requests:
+  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+
+  <h2 id="data">2. Data collected</h2>
+  <h3>2.1 App data (local)</h3>
+  <p>All data you enter in the app -- portfolios, positions, goals, settings, API keys -- is stored
+  exclusively on your device, in encrypted storage (AES-256 + HMAC-SHA256). The encryption key is
+  kept in the operating system keystore.</p>
+
+  <h3>2.2 Website data</h3>
+  <ul>
+    <li>Pre-launch newsletter sign-up: email + preferred language (handled by Formspree, USA, Standard Contractual Clauses).</li>
+    <li>Contact form: name, email, subject, message (handled by Formspree).</li>
+    <li>GitHub Pages static server logs: IP address, user-agent (max 14-day retention, handled by GitHub).</li>
+  </ul>
+
+  <h2 id="processing">3. Processing purposes</h2>
+  <ul>
+    <li><strong>Newsletter:</strong> send a launch notification. Legal basis: consent (Art. 6.1.a GDPR).</li>
+    <li><strong>Contact form:</strong> respond to support requests. Legal basis: consent and legitimate interest (Art. 6.1.f).</li>
+    <li><strong>GitHub Pages logs:</strong> security and abuse prevention. Legal basis: legitimate interest.</li>
+  </ul>
+
+  <h2 id="third-parties">4. Third parties</h2>
+  <p>The app may send data to external services <strong>only if you enable the relevant optional features</strong>:</p>
+  <ul>
+    <li><strong>Google Gemini</strong> -- AI analysis (user API key).</li>
+    <li><strong>EODHD / FMP</strong> -- market prices (user API key).</li>
+    <li><strong>Formspree</strong> -- form handling (USA, SCC).</li>
+    <li><strong>GitHub Pages</strong> -- static hosting (USA, SCC).</li>
+  </ul>
+
+  <h2 id="rights">5. User rights</h2>
+  <p>You may at any time exercise the rights under Articles 15-22 GDPR: access, rectification,
+  erasure, restriction, portability, objection. Write to
+  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <p>For local data, you can wipe everything from Settings at any time.</p>
+
+  <h2 id="contact">6. Contact</h2>
+  <p>General: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>GDPR requests: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+
+  <h2 id="changes">7. Changes</h2>
+  <p>Material changes will be communicated on the site and, where required, by email to newsletter subscribers.</p>
+
+  <hr />
+  <div class="note">
+    The full Privacy Policy will be produced by a legal professional in Wave W3 of the development plan.
+    This text is a preliminary informational version.
+  </div>
+</LegalLayout>

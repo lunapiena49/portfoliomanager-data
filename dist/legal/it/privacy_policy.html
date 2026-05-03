@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Privacy Policy -- PluriFin</title>
+  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Privacy Policy -- Portfolio Manager by PluriFin." />
+  <link rel="stylesheet" href="../_styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container" style="padding-top:0;padding-bottom:0;">
+      <a href="../">PluriFin -- Legal</a>
+    </div>
+  </header>
+  <main class="container">
+    <nav class="lang-switcher" aria-label="Language switcher">
+      <a class='active' href='../it/privacy_policy.html' lang='it'>Italiano</a>
+<a href='../en/privacy_policy.html' lang='en'>English</a>
+<a href='../es/privacy_policy.html' lang='es'>Espanol</a>
+<a href='../fr/privacy_policy.html' lang='fr'>Francais</a>
+<a href='../de/privacy_policy.html' lang='de'>Deutsch</a>
+<a href='../pt/privacy_policy.html' lang='pt'>Portugues</a>
+
+    </nav>
+    <h1>Privacy Policy -- Portfolio Manager by PluriFin</h1>
+<p><strong>Versione</strong>: 1.0.0 <strong>Ultimo aggiornamento</strong>: 2026-05-02 <strong>Lingua originale</strong>: Italiano (versione di riferimento per il foro competente) <strong>Hash testo (per audit trail)</strong>: SHA-256 generato dallo script <code>scripts/legal/build_legal_html.ps1</code></p>
+<hr/>
+<h2>1. Titolare del trattamento</h2>
+<p>Il titolare del trattamento dei dati personali e':</p>
+<ul>
+<li><strong>Nome</strong>: Filippo Salemi</li>
+<li><strong>Forma giuridica</strong>: persona fisica (sviluppatore indipendente)</li>
+<li><strong>Brand commerciale</strong>: PluriFin</li>
+<li><strong>Paese</strong>: Italia</li>
+<li><strong>Email per richieste GDPR e privacy</strong>: <code>plurifin.app+gdpr@gmail.com</code></li>
+<li><strong>Email contatto generale</strong>: <code>plurifin.app@gmail.com</code></li>
+</ul>
+<p>Non e' designato un Data Protection Officer (DPO) in quanto il titolare e' una persona fisica e l'attivita' non rientra fra i casi obbligatori previsti dall'art. 37 del Regolamento (UE) 2016/679 (GDPR).</p>
+<h2>2. Sintesi (TL;DR)</h2>
+<ul>
+<li>Tutti i dati di portafoglio (posizioni, transazioni, obiettivi, impostazioni)</li>
+</ul>
+<p>sono <strong>memorizzati esclusivamente sul dispositivo dell'utente</strong> in formato   cifrato. Non li riceviamo, non li archiviamo, non li trasmettiamo a server di   PluriFin.</p>
+<ul>
+<li>L'app <strong>non utilizza analytics di terze parti</strong> (no Google Analytics, no</li>
+</ul>
+<p>Firebase, no Facebook SDK, no AppsFlyer, no Sentry by default).</p>
+<ul>
+<li>L'app <strong>non condivide dati con inserzionisti</strong>. Non e' presente pubblicita'.</li>
+<li>Sono presenti <strong>funzionalita' opzionali</strong> che, se attivate dall'utente,</li>
+</ul>
+<p>comportano la trasmissione di dati a fornitori terzi (sub-processor): AI   Gemini, prezzi di mercato live (EODHD/FMP), validazione abbonamento   (Cloudflare Worker). Ognuna richiede un'azione esplicita dell'utente per   essere attivata.</p>
+<ul>
+<li>L'utente puo' esportare e cancellare tutti i dati in qualsiasi momento dalle</li>
+</ul>
+<p>Impostazioni dell'app, senza dover contattare il titolare.</p>
+<h2>3. Tipologie di dati trattati</h2>
+<h3>3.1 Dati raccolti localmente sul dispositivo</h3>
+<p>I seguenti dati restano <strong>esclusivamente</strong> in cifratura locale (Hive AES-256 con chiave custodita nel keystore del sistema operativo):</p>
+<table>
+<thead><tr><th>Categoria</th><th>Esempi</th><th>Base giuridica</th><th>Conservazione</th></tr></thead>
+<tbody>
+<tr><td>Dati di portafoglio</td><td>nome posizione, ticker, quantita', prezzo medio, broker, data acquisto</td><td>art. 6.1.b GDPR (esecuzione contratto utente)</td><td>Finche' l'utente non li cancella</td></tr>
+<tr><td>Obiettivi finanziari</td><td>titolo, importo target, scadenza, contributi mensili</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non li cancella</td></tr>
+<tr><td>Preferenze</td><td>lingua, valuta, tema, notifiche, modalita' demo</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non disinstalla</td></tr>
+<tr><td>Audit trail consensi</td><td>timestamp, versione documento, decisione (accept/decline), hash testo</td><td>art. 6.1.c GDPR (obbligo legale prova del consenso)</td><td>Finche' l'utente non li cancella o disinstalla</td></tr>
+<tr><td>Chiavi API utente</td><td>chiave Gemini, chiave EODHD, chiave FMP (inserite manualmente dall'utente)</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non le rimuove</td></tr>
+</tbody></table>
+<p>Tutte queste informazioni sono cifrate con AES-256 + HMAC-SHA256, chiave a 32 byte custodita nel keystore di sistema (Android Keystore su Android, Keychain su iOS, DPAPI su Windows). Le chiavi API sono salvate in <code>flutter_secure_storage</code>, che usa lo stesso keystore di sistema.</p>
+<h3>3.2 Dati raccolti tramite Play Store (Google)</h3>
+<p>L'installazione, l'aggiornamento, la valutazione e l'eventuale acquisto dell'abbonamento avvengono tramite Google Play Store. PluriFin riceve da Google solo i dati strettamente necessari alla validazione dell'abbonamento:</p>
+<table>
+<thead><tr><th>Dato</th><th>Origine</th><th>Finalita'</th></tr></thead>
+<tbody>
+<tr><td><code>purchaseToken</code> (token di acquisto)</td><td>Google Play Billing</td><td>Validazione abbonamento via Cloudflare Worker</td></tr>
+<tr><td><code>productId</code></td><td>Google Play Billing</td><td>Identificazione del prodotto acquistato (<code>pluri_premium_yearly_099</code>)</td></tr>
+<tr><td><code>device_id_hash</code> (HMAC-SHA256 di Android ID + salt server)</td><td>Calcolato sul dispositivo</td><td>Identificazione anonima del dispositivo per gestione del trial 7 giorni</td></tr>
+</tbody></table>
+<p>PluriFin <strong>non</strong> riceve da Google: nome, email, indirizzo, dati pagamento, numero carta. Il pagamento e' gestito interamente da Google Play.</p>
+<h3>3.3 Dati raccolti per la validazione dell'abbonamento (Cloudflare Worker)</h3>
+<p>Quando l'utente avvia il trial gratuito o effettua un acquisto, l'app invia al Cloudflare Worker i seguenti dati:</p>
+<ul>
+<li><code>device_id_hash</code> (HMAC-SHA256 del Android ID con salt server-side, non</li>
+</ul>
+<p>reversibile lato client)</p>
+<ul>
+<li><code>purchase_token</code> + <code>product_id</code> (solo in caso di acquisto)</li>
+<li><code>JWT</code> firmato (per richieste di stato successive)</li>
+</ul>
+<p>Il Worker risponde con un JWT firmato Ed25519 (entitlement). Nessun PII e' mai trasmesso. Il <code>device_id_hash</code> non e' un identificativo personale: due dispositivi diversi dello stesso utente hanno hash diversi e non sono collegabili senza il salt server.</p>
+<h3>3.4 Dati che Claude AI / Gemini riceve (solo se l'utente attiva la feature)</h3>
+<p>Se l'utente:</p>
+<ol>
+<li>inserisce manualmente la propria API key Gemini in Impostazioni;</li>
+<li>apre la chat AI o richiede un'analisi del portafoglio;</li>
+</ol>
+<p>allora il <strong>prompt</strong> (composto da: domanda utente + struttura portafoglio in forma anonima -- ticker, quantita', prezzo medio, allocazione percentuale) viene trasmesso direttamente da app a Google Gemini.</p>
+<p>PluriFin non intermedia ne' archivia questi prompt. La trasmissione avviene end-to-end fra il dispositivo utente e l'API Gemini di Google. Si applicano le condizioni d'uso e la privacy policy di Google AI Studio / <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>.</p>
+<p>L'utente puo' revocare la chiave in qualsiasi momento dalle Impostazioni; da quel momento nessuna richiesta AI viene piu' inviata.</p>
+<h3>3.5 Dati che EODHD / FMP ricevono (solo se l'utente attiva la feature)</h3>
+<p>Analogamente, se l'utente inserisce la propria chiave EODHD o FMP per ottenere prezzi real-time, l'app trasmette i ticker richiesti direttamente a quei provider. PluriFin non intermedia ne' archivia. Si applicano:</p>
+<ul>
+<li><a href="https://eodhd.com/financial-academy/privacy-policy/">EODHD Privacy Policy</a></li>
+<li><a href="https://site.financialmodelingprep.com/privacy-policy">FMP Privacy Policy</a></li>
+</ul>
+<h2>4. Sub-processor</h2>
+<p>L'elenco completo dei sub-processor a cui l'app puo' trasmettere dati (solo se l'utente attiva le feature corrispondenti) e':</p>
+<table>
+<thead><tr><th>Sub-processor</th><th>Finalita'</th><th>Dati trasmessi</th><th>Quando</th></tr></thead>
+<tbody>
+<tr><td><strong>Google LLC</strong> -- Play Billing</td><td>Pagamento e gestione abbonamento</td><td><code>purchaseToken</code>, <code>productId</code>, dati di pagamento (gestiti da Google, non da PluriFin)</td><td>Solo se utente acquista subscription</td></tr>
+<tr><td><strong>Google LLC</strong> -- Gemini API</td><td>Analisi AI del portafoglio</td><td>Prompt utente + struttura portafoglio anonima</td><td>Solo se utente inserisce chiave Gemini ed apre AI</td></tr>
+<tr><td><strong>EODHD</strong></td><td>Prezzi di mercato real-time</td><td>Lista ticker</td><td>Solo se utente inserisce chiave EODHD</td></tr>
+<tr><td><strong>Financial Modeling Prep (FMP)</strong></td><td>Prezzi di mercato real-time, fondamentali</td><td>Lista ticker</td><td>Solo se utente inserisce chiave FMP</td></tr>
+<tr><td><strong>Cloudflare, Inc.</strong> -- Worker</td><td>Validazione trial e subscription</td><td><code>device_id_hash</code>, <code>purchase_token</code>, <code>productId</code>, JWT</td><td>Sempre (necessario per gating subscription)</td></tr>
+<tr><td><strong>Microsoft GitHub</strong> -- Pages</td><td>Hosting documenti legali, market data pubblici, webapp demo, vetrina</td><td>Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft)</td><td>Sempre, ogni volta che l'utente apre la webapp o un documento legale</td></tr>
+</tbody></table>
+<p>Cloudflare e GitHub Pages possono raccogliere log tecnici di accesso (IP, user-agent, timestamp) come da loro standard. Vedi:</p>
+<ul>
+<li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a></li>
+<li><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a></li>
+</ul>
+<p>Nessun dato finanziario dell'utente e' mai trasmesso a Cloudflare o GitHub oltre a quanto strettamente necessario al rispettivo servizio.</p>
+<h2>5. Trasferimenti extra-UE</h2>
+<p>Google (Gemini, Play Billing), Cloudflare e GitHub sono societa' statunitensi. I trasferimenti dati avvengono sotto:</p>
+<ul>
+<li>Standard Contractual Clauses (SCC) UE 2021/914 dove applicabili</li>
+<li>Data Privacy Framework UE-USA per Google (vedi</li>
+</ul>
+<p><a href="https://www.dataprivacyframework.gov/list">registrazione Google al DPF</a>)</p>
+<ul>
+<li>Per EODHD e FMP: si applicano le rispettive policy di trasferimento</li>
+</ul>
+<p>L'utente che non desidera trasferimenti extra-UE puo' semplicemente non attivare le feature opzionali (AI Gemini, prezzi real-time): l'app funziona pienamente in modalita' locale senza alcun trasferimento.</p>
+<h2>6. Diritti dell'interessato (artt. 15-22 GDPR)</h2>
+<p>L'utente ha diritto di:</p>
+<table>
+<thead><tr><th>Diritto</th><th>Come esercitarlo</th></tr></thead>
+<tbody>
+<tr><td><strong>Accesso</strong> ai dati personali</td><td>Direttamente in app: Impostazioni &gt; Privacy &gt; Esporta i miei dati (ZIP con portafoglio + consensi + log)</td></tr>
+<tr><td><strong>Rettifica</strong> dei dati inesatti</td><td>Modifica diretta in app (modifica posizione/obiettivo/impostazione)</td></tr>
+<tr><td><strong>Cancellazione</strong> (&quot;diritto all'oblio&quot;)</td><td>Impostazioni &gt; Privacy &gt; Cancella tutti i dati (irrevocabile) o disinstallazione app</td></tr>
+<tr><td><strong>Limitazione</strong> del trattamento</td><td>Disattivazione feature opzionali (AI, prezzi live, subscription)</td></tr>
+<tr><td><strong>Portabilita'</strong></td><td>Impostazioni &gt; Privacy &gt; Esporta i miei dati (formato JSON + CSV in ZIP)</td></tr>
+<tr><td><strong>Opposizione</strong></td><td>Disattivazione feature opzionali (AI, prezzi live)</td></tr>
+<tr><td><strong>Reclamo</strong> all'autorita' di controllo</td><td><a href="https://www.garanteprivacy.it/">Garante per la protezione dei dati personali</a> (Italia) o autorita' nazionale del paese di residenza</td></tr>
+</tbody></table>
+<p>Per richieste che non sono gestibili autonomamente in app (es. revoca del consenso al trattamento di dati gia' trasmessi a un sub-processor):</p>
+<ul>
+<li>Email: <code>plurifin.app+gdpr@gmail.com</code></li>
+<li>Tempo di risposta: entro 30 giorni dalla ricezione (art. 12.3 GDPR)</li>
+<li>Formato risposta: lingua della richiesta</li>
+</ul>
+<p>Trattandosi di app local-first, la maggior parte delle richieste e' soddisfacibile istantaneamente dall'utente stesso senza dover contattare il titolare.</p>
+<h2>7. Conservazione dei dati</h2>
+<p>I dati locali sul dispositivo restano fino a quando l'utente:</p>
+<ol>
+<li>Cancella manualmente la singola voce (posizione, obiettivo, ecc.)</li>
+<li>Esegue &quot;Cancella tutti i dati&quot; da Impostazioni</li>
+<li>Disinstalla l'app</li>
+</ol>
+<p>L'audit trail dei consensi (<code>consent_box</code>) ha conservazione separata: viene mantenuto finche' l'utente non lo esporta e cancella esplicitamente. Questo serve a fornire prova del consenso ai sensi dell'art. 7.1 GDPR.</p>
+<p>I dati lato sub-processor sono soggetti alle policy di conservazione di ciascun provider:</p>
+<ul>
+<li>Cloudflare Worker: <code>device_id_hash</code> per la durata del trial (8 giorni) +</li>
+</ul>
+<p>entitlement attivo + grace period (3 giorni) + account hold (7 giorni) =   durata massima 1 anno + ~ 3 settimane</p>
+<ul>
+<li>Google Play Billing: vedi termini Google</li>
+<li>Gemini, EODHD, FMP: nessuna conservazione lato PluriFin (richieste</li>
+</ul>
+<p>passthrough)</p>
+<h2>8. Sicurezza</h2>
+<p>Misure tecniche e organizzative adottate:</p>
+<ul>
+<li>Storage locale: Hive AES-256 + HMAC-SHA256, chiave a 32 byte nel keystore di</li>
+</ul>
+<p>sistema</p>
+<ul>
+<li>Chiavi API utente: <code>flutter_secure_storage</code> (Android Keystore / iOS Keychain</li>
+</ul>
+<p>/ DPAPI)</p>
+<ul>
+<li>Comunicazioni di rete: solo HTTPS (TLS 1.2+), <code>cleartextTrafficPermitted=false</code></li>
+</ul>
+<p>in Network Security Config Android, <code>NSAppTransportSecurity</code> strict iOS</p>
+<ul>
+<li>Anti-screenshot: <code>FLAG_SECURE</code> Android su pagine sensibili (home, dettaglio</li>
+</ul>
+<p>posizione, AI chat, ribilanciamento)</p>
+<ul>
+<li>Anti-backup: <code>android:allowBackup=&quot;false&quot;</code> per evitare l'inclusione dei dati</li>
+</ul>
+<p>cifrati nei backup automatici Google Drive</p>
+<ul>
+<li>Anti-tamper: detection root/jailbreak con degrade graceful</li>
+<li>Codice: obfuscation Dart attiva su tutte le release (`--obfuscate</li>
+</ul>
+<p>--split-debug-info`)</p>
+<ul>
+<li>Nessun log persistente di dati personali ne' in console ne' su file</li>
+<li>Nessuna telemetria di crash by default (Sentry disattivato in v1.0)</li>
+</ul>
+<h2>9. Minori (art. 8 GDPR)</h2>
+<p>L'app non e' destinata a minori di 18 anni. Il content rating dichiarato a Google Play e' &quot;18+&quot; come consigliato per app finanziarie. PluriFin non raccoglie consapevolmente dati di minori. Se un genitore o tutore individua un account di un minore, puo' richiederne la cancellazione scrivendo a <code>plurifin.app+gdpr@gmail.com</code>.</p>
+<h2>10. Cookie e tecnologie simili</h2>
+<p>L'app mobile <strong>non</strong> utilizza cookie (non e' un browser).</p>
+<p>La <strong>webapp demo</strong> (<code>lunapiena49.github.io/portfoliomanager-data/app/</code>) utilizza:</p>
+<ul>
+<li><code>localStorage</code> (HTML5) per persistere le 5 posizioni demo locali. Nessun</li>
+</ul>
+<p>cookie e' impostato dall'app.</p>
+<ul>
+<li>Un cookie tecnico imposto da GitHub Pages per anti-CSRF (gestito da Microsoft</li>
+</ul>
+<p>GitHub, non da PluriFin).</p>
+<p>Il <strong>sito vetrina</strong> (<code>lunapiena49.github.io/portfoliomanager-data/</code>) utilizza analytics privacy-safe <strong>GoatCounter self-hosted</strong> (no cookie, no fingerprinting, IP non memorizzato). Se in futuro saranno aggiunti analytics con cookie, verra' mostrato un banner di consenso conforme alla normativa e-Privacy.</p>
+<h2>11. Modifiche alla presente Privacy Policy</h2>
+<p>PluriFin si riserva di aggiornare questa Privacy Policy. Le modifiche sostanziali saranno notificate:</p>
+<ul>
+<li>In app, tramite schermata di re-consent al primo avvio successivo all'aggiornamento</li>
+<li>Sul sito vetrina, con un banner per 30 giorni</li>
+<li>Tramite email agli iscritti alla newsletter (se applicabile)</li>
+</ul>
+<p>Il numero di versione (in alto in questo documento) viene incrementato ad ogni modifica sostanziale. Le versioni precedenti sono disponibili nella history Git del repo pubblico <code>lunapiena49/portfoliomanager-data</code> cartella <code>legal/</code>.</p>
+<h2>12. Contatti</h2>
+<table>
+<thead><tr><th>Tipo richiesta</th><th>Email</th></tr></thead>
+<tbody>
+<tr><td>Richieste GDPR (accesso, cancellazione, portabilita', reclamo)</td><td><code>plurifin.app+gdpr@gmail.com</code></td></tr>
+<tr><td>Privacy &amp; sicurezza</td><td><code>plurifin.app+privacy@gmail.com</code></td></tr>
+<tr><td>Supporto generale</td><td><code>plurifin.app+support@gmail.com</code></td></tr>
+<tr><td>Contatto pubblico Play Store</td><td><code>plurifin.app@gmail.com</code></td></tr>
+</tbody></table>
+<h2>13. Foro competente e legge applicabile</h2>
+<p>La presente Privacy Policy e' regolata dalla legge italiana e dal Regolamento (UE) 2016/679 (GDPR). Per controversie il foro competente e' quello del consumatore ai sensi del D.Lgs. 206/2005 (Codice del Consumo).</p>
+<p>Per utenti residenti fuori dall'Unione Europea si applicano la legge italiana e il GDPR per quanto riguarda il trattamento dei dati personali, salvo applicazione di norme nazionali piu' protettive del consumatore.</p>
+
+    <footer class="doc-footer">
+      <p>SHA-256 (privacy_policy.md): <code>b847edf7a79bdd2d6c58525e90bb1972609118ec2227309edd0095f33549ef26</code></p>
+      <p><a href="index.html">Torna all'indice</a></p>
+    </footer>
+  </main>
+</body>
+</html>

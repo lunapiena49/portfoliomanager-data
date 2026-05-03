@@ -1,0 +1,159 @@
+---
+// WebDemoSection -- two-card section that explicitly contrasts the free
+// web demo (5 manual positions, no import, weekly market data, AI/goals
+// locked) with the full Android Premium app. Goal: turn curious site
+// visitors into either a /app/ trial or an Android download, with no
+// bait-and-switch (we list the demo limits up-front).
+//
+// Design tokens: Tailwind palette aligned to the D2 handoff (primary
+// #1E88E5 = sky-600, accent #00BFA5 = teal-500, surface neutral-50/900).
+// Inter font is loaded globally by Layout.astro -- no extra <link> here.
+
+import type { Translations, Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+
+interface Props {
+  t: Translations;
+  lang: Locale;
+  // Same launchState surface as LandingPage so the Play CTA can be hidden
+  // pre-launch and shown post go-live without forking the component.
+  launchState?: 'pre' | 'live';
+  playStoreUrl?: string;
+}
+
+const {
+  t,
+  lang,
+  launchState = 'pre',
+  playStoreUrl = 'https://play.google.com/store/apps/details?id=app.plurifin.portfoliomanager',
+} = Astro.props;
+
+const wd = (t as any).webdemo as {
+  eyebrow: string;
+  h2: string;
+  lede: string;
+  demo: {
+    title: string;
+    subtitle: string;
+    limits: string[];
+    cta: string;
+  };
+  android: {
+    title: string;
+    subtitle: string;
+    features: string[];
+    cta_pre: string;
+    cta_live: string;
+    pricing: string;
+  };
+};
+
+const webappHref = `${import.meta.env.BASE_URL.replace(/\/$/, '')}/app/`;
+---
+
+<section id="webdemo" class="relative py-20 sm:py-24 bg-neutral-50">
+  <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center reveal">
+      <p class="text-sm font-semibold uppercase tracking-wider text-sky-600">
+        {wd.eyebrow}
+      </p>
+      <h2 class="mt-2 text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl">
+        {wd.h2}
+      </h2>
+      <p class="mt-4 mx-auto max-w-2xl text-base text-neutral-600">
+        {wd.lede}
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+      {/* ---------- CARD 1: Web demo (free) ---------- */}
+      <article class="reveal flex flex-col rounded-2xl border border-neutral-200 bg-white p-8 shadow-sm transition hover:shadow-md">
+        <header class="flex items-center gap-3">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-teal-100 text-teal-700">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 12a9 9 0 1018 0 9 9 0 00-18 0zm9-9c2.5 3 2.5 15 0 18m0-18c-2.5 3-2.5 15 0 18M3 12h18" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-semibold text-neutral-900">{wd.demo.title}</h3>
+            <p class="text-sm text-neutral-500">{wd.demo.subtitle}</p>
+          </div>
+        </header>
+
+        <ul role="list" class="mt-6 flex-1 space-y-3 text-sm text-neutral-700">
+          {wd.demo.limits.map((line) => (
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mt-0.5 h-5 w-5 shrink-0 text-neutral-400" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm.75-11a.75.75 0 00-1.5 0v4a.75.75 0 001.5 0V7zm0 7a.75.75 0 10-1.5 0v.01a.75.75 0 101.5 0V14z" clip-rule="evenodd" />
+              </svg>
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8">
+          <a
+            href={webappHref}
+            class="inline-flex w-full items-center justify-center rounded-lg border border-neutral-300 bg-white px-5 py-3 text-sm font-semibold text-neutral-900 transition hover:border-teal-500 hover:text-teal-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+          >
+            {wd.demo.cta}
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="ml-2 h-4 w-4" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.69L10.97 5.78a.75.75 0 011.06-1.06l4.72 4.72a.75.75 0 010 1.06l-4.72 4.72a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </article>
+
+      {/* ---------- CARD 2: Android Premium ---------- */}
+      <article class="reveal flex flex-col rounded-2xl border-2 border-sky-600 bg-white p-8 shadow-md transition hover:shadow-lg">
+        <header class="flex items-center gap-3">
+          <span class="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-sky-100 text-sky-700">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" stroke="currentColor" class="h-5 w-5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 4a2 2 0 012-2h10a2 2 0 012 2v16a2 2 0 01-2 2H7a2 2 0 01-2-2V4zm5 18h4" />
+            </svg>
+          </span>
+          <div>
+            <h3 class="text-lg font-semibold text-neutral-900">{wd.android.title}</h3>
+            <p class="text-sm text-neutral-500">{wd.android.subtitle}</p>
+          </div>
+          <span class="ml-auto rounded-full bg-sky-600 px-3 py-1 text-xs font-semibold text-white">
+            {wd.android.pricing}
+          </span>
+        </header>
+
+        <ul role="list" class="mt-6 flex-1 space-y-3 text-sm text-neutral-700">
+          {wd.android.features.map((line) => (
+            <li class="flex items-start gap-2">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="mt-0.5 h-5 w-5 shrink-0 text-sky-600" aria-hidden="true">
+                <path fill-rule="evenodd" d="M16.704 5.296a1 1 0 010 1.408l-7.5 7.5a1 1 0 01-1.408 0l-3.5-3.5a1 1 0 011.408-1.408L8.5 12.092l6.796-6.796a1 1 0 011.408 0z" clip-rule="evenodd" />
+              </svg>
+              <span>{line}</span>
+            </li>
+          ))}
+        </ul>
+
+        <div class="mt-8">
+          {launchState === 'live' ? (
+            <a
+              href={playStoreUrl}
+              class="inline-flex w-full items-center justify-center rounded-lg bg-sky-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-sky-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2"
+            >
+              {wd.android.cta_live}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="ml-2 h-4 w-4" aria-hidden="true">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.69L10.97 5.78a.75.75 0 011.06-1.06l4.72 4.72a.75.75 0 010 1.06l-4.72 4.72a.75.75 0 11-1.06-1.06l3.47-3.47H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          ) : (
+            <button
+              type="button"
+              data-modal-trigger
+              class="inline-flex w-full items-center justify-center rounded-lg bg-neutral-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-700 focus-visible:ring-offset-2"
+            >
+              {wd.android.cta_pre}
+            </button>
+          )}
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

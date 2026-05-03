@@ -1,0 +1,114 @@
+---
+import type { Translations } from '../i18n/index';
+
+interface Props { t: Translations; lang: string; }
+const { t, lang } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const privacyUrl = lang === 'it' ? `${base}/privacy` : `${base}/${lang}/privacy`;
+
+const bullets = [
+  {
+    title: t.privacy.b1Title,
+    body: t.privacy.b1Body,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+  },
+  {
+    title: t.privacy.b2Title,
+    body: t.privacy.b2Body,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/><circle cx="12" cy="16" r="1.2" fill="currentColor"/></svg>`,
+  },
+  {
+    title: t.privacy.b3Title,
+    body: t.privacy.b3Body,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`,
+  },
+  {
+    title: t.privacy.b4Title,
+    body: t.privacy.b4Body,
+    icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="20" height="20"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4h6v2"/></svg>`,
+  },
+];
+---
+<section class="section" id="privacy" aria-labelledby="privacy-h2">
+  <div class="wrap">
+    <div class="privacy-panel reveal">
+      <div class="panel-head">
+        <p class="eyebrow">{t.privacy.eyebrow}</p>
+        <h2 id="privacy-h2">{t.privacy.h2}</h2>
+        <p class="intro">{t.privacy.intro}</p>
+      </div>
+
+      <div class="privacy-grid" role="list">
+        {bullets.map((b, i) => (
+          <div class={`privacy-item reveal`} style={`transition-delay: ${i * 70}ms`} role="listitem">
+            <div class="ico" aria-hidden="true" set:html={b.icon} />
+            <div>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="privacy-tech" role="note">
+        <strong>Tecnica: </strong>{t.privacy.techCallout}
+      </div>
+
+      <a href={privacyUrl} class="btn btn-outline privacy-cta">
+        {t.privacy.cta}
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .privacy-panel {
+    background: linear-gradient(180deg, rgba(0,191,165,.06) 0%, rgba(0,191,165,.02) 100%);
+    border: 1px solid rgba(0,191,165,.18);
+    border-radius: var(--radius-xl);
+    padding: 48px;
+  }
+  .panel-head { margin-bottom: 32px; }
+  .panel-head h2 { margin: 0 0 12px; }
+  .intro { color: var(--text-2); font-size: 16px; line-height: 1.65; max-width: 66ch; }
+  .privacy-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .privacy-item { display: flex; gap: 16px; align-items: flex-start; }
+  .privacy-item .ico {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: rgba(0,191,165,.12);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+  }
+  .privacy-item h3 { font-size: 16px; margin-bottom: 6px; }
+  .privacy-item p { color: var(--text-2); font-size: 14px; line-height: 1.55; }
+  .privacy-tech {
+    margin-bottom: 28px;
+    padding: 16px 18px;
+    background: #fff;
+    border: 1px dashed var(--divider);
+    border-radius: var(--radius);
+    font-size: 13px;
+    color: var(--text-2);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .privacy-tech strong { color: var(--text); font-family: 'InterVariable', 'Inter', sans-serif; }
+  .privacy-cta { align-self: flex-start; }
+
+  @media (max-width: 768px) {
+    .privacy-panel { padding: 28px; }
+    .privacy-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>

@@ -1,0 +1,11 @@
+---
+import de from '../../i18n/de';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+const toc = [{ id: 'nutzung', label: 'Nutzungsbedingungen' }];
+---
+<LegalLayout t={de} lang="de" pageTitle="Nutzungsbedingungen" tocItems={toc}>
+  <p class="meta">Letzte Aktualisierung: 28. April 2026 · Version 1.0</p>
+  <h2 id="nutzung">Nutzungsbedingungen</h2>
+  <p>Durch die Nutzung von Portfolio Manager oder der PluriFin-Website stimmst du diesen Nutzungsbedingungen zu. PluriFin gewaehrt dir eine persoenliche, nicht-exklusive und nicht-uebertragbare Lizenz zur nicht-kommerziellen Nutzung. Du darfst die App nicht verteilen, weiterverkaufen oder dekompilieren. Fragen: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Endgueltiger Rechtstext in juristischer Pruefung (Wave W3).</div>
+</LegalLayout>

@@ -1,0 +1,87 @@
+---
+import type { Translations } from '../i18n/index';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
+---
+<section class="section" id="about" aria-labelledby="about-h2">
+  <div class="wrap">
+    <div class="about-card reveal">
+      <div class="about-avatar" aria-hidden="true">FS</div>
+      <div>
+        <p class="eyebrow">{t.about.eyebrow}</p>
+        <h2 id="about-h2">{t.about.h2}</h2>
+        <p class="about-body">{t.about.body}</p>
+        <div class="about-list" role="table" aria-label="About details">
+          <div class="row" role="row">
+            <span role="cell">{t.about.role !== 'Independent developer' ? 'Ruolo' : 'Role'}</span>
+            <span role="cell">{t.about.role}</span>
+          </div>
+          <div class="row" role="row">
+            <span role="cell">{t.about.location !== 'Italy' ? 'Sede' : 'Location'}</span>
+            <span role="cell">{t.about.location}</span>
+          </div>
+          <div class="row" role="row">
+            <span role="cell">{t.about.type !== 'Private individual' ? 'Tipo' : 'Type'}</span>
+            <span role="cell">{t.about.type}</span>
+          </div>
+          <div class="row" role="row">
+            <span role="cell">{t.lang === 'it' ? 'Conflitti' : 'Conflicts'}</span>
+            <span role="cell">{t.about.conflict}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .about-card {
+    background: #fff;
+    border: 1px solid var(--divider);
+    border-radius: var(--radius-xl);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 36px;
+    align-items: flex-start;
+  }
+  .about-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1E88E5, #00BFA5);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-size: 56px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    flex-shrink: 0;
+  }
+  .about-card .eyebrow { margin-bottom: 6px; }
+  .about-card h2 { margin-bottom: 14px; }
+  .about-body { color: var(--text-2); margin-bottom: 18px; font-size: 16px; line-height: 1.6; }
+  .about-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 24px;
+    margin-top: 18px;
+  }
+  .about-list .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--divider-soft);
+    font-size: 14px;
+  }
+  .about-list .row span:first-child { color: var(--text-3); }
+  .about-list .row span:last-child { color: var(--text); font-weight: 500; }
+
+  @media (max-width: 768px) {
+    .about-card { grid-template-columns: 1fr; padding: 32px; gap: 24px; text-align: center; }
+    .about-avatar { margin: 0 auto; width: 120px; height: 120px; font-size: 44px; }
+    .about-list { grid-template-columns: 1fr; }
+    .about-list .row { justify-content: flex-start; gap: 16px; }
+  }
+</style>

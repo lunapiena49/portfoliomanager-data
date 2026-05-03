@@ -1,0 +1,42 @@
+---
+import es from '../../i18n/es';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'overview', label: '1. Resumen' },
+  { id: 'data', label: '2. Datos recogidos' },
+  { id: 'processing', label: '3. Finalidad del tratamiento' },
+  { id: 'third-parties', label: '4. Terceros' },
+  { id: 'rights', label: '5. Derechos del usuario' },
+  { id: 'contact', label: '6. Contacto' },
+];
+---
+<LegalLayout t={es} lang="es" pageTitle="Politica de Privacidad" tocItems={toc}>
+  <p class="meta">Ultima actualizacion: 28 de abril de 2026 · Version 1.0</p>
+  <div class="callout">
+    <strong>En resumen:</strong> Portfolio Manager no recoge datos del portafolio. Carteras,
+    posiciones y objetivos permanecen en tu dispositivo. Las llamadas a servicios externos solo
+    ocurren si activas las funciones opcionales con tu propia API key.
+  </div>
+  <h2 id="overview">1. Resumen</h2>
+  <p>Esta politica describe como PluriFin (Filippo Salemi, persona fisica con base en Italia) trata
+  los datos personales en el marco de la aplicacion Portfolio Manager y el sitio web.</p>
+  <p>Responsable del tratamiento: <strong>Filippo Salemi</strong>.
+  Contacto: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>.
+  Solicitudes RGPD: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <h2 id="data">2. Datos recogidos</h2>
+  <p>Todos los datos de la app se almacenan localmente, cifrados (AES-256 + HMAC-SHA256). El sitio web
+  recoge email (newsletter, con consentimiento) y datos del formulario de contacto (via Formspree).</p>
+  <h2 id="processing">3. Finalidad del tratamiento</h2>
+  <p>Newsletter: enviar notificacion al lanzamiento (base juridica: consentimiento). Formulario:
+  responder solicitudes (base: consentimiento + interes legitimo).</p>
+  <h2 id="third-parties">4. Terceros</h2>
+  <p>La app puede enviar datos a Google Gemini, EODHD/FMP (con tu API key) y Formspree/GitHub Pages
+  (sitio web). Solo si activas las funciones opcionales.</p>
+  <h2 id="rights">5. Derechos del usuario</h2>
+  <p>Puedes ejercer derechos RGPD (acceso, rectificacion, supresion...) escribiendo a
+  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <h2 id="contact">6. Contacto</h2>
+  <p><a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Texto legal definitivo pendiente de revision (Wave W3).</div>
+</LegalLayout>

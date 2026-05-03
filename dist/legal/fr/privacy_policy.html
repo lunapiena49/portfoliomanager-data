@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Politique de Confidentialite -- PluriFin</title>
+  <meta name="robots" content="index,follow" />
+  <meta name="description" content="Politique de Confidentialite -- Portfolio Manager by PluriFin." />
+  <link rel="stylesheet" href="../_styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container" style="padding-top:0;padding-bottom:0;">
+      <a href="../">PluriFin -- Legal</a>
+    </div>
+  </header>
+  <main class="container">
+    <nav class="lang-switcher" aria-label="Language switcher">
+      <a href='../it/privacy_policy.html' lang='it'>Italiano</a>
+<a href='../en/privacy_policy.html' lang='en'>English</a>
+<a href='../es/privacy_policy.html' lang='es'>Espanol</a>
+<a class='active' href='../fr/privacy_policy.html' lang='fr'>Francais</a>
+<a href='../de/privacy_policy.html' lang='de'>Deutsch</a>
+<a href='../pt/privacy_policy.html' lang='pt'>Portugues</a>
+
+    </nav>
+    <h1>Politique de Confidentialite -- Portfolio Manager by PluriFin</h1>
+<p><strong>Version</strong>: 1.0.0 <strong>Derniere mise a jour</strong>: 2026-05-02 <strong>Langue originale</strong>: Italien (version contraignante pour la juridiction)</p>
+<hr/>
+<h2>1. Responsable du traitement</h2>
+<ul>
+<li><strong>Nom</strong>: Filippo Salemi</li>
+<li><strong>Forme juridique</strong>: personne physique (developpeur independant)</li>
+<li><strong>Marque commerciale</strong>: PluriFin</li>
+<li><strong>Pays</strong>: Italie</li>
+<li><strong>Email pour demandes RGPD et confidentialite</strong>: <code>plurifin.app+gdpr@gmail.com</code></li>
+<li><strong>Email general</strong>: <code>plurifin.app@gmail.com</code></li>
+</ul>
+<p>Aucun Delegue a la Protection des Donnees (DPO) n'est designe: la controleuse est une personne physique hors des cas obligatoires art. 37 RGPD.</p>
+<h2>2. Synthese (TL;DR)</h2>
+<ul>
+<li>Toutes les donnees de portefeuille (positions, transactions, objectifs,</li>
+</ul>
+<p>parametres) sont <strong>stockees uniquement sur l'appareil de l'utilisateur</strong>   sous forme chiffree. Nous ne les recevons pas, ne les stockons pas et ne   les transmettons pas a des serveurs PluriFin.</p>
+<ul>
+<li>L'app <strong>n'utilise aucun analytics tiers</strong> (pas de Google Analytics,</li>
+</ul>
+<p>Firebase, Facebook SDK, AppsFlyer, Sentry par defaut).</p>
+<ul>
+<li>L'app <strong>ne partage aucune donnee</strong> avec annonceurs. Pas de publicite.</li>
+<li>Des <strong>fonctionnalites optionnelles</strong> existent qui, si activees, transmettent</li>
+</ul>
+<p>des donnees a des sous-traitants tiers: IA Gemini, prix marche temps reel   (EODHD/FMP), validation abonnement (Cloudflare Worker). Chacune necessite   action explicite.</p>
+<ul>
+<li>L'utilisateur peut exporter et supprimer toutes les donnees a tout moment</li>
+</ul>
+<p>depuis Parametres, sans contacter le controleur.</p>
+<h2>3. Categories de donnees</h2>
+<h3>3.1 Donnees locales sur l'appareil</h3>
+<p>Chiffrees Hive AES-256 + cle dans le keystore systeme:</p>
+<table>
+<thead><tr><th>Categorie</th><th>Exemples</th><th>Base juridique</th><th>Conservation</th></tr></thead>
+<tbody>
+<tr><td>Donnees portefeuille</td><td>nom, ticker, quantite, prix moyen, broker, date</td><td>art. 6.1.b RGPD</td><td>Jusqu'a suppression</td></tr>
+<tr><td>Objectifs financiers</td><td>titre, montant, echeance, contributions</td><td>art. 6.1.b RGPD</td><td>Jusqu'a suppression</td></tr>
+<tr><td>Preferences</td><td>langue, devise, theme, notifications, mode demo</td><td>art. 6.1.b RGPD</td><td>Jusqu'a desinstallation</td></tr>
+<tr><td>Audit consentements</td><td>timestamp, version doc, decision, hash texte</td><td>art. 6.1.c RGPD</td><td>Jusqu'a suppression</td></tr>
+<tr><td>Cles API utilisateur</td><td>Gemini, EODHD, FMP saisies manuellement</td><td>art. 6.1.b RGPD</td><td>Jusqu'a suppression</td></tr>
+</tbody></table>
+<p><code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
+<h3>3.2 Donnees via Play Store (Google)</h3>
+<p>PluriFin recoit uniquement: <code>purchaseToken</code>, <code>productId</code>, <code>device_id_hash</code> (HMAC-SHA256). PluriFin <strong>ne</strong> recoit pas nom, email, adresse, donnees de paiement.</p>
+<h3>3.3 Validation abonnement (Cloudflare Worker)</h3>
+<p>Donnees envoyees: <code>device_id_hash</code>, <code>purchase_token</code>, <code>product_id</code>, JWT signe. Reponse: JWT Ed25519. Pas de PII. Hash non identifiable sans le sel serveur.</p>
+<h3>3.4 Donnees a Gemini (uniquement si active)</h3>
+<p>Si l'utilisateur saisit sa cle Gemini et utilise l'IA, le prompt (question + structure portefeuille anonyme) est transmis directement a Google Gemini. Application des <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>.</p>
+<h3>3.5 EODHD / FMP</h3>
+<p>Liste des tickers transmise au fournisseur via cle utilisateur. Conditions EODHD/FMP applicables.</p>
+<h2>4. Sous-traitants</h2>
+<table>
+<thead><tr><th>Sous-traitant</th><th>Finalite</th><th>Donnees</th><th>Quand</th></tr></thead>
+<tbody>
+<tr><td>Google Play Billing</td><td>Paiement abonnement</td><td>purchaseToken, productId</td><td>Achat seulement</td></tr>
+<tr><td>Google Gemini API</td><td>Analyse IA</td><td>Prompt + portefeuille anonyme</td><td>Activation seulement</td></tr>
+<tr><td>EODHD</td><td>Prix temps reel</td><td>Liste tickers</td><td>Activation seulement</td></tr>
+<tr><td>FMP</td><td>Prix temps reel</td><td>Liste tickers</td><td>Activation seulement</td></tr>
+<tr><td>Cloudflare Worker</td><td>Validation abonnement</td><td>device_id_hash, JWT</td><td>Toujours (gating)</td></tr>
+<tr><td>GitHub Pages</td><td>Hosting docs/webapp/site</td><td>IP request</td><td>Chaque visite</td></tr>
+</tbody></table>
+<h2>5. Transferts hors UE</h2>
+<p>Google, Cloudflare, GitHub: societes USA. Bases:</p>
+<ul>
+<li>Clauses Contractuelles Types UE 2021/914</li>
+<li>EU-US Data Privacy Framework (Google)</li>
+<li>Politiques propres (EODHD, FMP)</li>
+</ul>
+<p>Pour eviter transferts hors UE: ne pas activer les fonctions optionnelles.</p>
+<h2>6. Droits de la personne concernee (arts. 15-22 RGPD)</h2>
+<table>
+<thead><tr><th>Droit</th><th>Comment exercer</th></tr></thead>
+<tbody>
+<tr><td>Acces</td><td>Parametres &gt; Confidentialite &gt; Exporter mes donnees (ZIP)</td></tr>
+<tr><td>Rectification</td><td>Edition directe in-app</td></tr>
+<tr><td>Effacement</td><td>Parametres &gt; Confidentialite &gt; Supprimer toutes les donnees / desinstaller</td></tr>
+<tr><td>Limitation</td><td>Desactiver fonctions optionnelles</td></tr>
+<tr><td>Portabilite</td><td>Parametres &gt; Exporter (JSON+CSV)</td></tr>
+<tr><td>Opposition</td><td>Desactiver fonctions optionnelles</td></tr>
+<tr><td>Reclamation</td><td><a href="https://www.garanteprivacy.it/">Garante (Italie)</a>, CNIL (France) ou autorite nationale</td></tr>
+</tbody></table>
+<p>Demandes: <code>plurifin.app+gdpr@gmail.com</code>. Reponse 30 jours (art. 12.3 RGPD).</p>
+<h2>7. Conservation</h2>
+<p>Donnees locales jusqu'a suppression utilisateur. Audit consentements: jusqu'a export et suppression explicites. Sous-traitants: politique propre.</p>
+<h2>8. Securite</h2>
+<ul>
+<li>Hive AES-256 + HMAC-SHA256</li>
+<li><code>flutter_secure_storage</code></li>
+<li>HTTPS uniquement (TLS 1.2+)</li>
+<li><code>FLAG_SECURE</code> Android sur pages sensibles</li>
+<li><code>allowBackup=false</code></li>
+<li>Detection root/jailbreak avec degradation graceful</li>
+<li>Obfuscation Dart en release</li>
+</ul>
+<h2>9. Mineurs (art. 8 RGPD)</h2>
+<p>App non destinee aux moins de 18 ans. Content rating Play &quot;18+&quot;. Parents/tuteurs peuvent demander suppression a <code>plurifin.app+gdpr@gmail.com</code>.</p>
+<h2>10. Cookies</h2>
+<p>App mobile: aucun cookie. Webapp: <code>localStorage</code> + cookie technique GitHub Pages. Site vitrine: GoatCounter self-hosted (sans cookie, sans fingerprinting).</p>
+<h2>11. Modifications</h2>
+<p>Notification via app (re-consent), banniere site (30 jours), email newsletter. Versions precedentes dans repo <code>lunapiena49/portfoliomanager-data</code>, historique Git.</p>
+<h2>12. Contacts</h2>
+<ul>
+<li>RGPD: <code>plurifin.app+gdpr@gmail.com</code></li>
+<li>Confidentialite: <code>plurifin.app+privacy@gmail.com</code></li>
+<li>Support: <code>plurifin.app+support@gmail.com</code></li>
+<li>Public Play Store: <code>plurifin.app@gmail.com</code></li>
+</ul>
+<h2>13. Juridiction et loi applicable</h2>
+<p>Loi italienne et RGPD. Pour consommateurs: for du consommateur selon D.Lgs. 206/2005 (Italie) ou regles nationales plus protectrices.</p>
+
+    <footer class="doc-footer">
+      <p>SHA-256 (privacy_policy.md): <code>342e78a2b48c3014e18062fe7ef0ecf47c69a3504b96f1502628ccad204ce79c</code></p>
+      <p><a href="index.html">Retour a l'index</a></p>
+    </footer>
+  </main>
+</body>
+</html>

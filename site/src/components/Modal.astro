@@ -1,0 +1,257 @@
+---
+import type { Translations } from '../i18n/index';
+import { LOCALE_NAMES, LOCALES } from '../i18n/index';
+
+interface Props { t: Translations; }
+const { t } = Astro.props;
+
+// Formspree endpoint -- replace PLACEHOLDER_NEWSLETTER_ID with real ID at launch
+const FORMSPREE_NEWSLETTER = 'https://formspree.io/f/PLACEHOLDER_NEWSLETTER_ID';
+---
+<div class="modal-bg" id="modalBg" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-hidden="true">
+  <div class="modal modal-wrap">
+    <button class="modal-close" id="modalClose" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+    <h3 id="modal-title">{t.modal.title}</h3>
+    <p>{t.modal.sub}</p>
+
+    <!-- Form -->
+    <form id="newsletterForm" action={FORMSPREE_NEWSLETTER} method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Newsletter signup - PluriFin" />
+      <input type="hidden" name="_replyto" id="replyTo" value="" />
+
+      <div class="form-row">
+        <label for="modalEmail">{t.modal.emailLabel} *</label>
+        <input
+          type="email"
+          id="modalEmail"
+          name="email"
+          required
+          autocomplete="email"
+          placeholder="name@example.com"
+          aria-required="true"
+        />
+      </div>
+
+      <div class="form-row">
+        <label>{t.modal.langLabel}</label>
+        <div class="lang-radios" role="radiogroup" aria-label={t.modal.langLabel}>
+          {LOCALES.map(l => (
+            <label>
+              <input type="radio" name="preferred_lang" value={l} checked={l === t.lang} />
+              {l.toUpperCase()}
+            </label>
+          ))}
+        </div>
+      </div>
+
+      <div class="form-row gdpr">
+        <input type="checkbox" id="gdprConsent" name="gdpr_consent" required aria-required="true" />
+        <label for="gdprConsent">{t.modal.gdpr}</label>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-ghost" id="modalCancelBtn">{t.lang === 'it' ? 'Annulla' : 'Cancel'}</button>
+        <button type="submit" class="btn btn-primary">{t.modal.submit}</button>
+      </div>
+
+      <!-- Success message (hidden by default) -->
+      <div class="success-msg" id="successMsg" role="status" aria-live="polite" hidden>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        {t.modal.success}
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .modal-bg {
+    position: fixed;
+    inset: 0;
+    background: rgba(14,17,22,.55);
+    z-index: 200;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: #fff;
+    border-radius: var(--radius-xl);
+    padding: 36px;
+    max-width: 480px;
+    width: 100%;
+    box-shadow: var(--shadow-elev);
+    position: relative;
+  }
+  .modal h3 { font-size: 24px; margin-bottom: 8px; }
+  .modal > p { color: var(--text-2); font-size: 15px; margin-bottom: 24px; }
+  .form-row { margin-bottom: 16px; }
+  .form-row > label:first-child {
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .modal input[type="email"] {
+    width: 100%;
+    height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--divider);
+    border-radius: 8px;
+    font-size: 15px;
+    font-family: inherit;
+    color: var(--text);
+    background: #fff;
+    transition: border-color .15s;
+  }
+  .modal input[type="email"]:focus {
+    border-color: var(--primary);
+    outline: 2px solid rgba(30,136,229,.15);
+    outline-offset: 0;
+  }
+  .lang-radios {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .lang-radios label {
+    flex: 1;
+    min-width: 52px;
+    text-align: center;
+    padding: 9px 0;
+    border: 1px solid var(--divider);
+    border-radius: 6px;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+    letter-spacing: .06em;
+    cursor: pointer;
+    color: var(--text-2);
+    transition: all .15s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .lang-radios input[type="radio"] { position: absolute; opacity: 0; pointer-events: none; }
+  .lang-radios label:has(input:checked) { background: var(--text); color: #fff; border-color: var(--text); }
+  .gdpr {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .gdpr input[type="checkbox"] { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; }
+  .gdpr label { font-size: 13px !important; color: var(--text-2); line-height: 1.5; font-weight: 400 !important; }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    color: var(--text-3);
+    display: grid;
+    place-items: center;
+    transition: background .12s, color .12s;
+    cursor: pointer;
+  }
+  .modal-close:hover { background: var(--bg); color: var(--text); }
+  .success-msg {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: rgba(76,175,80,.08);
+    border: 1px solid rgba(76,175,80,.2);
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 500;
+    color: #2E7D32;
+  }
+
+  @media (max-width: 480px) {
+    .modal { padding: 24px; }
+    .modal-actions { flex-direction: column-reverse; }
+    .modal-actions .btn { width: 100%; justify-content: center; }
+  }
+</style>
+
+<script>
+  const bg = document.getElementById('modalBg');
+  const closeBtn = document.getElementById('modalClose');
+  const cancelBtn = document.getElementById('modalCancelBtn');
+  const form = document.getElementById('newsletterForm') as HTMLFormElement | null;
+  const successMsg = document.getElementById('successMsg');
+
+  function openModal() {
+    if (!bg) return;
+    bg.classList.add('open');
+    bg.setAttribute('aria-hidden', 'false');
+    const firstInput = bg.querySelector('input, button') as HTMLElement | null;
+    firstInput?.focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    if (!bg) return;
+    bg.classList.remove('open');
+    bg.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('open-modal', openModal);
+  closeBtn?.addEventListener('click', closeModal);
+  cancelBtn?.addEventListener('click', closeModal);
+  bg?.addEventListener('click', (e: MouseEvent) => {
+    if (e.target === bg) closeModal();
+  });
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // Formspree AJAX submission
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const email = (data.get('email') as string) ?? '';
+      const replyTo = document.getElementById('replyTo') as HTMLInputElement | null;
+      if (replyTo) replyTo.value = email;
+
+      try {
+        const res = await fetch(form.action, {
+          method: 'POST',
+          body: data,
+          headers: { Accept: 'application/json' },
+        });
+        if (res.ok) {
+          form.reset();
+          if (successMsg) successMsg.hidden = false;
+          const submitBtn = form.querySelector('[type="submit"]') as HTMLButtonElement | null;
+          if (submitBtn) submitBtn.disabled = true;
+        }
+      } catch {
+        // Fall through to native form submit if fetch fails
+        form.submit();
+      }
+    });
+  }
+</script>

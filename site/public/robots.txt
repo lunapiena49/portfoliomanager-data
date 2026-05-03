@@ -1,0 +1,11 @@
+# PluriFin marketing site
+User-agent: *
+Allow: /portfoliomanager-data/
+
+# Block indexing of the Flutter webapp (separate product page on Play Store)
+Disallow: /portfoliomanager-data/app/
+
+# Block market data JSON files (not meant for search engines)
+Disallow: /portfoliomanager-data/dist/
+
+Sitemap: https://lunapiena49.github.io/portfoliomanager-data/sitemap.xml

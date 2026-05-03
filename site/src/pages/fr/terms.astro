@@ -1,0 +1,11 @@
+---
+import fr from '../../i18n/fr';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+const toc = [{ id: 'cgu', label: "Conditions d'utilisation" }];
+---
+<LegalLayout t={fr} lang="fr" pageTitle="Conditions d'utilisation" tocItems={toc}>
+  <p class="meta">Derniere mise a jour : 28 avril 2026 · Version 1.0</p>
+  <h2 id="cgu">Conditions d'utilisation</h2>
+  <p>En utilisant Portfolio Manager ou le site PluriFin, vous acceptez ces conditions. PluriFin vous accorde une licence personnelle, non exclusive et non cessible pour utiliser l'application a des fins personnelles et non commerciales. Vous ne pouvez pas distribuer, revendre ni faire de retro-ingenierie sur l'application. Pour toute question : <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Texte legal definitif en cours de revision (Wave W3).</div>
+</LegalLayout>

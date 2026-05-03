@@ -1,0 +1,11 @@
+---
+import pt from '../../i18n/pt';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+const toc = [{ id: 'termos', label: 'Termos de servico' }];
+---
+<LegalLayout t={pt} lang="pt" pageTitle="Termos de servico" tocItems={toc}>
+  <p class="meta">Ultima atualizacao: 28 de abril de 2026 · Versao 1.0</p>
+  <h2 id="termos">Termos de servico</h2>
+  <p>Ao usar o Portfolio Manager ou o site PluriFin, aceita estes Termos de servico. PluriFin concede-lhe uma licenca pessoal, nao exclusiva e intransmissivel para uso pessoal e nao comercial. Nao pode distribuir, revender nem fazer engenharia inversa da aplicacao. Para questoes: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Texto legal definitivo pendente de revisao juridica (Wave W3).</div>
+</LegalLayout>

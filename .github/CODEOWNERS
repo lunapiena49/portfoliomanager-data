@@ -1,0 +1,14 @@
+# CODEOWNERS for portfoliomanager-data (public repo).
+# Ruleset main-protection blocks deletes and force pushes (no PR review
+# requirement on the public repo, but CODEOWNERS still flags reviewers).
+# See https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+# Default code owner.
+*       @lunapiena49
+
+# Sensitive paths: workflows + market data + legal docs require explicit owner.
+/.github/workflows/     @lunapiena49
+/scripts/eodhd/         @lunapiena49
+/dist/                  @lunapiena49
+/legal/                 @lunapiena49
+/site/                  @lunapiena49

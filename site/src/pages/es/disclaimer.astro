@@ -1,0 +1,13 @@
+---
+import es from '../../i18n/es';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+const toc = [{ id: 'aviso', label: 'Aviso importante' }];
+---
+<LegalLayout t={es} lang="es" pageTitle="Disclaimer financiero" tocItems={toc}>
+  <p class="meta">Ultima actualizacion: 28 de abril de 2026 · Version 1.0</p>
+  <div class="callout"><strong>En resumen:</strong> Portfolio Manager es una herramienta informativa. No constituye asesoramiento financiero, no gestiona capitales, no ejecuta ordenes.</div>
+  <h2 id="aviso">Aviso importante</h2>
+  <p>Los contenidos de Portfolio Manager se proporcionan con fines exclusivamente informativos. No constituyen asesoramiento financiero, fiscal o juridico segun el TUF italiano (D.Lgs. 58/1998) o normativas equivalentes. PluriFin no gestiona capitales ni ejecuta ordenes. Las decisiones de inversion son responsabilidad exclusiva del usuario. Las respuestas de la IA (Gemini) son automaticas y pueden contener errores.</p>
+  <p>Contacto: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <hr /><div class="note">Texto legal definitivo pendiente de revision (Wave W3).</div>
+</LegalLayout>

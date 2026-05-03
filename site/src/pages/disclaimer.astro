@@ -1,0 +1,75 @@
+---
+import it from '../i18n/it';
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'scope', label: '1. Ambito di applicazione' },
+  { id: 'no-advice', label: '2. Non e\' consulenza' },
+  { id: 'ai', label: '3. Contenuti AI' },
+  { id: 'accuracy', label: '4. Accuratezza dati' },
+  { id: 'liability', label: '5. Limitazione responsabilita\'' },
+  { id: 'contact', label: '6. Contatti' },
+];
+---
+<LegalLayout t={it} lang="it" pageTitle="Disclaimer finanziario" tocItems={toc}>
+  <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
+
+  <div class="callout">
+    <strong>In sintesi:</strong> Portfolio Manager e' uno strumento informativo. Non e' consulenza
+    finanziaria, non gestisce capitali, non esegue ordini. Le analisi AI sono esempi informativi,
+    non raccomandazioni. Le decisioni restano completamente dell'utente.
+  </div>
+
+  <h2 id="scope">1. Ambito di applicazione</h2>
+  <p>Il presente disclaimer si applica all'applicazione mobile Portfolio Manager (Android, iOS, Web,
+  Desktop), al sito web PluriFin e a qualsiasi contenuto prodotto dall'applicazione, incluse le
+  analisi generate dall'intelligenza artificiale (Gemini).</p>
+  <p>PluriFin e' Filippo Salemi, persona fisica con base in Italia. Non e' un soggetto abilitato alla
+  prestazione di servizi di investimento ai sensi del Testo Unico della Finanza (D.Lgs. 58/1998,
+  "TUF") o della Direttiva MiFID II (2014/65/UE).</p>
+
+  <h2 id="no-advice">2. Non e' consulenza finanziaria</h2>
+  <p>I contenuti di Portfolio Manager -- compresi calcoli di performance, analisi di allocazione,
+  suggerimenti di ribilanciamento e qualsiasi altra elaborazione -- sono forniti a scopo
+  <strong>esclusivamente informativo e didattico</strong>. Non costituiscono:</p>
+  <ul>
+    <li>consulenza finanziaria, di investimento, fiscale o legale;</li>
+    <li>raccomandazione di investimento personalizzata ai sensi del TUF o di MiFID II;</li>
+    <li>offerta, sollecitazione o proposta contrattuale relativa a strumenti finanziari.</li>
+  </ul>
+  <p>Le decisioni di investimento, disinvestimento o detenzione di strumenti finanziari restano
+  <strong>esclusivamente a carico dell'utente</strong>, che e' tenuto a valutarle in modo autonomo
+  o avvalendosi di un professionista abilitato (consulente finanziario indipendente, intermediario
+  bancario o finanziario autorizzato).</p>
+
+  <h2 id="ai">3. Contenuti AI (Google Gemini)</h2>
+  <p>L'applicazione consente, in modo opzionale e con la propria chiave API, l'utilizzo del modello
+  linguistico Google Gemini per generare analisi sul portafoglio dell'utente. A tal proposito:</p>
+  <ul>
+    <li>Le risposte del modello sono <strong>generate automaticamente</strong> e possono contenere
+    errori, imprecisioni o informazioni obsolete.</li>
+    <li>PluriFin non verifica, non approva e non e' responsabile dei contenuti generati da Gemini.</li>
+    <li>L'utente prende visione del prompt prima dell'invio e puo' scegliere di non procedere.</li>
+    <li>I contenuti AI non sostituiscono la consulenza professionale.</li>
+  </ul>
+
+  <h2 id="accuracy">4. Accuratezza dei dati di mercato</h2>
+  <p>I dati di mercato (prezzi, variazioni, top movers) sono forniti da provider terzi (EODHD,
+  Financial Modeling Prep) con la chiave API dell'utente o tramite snapshot pubblici. Tali dati
+  possono essere soggetti a ritardi, errori o interruzioni. PluriFin non garantisce l'accuratezza,
+  la completezza o la tempestivita' dei dati di mercato.</p>
+
+  <h2 id="liability">5. Limitazione di responsabilita'</h2>
+  <p>Nella misura massima consentita dalla legge applicabile, PluriFin (Filippo Salemi) non sara'
+  responsabile per perdite, danni diretti o indiretti, mancati guadagni o danni economici di qualsiasi
+  natura derivanti dall'utilizzo dell'applicazione o dal fare affidamento sui suoi contenuti.</p>
+
+  <h2 id="contact">6. Contatti</h2>
+  <p>Per domande su questo disclaimer: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+
+  <hr />
+  <div class="note">
+    Il testo definitivo del disclaimer e' in fase di revisione legale (Wave W3 del piano di sviluppo).
+    Il presente testo e' una versione preliminare informativa.
+  </div>
+</LegalLayout>

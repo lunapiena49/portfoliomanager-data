@@ -1,0 +1,81 @@
+---
+import it from '../i18n/it';
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'overview', label: '1. Panoramica' },
+  { id: 'data', label: '2. Dati raccolti' },
+  { id: 'processing', label: '3. Finalita del trattamento' },
+  { id: 'third-parties', label: '4. Terze parti' },
+  { id: 'rights', label: '5. Diritti dell\'utente' },
+  { id: 'contact', label: '6. Contatti' },
+  { id: 'changes', label: '7. Modifiche' },
+];
+---
+<LegalLayout t={it} lang="it" pageTitle="Privacy Policy" tocItems={toc}>
+  <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
+
+  <div class="callout">
+    <strong>In sintesi:</strong> Portfolio Manager e' progettato per non raccogliere dati.
+    Portafogli, posizioni e obiettivi restano sul tuo dispositivo. Non esiste un server dell'app.
+    Le chiamate verso servizi esterni (Gemini, EODHD, FMP) avvengono solo se attivi le rispettive
+    funzioni opzionali, con la tua API key.
+  </div>
+
+  <h2 id="overview">1. Panoramica</h2>
+  <p>La presente informativa descrive come PluriFin (Filippo Salemi, persona fisica con base in Italia)
+  tratta i dati personali nell'ambito dell'applicazione Portfolio Manager (di seguito "l'App") e del
+  relativo sito web.</p>
+  <p>Il titolare del trattamento e' <strong>Filippo Salemi</strong>, contattabile all'indirizzo
+  <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>. Per richieste GDPR specifiche:
+  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+
+  <h2 id="data">2. Dati raccolti</h2>
+  <h3>2.1 Dati creati nell'app (locali)</h3>
+  <p>Tutti i dati che inserisci nell'app -- portafogli, posizioni, obiettivi, impostazioni, chiavi API
+  -- sono memorizzati esclusivamente sul tuo dispositivo, in uno storage cifrato (AES-256 + HMAC-SHA256).
+  La chiave di cifratura e' custodita nel keystore del sistema operativo.</p>
+
+  <h3>2.2 Dati del sito web</h3>
+  <ul>
+    <li>Iscrizione alla newsletter pre-launch: email + lingua preferita (gestiti da Formspree, USA, Standard Contractual Clauses).</li>
+    <li>Form di contatto: nome, email, oggetto, messaggio (gestiti da Formspree).</li>
+    <li>Log del server statico GitHub Pages: indirizzo IP, user-agent (conservazione max 14 giorni, gestiti da GitHub).</li>
+  </ul>
+
+  <h2 id="processing">3. Finalita del trattamento</h2>
+  <ul>
+    <li><strong>Iscrizione newsletter:</strong> inviare una notifica al lancio dell'app. Base giuridica: consenso (art. 6.1.a GDPR).</li>
+    <li><strong>Form di contatto:</strong> rispondere a richieste di assistenza. Base giuridica: consenso e legittimo interesse (art. 6.1.f).</li>
+    <li><strong>Log GitHub Pages:</strong> sicurezza e prevenzione abusi. Base giuridica: legittimo interesse.</li>
+  </ul>
+
+  <h2 id="third-parties">4. Terze parti</h2>
+  <p>L'app puo' inviare dati a servizi esterni <strong>solo se l'utente attiva le relative funzioni opzionali</strong>:</p>
+  <ul>
+    <li><strong>Google Gemini</strong> -- analisi AI (chiave API utente).</li>
+    <li><strong>EODHD / FMP</strong> -- prezzi di mercato (chiave API utente).</li>
+    <li><strong>Formspree</strong> -- gestione form sito (USA, SCC).</li>
+    <li><strong>GitHub Pages</strong> -- hosting statico (USA, SCC).</li>
+  </ul>
+
+  <h2 id="rights">5. Diritti dell'utente</h2>
+  <p>In qualsiasi momento puoi esercitare i diritti previsti dagli articoli 15-22 del GDPR: accesso,
+  rettifica, cancellazione, limitazione, portabilita', opposizione. Per esercitarli scrivi a
+  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <p>Per i dati locali, puoi cancellare tutto in qualsiasi momento dalle Impostazioni dell'app.</p>
+
+  <h2 id="contact">6. Contatti</h2>
+  <p>Email generale: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>Richieste GDPR: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+
+  <h2 id="changes">7. Modifiche</h2>
+  <p>Eventuali modifiche sostanziali saranno comunicate sul sito e, ove necessario, via email
+  agli iscritti alla newsletter.</p>
+
+  <hr />
+  <div class="note">
+    Il testo completo della Privacy Policy sara' prodotto da un professionista legale in Wave W3
+    del piano di sviluppo e pubblicato qui. Il presente testo e' una versione preliminare informativa.
+  </div>
+</LegalLayout>

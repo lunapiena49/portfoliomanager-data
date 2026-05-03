@@ -1,0 +1,37 @@
+---
+import en from '../../i18n/en';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'who', label: 'About PluriFin' },
+  { id: 'mission', label: 'Mission' },
+  { id: 'tech', label: 'Technology' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+<LegalLayout t={en} lang="en" pageTitle="About PluriFin" tocItems={toc}>
+  <h2 id="who">About PluriFin</h2>
+  <p><strong>PluriFin</strong> is the project of <strong>Filippo Salemi</strong>, an independent
+  developer based in Italy. A private individual, no conflicts of interest with brokers or financial
+  intermediaries, no advisory activity, no intermediation.</p>
+
+  <h2 id="mission">Mission</h2>
+  <p>The goal is to build tools that retail investors can fully own and control: without vendor
+  lock-in, without mandatory cloud, without dependencies on services that might disappear or change
+  their terms.</p>
+  <p>Portfolio Manager was born from a personal need to accurately track multi-broker, multi-currency
+  and multi-asset-class portfolios, with optional AI analysis and long-term goals.</p>
+
+  <h2 id="tech">Technology</h2>
+  <p>Built with <strong>Flutter</strong> for maximum portability (Android, iOS, Web, Windows, Linux,
+  macOS). Local storage uses <strong>Hive</strong> with AES-256 encryption. API keys are kept in
+  each platform's OS keystore.</p>
+  <p>The app code is closed-source (proprietary). The public repository
+  <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a>
+  hosts the market data pipeline (MIT license) and the webapp.</p>
+
+  <h2 id="contact">Contact</h2>
+  <p>General: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>GDPR / privacy: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">lunapiena49/portfoliomanager-data</a></p>
+</LegalLayout>

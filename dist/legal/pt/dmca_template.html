@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DMCA / Takedown -- PluriFin</title>
+  <meta name="robots" content="index,follow" />
+  <meta name="description" content="DMCA / Takedown -- Portfolio Manager by PluriFin." />
+  <link rel="stylesheet" href="../_styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container" style="padding-top:0;padding-bottom:0;">
+      <a href="../">PluriFin -- Legal</a>
+    </div>
+  </header>
+  <main class="container">
+    <nav class="lang-switcher" aria-label="Language switcher">
+      <a href='../it/dmca_template.html' lang='it'>Italiano</a>
+<a href='../en/dmca_template.html' lang='en'>English</a>
+<a href='../es/dmca_template.html' lang='es'>Espanol</a>
+<a href='../fr/dmca_template.html' lang='fr'>Francais</a>
+<a href='../de/dmca_template.html' lang='de'>Deutsch</a>
+<a class='active' href='../pt/dmca_template.html' lang='pt'>Portugues</a>
+
+    </nav>
+    <h1>Modelo DMCA / Takedown -- PluriFin</h1>
+<p><strong>Versao</strong>: 1.0.0 <strong>Ultima atualizacao</strong>: 2026-05-02</p>
+<p>Modelos para gerir:</p>
+<ol>
+<li><strong>Notices recebidas</strong>: terceiro alega violacao (raro, app sem</li>
+</ol>
+<p>conteudo user-generated).</p>
+<ol>
+<li><strong>Notices enviadas</strong>: PluriFin denuncia clones, forks, violacoes de</li>
+</ol>
+<p>marca ou codigo.</p>
+<ol>
+<li><strong>Counter-notices</strong>: contranotificacao por remocao contestada.</li>
+</ol>
+<p>Referencias:</p>
+<ul>
+<li>DMCA (17 U.S.C. § 512) para plataformas USA</li>
+<li>Diretiva UE 2019/790 + IT D.Lgs. 177/2021 para plataformas UE</li>
+<li>Codice Civile italiano arts. 2598 (concorrencia desleal), 2569+</li>
+</ul>
+<p>(marca registada) apos deposito EUIPO</p>
+<hr/>
+<h2>1. Notice recebida</h2>
+<h3>1.1 Procedimento</h3>
+<ol>
+<li><strong>Nao responder de imediato</strong>. Conservar tudo.</li>
+<li>Issue privada em <code>portfolio-manager-app</code> label <code>legal-incoming</code>.</li>
+<li>Verificar origem (commits, assets), licencas, fair use.</li>
+<li>Se fundamentada: remover e responder com modelo 1.3.</li>
+<li>Se infundada: responder com modelo 1.4.</li>
+<li>Se via plataforma host: usar tambem o counter-notice form.</li>
+</ol>
+<h3>1.2 Modelo -- pretensao fundamentada</h3>
+<pre><code>
+Assunto: Re: &lt;assunto&gt;
+
+Caro/a &lt;requerente&gt;,
+
+Recebi a sua comunicacao de &lt;data&gt; sobre &lt;descricao material&gt;. Apos
+verificacao, removi o material em &lt;data remocao&gt;.
+
+Referencia commit / acao: &lt;hash ou link&gt;
+
+Pecas desculpa. Permanece a disposicao.
+
+Cumprimentos,
+Filippo Salemi
+PluriFin
+plurifin.app+legal@gmail.com
+</code></pre>
+<h3>1.3 Modelo -- pretensao infundada</h3>
+<pre><code>
+Assunto: Re: &lt;assunto&gt;
+
+Caro/a &lt;requerente&gt;,
+
+Apos verificacao contesto as suas afirmacoes pelos seguintes motivos:
+
+1. &lt;motivo, ex.: material original meu, ver commit &lt;hash&gt; de &lt;data&gt;&gt;
+2. &lt;motivo, ex.: coberto por fair use sob...&gt;
+3. &lt;motivo, ex.: licenca &lt;X&gt; respeitada com atribuicao&gt;
+
+Peco prova dos seus direitos e dano alegado em 30 dias. Sem
+documentacao, considero o assunto encerrado.
+
+Cumprimentos,
+Filippo Salemi
+PluriFin
+plurifin.app+legal@gmail.com
+</code></pre>
+<hr/>
+<h2>2. Notice enviada -- DMCA plataforma USA</h2>
+<h3>2.1 Quando</h3>
+<ul>
+<li>Fork GitHub publico que redistribui codigo proprietario</li>
+<li>Clone Play Store com mesmo nome/logo/screenshots</li>
+<li>Site web copia substancial do marketing site</li>
+<li>APKs modificados de Portfolio Manager</li>
+<li>Reproducao nao autorizada de blog ou press kit</li>
+</ul>
+<h3>2.2 Modelo DMCA (ingles, 17 U.S.C. § 512(c)(3))</h3>
+<pre><code>
+DIGITAL MILLENNIUM COPYRIGHT ACT TAKEDOWN NOTICE
+
+To Whom It May Concern,
+
+I am the copyright owner of &quot;Portfolio Manager&quot; by PluriFin, with
+official site https://lunapiena49.github.io/portfoliomanager-data/ and
+authoritative Play Store listing
+https://play.google.com/store/apps/details?id=app.plurifin.portfoliomanager
+
+INFRINGING MATERIAL:
+- &lt;full URL&gt;
+- &lt;description&gt;
+
+CONTACT:
+Name: Filippo Salemi
+Brand: PluriFin
+Country: Italy
+Email: plurifin.app+legal@gmail.com
+
+I have a good faith belief that the use is not authorized. I swear under
+penalty of perjury that this notice is accurate and I am the rights
+owner.
+
+/s/ Filippo Salemi
+Date: &lt;YYYY-MM-DD&gt;
+</code></pre>
+<h3>2.3 Onde enviar</h3>
+<ul>
+<li>GitHub: <a href="https://github.com/contact/dmca">https://github.com/contact/dmca</a></li>
+<li>Google Play: <a href="https://support.google.com/legal/answer/3463191">https://support.google.com/legal/answer/3463191</a></li>
+<li>Cloudflare: <a href="https://abuse.cloudflare.com/">https://abuse.cloudflare.com/</a></li>
+<li>AWS: abuse@amazonaws.com</li>
+</ul>
+<h3>2.4 Provas</h3>
+<p>Screenshots, copia notice, resposta provider. Pasta local <code>Plurifin/Legal/Takedowns/&lt;YYYY&gt;/&lt;case-id&gt;/</code>, fora repo.</p>
+<hr/>
+<h2>3. Notice enviada -- host UE (italiano)</h2>
+<p>Ver <code>legal/dmca_template.md</code> IT, seccao 3.</p>
+<h2>4. Counter-notice</h2>
+<h3>4.1 DMCA counter-notice (ingles)</h3>
+<pre><code>
+DMCA COUNTER-NOTICE
+
+To Whom It May Concern,
+
+I am responding to a DMCA takedown notice that resulted in removal of
+my content. I assert in good faith the material was removed by mistake
+or misidentification.
+
+REMOVED MATERIAL:
+URL: &lt;URL&gt;
+Description: &lt;description&gt;
+
+I swear under penalty of perjury this belief is in good faith.
+
+JURISDICTION: I consent to Federal District Court in my address district
+or, if outside US, Northern District of California.
+
+CONTACT:
+Name: Filippo Salemi
+Address: &lt;complete address&gt;
+Phone: &lt;phone&gt;
+Email: plurifin.app+legal@gmail.com
+
+/s/ Filippo Salemi
+Date: &lt;YYYY-MM-DD&gt;
+</code></pre>
+<h2>5. Notas operacionais</h2>
+<ul>
+<li><strong>Agir</strong>: so violacoes evidentes e materiais</li>
+<li><strong>Nao agir</strong>: criticas, comparacoes, screenshots imprensa (fair use)</li>
+<li><strong>Custos</strong>: gratuito para o titular. So se processo civil ~ EUR</li>
+</ul>
+<p>200-500 primeira consulta legal.</p>
+<ul>
+<li><strong>EUIPO marca</strong>: apos deposito classes 9+36, Reg. UE 2017/1001</li>
+</ul>
+<p>oferece protecao mais incisiva.</p>
+<ul>
+<li><strong>Documentacao</strong>: registo em <code>marketing/legal_actions.md</code> ao primeiro</li>
+</ul>
+<p>caso real.</p>
+<h2>6. Jurisdicao</h2>
+<ul>
+<li>Italia: foro consumidor / geral civil</li>
+<li>USA: Northern District of California por defeito</li>
+<li>Outros UE: Reg. UE 1215/2012 (Bruxelas I-bis)</li>
+</ul>
+<h2>7. Atualizacoes</h2>
+<p>Documento a atualizar para: alteracoes normativas UE/IT, primeiro caso real, deposito marca EUIPO PluriFin.</p>
+
+    <footer class="doc-footer">
+      <p>SHA-256 (dmca_template.md): <code>fb7d31806ce0028ce4b9849fb405cb69531b964d2ef5c164cbb83c289c290931</code></p>
+      <p><a href="index.html">Voltar ao indice</a></p>
+    </footer>
+  </main>
+</body>
+</html>
