@@ -65,7 +65,7 @@
 <tr><td>Finanzziele</td><td>Titel, Zielbetrag, Falligkeit, Beitrage</td><td>Art. 6.1.b DSGVO</td><td>Bis Loschung durch Nutzer</td></tr>
 <tr><td>Praferenzen</td><td>Sprache, Wahrung, Theme, Demo-Modus</td><td>Art. 6.1.b DSGVO</td><td>Bis Deinstallation</td></tr>
 <tr><td>Einwilligungs-Audit</td><td>Timestamp, Dokumentversion, Entscheidung, Texthash</td><td>Art. 6.1.c DSGVO</td><td>Bis Loschung</td></tr>
-<tr><td>API-Schlussel</td><td>Gemini, EODHD, FMP manuell eingegeben</td><td>Art. 6.1.b DSGVO</td><td>Bis Entfernung</td></tr>
+<tr><td>API-Schlussel</td><td>Schlussel aktivierter Anbieter: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (manuell eingegeben)</td><td>Art. 6.1.b DSGVO</td><td>Bis Entfernung</td></tr>
 </tbody></table>
 <p><code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
 <h3>3.2 Daten via Play Store (Google)</h3>
@@ -74,16 +74,47 @@
 <p>Gesendete Daten: <code>device_id_hash</code>, <code>purchase_token</code>, <code>product_id</code>, signiertes JWT. Antwort: JWT Ed25519. Keine PII. Hash ohne Server-Salt nicht zuruckfuhrbar.</p>
 <h3>3.4 Daten an Gemini (nur bei Aktivierung)</h3>
 <p>Wenn Nutzer Gemini-Schlussel eingibt und KI nutzt, wird der Prompt (Frage + anonyme Portfoliostruktur) direkt an Google Gemini gesendet. Es gelten die <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>.</p>
-<h3>3.5 EODHD / FMP</h3>
-<p>Ticker-Liste direkt an Anbieter mit Nutzer-Schlussel. EODHD/FMP Datenschutzerklarungen anwendbar.</p>
+<h3>3.5 Daten an Marktdaten-Anbieter (nur bei Aktivierung)</h3>
+<p>Die App unterstutzt 10 Marktdaten-Anbieter, die der Nutzer unabhangig konfigurieren kann, indem er einen eigenen API-Schlussel in den Einstellungen eingibt. Bei jedem Preis-Refresh ubertragt die App die gewunschten Ticker direkt an den gewahlten Anbieter. PluriFin vermittelt nicht und speichert nicht.</p>
+<p>Unterstutzte Anbieter und ihre Datenschutzerklarungen:</p>
+<ul>
+<li><a href="https://eodhd.com/financial-academy/privacy-policy/">EODHD</a></li>
+<li><a href="https://site.financialmodelingprep.com/privacy-policy">Financial Modeling Prep (FMP)</a></li>
+<li><a href="https://www.alphavantage.co/privacy/">Alpha Vantage</a></li>
+<li><a href="https://twelvedata.com/privacy">Twelve Data</a></li>
+<li><a href="https://finnhub.io/privacy-policy">Finnhub</a></li>
+<li><a href="https://polygon.io/privacy">Polygon.io</a></li>
+<li><a href="https://marketstack.com/privacy">Marketstack</a></li>
+<li><a href="https://www.tiingo.com/about/privacy">Tiingo</a></li>
+<li><a href="https://www.nasdaq.com/privacy-statement">Nasdaq Data Link</a></li>
+<li><a href="https://stooq.com">Stooq</a>: offentlicher CSV-Download ohne API-Schlussel</li>
+</ul>
+<p>(die HTTP-Anfrage erfolgt direkt vom Gerat zu stooq.com)</p>
+<p>Fur jeden Anbieter erfolgt die Ubertragung <strong>nur</strong>, wenn der Nutzer:</p>
+<ol>
+<li>seinen API-Schlussel in den Einstellungen eingegeben hat (Stooq</li>
+</ol>
+<p>ausgenommen, kostenlos);</p>
+<ol>
+<li>den Anbieter als aktiv fur den Refresh ausgewahlt hat.</li>
+</ol>
+<p>Der Nutzer kann den Schlussel jederzeit entfernen oder den Anbieter deaktivieren.</p>
 <h2>4. Auftragsverarbeiter</h2>
 <table>
 <thead><tr><th>Auftragsverarbeiter</th><th>Zweck</th><th>Daten</th><th>Wann</th></tr></thead>
 <tbody>
 <tr><td>Google Play Billing</td><td>Zahlung Abonnement</td><td>purchaseToken, productId</td><td>Nur bei Kauf</td></tr>
 <tr><td>Google Gemini API</td><td>KI-Analyse</td><td>Prompt + anonymes Portfolio</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>EODHD</td><td>Echtzeit-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>FMP</td><td>Echtzeit-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>EODHD</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>FMP</td><td>Echtzeit-Preise, Fundamentaldaten</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Alpha Vantage</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Twelve Data</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Finnhub</td><td>Echtzeit-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Polygon.io</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Marketstack</td><td>End-of-Day-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Tiingo</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Nasdaq Data Link</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
+<tr><td>Stooq</td><td>Offentlicher CSV-Download historischer Preise</td><td>Ticker-Liste (kein API-Schlussel)</td><td>Nur bei Aktivierung Stooq</td></tr>
 <tr><td>Cloudflare Worker</td><td>Abonnement-Validierung</td><td>device_id_hash, JWT</td><td>Immer (Gating)</td></tr>
 <tr><td>GitHub Pages</td><td>Hosting</td><td>IP HTTP-Request</td><td>Bei jedem Besuch</td></tr>
 </tbody></table>
@@ -137,7 +168,7 @@
 <p>Italienisches Recht und DSGVO. Fur Verbraucher: Verbrauchergerichtsstand nach D.Lgs. 206/2005 (Italien) oder strengere nationale Regeln.</p>
 
     <footer class="doc-footer">
-      <p>SHA-256 (privacy_policy.md): <code>a98b124c70faa82a06a9508e9b750fb6392867968ade27077a2995fb49599149</code></p>
+      <p>SHA-256 (privacy_policy.md): <code>9defdc8feff72764ee22d4b265d868a6be6aa08f061130239ee3146e4a2cf0b3</code></p>
       <p><a href="index.html">Zur Indexseite</a></p>
     </footer>
   </main>

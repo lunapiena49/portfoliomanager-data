@@ -65,7 +65,7 @@
 <tr><td>Objetivos financeiros</td><td>titulo, valor, prazo, contribuicoes</td><td>art. 6.1.b RGPD</td><td>Ate eliminacao</td></tr>
 <tr><td>Preferencias</td><td>idioma, moeda, tema, notificacoes, modo demo</td><td>art. 6.1.b RGPD</td><td>Ate desinstalacao</td></tr>
 <tr><td>Auditoria de consentimentos</td><td>timestamp, versao doc, decisao, hash texto</td><td>art. 6.1.c RGPD</td><td>Ate eliminacao</td></tr>
-<tr><td>Chaves API do utilizador</td><td>Gemini, EODHD, FMP introduzidas manualmente</td><td>art. 6.1.b RGPD</td><td>Ate remocao</td></tr>
+<tr><td>Chaves API do utilizador</td><td>chaves dos fornecedores ativados: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (introduzidas manualmente)</td><td>art. 6.1.b RGPD</td><td>Ate remocao</td></tr>
 </tbody></table>
 <p><code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
 <h3>3.2 Dados via Play Store (Google)</h3>
@@ -74,16 +74,44 @@
 <p>Dados enviados: <code>device_id_hash</code>, <code>purchase_token</code>, <code>product_id</code>, JWT assinado. Resposta: JWT Ed25519. Sem PII. Hash nao identificavel sem o salt servidor.</p>
 <h3>3.4 Dados a Gemini (so se ativado)</h3>
 <p>Se utilizador introduz a chave Gemini e usa IA, o prompt (pergunta + estrutura carteira anonima) e transmitido diretamente a Google Gemini. Aplicam-se <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>.</p>
-<h3>3.5 EODHD / FMP</h3>
-<p>Lista de tickers transmitida diretamente ao fornecedor com a chave do utilizador. Politicas EODHD/FMP aplicam-se.</p>
+<h3>3.5 Dados aos fornecedores de mercado (so se ativado)</h3>
+<p>A app suporta 10 fornecedores de dados de mercado que o utilizador pode configurar independentemente introduzindo a sua API key nas Definicoes. Quando o utilizador pede uma atualizacao de precos, a app transmite os tickers diretamente ao fornecedor escolhido. PluriFin nao intermedeia nem armazena.</p>
+<p>Fornecedores suportados e politicas de privacidade:</p>
+<ul>
+<li><a href="https://eodhd.com/financial-academy/privacy-policy/">EODHD</a></li>
+<li><a href="https://site.financialmodelingprep.com/privacy-policy">Financial Modeling Prep (FMP)</a></li>
+<li><a href="https://www.alphavantage.co/privacy/">Alpha Vantage</a></li>
+<li><a href="https://twelvedata.com/privacy">Twelve Data</a></li>
+<li><a href="https://finnhub.io/privacy-policy">Finnhub</a></li>
+<li><a href="https://polygon.io/privacy">Polygon.io</a></li>
+<li><a href="https://marketstack.com/privacy">Marketstack</a></li>
+<li><a href="https://www.tiingo.com/about/privacy">Tiingo</a></li>
+<li><a href="https://www.nasdaq.com/privacy-statement">Nasdaq Data Link</a></li>
+<li><a href="https://stooq.com">Stooq</a>: download CSV publico sem API key (a</li>
+</ul>
+<p>requisicao HTTP vai diretamente do dispositivo a stooq.com)</p>
+<p>Para cada fornecedor, a transmissao ocorre <strong>so</strong> se o utilizador:</p>
+<ol>
+<li>introduziu a sua API key nas Definicoes (Stooq excluido, gratuito);</li>
+<li>selecionou o fornecedor como ativo para o refresh.</li>
+</ol>
+<p>O utilizador pode remover a chave ou desativar o fornecedor a qualquer momento.</p>
 <h2>4. Subprocessadores</h2>
 <table>
 <thead><tr><th>Subprocessador</th><th>Finalidade</th><th>Dados</th><th>Quando</th></tr></thead>
 <tbody>
 <tr><td>Google Play Billing</td><td>Pagamento subscricao</td><td>purchaseToken, productId</td><td>So compra</td></tr>
 <tr><td>Google Gemini API</td><td>Analise IA</td><td>Prompt + carteira anonima</td><td>So ativacao</td></tr>
-<tr><td>EODHD</td><td>Precos real-time</td><td>Lista tickers</td><td>So ativacao</td></tr>
-<tr><td>FMP</td><td>Precos real-time</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>EODHD</td><td>Precos real-time e historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>FMP</td><td>Precos real-time, fundamentais</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Alpha Vantage</td><td>Precos historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Twelve Data</td><td>Precos real-time e historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Finnhub</td><td>Precos real-time</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Polygon.io</td><td>Precos historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Marketstack</td><td>Precos end-of-day</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Tiingo</td><td>Precos real-time e historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Nasdaq Data Link</td><td>Precos historicos</td><td>Lista tickers</td><td>So ativacao</td></tr>
+<tr><td>Stooq</td><td>Download CSV publico precos historicos</td><td>Lista tickers (sem API key)</td><td>So ativacao Stooq</td></tr>
 <tr><td>Cloudflare Worker</td><td>Validacao subscricao</td><td>device_id_hash, JWT</td><td>Sempre (gating)</td></tr>
 <tr><td>GitHub Pages</td><td>Hosting</td><td>IP HTTP request</td><td>Cada visita</td></tr>
 </tbody></table>
@@ -137,7 +165,7 @@
 <p>Lei italiana e RGPD. Para consumidores: foro do consumidor segundo D.Lgs. 206/2005 (Italia) ou regras nacionais mais protetoras.</p>
 
     <footer class="doc-footer">
-      <p>SHA-256 (privacy_policy.md): <code>148c546d2728f59c6183ec5ff4c75d2331c27a9816659928c4976531eb09c808</code></p>
+      <p>SHA-256 (privacy_policy.md): <code>0896c2e6201063e5b7a38614de33e5158f7ecf0f5f78dcad6c55cf5c238ed2f4</code></p>
       <p><a href="index.html">Voltar ao indice</a></p>
     </footer>
   </main>

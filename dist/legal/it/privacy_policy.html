@@ -66,7 +66,7 @@
 <tr><td>Obiettivi finanziari</td><td>titolo, importo target, scadenza, contributi mensili</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non li cancella</td></tr>
 <tr><td>Preferenze</td><td>lingua, valuta, tema, notifiche, modalita' demo</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non disinstalla</td></tr>
 <tr><td>Audit trail consensi</td><td>timestamp, versione documento, decisione (accept/decline), hash testo</td><td>art. 6.1.c GDPR (obbligo legale prova del consenso)</td><td>Finche' l'utente non li cancella o disinstalla</td></tr>
-<tr><td>Chiavi API utente</td><td>chiave Gemini, chiave EODHD, chiave FMP (inserite manualmente dall'utente)</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non le rimuove</td></tr>
+<tr><td>Chiavi API utente</td><td>chiavi dei provider attivati: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (inserite manualmente dall'utente)</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non le rimuove</td></tr>
 </tbody></table>
 <p>Tutte queste informazioni sono cifrate con AES-256 + HMAC-SHA256, chiave a 32 byte custodita nel keystore di sistema (Android Keystore su Android, Keychain su iOS, DPAPI su Windows). Le chiavi API sono salvate in <code>flutter_secure_storage</code>, che usa lo stesso keystore di sistema.</p>
 <h3>3.2 Dati raccolti tramite Play Store (Google)</h3>
@@ -99,12 +99,28 @@
 <p>allora il <strong>prompt</strong> (composto da: domanda utente + struttura portafoglio in forma anonima -- ticker, quantita', prezzo medio, allocazione percentuale) viene trasmesso direttamente da app a Google Gemini.</p>
 <p>PluriFin non intermedia ne' archivia questi prompt. La trasmissione avviene end-to-end fra il dispositivo utente e l'API Gemini di Google. Si applicano le condizioni d'uso e la privacy policy di Google AI Studio / <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>.</p>
 <p>L'utente puo' revocare la chiave in qualsiasi momento dalle Impostazioni; da quel momento nessuna richiesta AI viene piu' inviata.</p>
-<h3>3.5 Dati che EODHD / FMP ricevono (solo se l'utente attiva la feature)</h3>
-<p>Analogamente, se l'utente inserisce la propria chiave EODHD o FMP per ottenere prezzi real-time, l'app trasmette i ticker richiesti direttamente a quei provider. PluriFin non intermedia ne' archivia. Si applicano:</p>
+<h3>3.5 Dati che i provider di mercato ricevono (solo se l'utente attiva la feature)</h3>
+<p>L'app supporta 10 provider di dati di mercato che l'utente puo' configurare indipendentemente inserendo la propria API key in Impostazioni. Quando l'utente richiede un aggiornamento prezzi (manuale o periodico), l'app trasmette i ticker richiesti direttamente al provider scelto. PluriFin non intermedia ne' archivia.</p>
+<p>Provider supportati e relative privacy policy:</p>
 <ul>
 <li><a href="https://eodhd.com/financial-academy/privacy-policy/">EODHD Privacy Policy</a></li>
-<li><a href="https://site.financialmodelingprep.com/privacy-policy">FMP Privacy Policy</a></li>
+<li><a href="https://site.financialmodelingprep.com/privacy-policy">Financial Modeling Prep (FMP) Privacy Policy</a></li>
+<li><a href="https://www.alphavantage.co/privacy/">Alpha Vantage Privacy Policy</a></li>
+<li><a href="https://twelvedata.com/privacy">Twelve Data Privacy Policy</a></li>
+<li><a href="https://finnhub.io/privacy-policy">Finnhub Privacy Policy</a></li>
+<li><a href="https://polygon.io/privacy">Polygon.io Privacy Policy</a></li>
+<li><a href="https://marketstack.com/privacy">Marketstack Privacy Policy</a></li>
+<li><a href="https://www.tiingo.com/about/privacy">Tiingo Privacy Policy</a></li>
+<li><a href="https://www.nasdaq.com/privacy-statement">Nasdaq Data Link Privacy Policy</a></li>
+<li><a href="https://stooq.com">Stooq</a>: download CSV pubblico senza API key (la richiesta</li>
 </ul>
+<p>HTTP avviene direttamente dal dispositivo utente verso stooq.com)</p>
+<p>Per ciascun provider, l'invio dati avviene <strong>solo</strong> se l'utente ha:</p>
+<ol>
+<li>inserito manualmente la propria API key in Impostazioni (Stooq escluso, e' free);</li>
+<li>selezionato il provider come attivo per il refresh prezzi.</li>
+</ol>
+<p>L'utente puo' rimuovere la chiave o disattivare il provider in qualsiasi momento.</p>
 <h2>4. Sub-processor</h2>
 <p>L'elenco completo dei sub-processor a cui l'app puo' trasmettere dati (solo se l'utente attiva le feature corrispondenti) e':</p>
 <table>
@@ -112,8 +128,16 @@
 <tbody>
 <tr><td><strong>Google LLC</strong> -- Play Billing</td><td>Pagamento e gestione abbonamento</td><td><code>purchaseToken</code>, <code>productId</code>, dati di pagamento (gestiti da Google, non da PluriFin)</td><td>Solo se utente acquista subscription</td></tr>
 <tr><td><strong>Google LLC</strong> -- Gemini API</td><td>Analisi AI del portafoglio</td><td>Prompt utente + struttura portafoglio anonima</td><td>Solo se utente inserisce chiave Gemini ed apre AI</td></tr>
-<tr><td><strong>EODHD</strong></td><td>Prezzi di mercato real-time</td><td>Lista ticker</td><td>Solo se utente inserisce chiave EODHD</td></tr>
-<tr><td><strong>Financial Modeling Prep (FMP)</strong></td><td>Prezzi di mercato real-time, fondamentali</td><td>Lista ticker</td><td>Solo se utente inserisce chiave FMP</td></tr>
+<tr><td><strong>EODHD</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave EODHD e seleziona il provider</td></tr>
+<tr><td><strong>Financial Modeling Prep (FMP)</strong></td><td>Prezzi di mercato real-time, fondamentali</td><td>Lista ticker</td><td>Solo se utente inserisce chiave FMP e seleziona il provider</td></tr>
+<tr><td><strong>Alpha Vantage</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Alpha Vantage e seleziona il provider</td></tr>
+<tr><td><strong>Twelve Data</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Twelve Data e seleziona il provider</td></tr>
+<tr><td><strong>Finnhub</strong></td><td>Prezzi di mercato real-time</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Finnhub e seleziona il provider</td></tr>
+<tr><td><strong>Polygon.io</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Polygon.io e seleziona il provider</td></tr>
+<tr><td><strong>Marketstack</strong></td><td>Prezzi di mercato end-of-day</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Marketstack e seleziona il provider</td></tr>
+<tr><td><strong>Tiingo</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Tiingo e seleziona il provider</td></tr>
+<tr><td><strong>Nasdaq Data Link</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Nasdaq Data Link e seleziona il provider</td></tr>
+<tr><td><strong>Stooq</strong></td><td>Download CSV pubblico prezzi storici</td><td>Lista ticker (no API key, richiesta HTTP pubblica)</td><td>Solo se utente seleziona Stooq come provider</td></tr>
 <tr><td><strong>Cloudflare, Inc.</strong> -- Worker</td><td>Validazione trial e subscription</td><td><code>device_id_hash</code>, <code>purchase_token</code>, <code>productId</code>, JWT</td><td>Sempre (necessario per gating subscription)</td></tr>
 <tr><td><strong>Microsoft GitHub</strong> -- Pages</td><td>Hosting documenti legali, market data pubblici, webapp demo, vetrina</td><td>Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft)</td><td>Sempre, ogni volta che l'utente apre la webapp o un documento legale</td></tr>
 </tbody></table>
@@ -239,7 +263,7 @@
 <p>Per utenti residenti fuori dall'Unione Europea si applicano la legge italiana e il GDPR per quanto riguarda il trattamento dei dati personali, salvo applicazione di norme nazionali piu' protettive del consumatore.</p>
 
     <footer class="doc-footer">
-      <p>SHA-256 (privacy_policy.md): <code>b847edf7a79bdd2d6c58525e90bb1972609118ec2227309edd0095f33549ef26</code></p>
+      <p>SHA-256 (privacy_policy.md): <code>0704aa25fc4cf60e14006e61f3e5e326eb29e86651111f7a7b0d0fbe7694cb85</code></p>
       <p><a href="index.html">Torna all'indice</a></p>
     </footer>
   </main>
