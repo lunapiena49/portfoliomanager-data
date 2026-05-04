@@ -117,11 +117,11 @@
   .btn:hover { transform: translateY(-1px); }
   .btn:active { transform: translateY(0); }
   .btn-primary {
-    background: var(--primary);
+    background: var(--primary-dark);
     color: #fff;
     box-shadow: var(--shadow-primary);
   }
-  .btn-primary:hover { background: var(--primary-dark); color: #fff; }
+  .btn-primary:hover { background: #0D47A1; color: #fff; }
   .btn-outline {
     background: transparent;
     color: var(--text);

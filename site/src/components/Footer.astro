@@ -33,7 +33,7 @@ function legalUrl(page: string) {
 
       <!-- Product -->
       <nav aria-label={t.footer.colProduct}>
-        <h4>{t.footer.colProduct}</h4>
+        <h3>{t.footer.colProduct}</h3>
         <ul>
           <li><a href={`${base}/app/`}>{t.footer.linkWebapp}</a></li>
           <li><a href="#" aria-disabled="true">{t.footer.linkPlayStore}</a></li>
@@ -44,7 +44,7 @@ function legalUrl(page: string) {
 
       <!-- Legal -->
       <nav aria-label={t.footer.colLegal}>
-        <h4>{t.footer.colLegal}</h4>
+        <h3>{t.footer.colLegal}</h3>
         <ul>
           <li><a href={legalUrl('privacy')}>{t.footer.linkPrivacy}</a></li>
           <li><a href={legalUrl('terms')}>{t.footer.linkTerms}</a></li>
@@ -55,7 +55,7 @@ function legalUrl(page: string) {
 
       <!-- Contact -->
       <nav aria-label={t.footer.colContact}>
-        <h4>{t.footer.colContact}</h4>
+        <h3>{t.footer.colContact}</h3>
         <ul>
           <li>
             <a href="mailto:plurifin.app@gmail.com">
@@ -103,7 +103,7 @@ function legalUrl(page: string) {
     padding: 64px 0 32px;
     font-size: 14px;
   }
-  footer h4 {
+  footer nav h3 {
     color: #fff;
     font-size: 13px;
     font-weight: 600;
@@ -137,12 +137,12 @@ function legalUrl(page: string) {
     flex-shrink: 0;
   }
   .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: #fff; }
-  .footer-brand p { color: #8A93A0; max-width: 30ch; font-size: 13px; line-height: 1.55; margin-bottom: 8px; }
-  .footer-brand .copy { color: #5A6670; font-size: 12px; margin-top: 12px; }
+  .footer-brand p { color: #B7BDC6; max-width: 30ch; font-size: 13px; line-height: 1.55; margin-bottom: 8px; }
+  .footer-brand .copy { color: #9099A6; font-size: 12px; margin-top: 12px; }
   footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
   footer ul a { color: #B7BDC6; font-size: 14px; transition: color .15s; text-decoration: none; display: flex; flex-direction: column; gap: 2px; }
   footer ul a:hover { color: #fff; }
-  .email-address { font-size: 12px; color: #5A6670; }
+  .email-address { font-size: 12px; color: #9099A6; }
   footer ul a[aria-disabled="true"] { opacity: .5; cursor: not-allowed; pointer-events: none; }
   .footer-bottom {
     border-top: 1px solid #1F2530;
