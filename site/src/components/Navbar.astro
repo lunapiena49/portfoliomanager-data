@@ -21,11 +21,11 @@ function langUrl(l: Locale) {
       <span class="brand-name">PluriFin</span>
     </a>
 
-    <div class="nav-links" role="list">
-      <a href="#features" role="listitem">{t.nav.features}</a>
-      <a href="#privacy" role="listitem">{t.nav.privacy}</a>
-      <a href="#brokers" role="listitem">{t.nav.brokers}</a>
-      <a href="#faq" role="listitem">{t.nav.faq}</a>
+    <div class="nav-links">
+      <a href="#features">{t.nav.features}</a>
+      <a href="#privacy">{t.nav.privacy}</a>
+      <a href="#brokers">{t.nav.brokers}</a>
+      <a href="#faq">{t.nav.faq}</a>
     </div>
 
     <span class="nav-spacer" aria-hidden="true"></span>
@@ -33,7 +33,7 @@ function langUrl(l: Locale) {
     <div class="nav-right">
       <!-- Language switcher -->
       <div class="lang-tog" id="langTog" tabindex="0" role="button"
-           aria-haspopup="listbox" aria-expanded="false" aria-label={t.nav.langLabel}>
+           aria-haspopup="listbox" aria-expanded="false">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
              stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <circle cx="12" cy="12" r="9"/>
