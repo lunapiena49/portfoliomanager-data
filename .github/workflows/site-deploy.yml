@@ -45,18 +45,44 @@ jobs:
       - name: Build site
         working-directory: site
         env:
-          # Custom domain plurifin.app served at root (CNAME in site/public/).
+          # Custom domain (CNAME plurifin.app) -> root base
           SITE_URL: https://plurifin.app
           SITE_BASE: /
         run: npm run build
 
-      # The Astro build outputs to site/dist/.
-      # We need to merge it with the existing Pages content (app/, legal/, dist/).
-      # Strategy: copy the full Pages artifact first, then overlay the site build.
+      # The Astro build outputs to site/dist/. Pages upload-pages-artifact
+      # replaces the entire Pages content; without merging, legal/ HTML and
+      # market-data top_movers.json from outside site/ disappear after deploy.
+      - name: Merge static assets (legal/, market-data, CNAME) into site/dist
+        run: |
+          set -euo pipefail
+          # CNAME for custom domain -- must be at site root.
+          if [ -f CNAME ]; then
+            cp CNAME site/dist/CNAME
+          fi
+          # Legal HTML (rendered by scripts/legal/build_legal_html.ps1 -> dist/legal/<lang>/*.html).
+          if [ -d dist/legal ]; then
+            mkdir -p site/dist/legal
+            cp -r dist/legal/. site/dist/legal/
+          fi
+          # Market data: expose top_movers.json at root (consumed by daily-data-commit.yml
+          # via curl https://<owner>.github.io/<repo>/top_movers.json).
+          if [ -f dist/market-data/top_movers.json ]; then
+            cp dist/market-data/top_movers.json site/dist/top_movers.json
+          fi
+          # Also expose under /market-data/ for clients preferring namespaced paths.
+          if [ -d dist/market-data ]; then
+            mkdir -p site/dist/market-data
+            for f in dist/market-data/top_movers.json dist/market-data/.gitkeep; do
+              if [ -f "$f" ]; then cp "$f" "site/dist/market-data/$(basename "$f")"; fi
+            done
+          fi
+          ls -la site/dist/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: Upload Pages artifact (site/dist/)
+      - name: Upload Pages artifact (site/dist/ + merged static assets)
         uses: actions/upload-pages-artifact@v3
         with:
           path: site/dist
