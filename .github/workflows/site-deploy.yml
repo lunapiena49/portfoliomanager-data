@@ -45,9 +45,9 @@ jobs:
       - name: Build site
         working-directory: site
         env:
-          # Override base/site for GitHub Pages
-          SITE_URL: https://lunapiena49.github.io/portfoliomanager-data
-          SITE_BASE: /portfoliomanager-data
+          # Custom domain plurifin.app served at root (CNAME in site/public/).
+          SITE_URL: https://plurifin.app
+          SITE_BASE: /
         run: npm run build
 
       # The Astro build outputs to site/dist/.
