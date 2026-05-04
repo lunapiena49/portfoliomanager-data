@@ -36,28 +36,42 @@ jobs:
         id: download
         run: |
           set -euo pipefail
-          BASE="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}"
+          # Use the custom domain plurifin.app directly. The legacy URL
+          # https://<owner>.github.io/<repo> is now a 301 redirect to
+          # http://plurifin.app/, which from inside GitHub Actions runners
+          # sometimes returns 403 (Cloudflare anti-loop or runner IP filter)
+          # before the redirect can be followed. Hitting plurifin.app
+          # directly avoids the round-trip.
+          PRIMARY_URL="https://plurifin.app/top_movers.json"
+          FALLBACK_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/top_movers.json"
           mkdir -p dist/market-data
-          echo "Downloading top_movers.json from $BASE ..."
+          echo "Downloading top_movers.json from $PRIMARY_URL ..."
           # Retry up to 3 times (60s, 120s, 240s) before giving up -- this
           # distinguishes "not yet published" (transient) from a real outage.
           MAX_ATTEMPTS=3
           ATTEMPT=1
           SUCCESS=0
           while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-            if curl -fsSL --max-time 120 "$BASE/top_movers.json" -o dist/market-data/top_movers.json; then
+            if curl -fsSL --max-time 120 "$PRIMARY_URL" -o dist/market-data/top_movers.json; then
               SUCCESS=1
+              break
+            fi
+            # On retry, alternate to fallback so a transient custom-domain SSL
+            # issue doesn't kill the run when the legacy URL is reachable.
+            if curl -fsSL --max-time 120 "$FALLBACK_URL" -o dist/market-data/top_movers.json; then
+              SUCCESS=1
+              echo "Primary URL failed, fallback succeeded."
               break
             fi
             if [ $ATTEMPT -lt $MAX_ATTEMPTS ]; then
               SLEEP=$((60 * ATTEMPT))
-              echo "Attempt $ATTEMPT failed, retrying in ${SLEEP}s..."
+              echo "Attempt $ATTEMPT failed (both URLs), retrying in ${SLEEP}s..."
               sleep $SLEEP
             fi
             ATTEMPT=$((ATTEMPT + 1))
           done
           if [ $SUCCESS -ne 1 ]; then
-            echo "::error::Pages artifact unreachable after $MAX_ATTEMPTS attempts."
+            echo "::error::Pages artifact unreachable after $MAX_ATTEMPTS attempts (tried $PRIMARY_URL and $FALLBACK_URL)."
             exit 1
           fi
           echo "skip=false" >> "$GITHUB_OUTPUT"
