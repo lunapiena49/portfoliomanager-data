@@ -40,11 +40,11 @@ const cards = [
     </div>
     <div class="features" role="list">
       {cards.map((c, i) => (
-        <article class={`feat-card reveal`} style={`transition-delay: ${i * 80}ms`} role="listitem">
+        <div class={`feat-card reveal`} style={`transition-delay: ${i * 80}ms`} role="listitem">
           <div class={`feat-icon ${c.accentClass}`} aria-hidden="true" set:html={c.icon} />
           <h3>{c.title}</h3>
           <p>{c.body}</p>
-        </article>
+        </div>
       ))}
     </div>
   </div>

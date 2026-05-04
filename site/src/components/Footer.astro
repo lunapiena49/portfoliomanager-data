@@ -91,7 +91,7 @@ function legalUrl(page: string) {
           </a>
         ))}
       </nav>
-      <span class="footer-bid" aria-label="Bundle ID">{t.footer.bundleId}</span>
+      <span class="footer-bid">Bundle ID: {t.footer.bundleId}</span>
     </div>
   </div>
 </footer>
@@ -175,7 +175,7 @@ function legalUrl(page: string) {
   }
   .footer-langs a.active { background: #fff; color: var(--text); }
   .footer-langs a:hover:not(.active) { background: rgba(255,255,255,.08); color: #fff; }
-  .footer-bid { font-family: ui-monospace, monospace; font-size: 11px; color: #3F4754; }
+  .footer-bid { font-family: ui-monospace, monospace; font-size: 11px; color: #A8B0BD; }
 
   @media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
   @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
