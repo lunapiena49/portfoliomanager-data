@@ -24,6 +24,10 @@ export default defineConfig({
   },
   build: {
     assets: '_assets',
+    // 4A.1bis: emit /privacy.html instead of /privacy/index.html so URLs like
+    // /legal/<lang>/privacy.html (linked in-app + on Play Store listing) resolve
+    // directly to a single .html file without trailing-slash redirects.
+    format: 'file',
   },
   compressHTML: true,
   output: 'static',

@@ -1,0 +1,71 @@
+---
+import de from '../../i18n/de';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'scope', label: '1. Geltungsbereich' },
+  { id: 'incoming', label: '2. Eingehende Beschwerden' },
+  { id: 'outgoing', label: '3. Ausgehende Mitteilungen (DMCA)' },
+  { id: 'counter', label: '4. Gegen-Mitteilung' },
+  { id: 'contact', label: '5. Kontakt' },
+];
+---
+<LegalLayout t={de} lang="de" pageTitle="DMCA / Loeschung" tocItems={toc}>
+  <p class="meta">Zuletzt aktualisiert: 2. Mai 2026 - Version 1.0</p>
+
+  <div class="callout">
+    <strong>Kurz gefasst:</strong> PluriFin respektiert das geistige Eigentum Dritter und erwartet
+    dasselbe. Um rechtsverletzendes Material in unserem Bereich zu melden oder eine unautorisierte
+    Nutzung von PluriFin-Inhalten zu melden, schreiben Sie an
+    <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a>.
+  </div>
+
+  <h2 id="scope">1. Geltungsbereich</h2>
+  <p>Diese Seite fasst das Verfahren zur Meldung von Urheberrechts- oder Markenverletzungen
+  zusammen, die die App Portfolio Manager, die PluriFin-Website und damit verbundene Inhalte
+  betreffen. Die vollstaendigen Templates (Italienisch und Englisch) finden Sie im ausfuehrlichen
+  Dokument unter <a href="/legal/de/dmca.html">/legal/de/dmca.html</a>.</p>
+
+  <h2 id="incoming">2. Eingehende Beschwerden</h2>
+  <p>Wenn Sie der Meinung sind, dass von PluriFin veroeffentlichte Inhalte (Website, Screenshots,
+  Blog, Open-Source-Code) Ihre Rechte verletzen, senden Sie uns eine Meldung mit:</p>
+  <ul>
+    <li>Identifikation des rechtsverletzenden Materials (vollstaendige URLs, Screenshots).</li>
+    <li>Identifikation des geschuetzten Werks, an dem Sie Rechte halten (Eintragung,
+    Erstveroeffentlichung).</li>
+    <li>Rechtliche Hinweise (DMCA 17 U.S.C. par. 512 oder EU-Richtlinie 2019/790).</li>
+    <li>Unterzeichnete Erklaerung in gutem Glauben und zur Richtigkeit.</li>
+    <li>Vollstaendige Kontaktdaten und Ausweiskopie (auf Anfrage).</li>
+  </ul>
+  <p>Typische Antwortzeit: 5 Werktage. Bei eindeutig begruendeten Meldungen entfernen oder
+  ersetzen wir das Material vor der Antwort.</p>
+
+  <h2 id="outgoing">3. Ausgehende Mitteilungen (DMCA)</h2>
+  <p>Wenn PluriFin eine missbraeuchliche Kopie, einen kommerziellen Fork oder eine Markenverletzung
+  feststellt, reichen wir eine formelle Meldung bei der Hosting-Plattform ein. Die am haeufigsten
+  genutzten US-Plattformen sind GitHub
+  (<a href="https://github.com/contact/dmca">github.com/contact/dmca</a>), Google Play
+  (<a href="https://support.google.com/legal/answer/3463191">support.google.com/legal</a>),
+  Cloudflare und AWS. Bei EU-Hosts wird eine Aufforderung gemaess D.Lgs. 70/2003 Art. 17 versandt.</p>
+  <p>Aktionsschwelle: wir handeln nur bei eindeutigen und materiellen Verletzungen (App-Klone,
+  vollstaendige Site-Kopien, kommerzielle Code-Forks). Wir handeln nicht gegen Kritik, Reviews oder
+  Screenshots in Presseartikeln -- diese fallen unter Fair Use.</p>
+
+  <h2 id="counter">4. Gegen-Mitteilung</h2>
+  <p>Wenn PluriFin-Inhalte auf der Grundlage einer Meldung entfernt werden, die wir fuer unbegruendet
+  oder fehlerhaft halten, reichen wir eine DMCA-Gegen-Mitteilung (17 U.S.C. par. 512(g)) ein, die
+  in gutem Glauben die Fehlidentifikation behauptet, die US-Gerichtsbarkeit fuer
+  grenzueberschreitende Faelle akzeptiert und die Wiederherstellung des Materials verlangt.</p>
+
+  <h2 id="contact">5. Kontakt</h2>
+  <p>Dedizierte juristische E-Mail: <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a></p>
+  <p>Antworten innerhalb von 5-10 Werktagen. Fuer dringende Angelegenheiten markieren Sie den Betreff
+  mit "URGENT DMCA".</p>
+
+  <hr />
+  <div class="note">
+    Dieses Dokument ist eine operative Zusammenfassung. Die vollstaendigen Template-Texte
+    (Italienisch und Englisch) und die internen Verfahrensanweisungen finden Sie im juristischen
+    Dokument unter <a href="/legal/de/dmca.html">/legal/de/dmca.html</a>.
+  </div>
+</LegalLayout>

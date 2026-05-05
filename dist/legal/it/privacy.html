@@ -16,7 +16,7 @@
   </header>
   <main class="container">
     <nav class="lang-switcher" aria-label="Language switcher">
-      <a class='active' href='../it/privacy.html' lang='it'>Italiano</a>
+<a class='active' href='../it/privacy.html' lang='it'>Italiano</a>
 <a href='../en/privacy.html' lang='en'>English</a>
 <a href='../es/privacy.html' lang='es'>Espanol</a>
 <a href='../fr/privacy.html' lang='fr'>Francais</a>
@@ -24,7 +24,7 @@
 <a href='../pt/privacy.html' lang='pt'>Portugues</a>
 
     </nav>
-    <h1>Privacy Policy -- Portfolio Manager by PluriFin</h1>
+<h1>Privacy Policy -- Portfolio Manager by PluriFin</h1>
 <p><strong>Versione</strong>: 1.0.0 <strong>Ultimo aggiornamento</strong>: 2026-05-02 <strong>Lingua originale</strong>: Italiano (versione di riferimento per il foro competente) <strong>Hash testo (per audit trail)</strong>: SHA-256 generato dallo script <code>scripts/legal/build_legal_html.ps1</code></p>
 <hr/>
 <h2>1. Titolare del trattamento</h2>
@@ -59,25 +59,11 @@
 <h2>3. Tipologie di dati trattati</h2>
 <h3>3.1 Dati raccolti localmente sul dispositivo</h3>
 <p>I seguenti dati restano <strong>esclusivamente</strong> in cifratura locale (Hive AES-256 con chiave custodita nel keystore del sistema operativo):</p>
-<table>
-<thead><tr><th>Categoria</th><th>Esempi</th><th>Base giuridica</th><th>Conservazione</th></tr></thead>
-<tbody>
-<tr><td>Dati di portafoglio</td><td>nome posizione, ticker, quantita', prezzo medio, broker, data acquisto</td><td>art. 6.1.b GDPR (esecuzione contratto utente)</td><td>Finche' l'utente non li cancella</td></tr>
-<tr><td>Obiettivi finanziari</td><td>titolo, importo target, scadenza, contributi mensili</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non li cancella</td></tr>
-<tr><td>Preferenze</td><td>lingua, valuta, tema, notifiche, modalita' demo</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non disinstalla</td></tr>
-<tr><td>Audit trail consensi</td><td>timestamp, versione documento, decisione (accept/decline), hash testo</td><td>art. 6.1.c GDPR (obbligo legale prova del consenso)</td><td>Finche' l'utente non li cancella o disinstalla</td></tr>
-<tr><td>Chiavi API utente</td><td>chiavi dei provider attivati: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (inserite manualmente dall'utente)</td><td>art. 6.1.b GDPR</td><td>Finche' l'utente non le rimuove</td></tr>
-</tbody></table>
+<p>| Categoria | Esempi | Base giuridica | Conservazione | |---|---|---|---| | Dati di portafoglio | nome posizione, ticker, quantita', prezzo medio, broker, data acquisto | art. 6.1.b GDPR (esecuzione contratto utente) | Finche' l'utente non li cancella | | Obiettivi finanziari | titolo, importo target, scadenza, contributi mensili | art. 6.1.b GDPR | Finche' l'utente non li cancella | | Preferenze | lingua, valuta, tema, notifiche, modalita' demo | art. 6.1.b GDPR | Finche' l'utente non disinstalla | | Audit trail consensi | timestamp, versione documento, decisione (accept/decline), hash testo | art. 6.1.c GDPR (obbligo legale prova del consenso) | Finche' l'utente non li cancella o disinstalla | | Chiavi API utente | chiavi dei provider attivati: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (inserite manualmente dall'utente) | art. 6.1.b GDPR | Finche' l'utente non le rimuove |</p>
 <p>Tutte queste informazioni sono cifrate con AES-256 + HMAC-SHA256, chiave a 32 byte custodita nel keystore di sistema (Android Keystore su Android, Keychain su iOS, DPAPI su Windows). Le chiavi API sono salvate in <code>flutter_secure_storage</code>, che usa lo stesso keystore di sistema.</p>
 <h3>3.2 Dati raccolti tramite Play Store (Google)</h3>
 <p>L'installazione, l'aggiornamento, la valutazione e l'eventuale acquisto dell'abbonamento avvengono tramite Google Play Store. PluriFin riceve da Google solo i dati strettamente necessari alla validazione dell'abbonamento:</p>
-<table>
-<thead><tr><th>Dato</th><th>Origine</th><th>Finalita'</th></tr></thead>
-<tbody>
-<tr><td><code>purchaseToken</code> (token di acquisto)</td><td>Google Play Billing</td><td>Validazione abbonamento via Cloudflare Worker</td></tr>
-<tr><td><code>productId</code></td><td>Google Play Billing</td><td>Identificazione del prodotto acquistato (<code>pluri_premium_yearly_099</code>)</td></tr>
-<tr><td><code>device_id_hash</code> (HMAC-SHA256 di Android ID + salt server)</td><td>Calcolato sul dispositivo</td><td>Identificazione anonima del dispositivo per gestione del trial 7 giorni</td></tr>
-</tbody></table>
+<p>| Dato | Origine | Finalita' | |---|---|---| | <code>purchaseToken</code> (token di acquisto) | Google Play Billing | Validazione abbonamento via Cloudflare Worker | | <code>productId</code> | Google Play Billing | Identificazione del prodotto acquistato (<code>pluri_premium_yearly_099</code>) | | <code>device_id_hash</code> (HMAC-SHA256 di Android ID + salt server) | Calcolato sul dispositivo | Identificazione anonima del dispositivo per gestione del trial 7 giorni |</p>
 <p>PluriFin <strong>non</strong> riceve da Google: nome, email, indirizzo, dati pagamento, numero carta. Il pagamento e' gestito interamente da Google Play.</p>
 <h3>3.3 Dati raccolti per la validazione dell'abbonamento (Cloudflare Worker)</h3>
 <p>Quando l'utente avvia il trial gratuito o effettua un acquisto, l'app invia al Cloudflare Worker i seguenti dati:</p>
@@ -123,24 +109,7 @@
 <p>L'utente puo' rimuovere la chiave o disattivare il provider in qualsiasi momento.</p>
 <h2>4. Sub-processor</h2>
 <p>L'elenco completo dei sub-processor a cui l'app puo' trasmettere dati (solo se l'utente attiva le feature corrispondenti) e':</p>
-<table>
-<thead><tr><th>Sub-processor</th><th>Finalita'</th><th>Dati trasmessi</th><th>Quando</th></tr></thead>
-<tbody>
-<tr><td><strong>Google LLC</strong> -- Play Billing</td><td>Pagamento e gestione abbonamento</td><td><code>purchaseToken</code>, <code>productId</code>, dati di pagamento (gestiti da Google, non da PluriFin)</td><td>Solo se utente acquista subscription</td></tr>
-<tr><td><strong>Google LLC</strong> -- Gemini API</td><td>Analisi AI del portafoglio</td><td>Prompt utente + struttura portafoglio anonima</td><td>Solo se utente inserisce chiave Gemini ed apre AI</td></tr>
-<tr><td><strong>EODHD</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave EODHD e seleziona il provider</td></tr>
-<tr><td><strong>Financial Modeling Prep (FMP)</strong></td><td>Prezzi di mercato real-time, fondamentali</td><td>Lista ticker</td><td>Solo se utente inserisce chiave FMP e seleziona il provider</td></tr>
-<tr><td><strong>Alpha Vantage</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Alpha Vantage e seleziona il provider</td></tr>
-<tr><td><strong>Twelve Data</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Twelve Data e seleziona il provider</td></tr>
-<tr><td><strong>Finnhub</strong></td><td>Prezzi di mercato real-time</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Finnhub e seleziona il provider</td></tr>
-<tr><td><strong>Polygon.io</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Polygon.io e seleziona il provider</td></tr>
-<tr><td><strong>Marketstack</strong></td><td>Prezzi di mercato end-of-day</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Marketstack e seleziona il provider</td></tr>
-<tr><td><strong>Tiingo</strong></td><td>Prezzi di mercato real-time e storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Tiingo e seleziona il provider</td></tr>
-<tr><td><strong>Nasdaq Data Link</strong></td><td>Prezzi di mercato storici</td><td>Lista ticker</td><td>Solo se utente inserisce chiave Nasdaq Data Link e seleziona il provider</td></tr>
-<tr><td><strong>Stooq</strong></td><td>Download CSV pubblico prezzi storici</td><td>Lista ticker (no API key, richiesta HTTP pubblica)</td><td>Solo se utente seleziona Stooq come provider</td></tr>
-<tr><td><strong>Cloudflare, Inc.</strong> -- Worker</td><td>Validazione trial e subscription</td><td><code>device_id_hash</code>, <code>purchase_token</code>, <code>productId</code>, JWT</td><td>Sempre (necessario per gating subscription)</td></tr>
-<tr><td><strong>Microsoft GitHub</strong> -- Pages</td><td>Hosting documenti legali, market data pubblici, webapp demo, vetrina</td><td>Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft)</td><td>Sempre, ogni volta che l'utente apre la webapp o un documento legale</td></tr>
-</tbody></table>
+<p>| Sub-processor | Finalita' | Dati trasmessi | Quando | |---|---|---|---| | <strong>Google LLC</strong> -- Play Billing | Pagamento e gestione abbonamento | <code>purchaseToken</code>, <code>productId</code>, dati di pagamento (gestiti da Google, non da PluriFin) | Solo se utente acquista subscription | | <strong>Google LLC</strong> -- Gemini API | Analisi AI del portafoglio | Prompt utente + struttura portafoglio anonima | Solo se utente inserisce chiave Gemini ed apre AI | | <strong>EODHD</strong> | Prezzi di mercato real-time e storici | Lista ticker | Solo se utente inserisce chiave EODHD e seleziona il provider | | <strong>Financial Modeling Prep (FMP)</strong> | Prezzi di mercato real-time, fondamentali | Lista ticker | Solo se utente inserisce chiave FMP e seleziona il provider | | <strong>Alpha Vantage</strong> | Prezzi di mercato storici | Lista ticker | Solo se utente inserisce chiave Alpha Vantage e seleziona il provider | | <strong>Twelve Data</strong> | Prezzi di mercato real-time e storici | Lista ticker | Solo se utente inserisce chiave Twelve Data e seleziona il provider | | <strong>Finnhub</strong> | Prezzi di mercato real-time | Lista ticker | Solo se utente inserisce chiave Finnhub e seleziona il provider | | <strong>Polygon.io</strong> | Prezzi di mercato storici | Lista ticker | Solo se utente inserisce chiave Polygon.io e seleziona il provider | | <strong>Marketstack</strong> | Prezzi di mercato end-of-day | Lista ticker | Solo se utente inserisce chiave Marketstack e seleziona il provider | | <strong>Tiingo</strong> | Prezzi di mercato real-time e storici | Lista ticker | Solo se utente inserisce chiave Tiingo e seleziona il provider | | <strong>Nasdaq Data Link</strong> | Prezzi di mercato storici | Lista ticker | Solo se utente inserisce chiave Nasdaq Data Link e seleziona il provider | | <strong>Stooq</strong> | Download CSV pubblico prezzi storici | Lista ticker (no API key, richiesta HTTP pubblica) | Solo se utente seleziona Stooq come provider | | <strong>Cloudflare, Inc.</strong> -- Worker | Validazione trial e subscription | <code>device_id_hash</code>, <code>purchase_token</code>, <code>productId</code>, JWT | Sempre (necessario per gating subscription) | | <strong>Microsoft GitHub</strong> -- Pages | Hosting documenti legali, market data pubblici, webapp demo, vetrina | Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft) | Sempre, ogni volta che l'utente apre la webapp o un documento legale |</p>
 <p>Cloudflare e GitHub Pages possono raccogliere log tecnici di accesso (IP, user-agent, timestamp) come da loro standard. Vedi:</p>
 <ul>
 <li><a href="https://www.cloudflare.com/privacypolicy/">Cloudflare Privacy Policy</a></li>
@@ -160,17 +129,7 @@
 <p>L'utente che non desidera trasferimenti extra-UE puo' semplicemente non attivare le feature opzionali (AI Gemini, prezzi real-time): l'app funziona pienamente in modalita' locale senza alcun trasferimento.</p>
 <h2>6. Diritti dell'interessato (artt. 15-22 GDPR)</h2>
 <p>L'utente ha diritto di:</p>
-<table>
-<thead><tr><th>Diritto</th><th>Come esercitarlo</th></tr></thead>
-<tbody>
-<tr><td><strong>Accesso</strong> ai dati personali</td><td>Direttamente in app: Impostazioni &gt; Privacy &gt; Esporta i miei dati (ZIP con portafoglio + consensi + log)</td></tr>
-<tr><td><strong>Rettifica</strong> dei dati inesatti</td><td>Modifica diretta in app (modifica posizione/obiettivo/impostazione)</td></tr>
-<tr><td><strong>Cancellazione</strong> (&quot;diritto all'oblio&quot;)</td><td>Impostazioni &gt; Privacy &gt; Cancella tutti i dati (irrevocabile) o disinstallazione app</td></tr>
-<tr><td><strong>Limitazione</strong> del trattamento</td><td>Disattivazione feature opzionali (AI, prezzi live, subscription)</td></tr>
-<tr><td><strong>Portabilita'</strong></td><td>Impostazioni &gt; Privacy &gt; Esporta i miei dati (formato JSON + CSV in ZIP)</td></tr>
-<tr><td><strong>Opposizione</strong></td><td>Disattivazione feature opzionali (AI, prezzi live)</td></tr>
-<tr><td><strong>Reclamo</strong> all'autorita' di controllo</td><td><a href="https://www.garanteprivacy.it/">Garante per la protezione dei dati personali</a> (Italia) o autorita' nazionale del paese di residenza</td></tr>
-</tbody></table>
+<p>| Diritto | Come esercitarlo | |---|---| | <strong>Accesso</strong> ai dati personali | Direttamente in app: Impostazioni &gt; Privacy &gt; Esporta i miei dati (ZIP con portafoglio + consensi + log) | | <strong>Rettifica</strong> dei dati inesatti | Modifica diretta in app (modifica posizione/obiettivo/impostazione) | | <strong>Cancellazione</strong> ("diritto all'oblio") | Impostazioni &gt; Privacy &gt; Cancella tutti i dati (irrevocabile) o disinstallazione app | | <strong>Limitazione</strong> del trattamento | Disattivazione feature opzionali (AI, prezzi live, subscription) | | <strong>Portabilita'</strong> | Impostazioni &gt; Privacy &gt; Esporta i miei dati (formato JSON + CSV in ZIP) | | <strong>Opposizione</strong> | Disattivazione feature opzionali (AI, prezzi live) | | <strong>Reclamo</strong> all'autorita' di controllo | <a href="https://www.garanteprivacy.it/">Garante per la protezione dei dati personali</a> (Italia) o autorita' nazionale del paese di residenza |</p>
 <p>Per richieste che non sono gestibili autonomamente in app (es. revoca del consenso al trattamento di dati gia' trasmessi a un sub-processor):</p>
 <ul>
 <li>Email: <code>plurifin.app+gdpr@gmail.com</code></li>
@@ -182,7 +141,7 @@
 <p>I dati locali sul dispositivo restano fino a quando l'utente:</p>
 <ol>
 <li>Cancella manualmente la singola voce (posizione, obiettivo, ecc.)</li>
-<li>Esegue &quot;Cancella tutti i dati&quot; da Impostazioni</li>
+<li>Esegue "Cancella tutti i dati" da Impostazioni</li>
 <li>Disinstalla l'app</li>
 </ol>
 <p>L'audit trail dei consensi (<code>consent_box</code>) ha conservazione separata: viene mantenuto finche' l'utente non lo esporta e cancella esplicitamente. Questo serve a fornire prova del consenso ai sensi dell'art. 7.1 GDPR.</p>
@@ -215,7 +174,7 @@
 </ul>
 <p>posizione, AI chat, ribilanciamento)</p>
 <ul>
-<li>Anti-backup: <code>android:allowBackup=&quot;false&quot;</code> per evitare l'inclusione dei dati</li>
+<li>Anti-backup: <code>android:allowBackup="false"</code> per evitare l'inclusione dei dati</li>
 </ul>
 <p>cifrati nei backup automatici Google Drive</p>
 <ul>
@@ -228,7 +187,7 @@
 <li>Nessuna telemetria di crash by default (Sentry disattivato in v1.0)</li>
 </ul>
 <h2>9. Minori (art. 8 GDPR)</h2>
-<p>L'app non e' destinata a minori di 18 anni. Il content rating dichiarato a Google Play e' &quot;18+&quot; come consigliato per app finanziarie. PluriFin non raccoglie consapevolmente dati di minori. Se un genitore o tutore individua un account di un minore, puo' richiederne la cancellazione scrivendo a <code>plurifin.app+gdpr@gmail.com</code>.</p>
+<p>L'app non e' destinata a minori di 18 anni. Il content rating dichiarato a Google Play e' "18+" come consigliato per app finanziarie. PluriFin non raccoglie consapevolmente dati di minori. Se un genitore o tutore individua un account di un minore, puo' richiederne la cancellazione scrivendo a <code>plurifin.app+gdpr@gmail.com</code>.</p>
 <h2>10. Cookie e tecnologie simili</h2>
 <p>L'app mobile <strong>non</strong> utilizza cookie (non e' un browser).</p>
 <p>La <strong>webapp demo</strong> (<code>lunapiena49.github.io/portfoliomanager-data/app/</code>) utilizza:</p>
@@ -250,21 +209,13 @@
 </ul>
 <p>Il numero di versione (in alto in questo documento) viene incrementato ad ogni modifica sostanziale. Le versioni precedenti sono disponibili nella history Git del repo pubblico <code>lunapiena49/portfoliomanager-data</code> cartella <code>legal/</code>.</p>
 <h2>12. Contatti</h2>
-<table>
-<thead><tr><th>Tipo richiesta</th><th>Email</th></tr></thead>
-<tbody>
-<tr><td>Richieste GDPR (accesso, cancellazione, portabilita', reclamo)</td><td><code>plurifin.app+gdpr@gmail.com</code></td></tr>
-<tr><td>Privacy &amp; sicurezza</td><td><code>plurifin.app+privacy@gmail.com</code></td></tr>
-<tr><td>Supporto generale</td><td><code>plurifin.app+support@gmail.com</code></td></tr>
-<tr><td>Contatto pubblico Play Store</td><td><code>plurifin.app@gmail.com</code></td></tr>
-</tbody></table>
+<p>| Tipo richiesta | Email | |---|---| | Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | <code>plurifin.app+gdpr@gmail.com</code> | | Privacy &amp; sicurezza | <code>plurifin.app+privacy@gmail.com</code> | | Supporto generale | <code>plurifin.app+support@gmail.com</code> | | Contatto pubblico Play Store | <code>plurifin.app@gmail.com</code> |</p>
 <h2>13. Foro competente e legge applicabile</h2>
 <p>La presente Privacy Policy e' regolata dalla legge italiana e dal Regolamento (UE) 2016/679 (GDPR). Per controversie il foro competente e' quello del consumatore ai sensi del D.Lgs. 206/2005 (Codice del Consumo).</p>
 <p>Per utenti residenti fuori dall'Unione Europea si applicano la legge italiana e il GDPR per quanto riguarda il trattamento dei dati personali, salvo applicazione di norme nazionali piu' protettive del consumatore.</p>
 
     <footer class="doc-footer">
-      <p>SHA-256 (privacy_policy.md): <code>0704aa25fc4cf60e14006e61f3e5e326eb29e86651111f7a7b0d0fbe7694cb85</code></p>
-      <p><a href="index.html">Torna all'indice</a></p>
+      <p><a href="./index.html">Index</a> | <a href="../">All languages</a></p>
     </footer>
   </main>
 </body>

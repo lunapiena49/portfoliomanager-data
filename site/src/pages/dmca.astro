@@ -1,0 +1,71 @@
+---
+import it from '../i18n/it';
+import LegalLayout from '../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'scope', label: '1. Ambito di applicazione' },
+  { id: 'incoming', label: '2. Reclami in arrivo' },
+  { id: 'outgoing', label: '3. Notifiche in uscita (DMCA)' },
+  { id: 'counter', label: '4. Contro-notifica' },
+  { id: 'contact', label: '5. Contatti' },
+];
+---
+<LegalLayout t={it} lang="it" pageTitle="DMCA / Takedown" tocItems={toc}>
+  <p class="meta">Ultimo aggiornamento: 2 maggio 2026 - Versione 1.0</p>
+
+  <div class="callout">
+    <strong>In sintesi:</strong> PluriFin rispetta la proprieta' intellettuale di terzi e si aspetta lo
+    stesso. Per segnalare materiale infringente che ci riguarda, oppure per segnalare un uso non
+    autorizzato di contenuti PluriFin, scrivi a
+    <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a>.
+  </div>
+
+  <h2 id="scope">1. Ambito di applicazione</h2>
+  <p>Questa pagina riassume la procedura per segnalare violazioni di copyright o marchio relative
+  all'app Portfolio Manager, al sito PluriFin e ai contenuti correlati. Per i template completi
+  (incluse le formule legali in italiano e inglese) consulta il documento esteso pubblicato nei
+  documenti legali in <a href="/legal/it/dmca.html">testo integrale</a>.</p>
+
+  <h2 id="incoming">2. Reclami in arrivo</h2>
+  <p>Se ritieni che un contenuto pubblicato da PluriFin (sito vetrina, screenshot, blog, codice
+  open-source) violi un tuo diritto, invia una segnalazione che contenga:</p>
+  <ul>
+    <li>Identificazione del materiale contestato (URL completi, screenshot).</li>
+    <li>Identificazione dell'opera tutelata di cui sei titolare (registrazione, prima
+    pubblicazione).</li>
+    <li>Riferimenti normativi (DMCA 17 U.S.C. par. 512 oppure Direttiva UE 2019/790 / D.Lgs.
+    177/2021).</li>
+    <li>Dichiarazione di buona fede e di accuratezza, firmata.</li>
+    <li>Recapiti completi e una copia del documento d'identita' (richiesta su istanza).</li>
+  </ul>
+  <p>Tempo di risposta tipico: 5 giorni lavorativi. Su segnalazioni evidentemente fondate
+  rimuoviamo o sostituiamo il materiale prima della risposta.</p>
+
+  <h2 id="outgoing">3. Notifiche in uscita (DMCA)</h2>
+  <p>Quando PluriFin individua una copia abusiva, un fork commerciale o una violazione del marchio,
+  invia una notifica formale alla piattaforma host. Le piattaforme USA usate piu' spesso sono GitHub
+  (<a href="https://github.com/contact/dmca">github.com/contact/dmca</a>), Google Play
+  (<a href="https://support.google.com/legal/answer/3463191">support.google.com/legal</a>),
+  Cloudflare e AWS. Per host UE viene inviata una diffida ai sensi del D.Lgs. 70/2003 art. 17.</p>
+  <p>Soglia di azione: agiamo solo per violazioni evidenti e materiali (clone d'app, copia integrale
+  del sito, fork commerciale del codice). Non agiamo per critiche, recensioni o screenshot in
+  articoli stampa: rientrano nel fair use.</p>
+
+  <h2 id="counter">4. Contro-notifica</h2>
+  <p>Se un contenuto PluriFin viene rimosso a seguito di una notifica che riteniamo infondata o
+  errata, inviamo una contro-notifica DMCA (17 U.S.C. par. 512(g)) che asserisce in buona fede
+  l'errore di identificazione, accetta la giurisdizione USA per i casi cross-border e richiede il
+  ripristino del materiale.</p>
+
+  <h2 id="contact">5. Contatti</h2>
+  <p>Email dedicata legale: <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a></p>
+  <p>Risposte entro 5-10 giorni lavorativi. Per pratiche urgenti indica chiaramente "URGENT DMCA"
+  nel subject.</p>
+
+  <hr />
+  <div class="note">
+    Il presente documento e' una sintesi operativa. Per il testo integrale dei template (italiano e
+    inglese) e per le procedure interne di gestione, consulta il documento legale completo
+    pubblicato in <a href="/legal/it/dmca.html">/legal/it/dmca.html</a>.
+  </div>
+</LegalLayout>

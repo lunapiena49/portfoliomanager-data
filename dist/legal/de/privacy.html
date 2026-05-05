@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Datenschutzerklarung -- PluriFin</title>
+  <title>Datenschutzerklaerung -- PluriFin</title>
   <meta name="robots" content="index,follow" />
-  <meta name="description" content="Datenschutzerklarung -- Portfolio Manager by PluriFin." />
+  <meta name="description" content="Datenschutzerklaerung -- Portfolio Manager by PluriFin." />
   <link rel="stylesheet" href="../_styles.css" />
 </head>
 <body>
@@ -16,7 +16,7 @@
   </header>
   <main class="container">
     <nav class="lang-switcher" aria-label="Language switcher">
-      <a href='../it/privacy.html' lang='it'>Italiano</a>
+<a href='../it/privacy.html' lang='it'>Italiano</a>
 <a href='../en/privacy.html' lang='en'>English</a>
 <a href='../es/privacy.html' lang='es'>Espanol</a>
 <a href='../fr/privacy.html' lang='fr'>Francais</a>
@@ -24,7 +24,7 @@
 <a href='../pt/privacy.html' lang='pt'>Portugues</a>
 
     </nav>
-    <h1>Datenschutzerklarung -- Portfolio Manager by PluriFin</h1>
+<h1>Datenschutzerklarung -- Portfolio Manager by PluriFin</h1>
 <p><strong>Version</strong>: 1.0.0 <strong>Letzte Aktualisierung</strong>: 2026-05-02 <strong>Originalsprache</strong>: Italienisch (verbindliche Fassung fur die Gerichtsbarkeit)</p>
 <hr/>
 <h2>1. Verantwortlicher</h2>
@@ -58,15 +58,7 @@
 <h2>3. Kategorien verarbeiteter Daten</h2>
 <h3>3.1 Lokal auf dem Gerat</h3>
 <p>Verschlusselt mit Hive AES-256 + Schlussel im OS-Keystore:</p>
-<table>
-<thead><tr><th>Kategorie</th><th>Beispiele</th><th>Rechtsgrundlage</th><th>Aufbewahrung</th></tr></thead>
-<tbody>
-<tr><td>Portfoliodaten</td><td>Name, Ticker, Menge, Durchschnittspreis, Broker, Datum</td><td>Art. 6.1.b DSGVO</td><td>Bis Loschung durch Nutzer</td></tr>
-<tr><td>Finanzziele</td><td>Titel, Zielbetrag, Falligkeit, Beitrage</td><td>Art. 6.1.b DSGVO</td><td>Bis Loschung durch Nutzer</td></tr>
-<tr><td>Praferenzen</td><td>Sprache, Wahrung, Theme, Demo-Modus</td><td>Art. 6.1.b DSGVO</td><td>Bis Deinstallation</td></tr>
-<tr><td>Einwilligungs-Audit</td><td>Timestamp, Dokumentversion, Entscheidung, Texthash</td><td>Art. 6.1.c DSGVO</td><td>Bis Loschung</td></tr>
-<tr><td>API-Schlussel</td><td>Schlussel aktivierter Anbieter: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (manuell eingegeben)</td><td>Art. 6.1.b DSGVO</td><td>Bis Entfernung</td></tr>
-</tbody></table>
+<p>| Kategorie | Beispiele | Rechtsgrundlage | Aufbewahrung | |---|---|---|---| | Portfoliodaten | Name, Ticker, Menge, Durchschnittspreis, Broker, Datum | Art. 6.1.b DSGVO | Bis Loschung durch Nutzer | | Finanzziele | Titel, Zielbetrag, Falligkeit, Beitrage | Art. 6.1.b DSGVO | Bis Loschung durch Nutzer | | Praferenzen | Sprache, Wahrung, Theme, Demo-Modus | Art. 6.1.b DSGVO | Bis Deinstallation | | Einwilligungs-Audit | Timestamp, Dokumentversion, Entscheidung, Texthash | Art. 6.1.c DSGVO | Bis Loschung | | API-Schlussel | Schlussel aktivierter Anbieter: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (manuell eingegeben) | Art. 6.1.b DSGVO | Bis Entfernung |</p>
 <p><code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
 <h3>3.2 Daten via Play Store (Google)</h3>
 <p>PluriFin erhalt nur: <code>purchaseToken</code>, <code>productId</code>, <code>device_id_hash</code> (HMAC-SHA256). PluriFin <strong>erhalt kein</strong> Name, E-Mail, Adresse, Zahlungsdaten.</p>
@@ -100,24 +92,7 @@
 </ol>
 <p>Der Nutzer kann den Schlussel jederzeit entfernen oder den Anbieter deaktivieren.</p>
 <h2>4. Auftragsverarbeiter</h2>
-<table>
-<thead><tr><th>Auftragsverarbeiter</th><th>Zweck</th><th>Daten</th><th>Wann</th></tr></thead>
-<tbody>
-<tr><td>Google Play Billing</td><td>Zahlung Abonnement</td><td>purchaseToken, productId</td><td>Nur bei Kauf</td></tr>
-<tr><td>Google Gemini API</td><td>KI-Analyse</td><td>Prompt + anonymes Portfolio</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>EODHD</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>FMP</td><td>Echtzeit-Preise, Fundamentaldaten</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Alpha Vantage</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Twelve Data</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Finnhub</td><td>Echtzeit-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Polygon.io</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Marketstack</td><td>End-of-Day-Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Tiingo</td><td>Echtzeit- und historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Nasdaq Data Link</td><td>Historische Preise</td><td>Ticker-Liste</td><td>Nur bei Aktivierung</td></tr>
-<tr><td>Stooq</td><td>Offentlicher CSV-Download historischer Preise</td><td>Ticker-Liste (kein API-Schlussel)</td><td>Nur bei Aktivierung Stooq</td></tr>
-<tr><td>Cloudflare Worker</td><td>Abonnement-Validierung</td><td>device_id_hash, JWT</td><td>Immer (Gating)</td></tr>
-<tr><td>GitHub Pages</td><td>Hosting</td><td>IP HTTP-Request</td><td>Bei jedem Besuch</td></tr>
-</tbody></table>
+<p>| Auftragsverarbeiter | Zweck | Daten | Wann | |---|---|---|---| | Google Play Billing | Zahlung Abonnement | purchaseToken, productId | Nur bei Kauf | | Google Gemini API | KI-Analyse | Prompt + anonymes Portfolio | Nur bei Aktivierung | | EODHD | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | FMP | Echtzeit-Preise, Fundamentaldaten | Ticker-Liste | Nur bei Aktivierung | | Alpha Vantage | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Twelve Data | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Finnhub | Echtzeit-Preise | Ticker-Liste | Nur bei Aktivierung | | Polygon.io | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Marketstack | End-of-Day-Preise | Ticker-Liste | Nur bei Aktivierung | | Tiingo | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Nasdaq Data Link | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Stooq | Offentlicher CSV-Download historischer Preise | Ticker-Liste (kein API-Schlussel) | Nur bei Aktivierung Stooq | | Cloudflare Worker | Abonnement-Validierung | device_id_hash, JWT | Immer (Gating) | | GitHub Pages | Hosting | IP HTTP-Request | Bei jedem Besuch |</p>
 <h2>5. Ubertragungen ausserhalb der EU</h2>
 <p>Google, Cloudflare, GitHub: US-Unternehmen. Grundlagen:</p>
 <ul>
@@ -127,17 +102,7 @@
 </ul>
 <p>Wer keine Drittlandsubertragungen wunscht: optionale Funktionen nicht aktivieren.</p>
 <h2>6. Betroffenenrechte (Art. 15-22 DSGVO)</h2>
-<table>
-<thead><tr><th>Recht</th><th>Wahrnehmung</th></tr></thead>
-<tbody>
-<tr><td>Auskunft</td><td>Einstellungen &gt; Datenschutz &gt; Daten exportieren (ZIP)</td></tr>
-<tr><td>Berichtigung</td><td>Direkte Bearbeitung in der App</td></tr>
-<tr><td>Loschung</td><td>Einstellungen &gt; Datenschutz &gt; Alle Daten loschen / Deinstallation</td></tr>
-<tr><td>Einschrankung</td><td>Optionale Funktionen deaktivieren</td></tr>
-<tr><td>Datenubertragbarkeit</td><td>Einstellungen &gt; Daten exportieren (JSON+CSV)</td></tr>
-<tr><td>Widerspruch</td><td>Optionale Funktionen deaktivieren</td></tr>
-<tr><td>Beschwerde</td><td><a href="https://www.garanteprivacy.it/">Garante (Italien)</a>, BfDI (Deutschland) oder nationale Behorde</td></tr>
-</tbody></table>
+<p>| Recht | Wahrnehmung | |---|---| | Auskunft | Einstellungen &gt; Datenschutz &gt; Daten exportieren (ZIP) | | Berichtigung | Direkte Bearbeitung in der App | | Loschung | Einstellungen &gt; Datenschutz &gt; Alle Daten loschen / Deinstallation | | Einschrankung | Optionale Funktionen deaktivieren | | Datenubertragbarkeit | Einstellungen &gt; Daten exportieren (JSON+CSV) | | Widerspruch | Optionale Funktionen deaktivieren | | Beschwerde | <a href="https://www.garanteprivacy.it/">Garante (Italien)</a>, BfDI (Deutschland) oder nationale Behorde |</p>
 <p>Anfragen: <code>plurifin.app+gdpr@gmail.com</code>. Antwort innerhalb 30 Tagen (Art. 12.3 DSGVO).</p>
 <h2>7. Aufbewahrung</h2>
 <p>Lokale Daten bis Nutzerloschung. Einwilligungs-Audit: bis explizitem Export und Loschung. Auftragsverarbeiter: eigene Richtlinien.</p>
@@ -152,7 +117,7 @@
 <li>Dart-Obfuskation in Releases</li>
 </ul>
 <h2>9. Minderjahrige (Art. 8 DSGVO)</h2>
-<p>App nicht fur unter 18-Jahrige. Play Store Content Rating &quot;18+&quot;. Eltern/Erziehungsberechtigte konnen Loschung anfordern an <code>plurifin.app+gdpr@gmail.com</code>.</p>
+<p>App nicht fur unter 18-Jahrige. Play Store Content Rating "18+". Eltern/Erziehungsberechtigte konnen Loschung anfordern an <code>plurifin.app+gdpr@gmail.com</code>.</p>
 <h2>10. Cookies</h2>
 <p>Mobile App: keine Cookies. Webapp: <code>localStorage</code> + technisches GitHub-Pages-Cookie. Marketing-Site: GoatCounter self-hosted (cookie-frei, ohne Fingerprinting).</p>
 <h2>11. Anderungen</h2>
@@ -168,8 +133,7 @@
 <p>Italienisches Recht und DSGVO. Fur Verbraucher: Verbrauchergerichtsstand nach D.Lgs. 206/2005 (Italien) oder strengere nationale Regeln.</p>
 
     <footer class="doc-footer">
-      <p>SHA-256 (privacy_policy.md): <code>9defdc8feff72764ee22d4b265d868a6be6aa08f061130239ee3146e4a2cf0b3</code></p>
-      <p><a href="index.html">Zur Indexseite</a></p>
+      <p><a href="./index.html">Index</a> | <a href="../">All languages</a></p>
     </footer>
   </main>
 </body>

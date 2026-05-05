@@ -1,0 +1,71 @@
+---
+import fr from '../../i18n/fr';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'scope', label: '1. Champ d\'application' },
+  { id: 'incoming', label: '2. Plaintes entrantes' },
+  { id: 'outgoing', label: '3. Notifications sortantes (DMCA)' },
+  { id: 'counter', label: '4. Contre-notification' },
+  { id: 'contact', label: '5. Contact' },
+];
+---
+<LegalLayout t={fr} lang="fr" pageTitle="DMCA / Retrait" tocItems={toc}>
+  <p class="meta">Derniere mise a jour: 2 mai 2026 - Version 1.0</p>
+
+  <div class="callout">
+    <strong>En resume:</strong> PluriFin respecte la propriete intellectuelle des tiers et attend la
+    reciprocite. Pour signaler un contenu portant atteinte a vos droits ou pour signaler une
+    utilisation non autorisee de contenu PluriFin, ecrivez a
+    <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a>.
+  </div>
+
+  <h2 id="scope">1. Champ d'application</h2>
+  <p>Cette page resume la procedure pour signaler des violations de droits d'auteur ou de marque
+  relatives a l'application Portfolio Manager, au site PluriFin et aux contenus associes. Pour les
+  modeles complets (en italien et en anglais) consultez le document detaille publie a
+  <a href="/legal/fr/dmca.html">/legal/fr/dmca.html</a>.</p>
+
+  <h2 id="incoming">2. Plaintes entrantes</h2>
+  <p>Si vous estimez qu'un contenu publie par PluriFin (site vitrine, captures, blog, code
+  open-source) viole vos droits, envoyez un signalement contenant:</p>
+  <ul>
+    <li>Identification du materiel litigieux (URL completes, captures).</li>
+    <li>Identification de l'oeuvre protegee dont vous etes titulaire (enregistrement, premiere
+    publication).</li>
+    <li>References legales (DMCA 17 U.S.C. par. 512 ou Directive UE 2019/790).</li>
+    <li>Declaration signee de bonne foi et d'exactitude.</li>
+    <li>Coordonnees completes et copie de la piece d'identite (sur demande).</li>
+  </ul>
+  <p>Delai de reponse typique: 5 jours ouvres. Sur des signalements clairement fondes, nous retirons
+  ou remplacons le materiel avant de repondre.</p>
+
+  <h2 id="outgoing">3. Notifications sortantes (DMCA)</h2>
+  <p>Lorsque PluriFin identifie une copie abusive, un fork commercial ou une violation de marque,
+  une notification formelle est deposee aupres de la plateforme hote. Les plateformes US les plus
+  utilisees sont GitHub (<a href="https://github.com/contact/dmca">github.com/contact/dmca</a>),
+  Google Play (<a href="https://support.google.com/legal/answer/3463191">support.google.com/legal</a>),
+  Cloudflare et AWS. Pour les hotes UE une mise en demeure est envoyee au titre du D.Lgs. 70/2003
+  art. 17.</p>
+  <p>Seuil d'action: nous agissons uniquement sur des violations claires et substantielles (clones
+  d'app, copies integrales du site, forks commerciaux du code). Nous n'agissons pas contre les
+  critiques, avis ou captures dans des articles de presse: ils relevent du fair use.</p>
+
+  <h2 id="counter">4. Contre-notification</h2>
+  <p>Si un contenu PluriFin est retire suite a une notification que nous considerons comme
+  infondee ou erronee, nous deposons une contre-notification DMCA (17 U.S.C. par. 512(g)) qui
+  affirme de bonne foi l'erreur d'identification, accepte la juridiction US pour les cas
+  transfrontaliers et demande la restauration du materiel.</p>
+
+  <h2 id="contact">5. Contact</h2>
+  <p>Email legal dedie: <a href="mailto:plurifin.app+legal@gmail.com">plurifin.app+legal@gmail.com</a></p>
+  <p>Reponses sous 5-10 jours ouvres. Pour les affaires urgentes, indiquez "URGENT DMCA" dans
+  l'objet.</p>
+
+  <hr />
+  <div class="note">
+    Ce document est un resume operationnel. Pour les textes complets des modeles (italien et
+    anglais) et les procedures internes, consultez le document legal a
+    <a href="/legal/fr/dmca.html">/legal/fr/dmca.html</a>.
+  </div>
+</LegalLayout>
