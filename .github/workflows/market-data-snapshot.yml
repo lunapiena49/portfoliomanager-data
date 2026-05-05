@@ -14,6 +14,7 @@ permissions:
   issues: write
   pages: write
   id-token: write
+  actions: write
 
 concurrency:
   group: market-data-pages
@@ -89,6 +90,22 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  trigger-site-deploy:
+    # After market-data deploys JSON-only Pages, trigger site-deploy to
+    # restore the full Astro site (HTML + legal pages + market data merged).
+    # Without this, the last-writer-wins Pages race leaves the site as JSON-only.
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: ${{ needs.deploy.result == 'success' }}
+    permissions:
+      actions: write
+      contents: read
+    steps:
+      - name: Trigger site-deploy to restore full site HTML
+        run: gh workflow run site-deploy.yml --repo ${{ github.repository }}
+        env:
+          GH_TOKEN: ${{ github.token }}
 
   notify-failure:
     runs-on: ubuntu-latest
