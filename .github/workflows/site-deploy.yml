@@ -50,9 +50,33 @@ jobs:
           SITE_BASE: /
         run: npm run build
 
+      # CC-P1-DB fix: preserve market-data binary assets (~950MB DB zip + lookup
+      # tables) from the current Pages deploy. Without this, the Astro build's
+      # upload-pages-artifact wipes Pages, including market_history.db.zip and
+      # prices_index.json. The next market-data-snapshot cron then "starts fresh"
+      # and burns ~100k EODHD API calls rebuilding the rolling 365-day window.
+      - name: Preserve market_history.db.zip + prices_index.json from current Pages
+        run: |
+          set -euo pipefail
+          mkdir -p dist/market-data
+          # DB zip (rolling history backfill source). |\| true so first run after
+          # this fix doesn't fail when the zip isn't on Pages yet.
+          curl -sfL -o dist/market-data/market_history.db.zip \
+            https://plurifin.app/market_history.db.zip \
+            || curl -sfL -o dist/market-data/market_history.db.zip \
+               https://lunapiena49.github.io/portfoliomanager-data/market_history.db.zip \
+               || echo "WARN: market_history.db.zip not on Pages -- next market-data run will rebuild"
+          # prices_index.json (instrument lookup table).
+          curl -sfL -o dist/market-data/prices_index.json \
+            https://plurifin.app/prices_index.json \
+            || curl -sfL -o dist/market-data/prices_index.json \
+               https://lunapiena49.github.io/portfoliomanager-data/prices_index.json \
+               || echo "WARN: prices_index.json not on Pages -- next market-data run will regenerate"
+          ls -lh dist/market-data/ || true
+
       # The Astro build outputs to site/dist/. Pages upload-pages-artifact
       # replaces the entire Pages content; without merging, legal/ HTML and
-      # market-data top_movers.json from outside site/ disappear after deploy.
+      # market-data binaries from outside site/ disappear after deploy.
       - name: Merge static assets (legal/, market-data, CNAME) into site/dist
         run: |
           set -euo pipefail
@@ -70,14 +94,30 @@ jobs:
           if [ -f dist/market-data/top_movers.json ]; then
             cp dist/market-data/top_movers.json site/dist/top_movers.json
           fi
+          # CC-P1-DB: market_history.db.zip + prices_index.json must persist
+          # across site-deploys. Without these at root the market-data-snapshot
+          # cron (22:35 UTC) cannot do incremental backfill and burns ~100k
+          # EODHD calls re-bootstrapping the window.
+          if [ -f dist/market-data/market_history.db.zip ]; then
+            cp dist/market-data/market_history.db.zip site/dist/market_history.db.zip
+          fi
+          if [ -f dist/market-data/prices_index.json ]; then
+            cp dist/market-data/prices_index.json site/dist/prices_index.json
+          fi
           # Also expose under /market-data/ for clients preferring namespaced paths.
           if [ -d dist/market-data ]; then
             mkdir -p site/dist/market-data
-            for f in dist/market-data/top_movers.json dist/market-data/.gitkeep; do
+            for f in \
+              dist/market-data/top_movers.json \
+              dist/market-data/market_history.db.zip \
+              dist/market-data/prices_index.json \
+              dist/market-data/.gitkeep \
+            ; do
               if [ -f "$f" ]; then cp "$f" "site/dist/market-data/$(basename "$f")"; fi
             done
           fi
-          ls -la site/dist/
+          ls -la site/dist/ | head -50
+          du -sh site/dist/ || true
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
