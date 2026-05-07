@@ -1,0 +1,176 @@
+---
+import en from '../../i18n/en';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'plans', label: 'Plans' },
+  { id: 'family', label: 'Family plan' },
+  { id: 'trial', label: '7-day trial' },
+  { id: 'faq', label: 'FAQ' },
+];
+---
+<LegalLayout t={en} lang="en" pageTitle="Pricing & subscriptions" tocItems={toc}>
+  <p class="meta">Fixed prices for everyone, forever. No "early bird" promos, no segmentation.</p>
+
+  <h2 id="plans">Plans available at launch</h2>
+  <p>PluriFin offers <strong>4 plans</strong> at the same price for everyone, today and in the
+  future. If we ever raise prices, existing subscribers stay grandfathered at their original
+  price. Lifetime options remain final.</p>
+
+  <div class="pricing-grid" role="list">
+    <div class="pricing-card" role="listitem">
+      <h3>Single Annual</h3>
+      <p class="price"><strong>EUR 0.99</strong> / year</p>
+      <p class="cycle">Auto-renewing yearly. Cancel any time.</p>
+      <ul>
+        <li>1 device</li>
+        <li>Unlimited broker import</li>
+        <li>AI Gemini analysis</li>
+        <li>Goals and rebalancing</li>
+        <li>Real-time market data</li>
+      </ul>
+    </div>
+    <div class="pricing-card highlight" role="listitem">
+      <span class="badge">Best value</span>
+      <h3>Single Lifetime</h3>
+      <p class="price"><strong>EUR 4.99</strong> one-time</p>
+      <p class="cycle">One-time payment. Lifetime access on this Google account.</p>
+      <ul>
+        <li>1 device</li>
+        <li>Everything included, forever</li>
+        <li>Equivalent to ~5 years of Annual</li>
+      </ul>
+    </div>
+    <div class="pricing-card" role="listitem">
+      <h3>Family Annual</h3>
+      <p class="price"><strong>EUR 1.99</strong> / year</p>
+      <p class="cycle">Auto-renewing yearly. Cancel any time.</p>
+      <ul>
+        <li>Up to 5 Google Family members</li>
+        <li>Import, AI, goals and market for everyone</li>
+      </ul>
+    </div>
+    <div class="pricing-card highlight" role="listitem">
+      <span class="badge">Best value</span>
+      <h3>Family Lifetime</h3>
+      <p class="price"><strong>EUR 9.99</strong> one-time</p>
+      <p class="cycle">One-time payment. Lifetime access for the Family group.</p>
+      <ul>
+        <li>Up to 5 Google Family members</li>
+        <li>Everything included, forever</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="family">How the Family plan works</h2>
+  <p>The <strong>Family</strong> plans use <a href="https://families.google.com/" rel="noopener noreferrer" target="_blank">Google Family</a>
+  to share the subscription with up to 5 members. The organizer purchases; the other members
+  unlock access via their own Google account at no extra cost. Sharing is fully managed by
+  Google, not by PluriFin.</p>
+
+  <h2 id="trial">7-day free trial</h2>
+  <p>Every Android user gets a <strong>7-day full trial</strong> on first launch, no credit
+  card required. On day 8 the app falls back to free mode (5 positions, no import, no AI,
+  no goals). Pick one of the 4 plans above to keep the full experience.</p>
+
+  <div class="callout">
+    <strong>Refund:</strong> all Play Store purchases are refundable automatically within 48h
+    directly from the Play Store. Lifetime options are treated as non-consumable in-app
+    products: 48h Play refund window, then final purchase.
+  </div>
+
+  <h2 id="faq">Frequently asked questions</h2>
+
+  <h3>Why such a low price?</h3>
+  <p>The app is a personal project from a single developer. No investors, no VC, no churn
+  pressure. The goal is to cover the Play Console one-time cost (25 USD) and the Worker
+  hosting (free Cloudflare tier) -- not to maximize ARPU.</p>
+
+  <h3>How does Lifetime compare to Annual?</h3>
+  <p>Single Lifetime (EUR 4.99) is roughly 5 years of Single Annual (EUR 0.99/year) and
+  includes every future major release at no extra cost. Family Lifetime (EUR 9.99) is the
+  same for the Family plan.</p>
+
+  <h3>What if the app disappears?</h3>
+  <p>Your data lives <strong>on your device</strong>: AES-256 encrypted Hive boxes inside
+  the app's private storage, not in the PluriFin cloud. The GDPR data-portability export
+  (art. 20) produces a single portable JSON at any time. Even if PluriFin shuts down
+  tomorrow, your data stays with you.</p>
+
+  <h3>How do I manage my subscription?</h3>
+  <p>Directly from <a href="https://play.google.com/store/account/subscriptions" rel="noopener noreferrer" target="_blank">Play Store - Subscriptions</a>.
+  Immediate cancellation, access remains until the end of the period already paid.</p>
+
+  <h3>Can I switch from Annual to Lifetime?</h3>
+  <p>Yes: buy Lifetime; the Annual subscription is automatically cancelled at the next
+  renewal and lifetime access starts immediately.</p>
+
+  <h3>Does it work offline?</h3>
+  <p>Yes. Live market quotes need internet, but everything else (positions, goals, history)
+  is offline-first.</p>
+
+  <h3>Web vs Android app: differences?</h3>
+  <p>The <a href="/app/">webapp</a> is a free demo: 5 manual positions max, no import, no AI,
+  no goals, weekly market data. The Android app unlocks every feature. iOS lands in Phase 2
+  once the app is commercially sustainable.</p>
+
+  <h3>Can I use PluriFin without an account?</h3>
+  <p>Yes. No registration required. Trial and subscription are tied to your Google Play
+  account, not to a PluriFin account.</p>
+</LegalLayout>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0 32px;
+  }
+  .pricing-card {
+    background: rgba(0,191,165,.04);
+    border: 1px solid rgba(0,191,165,.16);
+    border-radius: 12px;
+    padding: 20px 18px;
+    position: relative;
+    list-style: none;
+  }
+  .pricing-card.highlight {
+    background: linear-gradient(180deg, rgba(0,191,165,.10) 0%, rgba(0,191,165,.04) 100%);
+    border-color: rgba(0,191,165,.36);
+  }
+  .pricing-card .badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: var(--accent, #00BFA5);
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    letter-spacing: .04em;
+    font-weight: 600;
+  }
+  .pricing-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .pricing-card .price {
+    font-size: 24px;
+    margin: 4px 0 4px;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .pricing-card .cycle {
+    font-size: 13px;
+    color: var(--text-3);
+    margin: 0 0 12px;
+  }
+  .pricing-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+</style>

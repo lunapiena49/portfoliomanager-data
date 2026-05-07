@@ -1,0 +1,86 @@
+---
+import { getCollection } from 'astro:content';
+import it from '../../i18n/it';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const all = await getCollection('blog', ({ data }) => !data.draft);
+const posts = all.sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+
+const toc = posts.map((p) => ({
+  id: p.slug,
+  label: p.data.title,
+}));
+---
+<LegalLayout t={it} lang="it" pageTitle="Blog PluriFin" tocItems={toc}>
+  <p class="meta">Storie, decisioni di prodotto, lezioni apprese. Aggiornato saltuariamente.</p>
+
+  {posts.length === 0 ? (
+    <p>Nessun articolo pubblicato ancora. Torna a trovarci.</p>
+  ) : (
+    posts.map((post) => (
+      <article class="blog-card" id={post.slug}>
+        <p class="meta">
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {post.data.publishedAt.toLocaleDateString('it-IT', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          {' · '}
+          <span>{post.data.author.name}</span>
+          {post.data.tags.length > 0 && (
+            <span class="tags">
+              {' · '}
+              {post.data.tags.map((tag) => (
+                <span class="tag">#{tag}</span>
+              ))}
+            </span>
+          )}
+        </p>
+        <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+        <p>{post.data.summary}</p>
+        <p><a href={`/blog/${post.slug}/`} class="read-more">Leggi tutto -></a></p>
+      </article>
+    ))
+  )}
+</LegalLayout>
+
+<style>
+  .blog-card {
+    border-bottom: 1px solid var(--divider);
+    padding: 16px 0 24px;
+  }
+  .blog-card:last-child {
+    border-bottom: none;
+  }
+  .blog-card .meta {
+    font-size: 13px;
+    color: var(--text-3);
+    margin-bottom: 4px;
+  }
+  .blog-card h2 {
+    margin: 4px 0 8px;
+    font-size: 22px;
+    line-height: 1.3;
+  }
+  .blog-card h2 a {
+    color: var(--text);
+    text-decoration: none;
+  }
+  .blog-card h2 a:hover {
+    color: var(--primary);
+  }
+  .blog-card .tag {
+    display: inline-block;
+    margin-right: 4px;
+    color: var(--accent, #00BFA5);
+    font-size: 12px;
+  }
+  .blog-card .read-more {
+    color: var(--primary);
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .blog-card .read-more:hover {
+    text-decoration: underline;
+  }
+</style>

@@ -22,7 +22,11 @@ const {
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const siteUrl = 'https://plurifin.app';
+// Custom domain live since 2026-05-04 (W3 task 38). Override at build time
+// only for staging previews:
+//   SITE_URL=https://lunapiena49.github.io/portfoliomanager-data astro build
+const siteUrl = (import.meta.env.SITE_URL as string | undefined) ??
+  'https://plurifin.app';
 const canonicalUrl = `${siteUrl}${canonicalPath ? '/' + canonicalPath : ''}`;
 const ogImageUrl = `${siteUrl}/assets/og-image.png`;
 

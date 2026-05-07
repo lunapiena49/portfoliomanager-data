@@ -1,0 +1,67 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import it from '../../i18n/it';
+import en from '../../i18n/en';
+import es from '../../i18n/es';
+import fr from '../../i18n/fr';
+import de from '../../i18n/de';
+import pt from '../../i18n/pt';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await post.render();
+
+const tByLang = { it, en, es, fr, de, pt };
+const t = tByLang[post.data.lang];
+
+const toc = headings
+  .filter((h) => h.depth === 2)
+  .map((h) => ({ id: h.slug, label: h.text }));
+---
+<LegalLayout t={t} lang={post.data.lang} pageTitle={post.data.title} tocItems={toc}>
+  <p class="meta">
+    <time datetime={post.data.publishedAt.toISOString()}>
+      {post.data.publishedAt.toLocaleDateString(post.data.lang, { year: 'numeric', month: 'long', day: 'numeric' })}
+    </time>
+    {' · '}
+    <span>{post.data.author.name}</span>
+  </p>
+
+  <Content />
+
+  {post.data.tags.length > 0 && (
+    <p class="tags">
+      Tag: {post.data.tags.map((tag) => (
+        <span class="tag">#{tag}</span>
+      ))}
+    </p>
+  )}
+
+  <hr />
+  <p><a href="/blog/">&larr; Torna al blog</a></p>
+</LegalLayout>
+
+<style>
+  .tags {
+    margin-top: 32px;
+    color: var(--text-3);
+    font-size: 14px;
+  }
+  .tags .tag {
+    display: inline-block;
+    margin-right: 4px;
+    color: var(--accent, #00BFA5);
+  }
+</style>
