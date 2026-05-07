@@ -51,17 +51,22 @@ jobs:
           SITE_BASE: /
         run: npm run build
 
-      # CC-P1-DB v2: restore market-data binary assets (~830MB DB zip + lookup
-      # tables) from the most recent market-data-snapshot artifact, NOT from
-      # Pages directly.
+      # CC-P1-DB v2 + W3.CF-BOT-V4 (2026-05-08): restore market-data binary
+      # assets (~830MB DB zip + lookup tables) from the most recent
+      # market-data-snapshot artifact, iterating over completed runs (not
+      # just success). Since market-data-snapshot.yml v4 uses if:always
+      # upload, every completed run uploads its DB state -- chain is
+      # unbroken across consecutive failures, but only iteration finds the
+      # most recent artifact regardless of conclusion.
       #
-      # Why not curl from Pages: site-deploy is auto-triggered by market-data-
-      # snapshot's `trigger-site-deploy` job ~3s after market-data deploys to
-      # Pages. Cloudflare CDN cache hasn't propagated the new files yet (still
-      # serves stale 404 from before the deploy), so the curl fallback fails
-      # and the DB zip gets wiped on every cycle. CC-P1-DB v1 (commit 62a787d)
-      # had this race; v2 bypasses Cloudflare entirely by pulling the artifact
-      # straight from the GitHub Actions API.
+      # Why not curl from Pages: site-deploy is auto-triggered by market-
+      # data-snapshot's `trigger-site-deploy` job ~3s after market-data
+      # deploys to Pages. Cloudflare CDN cache hasn't propagated the new
+      # files yet (still serves stale 404 from before the deploy), so the
+      # curl fallback fails and the DB zip gets wiped on every cycle.
+      # CC-P1-DB v1 (commit 62a787d) had this race; v2 bypasses Cloudflare
+      # entirely by pulling the artifact straight from the GitHub Actions
+      # API.
       #
       # The market-data-snapshot.yml uploads the same files to Pages and as
       # artifact `github-pages`, so the artifact == what was just deployed.
@@ -70,28 +75,34 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          mkdir -p dist/market-data /tmp/md-artifact
-          LATEST_RUN_ID=$(gh run list \
-            --repo "${{ github.repository }}" \
-            --workflow=market-data-snapshot.yml \
-            --status=success \
-            --limit 1 \
-            --json databaseId \
-            --jq '.[0].databaseId' 2>/dev/null || echo "")
-          if [ -z "$LATEST_RUN_ID" ] || [ "$LATEST_RUN_ID" = "null" ]; then
-            echo "WARN: no successful market-data-snapshot run found -- nothing to restore"
-            exit 0
-          fi
-          echo "Restoring from market-data-snapshot run #$LATEST_RUN_ID"
-          if ! gh run download "$LATEST_RUN_ID" \
+          mkdir -p dist/market-data
+          RESTORED=""
+          for CANDIDATE_RUN in $(gh run list \
               --repo "${{ github.repository }}" \
-              --name github-pages \
-              --dir /tmp/md-artifact 2>&1; then
-            echo "WARN: gh run download failed -- artifact may have expired"
+              --workflow=market-data-snapshot.yml \
+              --status=completed \
+              --limit 10 \
+              --json databaseId \
+              --jq '.[].databaseId' 2>/dev/null); do
+            echo "Trying artifact from run $CANDIDATE_RUN..."
+            rm -rf /tmp/md-artifact
+            if gh run download "$CANDIDATE_RUN" \
+                --repo "${{ github.repository }}" \
+                --name github-pages \
+                --dir /tmp/md-artifact 2>/dev/null; then
+              RESTORED="$CANDIDATE_RUN"
+              break
+            else
+              echo "  Artifact unavailable -- trying older run."
+            fi
+          done
+          if [ -z "$RESTORED" ]; then
+            echo "WARN: no restorable market-data-snapshot artifact in last 10 completed runs"
             exit 0
           fi
+          echo "Restoring from market-data-snapshot run #$RESTORED"
           if [ ! -f /tmp/md-artifact/artifact.tar ]; then
-            echo "WARN: artifact.tar missing in download (run #$LATEST_RUN_ID)"
+            echo "WARN: artifact.tar missing in download (run #$RESTORED)"
             ls -la /tmp/md-artifact/ || true
             exit 0
           fi

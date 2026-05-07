@@ -322,6 +322,31 @@ def parse_args() -> argparse.Namespace:
             "to keep penny stocks out of the top movers."
         ),
     )
+    parser.add_argument(
+        "--allow-fresh-bootstrap",
+        action="store_true",
+        default=False,
+        help=(
+            "Allow fresh bootstrap (~100k EODHD calls) when no rolling history "
+            "DB is available after fetch_history_db. By default, the script "
+            "ABORTS in this scenario to prevent accidental quota exhaustion. "
+            "Set this flag explicitly only for: (a) the very first run, or "
+            "(b) intentional disaster recovery after >14d artifact retention "
+            "expiry. W3.CF-BOT-V4 safety net (2026-05-08)."
+        ),
+    )
+    parser.add_argument(
+        "--min-history-rows",
+        type=int,
+        default=1000,
+        help=(
+            "Minimum number of rows in history_prices required after restore. "
+            "If the restored DB has fewer rows, the script ABORTS (unless "
+            "--allow-fresh-bootstrap is set). Catches corrupt or empty DB "
+            "artifacts that would otherwise trigger fresh bootstrap. "
+            "Default 1000 = ~1 day of US bulk data."
+        ),
+    )
     return parser.parse_args()
 
 
@@ -1705,6 +1730,67 @@ def main() -> int:
             timeout_seconds=args.timeout_seconds,
             logger=logger,
         )
+
+        # W3.CF-BOT-V4 SAFETY (2026-05-08): refuse to proceed without an
+        # existing history DB unless --allow-fresh-bootstrap is explicitly
+        # set. Fresh bootstrap costs ~100k EODHD calls (8 markets x 365 days
+        # x 100 calls/bulk = 292k > daily quota), which the user has burned
+        # 3 days in a row on 2026-05-05/06/07 by accident. The workflow
+        # restore step (gh artifact API) populates history_db_path before
+        # this script runs; only an outright catastrophic failure (>14d
+        # artifact chain expired AND CF BFM blocking URL fallback) reaches
+        # this branch. In that case ABORT is safer than burning quota.
+        if not history_db_path.exists() and not args.allow_fresh_bootstrap:
+            raise RuntimeError(
+                "REFUSING fresh bootstrap. No history DB at %s after "
+                "fetch_history_db (artifact restore failed AND URL fallback "
+                "failed). Re-run with --allow-fresh-bootstrap to override "
+                "(WARNING: ~100k EODHD calls will be consumed). See master "
+                "plan W3.CF-BOT-V4 incident timeline 2026-05-05/06/07."
+                % history_db_path
+            )
+
+        if history_db_path.exists():
+            # Sanity check: row count. Catches corrupt or near-empty DBs.
+            try:
+                with sqlite3.connect(history_db_path) as sanity_conn:
+                    sanity_conn.execute(
+                        "CREATE TABLE IF NOT EXISTS history_prices ("
+                        "market_code TEXT, ticker TEXT, name TEXT, "
+                        "currency TEXT, close REAL, volume INTEGER, "
+                        "dollar_volume REAL, market_cap INTEGER, "
+                        "change_percent REAL, as_of_date TEXT, "
+                        "PRIMARY KEY (market_code, ticker, as_of_date))"
+                    )
+                    row_count = sanity_conn.execute(
+                        "SELECT COUNT(*) FROM history_prices"
+                    ).fetchone()[0]
+            except sqlite3.DatabaseError as db_error:
+                if not args.allow_fresh_bootstrap:
+                    raise RuntimeError(
+                        "REFUSING fresh bootstrap. Restored history DB at %s "
+                        "is corrupt (sqlite3.DatabaseError: %s). "
+                        "Re-run with --allow-fresh-bootstrap to override."
+                        % (history_db_path, db_error)
+                    )
+                logger.warning(
+                    "DB corrupt but --allow-fresh-bootstrap set; will rebuild."
+                )
+                row_count = 0
+            else:
+                logger.info(
+                    "History DB sanity check: %d rows in history_prices.",
+                    row_count,
+                )
+            if row_count < args.min_history_rows and not args.allow_fresh_bootstrap:
+                raise RuntimeError(
+                    "REFUSING fresh bootstrap. Restored history DB at %s "
+                    "has only %d rows (< --min-history-rows %d). Likely "
+                    "corrupt or partially-restored artifact. Re-run with "
+                    "--allow-fresh-bootstrap to override (WARNING: ~100k "
+                    "EODHD calls). Otherwise inspect artifact contents."
+                    % (history_db_path, row_count, args.min_history_rows)
+                )
 
         # --- 4. Upsert latest market day and bootstrap missing anchors ---
         with sqlite3.connect(history_db_path) as conn:

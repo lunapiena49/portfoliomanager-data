@@ -42,6 +42,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
+          # W3.CF-BOT-V4 (2026-05-08): iterate over recent completed runs,
+          # not just successful ones. Since market-data-snapshot.yml v4 uses
+          # `if: always()` on Upload Pages artifact, every completed run
+          # uploads the DB and top_movers.json (preserving previous run's
+          # data when the script fails). The chain is therefore unbroken
+          # across consecutive failures, but only iteration finds the most
+          # recent artifact regardless of conclusion.
+          #
           # W3.CF-BOT-V2 (2026-05-06): download via GitHub Actions artifact
           # API instead of curl-from-Pages. Why: Cloudflare BFM (Free plan)
           # blocks Azure runner IPs returning HTTP 403 even with a custom
@@ -49,19 +57,27 @@ jobs:
           # rules cannot override on Free. The artifact API bypasses CF
           # entirely. Same pattern as site-deploy.yml CC-P1-DB v2.
           mkdir -p dist/market-data
-          LATEST_RUN_ID=$(gh run list \
-            --workflow=market-data-snapshot.yml \
-            --status=success \
-            --limit 1 \
-            --json databaseId \
-            --jq '.[0].databaseId')
-          if [ -z "$LATEST_RUN_ID" ] || [ "$LATEST_RUN_ID" = "null" ]; then
-            echo "::error::No successful market-data-snapshot run found."
+          RESTORED=""
+          for CANDIDATE_RUN in $(gh run list \
+              --workflow=market-data-snapshot.yml \
+              --status=completed \
+              --limit 10 \
+              --json databaseId \
+              --jq '.[].databaseId'); do
+            echo "Trying artifact from run $CANDIDATE_RUN..."
+            rm -rf /tmp/md-artifact /tmp/md-extracted
+            if gh run download "$CANDIDATE_RUN" --name github-pages --dir /tmp/md-artifact 2>/dev/null; then
+              RESTORED="$CANDIDATE_RUN"
+              break
+            else
+              echo "  Artifact unavailable -- trying older run."
+            fi
+          done
+          if [ -z "$RESTORED" ]; then
+            echo "::error::No restorable market-data-snapshot artifact in last 10 completed runs."
             exit 1
           fi
-          echo "Downloading github-pages artifact from market-data run $LATEST_RUN_ID..."
-          rm -rf /tmp/md-artifact /tmp/md-extracted
-          gh run download "$LATEST_RUN_ID" --name github-pages --dir /tmp/md-artifact
+          echo "Using artifact from run $RESTORED."
           mkdir -p /tmp/md-extracted
           # The github-pages artifact is published as a single tarball
           # (artifact.tar) by actions/upload-pages-artifact@v3.
