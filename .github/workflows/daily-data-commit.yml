@@ -16,6 +16,10 @@ on:
 permissions:
   contents: write
   issues: write
+  actions: read   # W3.CF-BOT-V2 (2026-05-06): needed for `gh run download`
+                  # to bypass Cloudflare BFM (which blocks GH Actions runner
+                  # IPs via curl on the Free plan -- WAF custom rules cannot
+                  # skip BFM basic, only SBFM Pro).
 
 concurrency:
   group: daily-data-commit
@@ -32,48 +36,49 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Download latest snapshot from GitHub Pages
+      - name: Download latest top_movers.json from snapshot artifact
         id: download
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-          # Use the custom domain plurifin.app directly. The legacy URL
-          # https://<owner>.github.io/<repo> is now a 301 redirect to
-          # http://plurifin.app/, which from inside GitHub Actions runners
-          # sometimes returns 403 (Cloudflare anti-loop or runner IP filter)
-          # before the redirect can be followed. Hitting plurifin.app
-          # directly avoids the round-trip.
-          PRIMARY_URL="https://plurifin.app/top_movers.json"
-          FALLBACK_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/top_movers.json"
+          # W3.CF-BOT-V2 (2026-05-06): download via GitHub Actions artifact
+          # API instead of curl-from-Pages. Why: Cloudflare BFM (Free plan)
+          # blocks Azure runner IPs returning HTTP 403 even with a custom
+          # WAF skip rule, because BFM basic is a global toggle that custom
+          # rules cannot override on Free. The artifact API bypasses CF
+          # entirely. Same pattern as site-deploy.yml CC-P1-DB v2.
           mkdir -p dist/market-data
-          echo "Downloading top_movers.json from $PRIMARY_URL ..."
-          # Retry up to 3 times (60s, 120s, 240s) before giving up -- this
-          # distinguishes "not yet published" (transient) from a real outage.
-          MAX_ATTEMPTS=3
-          ATTEMPT=1
-          SUCCESS=0
-          while [ $ATTEMPT -le $MAX_ATTEMPTS ]; do
-            if curl -fsSL --max-time 120 "$PRIMARY_URL" -o dist/market-data/top_movers.json; then
-              SUCCESS=1
-              break
-            fi
-            # On retry, alternate to fallback so a transient custom-domain SSL
-            # issue doesn't kill the run when the legacy URL is reachable.
-            if curl -fsSL --max-time 120 "$FALLBACK_URL" -o dist/market-data/top_movers.json; then
-              SUCCESS=1
-              echo "Primary URL failed, fallback succeeded."
-              break
-            fi
-            if [ $ATTEMPT -lt $MAX_ATTEMPTS ]; then
-              SLEEP=$((60 * ATTEMPT))
-              echo "Attempt $ATTEMPT failed (both URLs), retrying in ${SLEEP}s..."
-              sleep $SLEEP
-            fi
-            ATTEMPT=$((ATTEMPT + 1))
-          done
-          if [ $SUCCESS -ne 1 ]; then
-            echo "::error::Pages artifact unreachable after $MAX_ATTEMPTS attempts (tried $PRIMARY_URL and $FALLBACK_URL)."
+          LATEST_RUN_ID=$(gh run list \
+            --workflow=market-data-snapshot.yml \
+            --status=success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+          if [ -z "$LATEST_RUN_ID" ] || [ "$LATEST_RUN_ID" = "null" ]; then
+            echo "::error::No successful market-data-snapshot run found."
             exit 1
           fi
+          echo "Downloading github-pages artifact from market-data run $LATEST_RUN_ID..."
+          rm -rf /tmp/md-artifact /tmp/md-extracted
+          gh run download "$LATEST_RUN_ID" --name github-pages --dir /tmp/md-artifact
+          mkdir -p /tmp/md-extracted
+          # The github-pages artifact is published as a single tarball
+          # (artifact.tar) by actions/upload-pages-artifact@v3.
+          if [ -f /tmp/md-artifact/artifact.tar ]; then
+            tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted
+          else
+            # Fallback: some runners extract directly without the tarball
+            # wrapper. Copy whatever is at the top level.
+            cp -r /tmp/md-artifact/. /tmp/md-extracted/
+          fi
+          if [ ! -f /tmp/md-extracted/top_movers.json ]; then
+            echo "::error::top_movers.json not found in artifact. Contents:"
+            ls -la /tmp/md-extracted/
+            exit 1
+          fi
+          cp /tmp/md-extracted/top_movers.json dist/market-data/top_movers.json
+          echo "Got top_movers.json: $(stat -c%s dist/market-data/top_movers.json) bytes"
           echo "skip=false" >> "$GITHUB_OUTPUT"
 
       - name: Extract as_of_date from snapshot
