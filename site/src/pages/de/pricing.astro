@@ -1,0 +1,176 @@
+---
+import de from '../../i18n/de';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'plaene', label: 'Plaene' },
+  { id: 'familie', label: 'Familienplan' },
+  { id: 'trial', label: '7-Tage-Test' },
+  { id: 'faq', label: 'Haeufige Fragen' },
+];
+---
+<LegalLayout t={de} lang="de" pageTitle="Preise und Abonnements" tocItems={toc}>
+  <p class="meta">Feste Preise fuer alle, immer. Keine "Early-Bird"-Aktionen, keine Segmentierung.</p>
+
+  <h2 id="plaene">Plaene zum Marktstart</h2>
+  <p>PluriFin bietet <strong>4 Plaene</strong> zum gleichen Preis fuer alle, heute und in
+  Zukunft. Falls wir die Preise spaeter erhoehen, behalten bestehende Abonnenten ihren
+  ursprunglichen Preis (Grandfathering Play Store). Lifetime-Optionen bleiben endgueltig.</p>
+
+  <div class="pricing-grid" role="list">
+    <div class="pricing-card" role="listitem">
+      <h3>Single Jaehrlich</h3>
+      <p class="price"><strong>0,99 EUR</strong> / Jahr</p>
+      <p class="cycle">Automatische jaehrliche Verlaengerung. Jederzeit kuendbar.</p>
+      <ul>
+        <li>1 Geraet</li>
+        <li>Unbegrenzter Broker-Import</li>
+        <li>KI-Analyse mit Gemini</li>
+        <li>Ziele und Rebalancing</li>
+        <li>Marktdaten in Echtzeit</li>
+      </ul>
+    </div>
+    <div class="pricing-card highlight" role="listitem">
+      <span class="badge">Bestes Angebot</span>
+      <h3>Single Lifetime</h3>
+      <p class="price"><strong>4,99 EUR</strong> Einmalzahlung</p>
+      <p class="cycle">Einmalige Zahlung. Lebenslanger Zugriff auf diesem Google-Konto.</p>
+      <ul>
+        <li>1 Geraet</li>
+        <li>Alles inklusive, fuer immer</li>
+        <li>Entspricht ~5 Jahren des Jahresplans</li>
+      </ul>
+    </div>
+    <div class="pricing-card" role="listitem">
+      <h3>Familie Jaehrlich</h3>
+      <p class="price"><strong>1,99 EUR</strong> / Jahr</p>
+      <p class="cycle">Automatische jaehrliche Verlaengerung. Jederzeit kuendbar.</p>
+      <ul>
+        <li>Bis zu 5 Google-Family-Mitglieder</li>
+        <li>Import, KI, Ziele und Markt fuer alle</li>
+      </ul>
+    </div>
+    <div class="pricing-card highlight" role="listitem">
+      <span class="badge">Bestes Angebot</span>
+      <h3>Familie Lifetime</h3>
+      <p class="price"><strong>9,99 EUR</strong> Einmalzahlung</p>
+      <p class="cycle">Einmalige Zahlung. Lebenslanger Zugriff fuer die Family-Gruppe.</p>
+      <ul>
+        <li>Bis zu 5 Google-Family-Mitglieder</li>
+        <li>Alles inklusive, fuer immer</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 id="familie">So funktioniert der Familienplan</h2>
+  <p>Die <strong>Familien</strong>-Plaene nutzen <a href="https://families.google.com/" rel="noopener noreferrer" target="_blank">Google Family</a>,
+  um das Abo mit bis zu 5 Mitgliedern zu teilen. Der Organisator zahlt; die anderen Mitglieder
+  schalten den Zugriff ueber ihr eigenes Google-Konto ohne Zusatzkosten frei. Die Verwaltung
+  des Sharings uebernimmt vollstaendig Google, nicht PluriFin.</p>
+
+  <h2 id="trial">7-Tage-Testversion</h2>
+  <p>Jeder Android-Nutzer erhaelt <strong>7 Tage Vollversion</strong> beim ersten Start,
+  ohne Kreditkarte. Am 8. Tag wechselt die App in den Free-Modus (5 Positionen, kein Import,
+  keine KI, keine Ziele). Waehlt einen der 4 Plaene oben, um die volle Erfahrung zu behalten.</p>
+
+  <div class="callout">
+    <strong>Rueckerstattung:</strong> alle Play-Store-Kaeufe sind in 48 Stunden direkt
+    ueber Play Store rueckerstattbar. Lifetime-Optionen werden als nicht konsumierbare
+    In-App-Produkte behandelt: 48h Play-Rueckerstattungsfenster, danach finaler Kauf.
+  </div>
+
+  <h2 id="faq">Haeufige Fragen</h2>
+
+  <h3>Warum so guenstig?</h3>
+  <p>Die App ist ein persoenliches Projekt eines einzelnen Entwicklers. Keine Investoren,
+  kein VC, kein Churn-Druck. Ziel ist, die einmaligen Kosten von Play Console (25 USD) und
+  das Worker-Hosting (kostenloser Cloudflare-Tarif) abzudecken -- nicht ARPU zu maximieren.</p>
+
+  <h3>Lifetime versus Jaehrlich?</h3>
+  <p>Single Lifetime (4,99 EUR) entspricht etwa 5 Jahren Single Jaehrlich (0,99 EUR/Jahr)
+  und beinhaltet jede zukuenftige Major Release ohne Aufpreis. Familie Lifetime (9,99 EUR)
+  gilt analog fuer den Familienplan.</p>
+
+  <h3>Was passiert, wenn die App verschwindet?</h3>
+  <p>Eure Daten leben <strong>auf eurem Geraet</strong>: AES-256 verschluesselte Hive-Boxen
+  im privaten App-Speicher, nicht in der PluriFin-Cloud. Der GDPR-Datenexport (Art. 20)
+  liefert jederzeit einen einzelnen portablen JSON. Selbst wenn PluriFin morgen schliesst,
+  bleiben eure Daten bei euch.</p>
+
+  <h3>Wie verwalte ich mein Abonnement?</h3>
+  <p>Direkt ueber <a href="https://play.google.com/store/account/subscriptions" rel="noopener noreferrer" target="_blank">Play Store - Abonnements</a>.
+  Sofortige Kuendigung, der Zugang bleibt bis zum Ende der bereits bezahlten Periode aktiv.</p>
+
+  <h3>Kann ich von Jaehrlich auf Lifetime wechseln?</h3>
+  <p>Ja: ihr kauft Lifetime; das Jaehrliche wird zum naechsten Verlaengerungstermin
+  automatisch storniert und der Lifetime-Zugang startet sofort.</p>
+
+  <h3>Funktioniert das offline?</h3>
+  <p>Ja. Live-Marktquotes brauchen Internet, aber alles andere (Positionen, Ziele,
+  Historie) ist offline-first.</p>
+
+  <h3>Web vs. Android-App: Unterschiede?</h3>
+  <p>Die <a href="/app/">Webapp</a> ist eine kostenlose Demo: max. 5 manuelle Positionen,
+  kein Import, keine KI, keine Ziele, woechentliche Marktdaten. Die Android-App schaltet
+  alle Funktionen frei. iOS folgt in Phase 2, sobald die App kommerziell tragfaehig ist.</p>
+
+  <h3>Kann ich PluriFin ohne Konto nutzen?</h3>
+  <p>Ja. Keine Registrierung erforderlich. Trial und Abonnement sind an euer Google-Play-Konto
+  gebunden, nicht an ein PluriFin-Konto.</p>
+</LegalLayout>
+
+<style>
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+    margin: 24px 0 32px;
+  }
+  .pricing-card {
+    background: rgba(0,191,165,.04);
+    border: 1px solid rgba(0,191,165,.16);
+    border-radius: 12px;
+    padding: 20px 18px;
+    position: relative;
+    list-style: none;
+  }
+  .pricing-card.highlight {
+    background: linear-gradient(180deg, rgba(0,191,165,.10) 0%, rgba(0,191,165,.04) 100%);
+    border-color: rgba(0,191,165,.36);
+  }
+  .pricing-card .badge {
+    position: absolute;
+    top: -10px;
+    right: 12px;
+    background: var(--accent, #00BFA5);
+    color: #fff;
+    border-radius: 999px;
+    padding: 4px 10px;
+    font-size: 11px;
+    letter-spacing: .04em;
+    font-weight: 600;
+  }
+  .pricing-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .pricing-card .price {
+    font-size: 24px;
+    margin: 4px 0 4px;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .pricing-card .cycle {
+    font-size: 13px;
+    color: var(--text-3);
+    margin: 0 0 12px;
+  }
+  .pricing-card ul {
+    margin: 0;
+    padding-left: 18px;
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--text-2);
+  }
+</style>

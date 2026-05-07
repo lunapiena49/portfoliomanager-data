@@ -1,0 +1,96 @@
+---
+import de from '../../i18n/de';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'intro', label: 'Einfuehrung' },
+  { id: 'fakten', label: 'Wichtige Fakten' },
+  { id: 'copy', label: 'Boilerplate-Text' },
+  { id: 'assets', label: 'Visuelle Assets' },
+  { id: 'kontakt', label: 'Pressekontakt' },
+];
+---
+<LegalLayout t={de} lang="de" pageTitle="PluriFin Pressekit" tocItems={toc}>
+  <p class="meta">Ressourcen fuer Journalisten, Blogger und Content-Creator. Alle Assets
+  sind frei nutzbar in redaktionellen Beitraegen ueber PluriFin.</p>
+
+  <h2 id="intro">Einfuehrung</h2>
+  <p><strong>PluriFin</strong> ist eine Android-App zur Verwaltung von Multi-Broker-,
+  Multi-Waehrungs- und Multi-Asset-Class-Investmentportfolios mit optionaler KI-Analyse.
+  Entwickelt und gepflegt als persoenliches Projekt von <strong>Filippo Salemi</strong>,
+  einem Indie-Entwickler mit Sitz in Italien. Keine Investoren, kein VC, keine Vermittler.</p>
+
+  <h2 id="fakten">Wichtige Fakten</h2>
+  <ul>
+    <li><strong>Launch:</strong> Q2 2026 im Google Play Store (Android)</li>
+    <li><strong>Plattformen v1.0:</strong> Android (native App) + Web (kostenlose Demo)</li>
+    <li><strong>Plattformen Phase 2:</strong> iOS (nach Umsatz)</li>
+    <li><strong>Modell:</strong> 4 Stufen (Single/Familie x Jaehrlich/Lifetime), 0,99 - 9,99 EUR</li>
+    <li><strong>Test:</strong> 7 Tage kostenlos auf Android, keine Karte erforderlich</li>
+    <li><strong>Datenschutz:</strong> Daten auf dem Geraet (Hive AES-256), keine PluriFin-Cloud-Pflicht</li>
+    <li><strong>Unterstuetzte Broker:</strong> 12 native (Interactive Brokers, Trading 212, Trade Republic,
+      Fineco, Directa, usw.) + generischer CSV-Parser</li>
+    <li><strong>KI-Anbieter:</strong> Google Gemini (Nutzer-API-Schluessel, optional)</li>
+    <li><strong>Marktdaten:</strong> EODHD + FMP, oeffentlicher Snapshot taeglich aktualisiert</li>
+    <li><strong>Webseite:</strong> <a href="https://plurifin.app/">https://plurifin.app/</a></li>
+    <li><strong>Webapp-Demo:</strong> <a href="https://plurifin.app/app/">https://plurifin.app/app/</a></li>
+    <li><strong>Oeffentliches Repo (Daten + Seite):</strong> <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a></li>
+  </ul>
+
+  <h2 id="copy">Boilerplate-Text (frei zur Wiederverwendung)</h2>
+
+  <h3>100-Zeichen-Version</h3>
+  <p class="copy"><em>"PluriFin: Multi-Broker-Portfolio-Manager, privacy-first, ab 0,99 EUR/Jahr."</em></p>
+
+  <h3>500-Zeichen-Version</h3>
+  <p class="copy"><em>"PluriFin ist eine Android-App fuer Privatanleger, die Multi-Broker- und
+  Multi-Waehrungs-Portfolios lokal verwaltet, ohne verpflichtende Cloud. Importiert CSV/PDF
+  von 12 nativen Brokern, verfolgt langfristige Ziele, analysiert das Portfolio mit Google
+  Gemini (optional) und gleicht die Asset-Allokation neu aus. 7-Tage-Test gratis, dann
+  0,99 EUR/Jahr (Single) oder 4,99 EUR Einmalzahlung (Lifetime). Kostenlose Webapp online
+  verfuegbar."</em></p>
+
+  <h3>1000-Zeichen-Version</h3>
+  <p class="copy"><em>"PluriFin ist ein persoenliches Projekt von Filippo Salemi -- Indie-Entwickler,
+  Einzelunternehmer mit Sitz in Italien -- entstanden aus dem Beduerfnis, ein
+  Investmentportfolio ueber mehrere Broker, Waehrungen und Asset-Klassen hinweg praezise
+  zu verfolgen.</em></p>
+  <p class="copy"><em>Die App laeuft nativ auf Android, mit einer Demo-Webapp, die ueber den Browser
+  zugaenglich ist. Die Daten leben auf dem Geraet des Nutzers in AES-256 verschluesselten
+  Hive-Boxen; der GDPR-Export (Art. 20) produziert jederzeit einen einzelnen portablen
+  JSON. Kein Vendor-Lock-in, keine PluriFin-Cloud-Pflicht. Der KI-Anbieter (Google Gemini)
+  und die Marktdaten-APIs (EODHD, FMP) sind alle Opt-in und nutzen Nutzerschluessel.</em></p>
+  <p class="copy"><em>Geschaeftsmodell 4 Stufen (Single/Familie x Jaehrlich/Lifetime), Preise 0,99 - 9,99 EUR.
+  7-Tage-Test gratis, ohne Karte. iOS, Apple Pay und Yubikey folgen in Phase 2, sobald
+  die Umsatzschwellen erreicht sind. Seite: plurifin.app -- oeffentliches Repo (Daten +
+  Seite): github.com/lunapiena49/portfoliomanager-data."</em></p>
+
+  <h2 id="assets">Visuelle Assets</h2>
+  <ul>
+    <li>SVG-Logo: <code>/assets/favicon.svg</code> (in hochaufloesendem PNG fuer das Play-Store-Branding wiederverwendet)</li>
+    <li>Open-Graph-Karte 1200x630: <code>/assets/og-image.png</code></li>
+    <li>Play-Store-Screenshots: 5 Phone + 3 Tablet x 6 Sprachen (in Arbeit, siehe Issue-Tracker)</li>
+    <li>Launcher-Icon 512x512: <code>/assets/icon-512.png</code> (wird mit dem APK-Release-Build deployed)</li>
+  </ul>
+
+  <p class="callout">
+    <strong>Spezifische Assets benoetigt?</strong> Mail an <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>
+    mit Betreff "press kit asset request". Antwort innerhalb von 48 Werktag-Stunden.
+  </p>
+
+  <h2 id="kontakt">Pressekontakt</h2>
+  <p>Email: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">lunapiena49/portfoliomanager-data</a></p>
+  <p>Antwortzeit: 24-48 Werktag-Stunden.</p>
+</LegalLayout>
+
+<style>
+  .copy {
+    font-style: italic;
+    background: rgba(0,191,165,.06);
+    border-left: 3px solid var(--accent, #00BFA5);
+    padding: 12px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 8px 0 16px;
+  }
+</style>
