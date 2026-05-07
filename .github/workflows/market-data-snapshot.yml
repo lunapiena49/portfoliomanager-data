@@ -38,11 +38,61 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Restore previous market_history.db from last success artifact
+        # W3.CF-BOT-V2 (2026-05-07): bypass Cloudflare BFM (Free plan blocks
+        # GH runner IPs on plurifin.app, so the script's HTTP download of
+        # market_history.db.zip from Pages 403s -> falls back to "fresh
+        # start" -> burns 100k EODHD calls / day in 365-day rebuild).
+        # Restore the .db locally before the Python step. The script's
+        # fetch_history_db() function early-returns if db_path exists
+        # (build_daily_market_snapshot.py line 749), so the HTTP download
+        # is skipped and backfill is incremental (~8k calls/day).
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p dist/market-data
+          LATEST_RUN_ID=$(gh run list \
+            --workflow=market-data-snapshot.yml \
+            --status=success \
+            --limit 1 \
+            --json databaseId \
+            --jq '.[0].databaseId')
+          if [ -z "$LATEST_RUN_ID" ] || [ "$LATEST_RUN_ID" = "null" ]; then
+            echo "::warning::No previous successful run -- starting fresh (~100k EODHD calls)."
+            exit 0
+          fi
+          echo "Restoring DB from previous run $LATEST_RUN_ID..."
+          rm -rf /tmp/md-prev /tmp/md-prev-extracted
+          if ! gh run download "$LATEST_RUN_ID" --name github-pages --dir /tmp/md-prev; then
+            echo "::warning::Artifact unavailable (>14d retention?) -- starting fresh."
+            exit 0
+          fi
+          mkdir -p /tmp/md-prev-extracted
+          if [ -f /tmp/md-prev/artifact.tar ]; then
+            tar -xf /tmp/md-prev/artifact.tar -C /tmp/md-prev-extracted
+          else
+            cp -r /tmp/md-prev/. /tmp/md-prev-extracted/
+          fi
+          if [ -f /tmp/md-prev-extracted/market_history.db.zip ]; then
+            cd /tmp/md-prev-extracted
+            unzip -o market_history.db.zip -d "$GITHUB_WORKSPACE/dist/market-data/" >/dev/null
+            cd "$GITHUB_WORKSPACE"
+            echo "DB restored: $(stat -c%s dist/market-data/market_history.db) bytes"
+          else
+            echo "::warning::market_history.db.zip not in artifact -- starting fresh."
+            ls -la /tmp/md-prev-extracted/
+          fi
+
       - name: Build daily market snapshot
         env:
           EODHD_API_KEY: ${{ secrets.EODHD_API_KEY }}
           MARKETS: US,LSE,XETRA,PA,TO,HK,AU,NSE
         run: |
+          # HISTORY_URL is kept as fallback for fresh installs / lost
+          # artifacts. Normally the previous step has already populated
+          # dist/market-data/market_history.db, so fetch_history_db()
+          # short-circuits without the HTTP request.
           HISTORY_URL="https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/market_history.db.zip"
           # NOTE: --min-dollar-volume / --min-price are the legacy raw floor.
           # Investor-grade per-timeframe filters (scaled liquidity, anti-split
