@@ -80,7 +80,12 @@ jobs:
           # gives access to ~10 most recent runs of any conclusion, which
           # extends the chain duration well beyond 14d retention of any
           # single artifact (each run uploads with its own 14d timer).
-          # Pick the FIRST run whose artifact downloads successfully.
+          # CRITICAL: validate that the candidate artifact actually CONTAINS
+          # market_history.db.zip before accepting it. Without this check,
+          # an "early-abort" run (e.g. safety check fired before any DB was
+          # produced) could upload an empty artifact that wins the iteration
+          # but contains no DB -- leading to the very fresh-bootstrap we're
+          # trying to prevent.
           RESTORED=""
           for CANDIDATE_RUN in $(gh run list \
               --workflow=market-data-snapshot.yml \
@@ -90,33 +95,50 @@ jobs:
               --jq '.[].databaseId'); do
             echo "Trying artifact from run $CANDIDATE_RUN..."
             rm -rf /tmp/md-prev /tmp/md-prev-extracted
-            if gh run download "$CANDIDATE_RUN" --name github-pages --dir /tmp/md-prev 2>/dev/null; then
-              RESTORED="$CANDIDATE_RUN"
-              break
-            else
-              echo "  Artifact unavailable (expired or never uploaded) -- trying older run."
+            mkdir -p /tmp/md-prev-extracted
+            if ! gh run download "$CANDIDATE_RUN" --name github-pages --dir /tmp/md-prev 2>/dev/null; then
+              echo "  Artifact download failed (expired or never uploaded) -- trying older run."
+              continue
             fi
+            # Extract and verify market_history.db.zip is present.
+            if [ -f /tmp/md-prev/artifact.tar ]; then
+              tar -xf /tmp/md-prev/artifact.tar -C /tmp/md-prev-extracted
+            else
+              cp -r /tmp/md-prev/. /tmp/md-prev-extracted/
+            fi
+            if [ ! -f /tmp/md-prev-extracted/market_history.db.zip ]; then
+              echo "  Artifact present but missing market_history.db.zip -- trying older run."
+              ls -la /tmp/md-prev-extracted/ 2>/dev/null || true
+              continue
+            fi
+            # Sanity check: zip must be reasonably sized (>= 100KB).
+            ZIP_SIZE=$(stat -c%s /tmp/md-prev-extracted/market_history.db.zip)
+            if [ "$ZIP_SIZE" -lt 102400 ]; then
+              echo "  Artifact .db.zip suspiciously small ($ZIP_SIZE bytes) -- trying older run."
+              continue
+            fi
+            RESTORED="$CANDIDATE_RUN"
+            break
           done
           if [ -z "$RESTORED" ]; then
-            echo "::warning::No restorable artifact in last 10 completed runs -- starting fresh (~100k EODHD calls)."
+            echo "::warning::No restorable artifact (with valid market_history.db.zip) in last 10 completed runs."
+            echo "::warning::Build step will fail safety check unless --allow-fresh-bootstrap is added."
             exit 0
           fi
-          echo "Using artifact from run $RESTORED."
-          mkdir -p /tmp/md-prev-extracted
-          if [ -f /tmp/md-prev/artifact.tar ]; then
-            tar -xf /tmp/md-prev/artifact.tar -C /tmp/md-prev-extracted
-          else
-            cp -r /tmp/md-prev/. /tmp/md-prev-extracted/
-          fi
-          if [ -f /tmp/md-prev-extracted/market_history.db.zip ]; then
-            cd /tmp/md-prev-extracted
-            unzip -o market_history.db.zip -d "$GITHUB_WORKSPACE/dist/market-data/" >/dev/null
-            cd "$GITHUB_WORKSPACE"
-            echo "DB restored: $(stat -c%s dist/market-data/market_history.db) bytes"
-          else
-            echo "::warning::market_history.db.zip not in artifact -- starting fresh."
-            ls -la /tmp/md-prev-extracted/
-          fi
+          echo "Using artifact from run $RESTORED ($ZIP_SIZE bytes db.zip)."
+          cd /tmp/md-prev-extracted
+          unzip -o market_history.db.zip -d "$GITHUB_WORKSPACE/dist/market-data/" >/dev/null
+          cd "$GITHUB_WORKSPACE"
+          # Also restore top_movers.json + prices_index.json if present (so
+          # if today's build fails before regenerating them, the previous
+          # values are preserved on Pages).
+          for FILE in top_movers.json prices_index.json; do
+            if [ -f "/tmp/md-prev-extracted/$FILE" ]; then
+              cp "/tmp/md-prev-extracted/$FILE" "$GITHUB_WORKSPACE/dist/market-data/$FILE"
+            fi
+          done
+          echo "DB restored: $(stat -c%s dist/market-data/market_history.db) bytes"
+          ls -lh dist/market-data/ | head -10
 
       - name: Build daily market snapshot
         env:

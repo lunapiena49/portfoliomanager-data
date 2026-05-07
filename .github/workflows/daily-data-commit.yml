@@ -57,6 +57,10 @@ jobs:
           # rules cannot override on Free. The artifact API bypasses CF
           # entirely. Same pattern as site-deploy.yml CC-P1-DB v2.
           mkdir -p dist/market-data
+          # CRITICAL: validate the candidate artifact CONTAINS top_movers.json
+          # before accepting it. An "early-abort" market-data-snapshot run
+          # (safety check fired before producing top_movers.json) could
+          # upload an artifact missing this file -- skip those.
           RESTORED=""
           for CANDIDATE_RUN in $(gh run list \
               --workflow=market-data-snapshot.yml \
@@ -66,33 +70,34 @@ jobs:
               --jq '.[].databaseId'); do
             echo "Trying artifact from run $CANDIDATE_RUN..."
             rm -rf /tmp/md-artifact /tmp/md-extracted
-            if gh run download "$CANDIDATE_RUN" --name github-pages --dir /tmp/md-artifact 2>/dev/null; then
-              RESTORED="$CANDIDATE_RUN"
-              break
-            else
-              echo "  Artifact unavailable -- trying older run."
+            mkdir -p /tmp/md-extracted
+            if ! gh run download "$CANDIDATE_RUN" --name github-pages --dir /tmp/md-artifact 2>/dev/null; then
+              echo "  Download failed -- trying older run."
+              continue
             fi
+            if [ -f /tmp/md-artifact/artifact.tar ]; then
+              tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted
+            else
+              cp -r /tmp/md-artifact/. /tmp/md-extracted/
+            fi
+            if [ ! -f /tmp/md-extracted/top_movers.json ]; then
+              echo "  Artifact missing top_movers.json -- trying older run."
+              continue
+            fi
+            # Sanity check: top_movers.json must be reasonably sized (>= 1KB).
+            JSON_SIZE=$(stat -c%s /tmp/md-extracted/top_movers.json)
+            if [ "$JSON_SIZE" -lt 1024 ]; then
+              echo "  top_movers.json suspiciously small ($JSON_SIZE bytes) -- trying older run."
+              continue
+            fi
+            RESTORED="$CANDIDATE_RUN"
+            break
           done
           if [ -z "$RESTORED" ]; then
-            echo "::error::No restorable market-data-snapshot artifact in last 10 completed runs."
+            echo "::error::No restorable market-data-snapshot artifact (with valid top_movers.json) in last 10 completed runs."
             exit 1
           fi
-          echo "Using artifact from run $RESTORED."
-          mkdir -p /tmp/md-extracted
-          # The github-pages artifact is published as a single tarball
-          # (artifact.tar) by actions/upload-pages-artifact@v3.
-          if [ -f /tmp/md-artifact/artifact.tar ]; then
-            tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted
-          else
-            # Fallback: some runners extract directly without the tarball
-            # wrapper. Copy whatever is at the top level.
-            cp -r /tmp/md-artifact/. /tmp/md-extracted/
-          fi
-          if [ ! -f /tmp/md-extracted/top_movers.json ]; then
-            echo "::error::top_movers.json not found in artifact. Contents:"
-            ls -la /tmp/md-extracted/
-            exit 1
-          fi
+          echo "Using artifact from run $RESTORED ($JSON_SIZE bytes)."
           cp /tmp/md-extracted/top_movers.json dist/market-data/top_movers.json
           echo "Got top_movers.json: $(stat -c%s dist/market-data/top_movers.json) bytes"
           echo "skip=false" >> "$GITHUB_OUTPUT"

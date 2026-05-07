@@ -76,6 +76,9 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p dist/market-data
+          # CRITICAL: validate the candidate artifact CONTAINS the expected
+          # files before accepting it. An "early-abort" run could upload
+          # an artifact missing market_history.db.zip -- skip those.
           RESTORED=""
           for CANDIDATE_RUN in $(gh run list \
               --repo "${{ github.repository }}" \
@@ -85,28 +88,45 @@ jobs:
               --json databaseId \
               --jq '.[].databaseId' 2>/dev/null); do
             echo "Trying artifact from run $CANDIDATE_RUN..."
-            rm -rf /tmp/md-artifact
-            if gh run download "$CANDIDATE_RUN" \
+            rm -rf /tmp/md-artifact /tmp/md-extracted
+            mkdir -p /tmp/md-extracted
+            if ! gh run download "$CANDIDATE_RUN" \
                 --repo "${{ github.repository }}" \
                 --name github-pages \
                 --dir /tmp/md-artifact 2>/dev/null; then
-              RESTORED="$CANDIDATE_RUN"
-              break
-            else
-              echo "  Artifact unavailable -- trying older run."
+              echo "  Download failed -- trying older run."
+              continue
             fi
+            if [ ! -f /tmp/md-artifact/artifact.tar ]; then
+              echo "  artifact.tar missing in download -- trying older run."
+              ls -la /tmp/md-artifact/ 2>/dev/null || true
+              continue
+            fi
+            tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted
+            # site-deploy needs at least top_movers.json (HTML site references
+            # it). market_history.db.zip + prices_index.json are bonus (used
+            # by the app webapp). Validate top_movers.json presence.
+            if [ ! -f /tmp/md-extracted/top_movers.json ]; then
+              echo "  Artifact missing top_movers.json -- trying older run."
+              continue
+            fi
+            JSON_SIZE=$(stat -c%s /tmp/md-extracted/top_movers.json)
+            if [ "$JSON_SIZE" -lt 1024 ]; then
+              echo "  top_movers.json suspiciously small ($JSON_SIZE bytes) -- trying older run."
+              continue
+            fi
+            RESTORED="$CANDIDATE_RUN"
+            break
           done
           if [ -z "$RESTORED" ]; then
-            echo "WARN: no restorable market-data-snapshot artifact in last 10 completed runs"
+            echo "WARN: no restorable market-data-snapshot artifact (with valid top_movers.json) in last 10 completed runs"
             exit 0
           fi
           echo "Restoring from market-data-snapshot run #$RESTORED"
-          if [ ! -f /tmp/md-artifact/artifact.tar ]; then
-            echo "WARN: artifact.tar missing in download (run #$RESTORED)"
-            ls -la /tmp/md-artifact/ || true
-            exit 0
-          fi
-          tar -xf /tmp/md-artifact/artifact.tar -C dist/market-data/
+          # Copy all market data files (top_movers.json, prices_index.json,
+          # market_history.db.zip if present) from the validated artifact
+          # into dist/market-data/ for the merge step downstream.
+          cp -r /tmp/md-extracted/. dist/market-data/
           echo "OK: market-data binaries restored"
           ls -lh dist/market-data/
 
