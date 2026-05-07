@@ -102,7 +102,11 @@ jobs:
               ls -la /tmp/md-artifact/ 2>/dev/null || true
               continue
             fi
-            tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted
+            # Wrap tar in conditional to bypass `set -e` on corrupt artifact.
+            if ! tar -xf /tmp/md-artifact/artifact.tar -C /tmp/md-extracted 2>/dev/null; then
+              echo "  tar extraction failed (corrupt artifact?) -- trying older run."
+              continue
+            fi
             # site-deploy needs at least top_movers.json (HTML site references
             # it). market_history.db.zip + prices_index.json are bonus (used
             # by the app webapp). Validate top_movers.json presence.
@@ -110,9 +114,14 @@ jobs:
               echo "  Artifact missing top_movers.json -- trying older run."
               continue
             fi
-            JSON_SIZE=$(stat -c%s /tmp/md-extracted/top_movers.json)
+            JSON_SIZE=$(stat -c%s /tmp/md-extracted/top_movers.json 2>/dev/null || echo 0)
             if [ "$JSON_SIZE" -lt 1024 ]; then
               echo "  top_movers.json suspiciously small ($JSON_SIZE bytes) -- trying older run."
+              continue
+            fi
+            # Validate JSON parses correctly + has as_of_date.
+            if ! python3 -c "import json; d=json.load(open('/tmp/md-extracted/top_movers.json')); assert d.get('as_of_date'), 'no as_of_date'" 2>/dev/null; then
+              echo "  top_movers.json invalid JSON or missing as_of_date -- trying older run."
               continue
             fi
             RESTORED="$CANDIDATE_RUN"

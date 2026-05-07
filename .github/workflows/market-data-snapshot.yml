@@ -100,11 +100,19 @@ jobs:
               echo "  Artifact download failed (expired or never uploaded) -- trying older run."
               continue
             fi
-            # Extract and verify market_history.db.zip is present.
+            # Extract and verify market_history.db.zip is present. Wrap tar
+            # in `||` to bypass `set -e` -- a corrupt artifact tarball must
+            # not abort iteration, we want to try the next candidate.
             if [ -f /tmp/md-prev/artifact.tar ]; then
-              tar -xf /tmp/md-prev/artifact.tar -C /tmp/md-prev-extracted
+              if ! tar -xf /tmp/md-prev/artifact.tar -C /tmp/md-prev-extracted 2>/dev/null; then
+                echo "  tar extraction failed (corrupt artifact?) -- trying older run."
+                continue
+              fi
             else
-              cp -r /tmp/md-prev/. /tmp/md-prev-extracted/
+              cp -r /tmp/md-prev/. /tmp/md-prev-extracted/ 2>/dev/null || {
+                echo "  cp failed -- trying older run."
+                continue
+              }
             fi
             if [ ! -f /tmp/md-prev-extracted/market_history.db.zip ]; then
               echo "  Artifact present but missing market_history.db.zip -- trying older run."
@@ -112,9 +120,15 @@ jobs:
               continue
             fi
             # Sanity check: zip must be reasonably sized (>= 100KB).
-            ZIP_SIZE=$(stat -c%s /tmp/md-prev-extracted/market_history.db.zip)
+            ZIP_SIZE=$(stat -c%s /tmp/md-prev-extracted/market_history.db.zip 2>/dev/null || echo 0)
             if [ "$ZIP_SIZE" -lt 102400 ]; then
               echo "  Artifact .db.zip suspiciously small ($ZIP_SIZE bytes) -- trying older run."
+              continue
+            fi
+            # Final integrity check: try to unzip the .db file. If unzip
+            # fails (corrupt zip), skip this candidate.
+            if ! unzip -t /tmp/md-prev-extracted/market_history.db.zip >/dev/null 2>&1; then
+              echo "  market_history.db.zip integrity check failed -- trying older run."
               continue
             fi
             RESTORED="$CANDIDATE_RUN"
