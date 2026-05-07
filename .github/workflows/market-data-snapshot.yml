@@ -5,6 +5,15 @@ on:
   push:
     branches:
       - main
+    # W3.CF-BOT-V4 (2026-05-08): paths filter to prevent spurious triggers
+    # from app/site/legal/docs commits. Without this filter, ANY push to main
+    # triggered a full market-data-snapshot run, and combined with
+    # cancel-in-progress: true (now false, see below), 5 pushes in 30min on
+    # 2026-05-07 burned ~100k EODHD calls across cancelled mid-runs.
+    # Only re-trigger when EODHD pipeline code or this workflow changes.
+    paths:
+      - 'scripts/eodhd/**'
+      - '.github/workflows/market-data-snapshot.yml'
   schedule:
     # Daily after US market close (UTC-based schedule)
     - cron: "35 22 * * *"
@@ -18,7 +27,12 @@ permissions:
 
 concurrency:
   group: market-data-pages
-  cancel-in-progress: true
+  # W3.CF-BOT-V4 (2026-05-08): switched from cancel-in-progress: true ->
+  # false. Cancellation mid-run does NOT refund EODHD API calls already
+  # made by the cancelled run (HTTP requests are physical). Queueing
+  # rather than cancelling means at most ONE run consumes quota at a time
+  # and consecutive runs use the v3 restore (DB from previous artifact).
+  cancel-in-progress: false
 
 jobs:
   build:
@@ -39,14 +53,22 @@ jobs:
           python-version: "3.11"
 
       - name: Restore previous market_history.db from last success artifact
-        # W3.CF-BOT-V2 (2026-05-07): bypass Cloudflare BFM (Free plan blocks
+        # W3.CF-BOT-V3 (2026-05-07): bypass Cloudflare BFM (Free plan blocks
         # GH runner IPs on plurifin.app, so the script's HTTP download of
         # market_history.db.zip from Pages 403s -> falls back to "fresh
         # start" -> burns 100k EODHD calls / day in 365-day rebuild).
-        # Restore the .db locally before the Python step. The script's
-        # fetch_history_db() function early-returns if db_path exists
-        # (build_daily_market_snapshot.py line 749), so the HTTP download
-        # is skipped and backfill is incremental (~8k calls/day).
+        # Restore the .db locally before the Python step via gh artifact API
+        # (bypasses Cloudflare entirely). The script's fetch_history_db()
+        # function early-returns if db_path exists (line 749 of
+        # build_daily_market_snapshot.py: `if not url or db_path.exists():
+        # return`), so the HTTP download is skipped and backfill is
+        # incremental (~800 calls/day for 8 markets bulk vs 100k bootstrap).
+        #
+        # CRITICAL: this step + paths filter on push trigger (V4) +
+        # cancel-in-progress: false (V4) + retention-days: 14 on the
+        # upload step are the FOUR-LAYER DEFENSE against the
+        # "DB-restart-from-zero burning 100k EODHD/day" failure mode.
+        # See master plan W3.CF-BOT-V4 for incident timeline 2026-05-05/06/07.
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -127,6 +149,15 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/market-data
+          # W3.CF-BOT-V4 (2026-05-08): retention extended from default 1 day
+          # to 14 days. The v3 restore step depends on a previous successful
+          # run's artifact existing. If runs fail for >1 day (e.g. EODHD
+          # outage, quota exhaustion incident, infra issue) the default 1d
+          # retention purges the only known-good DB and the next run is
+          # forced into fresh bootstrap (~100k EODHD calls). 14d gives a
+          # 2-week safety window during which the previous DB can be
+          # recovered without burning quota.
+          retention-days: 14
 
   deploy:
     runs-on: ubuntu-latest
