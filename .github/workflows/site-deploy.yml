@@ -141,6 +141,14 @@ jobs:
               if [ -f "$f" ]; then cp "$f" "site/dist/market-data/$(basename "$f")"; fi
             done
           fi
+          # Flutter webapp under app/ -- pushed by app-web-deploy.yml from
+          # the private app repo. Without this merge, plurifin.app/app/ -> 404
+          # because Astro's site/dist/ doesn't include it.
+          if [ -d app ]; then
+            mkdir -p site/dist/app
+            cp -r app/. site/dist/app/
+            echo "Webapp merged: $(ls site/dist/app/ | head -5)"
+          fi
           ls -la site/dist/ | head -50
           du -sh site/dist/ || true
 
