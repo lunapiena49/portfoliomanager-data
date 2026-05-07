@@ -1,0 +1,1049 @@
+{
+  "app": {
+    "name": "Portfolio Manager"
+  },
+  "error": {
+    "title": "Error",
+    "page_not_found": "Pagina no encontrada",
+    "go_home": "Ir al inicio",
+    "no_portfolio_loaded": "Ningun portfolio cargado",
+    "no_portfolio_loaded_cta": "Importa un portfolio para continuar"
+  },
+  "common": {
+    "loading": "Cargando...",
+    "error": "Error",
+    "retry": "Reintentar",
+    "cancel": "Cancelar",
+    "confirm": "Confirmar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Agregar",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "settings": "Ajustes",
+    "help": "Ayuda",
+    "back": "Atras",
+    "next": "Siguiente",
+    "done": "Hecho",
+    "skip": "Omitir",
+    "close": "Cerrar",
+    "dismiss": "Cerrar",
+    "yes": "Si",
+    "no": "No",
+    "ok": "OK",
+    "clear": "Borrar",
+    "delete_confirm": {
+      "title": "Confirmar eliminacion",
+      "message": "Eliminar {item}? Esta accion no se puede deshacer.",
+      "confirm": "Eliminar"
+    }
+  },
+  "onboarding": {
+    "welcome": {
+      "title": "Bienvenido a Portfolio Manager",
+      "subtitle": "Un espacio profesional multiplataforma para inteligencia de cartera"
+    },
+    "features": {
+      "setup": {
+        "title": "Configura tu espacio de trabajo",
+        "description": "Elige idioma, moneda base y claves API opcionales. Tus ajustes se aplican al instante en disenos de escritorio y movil."
+      },
+      "import": {
+        "title": "Importa desde estados del broker",
+        "description": "Importa archivos CSV/PDF de brokers compatibles, revisa filas parseadas y gestiona duplicados con estrategias de mezcla antes de guardar."
+      },
+      "analysis": {
+        "title": "Analisis IA y chat",
+        "description": "Usa analisis con Gemini, haz preguntas personalizadas de cartera y genera insights estructurados sobre riesgo, asignacion y rendimiento."
+      },
+      "tracking": {
+        "title": "Precios en vivo y rendimiento",
+        "description": "Sigue precios de posiciones con insignias de fuente y logica de respaldo: EODHD tiempo real -> FMP -> snapshot diario."
+      },
+      "goals": {
+        "title": "Objetivos de inversion",
+        "content": "Planifica objetivos financieros a corto, medio y largo plazo adaptados a tu nivel.",
+        "details": "**Que son los objetivos**\nUn objetivo es una meta financiera medible (importe + fecha) que la app sigue junto a tu cartera real. Nada se envia online: todos los objetivos viven solo en tu dispositivo.\n\n**Tres niveles de experiencia**\nPara no abrumar a los nuevos usuarios con jerga financiera, la app agrupa las 20 plantillas de objetivo en tres niveles:\n\n- **Inicial (entry level)** â€” Fondo de emergencia, Ahorro general, Pago de deudas, Compra importante, Viajes, Boda, Familia / hijos, Educacion. Objetivos concretos de corto-medio plazo, ideales para quien empieza a ahorrar de forma estructurada.\n- **Intermedio** â€” Compra de vivienda, Compra de coche, Jubilacion, Renta pasiva, Crecimiento de cartera, Personalizado. Objetivos de horizonte mas largo que requieren planificacion mensual constante.\n- **Experto** â€” Jubilacion anticipada (FIRE), Ingresos por dividendos, Objetivo de diversificacion, Gestion del riesgo, Optimizacion fiscal, Planificacion patrimonial.\n\n**Estados**\nactivo, completado, en pausa, cancelado. La transicion a 'completado' ocurre automaticamente al alcanzar el objetivo.\n\n**Campos del formulario**\n- Tipo (con sugerencia de horizonte temporal)\n- Nombre y descripcion\n- Importe objetivo y moneda\n- Importe ya ahorrado\n- Fecha objetivo (opcional, pre-rellenada por tipo)\n- Aportacion mensual (opcional)\n\n**Metricas calculadas**\n- Porcentaje de progreso e importe restante\n- Meses hasta la fecha objetivo\n- Aportacion mensual necesaria para llegar a tiempo\n- Indicador 'on-track' si la aportacion actual >= la requerida\n\n**Privacidad**\nLos objetivos se guardan en la box Hive local goals. Ningun objetivo se envia a servidores externos. Restablecer los datos elimina tambien todos los objetivos.\n\n**Flujo recomendado por nivel**\n- *Inicial*: Crea primero un Fondo de emergencia de 3-6 meses de gastos. Luego un objetivo de Ahorro especifico. La constancia mensual importa mas que el rendimiento.\n- *Intermedio*: Anade objetivos de Jubilacion y Vivienda con horizontes 5-30 anos. Define una asignacion objetivo y enlaza el modulo Rebalanceo.\n- *Experto*: Crea objetivos FIRE / Renta por dividendos / Diversificacion y usa el glosario para definir bandas de tolerancia, drawdown maximo y la regla del 4% como tasa segura de retirada."
+      },
+      "market": {
+        "title": "Top movers globales gratis",
+        "description": "Los principales ganadores y perdedores se entregan cada dia desde un snapshot publico serverless. No se requiere clave API para top movers."
+      },
+      "security": {
+        "title": "Gestion de claves centrada en privacidad",
+        "description": "Las claves API se gestionan localmente en ajustes de la app. Tu controlas proveedores, refresco de datos y cuando se hacen solicitudes externas."
+      }
+    },
+    "disclosure": {
+      "confirm": "He leido y confirmo",
+      "confirmed": "Confirmado"
+    },
+    "disclosure_required": "Confirmacion requerida para continuar",
+    "privacy": {
+      "title": "Tu privacidad, ante todo",
+      "intro": "Portfolio Manager esta disenado para vivir en tu dispositivo. Antes de empezar, tomate un momento para leer los principios que guian el tratamiento de tus datos.",
+      "bullets": {
+        "local": {
+          "title": "Los datos se quedan en tu dispositivo",
+          "description": "Carteras, posiciones, objetivos y ajustes permanecen en local. No hay servidor de la app al que se envien."
+        },
+        "keys": {
+          "title": "Claves API protegidas por el sistema",
+          "description": "Las claves Gemini, EODHD y FMP se cifran con el keystore del sistema operativo (Keychain, Android Keystore, DPAPI)."
+        },
+        "telemetry": {
+          "title": "Sin analiticas de uso",
+          "description": "La app no envia eventos de uso, no recoge identificadores ni integra SDK de analitica o crash reporting de terceros."
+        },
+        "control": {
+          "title": "Control total sobre tus datos",
+          "description": "Puedes borrar todo en cualquier momento desde Ajustes: una sola accion elimina carteras, objetivos, cache y claves guardadas."
+        }
+      },
+      "footnote": "Podras revisar esta informacion en cualquier momento desde Ajustes > Revisar onboarding."
+    },
+    "storage": {
+      "title": "Donde la app guarda tus archivos",
+      "intro": "Para total transparencia, esta es la estructura exacta de carpetas que Portfolio Manager crea en tu dispositivo. Todo queda en el sandbox privado de la app y se elimina al desinstalar.",
+      "bullets": {
+        "root": {
+          "title": "PortfolioManager/",
+          "description": "Carpeta raiz creada en el directorio privado de documentos de la app. Nombre explicito para que reconozcas lo que pertenece a esta app."
+        },
+        "data": {
+          "title": "PortfolioManager/data/",
+          "description": "Base de datos local (Hive) con carteras, objetivos y ajustes. Archivos binarios pequenos, solo legibles por la app."
+        },
+        "cache": {
+          "title": "PortfolioManager/cache/market/",
+          "description": "Snapshots publicos de mercado (top movers, indice de precios) descargados de la pipeline gratuita. Borrables sin perder tus datos."
+        },
+        "imports": {
+          "title": "PortfolioManager/imports/",
+          "description": "Copia local opcional de los CSV/PDF de broker que importas, util para reprocesar filas sin volver a seleccionar el archivo."
+        },
+        "exports": {
+          "title": "PortfolioManager/exports/",
+          "description": "Backups JSON/PDF que generas. No se crea ningun archivo aqui hasta que solicites explicitamente un export."
+        }
+      },
+      "footnote": "Las claves API NO se escriben en estas carpetas: usan el keystore cifrado del sistema, no accesible por otras apps."
+    },
+    "network": {
+      "title": "Conexiones de red de la app",
+      "intro": "Estos son los unicos servidores con los que Portfolio Manager se comunica. Cada flujo lo inicias tu, sin trafico en segundo plano.",
+      "bullets": {
+        "snapshot": {
+          "title": "Snapshot de mercado publico",
+          "description": "Descarga top_movers.json y prices_index.json desde GitHub Pages (pipeline open source). Sin claves, sin perfil de usuario."
+        },
+        "gemini": {
+          "title": "Google Gemini (opcional)",
+          "description": "Solo si proporcionas tu clave Gemini: la app envia tus preguntas y un resumen de cartera a Google para el analisis IA."
+        },
+        "eodhd": {
+          "title": "EODHD (opcional)",
+          "description": "Solo si proporcionas tu clave EODHD: precios en tiempo real. Tu pagas el plan y decides cuando consultarlo."
+        },
+        "fmp": {
+          "title": "Financial Modeling Prep (opcional)",
+          "description": "Fallback de precios si no quieres usar EODHD. Requiere tu propia clave y solo se ejecuta a peticion tuya."
+        }
+      },
+      "footnote": "Todas las llamadas de red ocurren por tu iniciativa: refresco de precios, consulta IA, import broker."
+    },
+    "get_started": "Comenzar"
+  },
+  "navigation": {
+    "portfolio": "Cartera",
+    "portfolio_short": "Cartera",
+    "analysis": "Analisis",
+    "market": "Mercado",
+    "market_short": "Mercado",
+    "goals": "Objetivos",
+    "goals_short": "Objetivos",
+    "rebalancing": "Rebalanceo",
+    "rebalancing_short": "Rebalanceo",
+    "settings": "Ajustes"
+  },
+  "portfolio": {
+    "title": "Mi Cartera",
+    "total_value": "Valor Total",
+    "total_pnl": "P&L Total",
+    "privacy": {
+      "show": "Mostrar valores",
+      "hide": "Ocultar valores"
+    },
+    "detail": {
+      "tooltip": "Abrir analisis detallado"
+    },
+    "positions": "Posiciones",
+    "position_count_one": "{count} posicion",
+    "position_count_other": "{count} posiciones",
+    "no_positions": "No se encontraron posiciones",
+    "position_not_found": {
+      "title": "Posicion no encontrada",
+      "description": "La posicion solicitada ya no existe en tu cartera.",
+      "back_to_home": "Volver a la cartera"
+    },
+    "empty_portfolio": {
+      "description": "Cree o importe una cartera para comenzar"
+    },
+    "import_portfolio": "Importar Cartera",
+    "add_position": "Agregar Posicion",
+    "create_portfolio": "Crear Cartera",
+    "create_portfolio_info": "Cree una nueva cartera y dele un nombre. Podra agregar posiciones despues de crearla.",
+    "create_empty_tab": "Crear Vacia",
+    "create_import_tab": "Importar desde Broker",
+    "create_success": "Cartera creada con exito!",
+    "manage_portfolios": "Administrar Carteras",
+    "rename_portfolio": "Renombrar Cartera",
+    "portfolio_name": "Nombre de la Cartera",
+    "portfolio_name_hint": "p. ej., Inversiones a Largo Plazo",
+    "portfolio_name_required": "El nombre de la cartera es obligatorio",
+    "no_portfolio_to_add": "Cree o seleccione una cartera antes de agregar una posicion",
+    "position": {
+      "symbol": "Simbolo",
+      "name": "Nombre",
+      "quantity": "Cantidad",
+      "price": "Precio",
+      "value": "Valor",
+      "cost_basis": "Costo Base",
+      "pnl": "P&L",
+      "pnl_percent": "P&L %",
+      "pnl_unrealized": "P&L no realizado ({currency})",
+      "details": "Detalles",
+      "fx_rate": "Tasa de cambio",
+      "exchange": "Bolsa",
+      "sector": "Sector",
+      "currency": "Moneda",
+      "asset_type": "Tipo de Activo",
+      "region": "Region",
+      "region_hint": "Auto usa deteccion geografica automatica",
+      "region_auto": "Auto"
+    },
+    "filters": {
+      "all": "Todos",
+      "stocks": "Acciones",
+      "etfs": "ETFs",
+      "crypto": "Criptomonedas",
+      "bonds": "Bonos",
+      "options": "Opciones",
+      "futures": "Futuros",
+      "cash": "Efectivo",
+      "funds": "Fondos",
+      "commodities": "Materias Primas",
+      "cfds": "CFD",
+      "unassigned": "No asignable"
+    },
+    "asset_types": {
+      "stocks": "Acciones",
+      "etfs": "ETFs",
+      "bonds": "Bonos",
+      "crypto": "Criptomonedas",
+      "funds": "Fondos",
+      "options": "Opciones",
+      "futures": "Futuros",
+      "cash": "Efectivo",
+      "cfds": "CFD",
+      "commodities": "Materias Primas",
+      "real_estate": "Bienes Raices",
+      "other": "Otro"
+    },
+    "sectors": {
+      "technology": "Tecnologia",
+      "financials": "Financieros",
+      "healthcare": "Salud",
+      "consumer_cyclicals": "Consumo Ciclico",
+      "consumer_non_cyclicals": "Consumo No Ciclico",
+      "industrials": "Industriales",
+      "basic_materials": "Materiales Basicos",
+      "energy": "Energia",
+      "utilities": "Servicios Publicos",
+      "real_estate": "Bienes Raices",
+      "communications": "Comunicaciones",
+      "broad": "Diversificado",
+      "other": "Otro"
+    },
+    "charts": {
+      "title": "Graficos de Cartera",
+      "positions_title": "Treemap de Posiciones",
+      "positions_subtitle": "Cada bloque muestra el ticker y su peso en el valor total.",
+      "regions_title": "Treemap de Exposicion Geografica",
+      "regions_subtitle": "Exposicion regional por area y activos liquidos.",
+      "empty": "Aun no hay datos disponibles",
+      "other": "Otras",
+      "other_label": "Otras {count} posiciones",
+      "tooltip": {
+        "allocation": "Asignacion",
+        "value": "Valor"
+      },
+      "regions": {
+        "us": "Estados Unidos",
+        "europe": "Europa",
+        "asia": "Asia",
+        "rest_world": "Resto del Mundo",
+        "liquidity": "Liquidez",
+        "commodities": "Materias Primas",
+        "unassigned": "Sin Asignar"
+      }
+    }
+  },
+  "import": {
+    "title": "Importar Cartera",
+    "select_broker": "Selecciona Tu Broker",
+    "choose_broker": "Elija su broker...",
+    "portfolio_name": "Nombre de la Cartera",
+    "portfolio_name_label": "Nombre de la Cartera",
+    "portfolio_name_hint": "p. ej., Jubilacion 2026",
+    "supported_brokers": "Brokers Soportados",
+    "upload_file": "Cargar Archivos CSV o PDF",
+    "drag_drop": "Arrastra tus archivos CSV o PDF aqui",
+    "or": "o",
+    "browse_files": "Explorar Archivos",
+    "files_selected": "{count} archivos seleccionados",
+    "processing": "Procesando tu cartera...",
+    "success": "Cartera importada exitosamente!",
+    "error": "Error al importar la cartera",
+    "positions_found": "{count} posiciones encontradas",
+    "preview": "Vista Previa",
+    "import_button": "Importar",
+    "import_target": "Destino de importacion",
+    "import_target_create": "Crear nueva cartera",
+    "import_target_existing": "Agregar a cartera existente",
+    "select_existing_portfolio": "Seleccionar cartera existente",
+    "select_existing_portfolio_hint": "Elige una cartera...",
+    "no_portfolios": "No hay carteras disponibles",
+    "merge_conflict_title": "Posiciones ya existen",
+    "merge_conflict_message": "{count} posiciones ya existen en esta cartera. Como deseas manejarlas?",
+    "merge_ignore": "Ignorar duplicados",
+    "merge_replace": "Reemplazar existentes",
+    "merge_add": "Agregar cantidades",
+    "brokers": {
+      "ibkr": "Interactive Brokers",
+      "td_ameritrade": "TD Ameritrade",
+      "fidelity": "Fidelity",
+      "charles_schwab": "Charles Schwab",
+      "etrade": "E*TRADE",
+      "robinhood": "Robinhood",
+      "vanguard": "Vanguard",
+      "degiro": "DEGIRO",
+      "trading212": "Trading 212",
+      "xtb": "XTB",
+      "revolut": "Revolut",
+      "other": "Otro (CSV Generico)"
+    },
+    "help": {
+      "title": "Como Exportar desde Tu Broker",
+      "ibkr": "En Interactive Brokers: Gestion de Cuenta > Informes > Flex Queries > Crear Consulta Flex Personalizada > Descargar como CSV",
+      "fidelity": "En Fidelity: Accounts & Trade > Portfolio > Export > CSV",
+      "schwab": "En Charles Schwab: Accounts > History > Export",
+      "td_ameritrade": "En TD Ameritrade: My Account > History & Statements > Export",
+      "etrade": "En E*TRADE: Accounts > Portfolio > Download",
+      "robinhood": "En Robinhood: Account > Statements & History > Export",
+      "vanguard": "En Vanguard: My Accounts > Download Holdings",
+      "degiro": "En DEGIRO: Activity > Account Statement > Export CSV",
+      "trading212": "En Trading 212: History > Export CSV",
+      "xtb": "En XTB: History > Cash Operations > Export",
+      "revolut": "En Revolut: Stocks > Statements > Export CSV",
+      "generic": "Exporta tus posiciones como archivo CSV o PDF desde la plataforma de tu broker"
+    }
+  },
+  "add_position": {
+    "title": "Agregar Posicion",
+    "required_fields": "Informacion Requerida",
+    "optional_fields": "Informacion Opcional",
+    "info": "Agregue una nueva posicion a su cartera. Util para activos no incluidos en sus archivos.",
+    "add_button": "Agregar Posicion",
+    "success": "Posicion agregada exitosamente!",
+    "field_required": "Este campo es obligatorio",
+    "invalid_number": "Por favor ingrese un numero valido",
+    "must_be_positive": "El valor debe ser mayor que cero",
+    "cost_basis_hint": "Deje vacio para usar el valor actual"
+  },
+  "edit_position": {
+    "title": "Editar Posicion",
+    "info": "Actualiza los detalles de esta posicion. Los cambios se guardaran en tu cartera.",
+    "save_button": "Guardar Cambios",
+    "success": "Posicion actualizada exitosamente!",
+    "not_found": "No pudimos encontrar esta posicion. Vuelve atras e intenta de nuevo.",
+    "exchange_label": "Bolsa",
+    "exchange_hint": "p. ej., NASDAQ"
+  },
+  "analysis": {
+    "title": "Analisis IA",
+    "generating": "Generando analisis...",
+    "ask_ai": "Pregunta a la IA sobre tu cartera",
+    "chat_title": "Asistente de IA",
+    "chat_tooltip": "Chat IA",
+    "generate_full": "Generar Analisis Completo",
+    "ai_result_title": "Analisis IA",
+    "no_portfolio_loaded": "No hay cartera cargada",
+    "api_key_required": "Configura tu clave API de Gemini en Ajustes",
+    "thinking": "Pensando...",
+    "suggestions": {
+      "title": "Preguntas Sugeridas",
+      "risk": "Cual es el nivel de riesgo de mi cartera?",
+      "diversification": "Que tan diversificada esta mi cartera?",
+      "performance": "Como esta rindiendo mi cartera?",
+      "recommendations": "Que mejoras sugiere?"
+    },
+    "sections": {
+      "summary": "Resumen de Cartera",
+      "allocation": "Asignacion de Activos",
+      "risk": "Analisis de Riesgo",
+      "performance": "Analisis de Rendimiento",
+      "recommendations": "Recomendaciones"
+    },
+    "send_to_ai": "Enviar a Gemini",
+    "presets": {
+      "title": "Analisis rapidos",
+      "subtitle": "Elige un preset o ajusta que datos compartir antes de enviar a la IA",
+      "full_review": {
+        "title": "Analisis completo",
+        "description": "Revision completa: riesgo, diversificacion, rendimiento y recomendaciones."
+      },
+      "risk": {
+        "title": "Riesgo",
+        "description": "Concentracion, exposicion sectorial, geografica y de divisas."
+      },
+      "diversification": {
+        "title": "Diversificacion",
+        "description": "Como esta distribuida la cartera entre activos, sectores y regiones."
+      },
+      "performance": {
+        "title": "Rendimiento",
+        "description": "Principales contribuidores al resultado, dividendos y comisiones."
+      },
+      "recommendations": {
+        "title": "Recomendaciones",
+        "description": "De 3 a 5 acciones concretas y priorizadas."
+      },
+      "geographic": {
+        "title": "Exposicion geografica",
+        "description": "Balance por region y divisa frente a la moneda base."
+      },
+      "concentration": {
+        "title": "Concentracion",
+        "description": "Lectura de HHI, top N y numero efectivo de posiciones."
+      }
+    },
+    "data_slices": {
+      "core_summary": "Resumen de cuenta (nombre, divisa base, valor, P&L)",
+      "holdings": "Posiciones principales (hasta 50 por valor)",
+      "sector_allocation": "Asignacion sectorial",
+      "asset_allocation": "Asignacion por tipo de activo",
+      "region_allocation": "Asignacion geografica",
+      "currency_allocation": "Exposicion por divisa",
+      "concentration": "Indicadores de concentracion (HHI, top N)",
+      "statistics": "Estadisticas de cuenta (rendimiento acumulado, dividendos, comisiones)",
+      "performance_history": "Historico de rendimiento por periodo",
+      "investor_profile": "Perfil del inversor (edad, objetivos, patrimonio)"
+    },
+    "transparency": {
+      "title": "Que vera la IA",
+      "subtitle": "Decide que datos compartir. La misma seleccion se declara al agente al inicio del mensaje.",
+      "required_by_preset": "Requerido por el preset seleccionado",
+      "preview_button": "Vista previa del mensaje",
+      "preview_title": "Mensaje enviado a Gemini"
+    },
+    "metrics": {
+      "title": "Indicadores de cartera",
+      "subtitle": "Mismas cifras que recibe el agente en el bloque de concentracion.",
+      "position_count": "Numero de posiciones",
+      "profitable": "Posiciones en beneficio",
+      "top_1": "Peso top 1",
+      "top_5": "Peso top 5",
+      "top_10": "Peso top 10",
+      "hhi": "Indice HHI",
+      "hhi_diversified": "diversificada",
+      "hhi_moderate": "moderada",
+      "hhi_concentrated": "concentrada",
+      "effective_n": "Numero efectivo de posiciones",
+      "base_currency_exposure": "Exposicion en {currency}"
+    }
+  },
+  "market": {
+    "title": "Vision General del Mercado",
+    "top_gainers": "Mayores Alzas",
+    "top_losers": "Mayores Bajas",
+    "mover_filters_concise": "Solo titulos investor-grade: precio >= {minPrice} USD, contravalor >= {dollarVolume}, sin split/picos. Toca para ver los criterios.",
+    "mover_filters_dialog_title": "Criterios de seleccion de los top movers",
+    "mover_filters_dialog_intro": "Para evitar penny stocks, pump-and-dump y variaciones distorsionadas por splits u otras operaciones corporativas, mostramos solo acciones que superan estos filtros de calidad para cada timeframe:",
+    "mover_filters_dialog_row": "Precio >= {minPrice} USD - contravalor minimo {dollarVolume} - variacion maxima aceptada: +/-{maxAbsChange}%",
+    "mover_filters_excluded_patterns": "Excluidos ademas: warrants, derechos, units y acciones preferentes; para las ventanas 1M y 1Y la accion debe tener suficiente historial de cotizacion (respectivamente >=22 y >=200 dias de trading en la base de datos) para evitar OPVs demasiado recientes.",
+    "mover_filters_empty_state": "No hay movers investor-grade en este timeframe con los datos actuales. Los filtros excluyen penny stocks, pump-and-dump y movimientos distorsionados por splits. La lista se completara con la proxima actualizacion de datos de mercado.",
+    "mover_filters_view_criteria": "Ver los criterios",
+    "mover_volume": "Volumen: {volume}",
+    "mover_dollar_volume": "Contravalor: {dollarVolume}",
+    "calendar": "Calendario Economico",
+    "news": "Noticias del Mercado",
+    "refresh": "Actualizar",
+    "updated": "Actualizado: {time}",
+    "snapshot_source": "Datos snapshot desde el feed distribuido",
+    "stale_warning": "Los datos de mercado tienen {days} dias de antiguedad",
+    "stale_hint": "Verifica la conexion o intentalo mas tarde",
+    "no_data": "No hay datos disponibles",
+    "no_events": "No hay eventos proximos",
+    "portfolio_not_loaded": "La cartera aun no esta cargada",
+    "no_positions": "No hay posiciones en la cartera",
+    "portfolio_live_title": "Precios en vivo de tu cartera",
+    "portfolio_live_subtitle": "Cotizaciones en vivo con tu clave API (EODHD/FMP)",
+    "portfolio_live_subtitle_snapshot": "Precios del snapshot diario — agrega clave EODHD en Ajustes para cotizaciones en vivo",
+    "portfolio_live_subtitle_no_key": "Sin fuente de datos disponible. Agrega clave EODHD o FMP en Ajustes.",
+    "portfolio_live_optional_key_hint": "Opcional: agrega tu clave API EODHD o FMP en Ajustes para cotizaciones en tiempo real",
+    "live_positions": "Posiciones actualizadas",
+    "cash_included": "El efectivo/la liquidez se suma aritmeticamente al valor total",
+    "updated_positions": "Posiciones actualizadas: {count}",
+    "badges": {
+      "source": "Fuente: {source}",
+      "source_price_not_found": "Fuente/precio no encontrado",
+      "outlier_blocked": "Precio sospechoso bloqueado"
+    },
+    "price_unavailable": "Precio no disponible",
+    "time": {
+      "just_now": "Ahora mismo",
+      "minutes_ago": "hace {count}m",
+      "hours_ago": "hace {count}h"
+    },
+    "timeframes": {
+      "today": "Hoy",
+      "week": "5 Dias",
+      "month": "1 Mes",
+      "year": "1 Ano"
+    },
+    "markets": {
+      "us": "Estados Unidos",
+      "lse": "Reino Unido",
+      "xetra": "Alemania",
+      "pa": "Francia",
+      "to": "Canada",
+      "hk": "Hong Kong",
+      "au": "Australia",
+      "nse": "India"
+    }
+  },
+  "rebalancing": {
+    "title": "Rebalanceo",
+    "subtitle": "Establece porcentajes objetivo para tus posiciones y mira que ajustar",
+    "current": "Actual",
+    "target": "Objetivo",
+    "delta": "Delta",
+    "action": {
+      "add": "AGREGAR",
+      "remove": "QUITAR",
+      "hold": "OK"
+    },
+    "summary": {
+      "total_target": "Objetivo Total",
+      "remaining": "Restante hasta 100%",
+      "portfolio_value": "Valor del Portafolio",
+      "over_allocated": "Sobre-asignado por {amount}%",
+      "under_allocated": "Sub-asignado por {amount}%",
+      "balanced": "El portafolio esta equilibrado!"
+    },
+    "filter": {
+      "changes_only": "Solo cambios"
+    },
+    "menu": {
+      "filters": "Filtros",
+      "options": "Opciones",
+      "reset_to_current": "Restablecer a la asignacion actual",
+      "distribute_equally": "Distribuir equitativamente"
+    },
+    "actions": {
+      "reset": "Restablecer",
+      "save": "Guardar"
+    },
+    "messages": {
+      "saved": "Asignacion objetivo guardada!"
+    },
+    "empty": {
+      "title": "Sin Cartera",
+      "description": "Importa una cartera para comenzar a rebalancear tus posiciones"
+    },
+    "error": {
+      "title": "Error"
+    },
+    "help": {
+      "title": "Como Funciona el Rebalanceo",
+      "description": "Esta pestana replica las posiciones de tu cartera y te permite definir pesos objetivo. Mientras editas los objetivos, los valores actual, objetivo y delta se actualizan para mostrar que aumentar o reducir.",
+      "steps_title": "Como usarla:",
+      "step1": "1. Revisa la asignacion actual y el valor de cada posicion",
+      "step2": "2. Ingresa el porcentaje objetivo que deseas para cada posicion",
+      "step3": "3. Manten el total objetivo en 100% usando la tarjeta de resumen",
+      "step4": "4. Lee la columna delta para ver cuanto agregar o reducir",
+      "step5": "5. \"Restablecer a la asignacion actual\" copia los pesos actuales en todos los campos objetivo",
+      "step6": "6. \"Distribuir equitativamente\" asigna el mismo porcentaje objetivo a todas las posiciones",
+      "step7": "7. Activa \"Solo cambios\" para ver solo posiciones con diferencias entre objetivo y actual"
+    }
+  },
+  "settings": {
+    "title": "Ajustes",
+    "general": {
+      "title": "General",
+      "language": "Idioma",
+      "currency": "Moneda Base",
+      "theme": "Tema",
+      "theme_light": "Claro",
+      "theme_dark": "Oscuro",
+      "theme_system": "Sistema"
+    },
+    "data": {
+      "title": "Gestion de Datos",
+      "export": "Exportar Datos",
+      "clear": "Borrar Todos los Datos",
+      "clear_confirm_message": "Esto eliminara datos de cartera, objetivos, progreso de onboarding y ajustes locales en este dispositivo. Esta accion no se puede deshacer.",
+      "clear_success": "Todos los datos locales fueron eliminados correctamente"
+    },
+    "ai": {
+      "title": "Ajustes de IA",
+      "api_key": "Clave API de Gemini",
+      "api_key_hint": "Ingresa tu clave API de Gemini",
+      "api_key_saved": "Clave API guardada",
+      "test_connection": "Probar Conexion",
+      "connection_success": "Conexion exitosa!",
+      "connection_error": "Conexion fallida. Verifica tu clave API."
+    },
+    "eodhd": {
+      "title": "Datos de Mercado EODHD (Opcional)",
+      "api_key": "Clave API de EODHD",
+      "api_key_hint": "Ingresa tu clave API de EODHD",
+      "api_key_saved": "Clave API de EODHD guardada",
+      "api_key_optional_hint": "Opcional — habilita cotizaciones en tiempo real del portafolio via EODHD"
+    },
+    "fmp": {
+      "title": "Datos de Mercado FMP (Opcional)",
+      "api_key": "Clave API de FMP",
+      "api_key_hint": "Ingresa tu clave API de FMP",
+      "api_key_saved": "Clave API de FMP guardada"
+    },
+    "market_data": {
+      "title": "Datos de mercado",
+      "intro": "Configura uno o varios proveedores para cotizaciones historicas y en tiempo real. Sin ninguna clave la app usa el snapshot diario gratuito (actualizado una vez al dia a las 22:35 UTC por la pipeline publica).",
+      "refresh_interval": {
+        "title": "Frecuencia de actualizacion",
+        "description": "Define cada cuanto el precio de una posicion se considera obsoleto y se vuelve a obtener. Mas corto = mas llamadas en el tier free del proveedor; mas largo = menos llamadas pero datos mas viejos. Formula: llamadas/dia = posiciones x refresh_por_dia.",
+        "options": {
+          "manual": "Manual (solo bajo demanda)",
+          "hourly": "Cada hora (~24 llamadas/dia por posicion)",
+          "every4h": "Cada 4 horas (~6 llamadas/dia por posicion)",
+          "every12h": "Cada 12 horas (~2 llamadas/dia por posicion)",
+          "daily": "Diario (1 llamada/dia por posicion)"
+        },
+        "descriptions": {
+          "manual": "Sin auto-refresh: actualizas cuando pulsas 'Actualizar'. Cero llamadas API hasta que tu lo decides. Recomendado para tiers free muy ajustados.",
+          "hourly": "Solo apto para tiers generosos (Finnhub 60/min, Twelve Data 800/dia). Con 30 posiciones = ~720 llamadas/dia: muy por encima del free de Alpha Vantage o Marketstack.",
+          "every4h": "Equilibrado: 6 llamadas/posicion/dia. Encaja con Twelve Data (800/dia = 130 posiciones) y Tiingo (50 simbolos/hora). Default recomendado para tier free estandar.",
+          "every12h": "Conservador: 2 llamadas/posicion/dia. Comodo para FMP (250/dia = 125 posiciones) y Polygon free.",
+          "daily": "Maximo ahorro: 1 llamada/posicion/dia. Compatible con Alpha Vantage (25/dia = 25 posiciones). Alineado con la cadencia del snapshot publico."
+        }
+      }
+    },
+    "providers": {
+      "api_key_label": "Clave API {provider}",
+      "api_key_hint": "Pega aqui la clave generada en el panel del proveedor",
+      "api_key_saved": "Clave {provider} guardada",
+      "api_key_cleared": "Clave {provider} eliminada",
+      "copy_endpoint": "Copiar endpoint de ejemplo",
+      "endpoint_copied": "Endpoint copiado al portapapeles",
+      "signup": "Registrarse",
+      "docs": "Docs",
+      "url_copied": "Enlace copiado al portapapeles",
+      "no_key_required": "No requiere clave: este proveedor es publico.",
+      "tag_realtime": "Tiempo real",
+      "tag_historic": "Historico",
+      "eodhd": {
+        "short": "EOD historico + tiempo real + calendario economico (ya integrado).",
+        "description": "Proveedor end-of-day y tiempo real ya conectado en la app. Endpoint actual: https://eodhd.com/api con parametro api_token. Usado por la cascada de precios (real-time -> EOD -> snapshot) y el calendario economico.",
+        "free_quota": "Tier free: 20 llamadas/dia, 1 ano de historico, tickers DEMO disponibles (AAPL.US, TSLA.US, BTC-USD.CC...)."
+      },
+      "fmp": {
+        "short": "Cotizaciones, top movers y calendario economico (ya integrado).",
+        "description": "Financial Modeling Prep, integrado para fallback de precios y backup de top movers. Endpoint actual: https://financialmodelingprep.com/stable con parametro apikey. La rama legacy /api/v3/ sigue accesible para planes existentes.",
+        "free_quota": "Tier free Basic: 250 llamadas/dia, ~5 anos de EOD, banda 500 MB/30 dias."
+      },
+      "alphaVantage": {
+        "short": "Historico bursatil global + indicadores tecnicos.",
+        "description": "Alpha Vantage expone TIME_SERIES_DAILY/INTRADAY, fundamentales, FX, crypto y mas de 50 indicadores tecnicos. Endpoint actual: https://www.alphavantage.co/query con parametro apikey. Historico muy profundo (20+ anos con outputsize=full).",
+        "free_quota": "Tier free: 25 llamadas/dia, 5 llamadas/minuto. Clave de por vida gratis desde la pagina de soporte."
+      },
+      "twelveData": {
+        "short": "Multi-asset (acciones, forex, crypto) + WebSocket real-time.",
+        "description": "Twelve Data expone time_series, quote, indicators, profile, ticker search y mas. Endpoint actual: https://api.twelvedata.com con parametro apikey. Particularmente fuerte en forex y indices globales.",
+        "free_quota": "Trial gratis: 800 creditos/dia + 8 por minuto. Incluye WebSocket real-time en US, forex y crypto."
+      },
+      "finnhub": {
+        "short": "Cotizaciones US tiempo real + noticias + earnings.",
+        "description": "Finnhub cubre cotizaciones US tiempo real, velas OHLC, fundamentales, noticias, calendario de earnings y busqueda de ticker. Endpoint actual: https://finnhub.io/api/v1 con parametro token. Plan free generoso en rate limit.",
+        "free_quota": "Tier free: 60 llamadas/minuto en endpoints base US. Ideal para refrescos frecuentes."
+      },
+      "polygon": {
+        "short": "Agregados OHLC + datos institucionales (US).",
+        "description": "Polygon.io provee aggregates por ticker (1m/5m/1h/1d), trades & quotes nivel tick (de pago) y fundamentales. Endpoint actual: https://api.polygon.io con parametro apiKey. Tier free limitado a EOD.",
+        "free_quota": "Tier free: 5 llamadas/minuto, solo EOD, hasta 2 anos de historico. Plan Starter desbloquea tiempo real."
+      },
+      "marketstack": {
+        "short": "EOD global 30.000+ tickers (apilayer).",
+        "description": "Marketstack (apilayer) se especializa en EOD historico global en 30.000+ tickers. Endpoint actual: https://api.marketstack.com/v2 con parametro access_key. En tier free el endpoint exige HTTP en vez de HTTPS.",
+        "free_quota": "Tier free: 100 llamadas/mes (plan Free) o 1.000/mes (plan Free 1K actualizado). Solo EOD, max 12 meses de historico."
+      },
+      "tiingo": {
+        "short": "EOD US/global + IEX intraday + 30+ anos historico.",
+        "description": "Tiingo ofrece 30+ anos de EOD en acciones y ETF, IEX delayed/real-time y fundamentales. Endpoint actual: https://api.tiingo.com con parametro token o cabecera Authorization: Token <clave>. Especialmente fiable para backtesting.",
+        "free_quota": "Tier free: 50 simbolos unicos/mes, 1.000 llamadas/hora, 30+ anos de EOD."
+      },
+      "nasdaqDataLink": {
+        "short": "Time-series + tablas (antes Quandl).",
+        "description": "Nasdaq Data Link (antes Quandl) agrega 250+ datasets de time-series y tablas de 400+ publishers (commodities, macro, alt-data). Endpoint actual: https://data.nasdaq.com/api/v3 con parametro api_key. Solo 40 datasets gratis, el resto de pago.",
+        "free_quota": "Tier free: 50.000 llamadas/dia (300/10s, 2.000/10min). 40 datasets gratis sin suscripcion."
+      },
+      "stooq": {
+        "short": "CSV publicos gratis, sin clave.",
+        "description": "Stooq publica CSV gratis con EOD de 12.000+ acciones, indices, ETFs, forex y crypto. Sin clave: descarga directamente desde https://stooq.com/q/d/l/?s=<ticker>&i=d. Excelente como fallback gratuito pero sin SLA ni tiempo real.",
+        "free_quota": "Sin rate limit declarado, pero respeta uso humano (sin scraping masivo). Ideal como fallback gratuito historico."
+      }
+    },
+    "about": {
+      "title": "Acerca de",
+      "version": "Version",
+      "review_onboarding": "Revisar onboarding",
+      "legal_documents": "Documentos legales",
+      "onboarding_reset_message": "El onboarding se restablecio. La app volvera a abrir el flujo de onboarding."
+    }
+  },
+  "guide": {
+    "title": "Guía del Usuario — Whitepaper",
+    "intro": "Este manual describe en profundidad cada área de la aplicación, desde el uso diario hasta los detalles arquitectónicos. Diseñado como un whitepaper de referencia: desplázate por las secciones y toca un título para expandir el detalle técnico.",
+    "sections": {
+      "overview": {
+        "title": "Visión general y arquitectura",
+        "content": "Qué es Portfolio Manager, en qué plataformas se ejecuta y cómo está construida.",
+        "details": "**Qué es Portfolio Manager**\nUna aplicación multiplataforma para gestionar tu cartera de inversiones: importar extractos de broker (CSV/PDF), monitorizar la asignación y el rendimiento, definir objetivos y planes de rebalanceo, leer los movers del mercado y obtener análisis impulsados por IA sobre tu cartera. Todo permanece en el dispositivo: sin cuenta remota, sin nube privada, sin telemetría.\n\n**Plataformas soportadas**\n- Móvil: Android, iOS\n- Web: Chrome, Edge, Firefox, Safari\n- Escritorio: Windows, Linux, macOS\nEl mismo código base de Flutter alimenta todas las plataformas con una UI responsive (mobile-first, adaptación automática a escritorio y tablet).\n\n**Stack tecnológico**\n- Flutter 3 + Dart 3 para la UI multiplataforma\n- flutter_bloc para la gestión del estado (un evento → una transición de estado, sin efectos colaterales en los widgets)\n- Hive (NoSQL local) para carteras, objetivos y ajustes\n- shared_preferences para flags de estado (idioma, finalización del onboarding, disclosures)\n- flutter_secure_storage para las API keys (Keychain en iOS, DPAPI en Windows, libsecret en Linux, Web Crypto en navegadores)\n- dio + retrofit + interceptor de retry para HTTP\n- easy_localization para los 6 idiomas soportados (it / en / es / fr / de / pt)\n- go_router para navegación, deep links y restauración de la última ruta\n- syncfusion_flutter_charts y fl_chart para las visualizaciones\n\n**Filosofía de diseño**\n- **Privacy-first**: sin cuenta, sin telemetría, sin analítica de terceros. Las API keys y los datos de la cartera viven solo en el dispositivo.\n- **Datos abiertos**: los datos de mercado gratuitos provienen de un pipeline público, inspeccionable y reproducible (GitHub Actions + GitHub Pages).\n- **Modular y feature-first**: cada área de la app está aislada bajo `lib/features/<area>/` con su propio BLoC, entidades de dominio y widgets de presentación.\n- **Robustez de precios en tres niveles**: la app prueba varias fuentes en cascada y se degrada con elegancia cuando falta una clave o un proveedor está caído.\n\n**Mapa de áreas**\n- Cartera: posiciones, valor total, asignación, treemaps\n- Mercado: top movers diarios, calendario económico\n- Rebalanceo: pesos objetivo y deltas calculados\n- Objetivos: metas, hitos, sincronización con la cartera\n- Análisis IA: informes Gemini con presets y panel de transparencia\n- Ajustes: idioma, moneda, tema, API keys, reset de datos"
+      },
+      "getting_started": {
+        "title": "Primeros pasos",
+        "content": "Recorrido del primer arranque: desde elegir un idioma hasta lanzar tu primer análisis.",
+        "details": "**Primer arranque**\n1. **Idioma y moneda base** — en el primer arranque eliges el idioma de la interfaz y la moneda en la que verás los totales y el P&L (puedes cambiarlas después desde Ajustes → General).\n2. **Onboarding multi-paso** — un recorrido por las áreas principales (importación, análisis, objetivos, mercado).\n3. **Disclosures interactivas** — tres pantallas de consentimiento (Privacidad, Almacenamiento Local, Conexiones de Red) que explican qué hace y qué no hace la app. El consentimiento es necesario para continuar y está versionado (`*_v1`): si las políticas cambian en el futuro, deberás revisarlas de nuevo.\n4. **Home con bottom navigation** — cuatro pestañas: Cartera, Mercado, Rebalanceo, Objetivos.\n\n**Crea tu primera cartera**\n- Toca \"Crear cartera\" para empezar vacía y añadir posiciones manualmente, o\n- Toca \"Importar\" para cargar una exportación de tu broker (CSV o PDF).\n\n**Configuración recomendada (opcional)**\n- Abre Ajustes → IA y añade tu API key de Gemini para habilitar el análisis IA y el chat.\n- Añade las claves de EODHD y/o FMP para cotizaciones en vivo y fallbacks de precio.\nLa app también funciona sin ninguna clave: los top movers de mercado son públicos y gratuitos.\n\n**Notas UX multi-dispositivo**\n- En móvil: tarjetas desplazables, espaciado adaptativo vía flutter_screenutil, gestos de tap/long-press.\n- En escritorio/web: mismo orden de funciones, layouts a ancho completo, hover en los gráficos.\n- Tema claro/oscuro/sistema con cambio en runtime.\n\n**Restauración de sesión**\nSi cierras la app y la reabres a los pocos minutos, el splash te lleva de vuelta a la página en la que estabas (best-effort, con fallback a Home)."
+      },
+      "importing": {
+        "title": "Importación de datos y parsers de broker",
+        "content": "Cómo la app reconoce los archivos de broker, gestiona duplicados y normaliza las posiciones.",
+        "details": "**12 brokers soportados de forma nativa**\nInteractive Brokers, TD Ameritrade, Fidelity, Charles Schwab, E*TRADE, Robinhood, Vanguard, DEGIRO, Trading 212, XTB, Revolut, además de un parser CSV genérico como fallback.\n\n**Arquitectura de parsing**\n- Cada broker tiene una clase de parser dedicada en `lib/services/parsers/`, derivada de `BaseBrokerParser`.\n- `ParserFactory` actúa como registro: mapea los IDs de broker a los parsers, expone `getParser()`, `autoParseCSV()` y `detectBroker()`.\n- El auto-detect calcula una puntuación sobre patrones de cabecera y palabras clave: por encima del umbral, el broker se identifica automáticamente.\n- Los PDF pasan por `PdfImportParser` que extrae el texto, lo convierte en un CSV candidato y lo reenvía al parser.\n\n**Flujo de usuario**\n1. Abre \"Importar\" desde la Home.\n2. Elige el perfil de broker (o deja el auto-detect).\n3. Sube uno o varios archivos CSV/PDF.\n4. Revisa la previsualización de las posiciones (símbolo, cantidad, precio, valor).\n5. Elige el destino: nueva cartera o añadir a una existente.\n6. Confirma la estrategia de gestión de duplicados.\n\n**Estrategias de fusión de duplicados**\n- **Ignorar**: salta las filas cuyo símbolo ya está presente.\n- **Reemplazar**: sobrescribe las filas existentes con las nuevas.\n- **Sumar**: agrega las cantidades a las filas existentes (útil para varios extractos de la misma cuenta).\nLa deduplicación opera sobre ISIN + símbolo normalizados (case-insensitive, exchange-aware).\n\n**Campos mínimos requeridos**\n- Símbolo (ticker)\n- Cantidad\n- Precio o coste base\n- Moneda (recomendado, en su defecto se infiere del locale)\n- Bolsa (recomendada para el mapeo de precios y la región geográfica)\n\n**Normalización automática**\n- Decimales europeos (1.234,56) y estadounidenses (1,234.56) auto-detectados por fila\n- BOM UTF-8, separadores `,` `;` `\\t`, cabeceras multi-línea\n- Trim de espacios y caracteres de control, deduplicación final\n\n**Errores comunes**\n- Separador decimal no reconocido → revisa el formato de exportación del broker.\n- Cabeceras duplicadas o filas vacías → la app las filtra, pero redúcelas cuando sea posible.\n- Faltan columnas de símbolo o cantidad → elige manualmente el perfil de broker correcto.\n- PDF protegido o escaneado → utiliza la exportación CSV cuando esté disponible (no se admite OCR)."
+      },
+      "analysis": {
+        "title": "Análisis IA y chat con Gemini",
+        "content": "Cómo funciona el motor IA: presets, panel de transparencia, prompt builder y salvaguardas.",
+        "details": "**Motor IA**\n- Proveedor: Google Gemini API (`generativelanguage.googleapis.com`).\n- Modelo por defecto: `gemini-2.5-flash` (configurable en Ajustes).\n- Seguridad: umbral de daño establecido en HIGH para categorías peligrosas; controles sobre el conteo de tokens y la temperatura.\n- Timeouts: 60s en recepción, 30s en envío, retry automático ante 5xx con backoff exponencial.\n\n**Siete presets de análisis**\n- **Full Review**: visión general completa, desglose de holdings, diversificación, riesgo, recomendaciones.\n- **Risk Assessment**: foco en volatilidad, concentración, exposiciones anómalas.\n- **Diversification**: equilibrio entre sectores, clases de activo, regiones, monedas.\n- **Performance Review**: lectura del P&L absoluto y relativo, contribuyentes y detractores.\n- **Recommendations**: sugerencias accionables coherentes con el perfil del inversor.\n- **Geographic Exposure**: distribución regional y riesgo país.\n- **Concentration Check**: caza de posiciones dominantes y Herfindahl sectorial.\n\n**Panel de transparencia**\nAntes de que la solicitud llegue a Gemini, la app muestra exactamente qué \"slices\" de la cartera componen el prompt. Puedes desactivar slices individuales:\n- Resumen de la cartera (totales, moneda base)\n- Holdings (lista de posiciones)\n- Asignación sectorial\n- Asignación por clase de activo\n- Asignación regional\n- Asignación por moneda\n- Métricas de concentración\n- Estadísticas de rendimiento\n- Histórico de rendimiento\n- Perfil del inversor (si está rellenado)\n\n**Qué hace la IA**\n- Analiza estructura, asignación y métricas de la cartera pasada como contexto.\n- Responde en lenguaje natural en el idioma de la app.\n- Puede recibir un prompt personalizado adicional.\n\n**Qué no hace la IA automáticamente**\n- No coloca órdenes ni se conecta con brokers.\n- No persiste conversaciones en servidores distintos a los de Google (sujeto a la política del proveedor).\n- No sustituye a un asesor financiero certificado.\n\n**Chat IA multi-turn**\nLa página de chat mantiene el historial de la sesión actual con la cartera como contexto persistente. Puedes pedir aclaraciones sobre un análisis previo, centrarte en un sector o explorar escenarios.\n\n**Consejos para respuestas de alta calidad**\n- Refresca las cotizaciones antes de analizar.\n- Verifica los tickers (los errores de símbolo confunden a la IA).\n- Desactiva los slices no relevantes para tu pregunta (reduce el ruido).\n- Las preguntas específicas siempre superan a las genéricas (p. ej., \"cuál es mi riesgo de concentración sectorial\" supera a \"cómo voy\")."
+      },
+      "charts": {
+        "title": "Visualizaciones y gráficos",
+        "content": "Treemap squarified, treemap geográfico, tooltips locale-aware y gráficos de rendimiento.",
+        "details": "**Treemap de posiciones (squarified)**\nCada rectángulo es una posición. El tamaño es proporcional al peso sobre el valor total de la cartera. El algoritmo \"squarified\" minimiza los aspect ratios de los rectángulos para una lectura clara incluso en pantallas pequeñas. Toca o pasa el cursor para ver tooltips con símbolo, valor en moneda base, porcentaje de asignación y P&L.\n\n**Treemap geográfico**\nLas mismas posiciones se agrupan por región de exposición: Estados Unidos, Europa, Asia, Resto del Mundo, Liquidez, Materias Primas, Sin Asignar. Puedes forzar la región de una posición con el campo `regionOverride` en el editor (útil para ETF globales cuya exposición efectiva difiere del domicilio).\n\n**Tooltips locale-aware**\nLos números en tooltips y leyendas siguen el locale de la app: separadores de miles/decimales, símbolo de moneda y formato de fecha son coherentes con el idioma elegido.\n\n**Codificación de color del P&L**\n- Verde brillante para posiciones en beneficio\n- Rojo intenso para posiciones en pérdida\n- Tono neutro para posiciones cerca del breakeven\nEl esquema es coherente entre modo claro y oscuro, con contraste compatible con WCAG AA.\n\n**Gráficos de rendimiento**\nPara las posiciones con histórico de precios disponible, la app muestra una línea del valor en el tiempo (intraday/daily según el proveedor). Marcadores indican las transacciones declaradas (compras y ventas, si se han importado).\n\n**Leer el riesgo desde los gráficos**\n- Un rectángulo mucho mayor que los demás → riesgo de concentración en una sola posición.\n- Una región dominante en el gráfico geográfico → exposición país a evaluar.\n- Una moneda con peso superior al 80% → riesgo FX frente a la moneda base."
+      },
+      "goals": {
+        "title": "Objetivos de inversión",
+        "content": "Define objetivos tipados, hitos, contribuciones y sigue el progreso.",
+        "details": "**Tipos de objetivo**\n- **Jubilación** — horizonte largo, contribuciones periódicas.\n- **Educación** — fondos para estudios (hijos o uno mismo).\n- **Vivienda** — entrada o inversión inmobiliaria.\n- **Emergencia** — fondo de seguridad líquido.\n- **Viaje** — objetivo discrecional a medio plazo.\n- **Personalizado** — cualquier otra cosa que definas.\n\n**Estados**\nactivo · completado · pausado · cancelado.\n\n**Campos del objetivo**\n- Nombre y descripción\n- Importe objetivo y moneda\n- Importe actual\n- Fecha objetivo\n- Contribución mensual (opcional)\n- Hitos intermedios (p. ej. 25% / 50% / 75%)\n- Asignación objetivo (mapeo símbolo → porcentaje)\n\n**Métricas calculadas automáticamente**\n- Porcentaje de progreso\n- Importe restante\n- Meses hasta la fecha objetivo\n- Contribución mensual requerida para llegar a tiempo\n- Flag \"on-track\" si la contribución actual ≥ contribución requerida\n\n**Sincronización con la cartera**\nLa asignación objetivo del goal puede vincularse al módulo de Rebalanceo: los porcentajes objetivo se convierten en la composición deseada y los deltas de rebalanceo se transforman en un plan ejecutable para alcanzar el objetivo.\n\n**Analytics**\nLa pestaña Analytics agrega total de objetivos, porcentajes medios de finalización, distribución por tipo y línea temporal.\n\n**Workflow recomendado**\n1. Crea un objetivo \"Jubilación\" con una contribución mensual realista.\n2. Define una asignación objetivo (p. ej. 60% renta variable global, 30% bonos, 10% liquidez).\n3. Importa o crea la cartera.\n4. Abre Rebalanceo para ver cuánto falta posición por posición.\n5. Revisa mensualmente: el flag \"on-track\" te dice de inmediato si estás alineado."
+      },
+      "rebalancing": {
+        "title": "Rebalanceo de la cartera",
+        "content": "Cómo definir pesos objetivo, calcular deltas y guardar un plan accionable.",
+        "details": "**Qué es el rebalanceo**\nEl proceso de devolver los pesos de las posiciones a la composición deseada. La app no coloca órdenes reales: produce un plan (deltas en valor y porcentaje) que luego puedes ejecutar manualmente con tu broker.\n\n**Flujo**\n1. Abre la pestaña Rebalanceo.\n2. La app parte de la asignación actual de la cartera.\n3. Para cada posición, edita el valor **% Objetivo** para fijar el peso deseado.\n4. La columna **Delta** muestra en tiempo real cuánto añadir o retirar.\n\n**Salida del cálculo**\nPara cada posición: porcentaje actual, objetivo, delta porcentual, valor actual, valor objetivo, delta en moneda base. Los flags `needsIncrease`, `needsDecrease`, `isAtTarget` hacen visual el siguiente paso.\n\n**Acciones rápidas**\n- **Reset a la asignación actual** — rellena los objetivos con los pesos actuales (útil cuando solo quieres simular).\n- **Distribuir equitativamente** — asigna el mismo objetivo a todas las posiciones (p. ej. 5% × 20 = 100%).\n- **Solo cambios** — oculta las posiciones ya alineadas con el objetivo para que te concentres en las que requieren acción.\n\n**Validación**\nLa suma de los objetivos debe ser 100%. Un resumen destaca el delta total y te avisa si te has desviado.\n\n**Persistencia del plan**\nEl plan se guarda localmente (caja Hive dedicada), de modo que puedes revisarlo después de cerrar la app y compararlo con la composición futura para verificar la ejecución.\n\n**Sinergia con los objetivos**\nSi un objetivo tiene una asignación objetivo, el módulo de Rebalanceo puede importarla con un toque: tus pesos quedan coherentes con el plan definido aguas arriba."
+      },
+      "market_data": {
+        "title": "Datos de mercado y top movers",
+        "content": "Snapshots públicos gratuitos, filtros investor-grade, cadena de fallback de precios, calendario económico.",
+        "details": "**Feed de movers gratuito (sin clave)**\nLa app lee un snapshot público actualizado a diario con los top gainers y top losers. La fuente es un pipeline abierto basado en GitHub Actions y GitHub Pages (ver sección Pipeline de Datos).\n\n**Marcos temporales disponibles**\n1 día, 1 semana, 1 mes, 3 meses, 6 meses, 1 año.\n\n**Mercados cubiertos**\nEstados Unidos (NYSE, NASDAQ), Reino Unido, Alemania, Francia, Canadá, Hong Kong, Australia, India.\n\n**Filtros de calidad (investor-grade)**\nAntes del ranking, todo candidato debe superar dos puertas:\n- **Dollar Volume** = precio de cierre × volumen ≥ 1.500.000 USD/día (elimina nombres ilíquidos).\n- **Precio de cierre** ≥ 1,00 USD (excluye penny stocks).\nLos universos positivo y negativo se ordenan por separado para construir las listas de gainers/losers.\n\n**Modelo de fiabilidad de precios de las posiciones**\nCuando hay claves opcionales presentes, la app evalúa en cascada:\n1. **EODHD real-time** (si hay API key de EODHD disponible)\n2. **EODHD end-of-day** como fallback\n3. **FMP** (Financial Modeling Prep) como fallback adicional\n4. **Precio del snapshot** del pipeline público como último recurso\n\nSin clave: se utiliza únicamente el snapshot público y cada posición muestra `isPriceReliable=false` con un icono de obsolescencia.\n\n**Salvaguardas**\n- Verificación de obsolescencia sobre el `as_of_date`: si los datos son más antiguos que un umbral, la app lo señala.\n- Filtros de outliers: los saltos de precio sospechosos quedan retenidos.\n- Normalización de ticker/exchange antes del lookup (p. ej. \"VOD.L\" / \"VOD\" / \"VOD:LSE\").\n\n**Calendario económico**\nSi la API key de EODHD está configurada, la sección Mercado incluye un calendario con eventos macro (publicaciones de datos, decisiones de bancos centrales, earnings), filtrados por importancia."
+      },
+      "data_pipeline": {
+        "title": "Pipeline de datos (lado CI)",
+        "content": "Cómo se construyen, distribuyen y versionan los snapshots de mercado.",
+        "details": "**Stack de automatización**\nDos workflows de GitHub Actions y un hook local componen el ciclo de \"datos siempre frescos\".\n\n**Workflow 1 — market-data-snapshot.yml**\n- Trigger: cron 22:35 UTC, push en main, dispatch manual.\n- Ejecuta un script Python que utiliza el secret `EODHD_API_KEY` para descargar los datos crudos.\n- Calcula los top movers aplicando los filtros de calidad (dollar volume ≥ 1,5M, precio ≥ 1).\n- Actualiza la base de datos histórica rolling `market_history.db.zip`.\n- Publica los artefactos en GitHub Pages.\n\n**Workflow 2 — daily-data-commit.yml**\n- Trigger: cron 07:00 UTC, dispatch manual.\n- Descarga `top_movers.json` desde Pages.\n- Lo commitea en `main` como \"proof of freshness\" diaria.\n- Añade una línea a `docs/DATA_SNAPSHOT_LOG.md` con la fecha del nuevo snapshot.\n\n**Hook local — SessionStart**\n- Al abrir una sesión de desarrollo, el script PowerShell `.claude/hooks/session-start.ps1` ejecuta `git pull --ff-only`.\n- Si los datos locales tienen más de 24h, lanza `scripts/eodhd/sync_market_snapshot_from_pages.ps1` en segundo plano (pull-only, nunca push) para alinear la caché local.\n\n**Modelo histórico rolling**\n- El script Python descarga el `market_history.db.zip` más reciente desde Pages al inicio de la ejecución.\n- Las nuevas filas diarias se aplican con upsert; los anchors faltantes se backfilean automáticamente.\n- La retención mantiene una ventana rolling lo bastante profunda para comparaciones a 1 año.\n\n**Artefactos publicados**\n- `top_movers.json` — top movers + metadatos sobre los filtros activos (umbral de dollar volume, exclusiones).\n- `prices_index.json` — lookup plano por ticker y `market:ticker`.\n- `market_history.db.zip` — histórico rolling utilizado por el pipeline (~950 MB comprimidos, no en git).\n- Logs de build como artefactos del workflow.\n\n**Notas operativas**\n- La app consume los JSON publicados y no requiere cron local.\n- Una ejecución local manual puede reproducir las salidas para debugging.\n- El cómputo pesado se queda en CI: la ejecución móvil/web permanece ligera.\n- Source of truth: GitHub Pages. Nunca empujes la base de datos manualmente desde una sesión local."
+      },
+      "api_keys": {
+        "title": "API keys y proveedores opcionales",
+        "content": "Qué claves se necesitan, dónde se almacenan y qué ocurre sin ellas.",
+        "details": "**Las tres API keys opcionales**\n- **Gemini** (Google) — análisis IA y chat. Si falta, las funciones de IA se desactivan, pero el resto de la app funciona.\n- **EODHD** — cotizaciones en tiempo real y end-of-day, además del calendario económico. Si falta, los precios provienen únicamente del snapshot.\n- **FMP** (Financial Modeling Prep) — fallback de cotizaciones. Mejora la cobertura de los tickers que EODHD no gestiona bien.\n\nNinguna clave es obligatoria: la app está diseñada para ser útil incluso \"con las claves apagadas\" (top movers públicos, gestión manual de la cartera).\n\n**Dónde viven las claves**\nLas claves se guardan en `flutter_secure_storage`, que utiliza el keystore nativo de la plataforma:\n- iOS: Keychain (cifrada con `kSecAttrAccessibleAfterFirstUnlock`).\n- Android: EncryptedSharedPreferences con clave AES-256 en el Keystore.\n- Windows: DPAPI por usuario.\n- macOS: Keychain.\n- Linux: libsecret / Secret Service.\n- Web: Web Crypto API (con los límites del navegador).\n\n**Cadena de fallback de precios**\nAl refrescar el valor de una posición, la app prueba en orden:\n1. EODHD real-time → si la API key de EODHD está presente y el mercado está abierto.\n2. EODHD end-of-day → si la API key de EODHD está presente.\n3. FMP → si la API key de FMP está presente.\n4. Snapshot público → siempre disponible, pero con `isPriceReliable=false` e icono de obsolescencia.\n\n**Test de conexión**\nEn Ajustes → IA / Mercado puedes pulsar \"Probar conexión\" para validar la clave introducida: la app realiza una llamada ligera al endpoint del proveedor y devuelve feedback inmediato.\n\n**Dónde obtener las claves**\n- Gemini: Google AI Studio (`aistudio.google.com`). Tier gratuito generoso para uso personal.\n- EODHD: `eodhd.com` — plan gratuito limitado, planes de pago para real-time extendido.\n- FMP: `financialmodelingprep.com` — plan gratuito con rate limits.\n\n**Buenas prácticas operativas**\n- Rota las claves periódicamente desde los dashboards de los proveedores.\n- No compartas capturas que muestren la clave en claro.\n- Ante sospecha de compromiso, revoca inmediatamente desde el dashboard del proveedor y genera una nueva clave.\n- El reset de datos en Ajustes también borra las claves almacenadas."
+      },
+      "providers_catalog": {
+        "title": "Catalogo de proveedores soportados",
+        "content": "Los 10 proveedores de datos historicos/tiempo real integrados en la app, con endpoints, tier free y cuando usarlos.",
+        "details": "**Proveedores integrados (10 + Gemini AI)**\nLa app soporta 10 proveedores de datos de mercado (historicos + tiempo real) y Google Gemini para analisis AI. Cada proveedor tiene una tarjeta expandible en Ajustes > Datos de mercado con endpoint de ejemplo, link de signup, link de docs y formulario de clave API. Las claves se guardan en flutter_secure_storage (Keychain/DPAPI/libsecret).\n\n**EODHD** (ya integrado en runtime)\n- Endpoint: https://eodhd.com/api -- parametro api_token\n- Tier free: 20 llamadas/dia, 1 ano historico, tickers DEMO disponibles\n- Fuerte en: real-time + EOD + calendario economico global\n\n**Financial Modeling Prep (FMP)** (ya integrado en runtime)\n- Endpoint: https://financialmodelingprep.com/stable -- parametro apikey\n- Tier free Basic: 250 llamadas/dia, 5 anos historico, 500 MB/30d banda\n- Fuerte en: top movers, fundamentales, calendario economico\n\n**Alpha Vantage**\n- Endpoint: https://www.alphavantage.co/query -- parametro apikey\n- Tier free: 25 llamadas/dia, 5 llamadas/minuto, clave de por vida gratis\n- Fuerte en: TIME_SERIES_DAILY profundo (20+ anos), 50+ indicadores tecnicos, FX/crypto\n\n**Twelve Data**\n- Endpoint: https://api.twelvedata.com -- parametro apikey\n- Trial: 800 creditos/dia + WebSocket tiempo real gratis\n- Fuerte en: multi-asset (acciones/forex/crypto/indices globales), real-time push\n\n**Finnhub**\n- Endpoint: https://finnhub.io/api/v1 -- parametro token\n- Tier free: 60 llamadas/minuto en endpoints base US\n- Fuerte en: cotizaciones US real-time, noticias, earnings calendar, fundamentales\n\n**Polygon.io**\n- Endpoint: https://api.polygon.io -- parametro apiKey\n- Tier free: 5 llamadas/minuto, solo EOD, 2 anos historico\n- Fuerte en: aggregates OHLC en ventanas custom (1m, 5m, 1h, 1d)\n\n**Marketstack** (apilayer)\n- Endpoint: https://api.marketstack.com/v2 -- parametro access_key\n- Tier free: 100 llamadas/mes (1.000 en plan Free 1K actualizado), EOD global\n- Fuerte en: cobertura 30.000+ tickers en bolsas europeas/asiaticas\n\n**Tiingo**\n- Endpoint: https://api.tiingo.com -- parametro token (o cabecera Authorization: Token <clave>)\n- Tier free: 50 simbolos/mes, 1.000 llamadas/hora, 30+ anos historico\n- Fuerte en: backtesting (historico profundo y fiable), IEX delayed/real-time\n\n**Nasdaq Data Link** (antes Quandl)\n- Endpoint: https://data.nasdaq.com/api/v3 -- parametro api_key\n- Tier free: 50.000 llamadas/dia (300/10s, 2.000/10min), 40 datasets gratis\n- Fuerte en: time-series macro/commodity/alt-data, datasets esotericos\n\n**Stooq**\n- Endpoint: https://stooq.com/q/d/l/?s=<ticker>&i=d -- sin clave\n- CSV publicos, EOD en 12.000+ activos (acciones, indices, ETFs, forex, crypto)\n- Fuerte en: fallback gratuito sin registro, historico decenal\n\n**Cual elegir?**\n- Para **cartera US + refresh frecuente**: Finnhub (60/min) o Twelve Data (800/dia).\n- Para **historico profundo para backtesting**: Tiingo o Alpha Vantage.\n- Para **mercados europeos/asiaticos**: Marketstack (paid plan), EODHD, FMP.\n- Para **macro / commodities**: Nasdaq Data Link.\n- Para **aggregates intraday gratis**: Polygon (5/min suficiente para testing).\n- Para **fallback puro sin clave**: Stooq.\n\n**Cascada de fallback de precio (ya activa)**\n1. EODHD real-time (si clave)\n2. EODHD EOD (si clave)\n3. FMP (si clave)\n4. Snapshot publico GitHub Pages\n\nLos otros 7 proveedores estan actualmente en modo \"clave guardada + endpoint documentado\": la integracion runtime se puede activar por proveedor en futuras releases.\n\n**Seguridad de las claves**\nCada clave se cifra en el keystore del sistema. Nunca loggeada, nunca exportada. La accion 'Borrar datos' en Ajustes elimina todas las claves guardadas."
+      },
+      "refresh_interval": {
+        "title": "Frecuencia de actualizacion de datos",
+        "content": "Cada cuanto los precios se consideran obsoletos y se vuelven a obtener del proveedor activo.",
+        "details": "**Que controla este ajuste**\nAjustes > Datos de mercado > Frecuencia de actualizacion define el **umbral de obsolescencia de la cache de precios**. Cuando una posicion se muestra y su cotizacion en cache es mas vieja que el umbral, la app vuelve a fetchar. Entre dos fetches consecutivos no se hace ninguna llamada de red.\n\n**Sin clave API personal**\nLa app se apoya exclusivamente en el **snapshot diario publico** generado por la pipeline de GitHub Actions:\n- Workflow `market-data-snapshot.yml` corre diariamente a las 22:35 UTC.\n- Workflow `daily-data-commit.yml` commitea la 'proof of freshness' a las 07:00 UTC.\n- El hook local `session-start.ps1` hace pull de los nuevos datos al abrir cada sesion.\n- Resultado: datos actualizados **una vez al dia**, alineados con el cierre de la jornada anterior. Cero llamadas API hechas por la app.\n\n**Con clave API personal**\nLa app puede refrescar en tiempo real (segun el tier del proveedor). La frecuencia elegida determina cuantas llamadas/dia se hacen.\n\n**Las 5 opciones disponibles**\n- **Manual** (default para tiers free ajustados): sin auto-fetch. Refrescas cuando pulsas 'Actualizar'. Cero consumo API.\n- **Cada hora**: ~24 llamadas/posicion/dia. Solo para tiers generosos (Finnhub 60/min, Twelve Data 800/dia).\n- **Cada 4 horas**: ~6 llamadas/posicion/dia. Equilibrado para tiers comodos (Twelve Data 130 posiciones, Tiingo 50 simbolos/hora).\n- **Cada 12 horas**: ~2 llamadas/posicion/dia. Apto para tiers moderados (FMP 250/dia = 125 posiciones, Polygon 5/min).\n- **Diario** (default recomendado): 1 llamada/posicion/dia. Compatible incluso con Alpha Vantage (25/dia = 25 posiciones). Alineado con la cadencia del snapshot publico.\n\n**Calculo llamadas diarias**\nFormula simple: `llamadas_dia = posiciones x refresh_dia`.\n\nEjemplos:\n- 30 posiciones + Diario = 30 llamadas/dia (Alpha Vantage 25/dia: SUPERA cuota).\n- 30 posiciones + Cada 12h = 60 llamadas/dia (FMP 250/dia: 24% del tier).\n- 30 posiciones + Cada 4h = 180 llamadas/dia (Twelve Data 800/dia: 22% del tier).\n- 30 posiciones + Cada hora = 720 llamadas/dia (Finnhub 60/min = 86.400/dia: muy debajo).\n\n**Semantica precisa**\nLa app NO hace polling con timer. La obsolescencia se evalua **on-access**: cuando abres Inicio/Mercado o pulsas 'Actualizar', la app verifica para cada posicion `(ahora - cached_at) >= umbral` y refetcha solo las posiciones que lo necesitan. Esto evita llamadas inutiles cuando la app esta en background.\n\n**Cuando subir la frecuencia**\n- Trading intradia en pocas posiciones: Cada hora con Finnhub.\n- Monitoreo activo durante horario de mercado: Cada 4h.\n- Rebalanceo semanal o checks casuales: Diario o Manual.\n\n**Cuando bajarla**\n- Tier free muy ajustado (Alpha Vantage 25/dia, Marketstack 100/mes).\n- Conexion medida/lenta.\n- Privacy-first: menos llamadas = menos rastros con proveedores externos."
+      },
+      "quota_alerts": {
+        "title": "Alertas de cuota y rate limit",
+        "content": "La app muestra un banner persistente cuando una clave agota cuota o recibe rate limit.",
+        "details": "**Que dispara la alerta**\nCuando cualquiera de tus claves API recibe del proveedor una respuesta interpretada como 'limite alcanzado', la app muestra un banner coloreado encima de la pantalla actual.\n\n**Las tres categorias detectadas**\n- **Rate limit** (HTTP 429 generico): demasiadas llamadas en la ventana temporal. Banner naranja, desaparece tras 12 segundos. Reintentar mas tarde suele resolver.\n- **Cuota agotada** (HTTP 429 + body con 'quota/exhausted/daily/monthly' o HTTP 403 con 'limit/exceeded'): tier diario o mensual terminado. Banner rojo. Espera el reset o sube de tier.\n- **Clave invalida** (HTTP 401 o 403 sin patron de cuota): clave revocada, expirada, inexistente o mal escrita. Banner rojo oscuro. Ve a Ajustes y rota/corrige la clave.\n\n**Proveedores monitorizados**\nGemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon, Marketstack, Tiingo, Nasdaq Data Link. Cada proveedor tiene su etiqueta en el banner para saber al instante en cual clave actuar.\n\n**De-duplicacion**\nSi el mismo `(proveedor, motivo)` se repite en 60 segundos, la app **no** muestra de nuevo el banner para evitar spam. Tras 60 segundos un nuevo error identico vuelve a mostrar la alerta.\n\n**Auto-cierre**\nEl banner se cierra automaticamente tras 12 segundos sin tap. Puedes cerrarlo manualmente con el boton 'Cerrar' del banner.\n\n**Privacidad del banner**\nEl banner muestra solo: nombre del proveedor, motivo (rate limit / cuota / clave invalida) y traduccion del cuerpo de error si esta disponible. **Nunca** la clave, nunca endpoints completos, nunca usuario o IP.\n\n**Que hacer cuando aparece un banner**\n1. **Rate limit**: espera 30-60 segundos y reintenta. Si persiste, baja la frecuencia de actualizacion.\n2. **Cuota agotada**: abre el panel del proveedor, comprueba uso del dia/mes. Considera subir de tier o cambiar a otro proveedor configurado en la app.\n3. **Clave invalida**: abre Ajustes > Datos de mercado, expande el proveedor, guarda una clave nueva.\n\n**Telemetria**\nEl evento se usa **solo** para el banner. No se loggea externamente, no se envia a servidores de terceros, no se persiste entre sesiones."
+      },
+      "privacy_security": {
+        "title": "Privacidad y seguridad",
+        "content": "Qué guarda la app, qué envía por la red, cómo demuestra el cumplimiento de la privacidad.",
+        "details": "**Disclosures interactivas**\nDurante el onboarding aceptas tres disclosures separadas, persistidas en `shared_preferences` con claves versionadas (`*_v1`):\n- **Privacidad** — naturaleza local de la app, ausencia de cuentas remotas.\n- **Almacenamiento** — qué categorías de datos se guardan en el dispositivo.\n- **Red** — qué llamadas de red pueden realizarse y a qué endpoints.\nSi las políticas cambian, las claves de versión se incrementan y se te volverá a pedir el consentimiento.\n\n**Dónde viven los datos**\nRaíz: `<DocumentsDir>/PortfolioManager/`\n- `data/` — bases de datos Hive (ajustes, cartera, objetivos).\n- `cache/market/` — snapshots JSON de mercado (top_movers, prices_index).\n- `imports/` — copias de los archivos CSV/PDF importados (opcional, controlado por el usuario).\n- `exports/` — backups JSON / PDF exportados desde la app.\nEn Web la ruta es virtual y los datos viven en IndexedDB a través de Hive.\n\n**Cajas Hive**\n- `settings` (tema, idioma, moneda base, preferencias)\n- `portfolio` (entidad Portfolio serializada)\n- `goals` (lista InvestmentGoal serializada)\nApertura con recovery: si una caja está corrupta, se elimina y se vuelve a crear vacía en lugar de bloquear la app.\n\n**Telemetría**\nNinguna. Sin analítica de terceros, sin crash reporter remoto, sin beacon de apertura. La página Mercado realiza un fetch HTTP a GitHub Pages (origen público), nada más a menos que configures las API keys.\n\n**Qué pasa por la red (y a quién)**\n- Snapshot de mercado → endpoint público de GitHub Pages.\n- Análisis IA → solo si la API key de Gemini está presente, solo a `generativelanguage.googleapis.com`, solo para los slices de cartera que autorizas en el panel de transparencia.\n- Cotizaciones en vivo → solo si la API key de EODHD/FMP está presente, solo a sus endpoints.\n- Nada más.\n\n**Reset de datos**\nDesde Ajustes → Resetear datos: elimina todas las cajas Hive, las shared_preferences (incluidas las disclosures) y las claves del secure storage. Reabre la app y empiezas desde el onboarding.\n\n**Buenas prácticas del usuario**\n- Mantén el dispositivo cifrado (FileVault, BitLocker, cifrado por defecto en Android 6+).\n- No instales APKs desde fuentes no confiables si utilizas la build móvil.\n- Para la build web, evita los navegadores compartidos públicos: IndexedDB persiste entre sesiones."
+      },
+      "metrics": {
+        "title": "Métricas de rendimiento y riesgo",
+        "content": "Cómo la app calcula el P&L, la volatilidad, el drawdown, el Sharpe, el Sortino y la concentración.",
+        "details": "**P&L absoluto y porcentual**\n- P&L absoluto = valor actual − coste base (ambos convertidos a la moneda base mediante `fxRateToBase`).\n- P&L porcentual = P&L absoluto ÷ coste base × 100.\n- Calculado por posición y agregado para la cartera.\n- La app conserva la moneda original de cada posición y aplica el tipo de cambio en el momento del render.\n\n**Asignación**\nPorcentaje de una posición sobre el valor total de la cartera. Calculado en moneda base: las posiciones en monedas distintas son comparables.\n\n**Volatilidad**\nDesviación estándar de los rendimientos diarios de la posición/cartera. Requiere una serie temporal de precios (disponible para las posiciones con cobertura del proveedor). Se anualiza multiplicando por √252.\n\n**Drawdown**\nCaída porcentual desde el pico local hasta el valle posterior. El \"max drawdown\" es el máximo histórico de estas caídas. Indicador de la tolerancia a pérdida requerida en escenarios adversos.\n\n**Sharpe Ratio**\n(Rendimiento medio − tasa libre de riesgo) ÷ volatilidad total. Excedente de retorno por unidad de riesgo total. Cifras típicas: <1 mediocre, 1-2 bueno, >2 excelente.\n\n**Sortino Ratio**\nVariante del Sharpe que utiliza solo la desviación de los rendimientos negativos en el denominador. Penaliza la volatilidad bajista ignorando la alcista. Más relevante para inversores aversos a la pérdida.\n\n**Beta y Alpha**\n- **Beta**: sensibilidad respecto al benchmark de mercado. β=1 se mueve como el mercado; β>1 amplifica; β<1 amortigua.\n- **Alpha**: exceso de rendimiento sobre lo esperado dada la beta. Mide el \"valor añadido\" frente a una exposición pasiva.\n\n**Concentración**\n- **Peso Top-N**: peso agregado de las primeras N posiciones (por defecto 5).\n- **Herfindahl-Hirschman Index (HHI)**: suma de los cuadrados de las cuotas porcentuales. 10.000 = monopolio (una sola posición), 0 = perfectamente diversificada. Umbral típico de atención: 1.500 para carteras de renta variable global.\n\n**Límites**\n- Las métricas basadas en serie temporal necesitan datos de precios cubiertos por los proveedores (EODHD/FMP).\n- Sin claves, algunas métricas no se calculan o utilizan el snapshot público (granularidad diaria).\n- Beta y Alpha necesitan un benchmark coherente: la app utiliza un proxy global por defecto, configurable en el futuro por perfil de inversor."
+      },
+      "troubleshooting": {
+        "title": "Solución de problemas",
+        "content": "Diagnóstico rápido de los problemas más comunes de importación, precios, IA y UI.",
+        "details": "**Problemas de importación**\n- Verifica que el perfil de broker seleccionado sea el correcto (el auto-detect no siempre acierta con los CSV personalizados).\n- Elimina las filas de cabecera duplicadas que algunos brokers añaden al final de la exportación.\n- Comprueba el formato numérico: 1.234,56 (EU) frente a 1,234.56 (US). La app auto-detecta, pero los archivos mixtos pueden confundirla.\n- Para los PDF: utiliza la exportación CSV cuando esté disponible; el OCR de escaneos no está soportado.\n- Si la previsualización está vacía: prueba el \"CSV genérico\" como último recurso.\n\n**Sin precios en vivo**\n- Confirma que has guardado la API key de EODHD o FMP en Ajustes.\n- Pulsa \"Probar conexión\" para verificar que la clave se acepta.\n- Comprueba el mapeo de `exchange` en el detalle de la posición: los tickers ambiguos (p. ej. \"BMW\" listado en varias bolsas) requieren un sufijo explícito.\n- Refresca manualmente después de actualizar las claves.\n\n**Errores de análisis IA**\n- Abre Ajustes → IA y pulsa \"Probar conexión\" para validar la API key de Gemini.\n- Comprueba la cuota diaria del tier gratuito en el dashboard de Google AI Studio.\n- Vuelve a intentarlo con un prompt más corto o desactiva los slices no esenciales en el panel de transparencia.\n- Si el error persiste, revisa la conexión de red y los firewalls corporativos.\n\n**Comportamiento inesperado de la UI**\n- Reinicia la app por la fuerza (cierre completo + reapertura).\n- Resetea el tema desde Ajustes → Apariencia si ves colores inconsistentes.\n- Reabre el onboarding desde Ajustes → Acerca de si quieres revisar el recorrido.\n- Borra los datos locales solo como último recurso: perderás las carteras y objetivos no exportados.\n\n**Problemas específicos de Web**\n- Si IndexedDB no está disponible (modo incógnito o cuota superada), Hive no puede inicializarse. Usa una ventana normal y libera espacio.\n- Los ad-blockers agresivos pueden impedir la carga de los movers. Añade `*.github.io` a la whitelist.\n\n**Problemas específicos de escritorio**\n- flutter_secure_storage en Linux requiere libsecret (`sudo apt install libsecret-1-dev` antes del build).\n- En Windows, algunas políticas corporativas bloquean DPAPI: en ese caso las claves no se persisten y debes reintroducirlas en cada arranque."
+      },
+      "glossary": {
+        "title": "Glosario de inversiones",
+        "content": "Definiciones de los terminos principales usados en la app, los reportes IA y la seccion de objetivos.",
+        "details": "**P&L** â€” Profit & Loss. Diferencia entre valor actual y coste base, absoluta o porcentual.\n\n**Coste Base** â€” Capital originalmente invertido en la posicion, antes de comisiones salvo indicacion contraria.\n\n**Asignacion** â€” Peso porcentual de una posicion sobre el valor total de la cartera.\n\n**Clase de Activo** â€” Categoria del instrumento: acciones, ETF, bonos, crypto, opciones, futuros, materias primas, efectivo.\n\n**Asset Allocation** â€” Distribucion estrategica del capital entre clases de activos, decidida segun horizonte, tolerancia al riesgo y objetivos.\n\n**Volatilidad** â€” Dispersion de los rendimientos en el tiempo, expresada como desviacion estandar anualizada.\n\n**Drawdown** â€” Caida porcentual desde un pico local al siguiente minimo. El max drawdown es la peor caida historica.\n\n**Sharpe Ratio** â€” Rendimiento que excede al risk-free, normalizado por la volatilidad total.\n\n**Sortino Ratio** â€” Variante del Sharpe que usa solo la volatilidad negativa.\n\n**Beta** â€” Sensibilidad de la posicion/cartera respecto al benchmark.\n\n**Alpha** â€” Rendimiento extra respecto al esperado dado el beta, 'valor anadido' frente al pasivo.\n\n**Diversificacion** â€” Reparto del riesgo entre varios activos, sectores, regiones y monedas para reducir la concentracion.\n\n**Herfindahl (HHI)** â€” Indice de concentracion: suma de los cuadrados de las cuotas. 10.000 = una sola posicion.\n\n**Moneda Base** â€” Moneda en la que la app agrega totales y P&L. Configurada en Ajustes > General.\n\n**FX Rate** â€” Tipo de cambio aplicado a posiciones en moneda distinta para consolidar en moneda base.\n\n**ISIN** â€” International Securities Identification Number, codigo unico de 12 caracteres de un instrumento financiero.\n\n**Ticker** â€” Sigla del instrumento (p. ej. AAPL para Apple), especifica de cada bolsa.\n\n**Treemap** â€” Visualizacion jerarquica donde el area de cada rectangulo es proporcional al tamano del elemento.\n\n**Squarified** â€” Algoritmo de treemap que minimiza el aspect ratio de los rectangulos para mejor lectura.\n\n**Objetivo SMART** â€” Especifico, Medible, Alcanzable, Realista, Temporizado. Un buen objetivo cumple los cinco criterios.\n\n**Horizonte Temporal** â€” Tiempo entre el momento actual y la fecha en que necesitaras el capital. Determina la tolerancia al riesgo y la eleccion de activos.\n\n**Tolerancia al Riesgo** â€” Capacidad subjetiva de soportar oscilaciones de valor sin cambiar la estrategia. Conservadora, moderada, agresiva.\n\n**Liquidez** â€” Velocidad con la que un activo se convierte en efectivo sin perdida significativa de valor.\n\n**Interes Compuesto** â€” Rendimiento generado no solo por el capital inicial sino tambien por los rendimientos acumulados. Motor principal del crecimiento a largo plazo.\n\n**DCA (Dollar Cost Averaging)** â€” Estrategia de entrada que fragmenta la inversion en pequenas cuotas recurrentes para reducir el efecto del market timing.\n\n**Lump Sum** â€” Estrategia opuesta al DCA: invertir todo el capital de una vez.\n\n**Fondo de Emergencia** â€” Reserva de liquidez (3-6 meses de gastos fijos) fuera de la cartera invertida, para imprevistos.\n\n**FIRE (Financial Independence, Retire Early)** â€” Objetivo de acumular capital suficiente para que la renta pasiva supere los gastos anuales, dejando de depender del trabajo.\n\n**Tasa Segura de Retirada (regla del 4%)** â€” Estimacion historica del retiro anual sostenible (~4%) de una cartera diversificada sin agotar el capital en 30 anos.\n\n**Dividend Yield** â€” Dividendo anual por accion dividido por el precio actual. Medida de renta inmediata.\n\n**Yield on Cost** â€” Dividendo anual dividido por tu coste base personal, no por el precio de mercado.\n\n**Total Return** â€” Rendimiento total que incluye plusvalias y dividendos reinvertidos.\n\n**Escalera de Bonos** â€” Tecnica de diversificacion en bonos con vencimientos escalonados para reducir riesgo de tipos y mantener liquidez constante.\n\n**Cobertura contra la Inflacion** â€” Activos que protegen del poder adquisitivo: acciones, inmuebles, oro, TIPS.\n\n**Tax-Loss Harvesting** â€” Venta de posiciones perdedoras para realizar minusvalias y compensar plusvalias.\n\n**Glide Path** â€” Curva de reduccion de la exposicion en renta variable al acercarse a la fecha objetivo.\n\n**Portfolio Drift** â€” Desviacion progresiva de los pesos reales respecto a la asignacion objetivo por movimientos de mercado.\n\n**Banda de Rebalanceo** â€” Umbral de desviacion (p. ej. +/- 5%) a partir del cual conviene rebalancear.\n\n**Planificacion Patrimonial** â€” Conjunto de instrumentos (testamento, trust, seguros) para transmitir el patrimonio a los herederos minimizando impuestos."
+      }
+    }
+  },
+  "language_selection": {
+    "title": "Elige tu idioma",
+    "subtitle": "Selecciona el idioma y la moneda que prefieres usar en la aplicacion.",
+    "dynamic_translation_hint": "La pagina se actualiza de inmediato cuando tocas un idioma.",
+    "currency_title": "Selecciona tu moneda",
+    "currency_subtitle": "Elige la moneda base para tu cartera.",
+    "footer": "Puedes cambiar estas opciones mas tarde desde Ajustes > General."
+  },
+  "errors": {
+    "generic": "Algo salio mal. Por favor intenta de nuevo.",
+    "network": "Error de red. Verifica tu conexion.",
+    "file_invalid": "Formato de archivo invalido. Selecciona un archivo CSV o PDF valido.",
+    "parse_error": "Error al procesar el archivo. Verifica el formato.",
+    "api_error": "Error de API. Intenta mas tarde.",
+    "storage_error": "Error al guardar datos. Intenta de nuevo.",
+    "market": {
+      "snapshot_unavailable": "Snapshot del mercado no disponible. Verifica la conexion y reintenta."
+    }
+  },
+  "splash": {
+    "market_sync": {
+      "title": "Actualizacion de datos de mercado",
+      "subtitle": "Descargando el ultimo snapshot publico desde GitHub Pages...",
+      "progress": "{percent}%",
+      "ready": "Datos listos."
+    }
+  },
+  "goals": {
+    "title": "Objetivos",
+    "subtitle": "Establece y realiza seguimiento de tus objetivos de inversion",
+    "search": "Buscar objetivos",
+    "add": {
+      "action": "Anadir",
+      "first": "Anade tu primer objetivo",
+      "title": "Nuevo objetivo",
+      "coming_soon": "Esta funcion estara disponible pronto"
+    },
+    "tabs": {
+      "list": "Lista",
+      "analytics": "Analiticas",
+      "settings": "Ajustes"
+    },
+    "error": {
+      "title": "Error al cargar objetivos"
+    },
+    "empty": {
+      "title": "Aun no hay objetivos",
+      "description": "Crea tu primer objetivo de inversion para empezar a seguir el progreso"
+    },
+    "analytics": {
+      "total_goals": "Objetivos totales",
+      "completed": "Completados",
+      "total_value": "Valor total",
+      "progress_chart": "Grafico de progreso",
+      "type_distribution": "Distribucion por tipo",
+      "goal_count_one": "{count} objetivo",
+      "goal_count_other": "{count} objetivos"
+    },
+    "settings": {
+      "show_completed": "Mostrar objetivos completados",
+      "show_completed_desc": "Incluir objetivos ya completados en la lista",
+      "default_currency": "Moneda predeterminada",
+      "default_currency_desc": "Moneda usada para nuevos objetivos"
+    },
+    "filter": {
+      "title": "Filtrar objetivos",
+      "type": "Tipo",
+      "status": "Estado",
+      "sort": "Ordenar por"
+    },
+    "details": {
+      "description": "Descripcion",
+      "no_description": "Sin descripcion",
+      "target_amount": "Importe objetivo",
+      "current_amount": "Importe actual",
+      "progress": "Progreso",
+      "target_date": "Fecha objetivo",
+      "monthly_contribution": "Contribucion mensual",
+      "asset_allocation": "Asignacion de activos"
+    },
+    "types": {
+      "retirement": "Jubilacion",
+      "emergency": "Fondo de emergencia",
+      "house": "Casa",
+      "education": "Educacion",
+      "travel": "Viajes",
+      "custom": "Personalizado",
+      "savings": "Ahorro general",
+      "debtRepayment": "Pago de deudas",
+      "bigPurchase": "Compra importante",
+      "wedding": "Boda",
+      "family": "Familia / hijos",
+      "carPurchase": "Compra de coche",
+      "passiveIncome": "Renta pasiva",
+      "portfolioGrowth": "Crecimiento de cartera",
+      "earlyRetirement": "Jubilacion anticipada (FIRE)",
+      "dividendIncome": "Ingresos por dividendos",
+      "diversification": "Objetivo de diversificacion",
+      "riskManagement": "Gestion del riesgo",
+      "taxOptimization": "Optimizacion fiscal",
+      "estatePlanning": "Planificacion patrimonial"
+    },
+    "tiers": {
+      "entry": "Inicial",
+      "intermediate": "Intermedio",
+      "expert": "Experto"
+    },
+    "form": {
+      "title_new": "Nuevo objetivo",
+      "title_edit": "Editar objetivo",
+      "section_type": "Tipo de objetivo",
+      "section_type_help": "Elige una plantilla segun tu nivel. Solo afecta a iconos, color y sugerencias.",
+      "section_basics": "Datos basicos",
+      "section_amount": "Importe",
+      "section_plan": "Plan y aportaciones",
+      "name": "Nombre del objetivo",
+      "name_hint": "p. ej. Fondo de emergencia, Casa de playa",
+      "name_required": "Introduce un nombre",
+      "description": "Descripcion (opcional)",
+      "description_hint": "Notas personales, contexto o motivacion",
+      "target_amount": "Importe objetivo",
+      "current_amount": "Ya ahorrado",
+      "current_amount_help": "Deja 0 si aun no has empezado",
+      "amount_required": "Introduce un importe",
+      "amount_invalid": "Introduce un importe positivo",
+      "currency": "Moneda",
+      "target_date": "Fecha objetivo (opcional)",
+      "target_date_help": "Ayuda a calcular la aportacion mensual sugerida",
+      "target_date_none": "Sin fecha",
+      "monthly": "Aportacion mensual (opcional)",
+      "monthly_help": "Cuanto piensas apartar cada mes",
+      "privacy_hint": "Todos los datos permanecen en tu dispositivo: los objetivos nunca se envian a servidores externos.",
+      "create": "Crear objetivo"
+    },
+    "status": {
+      "active": "Activo",
+      "completed": "Completado",
+      "paused": "En pausa",
+      "cancelled": "Cancelado"
+    },
+    "sort": {
+      "name": "Nombre",
+      "target_amount": "Importe objetivo",
+      "progress": "Progreso",
+      "target_date": "Fecha objetivo",
+      "created_date": "Fecha de creacion"
+    }
+  },
+  "api_quota": {
+    "providers": {
+      "gemini": "Gemini",
+      "eodhd": "EODHD",
+      "fmp": "Financial Modeling Prep",
+      "alphaVantage": "Alpha Vantage",
+      "twelveData": "Twelve Data",
+      "finnhub": "Finnhub",
+      "polygon": "Polygon.io",
+      "marketstack": "Marketstack",
+      "tiingo": "Tiingo",
+      "nasdaqDataLink": "Nasdaq Data Link"
+    },
+    "rate_limit": {
+      "title": "Rate limit alcanzado",
+      "body": "{provider} ralentizo tus solicitudes (HTTP 429). Espera unos segundos y reintenta o reduce la frecuencia de actualizacion."
+    },
+    "quota_exceeded": {
+      "title": "Cuota agotada",
+      "body": "El tier free de {provider} ha agotado las llamadas diarias o mensuales. Espera el reset o actualiza el plan para seguir."
+    },
+    "invalid_key": {
+      "title": "Clave API no valida",
+      "body": "{provider} rechazo la clave (HTTP 401/403). Ve a Ajustes > Datos de mercado y verifica o rota la clave."
+    }
+  },
+  "legal": {
+    "banner": {
+      "ai_disclaimer": "El contenido de la IA no es asesoramiento financiero. Las decisiones y la responsabilidad son tuyas."
+    },
+    "disclaimer": {
+      "title": "Aviso financiero",
+      "intro": "Lee con atencion antes de usar la app. Confirma que entiendes cada punto.",
+      "cta_accept": "Acepto y quiero continuar",
+      "sections": {
+        "no_advice": {
+          "title": "No es asesoramiento financiero",
+          "body": "Portfolio Manager es una herramienta informativa. El contenido y los analisis mostrados en la app no son asesoramiento financiero, fiscal ni legal segun el TUF (D.Lgs. 58/1998 italiano) ni normas equivalentes. Decide siempre con un profesional habilitado."
+        },
+        "ai_warning": {
+          "title": "Limites del analisis IA",
+          "body": "Las respuestas de IA pueden contener errores, datos obsoletos o alucinaciones. Verifica siempre numeros, precios y recomendaciones con fuentes oficiales. La app no garantiza la precision de Gemini."
+        },
+        "no_fiduciary": {
+          "title": "Sin relacion fiduciaria",
+          "body": "El uso de la app no crea ninguna relacion de asesoramiento, gestion o intermediacion entre tu y PluriFin. No recibimos mandatos, no gestionamos capital, no ejecutamos ordenes por ti."
+        },
+        "risk": {
+          "title": "Riesgo de mercado",
+          "body": "Las inversiones pueden perder valor. Rendimientos pasados no garantizan resultados futuros. La exposicion a instrumentos complejos (derivados, apalancamiento, cripto) puede causar la perdida total del capital."
+        }
+      },
+      "checks": {
+        "not_advice": "Entiendo que la app no proporciona asesoramiento financiero.",
+        "not_fiduciary": "Entiendo que PluriFin no gestiona mi capital.",
+        "own_responsibility": "Asumo la responsabilidad de mis decisiones de inversion."
+      }
+    },
+    "documents": {
+      "title": "Documentos legales",
+      "copy": "Copiar enlace",
+      "close": "Cerrar",
+      "url_copied": "Enlace copiado al portapapeles.",
+      "privacy": {
+        "title": "Politica de privacidad",
+        "description": "Que datos recopila la app, donde residen y como ejercer tus derechos RGPD."
+      },
+      "terms": {
+        "title": "Terminos de servicio",
+        "description": "Condiciones de uso de la app, incluidas las limitaciones de responsabilidad."
+      },
+      "disclaimer": {
+        "title": "Aviso financiero (publicado)",
+        "description": "Version completa online -- referencia para compartir y auditorias."
+      },
+      "disclaimer_inapp": {
+        "title": "Aviso financiero (in-app)",
+        "description": "Vuelve a leer el texto aceptado en el onboarding y tu estado de consentimiento."
+      },
+      "licenses": {
+        "title": "Licencias open source",
+        "description": "Lista de las librerias de terceros incluidas en la app.",
+        "legalese": "Portfolio Manager (PluriFin) - Copyright (C) 2026 Filippo Salemi."
+      },
+      "export": {
+        "title": "Exportar mis datos (RGPD)",
+        "description": "Genera un archivo JSON con carteras, objetivos, consentimientos y ajustes. Las claves API no se incluyen.",
+        "success_title": "Exportacion completada",
+        "success_body": "El archivo se guardo en tu dispositivo. Adjuntalo a una solicitud de acceso RGPD si es necesario.",
+        "failed": "Exportacion fallida: {}"
+      }
+    }
+  }
+}
