@@ -160,27 +160,43 @@ jobs:
           if [ -f dist/market-data/top_movers.json ]; then
             cp dist/market-data/top_movers.json site/dist/top_movers.json
           fi
-          # CC-P1-DB: market_history.db.zip + prices_index.json must persist
-          # across site-deploys. Without these at root the market-data-snapshot
-          # cron (22:35 UTC) cannot do incremental backfill and burns ~100k
-          # EODHD calls re-bootstrapping the window.
-          if [ -f dist/market-data/market_history.db.zip ]; then
-            cp dist/market-data/market_history.db.zip site/dist/market_history.db.zip
-          fi
+          # prices_index.json is small (~few MB) and consumed by the Flutter
+          # webapp (plurifin.app/app/) -- safe to expose at root + namespaced.
           if [ -f dist/market-data/prices_index.json ]; then
             cp dist/market-data/prices_index.json site/dist/prices_index.json
           fi
-          # Also expose under /market-data/ for clients preferring namespaced paths.
+          # NOTE: market_history.db.zip (~830 MB) is INTENTIONALLY EXCLUDED
+          # from the Pages artifact. Pages enforces a 1 GB artifact limit;
+          # copying the DB zip twice (root + /market-data/) blew past it
+          # (~1.66 GB observed in run 25521360577), causing silent 404s on
+          # files uploaded after the cutoff (pricing/press/blog/* 6 langs).
+          # The market-data-snapshot.yml cron does NOT need the DB on Pages
+          # anymore: CC-P1-DB v2 (2026-05-08) uses `gh run download` against
+          # the workflow artifact API, bypassing Pages. Same for the
+          # `Restore market-data binaries` step above. So Pages serving the
+          # 830 MB zip provides zero value to the live pipeline.
+          # Also expose top_movers.json + prices_index.json under
+          # /market-data/ for clients preferring namespaced paths.
           if [ -d dist/market-data ]; then
             mkdir -p site/dist/market-data
             for f in \
               dist/market-data/top_movers.json \
-              dist/market-data/market_history.db.zip \
               dist/market-data/prices_index.json \
               dist/market-data/.gitkeep \
             ; do
               if [ -f "$f" ]; then cp "$f" "site/dist/market-data/$(basename "$f")"; fi
             done
+          fi
+          # Hard guardrail: fail the deploy if the merged artifact exceeds
+          # 950 MB (50 MB safety margin under Pages 1 GB limit). Without this
+          # an oversized artifact would silently 404 random files.
+          ARTIFACT_BYTES=$(du -sb site/dist/ | awk '{print $1}')
+          ARTIFACT_MB=$(( ARTIFACT_BYTES / 1024 / 1024 ))
+          echo "Artifact size: ${ARTIFACT_MB} MB"
+          if [ "$ARTIFACT_BYTES" -gt $(( 950 * 1024 * 1024 )) ]; then
+            echo "FAIL: artifact ${ARTIFACT_MB} MB exceeds 950 MB safety threshold"
+            echo "Pages enforces 1 GB hard limit; oversized artifacts cause silent 404s on the tail."
+            exit 1
           fi
           # Flutter webapp under app/ -- pushed by app-web-deploy.yml from
           # the private app repo. Without this merge, plurifin.app/app/ -> 404
