@@ -154,6 +154,23 @@
       },
       "footnote": "All network calls happen on your initiative: price refresh, AI prompt, broker import."
     },
+    "legal": {
+      "title": "Required legal acceptance",
+      "intro": "To use the app you must accept the following 3 documents. Tap each to read the full text before accepting.",
+      "view_documents": "Open the full documents",
+      "footnote": "Without your explicit acceptance you cannot proceed. You can review the documents again from Settings > Legal documents at any time.",
+      "checks": {
+        "privacy_policy": "I have read and accept the Privacy Policy",
+        "terms_of_service": "I have read and accept the Terms of Service",
+        "financial_disclaimer": "I have read and accept the Financial Disclaimer"
+      },
+      "summary": {
+        "privacy_policy": "How we handle your data: local only, no analytics, no proprietary server.",
+        "terms_of_service": "App usage rules, liability limits and subscription terms.",
+        "financial_disclaimer": "The app is an informational tool. No investment advice, no guarantee of results."
+      },
+      "required": "Confirm all 3 documents to continue"
+    },
     "get_started": "Get Started"
   },
   "navigation": {
@@ -166,7 +183,9 @@
     "goals_short": "Goals",
     "rebalancing": "Rebalancing",
     "rebalancing_short": "Rebalance",
-    "settings": "Settings"
+    "settings": "Settings",
+    "subscription": "Subscription",
+    "subscription_short": "Subscription"
   },
   "portfolio": {
     "title": "My Portfolio",
@@ -607,6 +626,11 @@
       "connection_success": "Connection successful!",
       "connection_error": "Connection failed. Please check your API key."
     },
+    "subscription": {
+      "title": "Subscription",
+      "manage_title": "Manage subscription",
+      "manage_subtitle": "View available plans or start the free trial"
+    },
     "eodhd": {
       "title": "EODHD Market Data (Optional)",
       "api_key": "EODHD API Key",
@@ -880,6 +904,7 @@
       "no_description": "No description",
       "target_amount": "Target amount",
       "current_amount": "Current amount",
+      "of_target": "of {amount} {currency}",
       "progress": "Progress",
       "target_date": "Target date",
       "monthly_contribution": "Monthly contribution",
@@ -1044,6 +1069,83 @@
         "success_body": "The file has been saved to your device. Attach it to a GDPR access request if needed.",
         "failed": "Export failed: {}"
       }
+    }
+  },
+  "subscription": {
+    "paywall": {
+      "title": "Premium",
+      "headline": "Unlock the full power of the app",
+      "subheadline": "Multi-broker import, AI analysis, goals and real-time markets. No ads, no data selling.",
+      "trial_badge": "7-day free trial, no card required",
+      "trial_cta": "Start 7-day free trial",
+      "trial_cta_subtitle": "No card required. Cancel anytime.",
+      "audience_single": "Single",
+      "audience_family": "Family",
+      "best_value": "Best value",
+      "products_unavailable": "Products not yet available. Please try again later.",
+      "purchase_success": "Purchase complete. Premium is active.",
+      "purchase_error": "Purchase failed ({reason}). Please try again or use Restore purchases.",
+      "restore_cta": "Restore purchases",
+      "disclaimer": {
+        "title": "Subscription information",
+        "body": "Payments are handled by Google Play. 48h refund window directly from Play. Annual subscriptions auto-renew; manage and cancel from the Play Store. Lifetime options are one-time purchases, valid for life on this Google account."
+      },
+      "product": {
+        "yearly_single": {
+          "title": "Single Annual",
+          "description": "1 device. Auto-renewing yearly.",
+          "cta": "Subscribe for EUR 0.99/year"
+        },
+        "lifetime_single": {
+          "title": "Single Lifetime",
+          "description": "1 device. One-time, lifetime access.",
+          "cta": "Buy for EUR 4.99"
+        },
+        "yearly_family": {
+          "title": "Family Annual",
+          "description": "Up to 5 Google Family members. Auto-renewing yearly.",
+          "cta": "Subscribe for EUR 1.99/year"
+        },
+        "lifetime_family": {
+          "title": "Family Lifetime",
+          "description": "Up to 5 Google Family members. One-time, lifetime access.",
+          "cta": "Buy for EUR 9.99"
+        }
+      }
+    },
+    "web_demo": {
+      "title": "You are using the web demo",
+      "limit_positions": "Up to {count} manual positions",
+      "limit_import": "CSV/PDF broker imports are not available",
+      "limit_market": "Market data refreshed weekly only",
+      "limit_goals": "Goals are not available",
+      "limit_ai": "AI analysis is not available",
+      "cta_android": "Get the Android app for the full version",
+      "position_limit_title": "Position limit reached",
+      "position_limit_body": "The web demo supports up to {count} manual positions. For unlimited positions download the Android app."
+    },
+    "feature_locked": {
+      "upgrade_cta": "Unlock with Premium",
+      "import": {
+        "title": "Broker import not available",
+        "body": "CSV/PDF broker imports require the Premium Android app. Web demo: 5 manual positions only."
+      },
+      "ai": {
+        "title": "AI analysis not available",
+        "body": "AI analysis with Gemini requires Premium. Available on Android after a 7-day free trial."
+      },
+      "goals": {
+        "title": "Goals not available",
+        "body": "Investment goals require Premium. Unlock every feature with a Premium plan."
+      }
+    },
+    "grace_period": {
+      "title": "Subscription reconnect required",
+      "body": "Verify within {hours} hours to keep your Premium access.",
+      "action": "Verify now"
+    },
+    "review_prompt": {
+      "unavailable_fallback": "Thanks for using PluriFin! Leave a review on Play Store whenever you like."
     }
   }
 }

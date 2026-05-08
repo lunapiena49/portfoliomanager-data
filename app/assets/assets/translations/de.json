@@ -154,6 +154,23 @@
       },
       "footnote": "Alle Netzwerkaufrufe erfolgen auf Ihre Initiative: Preis-Refresh, KI-Anfrage, Broker-Import."
     },
+    "legal": {
+      "title": "Erforderliche rechtliche Zustimmung",
+      "intro": "Um die App zu nutzen, mussen Sie die folgenden 3 Dokumente akzeptieren. Tippen Sie auf jedes, um es vor der Annahme vollstandig zu lesen.",
+      "view_documents": "Vollstandige Dokumente offnen",
+      "footnote": "Ohne Ihre ausdruckliche Zustimmung konnen Sie nicht fortfahren. Sie konnen die Dokumente jederzeit unter Einstellungen > Rechtliche Dokumente erneut einsehen.",
+      "checks": {
+        "privacy_policy": "Ich habe die Datenschutzerklarung gelesen und akzeptiere sie",
+        "terms_of_service": "Ich habe die Nutzungsbedingungen gelesen und akzeptiere sie",
+        "financial_disclaimer": "Ich habe den Finanz-Haftungsausschluss gelesen und akzeptiere ihn"
+      },
+      "summary": {
+        "privacy_policy": "Wie wir Ihre Daten verarbeiten: nur lokal, keine Analytik, kein eigener Server.",
+        "terms_of_service": "Nutzungsregeln, Haftungsgrenzen und Abonnement-Bedingungen.",
+        "financial_disclaimer": "Die App ist ein Informationswerkzeug. Keine Anlageberatung, keine Erfolgsgarantie."
+      },
+      "required": "Bestatigen Sie alle 3 Dokumente, um fortzufahren"
+    },
     "get_started": "Loslegen"
   },
   "navigation": {
@@ -166,7 +183,9 @@
     "goals_short": "Ziele",
     "rebalancing": "Rebalancing",
     "rebalancing_short": "Rebalancing",
-    "settings": "Einstellungen"
+    "settings": "Einstellungen",
+    "subscription": "Abonnement",
+    "subscription_short": "Abonnement"
   },
   "portfolio": {
     "title": "Mein Portfolio",
@@ -607,6 +626,11 @@
       "connection_success": "Verbindung erfolgreich!",
       "connection_error": "Verbindung fehlgeschlagen. Ueberpruefen Sie Ihren API-Schluessel."
     },
+    "subscription": {
+      "title": "Abonnement",
+      "manage_title": "Abonnement verwalten",
+      "manage_subtitle": "Verfuegbare Tarife ansehen oder kostenlosen Testzeitraum starten"
+    },
     "eodhd": {
       "title": "EODHD-Marktdaten (Optional)",
       "api_key": "EODHD API-Schluessel",
@@ -880,6 +904,7 @@
       "no_description": "Keine Beschreibung",
       "target_amount": "Zielbetrag",
       "current_amount": "Aktueller Betrag",
+      "of_target": "von {amount} {currency}",
       "progress": "Fortschritt",
       "target_date": "Zieldatum",
       "monthly_contribution": "Monatlicher Beitrag",
@@ -1044,6 +1069,83 @@
         "success_body": "Die Datei wurde auf deinem Geraet gespeichert. Haenge sie bei Bedarf an einen DSGVO-Auskunftsantrag an.",
         "failed": "Export fehlgeschlagen: {}"
       }
+    }
+  },
+  "subscription": {
+    "paywall": {
+      "title": "Premium",
+      "headline": "Schalte die gesamte Power der App frei",
+      "subheadline": "Multi-Broker-Import, KI-Analyse, Ziele und Echtzeit-Markt. Keine Werbung, kein Datenverkauf.",
+      "trial_badge": "7 Tage kostenlos testen, ohne Kreditkarte",
+      "trial_cta": "7 Tage kostenlos testen starten",
+      "trial_cta_subtitle": "Keine Kreditkarte. Jederzeit kündbar.",
+      "audience_single": "Einzeln",
+      "audience_family": "Familie",
+      "best_value": "Bestes Angebot",
+      "products_unavailable": "Produkte noch nicht verfügbar. Bitte später erneut versuchen.",
+      "purchase_success": "Kauf abgeschlossen. Premium ist aktiv.",
+      "purchase_error": "Kauf fehlgeschlagen ({reason}). Bitte erneut versuchen oder Käufe wiederherstellen.",
+      "restore_cta": "Käufe wiederherstellen",
+      "disclaimer": {
+        "title": "Abonnement-Informationen",
+        "body": "Zahlungen werden von Google Play abgewickelt. 48h-Rückerstattung direkt über Play. Jährliche Abos verlängern sich automatisch; verwalten und kündigen im Play Store. Lifetime-Optionen sind Einmalkäufe, lebenslanger Zugriff mit diesem Google-Konto."
+      },
+      "product": {
+        "yearly_single": {
+          "title": "Einzeln Jährlich",
+          "description": "1 Gerät. Automatische jährliche Verlängerung.",
+          "cta": "Für 0,99 €/Jahr abonnieren"
+        },
+        "lifetime_single": {
+          "title": "Einzeln Lifetime",
+          "description": "1 Gerät. Einmalig, lebenslanger Zugriff.",
+          "cta": "Für 4,99 € kaufen"
+        },
+        "yearly_family": {
+          "title": "Familie Jährlich",
+          "description": "Bis zu 5 Google Family-Mitglieder. Automatische jährliche Verlängerung.",
+          "cta": "Für 1,99 €/Jahr abonnieren"
+        },
+        "lifetime_family": {
+          "title": "Familie Lifetime",
+          "description": "Bis zu 5 Google Family-Mitglieder. Einmalig, lebenslanger Zugriff.",
+          "cta": "Für 9,99 € kaufen"
+        }
+      }
+    },
+    "web_demo": {
+      "title": "Du nutzt die Web-Demo",
+      "limit_positions": "Maximal {count} manuelle Positionen",
+      "limit_import": "CSV/PDF-Import der Broker nicht verfügbar",
+      "limit_market": "Marktdaten werden nur wöchentlich aktualisiert",
+      "limit_goals": "Ziele nicht verfügbar",
+      "limit_ai": "KI-Analyse nicht verfügbar",
+      "cta_android": "Hol dir die Android-App für die Vollversion",
+      "position_limit_title": "Positions-Limit erreicht",
+      "position_limit_body": "Die Web-Demo unterstuetzt bis zu {count} manuelle Positionen. Fuer unbegrenzte Positionen lade die Android-App herunter."
+    },
+    "feature_locked": {
+      "upgrade_cta": "Mit Premium freischalten",
+      "import": {
+        "title": "Broker-Import nicht verfuegbar",
+        "body": "Der CSV/PDF-Import von Brokern erfordert die Premium-Android-App. Web-Demo: nur 5 manuelle Positionen."
+      },
+      "ai": {
+        "title": "KI-Analyse nicht verfuegbar",
+        "body": "Die KI-Analyse mit Gemini erfordert Premium. Verfuegbar auf Android nach 7 Tagen kostenlosem Test."
+      },
+      "goals": {
+        "title": "Ziele nicht verfuegbar",
+        "body": "Investmentziele erfordern Premium. Schalte alle Funktionen mit einem Premium-Plan frei."
+      }
+    },
+    "grace_period": {
+      "title": "Abonnement-Reaktivierung erforderlich",
+      "body": "Bestaetige innerhalb von {hours} Stunden, um den Premium-Zugang nicht zu verlieren.",
+      "action": "Jetzt pruefen"
+    },
+    "review_prompt": {
+      "unavailable_fallback": "Danke fuer PluriFin! Bewerten Sie uns auf Play Store, wenn Sie moechten."
     }
   }
 }

@@ -154,6 +154,23 @@
       },
       "footnote": "Todas as chamadas de rede ocorrem por sua iniciativa: atualizacao de precos, consulta IA, importacao de broker."
     },
+    "legal": {
+      "title": "Aceitacao legal obrigatoria",
+      "intro": "Para usar a app deves aceitar os 3 documentos seguintes. Toca em cada um para o ler na integra antes de aceitar.",
+      "view_documents": "Abrir os documentos completos",
+      "footnote": "Sem a tua aceitacao explicita nao podes continuar. Podes consultar de novo os documentos em Configuracoes > Documentos legais a qualquer momento.",
+      "checks": {
+        "privacy_policy": "Li e aceito a Politica de Privacidade",
+        "terms_of_service": "Li e aceito os Termos de Servico",
+        "financial_disclaimer": "Li e aceito o Aviso Financeiro"
+      },
+      "summary": {
+        "privacy_policy": "Como tratamos os teus dados: so local, sem analytics, sem servidor proprio.",
+        "terms_of_service": "Regras de uso, limites de responsabilidade e termos da assinatura.",
+        "financial_disclaimer": "A app e uma ferramenta informativa. Nenhum conselho de investimento, nenhuma garantia de resultado."
+      },
+      "required": "Confirma os 3 documentos para continuar"
+    },
     "get_started": "Comecar"
   },
   "navigation": {
@@ -166,7 +183,9 @@
     "goals_short": "Objetivos",
     "rebalancing": "Rebalanceamento",
     "rebalancing_short": "Rebalancear",
-    "settings": "Configuracoes"
+    "settings": "Configuracoes",
+    "subscription": "Assinatura",
+    "subscription_short": "Assinatura"
   },
   "portfolio": {
     "title": "Minha Carteira",
@@ -607,6 +626,11 @@
       "connection_success": "Conexao bem sucedida!",
       "connection_error": "Conexao falhou. Verifique sua chave API."
     },
+    "subscription": {
+      "title": "Assinatura",
+      "manage_title": "Gerir assinatura",
+      "manage_subtitle": "Ver planos disponiveis ou iniciar a versao de avaliacao gratuita"
+    },
     "eodhd": {
       "title": "Dados de Mercado EODHD (Opcional)",
       "api_key": "Chave API EODHD",
@@ -880,6 +904,7 @@
       "no_description": "Sem descricao",
       "target_amount": "Valor alvo",
       "current_amount": "Valor atual",
+      "of_target": "de {amount} {currency}",
       "progress": "Progresso",
       "target_date": "Data alvo",
       "monthly_contribution": "Contribuicao mensal",
@@ -1044,6 +1069,83 @@
         "success_body": "O ficheiro foi guardado no seu dispositivo. Anexe a um pedido de acesso RGPD se necessario.",
         "failed": "Exportacao falhou: {}"
       }
+    }
+  },
+  "subscription": {
+    "paywall": {
+      "title": "Premium",
+      "headline": "Desbloqueie todo o poder do app",
+      "subheadline": "Importação multi-broker, análise AI, objetivos e mercado em tempo real. Sem anúncios, sem venda de dados.",
+      "trial_badge": "7 dias grátis, sem cartão",
+      "trial_cta": "Iniciar teste gratuito de 7 dias",
+      "trial_cta_subtitle": "Sem cartão. Cancele quando quiser.",
+      "audience_single": "Individual",
+      "audience_family": "Família",
+      "best_value": "Melhor opção",
+      "products_unavailable": "Produtos ainda não disponíveis. Tente novamente mais tarde.",
+      "purchase_success": "Compra concluída. Premium ativo.",
+      "purchase_error": "Compra falhou ({reason}). Tente novamente ou use Restaurar compras.",
+      "restore_cta": "Restaurar compras",
+      "disclaimer": {
+        "title": "Informações da assinatura",
+        "body": "Pagamentos são geridos pelo Google Play. Reembolso em 48h direto pelo Play. As assinaturas anuais renovam automaticamente; gestão e cancelamento via Play Store. Opções Lifetime são compras únicas, acesso vitalício nesta conta Google."
+      },
+      "product": {
+        "yearly_single": {
+          "title": "Anual Individual",
+          "description": "1 dispositivo. Renovação anual automática.",
+          "cta": "Assinar por 0,99 €/ano"
+        },
+        "lifetime_single": {
+          "title": "Lifetime Individual",
+          "description": "1 dispositivo. Pagamento único, acesso vitalício.",
+          "cta": "Comprar por 4,99 €"
+        },
+        "yearly_family": {
+          "title": "Anual Família",
+          "description": "Até 5 membros Google Family. Renovação anual automática.",
+          "cta": "Assinar por 1,99 €/ano"
+        },
+        "lifetime_family": {
+          "title": "Lifetime Família",
+          "description": "Até 5 membros Google Family. Pagamento único, acesso vitalício.",
+          "cta": "Comprar por 9,99 €"
+        }
+      }
+    },
+    "web_demo": {
+      "title": "Está a usar a demo web",
+      "limit_positions": "Até {count} posições manuais",
+      "limit_import": "Importação CSV/PDF dos brokers indisponível",
+      "limit_market": "Dados de mercado atualizados semanalmente",
+      "limit_goals": "Objetivos indisponíveis",
+      "limit_ai": "Análise AI indisponível",
+      "cta_android": "Descarregue a app Android para a versão completa",
+      "position_limit_title": "Limite de posicoes atingido",
+      "position_limit_body": "A demo web suporta ate {count} posicoes manuais. Para posicoes ilimitadas descarregue a app Android."
+    },
+    "feature_locked": {
+      "upgrade_cta": "Desbloquear com Premium",
+      "import": {
+        "title": "Importacao broker indisponivel",
+        "body": "A importacao CSV/PDF de brokers requer a app Android Premium. Demo web: apenas 5 posicoes manuais."
+      },
+      "ai": {
+        "title": "Analise AI indisponivel",
+        "body": "A analise AI com Gemini requer Premium. Disponivel no Android apos 7 dias de teste gratuito."
+      },
+      "goals": {
+        "title": "Objetivos indisponiveis",
+        "body": "Os objetivos de investimento requerem Premium. Desbloqueie todas as funcoes com um plano Premium."
+      }
+    },
+    "grace_period": {
+      "title": "Reconexao da subscricao necessaria",
+      "body": "Verifique dentro de {hours} horas para manter o acesso Premium.",
+      "action": "Verificar agora"
+    },
+    "review_prompt": {
+      "unavailable_fallback": "Obrigado por usar o PluriFin! Deixe uma avaliacao na Play Store quando quiser."
     }
   }
 }
