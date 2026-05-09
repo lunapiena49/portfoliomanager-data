@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Configurez votre espace",
-        "description": "Choisissez langue, devise de base et cles API optionnelles. Vos reglages s'appliquent immediatement sur mobile et desktop."
+        "description": "Choisissez langue, devise de base et cles API optionnelles. Vos reglages s'appliquent immediatement sur mobile et web demo."
       },
       "import": {
         "title": "Importez depuis vos releves broker",
-        "description": "Importez des fichiers CSV/PDF de courtiers compatibles, verifiez les lignes parsees et gerez les doublons avec des strategies de fusion avant sauvegarde."
+        "description": "Importez des fichiers CSV/PDF de courtiers compatibles, editez directement les lignes et gerez les doublons avec des strategies de fusion avant sauvegarde."
       },
       "analysis": {
         "title": "Analyse IA et chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Prix en direct et performance",
-        "description": "Suivez les prix des positions avec badges de source et logique de secours : EODHD temps reel -> FMP -> snapshot quotidien."
+        "description": "Suivez les prix des positions avec badges de source : snapshots publics quotidiens (gratuits), EODHD temps reel ou FMP en repli si vous ajoutez vos cles, plus Gemini AI pour analyses optionnelles."
       },
       "goals": {
         "title": "Objectifs d'investissement",
+        "description": "Planifiez des objectifs financiers court, moyen et long terme avec suivi du progres et reequilibrage guide.",
         "content": "Planifiez des objectifs financiers court, moyen et long terme adaptes a votre niveau.",
         "details": "**Que sont les objectifs**\nUn objectif est une cible financiere mesurable (montant + echeance) que l'app suit en parallele de votre portefeuille reel. Rien n'est envoye en ligne : chaque objectif reste sur votre appareil.\n\n**Trois niveaux d'experience**\nPour ne pas submerger les nouveaux utilisateurs, l'app regroupe les 20 modeles d'objectifs en trois niveaux :\n\n- **Debutant (entry level)** â€” Fonds d'urgence, Epargne generale, Remboursement de dettes, Gros achat, Voyages, Mariage, Famille / enfants, Education. Objectifs concrets a court-moyen terme.\n- **Intermediaire** â€” Achat d'une maison, Achat de voiture, Retraite, Revenu passif, Croissance du portefeuille, Personnalise. Objectifs a horizon plus long necessitant une planification mensuelle reguliere.\n- **Expert** â€” Retraite anticipee (FIRE), Revenu de dividendes, Objectif de diversification, Gestion du risque, Optimisation fiscale, Planification successorale.\n\n**Etats**\nactif, termine, en pause, annule. La transition vers 'termine' est automatique a l'atteinte de la cible.\n\n**Champs du formulaire**\n- Type (avec horizon suggere)\n- Nom et description\n- Montant cible et devise\n- Montant deja epargne\n- Date cible (facultatif, pre-remplie selon le type)\n- Contribution mensuelle (facultatif)\n\n**Metriques calculees**\n- Pourcentage de progres et montant restant\n- Mois restants jusqu'a la date cible\n- Contribution mensuelle requise pour arriver a temps\n- Indicateur 'on-track' si la contribution actuelle >= la requise\n\n**Confidentialite**\nLes objectifs sont stockes dans la box Hive locale goals. Aucun objectif n'est envoye sur des serveurs externes. La reinitialisation des donnees efface aussi tous les objectifs.\n\n**Flux recommande par niveau**\n- *Debutant* : Creez d'abord un Fonds d'urgence de 3-6 mois de depenses. Ajoutez un objectif d'Epargne pour des projets specifiques.\n- *Intermediaire* : Ajoutez Retraite et Maison sur 5-30 ans. Definissez une allocation cible et connectez le module Reequilibrage.\n- *Expert* : Creez FIRE / Revenu de dividendes / Diversification et utilisez le glossaire pour definir bandes de tolerance, drawdown max et la regle des 4%."
       },
@@ -158,6 +159,7 @@
       "title": "Acceptation legale obligatoire",
       "intro": "Pour utiliser l'application, vous devez accepter les 3 documents suivants. Touchez chacun pour le lire en entier avant d'accepter.",
       "view_documents": "Ouvrir les documents complets",
+      "read_full": "Lire le document complet",
       "footnote": "Sans votre acceptation explicite vous ne pouvez pas continuer. Vous pouvez consulter de nouveau les documents depuis Parametres > Documents legaux a tout moment.",
       "checks": {
         "privacy_policy": "J'ai lu et accepte la Politique de Confidentialite",
@@ -218,6 +220,9 @@
     "create_import_tab": "Importer depuis broker",
     "create_success": "Portefeuille cree avec succes!",
     "manage_portfolios": "Gerer les Portefeuilles",
+    "actions": {
+      "delete_current": "Supprimer le portefeuille actuel"
+    },
     "rename_portfolio": "Renommer le Portefeuille",
     "portfolio_name": "Nom du Portefeuille",
     "portfolio_name_hint": "ex. Investissements Long Terme",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Abonnement",
       "manage_title": "Gerer l'abonnement",
-      "manage_subtitle": "Voir les formules disponibles ou demarrer l'essai gratuit"
+      "manage_subtitle": "Voir les formules disponibles ou demarrer l'essai gratuit",
+      "trial_active_title": "Essai gratuit actif",
+      "trial_remaining": "{} jours restants",
+      "trial_dialog_title": "Essai gratuit en cours",
+      "trial_dialog_message": "Votre essai gratuit de 7 jours est actif. Il reste {} jours avant la fin. Toutes les fonctionnalites premium sont debloquees jusqu'a l'expiration.",
+      "trial_dialog_view_plans": "Voir les formules",
+      "premium_active_title": "Formule active : {}",
+      "premium_active_subtitle": "Gerez l'abonnement ou restaurez les achats",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "Donnees de Marche EODHD (Optionnel)",
@@ -976,7 +995,8 @@
       "progress": "Progression",
       "target_date": "Date cible",
       "created_date": "Date de creation"
-    }
+    },
+    "target_date_label": "Cible : {}"
   },
   "api_quota": {
     "providers": {

@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Configura tu espacio de trabajo",
-        "description": "Elige idioma, moneda base y claves API opcionales. Tus ajustes se aplican al instante en disenos de escritorio y movil."
+        "description": "Elige idioma, moneda base y claves API opcionales. Tus ajustes se aplican al instante en disenos movil y web demo."
       },
       "import": {
         "title": "Importa desde estados del broker",
-        "description": "Importa archivos CSV/PDF de brokers compatibles, revisa filas parseadas y gestiona duplicados con estrategias de mezcla antes de guardar."
+        "description": "Importa archivos CSV/PDF de brokers compatibles, edita las filas directamente y gestiona duplicados con estrategias de mezcla antes de guardar."
       },
       "analysis": {
         "title": "Analisis IA y chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Precios en vivo y rendimiento",
-        "description": "Sigue precios de posiciones con insignias de fuente y logica de respaldo: EODHD tiempo real -> FMP -> snapshot diario."
+        "description": "Sigue precios de posiciones con insignias de fuente: snapshots publicos diarios (gratis), EODHD en tiempo real o respaldo FMP si agregas tus claves, y Gemini AI para analisis opcionales."
       },
       "goals": {
         "title": "Objetivos de inversion",
+        "description": "Planifica objetivos financieros de corto, medio y largo plazo con seguimiento del progreso y rebalanceo guiado.",
         "content": "Planifica objetivos financieros a corto, medio y largo plazo adaptados a tu nivel.",
         "details": "**Que son los objetivos**\nUn objetivo es una meta financiera medible (importe + fecha) que la app sigue junto a tu cartera real. Nada se envia online: todos los objetivos viven solo en tu dispositivo.\n\n**Tres niveles de experiencia**\nPara no abrumar a los nuevos usuarios con jerga financiera, la app agrupa las 20 plantillas de objetivo en tres niveles:\n\n- **Inicial (entry level)** â€” Fondo de emergencia, Ahorro general, Pago de deudas, Compra importante, Viajes, Boda, Familia / hijos, Educacion. Objetivos concretos de corto-medio plazo, ideales para quien empieza a ahorrar de forma estructurada.\n- **Intermedio** â€” Compra de vivienda, Compra de coche, Jubilacion, Renta pasiva, Crecimiento de cartera, Personalizado. Objetivos de horizonte mas largo que requieren planificacion mensual constante.\n- **Experto** â€” Jubilacion anticipada (FIRE), Ingresos por dividendos, Objetivo de diversificacion, Gestion del riesgo, Optimizacion fiscal, Planificacion patrimonial.\n\n**Estados**\nactivo, completado, en pausa, cancelado. La transicion a 'completado' ocurre automaticamente al alcanzar el objetivo.\n\n**Campos del formulario**\n- Tipo (con sugerencia de horizonte temporal)\n- Nombre y descripcion\n- Importe objetivo y moneda\n- Importe ya ahorrado\n- Fecha objetivo (opcional, pre-rellenada por tipo)\n- Aportacion mensual (opcional)\n\n**Metricas calculadas**\n- Porcentaje de progreso e importe restante\n- Meses hasta la fecha objetivo\n- Aportacion mensual necesaria para llegar a tiempo\n- Indicador 'on-track' si la aportacion actual >= la requerida\n\n**Privacidad**\nLos objetivos se guardan en la box Hive local goals. Ningun objetivo se envia a servidores externos. Restablecer los datos elimina tambien todos los objetivos.\n\n**Flujo recomendado por nivel**\n- *Inicial*: Crea primero un Fondo de emergencia de 3-6 meses de gastos. Luego un objetivo de Ahorro especifico. La constancia mensual importa mas que el rendimiento.\n- *Intermedio*: Anade objetivos de Jubilacion y Vivienda con horizontes 5-30 anos. Define una asignacion objetivo y enlaza el modulo Rebalanceo.\n- *Experto*: Crea objetivos FIRE / Renta por dividendos / Diversificacion y usa el glosario para definir bandas de tolerancia, drawdown maximo y la regla del 4% como tasa segura de retirada."
       },
@@ -158,6 +159,7 @@
       "title": "Aceptacion legal obligatoria",
       "intro": "Para usar la aplicacion debes aceptar los 3 documentos siguientes. Toca cada uno para leerlo completo antes de aceptar.",
       "view_documents": "Abrir los documentos completos",
+      "read_full": "Leer documento completo",
       "footnote": "Sin tu aceptacion explicita no podras continuar. Puedes revisar los documentos otra vez desde Ajustes > Documentos legales en cualquier momento.",
       "checks": {
         "privacy_policy": "He leido y acepto la Politica de Privacidad",
@@ -218,6 +220,9 @@
     "create_import_tab": "Importar desde Broker",
     "create_success": "Cartera creada con exito!",
     "manage_portfolios": "Administrar Carteras",
+    "actions": {
+      "delete_current": "Eliminar cartera actual"
+    },
     "rename_portfolio": "Renombrar Cartera",
     "portfolio_name": "Nombre de la Cartera",
     "portfolio_name_hint": "p. ej., Inversiones a Largo Plazo",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Suscripcion",
       "manage_title": "Gestionar suscripcion",
-      "manage_subtitle": "Ver los planes disponibles o iniciar la prueba gratuita"
+      "manage_subtitle": "Ver los planes disponibles o iniciar la prueba gratuita",
+      "trial_active_title": "Prueba gratuita activa",
+      "trial_remaining": "{} dias restantes",
+      "trial_dialog_title": "Prueba gratuita en curso",
+      "trial_dialog_message": "Tu prueba gratuita de 7 dias esta activa. Faltan {} dias para que termine. Todas las funciones premium estan desbloqueadas hasta el vencimiento.",
+      "trial_dialog_view_plans": "Ver planes",
+      "premium_active_title": "Plan activo: {}",
+      "premium_active_subtitle": "Gestiona la suscripcion o restaura compras",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "Datos de Mercado EODHD (Opcional)",
@@ -976,7 +995,8 @@
       "progress": "Progreso",
       "target_date": "Fecha objetivo",
       "created_date": "Fecha de creacion"
-    }
+    },
+    "target_date_label": "Objetivo: {}"
   },
   "api_quota": {
     "providers": {
