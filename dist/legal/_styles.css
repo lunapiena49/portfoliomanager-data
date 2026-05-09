@@ -54,6 +54,21 @@ header.site-header a {
   color: inherit;
   text-decoration: none;
 }
+header.site-header a.brand-link:hover {
+  color: var(--color-link);
+}
+header.site-header a.back-home-btn {
+  font-size: 0.9em;
+  font-weight: 500;
+  padding: 6px 12px;
+  border: 1px solid var(--color-rule);
+  border-radius: var(--radius);
+  color: var(--color-link);
+}
+header.site-header a.back-home-btn:hover {
+  background: var(--color-link);
+  color: var(--color-bg);
+}
 
 nav.lang-switcher {
   margin: 12px 0 24px;

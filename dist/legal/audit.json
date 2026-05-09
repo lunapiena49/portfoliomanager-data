@@ -1,132 +1,132 @@
 {
-    "generated_at":  "2026-05-05T18:00:17Z",
+    "generated_at":  "2026-05-09T12:06:49Z",
     "docs":  {
                  "privacy":  {
                                  "it":  {
                                             "output_path":  "dist\\legal\\it\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\privacy_policy.md",
-                                            "sha256":  "0704aa25fc4cf60e14006e61f3e5e326eb29e86651111f7a7b0d0fbe7694cb85"
+                                            "source_path":  "legal\\privacy_policy.md",
+                                            "sha256":  "6b5266106e5f53a5b8d8ce708b1ce6f51f4aa388d469dca733c8aec9dd2e3882"
                                         },
                                  "es":  {
                                             "output_path":  "dist\\legal\\es\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\es\\privacy_policy.md",
-                                            "sha256":  "550195b7cf26cb6213c18fe974a1a17bd1663604092392e7106029ee76ec48f2"
+                                            "source_path":  "legal\\es\\privacy_policy.md",
+                                            "sha256":  "501e6a332ab2102a7666b2e0c36220ea831141577e3415b15d71fd515864ba4b"
                                         },
                                  "fr":  {
                                             "output_path":  "dist\\legal\\fr\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\fr\\privacy_policy.md",
-                                            "sha256":  "188a763c0699a172278fd1f35b4227197b7169cdf327829b3259a8dadb0c06ce"
+                                            "source_path":  "legal\\fr\\privacy_policy.md",
+                                            "sha256":  "4eee9abc1caa670777b5111a737baea5a5b263f00de42791209fa0e647a77457"
                                         },
                                  "pt":  {
                                             "output_path":  "dist\\legal\\pt\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\pt\\privacy_policy.md",
-                                            "sha256":  "0896c2e6201063e5b7a38614de33e5158f7ecf0f5f78dcad6c55cf5c238ed2f4"
+                                            "source_path":  "legal\\pt\\privacy_policy.md",
+                                            "sha256":  "4d04910e53c0de2208880e2cd481f8a40072e451bf4c8ff94b138f77b017a481"
                                         },
                                  "de":  {
                                             "output_path":  "dist\\legal\\de\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\de\\privacy_policy.md",
-                                            "sha256":  "9defdc8feff72764ee22d4b265d868a6be6aa08f061130239ee3146e4a2cf0b3"
+                                            "source_path":  "legal\\de\\privacy_policy.md",
+                                            "sha256":  "0c4c1da6b4c1304f153643fdc6f68e68deb59a21fae3e2ac0a251cf84455ff46"
                                         },
                                  "en":  {
                                             "output_path":  "dist\\legal\\en\\privacy.html",
-                                            "source_path":  "repo_split\\data\\legal\\en\\privacy_policy.md",
-                                            "sha256":  "3d525b1536514498a5d12c9f7b6672e9842acf11d78827690b9406205810094b"
+                                            "source_path":  "legal\\en\\privacy_policy.md",
+                                            "sha256":  "18243ede03a31cb86cc1795fb52a0b8191490172f03308308855cfab567f6843"
                                         }
                              },
                  "dmca":  {
                               "it":  {
                                          "output_path":  "dist\\legal\\it\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\dmca_template.md",
-                                         "sha256":  "b062f3f3eb443585d0ef2d6c19c77e9629264abff399e6e305a39e7ddfca782c"
+                                         "source_path":  "legal\\dmca_template.md",
+                                         "sha256":  "21aefaee538e325d8091ffd7a2315c008dda10c4c7bd1aaccd8f46618fc28de8"
                                      },
                               "es":  {
                                          "output_path":  "dist\\legal\\es\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\es\\dmca_template.md",
-                                         "sha256":  "e28a27b1a6ea288cc7066128bf4276d9e3ba2a30ba274411ea0faa363a0ae387"
+                                         "source_path":  "legal\\es\\dmca_template.md",
+                                         "sha256":  "9d67ec7ea5ffcbc0f96d52c99a71db4d2ae0f5193215615a80a5874dda8a6163"
                                      },
                               "fr":  {
                                          "output_path":  "dist\\legal\\fr\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\fr\\dmca_template.md",
-                                         "sha256":  "2de925a33dbffa277d40fef3e4b6e22b5e7a7793f2e36dc783b5fccb600679da"
+                                         "source_path":  "legal\\fr\\dmca_template.md",
+                                         "sha256":  "3b23f07aca9d3fa7f4802a7bed15905b6cdc03f349a2eeabf5113f5947161659"
                                      },
                               "pt":  {
                                          "output_path":  "dist\\legal\\pt\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\pt\\dmca_template.md",
-                                         "sha256":  "fb7d31806ce0028ce4b9849fb405cb69531b964d2ef5c164cbb83c289c290931"
+                                         "source_path":  "legal\\pt\\dmca_template.md",
+                                         "sha256":  "987ad40b1411d8518b1c638991970e62fe184550f8a247ed82c08fa20e253e92"
                                      },
                               "de":  {
                                          "output_path":  "dist\\legal\\de\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\de\\dmca_template.md",
-                                         "sha256":  "a35ac6a13dddd9a692ae1c7d66707bd49051c259d1a87cb60c9d79466f5cb172"
+                                         "source_path":  "legal\\de\\dmca_template.md",
+                                         "sha256":  "64ff7b0cd2379c504eeb861ddd6ea615b699d758e12d961007f6debb9b29dc0a"
                                      },
                               "en":  {
                                          "output_path":  "dist\\legal\\en\\dmca.html",
-                                         "source_path":  "repo_split\\data\\legal\\en\\dmca_template.md",
-                                         "sha256":  "bc985edc1ad7d327b4dca074a7cc001a317c9a1a8ab8fa42ecc94ac8383adba7"
+                                         "source_path":  "legal\\en\\dmca_template.md",
+                                         "sha256":  "30b026533f6cb32d56bea98ec72beb145c80a0f5f803c2e0fc85d0ac91ac496e"
                                      }
                           },
                  "disclaimer":  {
                                     "it":  {
                                                "output_path":  "dist\\legal\\it\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\disclaimer_financial.md",
-                                               "sha256":  "01eeb336f1db4938765087b8041dc9675a048beb0d480b41ac9946fbd49ed790"
+                                               "source_path":  "legal\\disclaimer_financial.md",
+                                               "sha256":  "0a40aebe2221b8583ce84633b00ae2bebe6f7ba3cf18a506827c8c7c4a744c2c"
                                            },
                                     "es":  {
                                                "output_path":  "dist\\legal\\es\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\es\\disclaimer_financial.md",
-                                               "sha256":  "895b6f5f671189af62421f2cdb0e85253617b8fca1bdbeb475fd975fed785197"
+                                               "source_path":  "legal\\es\\disclaimer_financial.md",
+                                               "sha256":  "bece0449efaeb01e4fefaa916e6d1a6df0fefd94336d08e461d2d9a2e0627bea"
                                            },
                                     "fr":  {
                                                "output_path":  "dist\\legal\\fr\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\fr\\disclaimer_financial.md",
-                                               "sha256":  "77df1f8a8aff24c03eecd2c71bb8f6653feb7e38f1c1bca96ea32c57383e5536"
+                                               "source_path":  "legal\\fr\\disclaimer_financial.md",
+                                               "sha256":  "5842a5557216d5a4b84c5c7b86a6aaecd0649aa57ebd56e9b747c03ddfac0431"
                                            },
                                     "pt":  {
                                                "output_path":  "dist\\legal\\pt\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\pt\\disclaimer_financial.md",
-                                               "sha256":  "5ab6cc561e4f11dd5f0b477d95716196c1099fff8e2e644df52b5326ba2a94ad"
+                                               "source_path":  "legal\\pt\\disclaimer_financial.md",
+                                               "sha256":  "631801073708b0b721115aeb5f03c560f15a2b0e0640a3b28dad4babb44344f5"
                                            },
                                     "de":  {
                                                "output_path":  "dist\\legal\\de\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\de\\disclaimer_financial.md",
-                                               "sha256":  "4b7348e7ce43ece0deb416037d3cae20c4e991b60070194e499f73eb156932bd"
+                                               "source_path":  "legal\\de\\disclaimer_financial.md",
+                                               "sha256":  "22b08f5129c055ab7d4f753580cfbf31610d4b36e9a457339bc4476280006747"
                                            },
                                     "en":  {
                                                "output_path":  "dist\\legal\\en\\disclaimer.html",
-                                               "source_path":  "repo_split\\data\\legal\\en\\disclaimer_financial.md",
-                                               "sha256":  "fafa2a3f067484636430df5230eca7bad039320e4b88885b29f055cad7e1817a"
+                                               "source_path":  "legal\\en\\disclaimer_financial.md",
+                                               "sha256":  "7b112b3a94af108fafb6bf96762409a780276d7d12f443f5b01dfd7f153c0904"
                                            }
                                 },
                  "terms":  {
                                "it":  {
                                           "output_path":  "dist\\legal\\it\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\terms_of_service.md",
-                                          "sha256":  "106c59b96a6fba0ce4e488980e03cf1bf804799e0107b8e9da6653a29698b363"
+                                          "source_path":  "legal\\terms_of_service.md",
+                                          "sha256":  "b2f137c0c5c5c9a9bbc3b6424b473bafb7f9cfc520026a980d51cd96c9031442"
                                       },
                                "es":  {
                                           "output_path":  "dist\\legal\\es\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\es\\terms_of_service.md",
-                                          "sha256":  "314e9aad9d73e9446e37ef94b7889b5aaac3484e8ab9b16d4335a1633095de0c"
+                                          "source_path":  "legal\\es\\terms_of_service.md",
+                                          "sha256":  "63697e1a789e39ba876130c790069035c109b24ccc3f69d84e363312f205aa88"
                                       },
                                "fr":  {
                                           "output_path":  "dist\\legal\\fr\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\fr\\terms_of_service.md",
-                                          "sha256":  "7de1c05ec715a7b014c12f9e2eaeb67e5386ddc484aa4762340fd432c9f676a1"
+                                          "source_path":  "legal\\fr\\terms_of_service.md",
+                                          "sha256":  "2f746071ca5967ab2b84bdee988d1e14e96f8e7eb8cf02670b577b2f33178ceb"
                                       },
                                "pt":  {
                                           "output_path":  "dist\\legal\\pt\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\pt\\terms_of_service.md",
-                                          "sha256":  "cc296dc90780ba929d691e70bd5dd45798b81707e2b3a96547bcbb96300dab84"
+                                          "source_path":  "legal\\pt\\terms_of_service.md",
+                                          "sha256":  "9e1a9300c1169a213ff98d0c0b0f1600e5d9aaaea59e88042eb2df5d7171589c"
                                       },
                                "de":  {
                                           "output_path":  "dist\\legal\\de\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\de\\terms_of_service.md",
-                                          "sha256":  "d5d86cde94c5879b1b1c7c008f38396a9edeb44f41d44c3afec7da201ccecd07"
+                                          "source_path":  "legal\\de\\terms_of_service.md",
+                                          "sha256":  "4c1f62144bbad1cd786ab4fd99e0f97e990f55ea43d4d857f42cf59323a0de62"
                                       },
                                "en":  {
                                           "output_path":  "dist\\legal\\en\\terms.html",
-                                          "source_path":  "repo_split\\data\\legal\\en\\terms_of_service.md",
-                                          "sha256":  "a6870036e30662b42d602eddf0e3d8200f14d0c91c46fc93cc7b32858847db95"
+                                          "source_path":  "legal\\en\\terms_of_service.md",
+                                          "sha256":  "d4758d13c3b6fdb5d5186b51985977b0d9271f1dbc636fb1ddfe6528ceba2363"
                                       }
                            }
              }
