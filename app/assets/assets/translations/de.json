@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Workspace konfigurieren",
-        "description": "Waehlen Sie Sprache, Basiswaehrung und optionale API-Schluessel. Ihre Einstellungen gelten sofort auf Desktop- und Mobile-Layouts."
+        "description": "Waehlen Sie Sprache, Basiswaehrung und optionale API-Schluessel. Ihre Einstellungen gelten sofort auf Mobile- und Web-Demo-Layouts."
       },
       "import": {
         "title": "Import aus Broker-Abrechnungen",
-        "description": "Importieren Sie CSV/PDF-Dateien unterstuetzter Broker, pruefen Sie geparste Zeilen und behandeln Sie Duplikate mit Merge-Strategien vor dem Speichern."
+        "description": "Importieren Sie CSV/PDF-Dateien unterstuetzter Broker, bearbeiten Sie geparste Zeilen direkt und behandeln Sie Duplikate mit Merge-Strategien vor dem Speichern."
       },
       "analysis": {
         "title": "KI-Analyse und Chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Live-Preise und Performance",
-        "description": "Verfolgen Sie Positionspreise mit Quellen-Badges und Fallback-Logik: EODHD Echtzeit -> FMP -> taeglicher Snapshot."
+        "description": "Verfolgen Sie Positionspreise mit Quellen-Badges: kostenlose taegliche oeffentliche Snapshots, EODHD Echtzeit oder FMP-Fallback wenn Sie Ihre Schluessel hinzufuegen, plus Gemini AI fuer optionale Analysen."
       },
       "goals": {
         "title": "Anlageziele",
+        "description": "Plane kurzfristige, mittelfristige und langfristige Finanzziele mit Fortschrittsverfolgung und gefuehrtem Rebalancing.",
         "content": "Plane kurzfristige, mittelfristige und langfristige Finanzziele passend zu deinem Niveau.",
         "details": "**Was Ziele sind**\nEin Ziel ist eine messbare finanzielle Vorgabe (Zielbetrag + Frist), die die App neben deinem echten Portfolio mitfuhrt. Nichts wird online gesendet: Jedes Ziel bleibt nur auf deinem Geraet.\n\n**Drei Erfahrungsstufen**\nDamit neue Nutzer nicht mit Finanzjargon ueberlastet werden, gruppiert die App die 20 Zielvorlagen in drei Stufen:\n\n- **Einsteiger (entry level)** â€” Notgroschen, Allgemeine Ersparnisse, Schuldentilgung, Grosse Anschaffung, Reisen, Hochzeit, Familie / Kinder, Ausbildung.\n- **Mittel** â€” Hauskauf, Autokauf, Ruhestand, Passives Einkommen, Portfolio-Wachstum, Individuell. Ziele mit laengerem Horizont, die monatliche Planung erfordern.\n- **Experte** â€” Vorzeitiger Ruhestand (FIRE), Dividendeneinkommen, Diversifikationsziel, Risikomanagement, Steueroptimierung, Nachlassplanung.\n\n**Status**\naktiv, abgeschlossen, pausiert, abgebrochen. Der Wechsel zu 'abgeschlossen' erfolgt automatisch beim Erreichen des Zielbetrags.\n\n**Formularfelder**\n- Typ (mit Horizont-Vorschlag)\n- Name und Beschreibung\n- Zielbetrag und Waehrung\n- Bereits gesparter Betrag\n- Zieldatum (optional, je nach Typ vorbelegt)\n- Monatlicher Beitrag (optional)\n\n**Berechnete Metriken**\n- Fortschrittsprozent und Restbetrag\n- Monate bis zum Zieldatum\n- Erforderlicher Monatsbeitrag fuer puenktliche Zielerreichung\n- Anzeige 'on-track', wenn aktueller Beitrag >= erforderlich\n\n**Datenschutz**\nZiele werden in der lokalen Hive-Box goals gespeichert. Kein Ziel wird je an externe Server gesendet. Datenreset loescht alle Ziele.\n\n**Empfohlener Workflow je Stufe**\n- *Einsteiger*: Beginne mit einem Notgroschen ueber 3-6 Monate Fixkosten. Ergaenze um ein Sparziel.\n- *Mittel*: Fuege Ruhestand und Hauskauf mit 5-30 Jahren Horizont hinzu. Definiere eine Zielallokation und verbinde sie mit dem Rebalancing-Modul.\n- *Experte*: Erstelle FIRE / Dividendeneinkommen / Diversifikation und nutze das Glossar fuer Toleranzbaender, max. Drawdown und 4%-Regel."
       },
@@ -158,6 +159,7 @@
       "title": "Erforderliche rechtliche Zustimmung",
       "intro": "Um die App zu nutzen, mussen Sie die folgenden 3 Dokumente akzeptieren. Tippen Sie auf jedes, um es vor der Annahme vollstandig zu lesen.",
       "view_documents": "Vollstandige Dokumente offnen",
+      "read_full": "Vollstandiges Dokument lesen",
       "footnote": "Ohne Ihre ausdruckliche Zustimmung konnen Sie nicht fortfahren. Sie konnen die Dokumente jederzeit unter Einstellungen > Rechtliche Dokumente erneut einsehen.",
       "checks": {
         "privacy_policy": "Ich habe die Datenschutzerklarung gelesen und akzeptiere sie",
@@ -218,6 +220,9 @@
     "create_import_tab": "Von Broker importieren",
     "create_success": "Portfolio erfolgreich erstellt!",
     "manage_portfolios": "Portfolios verwalten",
+    "actions": {
+      "delete_current": "Aktuelles Portfolio loeschen"
+    },
     "rename_portfolio": "Portfolio umbenennen",
     "portfolio_name": "Portfolio-Name",
     "portfolio_name_hint": "z.B. Langfristige Anlagen",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Abonnement",
       "manage_title": "Abonnement verwalten",
-      "manage_subtitle": "Verfuegbare Tarife ansehen oder kostenlosen Testzeitraum starten"
+      "manage_subtitle": "Verfuegbare Tarife ansehen oder kostenlosen Testzeitraum starten",
+      "trial_active_title": "Kostenloser Testzeitraum aktiv",
+      "trial_remaining": "{} Tage verbleibend",
+      "trial_dialog_title": "Testzeitraum laeuft",
+      "trial_dialog_message": "Ihr 7-taegiger kostenloser Testzeitraum ist aktiv. Noch {} Tage bis zum Ende. Alle Premium-Funktionen bleiben bis zum Ablauf entsperrt.",
+      "trial_dialog_view_plans": "Tarife ansehen",
+      "premium_active_title": "Aktiver Tarif: {}",
+      "premium_active_subtitle": "Abonnement verwalten oder Kaeufe wiederherstellen",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "EODHD-Marktdaten (Optional)",
@@ -976,7 +995,8 @@
       "progress": "Fortschritt",
       "target_date": "Zieldatum",
       "created_date": "Erstellungsdatum"
-    }
+    },
+    "target_date_label": "Ziel: {}"
   },
   "api_quota": {
     "providers": {

@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Configure seu workspace",
-        "description": "Escolha idioma, moeda base e chaves API opcionais. Suas configuracoes se aplicam instantaneamente em layouts desktop e mobile."
+        "description": "Escolha idioma, moeda base e chaves API opcionais. Suas configuracoes se aplicam instantaneamente em layouts mobile e web demo."
       },
       "import": {
         "title": "Importe de extratos da corretora",
-        "description": "Importe arquivos CSV/PDF de corretoras suportadas, revise linhas analisadas e trate duplicatas com estrategias de merge antes de salvar."
+        "description": "Importe arquivos CSV/PDF de corretoras suportadas, edite as linhas diretamente e trate duplicatas com estrategias de merge antes de salvar."
       },
       "analysis": {
         "title": "Analise IA e chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Precos ao vivo e desempenho",
-        "description": "Acompanhe precos das posicoes com badges de fonte e logica de fallback: EODHD tempo real -> FMP -> snapshot diario."
+        "description": "Acompanhe precos das posicoes com badges de fonte: snapshots publicos diarios (gratis), EODHD tempo real ou fallback FMP se adicionar suas chaves, alem de Gemini AI para analises opcionais."
       },
       "goals": {
         "title": "Objetivos de investimento",
+        "description": "Planeje objetivos financeiros de curto, medio e longo prazo com acompanhamento do progresso e rebalanceamento guiado.",
         "content": "Planeje objetivos financeiros de curto, medio e longo prazo adaptados ao seu nivel.",
         "details": "**O que sao objetivos**\nUm objetivo e uma meta financeira mensuravel (valor alvo + prazo) que a app acompanha em paralelo a sua carteira real. Nada e enviado online: cada objetivo permanece somente no seu dispositivo.\n\n**Tres niveis de experiencia**\nPara nao sobrecarregar novos usuarios com jargao financeiro, a app agrupa os 20 modelos de objetivo em tres niveis:\n\n- **Iniciante (entry level)** â€” Fundo de emergencia, Poupanca geral, Quitacao de dividas, Compra grande, Viagens, Casamento, Familia / filhos, Educacao.\n- **Intermediario** â€” Compra de imovel, Compra de carro, Aposentadoria, Renda passiva, Crescimento da carteira, Personalizado.\n- **Avancado** â€” Aposentadoria antecipada (FIRE), Renda de dividendos, Meta de diversificacao, Gestao de risco, Otimizacao fiscal, Planejamento sucessorio.\n\n**Estados**\nativo, concluido, em pausa, cancelado. A transicao para 'concluido' acontece automaticamente ao alcancar o valor alvo.\n\n**Campos do formulario**\n- Tipo (com sugestao de horizonte)\n- Nome e descricao\n- Valor alvo e moeda\n- Valor ja poupado\n- Data alvo (opcional, pre-preenchida segundo o tipo)\n- Contribuicao mensal (opcional)\n\n**Metricas calculadas**\n- Percentual de progresso e valor restante\n- Meses ate a data alvo\n- Contribuicao mensal necessaria para chegar a tempo\n- Indicador 'on-track' se a contribuicao atual >= a necessaria\n\n**Privacidade**\nOs objetivos ficam na box Hive local goals. Nenhum objetivo e enviado a servidores externos. Restaurar dados elimina todos os objetivos.\n\n**Fluxo recomendado por nivel**\n- *Iniciante*: Crie primeiro um Fundo de emergencia de 3-6 meses de despesas. Adicione um objetivo de Poupanca para projetos.\n- *Intermediario*: Adicione Aposentadoria e Imovel com horizontes 5-30 anos. Defina alocacao alvo e ligue ao modulo de Rebalanceamento.\n- *Avancado*: Crie FIRE / Renda de dividendos / Diversificacao e use o glossario para definir bandas de tolerancia, drawdown maximo e regra dos 4%."
       },
@@ -158,6 +159,7 @@
       "title": "Aceitacao legal obrigatoria",
       "intro": "Para usar a app deves aceitar os 3 documentos seguintes. Toca em cada um para o ler na integra antes de aceitar.",
       "view_documents": "Abrir os documentos completos",
+      "read_full": "Ler documento completo",
       "footnote": "Sem a tua aceitacao explicita nao podes continuar. Podes consultar de novo os documentos em Configuracoes > Documentos legais a qualquer momento.",
       "checks": {
         "privacy_policy": "Li e aceito a Politica de Privacidade",
@@ -218,6 +220,9 @@
     "create_import_tab": "Importar da corretora",
     "create_success": "Carteira criada com sucesso!",
     "manage_portfolios": "Gerenciar Carteiras",
+    "actions": {
+      "delete_current": "Excluir carteira atual"
+    },
     "rename_portfolio": "Renomear Carteira",
     "portfolio_name": "Nome da Carteira",
     "portfolio_name_hint": "ex. Investimentos de Longo Prazo",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Assinatura",
       "manage_title": "Gerir assinatura",
-      "manage_subtitle": "Ver planos disponiveis ou iniciar a versao de avaliacao gratuita"
+      "manage_subtitle": "Ver planos disponiveis ou iniciar a versao de avaliacao gratuita",
+      "trial_active_title": "Avaliacao gratuita ativa",
+      "trial_remaining": "{} dias restantes",
+      "trial_dialog_title": "Avaliacao gratuita em curso",
+      "trial_dialog_message": "Sua avaliacao gratuita de 7 dias esta ativa. Faltam {} dias para terminar. Todos os recursos premium permanecem desbloqueados ate expirar.",
+      "trial_dialog_view_plans": "Ver planos",
+      "premium_active_title": "Plano ativo: {}",
+      "premium_active_subtitle": "Gerencie a assinatura ou restaure compras",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "Dados de Mercado EODHD (Opcional)",
@@ -976,7 +995,8 @@
       "progress": "Progresso",
       "target_date": "Data alvo",
       "created_date": "Data de criacao"
-    }
+    },
+    "target_date_label": "Alvo: {}"
   },
   "api_quota": {
     "providers": {

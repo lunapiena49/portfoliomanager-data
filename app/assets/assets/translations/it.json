@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Configura il tuo workspace",
-        "description": "Scegli lingua, valuta base e chiavi API opzionali. Le impostazioni si applicano subito su layout desktop e mobile."
+        "description": "Scegli lingua, valuta base e chiavi API opzionali. Le impostazioni si applicano subito su layout mobile e web demo."
       },
       "import": {
         "title": "Importa da estratti del broker",
-        "description": "Importa file CSV/PDF da broker supportati, controlla l'anteprima righe e gestisci i duplicati con strategie di merge prima del salvataggio."
+        "description": "Importa file CSV/PDF da broker supportati, modifica le righe direttamente e gestisci i duplicati con strategie di merge prima del salvataggio."
       },
       "analysis": {
         "title": "Analisi AI e chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Prezzi live e performance",
-        "description": "Monitora prezzi posizioni con badge fonte e logica di fallback: EODHD real-time -> FMP -> snapshot giornaliero."
+        "description": "Monitora prezzi posizioni con badge fonte: snapshot pubblici giornalieri (gratis), EODHD real-time o FMP fallback se aggiungi le tue chiavi, piu' Gemini AI per analisi opzionali."
       },
       "goals": {
         "title": "Obiettivi di investimento",
+        "description": "Pianifica obiettivi finanziari di breve, medio e lungo termine con tracking del progresso e ribilanciamento guidato.",
         "content": "Pianifica obiettivi finanziari di breve, medio e lungo termine adatti al tuo livello.",
         "details": "**Cosa sono gli obiettivi**\nUn obiettivo e' un traguardo finanziario monetizzabile (importo target + scadenza) che l'app tiene tracciato accanto al portafoglio reale. Niente viene inviato online: tutti gli obiettivi vivono solo sul tuo dispositivo.\n\n**Tre livelli di esperienza**\nPer non sovraccaricare i nuovi utenti con il gergo finanziario, l'app raggruppa i 20 modelli di obiettivo in tre livelli:\n\n- **Base (entry level)** â€” Fondo emergenza, Risparmio generico, Estinzione debiti, Grande acquisto, Viaggi, Matrimonio, Famiglia / figli, Istruzione. Obiettivi concreti di breve-medio termine, ideali per chi si avvicina al risparmio strutturato per la prima volta.\n- **Intermedio** â€” Casa, Auto, Pensione, Rendita passiva, Crescita portafoglio, Personalizzato. Obiettivi a piu lungo orizzonte che richiedono pianificazione mensile costante e composizione del rendimento.\n- **Esperto** â€” Pensione anticipata (FIRE), Reddito da dividendi, Target diversificazione, Gestione rischio, Ottimizzazione fiscale, Pianificazione successoria. Obiettivi di costruzione e protezione del patrimonio per investitori avanzati.\n\n**Stati di un obiettivo**\nattivo, completato, in pausa, annullato. La transizione a 'completato' avviene automaticamente quando l'importo accumulato raggiunge il target.\n\n**Campi del form**\n- Tipo (con suggerimento di orizzonte temporale)\n- Nome e descrizione\n- Importo target e valuta\n- Importo gia accumulato\n- Data target (opzionale, pre-compilata in base al tipo)\n- Contributo mensile (opzionale)\n\n**Metriche calcolate**\n- Percentuale di progresso e importo residuo\n- Mesi mancanti alla data target\n- Contributo mensile richiesto per arrivare in tempo\n- Flag 'on-track' se contributo attuale >= contributo richiesto\n\n**Privacy**\nGli obiettivi sono salvati nella Hive box locale goals. Nessun obiettivo viene mai inviato a server esterni, nemmeno alle chiavi API attive. Il reset dati elimina anche tutti gli obiettivi.\n\n**Workflow consigliato per ogni livello**\n- *Base*: Crea per primo un Fondo emergenza pari a 3-6 mesi di spese fisse. Affianca un obiettivo di Risparmio per progetti specifici. Abbi pazienza: la regolarita' del contributo mensile conta piu' del rendimento.\n- *Intermedio*: Aggiungi obiettivi di Pensione e Casa con orizzonte 5-30 anni. Imposta un'allocazione target e collega il modulo Ribilanciamento per allinearti.\n- *Esperto*: Crea obiettivi FIRE / Reddito da dividendi / Diversificazione e usa il glossario per definire bande di tolleranza, max drawdown ammesso e regola del 4% per il safe withdrawal rate."
       },
@@ -158,6 +159,7 @@
       "title": "Accettazione legale obbligatoria",
       "intro": "Per usare l'app devi accettare i 3 documenti seguenti. Toccali per leggerli per intero prima di accettare.",
       "view_documents": "Apri i documenti completi",
+      "read_full": "Leggi documento completo",
       "footnote": "Senza la tua accettazione esplicita non e' possibile proseguire. Potrai consultare di nuovo i documenti da Impostazioni > Documenti legali in qualsiasi momento.",
       "checks": {
         "privacy_policy": "Ho letto e accetto la Privacy Policy",
@@ -218,6 +220,9 @@
     "create_import_tab": "Importa da Broker",
     "create_success": "Portafoglio creato con successo!",
     "manage_portfolios": "Gestisci Portafogli",
+    "actions": {
+      "delete_current": "Elimina portafoglio corrente"
+    },
     "rename_portfolio": "Rinomina Portafoglio",
     "portfolio_name": "Nome Portafoglio",
     "portfolio_name_hint": "es. Investimenti a Lungo Termine",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Abbonamento",
       "manage_title": "Gestisci abbonamento",
-      "manage_subtitle": "Visualizza i piani disponibili o attiva la prova gratuita"
+      "manage_subtitle": "Visualizza i piani disponibili o attiva la prova gratuita",
+      "trial_active_title": "Prova gratuita attiva",
+      "trial_remaining": "{} giorni rimasti",
+      "trial_dialog_title": "Prova gratuita in corso",
+      "trial_dialog_message": "La tua prova gratuita di 7 giorni e' attiva. Mancano {} giorni alla fine. Tutte le funzionalita' premium sono sbloccate fino allo scadere.",
+      "trial_dialog_view_plans": "Vedi piani",
+      "premium_active_title": "Piano attivo: {}",
+      "premium_active_subtitle": "Gestisci abbonamento o ripristina acquisti",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "Dati di Mercato EODHD (Opzionale)",
@@ -976,7 +995,8 @@
       "progress": "Progresso",
       "target_date": "Data obiettivo",
       "created_date": "Data creazione"
-    }
+    },
+    "target_date_label": "Target: {}"
   },
   "api_quota": {
     "providers": {

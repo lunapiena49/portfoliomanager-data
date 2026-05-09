@@ -48,11 +48,11 @@
     "features": {
       "setup": {
         "title": "Configure your workspace",
-        "description": "Choose language, base currency, and optional API keys. Your settings sync instantly across desktop and mobile layouts."
+        "description": "Choose language, base currency, and optional API keys. Your settings apply instantly across mobile and web demo layouts."
       },
       "import": {
         "title": "Import from broker statements",
-        "description": "Import CSV/PDF files from supported brokers, preview parsed rows, and handle duplicates with merge strategies before saving."
+        "description": "Import CSV/PDF files from supported brokers, edit parsed rows directly, and handle duplicates with merge strategies before saving."
       },
       "analysis": {
         "title": "AI analysis and chat",
@@ -60,10 +60,11 @@
       },
       "tracking": {
         "title": "Live pricing and performance",
-        "description": "Track position prices with source badges and fallback logic: EODHD real-time -> FMP -> daily snapshot."
+        "description": "Track position prices with source badges: free daily public snapshots, plus EODHD real-time or FMP fallback if you add your keys, and Gemini AI for optional analysis."
       },
       "goals": {
         "title": "Investment goals",
+        "description": "Plan short, medium and long-term financial goals with progress tracking and guided rebalancing.",
         "content": "Plan short, medium and long-term financial goals tailored to your level.",
         "details": "**What goals are**\nA goal is a measurable financial target (target amount + deadline) that the app tracks alongside your real portfolio. Nothing is sent online: every goal lives on your device only.\n\n**Three experience tiers**\nTo avoid overloading new users with finance jargon, the app groups the 20 goal templates into three tiers:\n\n- **Starter (entry level)** â€” Emergency fund, General savings, Debt repayment, Big-ticket purchase, Travel, Wedding, Family / kids, Education. Concrete short- to medium-term goals, ideal for users approaching structured saving for the first time.\n- **Intermediate** â€” House purchase, Car purchase, Retirement, Passive income, Portfolio growth, Custom. Longer-horizon goals that require steady monthly planning and benefit from compound returns.\n- **Expert** â€” Early retirement (FIRE), Dividend income, Diversification target, Risk management, Tax optimisation, Estate planning. Wealth-construction and protection goals aimed at advanced investors.\n\n**Goal states**\nactive, completed, paused, cancelled. Transition to 'completed' happens automatically when the saved amount reaches the target.\n\n**Form fields**\n- Type (with suggested time horizon hint)\n- Name and description\n- Target amount and currency\n- Already saved amount\n- Target date (optional, pre-filled based on type)\n- Monthly contribution (optional)\n\n**Computed metrics**\n- Progress percentage and remaining amount\n- Months left until target date\n- Required monthly contribution to land on time\n- 'On-track' flag if current contribution >= required contribution\n\n**Privacy**\nGoals are stored in the local goals Hive box. No goal is ever sent to external servers, not even to the active API keys. Resetting the app data also removes all goals.\n\n**Suggested workflow per tier**\n- *Starter*: Build an emergency fund equal to 3-6 months of fixed expenses first. Pair it with a Savings goal for specific projects. Patience matters: contribution regularity beats yield.\n- *Intermediate*: Add Retirement and House goals with 5-30 year horizons. Set a target asset allocation and link it to the Rebalancing module to stay aligned.\n- *Expert*: Create FIRE / Dividend income / Diversification goals and use the glossary to define tolerance bands, max acceptable drawdown and the 4% rule as your safe withdrawal rate."
       },
@@ -158,6 +159,7 @@
       "title": "Required legal acceptance",
       "intro": "To use the app you must accept the following 3 documents. Tap each to read the full text before accepting.",
       "view_documents": "Open the full documents",
+      "read_full": "Read full document",
       "footnote": "Without your explicit acceptance you cannot proceed. You can review the documents again from Settings > Legal documents at any time.",
       "checks": {
         "privacy_policy": "I have read and accept the Privacy Policy",
@@ -218,6 +220,9 @@
     "create_import_tab": "Import from Broker",
     "create_success": "Portfolio created successfully!",
     "manage_portfolios": "Manage Portfolios",
+    "actions": {
+      "delete_current": "Delete current portfolio"
+    },
     "rename_portfolio": "Rename Portfolio",
     "portfolio_name": "Portfolio Name",
     "portfolio_name_hint": "e.g., Long Term Investments",
@@ -629,7 +634,21 @@
     "subscription": {
       "title": "Subscription",
       "manage_title": "Manage subscription",
-      "manage_subtitle": "View available plans or start the free trial"
+      "manage_subtitle": "View available plans or start the free trial",
+      "trial_active_title": "Free trial active",
+      "trial_remaining": "{} days remaining",
+      "trial_dialog_title": "Free trial in progress",
+      "trial_dialog_message": "Your 7-day free trial is active. {} days left until it ends. All premium features remain unlocked until expiry.",
+      "trial_dialog_view_plans": "View plans",
+      "premium_active_title": "Active plan: {}",
+      "premium_active_subtitle": "Manage subscription or restore purchases",
+      "tier": {
+        "single_annual": "Single Annual",
+        "single_lifetime": "Single Lifetime",
+        "family_annual": "Family Annual",
+        "family_lifetime": "Family Lifetime",
+        "generic": "Premium"
+      }
     },
     "eodhd": {
       "title": "EODHD Market Data (Optional)",
@@ -976,7 +995,8 @@
       "progress": "Progress",
       "target_date": "Target date",
       "created_date": "Created date"
-    }
+    },
+    "target_date_label": "Target: {}"
   },
   "api_quota": {
     "providers": {
