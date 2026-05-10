@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024" role="img" aria-label="PluriFin app icon">
+  <defs>
+    <linearGradient id="silverStroke" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#F2F4F7"/>
+      <stop offset="50%" stop-color="#D5DAE2"/>
+      <stop offset="100%" stop-color="#B6BDC8"/>
+    </linearGradient>
+    <linearGradient id="mintFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5BFCBE"/>
+      <stop offset="100%" stop-color="#26D896"/>
+    </linearGradient>
+  </defs>
+  <!-- Midnight square background. Adaptive icon mask (Android) clips to circle/squircle automatically. -->
+  <rect width="1024" height="1024" fill="#0A0E14"/>
+  <!-- Infinity symbol: figure-8 path centred at (512, 512) with safe-zone padding (~33%). -->
+  <!-- Path uses 4 cubic Bezier curves; line-cap round for clean joins at the cross-over. -->
+  <path
+    d="M 232 512
+       C 232 308 419 308 512 512
+       C 605 716 792 716 792 512
+       C 792 308 605 308 512 512
+       C 419 716 232 716 232 512 Z"
+    fill="none"
+    stroke="url(#silverStroke)"
+    stroke-width="68"
+    stroke-linecap="round"
+    stroke-linejoin="round"/>
+  <!-- Mint diamond accent at the cross-over. -->
+  <path d="M 512 462 L 562 512 L 512 562 L 462 512 Z" fill="url(#mintFill)"/>
+</svg>
