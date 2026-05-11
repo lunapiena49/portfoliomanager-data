@@ -34,6 +34,8 @@
     "no": "Non",
     "ok": "OK",
     "clear": "Effacer",
+    "copy": "Copier",
+    "copied": "Copie dans le presse-papier",
     "delete_confirm": {
       "title": "Confirmer la suppression",
       "message": "Supprimer {item}? Cette action est irreversible.",
@@ -211,6 +213,9 @@
     },
     "empty_portfolio": {
       "description": "Creez ou importez un portefeuille pour commencer"
+    },
+    "error": {
+      "title": "Impossible de charger le portefeuille"
     },
     "import_portfolio": "Importer Portefeuille",
     "add_position": "Ajouter Position",
@@ -397,11 +402,17 @@
     "exchange_hint": "ex. NASDAQ"
   },
   "analysis": {
+    "empty_state": {
+      "title": "Chargez un portefeuille pour commencer",
+      "description": "PluriFin AI analyse votre portefeuille. Importez un CSV ou creez un portefeuille pour recevoir des insights personnalises."
+    },
     "title": "Analyse IA",
     "generating": "Generation de l'analyse...",
     "ask_ai": "Interrogez l'IA sur votre portefeuille",
     "chat_title": "Assistant IA",
     "chat_tooltip": "Chat IA",
+    "clear_chat": "Effacer la conversation",
+    "send_message": "Envoyer le message",
     "generate_full": "Generer l'analyse complete",
     "ai_result_title": "Analyse IA",
     "no_portfolio_loaded": "Aucun portefeuille charge",
@@ -490,6 +501,10 @@
     }
   },
   "market": {
+    "empty_portfolio": {
+      "title": "Ajoutez des positions pour les suivre ici",
+      "description": "Importez un CSV de courtier ou creez un portefeuille pour voir les prix en direct et vos principaux mouvements."
+    },
     "title": "Apercu du Marche",
     "top_gainers": "Meilleures Hausses",
     "top_losers": "Pires Baisses",
@@ -754,7 +769,22 @@
       "version": "Version",
       "review_onboarding": "Revoir l'onboarding",
       "legal_documents": "Documents legaux",
-      "onboarding_reset_message": "L'onboarding a ete reinitialise. L'application reouvrira le flux d'onboarding."
+      "onboarding_reset_message": "L'onboarding a ete reinitialise. L'application reouvrira le flux d'onboarding.",
+      "app_info": {
+        "title": "A propos de l'app",
+        "tagline": "Gestionnaire de portefeuille privacy-first pour investisseurs retail",
+        "version_label": "Version",
+        "loading": "Chargement...",
+        "legal": "Documents legaux",
+        "attribution": "Attributions",
+        "licenses": "Licences open source",
+        "licenses_subtitle": "Paquets Dart/Flutter utilises",
+        "contact": "Contacts",
+        "developer": "Developpeur",
+        "support_email": "Support",
+        "legal_email": "Legal",
+        "website": "Site web"
+      }
     }
   },
   "guide": {

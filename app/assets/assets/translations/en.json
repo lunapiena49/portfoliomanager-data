@@ -34,6 +34,8 @@
     "no": "No",
     "ok": "OK",
     "clear": "Clear",
+    "copy": "Copy",
+    "copied": "Copied to clipboard",
     "delete_confirm": {
       "title": "Confirm deletion",
       "message": "Delete {item}? This cannot be undone.",
@@ -211,6 +213,9 @@
     },
     "empty_portfolio": {
       "description": "Create or import a portfolio to get started"
+    },
+    "error": {
+      "title": "Couldn't load the portfolio"
     },
     "import_portfolio": "Import Portfolio",
     "add_position": "Add Position",
@@ -397,11 +402,17 @@
     "exchange_hint": "e.g., NASDAQ"
   },
   "analysis": {
+    "empty_state": {
+      "title": "Load a portfolio to get started",
+      "description": "PluriFin AI analyses your portfolio. Import a CSV or create a portfolio to receive personalised insights."
+    },
     "title": "AI Analysis",
     "generating": "Generating analysis...",
     "ask_ai": "Ask AI about your portfolio",
     "chat_title": "AI Assistant",
     "chat_tooltip": "AI Chat",
+    "clear_chat": "Clear chat",
+    "send_message": "Send message",
     "generate_full": "Generate Full Analysis",
     "ai_result_title": "AI Analysis",
     "no_portfolio_loaded": "No portfolio loaded",
@@ -490,6 +501,10 @@
     }
   },
   "market": {
+    "empty_portfolio": {
+      "title": "Add positions to track them here",
+      "description": "Import a broker CSV or create a portfolio to see live prices and your top movers."
+    },
     "title": "Market Overview",
     "top_gainers": "Top Gainers",
     "top_losers": "Top Losers",
@@ -754,7 +769,22 @@
       "version": "Version",
       "review_onboarding": "Review onboarding",
       "legal_documents": "Legal documents",
-      "onboarding_reset_message": "Onboarding has been reset. The app will reopen the onboarding flow."
+      "onboarding_reset_message": "Onboarding has been reset. The app will reopen the onboarding flow.",
+      "app_info": {
+        "title": "About app",
+        "tagline": "Privacy-first portfolio manager for retail investors",
+        "version_label": "Version",
+        "loading": "Loading...",
+        "legal": "Legal documents",
+        "attribution": "Attribution",
+        "licenses": "Open source licenses",
+        "licenses_subtitle": "Dart/Flutter packages used",
+        "contact": "Contacts",
+        "developer": "Developer",
+        "support_email": "Support",
+        "legal_email": "Legal",
+        "website": "Website"
+      }
     }
   },
   "guide": {

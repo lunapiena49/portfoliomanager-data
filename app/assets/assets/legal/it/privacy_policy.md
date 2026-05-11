@@ -290,6 +290,7 @@ del repo pubblico `lunapiena49/portfoliomanager-data` cartella `legal/`.
 | Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | `plurifin.app+gdpr@gmail.com` |
 | Privacy & sicurezza | `plurifin.app+privacy@gmail.com` |
 | Supporto generale | `plurifin.app+support@gmail.com` |
+| Legal & disclaimer | `plurifin.app+legal@gmail.com` |
 | Contatto pubblico Play Store | `plurifin.app@gmail.com` |
 
 ## 13. Foro competente e legge applicabile

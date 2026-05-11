@@ -34,6 +34,8 @@
     "no": "Nein",
     "ok": "OK",
     "clear": "Loeschen",
+    "copy": "Kopieren",
+    "copied": "In Zwischenablage kopiert",
     "delete_confirm": {
       "title": "Loeschen bestaetigen",
       "message": "{item} loeschen? Dies kann nicht rueckgaengig gemacht werden.",
@@ -211,6 +213,9 @@
     },
     "empty_portfolio": {
       "description": "Erstellen oder importieren Sie ein Portfolio, um zu beginnen"
+    },
+    "error": {
+      "title": "Portfolio konnte nicht geladen werden"
     },
     "import_portfolio": "Portfolio importieren",
     "add_position": "Position hinzufuegen",
@@ -397,11 +402,17 @@
     "exchange_hint": "z.B. NASDAQ"
   },
   "analysis": {
+    "empty_state": {
+      "title": "Laden Sie ein Portfolio, um zu beginnen",
+      "description": "PluriFin AI analysiert Ihr Portfolio. Importieren Sie eine CSV oder erstellen Sie ein Portfolio, um personalisierte Einblicke zu erhalten."
+    },
     "title": "KI-Analyse",
     "generating": "Analyse wird generiert...",
     "ask_ai": "Fragen Sie die KI zu Ihrem Portfolio",
     "chat_title": "KI-Assistent",
     "chat_tooltip": "KI-Chat",
+    "clear_chat": "Chat leeren",
+    "send_message": "Nachricht senden",
     "generate_full": "Vollstaendige Analyse erstellen",
     "ai_result_title": "KI-Analyse",
     "no_portfolio_loaded": "Kein Portfolio geladen",
@@ -490,6 +501,10 @@
     }
   },
   "market": {
+    "empty_portfolio": {
+      "title": "Positionen hinzufuegen und hier verfolgen",
+      "description": "Importieren Sie eine Broker-CSV oder erstellen Sie ein Portfolio, um Live-Preise und Top-Mover zu sehen."
+    },
     "title": "Marktuebersicht",
     "top_gainers": "Top-Gewinner",
     "top_losers": "Top-Verlierer",
@@ -754,7 +769,22 @@
       "version": "Version",
       "review_onboarding": "Onboarding erneut anzeigen",
       "legal_documents": "Rechtliche Dokumente",
-      "onboarding_reset_message": "Onboarding wurde zurueckgesetzt. Die App oeffnet den Onboarding-Flow erneut."
+      "onboarding_reset_message": "Onboarding wurde zurueckgesetzt. Die App oeffnet den Onboarding-Flow erneut.",
+      "app_info": {
+        "title": "Ueber die App",
+        "tagline": "Privacy-first Portfolio-Manager fuer Retail-Anleger",
+        "version_label": "Version",
+        "loading": "Laden...",
+        "legal": "Rechtliche Dokumente",
+        "attribution": "Attribute",
+        "licenses": "Open-Source-Lizenzen",
+        "licenses_subtitle": "Verwendete Dart/Flutter-Pakete",
+        "contact": "Kontakte",
+        "developer": "Entwickler",
+        "support_email": "Support",
+        "legal_email": "Legal",
+        "website": "Webseite"
+      }
     }
   },
   "guide": {

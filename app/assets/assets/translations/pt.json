@@ -34,6 +34,8 @@
     "no": "Nao",
     "ok": "OK",
     "clear": "Limpar",
+    "copy": "Copiar",
+    "copied": "Copiado para a area de transferencia",
     "delete_confirm": {
       "title": "Confirmar exclusao",
       "message": "Excluir {item}? Esta acao nao pode ser desfeita.",
@@ -211,6 +213,9 @@
     },
     "empty_portfolio": {
       "description": "Crie ou importe uma carteira para comecar"
+    },
+    "error": {
+      "title": "Nao foi possivel carregar a carteira"
     },
     "import_portfolio": "Importar Carteira",
     "add_position": "Adicionar Posicao",
@@ -397,11 +402,17 @@
     "exchange_hint": "ex. NASDAQ"
   },
   "analysis": {
+    "empty_state": {
+      "title": "Carregue uma carteira para comecar",
+      "description": "PluriFin AI analisa sua carteira. Importe um CSV ou crie uma carteira para receber insights personalizados."
+    },
     "title": "Analise IA",
     "generating": "Gerando analise...",
     "ask_ai": "Pergunte a IA sobre sua carteira",
     "chat_title": "Assistente de IA",
     "chat_tooltip": "Chat de IA",
+    "clear_chat": "Limpar chat",
+    "send_message": "Enviar mensagem",
     "generate_full": "Gerar Analise Completa",
     "ai_result_title": "Analise IA",
     "no_portfolio_loaded": "Nenhuma carteira carregada",
@@ -490,6 +501,10 @@
     }
   },
   "market": {
+    "empty_portfolio": {
+      "title": "Adicione posicoes para acompanha-las aqui",
+      "description": "Importe um CSV de corretora ou crie uma carteira para ver precos ao vivo e seus principais movimentos."
+    },
     "title": "Visao Geral do Mercado",
     "top_gainers": "Maiores Altas",
     "top_losers": "Maiores Baixas",
@@ -754,7 +769,22 @@
       "version": "Versao",
       "review_onboarding": "Rever onboarding",
       "legal_documents": "Documentos legais",
-      "onboarding_reset_message": "Onboarding redefinido. O app vai reabrir o fluxo de onboarding."
+      "onboarding_reset_message": "Onboarding redefinido. O app vai reabrir o fluxo de onboarding.",
+      "app_info": {
+        "title": "Sobre o app",
+        "tagline": "Gestor de carteira privacy-first para investidores retail",
+        "version_label": "Versao",
+        "loading": "Carregando...",
+        "legal": "Documentos legais",
+        "attribution": "Atribuicoes",
+        "licenses": "Licencas open source",
+        "licenses_subtitle": "Pacotes Dart/Flutter utilizados",
+        "contact": "Contactos",
+        "developer": "Programador",
+        "support_email": "Suporte",
+        "legal_email": "Legal",
+        "website": "Sitio web"
+      }
     }
   },
   "guide": {

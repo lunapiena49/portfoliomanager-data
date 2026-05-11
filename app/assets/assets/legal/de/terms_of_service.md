@@ -8,15 +8,15 @@
 
 ## 1. Parteien
 
-Anbieter: **Filippo Salemi**, naturliche Person, Marke **PluriFin**,
+Anbieter: **Filippo Salemi**, natürliche Person, Marke **PluriFin**,
 Italien. E-Mail: `plurifin.app@gmail.com`. Mit Installation akzeptiert
 der Nutzer diese Bedingungen.
 
 ## 2. Gegenstand
 
-Informative App fur personliche Portfolioverwaltung: CSV/PDF Import von
-Brokern, manuelle Positionserfassung, Finanzziele, offentliche
-Marktdaten, optionale KI-Analysen, Rebalancing-Vorschlage.
+Informative App für persönliche Portfolioverwaltung: CSV/PDF Import von
+Brokern, manuelle Positionserfassung, Finanzziele, öffentliche
+Marktdaten, optionale KI-Analysen, Rebalancing-Vorschläge.
 
 App ist **Software**, kein Finanzdienst, Broker, Berater oder
 Vermittler. Siehe auch `disclaimer_financial.md`.
@@ -25,105 +25,163 @@ Vermittler. Siehe auch `disclaimer_financial.md`.
 
 - KEINE Anlageberatung (italienisches TUF Art. 1.5-septies, MiFID II)
 - KEINE Portfolioverwaltung (TUF Art. 1.5.d)
-- KEINE Auftragsausfuhrung
+- KEINE Auftragsausführung
 - KEINE Operationen, keine Verbindung zu Brokern
 - KEINE Verwahrung von Geldern oder Instrumenten
 - KEINE Renditegarantie
-- NICHT der CONSOB / Banca d'Italia / BaFin / Aquivalente unterstellt
+- NICHT der CONSOB / Banca d'Italia / BaFin / Äquivalente unterstellt
 
-## 4. Geschaftsmodell
+## 4. Geschäftsmodell
 
-| Stufe | Kosten | Funktionen |
-|---|---|---|
-| Webapp Demo | Gratis | Max 5 manuelle Positionen, kein Import, wochentl. Markt, KI/Ziele gesperrt |
-| Trial Android (7 Tage) | Gratis, ohne Karte | Premium komplett |
-| Premium Android | EUR 0,99/Jahr (autom. jahrl. Verlangerung) | Alles freigeschaltet |
+PluriFin bietet eine kostenlose Stufe, eine kostenlose Testphase und vier
+Premium-Varianten (Annual/Lifetime x Single/Family). Alle Premium-Varianten
+schalten denselben Funktionsumfang frei: Unterschiede bestehen im
+Zahlungsmodell (wiederkehrend jährlich vs. einmalig) und in der Anzahl
+zugelassener Konten (1 Google-Konto vs. bis zu 6 Konten in einer Google
+Family Group).
+
+| Stufe | Kosten | Modell | Funktionen |
+|---|---|---|---|
+| Webapp Demo | Gratis | n/a | Max 5 manuelle Positionen, kein Import, wöchentl. Markt, KI/Ziele gesperrt |
+| Trial Android (7 Tage) | Gratis, ohne Karte | n/a | Premium komplett für 7 Tage |
+| Premium Single Annual | EUR 0,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet, ein Google-Konto |
+| Premium Single Lifetime | EUR 4,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet, ein Google-Konto |
+| Premium Family Annual | EUR 1,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
+| Premium Family Lifetime | EUR 9,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
+
+Preise in EUR für den italienischen Markt. Für andere Länder wendet
+Google Play eine automatische Kaufkraftparität-Umrechnung an. MwSt., wo
+anwendbar, ist im von Google Play beim Kauf angezeigten Endpreis
+enthalten.
 
 **Zahlung**: nur Google Play Billing (Google Pay, Karten, Play-Guthaben).
-PluriFin erhalt keine Kartendaten.
+PluriFin erhält keine Kartendaten.
 
-**Verlangerung**: jahrlich automatisch. Jederzeit kundbar in
+**Premium-Abonnementtypen**:
+
+- **Annual** (Single/Family): Dauerschuldverhältnis mit automatischer
+  jährlicher Verlängerung.
+- **Lifetime** (Single/Family): Einmalzahlung, keine Verlängerung, keine
+  wiederkehrenden Abbuchungen; lebenslanger Zugang vorbehaltlich
+  Service-Einstellung (Abschn. 10).
+- **Single**: ein Google-Konto.
+- **Family**: Account Holder + bis zu 5 Family Members derselben Google
+  Family Group (Abschn. 4.6).
+
+**Automatische Verlängerung (nur Annual)**: jährlich automatisch.
+Jederzeit kündbar in
 `https://play.google.com/store/account/subscriptions`, ohne Strafe.
+Lifetime-Abonnements **werden nicht verlängert** und verursachen keine
+wiederkehrenden Abbuchungen.
 
-**Erstattung**: Google Play Policy. Innerhalb 48h: automatisch via
-Google-Konto. Danach: nach Googles Ermessen.
+**Erstattung -- Annual-Abonnements**: Google Play Policy. Innerhalb 48h:
+automatisch via Google-Konto. Danach: nach Googles Ermessen.
 
-**Preisanderung**: Mitteilung 30 Tage vorher via App + E-Mail.
-Versprechen "EUR 0,99/Jahr lifetime" fur die ersten 1000 Abonnenten.
+**Erstattung -- Lifetime-Abonnements und 14-tägiges Widerrufsrecht**:
+als auf einem nicht-körperlichen Datenträger gelieferte digitale Inhalte
+i.S.d. Art. 59 Abs. 1 lit. o) D.Lgs. 206/2005 (italienisches
+Verbrauchergesetzbuch) erfolgt die Freischaltung **sofort**; mit
+Abschluss der Zahlung erklärt der Nutzer ausdrücklich sein Einverständnis
+mit der sofortigen Vertragsausführung und nimmt den dadurch eintretenden
+Verlust des Widerrufsrechts gemäß Art. 52 und 59 Abs. 1 lit. o) zur
+Kenntnis. Ungeachtet des Vorstehenden **verpflichtet sich PluriFin als
+kaufmännisches Entgegenkommen, das 14-tägige Widerrufsrecht** nach Art.
+52 D.Lgs. 206/2005 ab Kauf zu gewähren, auf schriftliche Anfrage an
+`plurifin.app+legal@gmail.com` (mit Google-Play-Order-ID und Google-
+Konto). Bei Ablehnung durch Google gewährt PluriFin dem Verbraucher
+direkt ein gleichwertiges Guthaben per Google-Play-Gift-Code oder
+ersatzweise eine gleichwertige Banküberweisung.
+
+**Family Plan -- Rollen**: einziger Vertragspartner ist der Account
+Holder (Käufer via Google Play); er nimmt die Bedingungen in eigenem
+Namen an und verpflichtet sich, die Family Members (max 5, konfiguriert
+über `https://families.google.com`) zu informieren. Family Members sind
+Begünstigte, keine Vertragspartner, behalten aber ihre individuellen
+DSGVO-Datenschutzrechte. Der Family-Zugang erlischt automatisch bei:
+Entfernung des Members aus der Google Family Group, Kündigung des
+Abonnements, natürlichem Ablauf des Annual ohne Verlängerung, Beendigung
+gemäß Abschn. 10. Der Account Holder haftet zivilrechtlich für die
+Nutzung der App durch die Family Members.
+
+**Preisänderung**: gilt nur für **Annual**-Abonnements (Single und
+Family). Mitteilung 30 Tage vorher via App + E-Mail. Versprechen "EUR
+0,99/Jahr lifetime" für die ersten 1000 **Single Annual**-Abonnenten.
+**Lifetime**-Abonnements unterliegen nach dem Kauf keinen
+Preisänderungen.
 
 ## 5. Lizenz
 
-Nicht-exklusive, nicht-ubertragbare, bei Verstoss widerrufbare Lizenz fur
-personliche Nutzung. Verboten: Dekompilierung (ausser Art. 64-quater L.
-633/1941 IT oder Aquivalent), Entfernung von Hinweisen/Marken,
-Weiterverkauf, Sublizenzierung, Umgehung technischer Schutzmassnahmen,
-professionelle Nutzung fur Dritte.
+Nicht-exklusive, nicht-übertragbare, bei Verstoß widerrufbare Lizenz für
+persönliche Nutzung. Verboten: Dekompilierung (außer Art. 64-quater L.
+633/1941 IT oder Äquivalent), Entfernung von Hinweisen/Marken,
+Weiterverkauf, Sublizenzierung, Umgehung technischer Schutzmaßnahmen,
+professionelle Nutzung für Dritte.
 
 ## 6. Konto und Sicherheit
 
-App **erfordert kein PluriFin-Konto**. Google-Play-Konto fur
-Abonnement-Kauf wird von Google verwaltet. Nutzer ist fur Geratsicherheit
+App **erfordert kein PluriFin-Konto**. Google-Play-Konto für
+Abonnement-Kauf wird von Google verwaltet. Nutzer ist für Gerätsicherheit
 verantwortlich.
 
-## 7. Haftungsbeschrankung
+## 7. Haftungsbeschränkung
 
 ### 7.1 Allgemein
 
-App "AS IS" und "AS AVAILABLE", ohne Gewahrleistungen ausser den nicht
-ausschliessbaren des anwendbaren Rechts (D.Lgs. 206/2005 IT
-Verbraucherkodex fur EU-Verbraucher, deutsche BGB-Vorschriften zum
-Verbraucherschutz fur DE-Verbraucher).
+App "AS IS" und "AS AVAILABLE", ohne Gewährleistungen außer den nicht
+ausschließbaren des anwendbaren Rechts (D.Lgs. 206/2005 IT
+Verbraucherkodex für EU-Verbraucher, deutsche BGB-Vorschriften zum
+Verbraucherschutz für DE-Verbraucher).
 
-### 7.2 Ausschlusse
+### 7.2 Ausschlüsse
 
-PluriFin haftet NICHT, in den gesetzlichen Grenzen, fur:
+PluriFin haftet NICHT, in den gesetzlichen Grenzen, für:
 
 - Anlageentscheidungen des Nutzers
 - Finanzielle Verluste (Kapital, entgangener Gewinn, Chancen)
-- Fehler/Verzogerungen/Ungenauigkeiten in Marktdaten Dritter
+- Fehler/Verzögerungen/Ungenauigkeiten in Marktdaten Dritter
 - Fehler, Halluzinationen, veraltete Daten in KI-Antworten
 - Fehler beim CSV/PDF-Parsing
-- Backend-Nichtverfugbarkeit (Cloudflare Worker)
-- Lokaler Datenverlust durch Deinstallation/Storung
-- Geratekompromittierung (Root, Jailbreak, Malware)
+- Backend-Nichtverfügbarkeit (Cloudflare Worker)
+- Lokaler Datenverlust durch Deinstallation/Störung
+- Gerätekompromittierung (Root, Jailbreak, Malware)
 
-### 7.3 Quantitative Hochstgrenze
+### 7.3 Quantitative Höchstgrenze
 
-Maximale Haftung von PluriFin = hoherer Wert aus **EUR 50,00** oder im
+Maximale Haftung von PluriFin = höherer Wert aus **EUR 50,00** oder im
 12-Monats-Zeitraum vor dem Ereignis gezahltem Betrag.
 
-### 7.4 Nicht-ausschliessbare Verbraucherrechte
+### 7.4 Nicht-ausschließbare Verbraucherrechte
 
-Nichts beschrankt nicht-waivable Verbraucherrechte (gesetzliche
-Mangelhaftung, Widerrufsrecht wo anwendbar, Schutz vor missbrauchlichen
+Nichts beschränkt nicht-waivable Verbraucherrechte (gesetzliche
+Mängelhaftung, Widerrufsrecht wo anwendbar, Schutz vor missbräuchlichen
 Klauseln).
 
 ## 8. Drittanbieterdienste
 
 Anwendbar: Google Gemini API Terms, Google Play Policies, GitHub Terms,
-EODHD/FMP. PluriFin haftet nicht fur deren Storungen.
+EODHD/FMP. PluriFin haftet nicht für deren Störungen.
 
-## 9. Anderung der Bedingungen
+## 9. Änderung der Bedingungen
 
 Mitteilung via App (Re-Consent) und Site-Banner (30 Tage). Bei
 Nichtannahme: Deinstallation und Erstattungsantrag bei Google.
 
 ## 10. Beendigung
 
-- **Durch Nutzer**: Abonnement-Kundigung + Deinstallation, jederzeit,
+- **Durch Nutzer**: Abonnement-Kündigung + Deinstallation, jederzeit,
   ohne Strafe.
-- **Durch PluriFin**: bei wesentlichem Verstoss, Betrug, Anti-Tamper-
+- **Durch PluriFin**: bei wesentlichem Verstoß, Betrug, Anti-Tamper-
   Umgehung. Keine anteilige Erstattung.
 - **Service-Einstellung**: Mindestvorlauf 90 Tage. Bezahlte Abonnements
-  bis Ablauf erfullt oder anteilig erstattet via Google Play.
+  bis Ablauf erfüllt oder anteilig erstattet via Google Play.
 
 ## 11. Marken und geistiges Eigentum
 
 - "PluriFin": Marke von Filippo Salemi (EUIPO-Anmeldung Phase 2)
 - "Portfolio Manager": beschreibender Name
 - Code, Logos, Fonts, Illustrationen: Urheberrecht (L. 633/1941 IT oder
-  nationales Aquivalent)
-- Drittanbieter-Marken: deren Eigentumer
+  nationales Äquivalent)
+- Drittanbieter-Marken: deren Eigentümer
 
 ## 12. Personenbezogene Daten
 
@@ -135,11 +193,11 @@ Siehe `legal/disclaimer_financial.md`, integraler Bestandteil.
 
 ## 14. Gerichtsstand und anwendbares Recht
 
-Italienisches Recht. Fur Verbraucher: Verbrauchergerichtsstand (Art.
-66-bis D.Lgs. 206/2005 oder nationale Aquivalente). Fur Nicht-Verbraucher:
-ausschliesslicher Gerichtsstand **Mailand (Italien)** gemass Art. 18 und
+Italienisches Recht. Für Verbraucher: Verbrauchergerichtsstand (Art.
+66-bis D.Lgs. 206/2005 oder nationale Äquivalente). Für Nicht-Verbraucher:
+ausschließlicher Gerichtsstand **Mailand (Italien)** gemäß Art. 18 und
 20 der italienischen Zivilprozessordnung als Gerichtsstand des in Italien
-ansassigen Verantwortlichen.
+ansässigen Verantwortlichen.
 
 ## 15. ADR
 
@@ -148,7 +206,7 @@ ODR-Plattform der EU-Kommission:
 
 ## 16. Salvatorische Klausel
 
-Bei Unwirksamkeit einer Klausel bleiben die ubrigen wirksam.
+Bei Unwirksamkeit einer Klausel bleiben die übrigen wirksam.
 
 ## 17. Kommunikation
 
@@ -157,5 +215,5 @@ Nutzer -> PluriFin: E-Mails Abschnitt 12 Privacy Policy.
 
 ## 18. Versionierung
 
-Versionsnummer oben. Vollstandige Historie in
+Versionsnummer oben. Vollständige Historie in
 `lunapiena49/portfoliomanager-data` Ordner `legal/`.

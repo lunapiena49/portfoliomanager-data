@@ -34,6 +34,8 @@
     "no": "No",
     "ok": "OK",
     "clear": "Cancella",
+    "copy": "Copia",
+    "copied": "Copiato negli appunti",
     "delete_confirm": {
       "title": "Conferma eliminazione",
       "message": "Vuoi eliminare {item}? L'operazione non puo essere annullata.",
@@ -211,6 +213,9 @@
     },
     "empty_portfolio": {
       "description": "Crea o importa un portafoglio per iniziare"
+    },
+    "error": {
+      "title": "Impossibile caricare il portafoglio"
     },
     "import_portfolio": "Importa Portafoglio",
     "add_position": "Aggiungi Posizione",
@@ -397,11 +402,17 @@
     "exchange_hint": "es. NASDAQ"
   },
   "analysis": {
+    "empty_state": {
+      "title": "Carica un portafoglio per iniziare",
+      "description": "PluriFin AI analizza il tuo portafoglio. Importa un CSV o crea un portafoglio per ottenere insight personalizzati."
+    },
     "title": "Analisi AI",
     "generating": "Generazione analisi...",
     "ask_ai": "Chiedi all'AI sul tuo portafoglio",
     "chat_title": "Assistente AI",
     "chat_tooltip": "Chat AI",
+    "clear_chat": "Pulisci chat",
+    "send_message": "Invia messaggio",
     "generate_full": "Genera Analisi Completa",
     "ai_result_title": "Analisi AI",
     "no_portfolio_loaded": "Nessun portafoglio caricato",
@@ -490,6 +501,10 @@
     }
   },
   "market": {
+    "empty_portfolio": {
+      "title": "Aggiungi posizioni per seguirle qui",
+      "description": "Importa un CSV da broker o crea un portafoglio per vedere i prezzi live e i tuoi top mover."
+    },
     "title": "Panoramica Mercato",
     "top_gainers": "Migliori Rialzi",
     "top_losers": "Peggiori Ribassi",
@@ -754,7 +769,22 @@
       "version": "Versione",
       "review_onboarding": "Rivedi onboarding",
       "legal_documents": "Documenti legali",
-      "onboarding_reset_message": "Onboarding ripristinato. L'app riaprira il flusso di onboarding."
+      "onboarding_reset_message": "Onboarding ripristinato. L'app riaprira il flusso di onboarding.",
+      "app_info": {
+        "title": "Info app",
+        "tagline": "Portfolio Manager privacy-first per investitori retail",
+        "version_label": "Versione",
+        "loading": "Caricamento...",
+        "legal": "Documenti legali",
+        "attribution": "Attribuzioni",
+        "licenses": "Licenze open source",
+        "licenses_subtitle": "Pacchetti Dart/Flutter utilizzati",
+        "contact": "Contatti",
+        "developer": "Sviluppatore",
+        "support_email": "Supporto",
+        "legal_email": "Legal",
+        "website": "Sito"
+      }
     }
   },
   "guide": {

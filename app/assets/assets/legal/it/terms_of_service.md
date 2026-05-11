@@ -62,16 +62,28 @@ arricchito: traccia, organizza, mostra. Le decisioni restano all'Utente.
 
 ## 4. Modello commerciale e prezzi
 
-### 4.1 Versione free e versione premium
+### 4.1 Versione free, trial e versioni Premium
 
-| Versione | Costo | Funzionalita' |
-|---|---|---|
-| Web demo | Gratuita | Max 5 posizioni manuali, no import CSV/PDF, mercato weekly, obiettivi locked, AI locked |
-| Trial Android (7 giorni) | Gratuita, **senza richiesta carta upfront** | Tutte le funzionalita' Premium attive per 7 giorni dal primo avvio |
-| Premium Android | EUR 0,99 / anno (rinnovo automatico annuale) | Tutte le funzionalita' attive senza limiti |
+PluriFin offre una versione free, un trial gratuito e quattro varianti
+Premium (Annual/Lifetime x Single/Family). Tutte le varianti Premium
+sbloccano lo stesso insieme di funzionalita': la differenza riguarda il
+modello di pagamento (ricorrente annuale vs una tantum) e il numero di
+account autorizzati (1 account Google vs fino a 6 account collegati a un
+Google Family Group).
 
-Il prezzo Premium e' definito in EUR per il mercato italiano. Per altri paesi
-Google Play applica una conversione automatica con parita' di potere d'acquisto.
+| Versione | Costo | Modello | Funzionalita' |
+|---|---|---|---|
+| Web demo | Gratuita | n/a | Max 5 posizioni manuali, no import CSV/PDF, mercato weekly, obiettivi locked, AI locked |
+| Trial Android (7 giorni) | Gratuita, **senza richiesta carta upfront** | n/a | Tutte le funzionalita' Premium attive per 7 giorni dal primo avvio |
+| Premium Single Annual | EUR 0,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive, singolo account Google |
+| Premium Single Lifetime | EUR 4,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita, singolo account Google |
+| Premium Family Annual | EUR 1,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
+| Premium Family Lifetime | EUR 9,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
+
+I prezzi sono definiti in EUR per il mercato italiano. Per altri paesi
+Google Play applica una conversione automatica con parita' di potere
+d'acquisto. L'IVA, ove dovuta, e' inclusa nel prezzo finale mostrato da
+Google Play al momento dell'acquisto.
 
 ### 4.2 Modalita' di pagamento
 
@@ -82,40 +94,165 @@ da Google Play in Italia), addebito su saldo Google Play, gift card.
 Il pagamento e' gestito **interamente da Google**: PluriFin non riceve dati di
 carta, IBAN o credenziali di pagamento.
 
-### 4.3 Rinnovo automatico
+### 4.3 Tipologie di abbonamento Premium
 
-L'abbonamento Premium si rinnova automaticamente ogni 12 mesi. L'Utente puo':
+Le quattro varianti Premium si distinguono per due assi indipendenti.
+
+- **Annual** (Single Annual, Family Annual): contratto ad esecuzione
+  continuata con rinnovo automatico annuale. Il pagamento ricorrente e'
+  disciplinato dalla sezione 4.4 (Rinnovo automatico) e dalla sezione 4.7
+  (Variazione prezzo).
+- **Lifetime** (Single Lifetime, Family Lifetime): contratto ad esecuzione
+  istantanea con pagamento unico. Non comporta alcun rinnovo automatico
+  ne' addebito periodico. L'accesso alle funzionalita' Premium e'
+  garantito a vita, fatte salve le ipotesi di cessazione del servizio
+  (sezione 10.3).
+- **Single** (Single Annual, Single Lifetime): abilita le funzionalita'
+  Premium per un singolo account Google.
+- **Family** (Family Annual, Family Lifetime): abilita le funzionalita'
+  Premium per l'Account Holder che effettua l'acquisto e per i Family
+  Members facenti parte del medesimo Google Family Group, alle condizioni
+  della sezione 4.6.
+
+### 4.4 Rinnovo automatico (solo abbonamenti Annual)
+
+Gli abbonamenti **Single Annual** e **Family Annual** si rinnovano
+automaticamente ogni 12 mesi al prezzo allora in vigore. L'Utente puo':
 
 - Disattivare il rinnovo in qualsiasi momento da Google Play
   (`https://play.google.com/store/account/subscriptions`)
-- Continuare a usare l'app fino alla scadenza dell'anno gia' pagato
+- Continuare a usare l'App fino alla scadenza dell'anno gia' pagato
 - Riattivare l'abbonamento in futuro senza penali
 
 Non sono previste penali per cancellazione anticipata.
 
-### 4.4 Refund
+Gli abbonamenti **Single Lifetime** e **Family Lifetime** **non comportano
+alcun rinnovo automatico** ne' addebito periodico: il pagamento e' unico
+e l'accesso e' a vita.
 
-Le richieste di rimborso sono gestite dalla policy di Google Play Store:
+### 4.5 Diritto di recesso e rimborsi
 
-- **Entro 48 ore** dall'acquisto: refund automatico dall'Utente tramite Google
-  Play (`Account > Cronologia ordini > Richiedi rimborso`)
+#### 4.5.1 Abbonamenti Annual
+
+Per gli abbonamenti **Single Annual** e **Family Annual** le richieste di
+rimborso sono gestite secondo la policy di Google Play Store:
+
+- **Entro 48 ore** dall'acquisto: refund automatico tramite Google Play
+  (`Account > Cronologia ordini > Richiedi rimborso`)
 - **Oltre 48 ore**: refund solo a discrezione di Google. PluriFin puo'
   inoltrare la richiesta a Google ma non ha il controllo della decisione.
 
-PluriFin non emette refund diretti in quanto non riceve direttamente il
-pagamento.
+L'Utente puo' disattivare il rinnovo in qualsiasi momento senza penali
+(sezione 4.4).
 
-### 4.5 Variazione prezzo
+#### 4.5.2 Abbonamenti Lifetime e diritto di recesso 14 giorni
 
-PluriFin si riserva il diritto di modificare il prezzo dell'abbonamento Premium.
-In caso di aumento per utenti gia' abbonati:
+Per gli abbonamenti **Single Lifetime** e **Family Lifetime**, in quanto
+contenuti digitali forniti su supporto non materiale ai sensi dell'art.
+59 comma 1 lett. o) del Codice del Consumo (D.Lgs. 206/2005):
+
+- L'acquisto avviene tramite Google Play Billing con sblocco **immediato**
+  delle funzionalita' Premium. L'Utente, completando il pagamento, accetta
+  espressamente l'esecuzione immediata del contratto e prende atto della
+  conseguente perdita del diritto di recesso ai sensi del combinato
+  disposto degli artt. 52 e 59 comma 1 lett. o) del Codice del Consumo.
+- Nonostante quanto precede, **PluriFin si impegna a onorare in via
+  commerciale il diritto di recesso ex art. 52 del Codice del Consumo
+  per 14 giorni** dall'acquisto, su richiesta scritta del consumatore
+  inviata a `plurifin.app+legal@gmail.com`. La richiesta deve indicare
+  l'order ID Google Play e l'account Google associato all'acquisto.
+- Su tali richieste PluriFin inoltrera' la pratica di rimborso a Google
+  e, in caso di diniego da parte di Google, riconoscera' direttamente al
+  consumatore un credito di valore equivalente tramite gift code Google
+  Play o, in subordine, un rimborso bancario equivalente.
+
+Decorsi i 14 giorni dall'acquisto, eventuali richieste di rimborso sono
+soggette esclusivamente alla discrezione di Google Play.
+
+#### 4.5.3 Posizione di PluriFin
+
+PluriFin non emette refund diretti su carta in quanto non riceve
+direttamente il pagamento dell'Utente: il refund tecnico avviene sempre
+attraverso il canale Google Play. La garanzia 14 giorni di cui alla
+sezione 4.5.2 costituisce un impegno **commerciale supplementare** di
+PluriFin nei confronti del consumatore, che non sostituisce ne' limita
+i diritti non derogabili riconosciuti dal Codice del Consumo.
+
+### 4.6 Family plan -- ruoli e responsabilita'
+
+Per gli abbonamenti **Premium Family** (Annual e Lifetime) si applicano
+le seguenti regole specifiche.
+
+#### 4.6.1 Parte contraente
+
+L'unico **contraente** del contratto Family Premium e' l'Utente che
+effettua l'acquisto via Google Play (di seguito "Account Holder"), in
+quanto pagatore. L'Account Holder accetta i presenti Termini in nome e
+per conto proprio e si impegna a renderne edotti i propri Family Members
+(definiti sotto). I Family Members beneficiano dell'unlock Premium ma
+non sono parti contraenti del contratto di subscription con PluriFin.
+
+#### 4.6.2 Composizione del Family Group
+
+L'abilitazione Family copre l'Account Holder e fino a **5 ulteriori
+Family Members** facenti parte della medesima Google Family Group
+configurata dall'Account Holder (totale max 6 utenti, secondo le
+limitazioni correnti di Google Family). La composizione del Google
+Family Group e' gestita esclusivamente tramite gli strumenti Google
+(`https://families.google.com`): PluriFin non interviene su inviti,
+accettazioni o rimozioni dei Family Members.
+
+#### 4.6.3 Diritti di privacy individuali
+
+Ogni Family Member resta titolare individuale dei propri diritti ai sensi
+del GDPR (Reg. UE 2016/679) e del Codice in materia di protezione dei
+dati personali (D.Lgs. 196/2003 e successive modificazioni), in
+particolare per quanto riguarda i dati personali trattati dall'App sul
+proprio dispositivo (vedi Privacy Policy).
+
+#### 4.6.4 Cessazione degli effetti della membership
+
+L'accesso Premium di un Family Member viene meno automaticamente in caso
+di:
+
+- Rimozione del Family Member dal Google Family Group (per decisione
+  dell'Account Holder o di Google)
+- Cessazione dell'abbonamento Family da parte dell'Account Holder
+- Scadenza naturale del periodo Annual senza rinnovo
+- Risoluzione del contratto ai sensi della sezione 10
+
+Le suddette cessazioni sono gestite automaticamente da Google Play
+Billing senza intervento di PluriFin.
+
+#### 4.6.5 Responsabilita' dell'Account Holder
+
+L'Account Holder e' civilmente responsabile per l'uso dell'App da parte
+dei propri Family Members nei limiti previsti dalla normativa applicabile
+e, in particolare, e' tenuto a:
+
+- Garantire che i Family Members siano informati dei presenti Termini e
+  del Disclaimer Finanziario
+- Disabilitare l'accesso Family in caso di uso non autorizzato o di
+  cessazione dei rapporti familiari
+
+### 4.7 Variazione prezzo
+
+PluriFin si riserva il diritto di modificare il prezzo degli abbonamenti
+**Annual** (Single Annual e Family Annual). In caso di aumento per utenti
+gia' abbonati:
 
 - Notifica via app + email (se l'Utente ha fornito email) almeno **30 giorni
   prima** della scadenza dell'abbonamento corrente
 - Possibilita' per l'Utente di disattivare il rinnovo senza alcuna penale
-- Promessa "lifetime EUR 0,99/anno" per i primi 1000 abbonati: il prezzo annuo
-  resta EUR 0,99 finche' l'abbonamento non viene mai cancellato (decisione
-  commerciale documentata, vincolante per PluriFin)
+- Promessa "lifetime EUR 0,99/anno" per i primi 1000 abbonati **Single
+  Annual**: il prezzo annuo resta EUR 0,99 finche' l'abbonamento non viene
+  mai cancellato (decisione commerciale documentata, vincolante per
+  PluriFin)
+
+Gli abbonamenti **Lifetime** (Single Lifetime e Family Lifetime) non sono
+soggetti a variazioni di prezzo dopo l'acquisto, in quanto il pagamento
+e' unico e gia' definitivamente eseguito. Eventuali nuove versioni
+Premium future non incideranno su Lifetime gia' acquistati.
 
 ## 5. Licenza d'uso
 
