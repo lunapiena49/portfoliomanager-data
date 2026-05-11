@@ -14,7 +14,16 @@ const toc = posts.map((p) => ({
 }));
 ---
 <LegalLayout t={it} lang="it" pageTitle="Blog PluriFin" tocItems={toc}>
-  <p class="meta">Storie, decisioni di prodotto, lezioni apprese. Aggiornato saltuariamente.</p>
+  <p class="meta">
+    Storie, decisioni di prodotto, lezioni apprese. Aggiornato saltuariamente.
+    {' '}
+    <a href="/blog/rss.xml" class="rss-link" aria-label="RSS feed">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"/>
+      </svg>
+      RSS feed
+    </a>
+  </p>
 
   {posts.length === 0 ? (
     <p>Nessun articolo pubblicato ancora. Torna a trovarci.</p>
@@ -82,5 +91,20 @@ const toc = posts.map((p) => ({
   }
   .blog-card .read-more:hover {
     text-decoration: underline;
+  }
+  .rss-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 4px;
+    color: var(--accent, #00BFA5);
+    text-decoration: none;
+    font-size: 13px;
+  }
+  .rss-link:hover {
+    text-decoration: underline;
+  }
+  .rss-link svg {
+    flex-shrink: 0;
   }
 </style>
