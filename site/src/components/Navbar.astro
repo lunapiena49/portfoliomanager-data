@@ -13,6 +13,13 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 function langUrl(l: Locale) {
   return l === 'it' ? `${base}/` : `${base}/${l}/`;
 }
+
+// W7.D-CC.2 v2 (2026-05-11) -- FAQ link points to the standalone /faq/
+// page (FAQPage JSON-LD + dedicated route) rather than the in-page
+// #faq anchor that only works on the landing.
+function legalUrl(page: string) {
+  return currentLang === 'it' ? `${base}/${page}` : `${base}/${currentLang}/${page}`;
+}
 ---
 <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
   <div class="wrap nav-inner">
@@ -25,7 +32,7 @@ function langUrl(l: Locale) {
       <a href="#features" role="listitem">{t.nav.features}</a>
       <a href="#privacy" role="listitem">{t.nav.privacy}</a>
       <a href="#brokers" role="listitem">{t.nav.brokers}</a>
-      <a href="#faq" role="listitem">{t.nav.faq}</a>
+      <a href={legalUrl('faq')} role="listitem">{t.nav.faq}</a>
     </div>
 
     <span class="nav-spacer" aria-hidden="true"></span>
@@ -72,7 +79,7 @@ function langUrl(l: Locale) {
       <a href="#features" role="menuitem">{t.nav.features}</a>
       <a href="#privacy" role="menuitem">{t.nav.privacy}</a>
       <a href="#brokers" role="menuitem">{t.nav.brokers}</a>
-      <a href="#faq" role="menuitem">{t.nav.faq}</a>
+      <a href={legalUrl('faq')} role="menuitem">{t.nav.faq}</a>
       <div class="mobile-divider" aria-hidden="true"></div>
       <a href={`${base}/app/`} role="menuitem">{t.nav.openApp}</a>
       <button class="btn btn-primary w-full" id="openModalMobile" aria-haspopup="dialog">

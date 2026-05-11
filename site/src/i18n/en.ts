@@ -93,7 +93,7 @@ const en: Translations = {
     q6: 'How many languages?',
     a6: 'Six: Italian, English, Spanish, French, German, Portuguese.',
     q7: 'Can I use it on the web?',
-    a7: 'Yes. The webapp is free at lunapiena49.github.io/portfoliomanager-data/app/',
+    a7: 'Yes. The webapp is free at plurifin.app/app/',
     q8: 'How do I get updates?',
     a8: 'Through Google Play Store (auto-update) or by reloading the webapp. Release notes are published on the GitHub repo.',
   },
