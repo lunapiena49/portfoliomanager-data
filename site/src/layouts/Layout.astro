@@ -88,7 +88,15 @@ const goatcounterHost = import.meta.env.GOATCOUNTER_HOST as string | undefined;
   <!-- Theme color -->
   <meta name="theme-color" content="#1E88E5" />
 
-  <!-- JSON-LD SoftwareApplication (Schema.org) for richer SERP cards -->
+  <!-- JSON-LD SoftwareApplication (Schema.org) for richer SERP cards.
+       NOTE on aggregateRating (Google Rich Results "Missing optional field"
+       warning): intentionally OMITTED at launch. Google policy prohibits
+       fabricated/non-genuine ratings (https://developers.google.com/search/docs/appearance/structured-data/software-app).
+       Inserting placeholder values would risk a manual action against
+       https://plurifin.app/. The field will be populated automatically from
+       the Play Store rating widget on the homepage once production reaches
+       >= 5 organic reviews (tracked in marketing/aso_keywords.md follow-up
+       "rich result ratings"). -->
   <script type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",

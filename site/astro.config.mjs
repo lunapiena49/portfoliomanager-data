@@ -2,12 +2,14 @@
 import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 
-// The site lives at the root of the GitHub Pages deployment.
-// The base path is /portfoliomanager-data because that is the repo name.
-// Override at build time with:
-//   SITE_URL=https://example.org SITE_BASE=/ astro build
-const SITE_URL = process.env.SITE_URL ?? 'https://lunapiena49.github.io/portfoliomanager-data';
-const SITE_BASE = process.env.SITE_BASE ?? '/portfoliomanager-data';
+// The production site lives at the root of plurifin.app (custom domain on
+// GitHub Pages via CNAME, see master plan 4B.3). The site-deploy.yml workflow
+// already sets SITE_URL=https://plurifin.app + SITE_BASE=/ for production
+// deploys; these defaults match so local dev builds emit the same URLs.
+// Legacy github.io override remains available for local debugging:
+//   SITE_URL=https://lunapiena49.github.io/portfoliomanager-data SITE_BASE=/portfoliomanager-data astro build
+const SITE_URL = process.env.SITE_URL ?? 'https://plurifin.app';
+const SITE_BASE = process.env.SITE_BASE ?? '/';
 
 export default defineConfig({
   site: SITE_URL,
