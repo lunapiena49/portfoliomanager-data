@@ -5,7 +5,7 @@ import { LOCALES } from '../i18n/index';
 
 const BASE = 'https://lunapiena49.github.io/portfoliomanager-data';
 
-const pages = ['', 'privacy', 'terms', 'disclaimer', 'about', 'contact'];
+const pages = ['', 'privacy', 'terms', 'disclaimer', 'about', 'contact', 'faq'];
 
 function url(locale: string, page: string): string {
   const prefix = locale === 'it' ? '' : `/${locale}`;
