@@ -284,6 +284,7 @@ Previous versions are available in the public repo
 | GDPR (access, deletion, portability, complaint) | `plurifin.app+gdpr@gmail.com` |
 | Privacy & security | `plurifin.app+privacy@gmail.com` |
 | General support | `plurifin.app+support@gmail.com` |
+| Legal & disclaimer questions | `plurifin.app+legal@gmail.com` |
 | Public Play Store contact | `plurifin.app@gmail.com` |
 
 ## 13. Jurisdiction and applicable law

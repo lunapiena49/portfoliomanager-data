@@ -59,16 +59,26 @@ organizes, displays. Decisions remain with the User.
 
 ## 4. Commercial model and pricing
 
-### 4.1 Free and premium
+### 4.1 Free, trial and Premium tiers
 
-| Tier | Cost | Features |
-|---|---|---|
-| Web demo | Free | Max 5 manual positions, no CSV/PDF import, weekly market data, goals locked, AI locked |
-| Android trial (7 days) | Free, **no card required upfront** | All Premium features active for 7 days from first launch |
-| Android Premium | EUR 0.99 / year (auto-renewing yearly) | All features unlocked |
+PluriFin offers a free tier, a free trial, and four Premium variants
+(Annual/Lifetime x Single/Family). All Premium variants unlock the same
+feature set: they differ in the payment model (recurring yearly vs
+one-time) and in the number of authorized accounts (1 Google account vs
+up to 6 accounts in a Google Family Group).
 
-The Premium price is set in EUR for the Italian market. For other countries
-Google Play applies automatic purchasing-power conversion.
+| Tier | Cost | Model | Features |
+|---|---|---|---|
+| Web demo | Free | n/a | Max 5 manual positions, no CSV/PDF import, weekly market data, goals locked, AI locked |
+| Android trial (7 days) | Free, **no card required upfront** | n/a | All Premium features active for 7 days from first launch |
+| Premium Single Annual | EUR 0.99 / year | Auto-renewing yearly | All features unlocked, single Google account |
+| Premium Single Lifetime | EUR 4.99 one-time | One-time payment, **no renewal** | All features unlocked for life, single Google account |
+| Premium Family Annual | EUR 1.99 / year | Auto-renewing yearly | All features unlocked for Account Holder + up to 5 Family Members in the same Google Family Group |
+| Premium Family Lifetime | EUR 9.99 one-time | One-time payment, **no renewal** | All features unlocked for life for Account Holder + up to 5 Family Members in the same Google Family Group |
+
+Prices are set in EUR for the Italian market. For other countries Google
+Play applies automatic purchasing-power conversion. VAT, where applicable,
+is included in the final price shown by Google Play at purchase.
 
 ### 4.2 Payment methods
 
@@ -79,40 +89,159 @@ country), Google Play balance, gift cards.
 Payment is fully handled **by Google**: PluriFin never receives card data,
 IBAN or payment credentials.
 
-### 4.3 Auto-renewal
+### 4.3 Premium subscription types
 
-The Premium subscription auto-renews every 12 months. The User can:
+The four Premium variants differ along two independent axes.
+
+- **Annual** (Single Annual, Family Annual): continuous-performance
+  contract with yearly auto-renewal. Recurring payment is governed by
+  section 4.4 (Auto-renewal) and section 4.7 (Price changes).
+- **Lifetime** (Single Lifetime, Family Lifetime): instantaneous contract
+  with one-time payment. No auto-renewal, no recurring charges. Access to
+  Premium features is granted for life, subject to the service shutdown
+  provisions of section 10.3.
+- **Single** (Single Annual, Single Lifetime): unlocks Premium features
+  for a single Google account.
+- **Family** (Family Annual, Family Lifetime): unlocks Premium features
+  for the Account Holder who makes the purchase and for Family Members
+  in the same Google Family Group, under the conditions of section 4.6.
+
+### 4.4 Auto-renewal (Annual subscriptions only)
+
+The **Single Annual** and **Family Annual** subscriptions auto-renew
+every 12 months at the then-current price. The User can:
 
 - Disable renewal at any time via Google Play
   (`https://play.google.com/store/account/subscriptions`)
-- Continue using the app until the end of the already-paid year
+- Continue using the App until the end of the already-paid year
 - Re-subscribe later without penalties
 
 No early-cancellation penalties.
 
-### 4.4 Refund
+The **Single Lifetime** and **Family Lifetime** subscriptions involve
+**no auto-renewal** and no recurring charges: the payment is one-time
+and access is for life.
 
-Refunds follow Google Play Store policy:
+### 4.5 Right of withdrawal and refunds
 
-- **Within 48 hours** of purchase: automatic refund by the User via Google
-  Play (`Account > Order history > Request refund`)
+#### 4.5.1 Annual subscriptions
+
+For **Single Annual** and **Family Annual** subscriptions, refunds
+follow Google Play Store policy:
+
+- **Within 48 hours** of purchase: automatic refund via Google Play
+  (`Account > Order history > Request refund`)
 - **After 48 hours**: refund only at Google's discretion. PluriFin can
   forward the request but does not control the decision.
 
-PluriFin does not issue direct refunds because it does not directly receive
-the payment.
+The User may disable renewal at any time without penalty (section 4.4).
 
-### 4.5 Price changes
+#### 4.5.2 Lifetime subscriptions and the 14-day right of withdrawal
 
-PluriFin reserves the right to modify the Premium price. For increases
-affecting existing subscribers:
+For **Single Lifetime** and **Family Lifetime** subscriptions, as digital
+content supplied on a non-tangible medium under art. 59(1)(o) of the
+Italian Consumer Code (D.Lgs. 206/2005):
+
+- Purchase is made via Google Play Billing with **immediate** unlock of
+  Premium features. By completing the payment, the User expressly
+  consents to immediate performance of the contract and acknowledges
+  the consequent loss of the right of withdrawal under the combined
+  provisions of arts. 52 and 59(1)(o) of the Italian Consumer Code.
+- Notwithstanding the above, **PluriFin undertakes as a commercial
+  commitment to honor the 14-day right of withdrawal under art. 52 of
+  the Italian Consumer Code** from purchase, upon written request from
+  the consumer sent to `plurifin.app+legal@gmail.com`. The request must
+  include the Google Play order ID and the Google account used.
+- For such requests PluriFin will forward the refund case to Google
+  and, in the event of refusal by Google, will directly grant the
+  consumer an equivalent-value credit via Google Play gift code or, as
+  an alternative, an equivalent bank refund.
+
+After 14 days from purchase, refund requests are subject solely to
+Google Play's discretion.
+
+#### 4.5.3 PluriFin's position
+
+PluriFin does not issue direct card refunds because it does not directly
+receive User payments: the technical refund always goes through the
+Google Play channel. The 14-day guarantee in section 4.5.2 is a
+**supplementary commercial commitment** of PluriFin towards the consumer
+and does not replace or limit the non-waivable consumer rights granted
+by the Italian Consumer Code.
+
+### 4.6 Family plan -- roles and responsibilities
+
+The following specific rules apply to **Premium Family** subscriptions
+(Annual and Lifetime).
+
+#### 4.6.1 Contracting party
+
+The sole **contracting party** of the Family Premium agreement is the
+User who completes the purchase via Google Play (the "Account Holder"),
+as payer. The Account Holder accepts these Terms in their own name and
+undertakes to inform their Family Members (as defined below). Family
+Members benefit from the Premium unlock but are not contracting parties
+of the subscription contract with PluriFin.
+
+#### 4.6.2 Family Group composition
+
+The Family unlock covers the Account Holder and up to **5 additional
+Family Members** belonging to the same Google Family Group configured by
+the Account Holder (max 6 users total, per current Google Family limits).
+Google Family Group composition is managed exclusively through Google's
+tools (`https://families.google.com`): PluriFin does not intervene in
+invitations, acceptances or removals of Family Members.
+
+#### 4.6.3 Individual privacy rights
+
+Each Family Member remains individually the data subject for their own
+rights under GDPR (Reg. EU 2016/679) and the Italian Personal Data
+Protection Code (D.Lgs. 196/2003 as amended), in particular regarding
+the personal data processed by the App on their own device (see Privacy
+Policy).
+
+#### 4.6.4 Termination of membership effects
+
+A Family Member's Premium access ceases automatically in case of:
+
+- Removal of the Family Member from the Google Family Group (by the
+  Account Holder or by Google)
+- Termination of the Family subscription by the Account Holder
+- Natural expiry of the Annual period without renewal
+- Termination of the contract under section 10
+
+The above terminations are handled automatically by Google Play Billing
+without PluriFin intervention.
+
+#### 4.6.5 Account Holder responsibility
+
+The Account Holder is civilly liable for the use of the App by their
+Family Members within the limits set by applicable law and is in
+particular required to:
+
+- Ensure that Family Members are informed of these Terms and of the
+  Financial Disclaimer
+- Disable Family access in case of unauthorized use or of termination
+  of the family relationship
+
+### 4.7 Price changes
+
+PluriFin reserves the right to modify the price of **Annual** subscriptions
+(Single Annual and Family Annual). For increases affecting existing
+subscribers:
 
 - In-app + email notice (if email provided) at least **30 days before**
   current subscription expires
 - Right to cancel renewal without penalty
-- "EUR 0.99/year lifetime" promise for the first 1000 subscribers: the
-  yearly price stays at EUR 0.99 as long as the subscription is never
-  cancelled (binding commercial commitment)
+- "EUR 0.99/year lifetime" promise for the first 1000 **Single Annual**
+  subscribers: the yearly price stays at EUR 0.99 as long as the
+  subscription is never cancelled (documented commercial commitment,
+  binding for PluriFin)
+
+**Lifetime** subscriptions (Single Lifetime and Family Lifetime) are not
+subject to price changes after purchase, as the payment is one-time and
+already definitively executed. Any future new Premium versions will not
+affect Lifetime subscriptions already purchased.
 
 ## 5. License
 

@@ -1,157 +1,157 @@
 # Disclaimer Financeiro -- Portfolio Manager by PluriFin
 
-**Versao**: 1.0.0
-**Ultima atualizacao**: 2026-05-02
-**Idioma original**: Italiano (versao vinculante)
+**Versão**: 1.0.0
+**Última atualização**: 2026-05-02
+**Idioma original**: Italiano (versão vinculante)
 
 ---
 
 > **AVISO IMPORTANTE -- LEIA ANTES DE USAR A APP**
 >
-> Portfolio Manager e uma ferramenta informativa. As informacoes, dados,
-> graficos, sugestoes de rebalanceamento e analises IA mostradas **NAO
-> constituem em caso algum consultoria financeira, recomendacao de
-> investimento, captacao publica de poupanca ou servico de investimento**
+> Portfolio Manager é uma ferramenta informativa. As informações, dados,
+> gráficos, sugestões de rebalanceamento e análises IA mostradas **NÃO
+> constituem em caso algum consultoria financeira, recomendação de
+> investimento, captação pública de poupança ou serviço de investimento**
 > nos termos do TUF italiano (D.Lgs. 58/1998), MiFID II (Diretiva
 > 2014/65/UE) e regras nacionais equivalentes. O Utilizador assume a
-> exclusiva responsabilidade das suas decisoes de investimento.
+> exclusiva responsabilidade das suas decisões de investimento.
 
 ---
 
 ## 1. Natureza informativa
 
 Tudo o que a App mostra tem **fim exclusivamente informativo, descritivo
-e educativo**. A App **nao**:
+e educativo**. A App **não**:
 
-- Da conselhos personalizados de investimento
-- Sugere instrumentos ou operacoes especificas
-- Opina sobre adequacao a situacao patrimonial / objetivos / tolerancia
+- Dá conselhos personalizados de investimento
+- Sugere instrumentos ou operações específicas
+- Opina sobre adequação à situação patrimonial / objetivos / tolerância
   ao risco
 - Executa ordens nem se relaciona com brokers
-- Custodia fundos ou instrumentos
+- Custódia fundos ou instrumentos
 
-## 2. Referencias normativas
+## 2. Referências normativas
 
-- **Art. 1.5-septies TUF**: definicao "consulenza in materia di
-  investimenti". App **nao se enquadra**.
+- **Art. 1.5-septies TUF**: definição "consulenza in materia di
+  investimenti". App **não se enquadra**.
 - **Art. 18-bis e 18-ter TUF**: reserva a inscritos no OCF.
-  PluriFin/Filippo Salemi **nao inscrito**.
-- **Art. 1.5.d TUF**: gestao de carteiras. App **nao gere**.
-- **MiFID II e MiFIR**: app nao presta servicos reservados.
-- **Reg. UE 2017/565**: app nao sujeita a avaliacao de
-  adequacao/conveniencia.
+  PluriFin/Filippo Salemi **não inscrito**.
+- **Art. 1.5.d TUF**: gestão de carteiras. App **não gere**.
+- **MiFID II e MiFIR**: app não presta serviços reservados.
+- **Reg. UE 2017/565**: app não sujeita a avaliação de
+  adequação/conveniência.
 
-## 3. Analises IA -- avisos especificos
+## 3. Análises IA -- avisos específicos
 
-### 3.1 Modelo probabilistico
+### 3.1 Modelo probabilístico
 
 LLMs geram texto **probabilisticamente**. Mesma pergunta -> respostas
 diferentes.
 
-### 3.2 Alucinacoes
+### 3.2 Alucinações
 
-Podem produzir **afirmacoes falsas mas plausiveis** sobre nomes
-instrumentos, ISINs, performance historica, dividendos, regras fiscais,
-composicao indices, datas ex-dividendo. **Verificar sempre** com fontes
+Podem produzir **afirmações falsas mas plausíveis** sobre nomes
+instrumentos, ISINs, performance histórica, dividendos, regras fiscais,
+composição índices, datas ex-dividendo. **Verificar sempre** com fontes
 oficiais.
 
 ### 3.3 Cutoff temporal
 
-Modelo nao conhece eventos posteriores ao seu cutoff.
+Modelo não conhece eventos posteriores ao seu cutoff.
 
-### 3.4 Sem recomendacoes personalizadas
+### 3.4 Sem recomendações personalizadas
 
-Mesmo com prompt incluindo a carteira, respostas IA **nao sao consultoria
-personalizada**: modelo nao conhece situacao patrimonial, rendimentos,
-liquidez, horizonte, risco, fiscalidade, objetivos pensoes.
+Mesmo com prompt incluindo a carteira, respostas IA **não são consultoria
+personalizada**: modelo não conhece situação patrimonial, rendimentos,
+liquidez, horizonte, risco, fiscalidade, objetivos pensões.
 
 ### 3.5 Sem "Know Your Customer"
 
-App nao recolhe perfil de risco. Nao sujeita a avaliacao MiFID II de
-adequacao/conveniencia.
+App não recolhe perfil de risco. Não sujeita a avaliação MiFID II de
+adequação/conveniência.
 
-## 4. Sugestoes de rebalanceamento
+## 4. Sugestões de rebalanceamento
 
-Calculos aritmeticos sobre parametros user-defined. **Nao sao**
-recomendacoes de compra/venda. App nao avalia: timing mercado, impacto
-fiscal, custos transacao, liquidez, concentracao. Consultar **consultor
+Cálculos aritméticos sobre parâmetros user-defined. **Não são**
+recomendações de compra/venda. App não avalia: timing mercado, impacto
+fiscal, custos transação, liquidez, concentração. Consultar **consultor
 financeiro autorizado**.
 
 ## 5. Dados de mercado
 
-Dados de fontes publicas ou EODHD/FMP (chaves do utilizador). Possiveis
-atrasos 15-20 min, erros em splits/dividendos/mudancas ticker. PluriFin
+Dados de fontes públicas ou EODHD/FMP (chaves do utilizador). Possíveis
+atrasos 15-20 min, erros em splits/dividendos/mudanças ticker. PluriFin
 sem responsabilidade.
 
-## 6. Calculos fiscais
+## 6. Cálculos fiscais
 
-App **nao calcula** fiscalidade. Mais-valias/menos-valias mostradas sao
-calculos brutos sem considerar: tributacao, bollo titoli (IT), IVAFE,
-deducoes, holding period, tratamento UCITS/nao-UCITS, sucessao.
+App **não calcula** fiscalidade. Mais-valias/menos-valias mostradas são
+cálculos brutos sem considerar: tributação, bollo titoli (IT), IVAFE,
+deduções, holding period, tratamento UCITS/não-UCITS, sucessão.
 Consultar **TOC ou consultor fiscal**.
 
 ## 7. Mercados estrangeiros e divisas
 
-Considerar: risco cambial, custos conversao, dupla tributacao (W-8BEN
-EUA), reporting ativos no estrangeiro, residencia fiscal. App **nao
+Considerar: risco cambial, custos conversão, dupla tributação (W-8BEN
+EUA), reporting ativos no estrangeiro, residência fiscal. App **não
 modela** nenhum.
 
-## 8. Seguranca pessoal
+## 8. Segurança pessoal
 
-- Chaves API no keystore SO -> acessiveis se dispositivo desbloqueado
-- Dispositivo perdido bloqueado: protegido; desbloqueado: expoe dados
+- Chaves API no keystore SO -> acessíveis se dispositivo desbloqueado
+- Dispositivo perdido bloqueado: protegido; desbloqueado: expõe dados
 - Backups Google Drive desativados por defeito
 
-PluriFin nao responde por: roubo/perda com desbloqueio, ma config lock,
-comprometimento, partilha de chaves API, exportacao manual e distribuicao
+PluriFin não responde por: roubo/perda com desbloqueio, má config lock,
+comprometimento, partilha de chaves API, exportação manual e distribuição
 descontrolada.
 
-## 9. Atualizacoes normativas
+## 9. Atualizações normativas
 
-Regras fiscais e regulatorias **mudam frequentemente**. App nao garante
-calculos, exemplos ou respostas IA atualizados. Verificar regulacao em
+Regras fiscais e regulatórias **mudam frequentemente**. App não garante
+cálculos, exemplos ou respostas IA atualizados. Verificar regulação em
 vigor.
 
-## 10. Decisoes do Utilizador -- exoneracao
+## 10. Decisões do Utilizador -- exoneração
 
 O Utilizador declara e aceita que:
 
-1. Uso de App, dados e analises e a sua exclusiva iniciativa e risco
-2. Decisoes de investimento sao **exclusivamente suas**
-3. PluriFin nao responde, nos limites legais, por perdas ou consequencias
+1. Uso de App, dados e análises é a sua exclusiva iniciativa e risco
+2. Decisões de investimento são **exclusivamente suas**
+3. PluriFin não responde, nos limites legais, por perdas ou consequências
    fiscais
-4. Para decisoes relevantes consultara **consultor financeiro autorizado**
+4. Para decisões relevantes consultará **consultor financeiro autorizado**
    (OCF: <https://www.organismocf.it> ou equivalente nacional)
 
 ## 11. Menores
 
-App **nao destinada a menores de 18**. Content rating Play "Everyone /
-18+". Pais/tutores responsaveis.
+App **não destinada a menores de 18**. Content rating Play "Everyone /
+18+". Pais/tutores responsáveis.
 
-## 12. Geolocalizacao
+## 12. Geolocalização
 
 App pensada para mercado italiano e zona Euro. Utilizadores fora devem
-verificar conformidade local. PluriFin nao responde por interpretacoes
+verificar conformidade local. PluriFin não responde por interpretações
 divergentes.
 
-## 13. Aceitacao explicita
+## 13. Aceitação explícita
 
-Aceitando este Disclaimer no primeiro arranque (ou apos bump versao), o
+Aceitando este Disclaimer no primeiro arranque (ou após bump versão), o
 Utilizador declara ter lido, compreendido a natureza informativa, as
-limitacoes IA, e libera PluriFin/Filippo Salemi nos limites legais.
+limitações IA, e libera PluriFin/Filippo Salemi nos limites legais.
 
-Aceitacao registada em `consent_box` cifrado (timestamp UTC, versao,
+Aceitação registada em `consent_box` cifrado (timestamp UTC, versão,
 hash SHA-256 texto).
 
-Sem aceitacao: rebalanceamento, IA e import bloqueados; so leitura
-legais e definicoes.
+Sem aceitação: rebalanceamento, IA e import bloqueados; só leitura
+legais e definições.
 
-## 14. Jurisdicao
+## 14. Jurisdição
 
 Lei italiana. Disputas: ver ToS.
 
 ## 15. Contactos
 
-`plurifin.app+legal@gmail.com`. PluriFin **nao presta consultoria
+`plurifin.app+legal@gmail.com`. PluriFin **não presta consultoria
 financeira por email**. Para isso, consultor autorizado (OCF ou
 equivalente).

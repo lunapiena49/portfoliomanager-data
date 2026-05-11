@@ -28,57 +28,57 @@
 <a href='../pt/privacy.html' lang='pt'>Portugues</a>
 
     </nav>
-<h1>Politica de Privacidad -- Portfolio Manager by PluriFin</h1>
-<p><strong>Version</strong>: 1.0.0 <strong>Ultima actualizacion</strong>: 2026-05-02 <strong>Idioma original</strong>: Italiano (version vinculante para la jurisdiccion)</p>
+<h1>Política de Privacidad -- Portfolio Manager by PluriFin</h1>
+<p><strong>Versión</strong>: 1.0.0 <strong>Última actualización</strong>: 2026-05-02 <strong>Idioma original</strong>: Italiano (versión vinculante para la jurisdicción)</p>
 <hr/>
 <h2>1. Responsable del tratamiento</h2>
 <ul>
 <li><strong>Nombre</strong>: Filippo Salemi</li>
-<li><strong>Forma juridica</strong>: persona fisica (desarrollador independiente)</li>
+<li><strong>Forma jurídica</strong>: persona física (desarrollador independiente)</li>
 <li><strong>Marca comercial</strong>: PluriFin</li>
-<li><strong>Pais</strong>: Italia</li>
+<li><strong>País</strong>: Italia</li>
 <li><strong>Email para solicitudes RGPD y privacidad</strong>: <code>plurifin.app+gdpr@gmail.com</code></li>
 <li><strong>Email general</strong>: <code>plurifin.app@gmail.com</code></li>
 </ul>
-<p>No se ha designado Delegado de Proteccion de Datos (DPO) por tratarse de persona fisica fuera de los supuestos del art. 37 RGPD.</p>
+<p>No se ha designado Delegado de Protección de Datos (DPO) por tratarse de persona física fuera de los supuestos del art. 37 RGPD.</p>
 <h2>2. Resumen (TL;DR)</h2>
 <ul>
 <li>Todos los datos de cartera (posiciones, transacciones, objetivos, ajustes)</li>
 </ul>
 <p>se almacenan <strong>solo en el dispositivo del usuario</strong> en forma cifrada. No   los recibimos, almacenamos ni transmitimos a servidores PluriFin.</p>
 <ul>
-<li>La app <strong>no usa analiticas de terceros</strong> (sin Google Analytics, sin</li>
+<li>La app <strong>no usa analíticas de terceros</strong> (sin Google Analytics, sin</li>
 </ul>
 <p>Firebase, sin Facebook SDK, sin AppsFlyer, sin Sentry por defecto).</p>
 <ul>
 <li>La app <strong>no comparte datos con anunciantes</strong>. No hay publicidad.</li>
 <li>Existen <strong>funcionalidades opcionales</strong> que, si el usuario las activa,</li>
 </ul>
-<p>transmiten datos a procesadores de terceros: IA Gemini, precios de   mercado en tiempo real (EODHD/FMP), validacion de suscripcion (Cloudflare   Worker). Cada una requiere accion explicita del usuario.</p>
+<p>transmiten datos a procesadores de terceros: IA Gemini, precios de   mercado en tiempo real (EODHD/FMP), validación de suscripción (Cloudflare   Worker). Cada una requiere acción explícita del usuario.</p>
 <ul>
 <li>El usuario puede exportar y borrar todos los datos en cualquier momento</li>
 </ul>
 <p>desde Ajustes, sin necesidad de contactar al responsable.</p>
-<h2>3. Categorias de datos tratados</h2>
+<h2>3. Categorías de datos tratados</h2>
 <h3>3.1 Datos locales en el dispositivo</h3>
 <p>Cifrados con Hive AES-256 + clave en el keystore del sistema operativo:</p>
-<p>| Categoria | Ejemplos | Base juridica | Conservacion | |---|---|---|---| | Datos de cartera | nombre, ticker, cantidad, precio medio, broker, fecha | art. 6.1.b RGPD | Hasta borrado por usuario | | Objetivos financieros | titulo, importe meta, vencimiento, aportaciones | art. 6.1.b RGPD | Hasta borrado por usuario | | Preferencias | idioma, divisa, tema, notificaciones, modo demo | art. 6.1.b RGPD | Hasta desinstalacion | | Auditoria de consentimientos | timestamp, version documento, decision (aceptar/rechazar), hash texto | art. 6.1.c RGPD | Hasta borrado o desinstalacion | | Claves API del usuario | claves de los proveedores activados: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (introducidas manualmente) | art. 6.1.b RGPD | Hasta eliminacion por usuario |</p>
+<p>| Categoría | Ejemplos | Base jurídica | Conservación | |---|---|---|---| | Datos de cartera | nombre, ticker, cantidad, precio medio, broker, fecha | art. 6.1.b RGPD | Hasta borrado por usuario | | Objetivos financieros | título, importe meta, vencimiento, aportaciones | art. 6.1.b RGPD | Hasta borrado por usuario | | Preferencias | idioma, divisa, tema, notificaciones, modo demo | art. 6.1.b RGPD | Hasta desinstalación | | Auditoría de consentimientos | timestamp, versión documento, decisión (aceptar/rechazar), hash texto | art. 6.1.c RGPD | Hasta borrado o desinstalación | | Claves API del usuario | claves de los proveedores activados: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (introducidas manualmente) | art. 6.1.b RGPD | Hasta eliminación por usuario |</p>
 <p>Todo en <code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
-<h3>3.2 Datos via Play Store (Google)</h3>
+<h3>3.2 Datos vía Play Store (Google)</h3>
 <p>PluriFin recibe de Google solo:</p>
 <ul>
-<li><code>purchaseToken</code> (token de compra) -- validacion suscripcion</li>
-<li><code>productId</code> -- identificacion producto</li>
-<li><code>device_id_hash</code> (HMAC-SHA256 con sal del servidor) -- gestion del trial</li>
+<li><code>purchaseToken</code> (token de compra) -- validación suscripción</li>
+<li><code>productId</code> -- identificación producto</li>
+<li><code>device_id_hash</code> (HMAC-SHA256 con sal del servidor) -- gestión del trial</li>
 </ul>
-<p>PluriFin <strong>no</strong> recibe nombre, email, direccion ni datos de pago.</p>
-<h3>3.3 Validacion suscripcion (Cloudflare Worker)</h3>
+<p>PluriFin <strong>no</strong> recibe nombre, email, dirección ni datos de pago.</p>
+<h3>3.3 Validación suscripción (Cloudflare Worker)</h3>
 <p>Datos enviados al Worker: <code>device_id_hash</code>, <code>purchase_token</code>, <code>product_id</code>, JWT firmado. Respuesta: JWT Ed25519. Sin PII. El hash no es identificador personal sin la sal del servidor.</p>
 <h3>3.4 Datos a Gemini (solo si el usuario activa)</h3>
-<p>Si el usuario introduce su clave Gemini y abre el chat IA, el prompt (pregunta + estructura de cartera anonima: ticker, cantidad, precio medio, asignacion %) se transmite directamente a Google Gemini. Aplican los <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>. PluriFin no intermedia ni almacena.</p>
+<p>Si el usuario introduce su clave Gemini y abre el chat IA, el prompt (pregunta + estructura de cartera anónima: ticker, cantidad, precio medio, asignación %) se transmite directamente a Google Gemini. Aplican los <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>. PluriFin no intermedia ni almacena.</p>
 <h3>3.5 Datos a los proveedores de mercado (solo si el usuario activa)</h3>
-<p>La app soporta 10 proveedores de datos de mercado que el usuario puede configurar independientemente introduciendo su API key en Ajustes. Cuando el usuario solicita una actualizacion de precios, la app transmite los tickers directamente al proveedor elegido. PluriFin no intermedia ni almacena.</p>
-<p>Proveedores soportados y politicas de privacidad:</p>
+<p>La app soporta 10 proveedores de datos de mercado que el usuario puede configurar independientemente introduciendo su API key en Ajustes. Cuando el usuario solicita una actualización de precios, la app transmite los tickers directamente al proveedor elegido. PluriFin no intermedia ni almacena.</p>
+<p>Proveedores soportados y políticas de privacidad:</p>
 <ul>
 <li><a href="https://eodhd.com/financial-academy/privacy-policy/">EODHD</a></li>
 <li><a href="https://site.financialmodelingprep.com/privacy-policy">Financial Modeling Prep (FMP)</a></li>
@@ -89,55 +89,56 @@
 <li><a href="https://marketstack.com/privacy">Marketstack</a></li>
 <li><a href="https://www.tiingo.com/about/privacy">Tiingo</a></li>
 <li><a href="https://www.nasdaq.com/privacy-statement">Nasdaq Data Link</a></li>
-<li><a href="https://stooq.com">Stooq</a>: descarga CSV publica sin API key (la</li>
+<li><a href="https://stooq.com">Stooq</a>: descarga CSV pública sin API key (la</li>
 </ul>
 <p>solicitud HTTP va directamente del dispositivo a stooq.com)</p>
-<p>Para cada proveedor, la transmision se produce <strong>solo</strong> si el usuario:</p>
+<p>Para cada proveedor, la transmisión se produce <strong>solo</strong> si el usuario:</p>
 <ol>
 <li>ha introducido su API key en Ajustes (Stooq excluido, es gratuito);</li>
-<li>ha seleccionado el proveedor como activo para la actualizacion.</li>
+<li>ha seleccionado el proveedor como activo para la actualización.</li>
 </ol>
 <p>El usuario puede eliminar la clave o desactivar el proveedor en cualquier momento.</p>
 <h2>4. Subprocesadores</h2>
-<p>| Subprocesador | Finalidad | Datos | Cuando | |---|---|---|---| | Google Play Billing | Pago y suscripcion | purchaseToken, productId | Solo si compra | | Google Gemini API | Analisis IA | Prompt + cartera anonima | Solo si activa | | EODHD | Precios real-time e historicos | Lista tickers | Solo si activa | | FMP | Precios real-time, fundamentales | Lista tickers | Solo si activa | | Alpha Vantage | Precios historicos | Lista tickers | Solo si activa | | Twelve Data | Precios real-time e historicos | Lista tickers | Solo si activa | | Finnhub | Precios real-time | Lista tickers | Solo si activa | | Polygon.io | Precios historicos | Lista tickers | Solo si activa | | Marketstack | Precios end-of-day | Lista tickers | Solo si activa | | Tiingo | Precios real-time e historicos | Lista tickers | Solo si activa | | Nasdaq Data Link | Precios historicos | Lista tickers | Solo si activa | | Stooq | Descarga CSV publica precios historicos | Lista tickers (sin API key) | Solo si activa Stooq | | Cloudflare Worker | Validacion suscripcion | device_id_hash, purchase_token, JWT | Siempre (gating subscription) | | GitHub Pages | Hosting legal/webapp/sitio | IP request HTTP | En cada visita |</p>
+<p>| Subprocesador | Finalidad | Datos | Cuándo | |---|---|---|---| | Google Play Billing | Pago y suscripción | purchaseToken, productId | Solo si compra | | Google Gemini API | Análisis IA | Prompt + cartera anónima | Solo si activa | | EODHD | Precios real-time e históricos | Lista tickers | Solo si activa | | FMP | Precios real-time, fundamentales | Lista tickers | Solo si activa | | Alpha Vantage | Precios históricos | Lista tickers | Solo si activa | | Twelve Data | Precios real-time e históricos | Lista tickers | Solo si activa | | Finnhub | Precios real-time | Lista tickers | Solo si activa | | Polygon.io | Precios históricos | Lista tickers | Solo si activa | | Marketstack | Precios end-of-day | Lista tickers | Solo si activa | | Tiingo | Precios real-time e históricos | Lista tickers | Solo si activa | | Nasdaq Data Link | Precios históricos | Lista tickers | Solo si activa | | Stooq | Descarga CSV pública precios históricos | Lista tickers (sin API key) | Solo si activa Stooq | | Cloudflare Worker | Validación suscripción | device_id_hash, purchase_token, JWT | Siempre (gating subscription) | | GitHub Pages | Hosting legal/webapp/sitio | IP request HTTP | En cada visita |</p>
 <h2>5. Transferencias fuera de la UE</h2>
 <p>Google, Cloudflare y GitHub son sociedades USA. Transferencias bajo:</p>
 <ul>
-<li>Clausulas Contractuales Tipo UE 2021/914</li>
+<li>Cláusulas Contractuales Tipo UE 2021/914</li>
 <li>EU-US Data Privacy Framework (Google)</li>
-<li>Politicas de cada proveedor (EODHD, FMP)</li>
+<li>Políticas de cada proveedor (EODHD, FMP)</li>
 </ul>
 <p>Quien no quiera transferencias fuera de la UE puede no activar las funciones opcionales.</p>
 <h2>6. Derechos del interesado (arts. 15-22 RGPD)</h2>
-<p>| Derecho | Como ejercerlo | |---|---| | Acceso | Ajustes &gt; Privacidad &gt; Exportar mis datos (ZIP) | | Rectificacion | Edicion directa en la app | | Supresion | Ajustes &gt; Privacidad &gt; Borrar todos los datos / desinstalar | | Limitacion | Desactivar funciones opcionales | | Portabilidad | Ajustes &gt; Privacidad &gt; Exportar (JSON+CSV) | | Oposicion | Desactivar funciones opcionales | | Reclamacion | <a href="https://www.garanteprivacy.it/">Garante (Italia)</a>, AEPD (Espana) o autoridad nacional |</p>
-<p>Solicitudes: <code>plurifin.app+gdpr@gmail.com</code>. Respuesta en 30 dias (art. 12.3 RGPD).</p>
-<h2>7. Conservacion</h2>
-<p>Datos locales hasta borrado por el usuario. Auditoria consentimientos: hasta export y borrado explicitos. Subprocesadores: politica propia.</p>
+<p>| Derecho | Cómo ejercerlo | |---|---| | Acceso | Ajustes &gt; Privacidad &gt; Exportar mis datos (ZIP) | | Rectificación | Edición directa en la app | | Supresión | Ajustes &gt; Privacidad &gt; Borrar todos los datos / desinstalar | | Limitación | Desactivar funciones opcionales | | Portabilidad | Ajustes &gt; Privacidad &gt; Exportar (JSON+CSV) | | Oposición | Desactivar funciones opcionales | | Reclamación | <a href="https://www.garanteprivacy.it/">Garante (Italia)</a>, AEPD (España) o autoridad nacional |</p>
+<p>Solicitudes: <code>plurifin.app+gdpr@gmail.com</code>. Respuesta en 30 días (art. 12.3 RGPD).</p>
+<h2>7. Conservación</h2>
+<p>Datos locales hasta borrado por el usuario. Auditoría consentimientos: hasta export y borrado explícitos. Subprocesadores: política propia.</p>
 <h2>8. Seguridad</h2>
 <ul>
 <li>Hive AES-256 + HMAC-SHA256</li>
 <li><code>flutter_secure_storage</code> para claves API</li>
 <li>HTTPS solo (TLS 1.2+)</li>
-<li><code>FLAG_SECURE</code> Android en paginas sensibles</li>
+<li><code>FLAG_SECURE</code> Android en páginas sensibles</li>
 <li><code>allowBackup=false</code></li>
-<li>Detection root/jailbreak con degradacion graceful</li>
+<li>Detección root/jailbreak con degradación graceful</li>
 <li>Obfuscation Dart en releases</li>
 </ul>
 <h2>9. Menores (art. 8 RGPD)</h2>
-<p>App no destinada a menores de 18 anos. Content rating Play Store "18+". Padres/tutores pueden solicitar borrado en <code>plurifin.app+gdpr@gmail.com</code>.</p>
+<p>App no destinada a menores de 18 años. Content rating Play Store "18+". Padres/tutores pueden solicitar borrado en <code>plurifin.app+gdpr@gmail.com</code>.</p>
 <h2>10. Cookies</h2>
-<p>App movil: ninguna cookie. Webapp: <code>localStorage</code> + cookie tecnica GitHub Pages. Sitio vitrina: GoatCounter self-hosted (sin cookie, sin fingerprinting).</p>
+<p>App móvil: ninguna cookie. Webapp: <code>localStorage</code> + cookie técnica GitHub Pages. Sitio vitrina: GoatCounter self-hosted (sin cookie, sin fingerprinting).</p>
 <h2>11. Cambios</h2>
-<p>Notificacion via app (re-consent), banner en sitio (30 dias), email newsletter. Versiones anteriores en repo <code>lunapiena49/portfoliomanager-data</code>, historial Git.</p>
+<p>Notificación vía app (re-consent), banner en sitio (30 días), email newsletter. Versiones anteriores en repo <code>lunapiena49/portfoliomanager-data</code>, historial Git.</p>
 <h2>12. Contactos</h2>
 <ul>
 <li>RGPD: <code>plurifin.app+gdpr@gmail.com</code></li>
 <li>Privacidad: <code>plurifin.app+privacy@gmail.com</code></li>
 <li>Soporte: <code>plurifin.app+support@gmail.com</code></li>
-<li>Publico Play Store: <code>plurifin.app@gmail.com</code></li>
+<li>Legal: <code>plurifin.app+legal@gmail.com</code></li>
+<li>Público Play Store: <code>plurifin.app@gmail.com</code></li>
 </ul>
-<h2>13. Jurisdiccion y ley aplicable</h2>
-<p>Ley italiana y RGPD. Para consumidores, fuero del consumidor segun D.Lgs. 206/2005 (Italia) o equivalentes nacionales mas protectores.</p>
+<h2>13. Jurisdicción y ley aplicable</h2>
+<p>Ley italiana y RGPD. Para consumidores, fuero del consumidor según D.Lgs. 206/2005 (Italia) o equivalentes nacionales más protectores.</p>
 
     <footer class="doc-footer">
       <p><a href="./index.html">Index</a> | <a href="/legal/">All languages</a> | <a href="/">Back to PluriFin home</a></p>
