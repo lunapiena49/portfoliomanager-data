@@ -1,0 +1,39 @@
+---
+import fr from '../../i18n/fr';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'qui', label: 'A propos' },
+  { id: 'mission', label: 'Mission' },
+  { id: 'technologie', label: 'Technologie' },
+  { id: 'contact', label: 'Contact' },
+];
+---
+<LegalLayout t={fr} lang="fr" pageTitle="A propos de PluriFin" tocItems={toc}>
+  <h2 id="qui">A propos de PluriFin</h2>
+  <p><strong>PluriFin</strong> est le projet de <strong>Filippo Salemi</strong>, developpeur
+  independant base en Italie. Personne physique, sans conflits d'interets avec des courtiers ou
+  des intermediaires financiers, sans activite de conseil ni d'intermediation.</p>
+
+  <h2 id="mission">Mission</h2>
+  <p>L'objectif est de construire des outils que les investisseurs particuliers peuvent posseder
+  et controler entierement : sans verrouillage fournisseur, sans cloud obligatoire, sans
+  dependances vis-a-vis de services qui pourraient disparaitre ou modifier leurs conditions.</p>
+  <p>Portfolio Manager est ne du besoin personnel de suivre avec precision des portefeuilles
+  multi-courtiers, multi-devises et multi-classes d'actifs, avec une analyse IA optionnelle et des
+  objectifs a long terme.</p>
+
+  <h2 id="technologie">Technologie</h2>
+  <p>L'application est developpee avec <strong>Flutter</strong> pour une portabilite maximale
+  (Android, iOS, Web, Windows, Linux, macOS). Le stockage local utilise <strong>Hive</strong>
+  avec un chiffrement AES-256. Les cles API sont conservees dans le keystore du systeme
+  d'exploitation de chaque plateforme.</p>
+  <p>Le code de l'application est closed-source (proprietaire). Le depot public
+  <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a>
+  heberge la chaine de donnees de marche (licence MIT) et la webapp.</p>
+
+  <h2 id="contact">Contact</h2>
+  <p>General : <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>RGPD / vie privee : <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+  <p>GitHub : <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">lunapiena49/portfoliomanager-data</a></p>
+</LegalLayout>
