@@ -50,7 +50,7 @@ export async function buildRssFeed(opts: FeedOptions): Promise<Response> {
   const items = sorted
     .map((post) => {
       const slug = post.slug;
-      const url = `${baseUrl}/blog/${slug}/`;
+      const url = `${baseUrl}/blog/${slug}`;
       const pubDate = post.data.publishedAt.toUTCString();
       const itemTitle = escapeXml(post.data.title);
       const summary = escapeXml(post.data.summary);
@@ -83,7 +83,7 @@ export async function buildRssFeed(opts: FeedOptions): Promise<Response> {
      xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(title)}</title>
-    <link>${baseUrl}/blog/</link>
+    <link>${baseUrl}/blog</link>
     <atom:link href="${baseUrl}${selfPath}" rel="self" type="application/rss+xml" />
     <description>${escapeXml(description)}</description>
     <language>${channelLanguage}</language>
