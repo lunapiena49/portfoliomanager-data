@@ -175,7 +175,12 @@
       },
       "required": "Confirma los 3 documentos para continuar"
     },
-    "get_started": "Comenzar"
+    "get_started": "Comenzar",
+    "skip_for_returning": {
+      "banner_title": "Bienvenido de nuevo",
+      "banner_message": "Ya completaste la introduccion anteriormente. Puedes omitir el tutorial e ir directamente a la pantalla principal.",
+      "cta": "Omitir"
+    }
   },
   "navigation": {
     "portfolio": "Cartera",

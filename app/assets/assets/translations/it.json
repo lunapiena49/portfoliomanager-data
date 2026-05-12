@@ -175,7 +175,12 @@
       },
       "required": "Conferma tutti e 3 i documenti per continuare"
     },
-    "get_started": "Inizia"
+    "get_started": "Inizia",
+    "skip_for_returning": {
+      "banner_title": "Bentornato",
+      "banner_message": "Hai gia' completato l'onboarding in precedenza. Puoi saltare il tutorial e andare direttamente alla home.",
+      "cta": "Salta"
+    }
   },
   "navigation": {
     "portfolio": "Portafoglio",

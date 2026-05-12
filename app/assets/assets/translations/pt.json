@@ -175,7 +175,12 @@
       },
       "required": "Confirma os 3 documentos para continuar"
     },
-    "get_started": "Comecar"
+    "get_started": "Comecar",
+    "skip_for_returning": {
+      "banner_title": "Bem-vindo de volta",
+      "banner_message": "Voce ja concluiu a introducao anteriormente. Pode pular o tutorial e ir direto para a tela inicial.",
+      "cta": "Pular"
+    }
   },
   "navigation": {
     "portfolio": "Carteira",
