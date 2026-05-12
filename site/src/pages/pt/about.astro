@@ -1,0 +1,39 @@
+---
+import pt from '../../i18n/pt';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'sobre', label: 'Sobre nos' },
+  { id: 'missao', label: 'Missao' },
+  { id: 'tecnologia', label: 'Tecnologia' },
+  { id: 'contato', label: 'Contato' },
+];
+---
+<LegalLayout t={pt} lang="pt" pageTitle="Sobre o PluriFin" tocItems={toc}>
+  <h2 id="sobre">Sobre o PluriFin</h2>
+  <p><strong>PluriFin</strong> e o projeto de <strong>Filippo Salemi</strong>, desenvolvedor
+  independente com sede na Italia. Pessoa fisica, sem conflitos de interesses com corretoras ou
+  intermediarios financeiros, sem atividade de consultoria ou intermediacao.</p>
+
+  <h2 id="missao">Missao</h2>
+  <p>O objetivo e construir ferramentas que os investidores de varejo possam possuir e controlar
+  totalmente: sem dependencia de fornecedor, sem nuvem obrigatoria, sem dependencias de servicos
+  que possam desaparecer ou alterar seus termos.</p>
+  <p>O Portfolio Manager nasceu da necessidade pessoal de acompanhar com precisao carteiras
+  multi-corretora, multi-moeda e multi-classe de ativos, com analise de IA opcional e objetivos
+  de longo prazo.</p>
+
+  <h2 id="tecnologia">Tecnologia</h2>
+  <p>O aplicativo e desenvolvido com <strong>Flutter</strong> para maxima portabilidade (Android,
+  iOS, Web, Windows, Linux, macOS). O armazenamento local utiliza <strong>Hive</strong> com
+  criptografia AES-256. As chaves de API sao mantidas no keystore do sistema operacional de cada
+  plataforma.</p>
+  <p>O codigo do aplicativo e closed-source (proprietario). O repositorio publico
+  <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a>
+  hospeda o pipeline de dados de mercado (licenca MIT) e a webapp.</p>
+
+  <h2 id="contato">Contato</h2>
+  <p>Geral: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>LGPD / privacidade: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">lunapiena49/portfoliomanager-data</a></p>
+</LegalLayout>

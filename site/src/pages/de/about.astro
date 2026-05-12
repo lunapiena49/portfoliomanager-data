@@ -1,0 +1,39 @@
+---
+import de from '../../i18n/de';
+import LegalLayout from '../../layouts/LegalLayout.astro';
+
+const toc = [
+  { id: 'ueber', label: 'Ueber uns' },
+  { id: 'mission', label: 'Mission' },
+  { id: 'technologie', label: 'Technologie' },
+  { id: 'kontakt', label: 'Kontakt' },
+];
+---
+<LegalLayout t={de} lang="de" pageTitle="Ueber PluriFin" tocItems={toc}>
+  <h2 id="ueber">Ueber PluriFin</h2>
+  <p><strong>PluriFin</strong> ist das Projekt von <strong>Filippo Salemi</strong>, einem
+  unabhaengigen Entwickler mit Sitz in Italien. Privatperson, keine Interessenkonflikte mit
+  Brokern oder Finanzintermediaeren, keine Beratungs- oder Vermittlungstaetigkeit.</p>
+
+  <h2 id="mission">Mission</h2>
+  <p>Das Ziel ist es, Werkzeuge zu entwickeln, die Privatanleger vollstaendig besitzen und
+  kontrollieren koennen: ohne Anbieterbindung, ohne obligatorische Cloud, ohne Abhaengigkeit von
+  Diensten, die verschwinden oder ihre Bedingungen aendern koennten.</p>
+  <p>Portfolio Manager entstand aus dem persoenlichen Bedarf, Multi-Broker-, Multi-Waehrungs- und
+  Multi-Asset-Klassen-Portfolios praezise zu verfolgen, mit optionaler KI-Analyse und langfristigen
+  Zielen.</p>
+
+  <h2 id="technologie">Technologie</h2>
+  <p>Die App wird mit <strong>Flutter</strong> entwickelt fuer maximale Portabilitaet (Android,
+  iOS, Web, Windows, Linux, macOS). Der lokale Speicher nutzt <strong>Hive</strong> mit
+  AES-256-Verschluesselung. API-Schluessel werden im Keystore des Betriebssystems jeder Plattform
+  aufbewahrt.</p>
+  <p>Der App-Code ist closed-source (proprietaer). Das oeffentliche Repository
+  <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">portfoliomanager-data</a>
+  beherbergt die Marktdaten-Pipeline (MIT-Lizenz) und die Webapp.</p>
+
+  <h2 id="kontakt">Kontakt</h2>
+  <p>Allgemein: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p>DSGVO / Datenschutz: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+  <p>GitHub: <a href="https://github.com/lunapiena49/portfoliomanager-data" rel="noopener noreferrer" target="_blank">lunapiena49/portfoliomanager-data</a></p>
+</LegalLayout>
