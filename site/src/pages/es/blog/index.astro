@@ -1,0 +1,69 @@
+---
+import { getCollection } from 'astro:content';
+import es from '../../../i18n/es';
+import LegalLayout from '../../../layouts/LegalLayout.astro';
+
+const all = await getCollection('blog', ({ data }) => !data.draft && data.lang === 'es');
+const posts = all.sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+
+const toc = posts.map((p) => ({
+  id: p.slug,
+  label: p.data.title,
+}));
+---
+<LegalLayout t={es} lang="es" pageTitle="Blog PluriFin" tocItems={toc}>
+  <p class="meta">
+    Historias, decisiones de producto, lecciones aprendidas. Actualizado ocasionalmente.
+    {' '}
+    <a href="/blog/rss-es.xml" class="rss-link" aria-label="RSS feed">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M6.18,15.64A2.18,2.18 0 0,1 8.36,17.82C8.36,19 7.38,20 6.18,20C5,20 4,19 4,17.82A2.18,2.18 0 0,1 6.18,15.64M4,4.44A15.56,15.56 0 0,1 19.56,20H16.73A12.73,12.73 0 0,0 4,7.27V4.44M4,10.1A9.9,9.9 0 0,1 13.9,20H11.07A7.07,7.07 0 0,0 4,12.93V10.1Z"/>
+      </svg>
+      RSS feed
+    </a>
+  </p>
+
+  {posts.length === 0 ? (
+    <p>Aun no hay articulos publicados. Vuelve pronto.</p>
+  ) : (
+    posts.map((post) => (
+      <article class="blog-card" id={post.slug}>
+        <p class="meta">
+          <time datetime={post.data.publishedAt.toISOString()}>
+            {post.data.publishedAt.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}
+          </time>
+          {' - '}
+          <span>{post.data.author.name}</span>
+          {post.data.tags.length > 0 && (
+            <span class="tags">
+              {' - '}
+              {post.data.tags.map((tag) => (
+                <span class="tag">#{tag}</span>
+              ))}
+            </span>
+          )}
+        </p>
+        <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+        <p>{post.data.summary}</p>
+        <p><a href={`/blog/${post.slug}/`} class="read-more">Leer mas -&gt;</a></p>
+      </article>
+    ))
+  )}
+</LegalLayout>
+
+<style>
+  .blog-card { border-bottom: 1px solid var(--divider); padding: 16px 0 24px; }
+  .blog-card:last-child { border-bottom: none; }
+  .blog-card .meta { font-size: 13px; color: var(--text-3); margin-bottom: 4px; }
+  .blog-card h2 { margin: 4px 0 8px; font-size: 22px; line-height: 1.3; }
+  .blog-card h2 a { color: var(--text); text-decoration: none; }
+  .blog-card h2 a:hover { color: var(--primary); }
+  .blog-card .tag { display: inline-block; margin-right: 4px; color: var(--accent, #00BFA5); font-size: 12px; }
+  .blog-card .read-more { color: var(--primary); text-decoration: none; font-size: 14px; }
+  .blog-card .read-more:hover { text-decoration: underline; }
+  .rss-link { display: inline-flex; align-items: center; gap: 4px; margin-left: 4px; color: var(--accent, #00BFA5); text-decoration: none; font-size: 13px; }
+  .rss-link:hover { text-decoration: underline; }
+  .rss-link svg { flex-shrink: 0; }
+</style>
