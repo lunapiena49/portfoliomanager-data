@@ -38,7 +38,7 @@ const backLabels = {
   de: 'Zurueck zum Blog',
   pt: 'Voltar ao blog',
 };
-const backHref = post.data.lang === 'it' ? '/blog/' : `/${post.data.lang}/blog/`;
+const backHref = post.data.lang === 'it' ? '/blog' : `/${post.data.lang}/blog`;
 const backLabel = backLabels[post.data.lang];
 ---
 <LegalLayout t={t} lang={post.data.lang} pageTitle={post.data.title} tocItems={toc}>

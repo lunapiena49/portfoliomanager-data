@@ -45,9 +45,9 @@ const toc = posts.map((p) => ({
             </span>
           )}
         </p>
-        <h2><a href={`/blog/${post.slug}/`}>{post.data.title}</a></h2>
+        <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
         <p>{post.data.summary}</p>
-        <p><a href={`/blog/${post.slug}/`} class="read-more">Weiterlesen -&gt;</a></p>
+        <p><a href={`/blog/${post.slug}`} class="read-more">Weiterlesen -&gt;</a></p>
       </article>
     ))
   )}
