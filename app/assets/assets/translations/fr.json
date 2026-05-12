@@ -175,7 +175,12 @@
       },
       "required": "Confirmez les 3 documents pour continuer"
     },
-    "get_started": "Commencer"
+    "get_started": "Commencer",
+    "skip_for_returning": {
+      "banner_title": "Bon retour",
+      "banner_message": "Vous avez deja effectue l'introduction. Sautez le tutoriel et accedez directement a l'ecran principal.",
+      "cta": "Passer"
+    }
   },
   "navigation": {
     "portfolio": "Portefeuille",

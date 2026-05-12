@@ -175,7 +175,12 @@
       },
       "required": "Confirm all 3 documents to continue"
     },
-    "get_started": "Get Started"
+    "get_started": "Get Started",
+    "skip_for_returning": {
+      "banner_title": "Welcome back",
+      "banner_message": "You completed onboarding before. Skip the tutorial and jump straight to the home screen.",
+      "cta": "Skip"
+    }
   },
   "navigation": {
     "portfolio": "Portfolio",

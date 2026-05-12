@@ -175,7 +175,12 @@
       },
       "required": "Bestatigen Sie alle 3 Dokumente, um fortzufahren"
     },
-    "get_started": "Loslegen"
+    "get_started": "Loslegen",
+    "skip_for_returning": {
+      "banner_title": "Willkommen zuruck",
+      "banner_message": "Sie haben das Onboarding bereits abgeschlossen. Uberspringen Sie das Tutorial und gehen Sie direkt zum Startbildschirm.",
+      "cta": "Uberspringen"
+    }
   },
   "navigation": {
     "portfolio": "Portfolio",
