@@ -24,6 +24,20 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
+  // IT default locale ha root path no-prefix (sitemap esclude /it/*),
+  // ma utenti che digitano /it/<page> per simmetria con /en|es|fr|de|pt/
+  // ricevevano 404. Static redirects emettono HTML meta-refresh stub.
+  redirects: {
+    '/it': '/',
+    '/it/faq': '/faq',
+    '/it/about': '/about',
+    '/it/pricing': '/pricing',
+    '/it/press': '/press',
+    '/it/contact': '/contact',
+    '/it/terms': '/terms',
+    '/it/privacy': '/privacy',
+    '/it/disclaimer': '/disclaimer',
+  },
   build: {
     assets: '_assets',
     // 4A.1bis: emit /privacy.html instead of /privacy/index.html so URLs like
