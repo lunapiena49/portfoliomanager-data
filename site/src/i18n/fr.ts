@@ -91,7 +91,7 @@ const fr: Translations = {
     q5: "L'IA donne des conseils ?",
     a5: 'Non. Les reponses de Gemini sont informatives. Elles peuvent contenir des erreurs ou des donnees obsoletes. Les decisions d\'investissement vous appartiennent.',
     q6: 'Combien de langues ?',
-    a6: 'Six : italien, anglais, espagnol, francais, allemand, portugais.',
+    a6: 'Six : italien, anglais, espagnol, français, allemand, portugais.',
     q7: "Je peux l'utiliser sur le web ?",
     a7: 'Oui. La webapp est disponible gratuitement sur plurifin.app/app/',
     q8: 'Comment je recois les mises a jour ?',

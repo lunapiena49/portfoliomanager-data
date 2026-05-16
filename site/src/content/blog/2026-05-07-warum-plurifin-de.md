@@ -1,6 +1,6 @@
 ---
 title: "Warum ich PluriFin gebaut habe"
-summary: "Die persoenliche Geschichte hinter einer privacy-first App fuer Privatanleger, und warum ein einzelner Entwickler sich einen 0,99 EUR/Jahr-Tarif leisten kann."
+summary: "Die persoenliche Geschichte hinter einer privacy-first App fuer Privatanleger, und warum ein einzelner Entwickler einen 0,99 EUR/Jahr-Tarif anbieten kann."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"

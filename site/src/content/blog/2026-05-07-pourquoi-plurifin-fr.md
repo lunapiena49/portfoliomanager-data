@@ -1,6 +1,6 @@
 ---
 title: "Pourquoi j'ai construit PluriFin"
-summary: "L'histoire personnelle derriere une app privacy-first pour investisseurs particuliers, et pourquoi un developpeur seul peut se permettre un plan a 0,99 EUR/an."
+summary: "L'histoire personnelle derriere une app privacy-first pour investisseurs particuliers, et pourquoi un developpeur seul peut offrir un plan a 0,99 EUR/an."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"
