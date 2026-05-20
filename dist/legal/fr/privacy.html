@@ -29,7 +29,7 @@
 
     </nav>
 <h1>Politique de Confidentialité -- Portfolio Manager by PluriFin</h1>
-<p><strong>Version</strong>: 1.0.0 <strong>Dernière mise à jour</strong>: 2026-05-02 <strong>Langue originale</strong>: Italien (version contraignante pour la juridiction)</p>
+<p><strong>Version</strong>: 1.0.1 <strong>Dernière mise à jour</strong>: 2026-05-20 <strong>Langue originale</strong>: Italien (version contraignante pour la juridiction)</p>
 <hr/>
 <h2>1. Responsable du traitement</h2>
 <ul>
@@ -49,8 +49,9 @@
 <ul>
 <li>L'app <strong>n'utilise aucun analytics tiers</strong> (pas de Google Analytics,</li>
 </ul>
-<p>Firebase, Facebook SDK, AppsFlyer, Sentry par défaut).</p>
+<p>Facebook SDK, AppsFlyer, Sentry par défaut).</p>
 <ul>
+<li>Sur Android, l'app intègre un <strong>diagnostic de crash anonyme optionnel via Firebase Crashlytics</strong> (Google Ireland Limited) : désactivé par défaut, activable par l'utilisateur depuis Paramètres &gt; Confidentialité. Jamais de données de portefeuille, clés API ou contenu IA. Voir section 4 (sous-traitants).</li>
 <li>L'app <strong>ne partage aucune donnée</strong> avec annonceurs. Pas de publicité.</li>
 <li>Des <strong>fonctionnalités optionnelles</strong> existent qui, si activées, transmettent</li>
 </ul>
@@ -93,7 +94,7 @@
 </ol>
 <p>L'utilisateur peut retirer la clé ou désactiver le fournisseur à tout moment.</p>
 <h2>4. Sous-traitants</h2>
-<p>| Sous-traitant | Finalité | Données | Quand | |---|---|---|---| | Google Play Billing | Paiement abonnement | purchaseToken, productId | Achat seulement | | Google Gemini API | Analyse IA | Prompt + portefeuille anonyme | Activation seulement | | EODHD | Prix temps réel et historiques | Liste tickers | Activation seulement | | FMP | Prix temps réel, fondamentaux | Liste tickers | Activation seulement | | Alpha Vantage | Prix historiques | Liste tickers | Activation seulement | | Twelve Data | Prix temps réel et historiques | Liste tickers | Activation seulement | | Finnhub | Prix temps réel | Liste tickers | Activation seulement | | Polygon.io | Prix historiques | Liste tickers | Activation seulement | | Marketstack | Prix end-of-day | Liste tickers | Activation seulement | | Tiingo | Prix temps réel et historiques | Liste tickers | Activation seulement | | Nasdaq Data Link | Prix historiques | Liste tickers | Activation seulement | | Stooq | Téléchargement CSV public prix historiques | Liste tickers (sans API key) | Activation Stooq seulement | | Cloudflare Worker | Validation abonnement | device_id_hash, JWT | Toujours (gating) | | GitHub Pages | Hosting docs/webapp/site | IP request | Chaque visite |</p>
+<p>| Sous-traitant | Finalité | Données | Quand | |---|---|---|---| | Google Play Billing | Paiement abonnement | purchaseToken, productId | Achat seulement | | Google Gemini API | Analyse IA | Prompt + portefeuille anonyme | Activation seulement | | EODHD | Prix temps réel et historiques | Liste tickers | Activation seulement | | FMP | Prix temps réel, fondamentaux | Liste tickers | Activation seulement | | Alpha Vantage | Prix historiques | Liste tickers | Activation seulement | | Twelve Data | Prix temps réel et historiques | Liste tickers | Activation seulement | | Finnhub | Prix temps réel | Liste tickers | Activation seulement | | Polygon.io | Prix historiques | Liste tickers | Activation seulement | | Marketstack | Prix end-of-day | Liste tickers | Activation seulement | | Tiingo | Prix temps réel et historiques | Liste tickers | Activation seulement | | Nasdaq Data Link | Prix historiques | Liste tickers | Activation seulement | | Stooq | Téléchargement CSV public prix historiques | Liste tickers (sans API key) | Activation Stooq seulement | | Google Ireland Limited -- Firebase Crashlytics | Diagnostic de crash anonyme | Trace d'appel offusquée, modèle d'appareil, OS, version de l'app, Firebase Installation ID anonyme | Seulement si l'utilisateur active "Diagnostic de crash anonyme" dans Paramètres &gt; Confidentialité. Désactivé par défaut. | | Cloudflare Worker | Validation abonnement | device_id_hash, JWT | Toujours (gating) | | GitHub Pages | Hosting docs/webapp/site | IP request | Chaque visite |</p>
 <h2>5. Transferts hors UE</h2>
 <p>Google, Cloudflare, GitHub: sociétés USA. Bases:</p>
 <ul>

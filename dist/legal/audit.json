@@ -1,36 +1,36 @@
 {
-    "generated_at":  "2026-05-11T18:25:52Z",
+    "generated_at":  "2026-05-20T09:38:20Z",
     "docs":  {
                  "privacy":  {
                                  "it":  {
                                             "output_path":  "dist\\legal\\it\\privacy.html",
                                             "source_path":  "assets\\legal\\it\\privacy_policy.md",
-                                            "sha256":  "cc0c9ed8a56d27871b556f5fb976c68726885609723f8dd3f204f8c785bc2f6d"
+                                            "sha256":  "1c8c896bfd3682c5efd403c588ed2ad4fac929f409ac8a2196abc10716924c5c"
                                         },
                                  "es":  {
                                             "output_path":  "dist\\legal\\es\\privacy.html",
                                             "source_path":  "assets\\legal\\es\\privacy_policy.md",
-                                            "sha256":  "d19479b0e3140232951baca3a230121dad4b1dc143379988c58f3a2225d62c65"
+                                            "sha256":  "fb7a8b9d58fe6928f4c20c92a4aa67b060cf591e2d1808af92f57de8f32fa16f"
                                         },
                                  "fr":  {
                                             "output_path":  "dist\\legal\\fr\\privacy.html",
                                             "source_path":  "assets\\legal\\fr\\privacy_policy.md",
-                                            "sha256":  "30bf4ff3b73f6302330d405ba08f1042a8e32cfb49e51dade86eb67cf9a988b2"
+                                            "sha256":  "873d6c885362bfab48a552e12e3d04a437cdebd2e3223b41917bae8d672fc86c"
                                         },
                                  "pt":  {
                                             "output_path":  "dist\\legal\\pt\\privacy.html",
                                             "source_path":  "assets\\legal\\pt\\privacy_policy.md",
-                                            "sha256":  "2c41741db8df7dc6befdd9b8fe372f14465ec1a6d10e4bf067b136542ec2e834"
+                                            "sha256":  "6a3effd1ed61962814363a7f72cafc60655bea57a9fe365c02bcbe7d2c8a45f5"
                                         },
                                  "de":  {
                                             "output_path":  "dist\\legal\\de\\privacy.html",
                                             "source_path":  "assets\\legal\\de\\privacy_policy.md",
-                                            "sha256":  "63ad39268a374d36713ee2392731027bdf90d47bbaf5c455c854f6c4c7ff106a"
+                                            "sha256":  "cd8dbb9844595b6a808bcedab405d255280ca433dd5da35a0984e9337df25c98"
                                         },
                                  "en":  {
                                             "output_path":  "dist\\legal\\en\\privacy.html",
                                             "source_path":  "assets\\legal\\en\\privacy_policy.md",
-                                            "sha256":  "dc5d6b9bffe07d32846cbd48e96246ff69c84b0b304fddc7da6fd30c8e495a50"
+                                            "sha256":  "f754956b1d2a69cea0974728838105c688d740304109c59319a3972c2ff23704"
                                         }
                              },
                  "disclaimer":  {
