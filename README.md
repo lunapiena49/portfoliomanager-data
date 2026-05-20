@@ -1,38 +1,80 @@
-# Portfolio Manager -- public data + webapp + legal
+# PluriFin -- Portfolio Manager
 
-Public companion repo to the private [`portfolio-manager-app`](https://github.com/lunapiena49/portfolio-manager-app)
-(Flutter source). This repo holds:
+> Track investments, plan goals, balance risk. Privacy-first, offline-capable, AI-assisted.
+> **Android v1.0 -- Web demo at <https://plurifin.app/app/>**
 
-1. **Market data snapshots** -- daily JSON published via GitHub Pages
-2. **Webapp** -- Flutter web build deployed under `/app/`
-3. **Legal docs** -- Privacy Policy + Terms of Service, HTML, 6 languages
+[![Site Deploy](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/site-deploy.yml/badge.svg)](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/site-deploy.yml)
+[![Market Data Snapshot](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/market-data-snapshot.yml/badge.svg)](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/market-data-snapshot.yml)
+[![Daily Data Commit](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/daily-data-commit.yml/badge.svg)](https://github.com/lunapiena49/portfoliomanager-data/actions/workflows/daily-data-commit.yml)
 
-> Published at <https://lunapiena49.github.io/portfoliomanager-data/>.
+## Get the app
+
+| Platform | Where | Status |
+|---|---|---|
+| Android (Google Play) | [play.google.com/store/apps/details?id=app.plurifin.portfoliomanager](https://play.google.com/store/apps/details?id=app.plurifin.portfoliomanager) | Internal Testing |
+| Web demo | <https://plurifin.app/app/> | Live (free tier, max 5 manual positions) |
+| iOS | -- | Phase 2 |
+
+## What is PluriFin?
+
+PluriFin is a multi-broker portfolio tracker for retail investors. You add positions manually
+or import CSV/PDF statements from 12 supported brokers, set financial goals, and let the AI
+assistant explain risk, allocation, and rebalancing in plain language. Nothing leaves your device
+unless you explicitly opt in to AI analysis (Gemini API, your own key) or anonymous crash
+diagnostics.
+
+**Core features**
+
+- Multi-portfolio, multi-currency (EUR / USD / GBP / others) with auto FX conversion
+- Daily market snapshot for 8 markets (US, LSE, XETRA, PA, TO, HK, AU, NSE)
+- Goal tracking with progress chart + auto-rebalancing target allocation
+- AI assistant powered by Gemini (bring your own key, prompts stay local)
+- 6 languages (Italian, English, Spanish, French, German, Portuguese)
+- Light/Dark/System theme, encrypted local storage (Hive + AES)
+- 12 broker CSV/PDF parsers (Directa, Fineco, Trade Republic, Degiro, IBKR, ...)
+
+## About this repository
+
+This is the **public companion repo** to the private [`portfolio-manager-app`](https://github.com/lunapiena49/portfolio-manager-app)
+where the Flutter source lives. This one holds the data + web + legal surface:
+
+1. **Market data snapshots** -- daily JSON published via GitHub Pages, consumed by the app
+2. **Web demo** -- Flutter web release built from the private repo, deployed under `/app/`
+3. **Legal pages** -- Privacy Policy + Terms of Service + Financial Disclaimer, HTML, 6 languages
+
+> Served at <https://plurifin.app/> (custom domain via Cloudflare DNS + GitHub Pages).
 
 ## URL surface
 
 | Resource | URL |
 |---|---|
-| Top movers (daily) | `top_movers.json` |
-| Prices index (rolling) | `prices_index.json` |
-| Market history (rolling, ~1 GB) | `market_history.db.zip` |
-| Webapp | `app/index.html` |
-| Privacy Policy (per language) | `legal/<lang>/privacy.html` |
-| Terms of Service (per language) | `legal/<lang>/terms.html` |
-| Financial disclaimer | `legal/<lang>/disclaimer.html` |
+| Marketing site | <https://plurifin.app/> |
+| Web demo (Flutter web) | <https://plurifin.app/app/> |
+| Top movers (daily) | <https://plurifin.app/top_movers.json> |
+| Prices index (rolling) | <https://plurifin.app/prices_index.json> |
+| Privacy Policy (per language) | `https://plurifin.app/legal/<lang>/privacy.html` |
+| Terms of Service (per language) | `https://plurifin.app/legal/<lang>/terms.html` |
+| Financial Disclaimer (per language) | `https://plurifin.app/legal/<lang>/disclaimer.html` |
 
 ## Pipeline
 
 ```
 GitHub Action: market-data-snapshot.yml
     Cron 22:35 UTC -- recomputes top_movers + prices_index +
-                      market_history.db (rolling, ~1 GB)
-    Pushes to gh-pages branch (or main / pages-deploy)
+                      market_history.db (rolling, ~1 GB).
+    Deploys JSON to GitHub Pages, preserves DB across runs via
+    artifact API (Cloudflare BFM bypass).
 
 GitHub Action: daily-data-commit.yml
-    Cron 07:00 UTC -- pulls top_movers.json from Pages and commits
-                      it back here as proof of freshness, plus a
-                      one-line entry in docs/DATA_SNAPSHOT_LOG.md
+    Cron 07:00 UTC -- pulls top_movers.json from latest snapshot
+                      artifact and commits it back here as proof
+                      of freshness, plus a one-line entry in
+                      docs/DATA_SNAPSHOT_LOG.md.
+
+GitHub Action: site-deploy.yml
+    Triggered by site/ or app/ pushes. Builds Astro marketing site,
+    merges legal HTML + market-data JSON + Flutter web app/ folder,
+    deploys to Pages.
 
 GitHub Action (in private repo): app-web-deploy.yml
     Triggered on tag v* in the private repo. Builds Flutter web,
@@ -42,26 +84,42 @@ GitHub Action (in private repo): app-web-deploy.yml
 ## Layout
 
 ```
-scripts/eodhd/                Python pipeline that downloads EODHD market data,
-                              filters movers, builds prices_index.
-.github/workflows/            market-data-snapshot.yml + daily-data-commit.yml
+scripts/eodhd/                Python pipeline downloading EODHD market data,
+                              filtering movers, building prices_index.
+.github/workflows/            market-data-snapshot.yml + daily-data-commit.yml +
+                              site-deploy.yml
 dist/market-data/             Output JSON (only top_movers.json is committed;
                               the rolling DB is regenerated by the workflow).
 docs/DATA_SNAPSHOT_LOG.md     Daily proof-of-freshness log (rolling tail).
 legal/                        Generated HTML legal pages (privacy, terms,
-                              disclaimer) per language.
+                              disclaimer) per language. Authored as .astro
+                              and rendered by build_legal_html.ps1 in the
+                              private repo.
+site/                         Astro marketing site source (plurifin.app).
 app/                          Flutter web build (mirrored from the private
                               repo at every release tag).
 ```
 
+## Privacy & data
+
+- No analytics, no third-party trackers, no ads.
+- Local storage only: Hive (positions + goals) + SharedPreferences (settings)
+  + flutter_secure_storage (API keys you provide).
+- Optional crash diagnostics (Firebase Crashlytics, anonymous, disable via Settings).
+- Optional AI assistant (Gemini, your own API key, prompts not stored upstream).
+- Optional CSV/PDF import (files processed locally, never uploaded).
+- Full Privacy Policy + Terms of Service + Financial Disclaimer in 6 languages
+  at <https://plurifin.app/legal/>.
+
 ## License
 
-- App webapp under `app/` -- proprietary, see private repo LICENSE.
+- App webapp under `app/` -- proprietary (see private repo LICENSE).
+- Marketing site under `site/` -- MIT (see `site/LICENSE` once present).
 - Pipeline scripts under `scripts/eodhd/` -- MIT (see `scripts/eodhd/LICENSE`).
-- Market data snapshots are published under [ODbL 1.0](https://opendatacommons.org/licenses/odbl/)
-  (data is derived from EODHD which has its own license terms; check the
-  upstream provider before redistributing).
-- Legal HTML pages are static text and may be copied with attribution.
+- Market data snapshots -- published under [ODbL 1.0](https://opendatacommons.org/licenses/odbl/).
+  Data is derived from EODHD which has its own license terms; check the
+  upstream provider before redistributing.
+- Legal HTML pages -- static text, may be copied with attribution.
 
 ## Local development of the data pipeline
 
@@ -70,11 +128,24 @@ cd scripts/eodhd
 python -m venv .venv
 .venv\Scripts\activate          # Windows
 pip install -r requirements.txt
-python build_top_movers.py      # writes dist/market-data/top_movers.json
+python build_daily_market_snapshot.py \
+  --output-dir ../../dist/market-data \
+  --markets US,LSE,XETRA,PA,TO,HK,AU,NSE \
+  --top-limit 50
 ```
+
+Requires an EODHD API key in `EODHD_API_KEY` env var (free tier sufficient
+for read-only daily snapshots; production cron uses the all-world plan).
 
 ## Disclaimer
 
-The Flutter webapp under `/app/` is provided for convenience. Local-storage
-data lives in your browser only. For real use install the Android app from
+The Flutter webapp under `/app/` is provided for convenience and is a **free demo tier**
+with limited features (max 5 manual positions, no CSV/PDF import, weekly market refresh,
+AI assistant locked). For full functionality install the Android app from
 [Google Play](https://play.google.com/store/apps/details?id=app.plurifin.portfoliomanager).
+
+This application does **not** provide investment advice, recommendations, or solicitations.
+All data is for informational purposes only. Past performance does not guarantee future
+results. Investment decisions are the sole responsibility of the user. Consult a regulated
+financial advisor (Albo OCF in Italy / equivalent regulator in your jurisdiction) before
+making investment decisions.
