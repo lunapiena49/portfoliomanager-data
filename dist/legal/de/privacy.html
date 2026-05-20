@@ -29,7 +29,7 @@
 
     </nav>
 <h1>Datenschutzerklärung -- Portfolio Manager by PluriFin</h1>
-<p><strong>Version</strong>: 1.0.0 <strong>Letzte Aktualisierung</strong>: 2026-05-02 <strong>Originalsprache</strong>: Italienisch (verbindliche Fassung für die Gerichtsbarkeit)</p>
+<p><strong>Version</strong>: 1.0.1 <strong>Letzte Aktualisierung</strong>: 2026-05-20 <strong>Originalsprache</strong>: Italienisch (verbindliche Fassung für die Gerichtsbarkeit)</p>
 <hr/>
 <h2>1. Verantwortlicher</h2>
 <ul>
@@ -49,8 +49,9 @@
 <ul>
 <li>App <strong>nutzt keine Drittanbieter-Analytics</strong> (kein Google Analytics,</li>
 </ul>
-<p>Firebase, Facebook SDK, AppsFlyer, Sentry standardmäßig).</p>
+<p>Facebook SDK, AppsFlyer, Sentry standardmäßig).</p>
 <ul>
+<li>Auf Android integriert die App eine <strong>optionale anonyme Crash-Diagnose via Firebase Crashlytics</strong> (Google Ireland Limited): standardmäßig deaktiviert, vom Nutzer aktivierbar unter Einstellungen &gt; Datenschutz. Niemals Portfolio-Daten, API-Schlüssel oder KI-Inhalt. Siehe Abschnitt 4 (Auftragsverarbeiter).</li>
 <li>App <strong>teilt keine Daten</strong> mit Werbeanbietern. Keine Werbung.</li>
 <li><strong>Optionale Funktionen</strong> existieren, die bei Aktivierung Daten an</li>
 </ul>
@@ -96,7 +97,7 @@
 </ol>
 <p>Der Nutzer kann den Schlüssel jederzeit entfernen oder den Anbieter deaktivieren.</p>
 <h2>4. Auftragsverarbeiter</h2>
-<p>| Auftragsverarbeiter | Zweck | Daten | Wann | |---|---|---|---| | Google Play Billing | Zahlung Abonnement | purchaseToken, productId | Nur bei Kauf | | Google Gemini API | KI-Analyse | Prompt + anonymes Portfolio | Nur bei Aktivierung | | EODHD | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | FMP | Echtzeit-Preise, Fundamentaldaten | Ticker-Liste | Nur bei Aktivierung | | Alpha Vantage | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Twelve Data | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Finnhub | Echtzeit-Preise | Ticker-Liste | Nur bei Aktivierung | | Polygon.io | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Marketstack | End-of-Day-Preise | Ticker-Liste | Nur bei Aktivierung | | Tiingo | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Nasdaq Data Link | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Stooq | Öffentlicher CSV-Download historischer Preise | Ticker-Liste (kein API-Schlüssel) | Nur bei Aktivierung Stooq | | Cloudflare Worker | Abonnement-Validierung | device_id_hash, JWT | Immer (Gating) | | GitHub Pages | Hosting | IP HTTP-Request | Bei jedem Besuch |</p>
+<p>| Auftragsverarbeiter | Zweck | Daten | Wann | |---|---|---|---| | Google Play Billing | Zahlung Abonnement | purchaseToken, productId | Nur bei Kauf | | Google Gemini API | KI-Analyse | Prompt + anonymes Portfolio | Nur bei Aktivierung | | EODHD | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | FMP | Echtzeit-Preise, Fundamentaldaten | Ticker-Liste | Nur bei Aktivierung | | Alpha Vantage | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Twelve Data | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Finnhub | Echtzeit-Preise | Ticker-Liste | Nur bei Aktivierung | | Polygon.io | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Marketstack | End-of-Day-Preise | Ticker-Liste | Nur bei Aktivierung | | Tiingo | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung | | Nasdaq Data Link | Historische Preise | Ticker-Liste | Nur bei Aktivierung | | Stooq | Öffentlicher CSV-Download historischer Preise | Ticker-Liste (kein API-Schlüssel) | Nur bei Aktivierung Stooq | | Google Ireland Limited -- Firebase Crashlytics | Anonyme Crash-Diagnose | Verschlüsselter Stack Trace, Gerätemodell, OS, App-Version, anonyme Firebase Installation ID | Nur wenn der Nutzer "Anonyme Crash-Diagnose" unter Einstellungen &gt; Datenschutz aktiviert. Standardmäßig deaktiviert. | | Cloudflare Worker | Abonnement-Validierung | device_id_hash, JWT | Immer (Gating) | | GitHub Pages | Hosting | IP HTTP-Request | Bei jedem Besuch |</p>
 <h2>5. Übertragungen außerhalb der EU</h2>
 <p>Google, Cloudflare, GitHub: US-Unternehmen. Grundlagen:</p>
 <ul>
