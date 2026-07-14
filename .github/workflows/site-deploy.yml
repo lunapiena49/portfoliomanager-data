@@ -12,6 +12,12 @@ on:
     paths:
       - 'site/**'
       - 'app/**'
+      - 'dist/legal/**'          # legal pages are COPIED from here by this workflow.
+                                 # Without this path, editing a legal document never
+                                 # redeployed it: the change sat in the repo, unseen
+                                 # on the live site. That is exactly how the site
+                                 # ended up serving two contradictory privacy
+                                 # policies (found in S6, cause found in S10).
       - '.github/workflows/site-deploy.yml'
   workflow_dispatch:
 
