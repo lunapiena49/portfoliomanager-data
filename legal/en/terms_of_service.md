@@ -1,7 +1,7 @@
 # Terms of Service -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Last update**: 2026-05-02
+**Last update**: 2026-07-14
 **Original language**: Italian (binding version for jurisdiction)
 
 ---
@@ -14,7 +14,7 @@ application ("the App") provided by:
 - **Filippo Salemi** -- natural person, independent developer
 - **Commercial brand**: PluriFin
 - **Country**: Italy
-- **Contact email**: `plurifin.app@gmail.com`
+- **Contact email**: `info@plurifin.app`
 
 By installing, launching or using the App ("the User") you fully accept these
 terms. If you do not accept them, you must uninstall the App and stop using it.

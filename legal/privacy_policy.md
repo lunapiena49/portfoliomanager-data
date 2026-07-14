@@ -1,7 +1,7 @@
 # Privacy Policy -- Portfolio Manager by PluriFin
 
 **Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Ultimo aggiornamento**: 2026-07-14
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 **Hash testo (per audit trail)**: SHA-256 generato dallo script `scripts/legal/build_legal_html.ps1`
 
@@ -15,8 +15,8 @@ Il titolare del trattamento dei dati personali e':
 - **Forma giuridica**: persona fisica (sviluppatore indipendente)
 - **Brand commerciale**: PluriFin
 - **Paese**: Italia
-- **Email per richieste GDPR e privacy**: `plurifin.app+gdpr@gmail.com`
-- **Email contatto generale**: `plurifin.app@gmail.com`
+- **Email per richieste GDPR e privacy**: `gdpr@plurifin.app`
+- **Email contatto generale**: `info@plurifin.app`
 
 Non e' designato un Data Protection Officer (DPO) in quanto il titolare e' una
 persona fisica e l'attivita' non rientra fra i casi obbligatori previsti dall'art.
@@ -196,7 +196,7 @@ L'utente ha diritto di:
 Per richieste che non sono gestibili autonomamente in app (es. revoca del
 consenso al trattamento di dati gia' trasmessi a un sub-processor):
 
-- Email: `plurifin.app+gdpr@gmail.com`
+- Email: `gdpr@plurifin.app`
 - Tempo di risposta: entro 30 giorni dalla ricezione (art. 12.3 GDPR)
 - Formato risposta: lingua della richiesta
 
@@ -251,7 +251,7 @@ L'app non e' destinata a minori di 18 anni. Il content rating dichiarato a
 Google Play e' "18+" come consigliato per app finanziarie. PluriFin non
 raccoglie consapevolmente dati di minori. Se un genitore o tutore individua
 un account di un minore, puo' richiederne la cancellazione scrivendo a
-`plurifin.app+gdpr@gmail.com`.
+`gdpr@plurifin.app`.
 
 ## 10. Cookie e tecnologie simili
 
@@ -287,10 +287,10 @@ del repo pubblico `lunapiena49/portfoliomanager-data` cartella `legal/`.
 
 | Tipo richiesta | Email |
 |---|---|
-| Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | `plurifin.app+gdpr@gmail.com` |
-| Privacy & sicurezza | `plurifin.app+privacy@gmail.com` |
-| Supporto generale | `plurifin.app+support@gmail.com` |
-| Contatto pubblico Play Store | `plurifin.app@gmail.com` |
+| Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | `gdpr@plurifin.app` |
+| Privacy & sicurezza | `privacy@plurifin.app` |
+| Supporto generale | `support@plurifin.app` |
+| Contatto pubblico Play Store | `info@plurifin.app` |
 
 ## 13. Foro competente e legge applicabile
 

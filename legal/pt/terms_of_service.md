@@ -1,7 +1,7 @@
 # Termos de Servico -- Portfolio Manager by PluriFin
 
 **Versao**: 1.0.0
-**Ultima atualizacao**: 2026-05-02
+**Ultima atualizacao**: 2026-07-14
 **Idioma original**: Italiano (versao vinculante)
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Partes
 
 Fornecedor: **Filippo Salemi**, pessoa fisica, marca **PluriFin**,
-Italia. Email: `plurifin.app@gmail.com`. Ao instalar a App, o
+Italia. Email: `info@plurifin.app`. Ao instalar a App, o
 Utilizador aceita estes Termos.
 
 ## 2. Objeto

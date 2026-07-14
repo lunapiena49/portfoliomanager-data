@@ -1,7 +1,7 @@
 # DMCA / Takedown Notice Template -- PluriFin
 
 **Version**: 1.0.0
-**Last update**: 2026-05-02
+**Last update**: 2026-07-14
 
 This document contains templates and operational instructions for handling:
 
@@ -67,7 +67,7 @@ available for further clarification.
 Best regards,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ### 1.4 Template -- unfounded claim, contested
@@ -93,7 +93,7 @@ closed.
 Best regards,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ---
@@ -140,7 +140,7 @@ The following URL(s) host material that infringes my copyright:
 Name: Filippo Salemi
 Brand: PluriFin
 Country: Italy
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 4. GOOD FAITH STATEMENT
 I have a good faith belief that the use of the material described above
@@ -220,7 +220,7 @@ provided the original DMCA notice or that person's agent.
 Name: Filippo Salemi
 Address: <complete physical address>
 Phone: <phone number>
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 5. ELECTRONIC SIGNATURE
 /s/ Filippo Salemi

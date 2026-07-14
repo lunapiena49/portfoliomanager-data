@@ -1,7 +1,7 @@
 # Conditions de Service -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Derniere mise a jour**: 2026-05-02
+**Derniere mise a jour**: 2026-07-14
 **Langue originale**: Italien (version contraignante pour la juridiction)
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Parties
 
 Fournisseur: **Filippo Salemi**, personne physique, marque **PluriFin**,
-Italie. Email: `plurifin.app@gmail.com`. En installant l'App
+Italie. Email: `info@plurifin.app`. En installant l'App
 l'Utilisateur accepte ces Conditions.
 
 ## 2. Objet du service

@@ -1,7 +1,7 @@
 # Disclaimer Finanziario -- Portfolio Manager by PluriFin
 
 **Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Ultimo aggiornamento**: 2026-07-14
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 
 ---
@@ -266,7 +266,7 @@ si applica quanto previsto nei Termini di Servizio (`legal/terms_of_service.md`)
 
 Per chiarimenti sul contenuto del presente Disclaimer:
 
-- Email: `plurifin.app+legal@gmail.com`
+- Email: `legal@plurifin.app`
 
 PluriFin **non puo' fornire consulenza finanziaria via email** ne' rispondere
 a quesiti su strumenti finanziari specifici. Per questo serve un consulente

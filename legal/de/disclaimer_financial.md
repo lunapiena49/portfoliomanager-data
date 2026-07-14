@@ -1,7 +1,7 @@
 # Finanz-Disclaimer -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Letzte Aktualisierung**: 2026-07-14
 **Originalsprache**: Italienisch (verbindliche Fassung)
 
 ---
@@ -149,5 +149,5 @@ Italienisches Recht. Streitigkeiten: siehe ToS.
 
 ## 15. Kontakte
 
-`plurifin.app+legal@gmail.com`. PluriFin **gibt keine Finanzberatung per
+`legal@plurifin.app`. PluriFin **gibt keine Finanzberatung per
 E-Mail**. Dafur autorisierter Berater (OCF oder Aquivalent).

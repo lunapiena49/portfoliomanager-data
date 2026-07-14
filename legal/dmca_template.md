@@ -1,7 +1,7 @@
 # DMCA / Takedown Notice Template -- PluriFin
 
 **Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Ultimo aggiornamento**: 2026-07-14
 
 Questo documento contiene i template e le istruzioni operative per gestire:
 
@@ -70,7 +70,7 @@ disposizione per ulteriori chiarimenti.
 Cordiali saluti,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ### 1.4 Template risposta -- pretesa infondata, contestazione
@@ -97,7 +97,7 @@ documentazione, considero la questione chiusa.
 Cordiali saluti,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ---
@@ -144,7 +144,7 @@ The following URL(s) host material that infringes my copyright:
 Name: Filippo Salemi
 Brand: PluriFin
 Country: Italy
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 4. GOOD FAITH STATEMENT
 I have a good faith belief that the use of the material described above
@@ -200,7 +200,7 @@ in Italia, titolare del brand commerciale "PluriFin".
 1. IDENTIFICAZIONE DEL TITOLARE
 Filippo Salemi
 Brand: PluriFin
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 Documento d'identita': fornito su richiesta
 
 2. OPERA TUTELATA
@@ -278,7 +278,7 @@ provided the original DMCA notice or that person's agent.
 Name: Filippo Salemi
 Address: <complete physical address>
 Phone: <phone number>
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 5. ELECTRONIC SIGNATURE
 /s/ Filippo Salemi
