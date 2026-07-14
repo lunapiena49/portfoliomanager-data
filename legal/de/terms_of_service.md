@@ -1,7 +1,7 @@
 # Nutzungsbedingungen -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Letzte Aktualisierung**: 2026-07-14
 **Originalsprache**: Italienisch (verbindliche Fassung)
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Parteien
 
 Anbieter: **Filippo Salemi**, naturliche Person, Marke **PluriFin**,
-Italien. E-Mail: `plurifin.app@gmail.com`. Mit Installation akzeptiert
+Italien. E-Mail: `info@plurifin.app`. Mit Installation akzeptiert
 der Nutzer diese Bedingungen.
 
 ## 2. Gegenstand

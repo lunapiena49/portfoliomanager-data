@@ -1,7 +1,7 @@
 # Datenschutzerklarung -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Letzte Aktualisierung**: 2026-07-14
 **Originalsprache**: Italienisch (verbindliche Fassung fur die Gerichtsbarkeit)
 
 ---
@@ -12,8 +12,8 @@
 - **Rechtsform**: naturliche Person (unabhangiger Entwickler)
 - **Marke**: PluriFin
 - **Land**: Italien
-- **E-Mail fur DSGVO und Datenschutz**: `plurifin.app+gdpr@gmail.com`
-- **Allgemeine E-Mail**: `plurifin.app@gmail.com`
+- **E-Mail fur DSGVO und Datenschutz**: `gdpr@plurifin.app`
+- **Allgemeine E-Mail**: `info@plurifin.app`
 
 Kein Datenschutzbeauftragter (DSB) bestellt: naturliche Person ausserhalb
 der Pflichtfalle nach Art. 37 DSGVO.
@@ -139,7 +139,7 @@ aktivieren.
 | Widerspruch | Optionale Funktionen deaktivieren |
 | Beschwerde | [Garante (Italien)](https://www.garanteprivacy.it/), BfDI (Deutschland) oder nationale Behorde |
 
-Anfragen: `plurifin.app+gdpr@gmail.com`. Antwort innerhalb 30 Tagen
+Anfragen: `gdpr@plurifin.app`. Antwort innerhalb 30 Tagen
 (Art. 12.3 DSGVO).
 
 ## 7. Aufbewahrung
@@ -161,7 +161,7 @@ Export und Loschung. Auftragsverarbeiter: eigene Richtlinien.
 
 App nicht fur unter 18-Jahrige. Play Store Content Rating "18+".
 Eltern/Erziehungsberechtigte konnen Loschung anfordern an
-`plurifin.app+gdpr@gmail.com`.
+`gdpr@plurifin.app`.
 
 ## 10. Cookies
 
@@ -177,10 +177,10 @@ Newsletter-E-Mail. Vorherige Versionen in Repo
 
 ## 12. Kontakte
 
-- DSGVO: `plurifin.app+gdpr@gmail.com`
-- Datenschutz: `plurifin.app+privacy@gmail.com`
-- Support: `plurifin.app+support@gmail.com`
-- Offentlich Play Store: `plurifin.app@gmail.com`
+- DSGVO: `gdpr@plurifin.app`
+- Datenschutz: `privacy@plurifin.app`
+- Support: `support@plurifin.app`
+- Offentlich Play Store: `info@plurifin.app`
 
 ## 13. Gerichtsstand und anwendbares Recht
 

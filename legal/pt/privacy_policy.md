@@ -1,7 +1,7 @@
 # Politica de Privacidade -- Portfolio Manager by PluriFin
 
 **Versao**: 1.0.0
-**Ultima atualizacao**: 2026-05-02
+**Ultima atualizacao**: 2026-07-14
 **Idioma original**: Italiano (versao vinculante para a jurisdicao)
 
 ---
@@ -12,8 +12,8 @@
 - **Forma juridica**: pessoa fisica (programador independente)
 - **Marca comercial**: PluriFin
 - **Pais**: Italia
-- **Email para pedidos RGPD e privacidade**: `plurifin.app+gdpr@gmail.com`
-- **Email geral**: `plurifin.app@gmail.com`
+- **Email para pedidos RGPD e privacidade**: `gdpr@plurifin.app`
+- **Email geral**: `info@plurifin.app`
 
 Nenhum Encarregado de Protecao de Dados (DPO) designado: pessoa fisica
 fora dos casos obrigatorios do art. 37 RGPD.
@@ -137,7 +137,7 @@ Quem nao quer transferencias fora UE: nao ativar funcoes opcionais.
 | Oposicao | Desativar funcoes opcionais |
 | Reclamacao | [Garante (Italia)](https://www.garanteprivacy.it/), CNPD (Portugal) ou autoridade nacional |
 
-Pedidos: `plurifin.app+gdpr@gmail.com`. Resposta em 30 dias (art. 12.3
+Pedidos: `gdpr@plurifin.app`. Resposta em 30 dias (art. 12.3
 RGPD).
 
 ## 7. Conservacao
@@ -159,7 +159,7 @@ propria.
 ## 9. Menores (art. 8 RGPD)
 
 App nao destinada a menores de 18 anos. Content rating Play "18+".
-Pais/tutores podem pedir eliminacao em `plurifin.app+gdpr@gmail.com`.
+Pais/tutores podem pedir eliminacao em `gdpr@plurifin.app`.
 
 ## 10. Cookies
 
@@ -175,10 +175,10 @@ historico Git.
 
 ## 12. Contactos
 
-- RGPD: `plurifin.app+gdpr@gmail.com`
-- Privacidade: `plurifin.app+privacy@gmail.com`
-- Suporte: `plurifin.app+support@gmail.com`
-- Publico Play Store: `plurifin.app@gmail.com`
+- RGPD: `gdpr@plurifin.app`
+- Privacidade: `privacy@plurifin.app`
+- Suporte: `support@plurifin.app`
+- Publico Play Store: `info@plurifin.app`
 
 ## 13. Jurisdicao e lei aplicavel
 

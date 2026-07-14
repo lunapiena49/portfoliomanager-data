@@ -1,7 +1,7 @@
 # Avertissement Financier -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Derniere mise a jour**: 2026-05-02
+**Derniere mise a jour**: 2026-07-14
 **Langue originale**: Italien (version contraignante pour la juridiction)
 
 ---
@@ -157,6 +157,6 @@ Loi italienne. Disputes: voir ToS.
 
 ## 15. Contacts
 
-`plurifin.app+legal@gmail.com`. PluriFin **ne fournit pas de conseil
+`legal@plurifin.app`. PluriFin **ne fournit pas de conseil
 financier par email**. Pour cela, conseiller autorise (OCF ou
 equivalent).

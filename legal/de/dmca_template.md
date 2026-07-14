@@ -1,7 +1,7 @@
 # DMCA / Takedown-Vorlage -- PluriFin
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Letzte Aktualisierung**: 2026-07-14
 
 Vorlagen fur:
 
@@ -47,7 +47,7 @@ Entschuldigung fur die Unannehmlichkeit. Stehe zur Verfugung.
 Mit freundlichen Grussen,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ### 1.3 Vorlage -- unberechtigte Forderung
@@ -69,7 +69,7 @@ Schadens vor. Ohne Dokumentation gilt die Sache als erledigt.
 Mit freundlichen Grussen,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ---
@@ -104,7 +104,7 @@ CONTACT:
 Name: Filippo Salemi
 Brand: PluriFin
 Country: Italy
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 I have a good faith belief that the use is not authorized. I swear under
 penalty of perjury that this notice is accurate and I am the rights
@@ -158,7 +158,7 @@ CONTACT:
 Name: Filippo Salemi
 Address: <complete address>
 Phone: <phone>
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 /s/ Filippo Salemi
 Date: <YYYY-MM-DD>

@@ -1,7 +1,7 @@
 # Termini di Servizio -- Portfolio Manager by PluriFin
 
 **Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Ultimo aggiornamento**: 2026-07-14
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 
 ---
@@ -14,7 +14,7 @@ I presenti Termini di Servizio (ToS) regolano l'uso dell'applicazione
 - **Filippo Salemi** -- persona fisica, sviluppatore indipendente
 - **Brand commerciale**: PluriFin
 - **Paese**: Italia
-- **Email contatto**: `plurifin.app@gmail.com`
+- **Email contatto**: `info@plurifin.app`
 
 L'utente che installa, avvia o utilizza l'App ("l'Utente") accetta integralmente
 i presenti termini. Se non li accetta, l'Utente deve disinstallare l'App e

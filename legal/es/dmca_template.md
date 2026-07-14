@@ -1,7 +1,7 @@
 # Plantilla DMCA / Takedown -- PluriFin
 
 **Version**: 1.0.0
-**Ultima actualizacion**: 2026-05-02
+**Ultima actualizacion**: 2026-07-14
 
 Plantillas para gestionar avisos:
 
@@ -47,7 +47,7 @@ Disculpas. Quedo a su disposicion.
 Saludos cordiales,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ### 1.3 Plantilla -- pretension infundada
@@ -69,7 +69,7 @@ considero el asunto cerrado.
 Saludos cordiales,
 Filippo Salemi
 PluriFin
-plurifin.app+legal@gmail.com
+legal@plurifin.app
 ```
 
 ---
@@ -104,7 +104,7 @@ CONTACT:
 Name: Filippo Salemi
 Brand: PluriFin
 Country: Italy
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 I have a good faith belief that the use is not authorized. I swear under
 penalty of perjury that this notice is accurate and I am the rights
@@ -158,7 +158,7 @@ CONTACT:
 Name: Filippo Salemi
 Address: <complete address>
 Phone: <phone>
-Email: plurifin.app+legal@gmail.com
+Email: legal@plurifin.app
 
 /s/ Filippo Salemi
 Date: <YYYY-MM-DD>
