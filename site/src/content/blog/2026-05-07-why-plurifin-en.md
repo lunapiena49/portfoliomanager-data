@@ -1,6 +1,6 @@
 ---
 title: "Why I built PluriFin"
-summary: "The personal story behind a privacy-first investment app for retail investors, and how a single developer can afford to ship a EUR 0.99/year tier."
+summary: "The personal story behind a privacy-first investment app for retail investors, and how a single developer can afford to ship a EUR 4.99/year tier."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"
@@ -44,8 +44,8 @@ Once I realized the product could be useful to more than just me, I decided to s
 it. The pricing model is deliberately low-friction:
 
 - 7 days of free trial, no credit card required
-- EUR 0.99/year for Single, EUR 1.99/year for Family
-- Lifetime one-time at EUR 4.99 (Single) or EUR 9.99 (Family)
+- EUR 4.99/year for Single, EUR 9.99/year for Family
+- Lifetime one-time at EUR 29.99 (Single) or EUR 49.99 (Family)
 
 No "early bird", no "first N users", no promos that segment the user base. Same
 price for everyone, today and forever.

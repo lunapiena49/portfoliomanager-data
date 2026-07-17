@@ -1,0 +1,23 @@
+---
+/**
+ * `/home` - la home aziendale: le due divisioni, la scena, lo studio.
+ * E' il sito che nel prototipo v7 stava nascosto dietro la soglia. Qui e' una
+ * pagina vera: indicizzabile, linkabile, raggiungibile senza l'introduzione.
+ */
+import it from '../i18n/it';
+import Layout from '../layouts/Layout.astro';
+import CompanyHome from '../components/CompanyHome.astro';
+
+const t = it;
+---
+<Layout
+  title={`PluriFin — ${t.company.hero.h1a} ${t.company.hero.h1b}`}
+  description={t.company.hero.lede}
+  ogTitle="PluriFin"
+  ogDescription={t.company.hero.lede}
+  lang="it"
+  section="company"
+  pageType="organization"
+>
+  <CompanyHome t={t} lang="it" />
+</Layout>

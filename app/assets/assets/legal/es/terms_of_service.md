@@ -9,7 +9,7 @@
 ## 1. Partes
 
 Proveedor: **Filippo Salemi**, persona física, marca **PluriFin**, Italia.
-Email: `plurifin.app@gmail.com`. Al instalar la App el Usuario acepta
+Email: `info@plurifin.app`. Al instalar la App el Usuario acepta
 estos Términos.
 
 ## 2. Objeto
@@ -81,7 +81,7 @@ y el Usuario, completando el pago, acepta la ejecución inmediata y
 acepta la consiguiente perdida del derecho de desistimiento conforme
 arts. 52 y 59.1.o. No obstante, **PluriFin se compromete comercialmente
 a honrar el derecho de desistimiento de 14 días** ex art. 52 D.Lgs.
-206/2005, previa solicitud escrita a `plurifin.app+legal@gmail.com`
+206/2005, previa solicitud escrita a `legal@plurifin.app`
 (indicando order ID Google Play y cuenta Google). En caso de negativa
 de Google, PluriFin reconocerá directamente al consumidor un crédito
 de valor equivalente vía gift code Google Play o reembolso bancario.

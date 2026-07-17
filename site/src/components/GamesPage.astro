@@ -1,0 +1,220 @@
+---
+/**
+ * ROLLQUEST (rotta `/games`) - divisione Games.
+ *
+ * IL PROGETTO E' IN SVILUPPO. Il repo Unity non ha ancora nemmeno una scena
+ * (zero file .unity, misurato). Quindi questa pagina:
+ *   - NON ha un link allo store, NON ha un "scarica", NON ha un "preordina";
+ *   - NON dichiara una data di uscita;
+ *   - NON raccoglie email con la scusa del lancio.
+ * Dice cosa sara' e a che punto e'. Promettere altro sarebbe la stessa bugia
+ * dei prezzi di un prodotto che non si puo' comprare - e in S11 ne abbiamo gia'
+ * trovata una.
+ *
+ * IP CLEAN-ROOM (regola 1 del CLAUDE.md di ROLLQUEST): nessun asset, nome o
+ * testo derivato dal gioco di riferimento. Rollo, Re Corvax e la Torre sono
+ * originali, disegnati per questo progetto.
+ */
+import type { Translations, Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import Layout from '../layouts/Layout.astro';
+import CompanyNav from './CompanyNav.astro';
+import Scena from './Scena.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  t: Translations;
+  lang: Locale;
+}
+
+const { t, lang } = Astro.props;
+const g = t.games;
+const blogUrl = localePath(lang, 'blog');
+---
+<Layout
+  title={g.meta.title}
+  description={g.meta.description}
+  ogTitle={g.meta.title}
+  ogDescription={g.meta.description}
+  lang={lang}
+  section="games"
+  pageType="game"
+>
+  <CompanyNav t={t} lang={lang} />
+
+  <main id="main">
+    <section class="g-hero">
+      <div class="wrap">
+        <p class="eyebrow">{g.hero.eyebrow}</p>
+        <h1>{g.hero.h1}</h1>
+        <p class="lede" set:html={g.hero.lede} />
+
+        <!-- LO STATO, in chiaro. Non e' una postilla in fondo: sta qui,
+             sotto il titolo, dove non si puo' non leggerlo. -->
+        <p class="status">
+          <span class="dot" aria-hidden="true"></span>
+          {g.hero.status}
+        </p>
+      </div>
+    </section>
+
+    <Scena t={t} />
+
+    <section class="pillars">
+      <div class="wrap">
+        <h2>{g.pillars.h2}</h2>
+        <div class="grid3">
+          <div class="pil reveal">
+            <span class="pi" style="background:rgba(88,196,112,.18);color:#3E9B58">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <h3>{g.pillars.p1Title}</h3>
+            <p>{g.pillars.p1Body}</p>
+          </div>
+          <div class="pil reveal">
+            <span class="pi" style="background:rgba(155,107,255,.18);color:#7A4FD4">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.1 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.3l6.1-.7Z"/></svg>
+            </span>
+            <h3>{g.pillars.p2Title}</h3>
+            <p>{g.pillars.p2Body}</p>
+          </div>
+          <div class="pil reveal">
+            <span class="pi" style="background:rgba(255,138,61,.20);color:#C4552F">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>
+            </span>
+            <h3>{g.pillars.p3Title}</h3>
+            <p>{g.pillars.p3Body}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cast">
+      <div class="wrap">
+        <h2>{g.cast.h2}</h2>
+        <p class="cast-lede">{g.cast.lede}</p>
+        <div class="grid2">
+          <div class="ch reveal">
+            <h3>{g.cast.rolloName}</h3>
+            <p>{g.cast.rolloBody}</p>
+          </div>
+          <div class="ch reveal">
+            <h3>{g.cast.corvaxName}</h3>
+            <p>{g.cast.corvaxBody}</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="follow">
+      <div class="wrap reveal">
+        <h2>{g.followUp.h2}</h2>
+        <p>{g.followUp.body}</p>
+        <a class="cta" href={blogUrl}>{g.followUp.cta}
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"
+               stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer t={t} currentLang={lang} />
+</Layout>
+
+<style>
+  /* I titoli vogliono un colore ESPLICITO: global.css ha
+         h1, h2, h3, h4 { color: var(--text); }
+     che vince su `main { color }`, e in tema chiaro - il default - `--text` e'
+     quasi nero. Su questo fondo scuro i titoli sparivano. Stesso difetto della
+     home aziendale, stessa cura. */
+  main { background: #0A0E14; color: #F4F6F9; }
+  main :global(h1),
+  main :global(h2),
+  main :global(h3) { color: #F4F6F9; }
+  .wrap { max-width: 1200px; margin: 0 auto; padding: 0 26px; }
+
+  .g-hero {
+    padding: 90px 0 60px; text-align: center;
+    background:
+      radial-gradient(70% 90% at 30% 0%, rgba(155,107,255,.20), transparent 60%),
+      radial-gradient(60% 80% at 78% 20%, rgba(255,138,61,.14), transparent 58%);
+  }
+  .eyebrow {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase;
+    color: #FFB37A; margin: 0;
+  }
+  .g-hero h1 {
+    margin: 14px 0 0; font-size: clamp(40px, 6vw, 68px); font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.02;
+    background: linear-gradient(100deg, #FFC24B, #FF8A3D 45%, #9B6BFF);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .lede { margin: 22px auto 0; max-width: 56ch; color: #AEB7C4; font-size: 17px; line-height: 1.66; }
+  .lede :global(b) { color: #F4F6F9; font-weight: 600; }
+
+  /* Lo stato del progetto. Ambra, non verde: non e' "pronto", e non deve
+     sembrarlo. */
+  .status {
+    display: inline-flex; align-items: center; gap: 10px;
+    margin: 30px auto 0; padding: 10px 18px;
+    border: 1px dashed rgba(255,194,75,.5); border-radius: 999px;
+    background: rgba(255,194,75,.07);
+    color: #FFD98A; font-size: 13.5px; max-width: 62ch; text-align: left;
+  }
+  .status .dot {
+    width: 8px; height: 8px; border-radius: 50%; flex: none;
+    background: #FFC24B; box-shadow: 0 0 10px #FFC24B;
+  }
+
+  .pillars { padding: 90px 0 20px; }
+  .pillars h2, .cast h2, .follow h2 {
+    margin: 0 0 12px; font-size: clamp(26px, 3.2vw, 36px);
+    letter-spacing: -.03em; font-weight: 700;
+  }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 36px; }
+  .pil {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 16px; padding: 24px;
+  }
+  .pi {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: grid; place-items: center; margin-bottom: 14px;
+  }
+  .pi svg { width: 18px; height: 18px; }
+  .pil h3 { margin: 0 0 8px; font-size: 17px; letter-spacing: -.02em; }
+  .pil p { margin: 0; color: #AEB7C4; font-size: 14.5px; line-height: 1.6; }
+
+  .cast { padding: 70px 0; }
+  .cast-lede { margin: 0 0 32px; color: #AEB7C4; max-width: 62ch; font-size: 16px; }
+  .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
+  .ch {
+    border-left: 2px solid rgba(255,194,75,.4);
+    padding: 4px 0 4px 20px;
+  }
+  .ch h3 { margin: 0 0 6px; font-size: 18px; color: #FFD98A; letter-spacing: -.02em; }
+  .ch p { margin: 0; color: #AEB7C4; font-size: 14.5px; line-height: 1.62; }
+
+  .follow { padding: 20px 0 100px; }
+  .follow p { margin: 0 0 24px; color: #AEB7C4; max-width: 62ch; font-size: 16px; }
+  .cta {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 26px; min-height: 48px; border-radius: 12px;
+    font-size: 15px; font-weight: 650; text-decoration: none;
+    background-image: linear-gradient(115deg, #FFC24B, #FF8A3D 48%, #E8632A);
+    background-size: 210% 100%; color: #2A1F16;
+    box-shadow: 0 14px 32px -14px rgba(255,138,61,.95);
+    transition: background-position .7s cubic-bezier(.16,1,.3,1);
+  }
+  .cta:hover { background-position: 100% 0; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(.16,1,.3,1), transform 1s cubic-bezier(.16,1,.3,1); }
+  .reveal:global(.in) { opacity: 1; transform: none; }
+
+  @media (max-width: 940px) {
+    .grid3, .grid2 { grid-template-columns: 1fr; gap: 20px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+</style>

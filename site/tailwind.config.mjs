@@ -1,34 +1,83 @@
 /** @type {import('tailwindcss').Config} */
+// Token PluriFin -- speculari a src/styles/global.css.
+// Sorgente canonica: C:\Plurifin\company\BRAND_GUIDELINES.md
+//
+// I colori del TERRENO (bg/surface/text/divider) sono esposti come
+// `var(--token)` e non come hex: cambiano col tema chiaro/scuro, quindi una
+// classe Tailwind come `bg-surface` resta corretta in entrambi i temi.
+// Gli accenti di DIVISIONE sono hex: non cambiano col tema (per scelta).
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       colors: {
-        primary:        '#1E88E5',
-        'primary-dark': '#1565C0',
-        'primary-light':'#42A5F5',
+        // marchio madre
+        ink:            '#0A0E14',
+        'ink-2':        '#171B22',
+        'ink-3':        '#212733',
+        'silver-hi':    '#F2F4F7',
+        silver:         '#D5DAE2',
+        'silver-lo':    '#B6BDC8',
+        mint:           '#26D896',
+        'mint-hi':      '#5BFCBE',
+        'mint-deep':    '#0B7F5A',
+        paper:          '#F8F9FA',
+
+        // divisione Finance
+        finance:        '#1E88E5',
+        'finance-deep': '#1565C0',
+        'finance-soft': '#7FC0F5',
         accent:         '#00BFA5',
+
+        // divisione Games
+        ember:          '#FF8A3D',
+        'ember-deep':   '#A8431E',
+        'ember-soft':   '#FFA867',
+        astral:         '#9B6BFF',
+        amber:          '#FFC24B',
+        'games-outline':'#3A3153',
+        'games-cream':  '#FFF6EA',
+        'sky-hi':       '#B8E0FF',
+        'sky-lo':       '#FFE8C8',
+
+        // semantica mercati
         success:        '#4CAF50',
         warning:        '#FF9800',
-        'bg-light':     '#F8F9FA',
-        surface:        '#FFFFFF',
-        'text-primary': '#212121',
-        'text-2':       '#5A5F66',
-        'text-3':       '#8A8F96',
-        divider:        '#E4E7EB',
-        'divider-soft': '#EFF1F4',
-        'warn-bg':      '#FFF7E6',
-        'warn-border':  '#F5D58A',
         'app-dark':     '#0E1116',
         'app-surf':     '#171B22',
         'app-text':     '#E8ECF1',
         'app-muted':    '#8A93A0',
         'app-green':    '#34D399',
         'app-red':      '#F87171',
+
+        // terreno (theme-aware: passano dai custom properties)
+        bg:             'var(--bg)',
+        surface:        'var(--surface)',
+        'surface-2':    'var(--surface-2)',
+        'text-primary': 'var(--text)',
+        'text-2':       'var(--text-2)',
+        'text-3':       'var(--text-3)',
+        divider:        'var(--divider)',
+        'divider-soft': 'var(--divider-soft)',
+        'warn-bg':      'var(--warn-bg)',
+        'warn-border':  'var(--warn-border)',
+
+        // accento di sezione (mint / blu / ember secondo [data-section])
+        sec:            'var(--sec)',
+        'sec-text':     'var(--sec-text)',
+        'sec-ink':      'var(--sec-ink)',
+
+        // legacy: primary segue l'accento di sezione
+        primary:        'var(--sec-text)',
+        'primary-dark': 'var(--sec-text)',
+        'primary-light':'var(--sec)',
+        'bg-light':     '#F8F9FA',
       },
       fontFamily: {
-        sans: ['InterVariable', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
+        sans:  ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        games: ['Baloo 2', 'Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono:  ['ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       fontSize: {
         h1:      ['clamp(40px,5.4vw,60px)', { lineHeight: '1.05', letterSpacing: '-0.03em', fontWeight: '700' }],
@@ -48,9 +97,9 @@ export default {
         full:'9999px',
       },
       boxShadow: {
-        card:    '0 1px 2px rgba(16,24,40,.04), 0 1px 3px rgba(16,24,40,.06)',
-        elev:    '0 24px 48px -16px rgba(16,24,40,.18), 0 4px 12px rgba(16,24,40,.06)',
-        primary: '0 6px 14px -4px rgba(30,136,229,.45)',
+        card:    'var(--shadow-card)',
+        elev:    'var(--shadow-elev)',
+        primary: '0 6px 14px -4px var(--sec-glow)',
       },
       maxWidth: {
         site: '1200px',

@@ -12,6 +12,12 @@ const toc = [
 <LegalLayout t={it} lang="it" pageTitle="Prezzi e abbonamenti" tocItems={toc}>
   <p class="meta">Prezzi fissi per tutti, sempre. Niente promo "early bird", niente segmentazione.</p>
 
+  <div class="callout">
+    <strong>Prezzi di lancio.</strong> Gli acquisti si apriranno con la pubblicazione dell'app su
+    Google Play. Oggi non e' possibile acquistare: il listino qui sotto e' l'annuncio dei prezzi
+    di lancio, non un'offerta gia' attiva. La <a href="/app/">web demo</a> resta gratuita.
+  </div>
+
   <h2 id="piani">Piani disponibili al lancio</h2>
   <p>PluriFin offre <strong>4 piani</strong> con stessi prezzi per chiunque, oggi e in futuro.
   Se in futuro i prezzi dovessero salire, gli abbonamenti gia' attivi vengono mantenuti al prezzo
@@ -20,7 +26,7 @@ const toc = [
   <div class="pricing-grid" role="list">
     <div class="pricing-card" role="listitem">
       <h3>Singolo Annuale</h3>
-      <p class="price"><strong>0,99 &euro;</strong> / anno</p>
+      <p class="price"><strong>4,99 &euro;</strong> / anno</p>
       <p class="cycle">Rinnovo automatico annuale. Cancellabile in qualsiasi momento.</p>
       <ul>
         <li>1 dispositivo</li>
@@ -33,17 +39,17 @@ const toc = [
     <div class="pricing-card highlight" role="listitem">
       <span class="badge">Miglior valore</span>
       <h3>Singolo Lifetime</h3>
-      <p class="price"><strong>4,99 &euro;</strong> una tantum</p>
+      <p class="price"><strong>29,99 &euro;</strong> una tantum</p>
       <p class="cycle">Pagamento unico. Accesso a vita su questo account Google.</p>
       <ul>
         <li>1 dispositivo</li>
         <li>Tutto incluso, per sempre</li>
-        <li>Equivalente a ~5 anni di Annuale</li>
+        <li>Equivalente a ~6 anni di Annuale</li>
       </ul>
     </div>
     <div class="pricing-card" role="listitem">
       <h3>Famiglia Annuale</h3>
-      <p class="price"><strong>1,99 &euro;</strong> / anno</p>
+      <p class="price"><strong>9,99 &euro;</strong> / anno</p>
       <p class="cycle">Rinnovo automatico annuale. Cancellabile in qualsiasi momento.</p>
       <ul>
         <li>Fino a 5 membri Google Family</li>
@@ -53,7 +59,7 @@ const toc = [
     <div class="pricing-card highlight" role="listitem">
       <span class="badge">Miglior valore</span>
       <h3>Famiglia Lifetime</h3>
-      <p class="price"><strong>9,99 &euro;</strong> una tantum</p>
+      <p class="price"><strong>49,99 &euro;</strong> una tantum</p>
       <p class="cycle">Pagamento unico. Accesso a vita per il gruppo Family.</p>
       <ul>
         <li>Fino a 5 membri Google Family</li>
@@ -88,8 +94,8 @@ const toc = [
   e del Worker server (gratuito Cloudflare free tier) -- non massimizzare ARPU.</p>
 
   <h3>Quanto vale Lifetime rispetto ad Annuale?</h3>
-  <p>Singolo Lifetime (4,99 &euro;) equivale a ~5 anni di Singolo Annuale (0,99 &euro;/anno) e include
-  ogni futura major release senza costi aggiuntivi. Famiglia Lifetime (9,99 &euro;) idem
+  <p>Singolo Lifetime (29,99 &euro;) equivale a ~6 anni di Singolo Annuale (4,99 &euro;/anno) e include
+  ogni futura major release senza costi aggiuntivi. Famiglia Lifetime (49,99 &euro;) idem
   per il piano Famiglia.</p>
 
   <h3>Cosa succede se l'app sparisce?</h3>
@@ -130,26 +136,41 @@ const toc = [
   .pricing-card {
     background: rgba(0,191,165,.04);
     border: 1px solid rgba(0,191,165,.16);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: 20px 18px;
     position: relative;
     list-style: none;
+    transition: border-color .25s, box-shadow .25s, transform .25s;
   }
+  .pricing-card:hover { border-color: rgba(0,191,165,.34); }
+  /* Gerarchia S16: i due Lifetime sono il livello alto (bordo pieno, fondo
+     piu' denso, elevazione, prezzo maggiore); le annuali restano quiete.
+     Prima: quattro card identiche con due badge identici = nessuna gerarchia. */
   .pricing-card.highlight {
-    background: linear-gradient(180deg, rgba(0,191,165,.10) 0%, rgba(0,191,165,.04) 100%);
-    border-color: rgba(0,191,165,.36);
+    background: linear-gradient(180deg, rgba(0,191,165,.13) 0%, rgba(0,191,165,.05) 100%);
+    border-color: rgba(0,191,165,.45);
+    box-shadow: 0 10px 30px -18px rgba(0,191,165,.55);
+  }
+  .pricing-card.highlight:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 38px -18px rgba(0,191,165,.7);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pricing-card { transition: none; }
+    .pricing-card.highlight:hover { transform: none; }
   }
   .pricing-card .badge {
     position: absolute;
     top: -10px;
     right: 12px;
     background: var(--accent, #00BFA5);
-    color: #fff;
+    /* Testo scuro sul menta: #fff su #00BFA5 stava a ~2,2:1 (sotto AA). */
+    color: #04261D;
     border-radius: 999px;
     padding: 4px 10px;
     font-size: 11px;
     letter-spacing: .04em;
-    font-weight: 600;
+    font-weight: 700;
   }
   .pricing-card h3 {
     margin: 0 0 6px;
@@ -161,7 +182,9 @@ const toc = [
     margin: 4px 0 4px;
     color: var(--text);
     line-height: 1.2;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
   }
+  .pricing-card.highlight .price { font-size: 28px; }
   .pricing-card .cycle {
     font-size: 13px;
     color: var(--text-3);

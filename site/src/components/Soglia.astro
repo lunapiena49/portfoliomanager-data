@@ -1,0 +1,558 @@
+---
+/**
+ * LA SOGLIA - l'ingresso del sito (rotta `/`).
+ *
+ * Porting del prototipo v7 (rollquest/tools/visual/fixtures/site/index.html).
+ * Una differenza sola, ma strutturale: nel prototipo il sito stava NELLA STESSA
+ * pagina, nascosto (`.site { display: none }`), e "Entra" lo rivelava. Qui
+ * "Entra" NAVIGA davvero verso /home.
+ *
+ * Conseguenza sul difetto #6 (lo scroll a scatti): nel prototipo il canvas della
+ * soglia continuava a girare dietro il sito rivelato, e bisognava spegnerlo a
+ * mano. Con una navigazione vera il documento muore, e con lui il canvas: quel
+ * difetto NON PUO' PIU' ESISTERE, per costruzione. Non e' un motivo per togliere
+ * il presidio - la classe di difetto (cicli rAF zombie) resta possibile su
+ * /home, ed e' li' che il test ora la cerca.
+ *
+ * LE SONDE (`window.__probe`) RESTANO, e servono ancora tutte e tre:
+ *   - maxNodeDrift()  il difetto #5, il cursore fantasma che storce il marchio;
+ *   - gateAlive()     che la soglia stia DAVVERO disegnando (una soglia morta
+ *                     non si vede in uno screenshot: si vede in un numero);
+ *   - pointerSeen()   che il test non abbia mosso il puntatore senza accorgersene.
+ * Costano zero per frame: nessuna e' chiamata dal ciclo di disegno.
+ */
+import type { Translations, Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+
+interface Props {
+  t: Translations;
+  lang: Locale;
+}
+
+const { t, lang } = Astro.props;
+const homeUrl = localePath(lang, 'home');
+const g = t.company.gate;
+---
+<section class="gate" id="gate">
+  <div class="grid" aria-hidden="true"></div>
+  <canvas id="field" aria-hidden="true"></canvas>
+  <div class="spot" id="spot" aria-hidden="true"></div>
+
+  <!-- La lemniscata: la geometria del marchio. Il canvas ne campiona i punti
+       con getPointAtLength(): non si disegna, si misura. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <path id="lem" d="M 200 105 C 170 62, 128 42, 98 42 C 57 42, 28 68, 28 105
+                        C 28 142, 57 168, 98 168 C 128 168, 170 148, 200 105
+                        C 230 62, 272 42, 302 42 C 343 42, 372 68, 372 105
+                        C 372 142, 343 168, 302 168 C 272 168, 230 148, 200 105 Z"/>
+    </defs>
+  </svg>
+
+  <div class="gate-inner">
+    <h1 class="wordmark" id="wordmark" aria-label="PluriFin"></h1>
+    <p class="kicker">{g.kicker}</p>
+
+    <div class="blurb">
+      <div class="ln"><span set:html={g.line1} /></div>
+      <div class="ln"><span set:html={g.line2} /></div>
+      <div class="ln"><span set:html={g.line3} /></div>
+    </div>
+
+    <div class="cta-row">
+      <!-- Un <a>, non un <button>: "Entra" porta a una pagina che esiste, e
+           deve funzionare col tasto centrale, col Ctrl+click e senza JavaScript.
+           L'animazione d'uscita e' un di piu' che si innesta sopra, e che cede
+           il passo alla navigazione se qualcosa va storto. -->
+      <a class="enter" id="enterBtn" href={homeUrl}>
+        {g.enter}
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </a>
+      <a class="skip" id="skipBtn" href={homeUrl}>{g.skip}</a>
+    </div>
+
+    <div class="divisions">
+      <span class="f" set:html={g.divFinance} />
+      <span class="sep" aria-hidden="true"></span>
+      <span class="g" set:html={g.divGames} />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* La soglia e' SEMPRE scura: e' l'ingresso, non una pagina di contenuto.
+     Non segue [data-theme] - non c'e' niente da leggere, qui, se non il marchio. */
+  .gate {
+    position: relative; min-height: 100svh;
+    display: grid; place-items: center;
+    padding: 30px 24px 50px; overflow: hidden; isolation: isolate;
+    background: var(--gate-ink, #0A0E14);
+    color: var(--gate-silver-hi, #F4F6F9);
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  }
+  #field { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .grid {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      repeating-linear-gradient(0deg,  rgba(150,190,255,.05) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, rgba(150,190,255,.05) 0 1px, transparent 1px 48px);
+    -webkit-mask-image: radial-gradient(ellipse 78% 58% at 50% 40%, #000, transparent 76%);
+    mask-image: radial-gradient(ellipse 78% 58% at 50% 40%, #000, transparent 76%);
+  }
+  .spot {
+    position: absolute; top: 0; left: 0; z-index: 2;
+    width: 680px; height: 680px; margin: -340px 0 0 -340px;
+    pointer-events: none; mix-blend-mode: screen; will-change: transform;
+    background: radial-gradient(circle closest-side,
+      rgba(120,220,255,.09), rgba(155,107,255,.05) 40%, transparent 72%);
+    transform: translate3d(50vw, 45vh, 0);
+  }
+
+  .gate-inner {
+    position: relative; z-index: 4; width: 100%; max-width: 860px; text-align: center;
+    display: flex; flex-direction: column; align-items: center;
+    padding-top: min(44vh, 400px);
+  }
+  .wordmark {
+    margin: 0; font-size: clamp(48px, 8.8vw, 98px);
+    font-weight: 700; letter-spacing: -.05em; line-height: 1;
+    display: flex; justify-content: center; perspective: 900px;
+  }
+  .wordmark :global(span) {
+    display: inline-block; opacity: 0;
+    transform: translateY(40px) rotateX(-64deg); transform-origin: 50% 100%;
+    background: linear-gradient(180deg, #FFFFFF 18%, #9EA9B8 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  :global(.go) .wordmark :global(span) { animation: up 1200ms cubic-bezier(.16,1,.3,1) forwards; }
+  @keyframes up { to { opacity: 1; transform: none; } }
+  @keyframes fadeIn { to { opacity: 1; } }
+
+  .kicker {
+    margin: 22px 0 0; font-size: 12px; font-weight: 700;
+    letter-spacing: .26em; text-transform: uppercase; color: #79828F; opacity: 0;
+  }
+  :global(.go) .kicker { animation: fadeIn 900ms ease 1900ms forwards; }
+
+  .blurb { margin: 26px 0 0; max-width: 62ch; }
+  .ln { overflow: hidden; }
+  .ln > :global(span) {
+    display: block; color: #AEB7C4; font-size: 16.5px; line-height: 1.66;
+    opacity: 0; transform: translateY(100%);
+  }
+  :global(.go) .ln > :global(span) { animation: up 950ms cubic-bezier(.16,1,.3,1) forwards; }
+  .blurb .ln:nth-child(1) > :global(span) { animation-delay: 2050ms; }
+  .blurb .ln:nth-child(2) > :global(span) { animation-delay: 2200ms; }
+  .blurb .ln:nth-child(3) > :global(span) { animation-delay: 2350ms; }
+  .blurb :global(b) { color: #F4F6F9; font-weight: 600; }
+  .blurb :global(.f) { color: #6EB6F5; font-weight: 600; }
+  .blurb :global(.g) { color: #FFB37A; font-weight: 600; }
+
+  .cta-row {
+    margin-top: 42px; display: flex; align-items: center; gap: 22px;
+    flex-wrap: wrap; justify-content: center; opacity: 0; transform: translateY(14px);
+  }
+  :global(.go) .cta-row { animation: up 900ms cubic-bezier(.16,1,.3,1) 2500ms forwards; }
+  .enter {
+    position: relative; display: inline-flex; align-items: center; gap: 11px;
+    padding: 17px 36px; min-height: 54px; border-radius: 999px; border: 0;
+    font: inherit; font-size: 16.5px; font-weight: 650; letter-spacing: -.005em;
+    color: #04261D; cursor: pointer; overflow: hidden; text-decoration: none;
+    background: linear-gradient(115deg, #5BFCBE, #26D896 40%, #0FA774 100%);
+    background-size: 210% 100%;
+    box-shadow: 0 16px 44px -14px rgba(38,216,150,.85), inset 0 1px 0 rgba(255,255,255,.5);
+    transition: background-position .7s cubic-bezier(.16,1,.3,1), box-shadow .4s;
+    will-change: transform;
+  }
+  .enter:hover { background-position: 100% 0; box-shadow: 0 22px 58px -14px rgba(38,216,150,1); }
+  .enter:active { transform: scale(.965) !important; }
+  .enter svg { transition: transform .45s cubic-bezier(.16,1,.3,1); }
+  .enter:hover svg { transform: translateX(5px); }
+
+  .skip {
+    background: none; border: 0; font: inherit; font-size: 13.5px; color: #79828F;
+    cursor: pointer; padding: 12px 4px; position: relative; opacity: 0;
+    animation: fadeIn 700ms ease 500ms forwards; transition: color .25s;
+    text-decoration: none;
+  }
+  .skip::after {
+    content: ''; position: absolute; left: 4px; right: 4px; bottom: 6px; height: 1px;
+    background: currentColor; transform: scaleX(.3); transform-origin: 0 50%;
+    transition: transform .5s cubic-bezier(.16,1,.3,1);
+  }
+  .skip:hover { color: #F4F6F9; }
+  .skip:hover::after { transform: scaleX(1); }
+
+  .divisions {
+    margin-top: 56px; display: flex; gap: 16px; align-items: center;
+    flex-wrap: wrap; justify-content: center;
+    font-size: 12.5px; color: #79828F; opacity: 0;
+  }
+  :global(.go) .divisions { animation: fadeIn 1100ms ease 2800ms forwards; }
+  .divisions :global(b) { font-weight: 650; }
+  .divisions .f :global(b) { color: #6EB6F5; }
+  .divisions .g :global(b) { color: #FFB37A; }
+  .sep { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: .5; }
+
+  @media (max-width: 940px) {
+    .gate-inner { padding-top: min(36vh, 290px); }
+  }
+
+  /* Composizione mobile (S16). Misurato a 360x800 PRIMA del fix: la CTA
+     "Entra" stava a 741-801px (tagliata dal fold a 800) e le divisioni a
+     857-913 (fuori). Qui si compatta il blocco perche' wordmark + tagline +
+     CTA stiano nel PRIMO viewport, senza scroll ne' attese. I margini sono
+     budget verticale, non estetica: se li allarghi, rimisura. */
+  @media (max-width: 640px) {
+    .gate-inner { padding-top: min(29vh, 232px); }
+    .blurb { margin-top: 18px; max-width: 46ch; }
+    .ln > :global(span) { font-size: 15px; line-height: 1.55; }
+    .cta-row { margin-top: 28px; }
+    .divisions { margin-top: 34px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wordmark :global(span), .kicker, .cta-row, .divisions, .skip, .ln > :global(span) {
+      opacity: 1 !important; transform: none !important; animation: none !important;
+    }
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+  /* `on` = il cursore si e' MOSSO davvero almeno una volta.
+     Senza questo flag M parte a meta' schermo e si comporta come un cursore
+     fantasma: la lemniscata e' centrata a CY~260, il fantasma sta a H*0.42
+     (~378px) - dentro il raggio di repulsione (155px) - e spinge via i nodi.
+     Risultato: a mouse fermo il logo nasce STORTO e si raddrizza solo appena
+     muovi il mouse (il difetto #5: nessuno lo vedeva, perche' per guardare il
+     mouse lo muovi sempre). Finche' non c'e' un cursore vero, non c'e' repulsione. */
+  const M = { x: innerWidth / 2, y: innerHeight * 0.42, on: false };
+  const S = { x: M.x, y: M.y };
+  addEventListener('pointermove', (e) => {
+    M.x = e.clientX; M.y = e.clientY; M.on = true;
+  }, { passive: true });
+
+  const cv = document.getElementById('field') as HTMLCanvasElement;
+  const ctx = cv.getContext('2d')!;
+  const lemPath = document.getElementById('lem') as unknown as SVGPathElement;
+  const LEN = lemPath.getTotalLength();
+  const spot = document.getElementById('spot') as HTMLElement;
+
+  const NODES = 170, HALO_PER_NODE = 3;
+  let W = 0, H = 0, DPR = 1;
+  let nodes: Array<{ hx: number; hy: number; x: number; y: number; vx: number; vy: number }> = [];
+  let halos: Array<{ n: number; ox: number; oy: number; x: number; y: number; vx: number; vy: number; r: number; ph: number; sp: number }> = [];
+  let dust: Array<{ x: number; y: number; r: number; v: number; a: number; dp: number }> = [];
+  let exploding = false, expT = 0;
+  const t0 = performance.now();
+  let CX = 0, CY = 0, SC = 1;
+  let gateAlive = true;
+
+  const aurCv = document.createElement('canvas');
+  const aurCtx = aurCv.getContext('2d')!;
+  const AS = 0.25;
+  let AW = 0, AH = 0;
+
+  const AUR = [
+    { c: '74,90,185',  x: .14, y: .55, r: .70, a: .17, s1: .09, s2: .07 },
+    { c: '30,136,229', x: .30, y: .30, r: .55, a: .15, s1: .11, s2: .08 },
+    { c: '62,198,192', x: .50, y: .62, r: .48, a: .10, s1: .07, s2: .12 },
+    { c: '38,216,150', x: .52, y: .28, r: .52, a: .11, s1: .13, s2: .09 },
+    { c: '155,107,255',x: .74, y: .58, r: .50, a: .12, s1: .10, s2: .11 },
+    { c: '255,138,61', x: .88, y: .34, r: .56, a: .14, s1: .08, s2: .10 },
+  ];
+
+  function build() {
+    DPR = Math.min(2, devicePixelRatio || 1);
+    W = cv.clientWidth; H = cv.clientHeight;
+    if (!W || !H) return;
+    cv.width = W * DPR; cv.height = H * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+
+    SC = Math.min(W * .74 / 400, H * .40 / 210);
+    CX = W / 2;
+    // Su schermi stretti la lemniscata sale (.23H invece di .30H): il blocco
+    // testo mobile parte a ~26vh e a .30H i due si sovrappongono (S16).
+    CY = Math.min(H * (W <= 640 ? .23 : .30), 260);
+
+    const keep = nodes.length === NODES && !exploding;
+    const old = nodes;
+    nodes = [];
+    for (let i = 0; i < NODES; i++) {
+      const p = lemPath.getPointAtLength((i / NODES) * LEN);
+      const hx = CX + (p.x - 200) * SC;
+      const hy = CY + (p.y - 105) * SC;
+      // A CASA fin dal primo fotogramma: la linea non e' mai storta.
+      nodes.push({ hx, hy, x: keep ? old[i].x : hx, y: keep ? old[i].y : hy, vx: 0, vy: 0 });
+    }
+
+    halos = [];
+    for (let i = 0; i < NODES; i++) {
+      for (let k = 0; k < HALO_PER_NODE; k++) {
+        const a = Math.random() * 6.283, d = 3 + Math.random() * 15;
+        const sa = Math.random() * 6.283, sr = Math.max(W, H) * (.3 + Math.random() * .5);
+        halos.push({
+          n: i, ox: Math.cos(a) * d, oy: Math.sin(a) * d,
+          x: CX + Math.cos(sa) * sr, y: CY + Math.sin(sa) * sr,
+          vx: 0, vy: 0,
+          r: .7 + Math.random() * 1.2, ph: Math.random() * 6.283, sp: .4 + Math.random() * .8,
+        });
+      }
+    }
+
+    dust = [];
+    const ND = clamp(Math.round(W * H / 13000), 50, 160);
+    for (let i = 0; i < ND; i++) {
+      dust.push({
+        x: Math.random() * W, y: Math.random() * H,
+        r: .6 + Math.random() * 1.2, v: .05 + Math.random() * .15,
+        a: .07 + Math.random() * .2, dp: .004 + Math.random() * .018,
+      });
+    }
+
+    AW = Math.max(2, Math.round(W * AS));
+    AH = Math.max(2, Math.round(H * AS));
+    aurCv.width = AW; aurCv.height = AH;
+  }
+
+  /* L'aurora e' sfocata per natura: renderla a piena risoluzione vorrebbe dire
+     riempire lo schermo sei volte a ogni frame. La disegno a un quarto di scala
+     e la ingrandisco: stessa resa, costo diviso per sedici. */
+  function aurora(el: number) {
+    const t = el / 1000;
+    const px = (M.x - W / 2) * .02 * AS, py = (M.y - H / 2) * .02 * AS;
+    const R = Math.min(AW, AH);
+    aurCtx.clearRect(0, 0, AW, AH);
+    aurCtx.globalCompositeOperation = 'lighter';
+    for (const b of AUR) {
+      const x = AW * b.x + Math.sin(t * b.s1) * AW * .035 - px;
+      const y = AH * b.y + Math.cos(t * b.s2) * AH * .045 - py;
+      const rad = R * b.r * (1 + Math.sin(t * b.s1 * .7) * .06);
+      const a = b.a * (.82 + Math.sin(t * b.s2 * 1.3) * .18);
+      const grd = aurCtx.createRadialGradient(x, y, 0, x, y, rad);
+      grd.addColorStop(0, `rgba(${b.c},${a.toFixed(3)})`);
+      grd.addColorStop(1, `rgba(${b.c},0)`);
+      aurCtx.fillStyle = grd;
+      aurCtx.fillRect(0, 0, AW, AH);
+    }
+    ctx.drawImage(aurCv, 0, 0, W, H);
+  }
+
+  function ringPath(pts: typeof nodes, from: number, to: number) {
+    const n = pts.length;
+    ctx.beginPath();
+    const a = pts[from % n], b = pts[(from + 1) % n];
+    ctx.moveTo((a.x + b.x) / 2, (a.y + b.y) / 2);
+    for (let k = from + 1; k <= to; k++) {
+      const p = pts[k % n], q = pts[(k + 1) % n];
+      ctx.quadraticCurveTo(p.x, p.y, (p.x + q.x) / 2, (p.y + q.y) / 2);
+    }
+  }
+
+  function frame(now: number) {
+    /* UNA sola condizione di vita, e sta in cima. Nel prototipo il controllo
+       stava solo sull'uscita in fondo, e il ramo "canvas non ancora
+       dimensionato" si ri-schedulava senza chiedere niente a nessuno: bastava
+       che build() girasse mentre il gate era gia' nascosto per lasciare W a 0,
+       e il loop rientrava per sempre in quel ramo, invisibile. */
+    if (!gateAlive) return;
+    const el = now - t0;
+    if (!W || !H) { requestAnimationFrame(frame); return; }
+
+    S.x = lerp(S.x, M.x, .14); S.y = lerp(S.y, M.y, .14);
+    spot.style.transform = `translate3d(${S.x.toFixed(1)}px, ${S.y.toFixed(1)}px, 0)`;
+
+    ctx.clearRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'lighter';
+    aurora(el);
+
+    const dpx = M.on ? (M.x - W / 2) : 0, dpy = M.on ? (M.y - H / 2) : 0;
+    ctx.fillStyle = '#9FB4CC';
+    for (const d of dust) {
+      d.y -= d.v;
+      if (d.y < -4) { d.y = H + 4; d.x = Math.random() * W; }
+      ctx.globalAlpha = d.a;
+      ctx.beginPath(); ctx.arc(d.x - dpx * d.dp, d.y - dpy * d.dp, d.r, 0, 6.283); ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    const gx = dpx * .022, gy = dpy * .022;
+    for (const n of nodes) {
+      if (exploding) { n.x += n.vx; n.y += n.vy; n.vx *= .99; n.vy *= .99; continue; }
+      n.vx += (n.hx + gx - n.x) * .020;
+      n.vy += (n.hy + gy - n.y) * .020;
+      if (M.on) {
+        const dx = n.x - M.x, dy = n.y - M.y, d2 = dx * dx + dy * dy;
+        if (d2 < 24000 && d2 > 1) {
+          const d = Math.sqrt(d2), f = (1 - d / 155) * 3.4;
+          n.vx += (dx / d) * f; n.vy += (dy / d) * f;
+        }
+      }
+      n.vx *= .86; n.vy *= .86;
+      n.x += n.vx; n.y += n.vy;
+    }
+
+    // 250->1400ms: la lemniscata chiude prima che il wordmark finisca di
+    // salire (coreografia S16: CTA visibile a 2.5s, non 3.9).
+    const grow = reduce ? 1 : clamp((el - 250) / 1150, 0, 1);
+    const drawn = Math.max(2, Math.floor(grow * NODES));
+    const alpha = exploding ? clamp(1 - (el - expT) / 700, 0, 1) : 1;
+
+    const grd = ctx.createLinearGradient(CX - 200 * SC, 0, CX + 200 * SC, 0);
+    grd.addColorStop(0, '#1E88E5'); grd.addColorStop(.22, '#00BFA5');
+    grd.addColorStop(.48, '#5BFCBE'); grd.addColorStop(.62, '#26D896');
+    grd.addColorStop(.82, '#FFC24B'); grd.addColorStop(1, '#FF8A3D');
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round'; ctx.strokeStyle = grd;
+
+    for (const [w, a] of [[13, .05], [7, .10], [4.4, .18]]) {
+      ctx.globalAlpha = a * alpha;
+      ctx.lineWidth = w;
+      ringPath(nodes, 0, drawn); ctx.stroke();
+    }
+    ctx.globalAlpha = alpha;
+    ctx.lineWidth = 2.6;
+    ringPath(nodes, 0, drawn); ctx.stroke();
+
+    if (grow >= 1 && !reduce && !exploding) {
+      const head = ((el - 1600) / 6500) % 1;
+      if (head > 0) {
+        const i0 = Math.floor(head * NODES);
+        ctx.strokeStyle = '#EAFFF6';
+        for (const [w, a] of [[9, .10], [5, .22], [2.8, .85]]) {
+          ctx.globalAlpha = a;
+          ctx.lineWidth = w;
+          ringPath(nodes, i0, i0 + 17); ctx.stroke();
+        }
+      }
+    }
+
+    for (const h of halos) {
+      const n = nodes[h.n];
+      if (exploding) { h.x += h.vx; h.y += h.vy; }
+      else {
+        h.vx += (n.x + h.ox - h.x) * .035;
+        h.vy += (n.y + h.oy - h.y) * .035;
+        h.vx *= .84; h.vy *= .84;
+        h.x += h.vx; h.y += h.vy;
+      }
+      const br = .6 + Math.sin(el / 800 * h.sp + h.ph) * .4;
+      ctx.globalAlpha = alpha * br * .75;
+      ctx.fillStyle = h.n < NODES * .28 ? '#4FA3EA'
+                    : h.n < NODES * .5  ? '#5BFCBE'
+                    : h.n < NODES * .78 ? '#26D896' : '#FFB37A';
+      ctx.beginPath(); ctx.arc(h.x, h.y, h.r, 0, 6.283); ctx.fill();
+    }
+
+    if (grow >= 1) {
+      const c = nodes[0];
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = '#5BFCBE';
+      ctx.save();
+      ctx.translate(c.x, c.y); ctx.rotate(Math.PI / 4);
+      const s = 9 * (1 + Math.sin(el / 1100) * .08);
+      ctx.fillRect(-s / 2, -s / 2, s, s);
+      ctx.restore();
+    }
+
+    ctx.globalAlpha = 1;
+    ctx.globalCompositeOperation = 'source-over';
+    if (gateAlive) requestAnimationFrame(frame);
+  }
+
+  build();
+  requestAnimationFrame(frame);
+  addEventListener('resize', () => { if (gateAlive) build(); });
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => { if (gateAlive) build(); });
+  }
+  new ResizeObserver(() => { if (gateAlive) build(); }).observe(document.getElementById('gate')!);
+
+  /* wordmark: una lettera per <span>, ognuna col suo ritardo */
+  const wm = document.getElementById('wordmark')!;
+  'PluriFin'.split('').forEach((ch, i) => {
+    const s = document.createElement('span');
+    s.textContent = ch;
+    s.style.animationDelay = (1100 + i * 55) + 'ms';
+    wm.appendChild(s);
+  });
+  requestAnimationFrame(() => document.body.classList.add('go'));
+
+  /* ================= L'USCITA =================
+     Il click NON e' l'unico modo di andarsene: <a href> funziona anche senza
+     JS, col tasto centrale, con Ctrl. Qui si intercetta solo il click semplice
+     e sinistro - quello a cui possiamo permetterci di aggiungere un'animazione
+     - e si lascia passare tutto il resto al browser. Se l'animazione fallisse,
+     la navigazione avviene comunque: il fallback e' il comportamento nativo. */
+  const enterBtn = document.getElementById('enterBtn') as HTMLAnchorElement;
+  const skipBtn = document.getElementById('skipBtn') as HTMLAnchorElement;
+
+  function kill() {
+    gateAlive = false;
+    if (W && H) ctx.clearRect(0, 0, W, H);
+    cv.width = cv.height = 0;
+  }
+
+  function esci(e: MouseEvent, href: string) {
+    // Modificatori / tasto non sinistro: e' il browser a doverne decidere.
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+
+    if (reduce) { kill(); location.href = href; return; }
+
+    exploding = true;
+    expT = performance.now() - t0;
+    for (const n of nodes) {
+      const dx = n.x - CX, dy = n.y - CY, d = Math.hypot(dx, dy) || 1;
+      n.vx = (dx / d) * (9 + Math.random() * 12);
+      n.vy = (dy / d) * (9 + Math.random() * 12);
+    }
+    for (const h of halos) {
+      const dx = h.x - CX, dy = h.y - CY, d = Math.hypot(dx, dy) || 1;
+      h.vx = (dx / d) * (10 + Math.random() * 14);
+      h.vy = (dy / d) * (10 + Math.random() * 14);
+    }
+    document.getElementById('gate')!.animate(
+      [{ opacity: 1, transform: 'scale(1)' }, { opacity: 0, transform: 'scale(1.08)' }],
+      { duration: 780, easing: 'cubic-bezier(.16,1,.3,1)', fill: 'forwards' },
+    );
+    // 700ms di esplosione, 780 di dissolvenza: si parte quando la soglia e' andata.
+    setTimeout(() => { kill(); location.href = href; }, 760);
+  }
+
+  enterBtn.addEventListener('click', (e) => esci(e, enterBtn.href));
+  skipBtn.addEventListener('click', (e) => esci(e, skipBtn.href));
+
+  /* ================= LE SONDE (harness visivo) =================
+     Tre funzioni in sola lettura. Nessuna e' chiamata dal ciclo di disegno:
+     le chiama solo Playwright, dall'esterno. Costo per frame: zero.
+
+     Servono perche' due dei sei difetti di S7 NON stanno in uno screenshot: il
+     marchio storto (si raddrizza appena muovi il mouse, e per guardarlo il
+     mouse lo muovi sempre) e il canvas che continua a girare. Un'immagine non
+     li vede. Un numero si'. */
+  (window as any).__probe = {
+    /** Quanto i nodi si sono allontanati da "casa". A cursore fermo DEVE essere
+     *  ~0: se e' grande, il cursore fantasma sta spingendo via il marchio (#5). */
+    maxNodeDrift() {
+      let m = 0;
+      for (const n of nodes) {
+        const d = Math.hypot(n.x - n.hx, n.y - n.hy);
+        if (d > m) m = d;
+      }
+      return m;
+    },
+    /** La soglia sta disegnando? Sulla soglia: si'. Una soglia morta non si
+     *  vede in uno screenshot - si vede qui. */
+    gateAlive() { return gateAlive; },
+    /** Il puntatore si e' MOSSO davvero, o e' il fantasma a meta' schermo? */
+    pointerSeen() { return M.on; },
+    nodeCount() { return nodes.length; },
+  };
+</script>

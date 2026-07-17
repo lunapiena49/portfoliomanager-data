@@ -1,0 +1,19 @@
+---
+// `/pt/home` - la home aziendale: le due divisioni, la scena, lo studio.
+import pt from '../../i18n/pt';
+import Layout from '../../layouts/Layout.astro';
+import CompanyHome from '../../components/CompanyHome.astro';
+
+const t = pt;
+---
+<Layout
+  title={`PluriFin — ${t.company.hero.h1a} ${t.company.hero.h1b}`}
+  description={t.company.hero.lede}
+  ogTitle="PluriFin"
+  ogDescription={t.company.hero.lede}
+  lang="pt"
+  section="company"
+  pageType="organization"
+>
+  <CompanyHome t={t} lang="pt" />
+</Layout>

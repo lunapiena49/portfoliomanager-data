@@ -4,15 +4,33 @@ import LegalLayout from '../../layouts/LegalLayout.astro';
 const toc = [{ id: 'overview', label: '1. Uebersicht' },{ id: 'data', label: '2. Daten' },{ id: 'rights', label: '3. Rechte' },{ id: 'contact', label: '4. Kontakt' }];
 ---
 <LegalLayout t={de} lang="de" pageTitle="Datenschutzerklaerung" tocItems={toc}>
-  <p class="meta">Letzte Aktualisierung: 28. April 2026 · Version 1.0</p>
+  <p class="meta">Letzte Aktualisierung: 20. Mai 2026 · Version 1.0.2</p>
   <div class="callout"><strong>Kurzfassung:</strong> Portfolio Manager erhebt keine Portfolio-Daten. Alles bleibt verschluesselt auf deinem Geraet.</div>
   <h2 id="overview">1. Uebersicht</h2>
-  <p>PluriFin (Filippo Salemi, Privatperson, Italien) verarbeitet nur die fuer den Betrieb der Website erforderlichen Daten (Newsletter via Formspree mit Einwilligung, Kontaktformular). Keine Portfolio-Daten werden an einen PluriFin-Server uebertragen.</p>
+  <p>PluriFin (Filippo Salemi, Privatperson, Italien) verarbeitet nur die fuer den Betrieb der Website erforderlichen Daten (GitHub-Pages-Logs) sowie die E-Mails, die du uns freiwillig sendest. Die Website enthaelt keine Formulare. Keine Portfolio-Daten werden an einen PluriFin-Server uebertragen.</p>
   <h2 id="data">2. Erhobene Daten</h2>
-  <p>App-Daten: nur lokal, AES-256-verschluesselt. Website: E-Mail Newsletter (Einwilligung), Kontaktformular (Formspree, USA, SCCs), GitHub Pages Logs.</p>
+  <p>App-Daten: nur lokal, AES-256-verschluesselt. Website: keine Formulare, keine Erhebung ueber den Browser. Verarbeitet werden nur die GitHub-Pages-Server-Logs (IP, User-Agent, max. 14 Tage) und, falls du uns an eine veroeffentlichte Adresse schreibst, deine Nachricht, ausschliesslich um dir zu antworten.</p>
+  <h3>2.1 Anonyme Crash-Daten</h3>
+  <p>Zur Diagnose von Bugs und Abstuerzen nutzen wir
+  <strong>Firebase Crashlytics</strong> (Google Ireland Limited,
+  Auftragsverarbeiter nach Art. 28 DSGVO). Bei einem Crash werden an
+  Crashlytics gesendet: verschluesselter Stack Trace, Geraetemodell,
+  App-Version, anonyme Installations-Kennung.
+  <strong>Nicht gesendet</strong>: Portfolios, Positionen, Ziele,
+  API-Schluessel, KI-Prompt-Inhalt. Die Erfassung ist
+  <strong>standardmaessig deaktiviert</strong>: keine Daten werden
+  gesendet, bis du den Schalter "Anonyme Crash-Diagnose" unter
+  Einstellungen &gt; Datenschutz manuell aktivierst. Aufbewahrung:
+  90 Tage. Rechtsgrundlage: berechtigtes Interesse (Art. 6.1.f DSGVO).
+  Drittlandtransfer durch Standardvertragsklauseln abgesichert.</p>
+  <p>Eine <strong>Google-Analytics-for-Firebase-Property (GA4, Google LLC)</strong>
+  ist mit dem Firebase-Projekt fuer kuenftige Erweiterungen verknuepft.
+  <em>In Version 1.0.0+10 werden keine Daten uebertragen</em> (das
+  `firebase_analytics`-SDK ist nicht integriert). Aktivierung
+  ausschliesslich nach einem App-Update + erneuter Nutzereinwilligung.</p>
   <h2 id="rights">3. Betroffenenrechte</h2>
-  <p>Du kannst deine DSGVO-Rechte (Auskunft, Berichtigung, Loeschung...) ausueben unter <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <p>Du kannst deine DSGVO-Rechte (Auskunft, Berichtigung, Loeschung...) ausueben unter <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
   <h2 id="contact">4. Kontakt</h2>
-  <p><a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p><a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a></p>
   <hr /><div class="note">Endgueltiger Rechtstext in juristischer Pruefung (Wave W3).</div>
 </LegalLayout>

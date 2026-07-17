@@ -3,12 +3,22 @@ import '../styles/global.css';
 import type { Locale } from '../i18n/index';
 import { LOCALES } from '../i18n/index';
 
+/** Sezione del sito: decide l'accento (menta / blu / ember) via [data-section]. */
+export type Section = 'company' | 'finance' | 'games';
+/** Tipo di pagina: decide lo schema JSON-LD emesso. */
+export type PageType = 'organization' | 'software' | 'game' | 'page';
+
 interface Props {
   title: string;
   description: string;
   ogTitle?: string;
   ogDescription?: string;
   lang: Locale;
+  section?: Section;
+  pageType?: PageType;
+  /** false = pagina senza traduzioni 1:1 (es. un post del blog): niente hreflang. */
+  alternates?: boolean;
+  /** Legacy: qualche pagina lo passa ancora. Se assente si deriva dall'URL. */
   canonicalPath?: string;
 }
 
@@ -18,33 +28,148 @@ const {
   ogTitle,
   ogDescription,
   lang,
-  canonicalPath = '',
+  section = 'finance',
+  pageType = 'page',
+  alternates = true,
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-// Custom domain live since 2026-05-04 (W3 task 38). Override at build time
-// only for staging previews:
+// Dominio custom attivo dal 2026-05-04. Override solo per anteprime di staging:
 //   SITE_URL=https://lunapiena49.github.io/portfoliomanager-data astro build
-const siteUrl = (import.meta.env.SITE_URL as string | undefined) ??
-  'https://plurifin.app';
-const canonicalUrl = `${siteUrl}${canonicalPath ? '/' + canonicalPath : ''}`;
-const ogImageUrl = `${siteUrl}/assets/og-image.png`;
+const siteUrl = (import.meta.env.SITE_URL as string | undefined) ?? 'https://plurifin.app';
 
-// GoatCounter analytics. Self-hosted on Cloudflare Workers (zero-cost,
-// no-cookie, GDPR-safe, no IP storage). Setup notes:
-//   marketing/analytics/goatcounter_setup.md
-// Set GOATCOUNTER_HOST at build time, e.g.:
-//   GOATCOUNTER_HOST=stats.plurifin.app astro build
-// If unset, no tracking script is emitted (silent no-op).
+/* --- Rotta canonica derivata dall'URL reale della pagina ---------------
+   Serve per canonical + hreflang CORRETTI su ogni pagina: prima venivano
+   emessi hreflang che puntavano SEMPRE alla home, quindi ogni pagina
+   tradotta dichiarava come propria alternativa la home, non se stessa.
+   NB: build.format = 'file' -> gli URL NON hanno lo slash finale
+   (/en e' 200, /en/ e' 404). Ogni costruzione di link parte da qui. */
+let path = Astro.url.pathname;
+if (base && path.startsWith(base)) path = path.slice(base.length);
+path = path.replace(/^\/+/, '').replace(/\/+$/, '').replace(/\.html$/, '');
+const segments = path ? path.split('/') : [];
+const hasLangPrefix =
+  segments.length > 0 && (LOCALES as string[]).includes(segments[0]) && segments[0] !== 'it';
+const route = (hasLangPrefix ? segments.slice(1) : segments).join('/');
+
+function localeHref(l: Locale, r: string): string {
+  const seg = [l === 'it' ? '' : l, r].filter(Boolean).join('/');
+  return seg ? `${siteUrl}/${seg}` : `${siteUrl}/`;
+}
+
+const canonicalUrl = localeHref(lang, route);
+const ogImageUrl = `${siteUrl}/assets/og-image.png`;
 const goatcounterHost = import.meta.env.GOATCOUNTER_HOST as string | undefined;
+
+const publisher = {
+  '@type': 'Organization',
+  name: 'PluriFin',
+  url: siteUrl,
+  founder: { '@type': 'Person', name: 'Filippo Salemi' },
+  address: { '@type': 'PostalAddress', addressCountry: 'IT' },
+};
+
+let jsonLd: Record<string, unknown>;
+if (pageType === 'organization') {
+  jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PluriFin',
+    url: siteUrl,
+    logo: `${siteUrl}/assets/favicon.svg`,
+    image: ogImageUrl,
+    description: ogDescription ?? description,
+    // NON un Gmail personale: questo JSON-LD spedisce su 42 pagine su 99, ed e'
+    // il contatto che Google mostra nel Knowledge Panel. `info@` e' uno dei 5
+    // alias verificati via API in S9 (i 3 di S10 - legal@/gdpr@/support@ - non
+    // lo sono ancora: il catch-all Cloudflare e' su Drop, quindi un alias senza
+    // regola di routing attiva perde la posta IN SILENZIO).
+    email: 'info@plurifin.app',
+    founder: { '@type': 'Person', name: 'Filippo Salemi' },
+    address: { '@type': 'PostalAddress', addressCountry: 'IT' },
+    sameAs: ['https://github.com/lunapiena49'],
+  };
+} else if (pageType === 'software') {
+  jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Portfolio Manager',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: 'Android, Web',
+    url: canonicalUrl,
+    image: ogImageUrl,
+    description: ogDescription ?? description,
+    inLanguage: lang,
+    softwareVersion: '1.0.0',
+    datePublished: '2026-05-02',
+    publisher,
+    // Solo la web demo gratuita e' effettivamente disponibile (InStock reale).
+    // I piani Premium NON sono acquistabili: l'account commerciante Google
+    // Payments non esiste ancora, quindi dichiarare un Offer InStock a prezzo
+    // sarebbe markup ingannevole (Google lo penalizza). I prezzi di lancio
+    // vivono nella pagina /pricing come ANNUNCIO, non come offerta commerciale
+    // attiva: gli acquisti si aprono alla pubblicazione su Play Store.
+    offers: [
+      {
+        '@type': 'Offer',
+        price: '0.00',
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock',
+        name: 'Web demo (free)',
+      },
+    ],
+  };
+} else if (pageType === 'game') {
+  // ROLLQUEST e' IN SVILUPPO: niente offerte, niente datePublished, niente
+  // rating. Dichiarare una disponibilita' che non esiste sarebbe markup
+  // ingannevole (e Google lo penalizza).
+  jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'ROLLQUEST',
+    url: canonicalUrl,
+    image: ogImageUrl,
+    description: ogDescription ?? description,
+    applicationCategory: 'GameApplication',
+    gamePlatform: 'Android',
+    operatingSystem: 'Android',
+    inLanguage: LOCALES,
+    publisher,
+  };
+} else {
+  jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: title,
+    url: canonicalUrl,
+    description: ogDescription ?? description,
+    inLanguage: lang,
+    isPartOf: { '@type': 'WebSite', name: 'PluriFin', url: siteUrl },
+  };
+}
 ---
 <!DOCTYPE html>
-<html lang={lang} dir="ltr">
+<html lang={lang} dir="ltr" data-section={section}>
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Primary meta -->
+  <!-- Tema applicato PRIMA del primo paint: niente lampo bianco.
+       Ordine: scelta esplicita dell'utente > preferenza di sistema. -->
+  <script is:inline>
+    (function () {
+      try {
+        var saved = localStorage.getItem('pf-theme');
+        var dark = saved
+          ? saved === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
   <title>{title}</title>
   <meta name="description" content={description} />
   <link rel="canonical" href={canonicalUrl} />
@@ -60,88 +185,40 @@ const goatcounterHost = import.meta.env.GOATCOUNTER_HOST as string | undefined;
   <meta property="og:locale" content={lang} />
   <meta property="og:site_name" content="PluriFin" />
 
-  <!-- Twitter card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content={ogTitle ?? title} />
   <meta name="twitter:description" content={ogDescription ?? description} />
   <meta name="twitter:image" content={ogImageUrl} />
 
-  <!-- Alternate locales -->
-  {LOCALES.map(l => {
-    const prefix = l === 'it' ? '' : `/${l}`;
-    return <link rel="alternate" hreflang={l} href={`${siteUrl}${prefix}`} />;
-  })}
-  <link rel="alternate" hreflang="x-default" href={siteUrl} />
+  <!-- hreflang: puntano alla STESSA pagina nelle altre lingue, non alla home. -->
+  {alternates && LOCALES.map(l => (
+    <link rel="alternate" hreflang={l} href={localeHref(l, route)} />
+  ))}
+  {alternates && <link rel="alternate" hreflang="x-default" href={localeHref('it', route)} />}
 
-  <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href={`${base}/assets/favicon.svg`} />
   <link rel="apple-touch-icon" href={`${base}/assets/apple-touch-icon.png`} />
 
-  <!-- Inter variable font (rsms.me CDN -- cached globally, 0 layout shift) -->
-  <link rel="preconnect" href="https://rsms.me/" />
-  <link rel="preload" as="style" href="https://rsms.me/inter/inter.css" />
-  <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+  <!-- Font self-hosted (nessun CDN terzo: v. global.css). In preload solo il
+       subset latin; latin-ext si carica solo se serve. -->
+  <link
+    rel="preload"
+    as="font"
+    type="font/woff2"
+    href={`${base}/assets/fonts/inter-latin.woff2`}
+    crossorigin
+  />
 
-  <!-- Robots -->
   <meta name="robots" content="index, follow" />
+  <meta name="theme-color" content="#F8F9FA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#0A0E14" media="(prefers-color-scheme: dark)" />
 
-  <!-- Theme color -->
-  <meta name="theme-color" content="#1E88E5" />
-
-  <!-- JSON-LD SoftwareApplication (Schema.org) for richer SERP cards.
-       NOTE on aggregateRating (Google Rich Results "Missing optional field"
-       warning): intentionally OMITTED at launch. Google policy prohibits
-       fabricated/non-genuine ratings (https://developers.google.com/search/docs/appearance/structured-data/software-app).
-       Inserting placeholder values would risk a manual action against
-       https://plurifin.app/. The field will be populated automatically from
-       the Play Store rating widget on the homepage once production reaches
-       >= 5 organic reviews (tracked in marketing/aso_keywords.md follow-up
-       "rich result ratings"). -->
-  <script type="application/ld+json" set:html={JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Portfolio Manager",
-    "applicationCategory": "FinanceApplication",
-    "operatingSystem": "Android, Web",
-    "url": canonicalUrl,
-    "image": ogImageUrl,
-    "description": ogDescription ?? description,
-    "inLanguage": lang,
-    "softwareVersion": "1.0.0",
-    "datePublished": "2026-05-02",
-    "publisher": {
-      "@type": "Person",
-      "name": "Filippo Salemi",
-      "alternateName": "PluriFin",
-      "address": {
-        "@type": "PostalAddress",
-        "addressCountry": "IT"
-      }
-    },
-    "offers": [
-      {
-        "@type": "Offer",
-        "price": "0.00",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "name": "Web demo (free)"
-      },
-      {
-        "@type": "Offer",
-        "price": "0.99",
-        "priceCurrency": "EUR",
-        "availability": "https://schema.org/InStock",
-        "name": "Premium Android (1 year, with 7-day trial)"
-      }
-    ]
-  })} />
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 </head>
 <body>
   <a href="#main" class="skip">Skip to content</a>
   <slot />
 
-  {/* GoatCounter analytics (no-cookie, GDPR-safe). Emitted only when
-      GOATCOUNTER_HOST is set at build time. */}
   {goatcounterHost && (
     <script
       data-goatcounter={`https://${goatcounterHost}/count`}
@@ -150,11 +227,11 @@ const goatcounterHost = import.meta.env.GOATCOUNTER_HOST as string | undefined;
     />
   )}
 
-  <!-- Intersection Observer for reveal animations -->
   <script>
+    // Rivelazione allo scroll (la variante ridotta e' in global.css).
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach(e => {
+        entries.forEach((e) => {
           if (e.isIntersecting) {
             e.target.classList.add('in');
             observer.unobserve(e.target);
@@ -163,7 +240,29 @@ const goatcounterHost = import.meta.env.GOATCOUNTER_HOST as string | undefined;
       },
       { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
     );
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // Toggle del tema. Il bottone vive nella Navbar; qui c'e' la logica, cosi'
+    // funziona anche nelle pagine che usano una navbar ridotta.
+    const root = document.documentElement;
+    const toggles = document.querySelectorAll('[data-theme-toggle]');
+
+    const isDark = () => root.getAttribute('data-theme') === 'dark';
+
+    function applyTheme(theme: 'light' | 'dark') {
+      root.setAttribute('data-theme', theme);
+      try {
+        localStorage.setItem('pf-theme', theme);
+      } catch (e) {
+        /* storage negato: il tema resta valido per questa pagina */
+      }
+      toggles.forEach((btn) => btn.setAttribute('aria-pressed', String(theme === 'dark')));
+    }
+
+    toggles.forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(isDark()));
+      btn.addEventListener('click', () => applyTheme(isDark() ? 'light' : 'dark'));
+    });
   </script>
 </body>
 </html>

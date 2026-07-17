@@ -49,7 +49,7 @@ export async function buildRssFeed(opts: FeedOptions): Promise<Response> {
 
   const items = sorted
     .map((post) => {
-      const slug = post.slug;
+      const slug = post.id;
       const url = `${baseUrl}/blog/${slug}`;
       const pubDate = post.data.publishedAt.toUTCString();
       const itemTitle = escapeXml(post.data.title);

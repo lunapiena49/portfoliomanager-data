@@ -1,6 +1,9 @@
-// Astro Content Collections schema for the PluriFin blog.
+// Astro Content Layer schema for the PluriFin blog (Astro 5+ glob loader;
+// migrated from the legacy src/content/config.ts collection in S16).
 //
-// Each markdown file under src/content/blog/<lang>/ ships as one post.
+// Each markdown file under src/content/blog/ ships as one post; files in a
+// subfolder (e.g. it/) keep the folder in their id, exactly like the legacy
+// slug did - routes did not change with the migration.
 // Locales mirror the rest of the site (it/en/es/fr/de/pt). Posts that
 // are not translated yet show only in their original locale.
 //
@@ -8,9 +11,10 @@
 // calendar lives in marketing/blog_schedule.md.
 
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 const blog = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     summary: z.string().min(40).max(280),

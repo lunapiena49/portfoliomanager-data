@@ -1,5 +1,22 @@
 ---
+// `/de` - la soglia. La radice appartiene allo STUDIO: il Portfolio Manager ha
+// la sua pagina in `/de/finance`.
 import de from '../../i18n/de';
-import LandingPage from '../../components/LandingPage.astro';
+import Layout from '../../layouts/Layout.astro';
+import Soglia from '../../components/Soglia.astro';
+
+const t = de;
 ---
-<LandingPage t={de} lang="de" />
+<Layout
+  title={`PluriFin — ${t.company.gate.kicker}`}
+  description={t.company.gate.line1}
+  ogTitle="PluriFin"
+  ogDescription={t.company.gate.line1}
+  lang="de"
+  section="company"
+  pageType="organization"
+>
+  <main id="main">
+    <Soglia t={t} lang="de" />
+  </main>
+</Layout>

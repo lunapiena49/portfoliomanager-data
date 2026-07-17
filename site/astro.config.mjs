@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
 
 // The production site lives at the root of plurifin.app (custom domain on
 // GitHub Pages via CNAME, see master plan 4B.3). The site-deploy.yml workflow
@@ -11,12 +10,13 @@ import tailwind from '@astrojs/tailwind';
 const SITE_URL = process.env.SITE_URL ?? 'https://plurifin.app';
 const SITE_BASE = process.env.SITE_BASE ?? '/';
 
+// Tailwind 3 runs as a plain PostCSS plugin (postcss.config.cjs) since the
+// Astro 6 upgrade: the @astrojs/tailwind integration is deprecated and only
+// supports astro<=5. Base styles were already off (applyBaseStyles: false);
+// src/styles/global.css keeps carrying the @tailwind directives.
 export default defineConfig({
   site: SITE_URL,
   base: SITE_BASE,
-  integrations: [
-    tailwind({ applyBaseStyles: false }),
-  ],
   i18n: {
     defaultLocale: 'it',
     locales: ['it', 'en', 'es', 'fr', 'de', 'pt'],

@@ -1,6 +1,7 @@
 ---
 import Layout from './Layout.astro';
 import type { Translations, Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
 
 interface Props {
   t: Translations;
@@ -11,7 +12,9 @@ interface Props {
 
 const { t, lang, pageTitle, tocItems } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const homeUrl = lang === 'it' ? `${base}/` : `${base}/${lang}/`;
+// Terza copia dello stesso bug (qui si chiamava homeUrl): `${base}/${lang}/`
+// con lo slash finale = 404. Ora l'URL lo costruisce localePath(), e basta.
+const homeUrl = localePath(lang);
 ---
 <Layout
   title={`${pageTitle} -- PluriFin`}
@@ -80,7 +83,7 @@ const homeUrl = lang === 'it' ? `${base}/` : `${base}/${lang}/`;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(248,249,250,.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--divider);
@@ -117,14 +120,28 @@ const homeUrl = lang === 'it' ? `${base}/` : `${base}/${lang}/`;
   .toc a:hover { color: var(--text); }
   .toc a.active { color: var(--primary); border-left-color: var(--primary); font-weight: 500; }
 
-  .prose { max-width: 720px; }
-  .prose h1 { margin-bottom: 8px; }
+  /* Tipografia da lettura lunga (S16): misura di riga in ch (privacy/terms
+     sono muri di testo in 6 lingue), scala fluida senza salti tra viewport,
+     text-wrap dove il browser lo sa fare (progressive enhancement). */
+  .prose { max-width: 68ch; }
+  .prose h1 {
+    margin-bottom: 8px;
+    font-size: clamp(28px, 24px + 1.6vw, 40px);
+    line-height: 1.15; letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
   :global(.prose .meta) { color: var(--text-3); font-size: 13px; margin-bottom: 32px; }
-  :global(.prose h2) { font-size: 24px; line-height: 1.3; margin: 48px 0 12px; }
-  :global(.prose h3) { font-size: 18px; margin: 24px 0 8px; }
-  :global(.prose p) { color: var(--text-2); font-size: 16px; line-height: 1.65; margin-bottom: 14px; }
+  :global(.prose h2) {
+    font-size: clamp(21px, 19px + 0.8vw, 26px);
+    line-height: 1.25; margin: 48px 0 12px; text-wrap: balance;
+  }
+  :global(.prose h3) { font-size: clamp(17px, 16px + 0.3vw, 19px); margin: 26px 0 8px; text-wrap: balance; }
+  :global(.prose p) {
+    color: var(--text-2); font-size: clamp(16px, 15.5px + 0.15vw, 17px);
+    line-height: 1.7; margin-bottom: 14px; text-wrap: pretty;
+  }
   :global(.prose ul) { padding-left: 24px; margin: 8px 0 16px; }
-  :global(.prose li) { margin-bottom: 6px; color: var(--text-2); font-size: 15px; line-height: 1.6; }
+  :global(.prose li) { margin-bottom: 6px; color: var(--text-2); font-size: 15px; line-height: 1.65; }
   :global(.prose strong) { color: var(--text); font-weight: 600; }
   :global(.prose a) { color: var(--primary); }
   :global(.prose a:hover) { color: var(--primary-dark); }

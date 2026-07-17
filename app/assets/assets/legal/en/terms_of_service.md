@@ -1,7 +1,7 @@
 # Terms of Service -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Last update**: 2026-05-02
+**Last update**: 2026-07-14
 **Original language**: Italian (binding version for jurisdiction)
 
 ---
@@ -14,7 +14,7 @@ application ("the App") provided by:
 - **Filippo Salemi** -- natural person, independent developer
 - **Commercial brand**: PluriFin
 - **Country**: Italy
-- **Contact email**: `plurifin.app@gmail.com`
+- **Contact email**: `info@plurifin.app`
 
 By installing, launching or using the App ("the User") you fully accept these
 terms. If you do not accept them, you must uninstall the App and stop using it.
@@ -150,7 +150,7 @@ Italian Consumer Code (D.Lgs. 206/2005):
 - Notwithstanding the above, **PluriFin undertakes as a commercial
   commitment to honor the 14-day right of withdrawal under art. 52 of
   the Italian Consumer Code** from purchase, upon written request from
-  the consumer sent to `plurifin.app+legal@gmail.com`. The request must
+  the consumer sent to `legal@plurifin.app`. The request must
   include the Google Play order ID and the Google account used.
 - For such requests PluriFin will forward the refund case to Google
   and, in the event of refusal by Google, will directly grant the

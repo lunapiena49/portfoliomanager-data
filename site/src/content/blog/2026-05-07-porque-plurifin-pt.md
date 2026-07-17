@@ -1,6 +1,6 @@
 ---
 title: "Porque construí a PluriFin"
-summary: "A história pessoal por trás de uma app privacy-first para investidores retalhistas, e como um programador único pode oferecer um plano a 0,99 EUR/ano."
+summary: "A história pessoal por trás de uma app privacy-first para investidores retalhistas, e como um programador único pode oferecer um plano a 4,99 EUR/ano."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"
@@ -49,8 +49,8 @@ Quando percebi que o produto podia ser útil a mais alguém além de mim, decidi
 publicá-lo. O modelo comercial é deliberadamente low-friction:
 
 - 7 dias de teste grátis sem cartão
-- 0,99 EUR/ano para Single, 1,99 EUR/ano para Família
-- Lifetime pagamento único 4,99 EUR (Single) ou 9,99 EUR (Família)
+- 4,99 EUR/ano para Single, 9,99 EUR/ano para Família
+- Lifetime pagamento único 29,99 EUR (Single) ou 49,99 EUR (Família)
 
 Sem "early bird", sem "primeiros N utilizadores", sem promoções que segmentem.
 Mesmo preço para todos, hoje e sempre.

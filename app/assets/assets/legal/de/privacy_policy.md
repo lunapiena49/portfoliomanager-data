@@ -1,7 +1,7 @@
 # Datenschutzerklärung -- Portfolio Manager by PluriFin
 
-**Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Version**: 1.0.2
+**Letzte Aktualisierung**: 2026-07-14
 **Originalsprache**: Italienisch (verbindliche Fassung für die Gerichtsbarkeit)
 
 ---
@@ -12,8 +12,8 @@
 - **Rechtsform**: natürliche Person (unabhängiger Entwickler)
 - **Marke**: PluriFin
 - **Land**: Italien
-- **E-Mail für DSGVO und Datenschutz**: `plurifin.app+gdpr@gmail.com`
-- **Allgemeine E-Mail**: `plurifin.app@gmail.com`
+- **E-Mail für DSGVO und Datenschutz**: `gdpr@plurifin.app`
+- **Allgemeine E-Mail**: `info@plurifin.app`
 
 Kein Datenschutzbeauftragter (DSB) bestellt: natürliche Person außerhalb
 der Pflichtfälle nach Art. 37 DSGVO.
@@ -23,8 +23,15 @@ der Pflichtfälle nach Art. 37 DSGVO.
 - Alle Portfoliodaten (Positionen, Transaktionen, Ziele, Einstellungen)
   werden **ausschließlich auf dem Gerät** verschlüsselt gespeichert.
   Nicht an PluriFin-Server übertragen.
-- App **nutzt keine Drittanbieter-Analytics** (kein Google Analytics,
-  Firebase, Facebook SDK, AppsFlyer, Sentry standardmäßig).
+- App **nutzt keine aktiven Drittanbieter-Analytics** in dieser Version
+  (kein Facebook SDK, AppsFlyer, Sentry, keine von der App erzeugten
+  Google-Analytics-Ereignisse). Eine Google-Analytics-for-Firebase-
+  Property (GA4) ist mit dem Firebase-Projekt `portfolio-manager-f6f8d`
+  verknüpft, um künftige Erweiterungen vorzubereiten: Version 1.0.0+10
+  bündelt kein `firebase_analytics`-SDK, daher erzeugt das App-Binary
+  keine Analytics-Ereignisse. Siehe Abschnitt 4 (Auftragsverarbeiter)
+  für die vollständige Erklärung.
+- Auf Android integriert die App eine **optionale anonyme Crash-Diagnose via Firebase Crashlytics** (Google Ireland Limited): standardmäßig deaktiviert, vom Nutzer aktivierbar unter Einstellungen > Datenschutz. Niemals Portfolio-Daten, API-Schlüssel oder KI-Inhalt. Siehe Abschnitt 4 (Auftragsverarbeiter).
 - App **teilt keine Daten** mit Werbeanbietern. Keine Werbung.
 - **Optionale Funktionen** existieren, die bei Aktivierung Daten an
   Drittanbieter übertragen: KI Gemini, Echtzeit-Marktpreise (EODHD/FMP),
@@ -113,6 +120,8 @@ deaktivieren.
 | Tiingo | Echtzeit- und historische Preise | Ticker-Liste | Nur bei Aktivierung |
 | Nasdaq Data Link | Historische Preise | Ticker-Liste | Nur bei Aktivierung |
 | Stooq | Öffentlicher CSV-Download historischer Preise | Ticker-Liste (kein API-Schlüssel) | Nur bei Aktivierung Stooq |
+| Google Ireland Limited -- Firebase Crashlytics | Anonyme Crash-Diagnose | Verschlüsselter Stack Trace, Gerätemodell, OS, App-Version, anonyme Firebase Installation ID | Nur wenn der Nutzer "Anonyme Crash-Diagnose" unter Einstellungen > Datenschutz aktiviert. Standardmäßig deaktiviert. |
+| Google LLC -- Google Analytics for Firebase (GA4) | Vorbereitung für künftige aggregierte Stabilitäts-Analytics (GA4-Property mit dem Firebase-Projekt verknüpft) | **Keine Datenübertragung in Version 1.0.0+10** (das `firebase_analytics`-SDK ist nicht in pubspec). Sobald `firebase_analytics` in einer zukünftigen Version integriert wird, erhält GA4 automatisch erfasste Ereignisse (Screen Views, app_start/app_foreground, `app_exception` aggregiert aus Crashlytics). Der Nutzer wird zu diesem Zeitpunkt neu eingewilligt | Inaktiv in Version 1.0.0+10. Wird erst nach einem zukünftigen App-Update + erneuter Nutzereinwilligung aktiviert. |
 | Cloudflare Worker | Abonnement-Validierung | device_id_hash, JWT | Immer (Gating) |
 | GitHub Pages | Hosting | IP HTTP-Request | Bei jedem Besuch |
 
@@ -139,7 +148,7 @@ aktivieren.
 | Widerspruch | Optionale Funktionen deaktivieren |
 | Beschwerde | [Garante (Italien)](https://www.garanteprivacy.it/), BfDI (Deutschland) oder nationale Behörde |
 
-Anfragen: `plurifin.app+gdpr@gmail.com`. Antwort innerhalb 30 Tagen
+Anfragen: `gdpr@plurifin.app`. Antwort innerhalb 30 Tagen
 (Art. 12.3 DSGVO).
 
 ## 7. Aufbewahrung
@@ -161,7 +170,7 @@ Export und Löschung. Auftragsverarbeiter: eigene Richtlinien.
 
 App nicht für unter 18-Jährige. Play Store Content Rating "18+".
 Eltern/Erziehungsberechtigte können Löschung anfordern an
-`plurifin.app+gdpr@gmail.com`.
+`gdpr@plurifin.app`.
 
 ## 10. Cookies
 
@@ -177,11 +186,11 @@ Newsletter-E-Mail. Vorherige Versionen in Repo
 
 ## 12. Kontakte
 
-- DSGVO: `plurifin.app+gdpr@gmail.com`
-- Datenschutz: `plurifin.app+privacy@gmail.com`
-- Support: `plurifin.app+support@gmail.com`
-- Legal: `plurifin.app+legal@gmail.com`
-- Öffentlich Play Store: `plurifin.app@gmail.com`
+- DSGVO: `gdpr@plurifin.app`
+- Datenschutz: `privacy@plurifin.app`
+- Support: `support@plurifin.app`
+- Legal: `legal@plurifin.app`
+- Öffentlich Play Store: `info@plurifin.app`
 
 ## 13. Gerichtsstand und anwendbares Recht
 

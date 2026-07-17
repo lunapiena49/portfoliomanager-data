@@ -12,7 +12,7 @@ const toc = [
 ];
 ---
 <LegalLayout t={es} lang="es" pageTitle="Politica de Privacidad" tocItems={toc}>
-  <p class="meta">Ultima actualizacion: 28 de abril de 2026 · Version 1.0</p>
+  <p class="meta">Ultima actualizacion: 20 de mayo de 2026 · Version 1.0.2</p>
   <div class="callout">
     <strong>En resumen:</strong> Portfolio Manager no recoge datos del portafolio. Carteras,
     posiciones y objetivos permanecen en tu dispositivo. Las llamadas a servicios externos solo
@@ -22,21 +22,42 @@ const toc = [
   <p>Esta politica describe como PluriFin (Filippo Salemi, persona fisica con base en Italia) trata
   los datos personales en el marco de la aplicacion Portfolio Manager y el sitio web.</p>
   <p>Responsable del tratamiento: <strong>Filippo Salemi</strong>.
-  Contacto: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>.
-  Solicitudes RGPD: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  Contacto: <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.
+  Solicitudes RGPD: <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
   <h2 id="data">2. Datos recogidos</h2>
   <p>Todos los datos de la app se almacenan localmente, cifrados (AES-256 + HMAC-SHA256). El sitio web
-  recoge email (newsletter, con consentimiento) y datos del formulario de contacto (via Formspree).</p>
+  no contiene formularios y no recoge datos a traves del navegador: los botones y los contactos abren
+  tu cliente de correo. Solo se registran los logs del servidor estatico GitHub Pages (IP, user-agent,
+  max 14 dias) y, si nos escribes a un correo publicado, tu mensaje, tratado solo para responderte.</p>
+  <h3>2.1 Datos de crash anonimos</h3>
+  <p>Para diagnosticar bugs y crashes de la app utilizamos
+  <strong>Firebase Crashlytics</strong> (Google Ireland Limited,
+  sub-encargado segun art. 28 RGPD). Cuando la app falla, se envian a
+  Crashlytics: stack trace ofuscado, modelo del dispositivo, version de
+  la app, identificador anonimo de instalacion. <strong>No se envian</strong>
+  carteras, posiciones, objetivos, claves API ni contenido de los prompts
+  de IA. La recogida esta <strong>desactivada por defecto</strong>: no
+  se envia ningun dato hasta que actives manualmente el toggle
+  "Diagnostica crash anonima" en Ajustes &gt; Privacidad. Conservacion:
+  90 dias. Base juridica: interes legitimo (art. 6.1.f RGPD).
+  Transferencia extra-UE cubierta por las Clausulas Contractuales Tipo.</p>
   <h2 id="processing">3. Finalidad del tratamiento</h2>
-  <p>Newsletter: enviar notificacion al lanzamiento (base juridica: consentimiento). Formulario:
-  responder solicitudes (base: consentimiento + interes legitimo).</p>
+  <p>Correos que nos envias: responder a tus solicitudes (base juridica: interes legitimo; obligacion
+  legal para las solicitudes RGPD). Logs GitHub Pages: seguridad y prevencion de abusos (interes legitimo).</p>
   <h2 id="third-parties">4. Terceros</h2>
-  <p>La app puede enviar datos a Google Gemini, EODHD/FMP (con tu API key) y Formspree/GitHub Pages
-  (sitio web). Solo si activas las funciones opcionales.</p>
+  <p>La app puede enviar datos a Google Gemini, EODHD/FMP (con tu API key),
+  Firebase Crashlytics (Google Ireland Limited, diagnostica de crashes
+  anonima, desactivable desde Ajustes &gt; Privacidad) y GitHub Pages
+  (hosting estatico del sitio). Solo si activas las funciones opcionales.</p>
+  <p>Una propiedad <strong>Google Analytics for Firebase (GA4, Google LLC)</strong>
+  esta vinculada al proyecto Firebase para futuras evoluciones. <em>Ningun
+  dato es transmitido en la version 1.0.0+10</em> (el SDK
+  `firebase_analytics` no esta integrado). Se activara solo despues de una
+  actualizacion de la app + re-consentimiento del usuario.</p>
   <h2 id="rights">5. Derechos del usuario</h2>
   <p>Puedes ejercer derechos RGPD (acceso, rectificacion, supresion...) escribiendo a
-  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
   <h2 id="contact">6. Contacto</h2>
-  <p><a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p><a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a></p>
   <hr /><div class="note">Texto legal definitivo pendiente de revision (Wave W3).</div>
 </LegalLayout>

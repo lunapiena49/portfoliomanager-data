@@ -19,7 +19,7 @@ in fretta di quanto pensi.
 
 Questo articolo nasce dall'esperienza di costruire **Portfolio Manager**
 sotto il brand **PluriFin** -- un'app gratuita su Google Play (con un
-anno Premium a 0,99 EUR) che ho scritto per togliermi il problema di
+anno Premium a 4,99 EUR) che ho scritto per togliermi il problema di
 dosso. Qui sotto trovi i criteri pratici che uso per scegliere uno
 strumento di tracking, validi indipendentemente dall'app che alla fine
 adotti.
@@ -138,12 +138,12 @@ Il pricing di PluriFin e' pensato per togliere l'attrito:
   import)
 - **7 giorni di prova gratuita** sull'app Android, **senza carta
   upfront**
-- **0,99 EUR / anno** dopo il trial
+- **4,99 EUR / anno** dopo il trial
 
 Il prezzo cosi' basso non e' marketing: e' che l'app e' local-first, non
 ha server, e quindi non ha costi ricorrenti che giustifichino una
 subscription da 5-10 EUR/mese. La promessa e' che i primi 1000
-abbonati restano a 0,99 EUR/anno per sempre, anche dopo aumenti futuri
+abbonati restano a 4,99 EUR/anno per sempre, anche dopo aumenti futuri
 per nuovi utenti.
 
 ## Cosa fare adesso

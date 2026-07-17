@@ -1,7 +1,7 @@
 # Privacy Policy -- Portfolio Manager by PluriFin
 
-**Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Versione**: 1.0.2
+**Ultimo aggiornamento**: 2026-07-14
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 **Hash testo (per audit trail)**: SHA-256 generato dallo script `scripts/legal/build_legal_html.ps1`
 
@@ -15,8 +15,8 @@ Il titolare del trattamento dei dati personali e':
 - **Forma giuridica**: persona fisica (sviluppatore indipendente)
 - **Brand commerciale**: PluriFin
 - **Paese**: Italia
-- **Email per richieste GDPR e privacy**: `plurifin.app+gdpr@gmail.com`
-- **Email contatto generale**: `plurifin.app@gmail.com`
+- **Email per richieste GDPR e privacy**: `gdpr@plurifin.app`
+- **Email contatto generale**: `info@plurifin.app`
 
 Non e' designato un Data Protection Officer (DPO) in quanto il titolare e' una
 persona fisica e l'attivita' non rientra fra i casi obbligatori previsti dall'art.
@@ -28,8 +28,14 @@ persona fisica e l'attivita' non rientra fra i casi obbligatori previsti dall'ar
   sono **memorizzati esclusivamente sul dispositivo dell'utente** in formato
   cifrato. Non li riceviamo, non li archiviamo, non li trasmettiamo a server di
   PluriFin.
-- L'app **non utilizza analytics di terze parti** (no Google Analytics, no
-  Firebase, no Facebook SDK, no AppsFlyer, no Sentry by default).
+- L'app **non utilizza analytics di terze parti attivi** in questa versione
+  (no Facebook SDK, no AppsFlyer, no Sentry, no eventi Google Analytics
+  generati dall'app). Una proprieta' Google Analytics for Firebase (GA4)
+  e' linkata al progetto Firebase `portfolio-manager-f6f8d` per future
+  evoluzioni: nella versione 1.0.0+10 nessun SDK `firebase_analytics` e'
+  integrato, quindi nessun evento analytics e' generato dal binario
+  dell'app. Vedi sezione 4 (sub-processor) per la dichiarazione completa.
+- Su Android, l'app integra una **diagnostica anonima opzionale di crash via Firebase Crashlytics** (Google Ireland Limited): disattivata di default, attivabile dall'utente in Impostazioni > Privacy. Mai dati di portafoglio, chiavi API o contenuto AI. Vedi sezione 4 (sub-processor).
 - L'app **non condivide dati con inserzionisti**. Non e' presente pubblicita'.
 - Sono presenti **funzionalita' opzionali** che, se attivate dall'utente,
   comportano la trasmissione di dati a fornitori terzi (sub-processor): AI
@@ -153,6 +159,8 @@ l'utente attiva le feature corrispondenti) e':
 | **Tiingo** | Prezzi di mercato real-time e storici | Lista ticker | Solo se utente inserisce chiave Tiingo e seleziona il provider |
 | **Nasdaq Data Link** | Prezzi di mercato storici | Lista ticker | Solo se utente inserisce chiave Nasdaq Data Link e seleziona il provider |
 | **Stooq** | Download CSV pubblico prezzi storici | Lista ticker (no API key, richiesta HTTP pubblica) | Solo se utente seleziona Stooq come provider |
+| **Google Ireland Limited** -- Firebase Crashlytics | Diagnostica anonima di crash | Stack trace offuscato, modello device (es. "Pixel 7"), OS (es. "Android 14"), versione app (es. "1.0.0+10"), Firebase Installation ID anonimo | Solo se utente attiva "Diagnostica crash anonima" in Impostazioni > Privacy. Disattivata di default. |
+| **Google LLC** -- Google Analytics for Firebase (GA4) | Predisposizione futura per analytics aggregata di stabilita' (proprieta' GA4 linkata al progetto Firebase) | **Nessun dato trasmesso nella versione 1.0.0+10** (SDK `firebase_analytics` non integrato nel pubspec). Quando in una versione futura `firebase_analytics` verra' integrato, GA4 ricevera' eventi auto-collected (screen views, app_start/app_foreground, `app_exception` aggregato da Crashlytics). L'utente sara' re-consentito al momento dell'introduzione | Inattivo nella versione 1.0.0+10. Verra' attivato solo dopo aggiornamento dell'app + re-consenso utente. |
 | **Cloudflare, Inc.** -- Worker | Validazione trial e subscription | `device_id_hash`, `purchase_token`, `productId`, JWT | Sempre (necessario per gating subscription) |
 | **Microsoft GitHub** -- Pages | Hosting documenti legali, market data pubblici, webapp demo, vetrina | Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft) | Sempre, ogni volta che l'utente apre la webapp o un documento legale |
 
@@ -196,7 +204,7 @@ L'utente ha diritto di:
 Per richieste che non sono gestibili autonomamente in app (es. revoca del
 consenso al trattamento di dati gia' trasmessi a un sub-processor):
 
-- Email: `plurifin.app+gdpr@gmail.com`
+- Email: `gdpr@plurifin.app`
 - Tempo di risposta: entro 30 giorni dalla ricezione (art. 12.3 GDPR)
 - Formato risposta: lingua della richiesta
 
@@ -251,7 +259,7 @@ L'app non e' destinata a minori di 18 anni. Il content rating dichiarato a
 Google Play e' "18+" come consigliato per app finanziarie. PluriFin non
 raccoglie consapevolmente dati di minori. Se un genitore o tutore individua
 un account di un minore, puo' richiederne la cancellazione scrivendo a
-`plurifin.app+gdpr@gmail.com`.
+`gdpr@plurifin.app`.
 
 ## 10. Cookie e tecnologie simili
 
@@ -287,11 +295,11 @@ del repo pubblico `lunapiena49/portfoliomanager-data` cartella `legal/`.
 
 | Tipo richiesta | Email |
 |---|---|
-| Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | `plurifin.app+gdpr@gmail.com` |
-| Privacy & sicurezza | `plurifin.app+privacy@gmail.com` |
-| Supporto generale | `plurifin.app+support@gmail.com` |
-| Legal & disclaimer | `plurifin.app+legal@gmail.com` |
-| Contatto pubblico Play Store | `plurifin.app@gmail.com` |
+| Richieste GDPR (accesso, cancellazione, portabilita', reclamo) | `gdpr@plurifin.app` |
+| Privacy & sicurezza | `privacy@plurifin.app` |
+| Supporto generale | `support@plurifin.app` |
+| Legal & disclaimer | `legal@plurifin.app` |
+| Contatto pubblico Play Store | `info@plurifin.app` |
 
 ## 13. Foro competente e legge applicabile
 
