@@ -129,11 +129,14 @@ const legalUrl = (page: string) => localePath(currentLang, page);
   }
   .brand-name { font-weight: 600; font-size: 15px; letter-spacing: -0.01em; color: #fff; }
   .footer-brand p { color: #8A93A0; max-width: 30ch; font-size: 13px; line-height: 1.55; margin-bottom: 8px; }
-  .footer-brand .copy { color: #5A6670; font-size: 12px; margin-top: 12px; }
+  /* S17: i grigi minuti del footer erano sotto AA sul fondo #0E1116
+     (Lighthouse live: 3.21 e 2.01 contro il 4.5 richiesto a 11-12px).
+     #8A93A0 = 6.1:1, #7E8894 = 5.3:1: stessi grigi della palette footer. */
+  .footer-brand .copy { color: #8A93A0; font-size: 12px; margin-top: 12px; }
   footer ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
   footer ul a { color: #B7BDC6; font-size: 14px; transition: color .15s; text-decoration: none; display: flex; flex-direction: column; gap: 2px; }
   footer ul a:hover { color: #fff; }
-  .email-address { font-size: 12px; color: #5A6670; }
+  .email-address { font-size: 12px; color: #8A93A0; }
   footer ul a[aria-disabled="true"] { opacity: .5; cursor: not-allowed; pointer-events: none; }
   .footer-bottom {
     border-top: 1px solid #1F2530;
@@ -143,7 +146,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
-    color: #5A6670;
+    color: #8A93A0;
     font-size: 12px;
   }
   .footer-langs {
@@ -166,7 +169,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
   }
   .footer-langs a.active { background: #fff; color: var(--ink); }  /* --ink, non --text: il footer e' sempre scuro, ma in tema scuro --text e' CHIARO -> era bianco su bianco */
   .footer-langs a:hover:not(.active) { background: rgba(255,255,255,.08); color: #fff; }
-  .footer-bid { font-family: ui-monospace, monospace; font-size: 11px; color: #3F4754; }
+  .footer-bid { font-family: ui-monospace, monospace; font-size: 11px; color: #7E8894; }
 
   @media (max-width: 880px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
   @media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr; } }
