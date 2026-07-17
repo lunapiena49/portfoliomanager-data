@@ -1,4 +1,4 @@
----
+﻿---
 import type { Translations } from '../i18n/index';
 
 interface Props { t: Translations; }
@@ -54,7 +54,7 @@ const brokers = [
     gap: 12px;
   }
   .brk {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--divider);
     border-radius: 8px;
     height: 74px;
@@ -70,7 +70,7 @@ const brokers = [
     padding: 0 12px;
     transition: border-color .18s, background .18s;
   }
-  .brk:hover { border-color: #B7BDC6; background: #fafbfc; }
+  .brk:hover { border-color: #B7BDC6; background: var(--surface-2); }
   .brk.generic { border-style: dashed; color: var(--text-2); }
   .brokers-foot {
     margin-top: 24px;

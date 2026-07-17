@@ -1,7 +1,7 @@
 # Termini di Servizio -- Portfolio Manager by PluriFin
 
 **Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-05-02
+**Ultimo aggiornamento**: 2026-07-14
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 
 ---
@@ -14,7 +14,7 @@ I presenti Termini di Servizio (ToS) regolano l'uso dell'applicazione
 - **Filippo Salemi** -- persona fisica, sviluppatore indipendente
 - **Brand commerciale**: PluriFin
 - **Paese**: Italia
-- **Email contatto**: `plurifin.app@gmail.com`
+- **Email contatto**: `info@plurifin.app`
 
 L'utente che installa, avvia o utilizza l'App ("l'Utente") accetta integralmente
 i presenti termini. Se non li accetta, l'Utente deve disinstallare l'App e
@@ -159,7 +159,7 @@ contenuti digitali forniti su supporto non materiale ai sensi dell'art.
 - Nonostante quanto precede, **PluriFin si impegna a onorare in via
   commerciale il diritto di recesso ex art. 52 del Codice del Consumo
   per 14 giorni** dall'acquisto, su richiesta scritta del consumatore
-  inviata a `plurifin.app+legal@gmail.com`. La richiesta deve indicare
+  inviata a `legal@plurifin.app`. La richiesta deve indicare
   l'order ID Google Play e l'account Google associato all'acquisto.
 - Su tali richieste PluriFin inoltrera' la pratica di rimborso a Google
   e, in caso di diniego da parte di Google, riconoscera' direttamente al

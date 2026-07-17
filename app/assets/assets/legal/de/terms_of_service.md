@@ -1,7 +1,7 @@
 # Nutzungsbedingungen -- Portfolio Manager by PluriFin
 
 **Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-05-02
+**Letzte Aktualisierung**: 2026-07-14
 **Originalsprache**: Italienisch (verbindliche Fassung)
 
 ---
@@ -9,7 +9,7 @@
 ## 1. Parteien
 
 Anbieter: **Filippo Salemi**, natürliche Person, Marke **PluriFin**,
-Italien. E-Mail: `plurifin.app@gmail.com`. Mit Installation akzeptiert
+Italien. E-Mail: `info@plurifin.app`. Mit Installation akzeptiert
 der Nutzer diese Bedingungen.
 
 ## 2. Gegenstand
@@ -87,7 +87,7 @@ Verlust des Widerrufsrechts gemäß Art. 52 und 59 Abs. 1 lit. o) zur
 Kenntnis. Ungeachtet des Vorstehenden **verpflichtet sich PluriFin als
 kaufmännisches Entgegenkommen, das 14-tägige Widerrufsrecht** nach Art.
 52 D.Lgs. 206/2005 ab Kauf zu gewähren, auf schriftliche Anfrage an
-`plurifin.app+legal@gmail.com` (mit Google-Play-Order-ID und Google-
+`legal@plurifin.app` (mit Google-Play-Order-ID und Google-
 Konto). Bei Ablehnung durch Google gewährt PluriFin dem Verbraucher
 direkt ein gleichwertiges Guthaben per Google-Play-Gift-Code oder
 ersatzweise eine gleichwertige Banküberweisung.

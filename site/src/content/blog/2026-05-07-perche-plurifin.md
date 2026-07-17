@@ -1,6 +1,6 @@
 ---
 title: "Perche ho costruito PluriFin"
-summary: "La storia personale dietro un'app per investitori retail privacy-first, e perche un singolo sviluppatore puo permettersi di proporre un piano da 0,99 EUR/anno."
+summary: "La storia personale dietro un'app per investitori retail privacy-first, e perche un singolo sviluppatore puo permettersi di proporre un piano da 4,99 EUR/anno."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"
@@ -44,8 +44,8 @@ Quando ho realizzato che il prodotto poteva essere utile a piu' di me, ho deciso
 pubblicarlo. Il modello commerciale e' deliberatamente low-friction:
 
 - 7 giorni di trial gratuito senza carta
-- 0,99 EUR/anno per Single, 1,99 EUR/anno per Family
-- Lifetime una tantum a 4,99 EUR (Single) o 9,99 EUR (Family)
+- 4,99 EUR/anno per Single, 9,99 EUR/anno per Family
+- Lifetime una tantum a 29,99 EUR (Single) o 49,99 EUR (Family)
 
 Niente "early bird", niente "primi N utenti", niente promo che differenziano. Stesso prezzo
 per tutti, oggi e in futuro.

@@ -1,7 +1,7 @@
 # Política de Privacidade -- Portfolio Manager by PluriFin
 
-**Versão**: 1.0.0
-**Última atualização**: 2026-05-02
+**Versão**: 1.0.2
+**Última atualização**: 2026-05-20
 **Idioma original**: Italiano (versão vinculante para a jurisdição)
 
 ---
@@ -12,8 +12,8 @@
 - **Forma jurídica**: pessoa física (programador independente)
 - **Marca comercial**: PluriFin
 - **País**: Itália
-- **Email para pedidos RGPD e privacidade**: `plurifin.app+gdpr@gmail.com`
-- **Email geral**: `plurifin.app@gmail.com`
+- **Email para pedidos RGPD e privacidade**: `gdpr@plurifin.app`
+- **Email geral**: `info@plurifin.app`
 
 Nenhum Encarregado de Proteção de Dados (DPO) designado: pessoa física
 fora dos casos obrigatórios do art. 37 RGPD.
@@ -23,8 +23,14 @@ fora dos casos obrigatórios do art. 37 RGPD.
 - Todos os dados de carteira (posições, transações, objetivos, definições)
   são **armazenados apenas no dispositivo do utilizador** em forma
   cifrada. Não recebidos nem armazenados em servidores PluriFin.
-- App **não usa analytics de terceiros** (sem Google Analytics, Firebase,
-  Facebook SDK, AppsFlyer, Sentry por defeito).
+- App **não usa analytics de terceiros ativos** nesta versão (sem
+  Facebook SDK, AppsFlyer, Sentry, sem eventos Google Analytics gerados
+  pela app). Uma propriedade Google Analytics for Firebase (GA4) está
+  ligada ao projeto Firebase `portfolio-manager-f6f8d` para futuras
+  evoluções: a versão 1.0.0+10 não inclui o SDK `firebase_analytics`,
+  pelo que o binário da app não gera nenhum evento de analítica. Ver
+  secção 4 (subcontratantes) para a declaração completa.
+- No Android, a app integra um **diagnóstico anónimo opcional de crash via Firebase Crashlytics** (Google Ireland Limited): desativado por predefinição, ativável pelo utilizador em Definições > Privacidade. Nunca dados de carteira, chaves API ou conteúdo de IA. Ver secção 4 (subcontratantes).
 - App **não partilha dados com anunciantes**. Sem publicidade.
 - **Funcionalidades opcionais** existem que, se ativadas, transmitem
   dados a subprocessadores de terceiros: IA Gemini, preços mercado em
@@ -112,6 +118,8 @@ momento.
 | Tiingo | Preços real-time e históricos | Lista tickers | Só ativação |
 | Nasdaq Data Link | Preços históricos | Lista tickers | Só ativação |
 | Stooq | Download CSV público preços históricos | Lista tickers (sem API key) | Só ativação Stooq |
+| Google Ireland Limited -- Firebase Crashlytics | Diagnóstico anónimo de crash | Stack trace ofuscado, modelo do dispositivo, OS, versão da app, Firebase Installation ID anónimo | Apenas se o utilizador ativar "Diagnóstico de crash anónimo" em Definições > Privacidade. Desativado por predefinição. |
+| Google LLC -- Google Analytics for Firebase (GA4) | Preparação futura para analítica agregada de estabilidade (propriedade GA4 ligada ao projeto Firebase) | **Nenhum dado transmitido na versão 1.0.0+10** (o SDK `firebase_analytics` não está no pubspec). Quando `firebase_analytics` for integrado numa versão futura, o GA4 receberá eventos recolhidos automaticamente (visualizações de ecrã, app_start/app_foreground, `app_exception` agregado a partir do Crashlytics). O utilizador será re-consentido nesse momento | Inativo na versão 1.0.0+10. Será ativado apenas após uma atualização futura da app + re-consentimento do utilizador. |
 | Cloudflare Worker | Validação subscrição | device_id_hash, JWT | Sempre (gating) |
 | GitHub Pages | Hosting | IP HTTP request | Cada visita |
 
@@ -137,7 +145,7 @@ Quem não quer transferências fora UE: não ativar funções opcionais.
 | Oposição | Desativar funções opcionais |
 | Reclamação | [Garante (Itália)](https://www.garanteprivacy.it/), CNPD (Portugal) ou autoridade nacional |
 
-Pedidos: `plurifin.app+gdpr@gmail.com`. Resposta em 30 dias (art. 12.3
+Pedidos: `gdpr@plurifin.app`. Resposta em 30 dias (art. 12.3
 RGPD).
 
 ## 7. Conservação
@@ -159,7 +167,7 @@ própria.
 ## 9. Menores (art. 8 RGPD)
 
 App não destinada a menores de 18 anos. Content rating Play "18+".
-Pais/tutores podem pedir eliminação em `plurifin.app+gdpr@gmail.com`.
+Pais/tutores podem pedir eliminação em `gdpr@plurifin.app`.
 
 ## 10. Cookies
 
@@ -175,11 +183,11 @@ histórico Git.
 
 ## 12. Contactos
 
-- RGPD: `plurifin.app+gdpr@gmail.com`
-- Privacidade: `plurifin.app+privacy@gmail.com`
-- Suporte: `plurifin.app+support@gmail.com`
-- Legal: `plurifin.app+legal@gmail.com`
-- Público Play Store: `plurifin.app@gmail.com`
+- RGPD: `gdpr@plurifin.app`
+- Privacidade: `privacy@plurifin.app`
+- Suporte: `support@plurifin.app`
+- Legal: `legal@plurifin.app`
+- Público Play Store: `info@plurifin.app`
 
 ## 13. Jurisdição e lei aplicável
 

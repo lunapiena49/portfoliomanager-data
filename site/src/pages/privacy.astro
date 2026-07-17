@@ -13,7 +13,7 @@ const toc = [
 ];
 ---
 <LegalLayout t={it} lang="it" pageTitle="Privacy Policy" tocItems={toc}>
-  <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
+  <p class="meta">Ultimo aggiornamento: 20 maggio 2026 · Versione 1.0.2</p>
 
   <div class="callout">
     <strong>In sintesi:</strong> Portfolio Manager e' progettato per non raccogliere dati.
@@ -27,8 +27,8 @@ const toc = [
   tratta i dati personali nell'ambito dell'applicazione Portfolio Manager (di seguito "l'App") e del
   relativo sito web.</p>
   <p>Il titolare del trattamento e' <strong>Filippo Salemi</strong>, contattabile all'indirizzo
-  <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a>. Per richieste GDPR specifiche:
-  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>. Per richieste GDPR specifiche:
+  <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
 
   <h2 id="data">2. Dati raccolti</h2>
   <h3>2.1 Dati creati nell'app (locali)</h3>
@@ -37,16 +37,41 @@ const toc = [
   La chiave di cifratura e' custodita nel keystore del sistema operativo.</p>
 
   <h3>2.2 Dati del sito web</h3>
+  <p>Il sito non contiene moduli (form) e non raccoglie email ne' altri dati tramite il browser.
+  Il pulsante "Avvisami al lancio" e i recapiti aprono il tuo client di posta con un indirizzo
+  gia' compilato: sei tu a scegliere se e quando inviarci un'email.</p>
   <ul>
-    <li>Iscrizione alla newsletter pre-launch: email + lingua preferita (gestiti da Formspree, USA, Standard Contractual Clauses).</li>
-    <li>Form di contatto: nome, email, oggetto, messaggio (gestiti da Formspree).</li>
     <li>Log del server statico GitHub Pages: indirizzo IP, user-agent (conservazione max 14 giorni, gestiti da GitHub).</li>
+    <li>Email che ci invii spontaneamente (a info@, privacy@, gdpr@ o press@ plurifin.app): l'indirizzo del mittente e il contenuto del messaggio, trattati al solo scopo di risponderti.</li>
   </ul>
+
+  <h3>2.3 Dati di crash anonimi</h3>
+  <p>Per diagnosticare bug e crash dell'app utilizziamo
+  <strong>Firebase Crashlytics</strong> (Google Ireland Limited, sub-processor
+  ai sensi dell'art. 28 GDPR). Quando l'app va in crash o registra una
+  eccezione non gestita, vengono inviati a Crashlytics:</p>
+  <ul>
+    <li>Stack trace della funzione che ha causato il crash (offuscato e
+    ri-mappato dal team di sviluppo via i symbols generati a build time).</li>
+    <li>Modello del dispositivo (es. "Pixel 7"), versione del sistema
+    operativo (es. "Android 14"), versione dell'app (es. "1.0.0+10").</li>
+    <li>Identificatore di installazione anonimo (Firebase Installation ID,
+    non collegato all'identita' dell'utente).</li>
+  </ul>
+  <p><strong>Non vengono inviati</strong>: portafogli, posizioni, obiettivi,
+  chiavi API, contenuto delle prompt AI, indirizzo IP grezzo (Google lo
+  tronca prima della scrittura su disco).</p>
+  <p>La raccolta e' <strong>disattivata di default</strong>: nessun dato
+  viene inviato finche' non attivi manualmente il toggle "Diagnostica crash
+  anonima" in Impostazioni &gt; Privacy. Retention: 90 giorni (default
+  Firebase Crashlytics). Base giuridica: legittimo interesse del titolare
+  al miglioramento e debug dell'app (art. 6.1.f GDPR). Trasferimento
+  extra-UE coperto dalle Standard Contractual Clauses tra il titolare e
+  Google Ireland Limited.</p>
 
   <h2 id="processing">3. Finalita del trattamento</h2>
   <ul>
-    <li><strong>Iscrizione newsletter:</strong> inviare una notifica al lancio dell'app. Base giuridica: consenso (art. 6.1.a GDPR).</li>
-    <li><strong>Form di contatto:</strong> rispondere a richieste di assistenza. Base giuridica: consenso e legittimo interesse (art. 6.1.f).</li>
+    <li><strong>Email che ci invii:</strong> rispondere alle tue richieste (assistenza, stampa, richieste GDPR). Base giuridica: legittimo interesse a dare riscontro; per le richieste GDPR, obbligo legale (art. 6.1.f e 6.1.c GDPR).</li>
     <li><strong>Log GitHub Pages:</strong> sicurezza e prevenzione abusi. Base giuridica: legittimo interesse.</li>
   </ul>
 
@@ -55,23 +80,30 @@ const toc = [
   <ul>
     <li><strong>Google Gemini</strong> -- analisi AI (chiave API utente).</li>
     <li><strong>EODHD / FMP</strong> -- prezzi di mercato (chiave API utente).</li>
-    <li><strong>Formspree</strong> -- gestione form sito (USA, SCC).</li>
+    <li><strong>Firebase Crashlytics (Google Ireland Limited)</strong> --
+    diagnostica crash anonima. Disattivata di default; attivabile da
+    Impostazioni &gt; Privacy.</li>
+    <li><strong>Google Analytics for Firebase / GA4 (Google LLC)</strong> --
+    proprieta' GA4 linkata al progetto Firebase per future evoluzioni.
+    <em>Nessun dato trasmesso nella versione 1.0.0+10</em> (SDK
+    `firebase_analytics` non integrato). Sara' attivato solo dopo
+    aggiornamento app + re-consenso utente.</li>
     <li><strong>GitHub Pages</strong> -- hosting statico (USA, SCC).</li>
   </ul>
 
   <h2 id="rights">5. Diritti dell'utente</h2>
   <p>In qualsiasi momento puoi esercitare i diritti previsti dagli articoli 15-22 del GDPR: accesso,
   rettifica, cancellazione, limitazione, portabilita', opposizione. Per esercitarli scrivi a
-  <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
   <p>Per i dati locali, puoi cancellare tutto in qualsiasi momento dalle Impostazioni dell'app.</p>
 
   <h2 id="contact">6. Contatti</h2>
-  <p>Email generale: <a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
-  <p>Richieste GDPR: <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a></p>
+  <p>Email generale: <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a></p>
+  <p>Richieste GDPR: <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a></p>
 
   <h2 id="changes">7. Modifiche</h2>
-  <p>Eventuali modifiche sostanziali saranno comunicate sul sito e, ove necessario, via email
-  agli iscritti alla newsletter.</p>
+  <p>Eventuali modifiche sostanziali saranno pubblicate su questa pagina, con aggiornamento
+  della data e del numero di versione in testa al documento.</p>
 
   <hr />
   <div class="note">

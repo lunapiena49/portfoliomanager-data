@@ -1,6 +1,6 @@
 ---
 title: "Warum ich PluriFin gebaut habe"
-summary: "Die persoenliche Geschichte hinter einer privacy-first App fuer Privatanleger, und warum ein einzelner Entwickler einen 0,99 EUR/Jahr-Tarif anbieten kann."
+summary: "Die persoenliche Geschichte hinter einer privacy-first App fuer Privatanleger, und warum ein einzelner Entwickler einen 4,99 EUR/Jahr-Tarif anbieten kann."
 publishedAt: 2026-05-07
 author:
   name: "Filippo Salemi"
@@ -51,8 +51,8 @@ entschied ich mich es zu veroeffentlichen. Das Geschaeftsmodell ist bewusst
 low-friction:
 
 - 7 Tage kostenlose Testversion ohne Karte
-- 0,99 EUR/Jahr fuer Single, 1,99 EUR/Jahr fuer Familie
-- Lifetime Einmalzahlung 4,99 EUR (Single) oder 9,99 EUR (Familie)
+- 4,99 EUR/Jahr fuer Single, 9,99 EUR/Jahr fuer Familie
+- Lifetime Einmalzahlung 29,99 EUR (Single) oder 49,99 EUR (Familie)
 
 Kein "Early Bird", kein "erste N Nutzer", keine Aktionen, die segmentieren.
 Gleicher Preis fuer alle, heute und in Zukunft.

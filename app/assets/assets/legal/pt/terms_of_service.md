@@ -9,7 +9,7 @@
 ## 1. Partes
 
 Fornecedor: **Filippo Salemi**, pessoa física, marca **PluriFin**,
-Itália. Email: `plurifin.app@gmail.com`. Ao instalar a App, o
+Itália. Email: `info@plurifin.app`. Ao instalar a App, o
 Utilizador aceita estes Termos.
 
 ## 2. Objeto
@@ -85,7 +85,7 @@ imediata e reconhece a consequente perda do direito de livre resolução
 nos termos dos arts. 52 e 59.1.o. Não obstante, **a PluriFin compromete-
 se comercialmente a honrar o direito de livre resolução de 14 dias**
 ex art. 52 D.Lgs. 206/2005, mediante pedido escrito para
-`plurifin.app+legal@gmail.com` (com order ID Google Play e conta
+`legal@plurifin.app` (com order ID Google Play e conta
 Google). Em caso de recusa da Google, a PluriFin concederá diretamente
 ao consumidor um crédito de valor equivalente via gift code Google Play
 ou, em alternativa, um reembolso bancário equivalente.

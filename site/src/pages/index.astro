@@ -1,5 +1,28 @@
 ---
+/**
+ * `/` - LA SOGLIA. L'ingresso del sito.
+ *
+ * Fino a S11 questa rotta era la landing del Portfolio Manager. Ora il PM ha la
+ * sua pagina (`/finance`) e la radice appartiene allo STUDIO: la soglia, e poi
+ * la home aziendale. Chi arriva da un motore di ricerca su /finance non passa
+ * di qui, ed e' giusto: la soglia e' un ingresso, non un pedaggio.
+ */
 import it from '../i18n/it';
-import LandingPage from '../components/LandingPage.astro';
+import Layout from '../layouts/Layout.astro';
+import Soglia from '../components/Soglia.astro';
+
+const t = it;
 ---
-<LandingPage t={it} lang="it" />
+<Layout
+  title={`PluriFin — ${t.company.gate.kicker}`}
+  description={t.company.gate.line1}
+  ogTitle="PluriFin"
+  ogDescription={t.company.gate.line1}
+  lang="it"
+  section="company"
+  pageType="organization"
+>
+  <main id="main">
+    <Soglia t={t} lang="it" />
+  </main>
+</Layout>

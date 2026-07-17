@@ -1,0 +1,634 @@
+---
+/**
+ * IL TELEFONO 3D - divisione Finance (Portfolio Manager). Porting del v7.
+ *
+ * Un solido vero, per ESTRUSIONE A STRATI: 34 lamine in Z, ognuna col SUO inset
+ * e il SUO raggio, presi da una curva
+ *     inset(z) = EDGE * (|z|/ZMAX)^3      raggio(z) = R0 - inset(z)
+ * L'esponente 3 tiene quasi dritta la banda centrale e concentra la curvatura
+ * sotto le facce: e' il profilo "flat edge" dei telefoni veri. Con 18 lamine
+ * IDENTICHE (com'era prima) il profilo e' dritto a 90 gradi, cioe' uno spigolo
+ * vivo lungo tutto il bordo - ed e' precisamente il difetto che si vedeva:
+ * "angoli che sembrano un disegno". Lo erano, geometricamente.
+ *
+ * LA TRAPPOLA GIA' PAGATA: nessun `filter`, `opacity < 1`, `mask` o `overflow`
+ * su un contenitore `preserve-3d`. Forzano `transform-style: flat` e il 3D si
+ * appiattisce IN SILENZIO. Le ombre stanno FUORI dal contesto 3D. C'e' un test
+ * che lo sorveglia ("nessun filter/opacity/mask su un contesto preserve-3d").
+ *
+ * IL TILT: i listener stanno sul WRAPPER, che NON ruota. Se stessero sul
+ * telefono, ruotando uscirebbe da sotto il cursore -> pointerleave -> torna
+ * dritto -> rientra: tremolio infinito. E il pointermove scrive DUE NUMERI
+ * (--rx/--ry) e nient'altro: i riflessi (vetro e tasti) li deriva il CSS con
+ * una calc(). Ricalcolare gradienti a ogni evento costava 30fps.
+ */
+---
+<div class="phone-wrap" id="phoneWrap">
+  <div class="p-shadow" aria-hidden="true"></div>
+  <div class="p-contact" aria-hidden="true"></div>
+  <div class="phone3d" id="phone">
+    <!-- lamine dello spessore e tasti: iniettati da script (la geometria e'
+         calcolata, non disegnata) -->
+    <div class="p-back" aria-hidden="true"></div>
+    <div class="p-face">
+      <div class="screen" id="screen">
+        <div class="sb">
+          <span class="sb-t">9:41</span>
+          <span class="sb-i">
+            <svg width="12" height="9" viewBox="0 0 14 10" fill="currentColor" aria-hidden="true">
+              <rect x="0" y="7" width="2.4" height="3" rx=".7"/><rect x="3.6" y="5" width="2.4" height="5" rx=".7"/>
+              <rect x="7.2" y="2.6" width="2.4" height="7.4" rx=".7"/><rect x="10.8" y="0" width="2.4" height="10" rx=".7"/>
+            </svg>
+            <svg width="12" height="9" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true">
+              <path d="M1 3.4a9 9 0 0 1 12 0M3.4 6a5.6 5.6 0 0 1 7.2 0"/><circle cx="7" cy="8.6" r=".9" fill="currentColor" stroke="none"/>
+            </svg>
+            <svg width="17" height="9" viewBox="0 0 20 10" aria-hidden="true">
+              <rect x=".6" y=".6" width="16" height="8.8" rx="2.4" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="1"/>
+              <rect x="2.2" y="2.2" width="11" height="5.6" rx="1.3" fill="currentColor"/>
+              <path d="M18.2 3.4v3.2a2 2 0 0 0 0-3.2Z" fill="currentColor" fill-opacity=".5"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="ap-h">
+          <div>
+            <p class="ap-hi">Buongiorno</p>
+            <p class="ap-hn">Portafoglio</p>
+          </div>
+          <span class="ap-av">FS</span>
+        </div>
+
+        <div class="scr-body">
+          <div class="card-b">
+            <p class="bal">Patrimonio totale</p>
+            <p class="bal-v" id="balV">&euro; 0</p>
+            <span class="bal-d">
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 15l7-7 7 7"/></svg>
+              +9,3% da inizio anno
+            </span>
+            <div class="scr-chart">
+              <svg id="chart" viewBox="0 0 240 64" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="gStroke" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#00BFA5"/><stop offset="60%" stop-color="#1E88E5"/><stop offset="100%" stop-color="#5BFCBE"/>
+                  </linearGradient>
+                  <linearGradient id="gArea" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stop-color="#1E88E5" stop-opacity=".42"/>
+                    <stop offset="100%" stop-color="#1E88E5" stop-opacity="0"/>
+                  </linearGradient>
+                </defs>
+                <path class="ar" id="chartArea"/>
+                <path class="ln" id="chartLine"/>
+                <circle class="dot" id="chartDot" r="2.6"/>
+              </svg>
+            </div>
+            <div class="chips">
+              <span>1S</span><span>1M</span><span>6M</span><span class="on">1A</span><span>Max</span>
+            </div>
+          </div>
+
+          <!-- Sei posizioni, e i numeri TORNANO: la somma fa il patrimonio.
+               I broker citati sono quelli che l'app legge davvero (Trade
+               Republic e Fineco passano dal lettore CSV generico, come
+               qualunque altro: non hanno un parser nativo). -->
+          <div class="hold">
+            <div class="h-hd"><span>Posizioni</span><b>6</b></div>
+
+            <div class="hrow sel">
+              <span class="ic" style="background:rgba(52,211,153,.16);color:#34D399">ETF</span>
+              <span class="nm">iShares MSCI World<i>18,42 quote &middot; DEGIRO</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 5 8 9 9.6 13 5.4 17 6.6 21 3 25 2" stroke="#34D399"/></svg>
+              <span class="rt"><span class="vl">&euro; 21.408</span><span class="dt up">+1,24%</span></span>
+            </div>
+            <div class="hrow">
+              <span class="ic" style="background:rgba(52,211,153,.16);color:#34D399">ETF</span>
+              <span class="nm">Vanguard S&amp;P 500<i>9,10 quote &middot; Vanguard</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 9 5 10 9 7 13 8.4 17 5 21 6.2 25 3.4" stroke="#34D399"/></svg>
+              <span class="rt"><span class="vl">&euro; 4.987</span><span class="dt up">+0,86%</span></span>
+            </div>
+            <div class="hrow">
+              <span class="ic" style="background:rgba(30,136,229,.18);color:#6EB6F5">RVL</span>
+              <span class="nm">Liquidit&agrave;<i>conto in EUR &middot; Revolut</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 8 5 7.6 9 8.2 13 7.4 17 7.8 21 7 25 7.2" stroke="#6EB6F5"/></svg>
+              <span class="rt"><span class="vl">&euro; 8.240</span><span class="dt up">+0,38%</span></span>
+            </div>
+            <div class="hrow">
+              <span class="ic" style="background:rgba(155,107,255,.20);color:#BFA0FF">IBK</span>
+              <span class="nm">Azioni Europa<i>4 titoli &middot; IBKR</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 4 5 5.6 9 4.8 13 7 17 6.2 21 9 25 10.4" stroke="#F87171"/></svg>
+              <span class="rt"><span class="vl">&euro; 6.115</span><span class="dt down">-0,52%</span></span>
+            </div>
+            <div class="hrow">
+              <span class="ic" style="background:rgba(0,191,165,.18);color:#4FD8C8">OBB</span>
+              <span class="nm">Obbligazioni EUR<i>3 titoli &middot; XTB</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 8 5 7.8 9 8 13 7.6 17 7.8 21 7.4 25 7.6" stroke="#4FD8C8"/></svg>
+              <span class="rt"><span class="vl">&euro; 4.930</span><span class="dt up">+0,11%</span></span>
+            </div>
+            <div class="hrow">
+              <span class="ic" style="background:rgba(248,113,113,.16);color:#F8A1A1">USD</span>
+              <span class="nm">Cambio USD<i>esposizione valutaria &middot; Schwab</i></span>
+              <svg class="sp" viewBox="0 0 26 14" aria-hidden="true"><path d="M1 5 5 6.4 9 5.8 13 7.2 17 8 21 7.4 25 9" stroke="#F87171"/></svg>
+              <span class="rt"><span class="vl">&euro; 2.532</span><span class="dt down">-0,24%</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <span class="on" aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1Z"/></svg>
+          </span>
+          <span aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l5.5-6 4 3.5L21 6"/><path d="M15 6h6v6"/></svg>
+          </span>
+          <span aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4"/></svg>
+          </span>
+          <span aria-hidden="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z"/></svg>
+          </span>
+        </div>
+        <div class="home-ind" aria-hidden="true"></div>
+      </div>
+      <div class="p-island" aria-hidden="true"></div>
+    </div>
+    <!-- niente id: il riflesso si muove in CSS, da una calc su --rx/--ry. L'id
+         serviva al vecchio JS che gli riscriveva il `background` a ogni
+         pointermove: era quello a costare i 30fps. -->
+    <div class="p-glass" aria-hidden="true"><div class="p-glare"></div></div>
+  </div>
+</div>
+
+<style>
+  .phone-wrap { perspective: 1250px; display: grid; place-items: center; padding: 14px 0 30px; position: relative; }
+
+  /* --rx/--ry sono NUMERI, non angoli: i gradi si fanno qui con `* 1deg`.
+     Servono adimensionali perche' i riflessi possano derivarne una TRASLAZIONE
+     in px: calc() sa moltiplicare un numero per 1px, non dividere un angolo per
+     un angolo. E' anche cio' che rende il riflesso MISURABILE da un test: si
+     inclina il telefono scrivendo --rx/--ry, e il riflesso si muove da solo. */
+  .phone3d {
+    position: relative; width: 258px; aspect-ratio: 9 / 19;
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--rx, 4) * 1deg)) rotateY(calc(var(--ry, -15) * 1deg));
+    transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
+    will-change: transform;
+  }
+  .phone3d.live { transition: transform .08s linear; }
+  .phone3d.live :global(.p-glare),
+  .phone3d.live :global(.p-btn-glare) { transition: transform .08s linear; }
+
+  /* Le lamine sono ANELLI, non dischi: un telefono e' cavo. Con lamine piene
+     quella frontale passa davanti al pannello e lo copre - il telefono diventa
+     una lastra di metallo (il difetto #3). La maschera toglie il centro e
+     lascia solo la parete, 5px di spessore: la scocca. */
+  .phone3d :global(.slab) {
+    position: absolute; border-radius: var(--r);
+    transform: translateZ(var(--z));
+    padding: 5px;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            mask-composite: exclude;
+  }
+  .p-back {
+    position: absolute; inset: 4.5px; border-radius: 31.5px;
+    transform: translateZ(-13.9px);
+    background: linear-gradient(150deg, #2A313B, #14181F 60%, #0C0F14);
+  }
+
+  /* I TASTI. Il modello vecchio impilava SETTE PIANI INTERNI (sezioni a x
+     costante). Ma le sezioni interne di un solido non si vedono: sono dentro.
+     Renderizzarle vuol dire disegnare una pila di fette - e una pila di fette
+     vista di scorcio e' una tessera piatta. Non e' un problema di quante fette:
+     e' che non sono superfici. Qui si disegnano solo le facce che esistono:
+     TESTA (+X), TAPPI (+Z/-Z, gli unici rivolti alla camera), CHIUSURE (+-Y),
+     piu' lo ZOCCOLO sepolto nel fianco - cio' che se ne vede intorno E' la
+     fessura di montaggio. */
+  .phone3d :global(.p-btn) { position: absolute; left: 50%; }
+  .phone3d :global(.p-btn-cap) { position: absolute; left: 50%; }
+  /* overflow:hidden qui e' LECITO: la testa e' una foglia, non un contesto
+     preserve-3d, quindi non appiattisce niente. Stesso patto di .p-glass. */
+  .phone3d :global(.p-btn-head) { position: absolute; left: 50%; border-radius: 4px; overflow: hidden; }
+  .phone3d :global(.p-btn-glare) {
+    position: absolute; top: -60%; left: -60%; width: 220%; height: 220%;
+    will-change: transform; transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
+    transform: translate3d(calc((var(--ry, -15) + 15) * -1.15px),
+                           calc((var(--rx, 4) - 4) * .85px), 0);
+    background: linear-gradient(103deg,
+      rgba(255,255,255,0) 28%, rgba(255,255,255,.10) 41%, rgba(255,255,255,.28) 47%,
+      rgba(255,255,255,.06) 54%, rgba(255,255,255,0) 67%);
+  }
+
+  /* IL PANNELLO STA SOTTO IL METALLO, E BEZEL E SCHERMO SONO COMPLANARI.
+     In un telefono vero il bordo nero e' la parte non attiva dello stesso
+     pannello, non un piano posato sopra: cio' che sporge davanti a entrambi e'
+     il METALLO (le lamine arrivano a z=14). Qui il pannello sta a z=12.6, cioe'
+     1,4px piu' indietro: e' quello l'incasso, ed e' reale.
+     L'errore da NON rifare: scocca a z=14 CON UN FONDO OPACO e schermo incassato
+     dietro -> in preserve-3d il fondo passa davanti allo schermo e lo spegne
+     (telefono nero: il difetto #2). */
+  .p-face {
+    position: absolute; inset: 9px; border-radius: 27px; padding: 6px;
+    transform: translateZ(12.6px);
+    transform-style: preserve-3d;
+    background: #06080C;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.04);
+  }
+  .screen {
+    position: relative; width: 100%; height: 100%; border-radius: 21px; overflow: hidden;
+    background: #0A0D12;
+    display: flex; flex-direction: column;
+    box-shadow: inset 0 0 14px rgba(0,0,0,.5);
+  }
+  .p-island {
+    position: absolute; top: 15px; left: 50%; width: 76px; height: 23px;
+    margin-left: -38px; border-radius: 12px; background: #04060A;
+    transform: translateZ(.5px);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+  }
+  .p-island::after {
+    content: ''; position: absolute; right: 9px; top: 50%; width: 10px; height: 10px;
+    margin-top: -5px; border-radius: 50%;
+    background: radial-gradient(circle at 34% 28%, #33465F, #060911 68%);
+    box-shadow: 0 0 0 1px rgba(130,170,225,.20);
+  }
+  .p-glass {
+    position: absolute; inset: 9px; border-radius: 27px;
+    transform: translateZ(13.8px);   /* fra il pannello (12,6) e il filo del metallo (14) */
+    pointer-events: none; overflow: hidden;
+  }
+  .p-glass::after {
+    content: ''; position: absolute; inset: 0; border-radius: 27px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.14), inset 0 1px 1px rgba(255,255,255,.22);
+  }
+  .p-glare {
+    position: absolute; top: -45%; left: -45%; width: 190%; height: 190%;
+    will-change: transform; transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
+    transform: translate3d(calc((var(--ry, -15) + 15) * -3.231px),
+                           calc((var(--rx, 4) - 4) * 3.444px), 0);
+    background: linear-gradient(112deg,
+      rgba(255,255,255,0) 32%, rgba(255,255,255,.07) 41%, rgba(255,255,255,.17) 46%,
+      rgba(255,255,255,.04) 52%, rgba(255,255,255,0) 60%,
+      rgba(255,255,255,0) 74%, rgba(255,255,255,.05) 80%, rgba(255,255,255,0) 88%);
+  }
+  /* ombre FUORI dal contesto 3D: `filter` dentro un preserve-3d lo appiattisce.
+     Una larga d'ambiente, una stretta di contatto: senza quella di contatto il
+     telefono galleggia. */
+  .p-shadow {
+    position: absolute; left: 50%; bottom: 8px; width: 234px; height: 36px;
+    margin-left: -117px; border-radius: 50%;
+    background: rgba(0,0,0,.46); filter: blur(28px); pointer-events: none;
+  }
+  .p-contact {
+    position: absolute; left: 50%; bottom: 20px; width: 138px; height: 13px;
+    margin-left: -69px; border-radius: 50%;
+    background: rgba(0,0,0,.62); filter: blur(10px); pointer-events: none;
+  }
+
+  /* ---- LA UI DENTRO LO SCHERMO ----
+     L'altra meta' del difetto #3: tre righe di esempio non sono un'app.
+     Densita' vera, gerarchia vera, stati veri, ombre che separano i piani. */
+  .sb {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px 0; font-size: 9.5px; color: #E4E9F0; font-weight: 600;
+  }
+  .sb-i { display: inline-flex; align-items: center; gap: 4px; }
+  .sb-i svg { display: block; opacity: .9; }
+  .ap-h { display: flex; align-items: center; justify-content: space-between; padding: 9px 16px 0; }
+  .ap-hi { font-size: 9px; color: #6C7686; letter-spacing: .04em; text-transform: uppercase; margin: 0; }
+  .ap-hn { font-size: 15px; font-weight: 700; color: #EEF2F7; letter-spacing: -.02em; margin: 1px 0 0; }
+  .ap-av {
+    width: 26px; height: 26px; border-radius: 9px; display: grid; place-items: center;
+    font-size: 10px; font-weight: 700; color: #BFD9F5;
+    background: linear-gradient(150deg, #24405E, #16283C);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.14), 0 2px 6px rgba(0,0,0,.5);
+  }
+  /* min-height:0 e' obbligatorio: un flex item ha min-height:auto e NON si
+     comprime sotto il proprio contenuto - la lista spingeva la navigazione
+     fuori dallo schermo. Cosi' il corpo cede e la lista si taglia sfumando:
+     e' quello che fa un'app quando le posizioni non ci stanno. */
+  .scr-body { padding: 10px 12px 0; flex: 1; min-height: 0; overflow: hidden; }
+  .card-b {
+    border-radius: 15px; padding: 10px 12px 8px;
+    background: linear-gradient(158deg, #1D2836 0%, #141C28 58%, #101722 100%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.09),
+      0 1px 0 rgba(0,0,0,.5),
+      0 10px 20px -12px rgba(0,0,0,.9);
+  }
+  .bal { font-size: 9.5px; color: #7C8797; letter-spacing: .02em; margin: 0; }
+  .bal-v { font-size: 21px; font-weight: 700; letter-spacing: -.035em; color: #F2F6FA; font-variant-numeric: tabular-nums; margin: 1px 0 0; }
+  .bal-d {
+    display: inline-flex; align-items: center; gap: 4px; margin-top: 4px;
+    font-size: 9px; font-weight: 650; color: #34D399;
+    background: rgba(52,211,153,.12); padding: 2px 7px; border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgba(52,211,153,.18);
+  }
+  .scr-chart { margin-top: 6px; }
+  .scr-chart svg { width: 100%; height: 48px; display: block; }
+  .scr-chart :global(.ar) { fill: url(#gArea); opacity: 0; transition: opacity 1.1s ease .5s; }
+  :global(.in) .scr-chart :global(.ar) { opacity: 1; }
+  .scr-chart :global(.ln) {
+    fill: none; stroke: url(#gStroke); stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round;
+    stroke-dasharray: var(--clen, 600);
+    stroke-dashoffset: calc(var(--clen, 600) - var(--clen, 600) * var(--cp, 0));
+  }
+  .scr-chart :global(.dot) { fill: #5BFCBE; opacity: 0; }
+  :global(.in) .scr-chart :global(.dot) { opacity: 1; animation: beat 2.4s ease-in-out infinite; }
+  @keyframes beat { 0%,100% { r: 2.6; opacity: 1; } 50% { r: 4.4; opacity: .5; } }
+  .chips { display: flex; gap: 4px; margin-top: 6px; }
+  .chips span {
+    flex: 1; text-align: center; font-size: 8.5px; font-weight: 650; color: #7C8797;
+    padding: 3px 0; border-radius: 6px; background: rgba(255,255,255,.04);
+  }
+  .chips span.on {
+    color: #DCE9F7; background: rgba(30,136,229,.22);
+    box-shadow: inset 0 0 0 1px rgba(110,182,245,.35);
+  }
+
+  .hold {
+    margin-top: 12px;
+    -webkit-mask-image: linear-gradient(#000 78%, rgba(0,0,0,.25) 94%, transparent);
+            mask-image: linear-gradient(#000 78%, rgba(0,0,0,.25) 94%, transparent);
+  }
+  .h-hd {
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 9px; color: #6C7686; text-transform: uppercase; letter-spacing: .08em;
+    padding: 0 2px 5px;
+  }
+  .h-hd b { color: #97A2B0; font-weight: 650; }
+  .hrow {
+    display: flex; align-items: center; gap: 8px; padding: 5px 2px;
+    border-top: 1px solid rgba(255,255,255,.05);
+    opacity: 0; transform: translateY(8px);
+    transition: opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+  }
+  :global(.in) .hrow { opacity: 1; transform: none; }
+  :global(.in) .hrow:nth-child(2) { transition-delay: .50s; }
+  :global(.in) .hrow:nth-child(3) { transition-delay: .59s; }
+  :global(.in) .hrow:nth-child(4) { transition-delay: .68s; }
+  :global(.in) .hrow:nth-child(5) { transition-delay: .77s; }
+  :global(.in) .hrow:nth-child(6) { transition-delay: .86s; }
+  :global(.in) .hrow:nth-child(7) { transition-delay: .95s; }
+  .hrow .ic {
+    width: 23px; height: 23px; border-radius: 8px; flex: none;
+    display: grid; place-items: center; font-size: 7.5px; font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
+  }
+  .hrow .nm {
+    flex: 1; font-size: 10px; color: #C8D0DA; font-weight: 550; min-width: 0;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .hrow .nm i {
+    display: block; font-style: normal; font-size: 8px; color: #6C7686; font-weight: 400;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .hrow .rt { display: flex; flex-direction: column; align-items: flex-end; flex: none; }
+  .hrow .vl { font-size: 10px; font-weight: 650; color: #E2E8F0; font-variant-numeric: tabular-nums; }
+  .hrow .dt { font-size: 8px; font-weight: 650; font-variant-numeric: tabular-nums; }
+  .hrow .sp { width: 26px; height: 14px; flex: none; }
+  .hrow .sp path { fill: none; stroke-width: 1.6; stroke-linecap: round; }
+  .up { color: #34D399; } .down { color: #F87171; }
+  .hrow.sel { background: rgba(255,255,255,.035); border-radius: 8px; }
+
+  .tabs {
+    margin-top: auto; display: flex; justify-content: space-around; align-items: center;
+    padding: 8px 0 4px; border-top: 1px solid rgba(255,255,255,.06);
+    background: linear-gradient(180deg, rgba(10,13,18,0), rgba(14,19,27,.9));
+  }
+  .tabs span { display: grid; place-items: center; width: 34px; height: 26px; border-radius: 8px; color: #59636F; }
+  .tabs span svg { display: block; }
+  .tabs span.on { color: #6EB6F5; background: rgba(30,136,229,.14); }
+  .home-ind {
+    width: 92px; height: 4px; border-radius: 999px; margin: 3px auto 7px;
+    background: rgba(255,255,255,.28);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .scr-chart :global(.ln) { stroke-dashoffset: 0 !important; }
+    .scr-chart :global(.ar) { opacity: 1 !important; }
+    .hrow { opacity: 1 !important; transform: none !important; }
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+  const phone = document.getElementById('phone');
+  const pw = document.getElementById('phoneWrap');
+  if (phone && pw) {
+    const pFace = phone.querySelector('.p-face')!;
+
+    /* ---- LO SPESSORE: estrusione a PROFILO BOMBATO ----
+       inset(z) = EDGE * (|z|/ZMAX)^3 ; raggio(z) = R0 - inset(z).
+       Le z sono distribuite con un seno, cosi' le lamine si infittiscono dove
+       il profilo curva (agli estremi) e non sprecano nodi sulla banda dritta.
+       La luce cresce verso il fronte: le lamine dello smusso frontale sono le
+       piu' chiare e, viste di taglio, diventano la riga lucida sul bordo. */
+    const N = 34, ZMAX = 14, EDGE = 4.5, R0 = 36;
+    const MIX = (a: number[], b: number[], t: number) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
+    const RGB = (c: number[]) => `rgb(${c[0]},${c[1]},${c[2]})`;
+    const DARK = [[14,18,25], [35,41,47], [23,28,36], [12,16,21]];              /* metallo in ombra */
+    const LITE = [[112,122,137], [172,182,196], [128,137,150], [92,100,114]];   /* smusso in luce */
+
+    for (let i = 0; i < N; i++) {
+      const t = i / (N - 1);
+      const z = ZMAX * Math.sin(Math.PI * (t - .5));
+      const inset = EDGE * Math.pow(Math.abs(z) / ZMAX, 3);
+      const hi = Math.pow((z / ZMAX + 1) / 2, 2.6);
+      const s = document.createElement('div');
+      s.className = 'slab';
+      s.style.top = s.style.right = s.style.bottom = s.style.left = inset.toFixed(2) + 'px';
+      s.style.setProperty('--r', (R0 - inset).toFixed(2) + 'px');
+      s.style.setProperty('--z', z.toFixed(2) + 'px');
+      const g = DARK.map((d, j) => RGB(MIX(d, LITE[j], hi)));
+      s.style.background = `linear-gradient(128deg, ${g[0]} 0%, ${g[1]} 28%, ${g[2]} 56%, ${g[3]} 100%)`;
+      phone.insertBefore(s, pFace);
+    }
+
+    /* ---- I TASTI ----
+       Il telefono e' largo 258 (v. .phone3d), quindi HALF = 129 e' ESATTAMENTE
+       il fianco a z=0, dove inset(0) = 0. Li' il vecchio tasto toccava eccome.
+       L'aria nasceva altrove: il fianco RIENTRA (inset(z) = EDGE*(|z|/ZMAX)^3)
+       mentre il tasto era un piano DRITTO lungo tutti i 28px di spessore.
+       Toccava solo sul piano z=0 e si staccava fino a 4,5px verso il fronte e
+       verso il retro.
+       LA CURA E' GEOMETRICA, e sono due mosse:
+       1) STRINGERE LA PROFONDITA' al 57% centrale (BD=16 su 28): li' il profilo
+          e' quasi dritto e il fianco rientra di 1,0px invece di 4,5;
+       2) SEPPELLIRE LA BASE di 2,0px dentro il fianco.
+       Sommate: il tasto sta DENTRO la scocca su TUTTA la sua impronta, non solo
+       al centro. */
+    const BTNS = [{ top: 132, h: 38 }, { top: 178, h: 38 }, { top: 244, h: 60 }];
+    const HALF = 129;      /* = 258/2: il fianco a z=0, dove inset(0) = 0 */
+    const BD = 16;         /* profondita' lungo Z: 16 su 28 = 57%, CENTRATA */
+    const BIN = 2.0;       /* quanto lo zoccolo e' sepolto nel fianco */
+    const BPROUD = 3.8;    /* sporgenza della testa oltre il fianco: ~1,1mm veri */
+    const BG = 0.9;        /* di quanto lo zoccolo e' piu' grande del tasto: E' LA FESSURA */
+    const BC = 0.9;        /* la testa e' appena piu' piccola del corpo (spigolo raccordato) */
+    const BX0 = HALF - BIN;      /* 127,0: lo zoccolo, sepolto nella scocca */
+    const BX1 = HALF + BPROUD;   /* 132,8: la testa, fuori */
+    const BEXT = BX1 - BX0;      /*   5,8: quanto e' lunga l'estrusione */
+
+    /* LO STESSO METALLO DELLA SCOCCA, per costruzione: il tetto e' LITE[1], lo
+       stesso punto piu' chiaro della scocca. Il tasto non puo' piu' essere piu'
+       chiaro della scocca nemmeno volendo (prima lo era: per questo leggeva
+       come plastica bianca). Cio' che lo distingue e' l'ORIENTAMENTO della
+       superficie, non la tinta. */
+    const ALU_LO = DARK[3], ALU_HI = LITE[1];
+    const alu = (hi: number) => RGB(MIX(ALU_LO, ALU_HI, clamp(hi, 0, 1)));
+    const hiAt = (z: number) => Math.pow((z / ZMAX + 1) / 2, 2.6);
+    const HEAD_GAIN = 2.5;   /* la testa guarda la luce di faccia: ne prende piu' del fianco curvo */
+
+    /* gradiente lungo Z: dopo rotateY(90deg) il bordo SINISTRO del div finisce
+       davanti (z positivo) e il destro dietro. Chiaro a sinistra, scuro a
+       destra: un cilindretto di metallo illuminato dal fronte. */
+    const zGrad = (gain: number) => {
+      const c = [BD / 2, BD / 6, -BD / 6, -BD / 2].map((z) => alu(hiAt(z) * gain));
+      return `linear-gradient(90deg, ${c[0]} 0%, ${c[1]} 34%, ${c[2]} 66%, ${c[3]} 100%)`;
+    };
+    const add = (el: HTMLElement) => phone.insertBefore(el, pFace);
+    const div = (cls: string) => { const d = document.createElement('div'); d.className = cls; return d; };
+
+    for (const b of BTNS) {
+      /* LO ZOCCOLO: la sede scavata nel fianco. Sepolto (x < HALF), piu' grande
+         del tasto di BG per lato, quasi nero. Il bordo che se ne vede intorno
+         alla testa e' la fessura; l'alone scuro all'esterno e' l'ombra di
+         contatto sulla scocca. */
+      const sk = div('p-btn');
+      const sw = BD + BG * 2;
+      sk.style.top = (b.top - BG).toFixed(2) + 'px';
+      sk.style.height = (b.h + BG * 2).toFixed(2) + 'px';
+      sk.style.width = sw.toFixed(2) + 'px';
+      sk.style.marginLeft = (-sw / 2).toFixed(2) + 'px';
+      sk.style.borderRadius = '5px';
+      sk.style.transform = `translateX(${BX0.toFixed(2)}px) rotateY(90deg)`;
+      sk.style.background = `linear-gradient(90deg, ${alu(.10)} 0%, ${alu(.04)} 55%, ${alu(.01)} 100%)`;
+      sk.style.boxShadow = '0 0 4px 1px rgba(0,0,0,.6), inset 0 -2px 3px rgba(0,0,0,.55)';
+      add(sk);
+
+      /* I TAPPI: davanti (+Z) e dietro (-Z). Il davanti e' quello che la camera
+         vede DI FACCIA, ed e' il pezzo che fa la lettura "solido". Esistono solo
+         perche' il tasto ora e' profondo 16 su 28 invece di 29 su 28: prima
+         ATTRAVERSAVA il telefono e un davanti non ce l'aveva proprio. */
+      for (const s of [1, -1]) {
+        const c = div('p-btn-cap');
+        c.style.top = b.top.toFixed(2) + 'px';
+        c.style.height = b.h.toFixed(2) + 'px';
+        c.style.width = BEXT.toFixed(2) + 'px';
+        c.style.marginLeft = BX0.toFixed(2) + 'px';
+        c.style.borderRadius = '1px 3px 3px 1px';
+        c.style.transform = `translateZ(${(s * BD / 2).toFixed(2)}px)`;
+        c.style.background = s > 0
+          ? `linear-gradient(90deg, ${alu(.06)} 0%, ${alu(.42)} 46%, ${alu(.92)} 100%)`
+          : `linear-gradient(90deg, ${alu(.02)} 0%, ${alu(.07)} 50%, ${alu(.16)} 100%)`;
+        add(c);
+      }
+
+      /* LE CHIUSURE, sopra e sotto (normale +-Y). Sottili in proiezione, ma
+         senza di loro il tasto e' una scatola APERTA e, sporgendo di 3,8px, ci
+         si guarda dentro. */
+      for (const s of [-1, 1]) {
+        const f = div('p-btn-cap');
+        const yc = s < 0 ? b.top : b.top + b.h;
+        f.style.top = (yc - BD / 2).toFixed(2) + 'px';
+        f.style.height = BD.toFixed(2) + 'px';   /* dopo rotateX(90deg) diventa la profondita' Z */
+        f.style.width = BEXT.toFixed(2) + 'px';
+        f.style.marginLeft = BX0.toFixed(2) + 'px';
+        f.style.transform = 'rotateX(90deg)';
+        f.style.background = s < 0
+          ? `linear-gradient(90deg, ${alu(.05)} 0%, ${alu(.30)} 50%, ${alu(.62)} 100%)`
+          : `linear-gradient(90deg, ${alu(.02)} 0%, ${alu(.12)} 50%, ${alu(.28)} 100%)`;
+        add(f);
+      }
+
+      /* LA TESTA: un piano solo, col suo raggio, che riceve il riflesso e lo fa
+         SCORRERE con l'inclinazione (il riflesso vive in CSS, guidato da
+         --rx/--ry). Prima al suo posto c'era la settima fetta di una pila. */
+      const hw = BD - BC * 2;
+      const head = div('p-btn-head');
+      head.style.top = (b.top + BC).toFixed(2) + 'px';
+      head.style.height = (b.h - BC * 2).toFixed(2) + 'px';
+      head.style.width = hw.toFixed(2) + 'px';
+      head.style.marginLeft = (-hw / 2).toFixed(2) + 'px';
+      head.style.transform = `translateX(${BX1.toFixed(2)}px) rotateY(90deg)`;
+      head.style.background = zGrad(HEAD_GAIN);
+      head.style.boxShadow = 'inset 0 0 0 .5px rgba(255,255,255,.12), inset 0 -1px 2px rgba(0,0,0,.35)';
+      head.appendChild(div('p-btn-glare'));
+      add(head);
+    }
+
+    /* ---- IL GRAFICO E IL SALDO ---- */
+    const SER = [0, 1.2, .6, 2.4, 1.9, 3.6, 3.1, 4.8, 4.2, 6.1, 5.6, 7.4, 8.2, 7.6, 9.3];
+    const CW = 240, CH = 64, PD = 7;
+    const mn = Math.min(...SER), mx = Math.max(...SER);
+    const PX = (i: number) => (i / (SER.length - 1)) * CW;
+    const PY = (v: number) => CH - PD - ((v - mn) / (mx - mn || 1)) * (CH - PD * 2);
+    const dl = SER.map((v, i) => `${i ? 'L' : 'M'}${PX(i).toFixed(1)} ${PY(v).toFixed(1)}`).join(' ');
+    const cl = document.getElementById('chartLine') as unknown as SVGPathElement | null;
+    if (cl) {
+      cl.setAttribute('d', dl);
+      document.getElementById('chartArea')!.setAttribute('d', `${dl} L${CW} ${CH} L0 ${CH} Z`);
+      cl.style.setProperty('--clen', String(Math.ceil(cl.getTotalLength())));
+      const cdot = document.getElementById('chartDot')!;
+      cdot.setAttribute('cx', String(PX(SER.length - 1)));
+      cdot.setAttribute('cy', String(PY(SER[SER.length - 1])));
+    }
+
+    const balV = document.getElementById('balV');
+    if (balV) {
+      const balIO = new IntersectionObserver((es) => {
+        es.forEach((e) => {
+          if (!e.isIntersecting) return;
+          balIO.unobserve(e.target);
+          const TO = 48212.9;
+          if (reduce) { balV.textContent = '€ 48.212,90'; return; }
+          const s = performance.now();
+          const step = (t: number) => {
+            const p = Math.min(1, (t - s) / 1500);
+            const v = TO * (1 - Math.pow(1 - p, 3));
+            balV.textContent = '€ ' + v.toLocaleString('it-IT', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            if (p < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      }, { threshold: .5 });
+      balIO.observe(phone);
+    }
+
+    /* Lo scroll guida il disegno del grafico. Si sveglia, fa un frame, si spegne. */
+    let ticking = false;
+    function onScroll() {
+      const ch = document.querySelector('.scr-chart');
+      if (ch && cl) {
+        const cr = ch.getBoundingClientRect();
+        cl.style.setProperty('--cp', clamp((innerHeight - cr.top) / (innerHeight * .6), 0, 1).toFixed(3));
+      }
+      ticking = false;
+    }
+    addEventListener('scroll', () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+    }, { passive: true });
+    onScroll();
+
+    /* ---- IL TILT ----
+       Listener sul WRAPPER, che NON ruota (v. commento in testa al file).
+       DUE NUMERI, e basta: i riflessi li sposta il CSS. */
+    if (fine && !reduce) {
+      pw.addEventListener('pointermove', (e) => {
+        const r = pw.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        phone.classList.add('live');
+        phone.style.setProperty('--ry', (-15 + (px - .5) * 26).toFixed(2));
+        phone.style.setProperty('--rx', (4 + (.5 - py) * 18).toFixed(2));
+      });
+      pw.addEventListener('pointerleave', () => {
+        phone.classList.remove('live');
+        phone.style.setProperty('--rx', '4');
+        phone.style.setProperty('--ry', '-15');
+      });
+    }
+  }
+</script>

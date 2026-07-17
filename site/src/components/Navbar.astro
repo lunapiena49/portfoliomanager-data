@@ -1,6 +1,6 @@
 ---
 import type { Translations, Locale } from '../i18n/index';
-import { LOCALES, LOCALE_NAMES } from '../i18n/index';
+import { LOCALES, LOCALE_NAMES, localePath } from '../i18n/index';
 
 interface Props {
   t: Translations;
@@ -10,16 +10,15 @@ interface Props {
 const { t, currentLang } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-function langUrl(l: Locale) {
-  return l === 'it' ? `${base}/` : `${base}/${l}/`;
-}
+// Gli URL li costruisce localePath(), e NESSUN ALTRO. La copia locale che
+// stava qui aggiungeva lo slash finale (`/en/`) e mandava in 404 tutte e cinque
+// le lingue non italiane: `build.format: 'file'` non serve lo slash.
+const langUrl = (l: Locale) => localePath(l);
 
-// W7.D-CC.2 v2 (2026-05-11) -- FAQ link points to the standalone /faq/
+// W7.D-CC.2 v2 (2026-05-11) -- FAQ link points to the standalone /faq
 // page (FAQPage JSON-LD + dedicated route) rather than the in-page
 // #faq anchor that only works on the landing.
-function legalUrl(page: string) {
-  return currentLang === 'it' ? `${base}/${page}` : `${base}/${currentLang}/${page}`;
-}
+const legalUrl = (page: string) => localePath(currentLang, page);
 ---
 <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
   <div class="wrap nav-inner">
@@ -94,7 +93,10 @@ function legalUrl(page: string) {
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(248, 249, 250, .92);
+    /* --nav-bg esiste in global.css da S7 (chiaro E scuro) e nessuno lo usava:
+       qui c'era rgba(248,249,250,.92) fisso, cioe' una barra BIANCA anche in
+       tema scuro. Il tema c'era gia': mancava solo di collegarlo. */
+    background: var(--nav-bg);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-bottom: 1px solid var(--divider);
@@ -161,7 +163,7 @@ function legalUrl(page: string) {
     position: absolute;
     top: calc(100% + 8px);
     right: 100px;
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--divider);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-elev);
@@ -207,7 +209,7 @@ function legalUrl(page: string) {
     display: none;
     border-top: 1px solid var(--divider);
     padding: 16px 0;
-    background: rgba(248,249,250,.97);
+    background: var(--nav-bg);
   }
   .mobile-menu.open { display: block; }
   .mobile-menu a {

@@ -1,6 +1,6 @@
----
+﻿---
 import type { Translations, Locale } from '../i18n/index';
-import { LOCALES } from '../i18n/index';
+import { LOCALES, localePath } from '../i18n/index';
 
 interface Props {
   t: Translations;
@@ -10,13 +10,9 @@ interface Props {
 const { t, currentLang } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
-function langUrl(l: Locale) {
-  return l === 'it' ? `${base}/` : `${base}/${l}/`;
-}
-
-function legalUrl(page: string) {
-  return currentLang === 'it' ? `${base}/${page}` : `${base}/${currentLang}/${page}`;
-}
+// Un'unica costruzione di URL: v. localePath() in src/i18n/index.ts.
+const langUrl = (l: Locale) => localePath(l);
+const legalUrl = (page: string) => localePath(currentLang, page);
 ---
 <footer role="contentinfo">
   <div class="wrap">
@@ -50,7 +46,7 @@ function legalUrl(page: string) {
           <li><a href={legalUrl('terms')}>{t.footer.linkTerms}</a></li>
           <li><a href={legalUrl('disclaimer')}>{t.footer.linkDisclaimer}</a></li>
           <li><a href={legalUrl('faq')}>{t.nav.faq}</a></li>
-          <li><a href="mailto:plurifin.app+gdpr@gmail.com">{t.footer.linkGdpr}</a></li>
+          <li><a href="mailto:gdpr@plurifin.app">{t.footer.linkGdpr}</a></li>
         </ul>
       </nav>
 
@@ -59,9 +55,9 @@ function legalUrl(page: string) {
         <h4>{t.footer.colContact}</h4>
         <ul>
           <li>
-            <a href="mailto:plurifin.app@gmail.com">
+            <a href="mailto:info@plurifin.app">
               {t.footer.linkEmail}
-              <span class="email-address">plurifin.app@gmail.com</span>
+              <span class="email-address">info@plurifin.app</span>
             </a>
           </li>
           <li>
@@ -71,7 +67,7 @@ function legalUrl(page: string) {
           </li>
           <li>
             <a href={legalUrl('contact')}>
-              {t.footer.linkGdpr}
+              {t.footer.linkContact}
             </a>
           </li>
         </ul>
@@ -168,7 +164,7 @@ function legalUrl(page: string) {
     text-decoration: none;
     transition: background .15s, color .15s;
   }
-  .footer-langs a.active { background: #fff; color: var(--text); }
+  .footer-langs a.active { background: #fff; color: var(--ink); }  /* --ink, non --text: il footer e' sempre scuro, ma in tema scuro --text e' CHIARO -> era bianco su bianco */
   .footer-langs a:hover:not(.active) { background: rgba(255,255,255,.08); color: #fff; }
   .footer-bid { font-family: ui-monospace, monospace; font-size: 11px; color: #3F4754; }
 

@@ -1,4 +1,4 @@
----
+﻿---
 import type { Translations } from '../i18n/index';
 
 interface Props { t: Translations; }
@@ -37,7 +37,7 @@ const { t } = Astro.props;
 
 <style>
   .about-card {
-    background: #fff;
+    background: var(--surface);
     border: 1px solid var(--divider);
     border-radius: var(--radius-xl);
     padding: 48px;

@@ -4,15 +4,33 @@ import LegalLayout from '../../layouts/LegalLayout.astro';
 const toc = [{ id: 'overview', label: '1. Visao geral' },{ id: 'dados', label: '2. Dados' },{ id: 'direitos', label: '3. Direitos' },{ id: 'contacto', label: '4. Contacto' }];
 ---
 <LegalLayout t={pt} lang="pt" pageTitle="Politica de Privacidade" tocItems={toc}>
-  <p class="meta">Ultima atualizacao: 28 de abril de 2026 · Versao 1.0</p>
+  <p class="meta">Ultima atualizacao: 20 de maio de 2026 · Versao 1.0.2</p>
   <div class="callout"><strong>Em resumo:</strong> Portfolio Manager nao recolhe dados de carteira. Tudo fica cifrado no seu dispositivo.</div>
   <h2 id="overview">1. Visao geral</h2>
-  <p>PluriFin (Filippo Salemi, pessoa singular, Italia) trata apenas os dados necessarios para o funcionamento do site (newsletter via Formspree com consentimento, formulario de contacto). Nenhum dado de carteira e transmitido a um servidor PluriFin.</p>
+  <p>PluriFin (Filippo Salemi, pessoa singular, Italia) trata apenas os dados necessarios para o funcionamento do site (logs do GitHub Pages) e os emails que opte por nos enviar. O site nao contem formularios. Nenhum dado de carteira e transmitido a um servidor PluriFin.</p>
   <h2 id="dados">2. Dados recolhidos</h2>
-  <p>Dados da app: apenas locais, cifrados AES-256. Site: email newsletter (consentimento), formulario de contacto (Formspree, EUA, CCE), logs do GitHub Pages.</p>
+  <p>Dados da app: apenas locais, cifrados AES-256. Site: sem formularios, sem recolha atraves do navegador. Sao tratados apenas os logs do servidor GitHub Pages (IP, user-agent, max. 14 dias) e, se nos escrever para um endereco publicado, a sua mensagem, apenas para lhe responder.</p>
+  <h3>2.1 Dados de crash anonimos</h3>
+  <p>Para diagnosticar bugs e crashes da app utilizamos o
+  <strong>Firebase Crashlytics</strong> (Google Ireland Limited,
+  subcontratante nos termos do art. 28 RGPD). Quando a app falha, sao
+  enviados ao Crashlytics: stack trace ofuscado, modelo do dispositivo,
+  versao da app, identificador anonimo de instalacao.
+  <strong>Nao sao enviados</strong>: carteiras, posicoes, objetivos,
+  chaves API, conteudo dos prompts de IA. A recolha esta
+  <strong>desativada por predefinicao</strong>: nenhum dado e enviado
+  ate que ative manualmente o toggle "Diagnostico de crash anonimo" em
+  Definicoes &gt; Privacidade. Conservacao: 90 dias. Base juridica:
+  interesse legitimo (art. 6.1.f RGPD). Transferencia extra-UE coberta
+  pelas Clausulas Contratuais Tipo.</p>
+  <p>Uma propriedade <strong>Google Analytics for Firebase (GA4, Google LLC)</strong>
+  esta ligada ao projeto Firebase para futuras evolucoes. <em>Nenhum
+  dado e transmitido na versao 1.0.0+10</em> (o SDK
+  `firebase_analytics` nao esta integrado). Ativacao apenas apos uma
+  atualizacao da app + re-consentimento do utilizador.</p>
   <h2 id="direitos">3. Direitos</h2>
-  <p>Pode exercer os seus direitos RGPD (acesso, retificacao, apagamento...) escrevendo para <a href="mailto:plurifin.app+gdpr@gmail.com">plurifin.app+gdpr@gmail.com</a>.</p>
+  <p>Pode exercer os seus direitos RGPD (acesso, retificacao, apagamento...) escrevendo para <a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a>.</p>
   <h2 id="contacto">4. Contacto</h2>
-  <p><a href="mailto:plurifin.app@gmail.com">plurifin.app@gmail.com</a></p>
+  <p><a href="mailto:privacy@plurifin.app">privacy@plurifin.app</a></p>
   <hr /><div class="note">Texto legal definitivo pendente de revisao juridica (Wave W3).</div>
 </LegalLayout>

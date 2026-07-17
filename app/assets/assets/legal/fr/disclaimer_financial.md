@@ -157,6 +157,6 @@ Loi italienne. Disputes: voir ToS.
 
 ## 15. Contacts
 
-`plurifin.app+legal@gmail.com`. PluriFin **ne fournit pas de conseil
+`legal@plurifin.app`. PluriFin **ne fournit pas de conseil
 financier par email**. Pour cela, conseiller autorisé (OCF ou
 équivalent).

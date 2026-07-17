@@ -1,0 +1,177 @@
+---
+/**
+ * IL DADO DI ROLLQUEST - divisione Games. Porting del prototipo v7.
+ *
+ * Un cubo UNICO: le facce hanno spigolo vivo e combaciano esattamente. Il
+ * contorno scuro sta DENTRO la faccia (inset), cosi' due facce adiacenti
+ * formano una linea sola e continua sullo spigolo, come nel cartoon del gioco.
+ * Il `border-radius` sulle facce era il difetto: tagliava gli angoli e le sei
+ * facce sembravano piastre accostate.
+ *
+ * Nessun `filter`/`opacity`/`mask` sul contenitore preserve-3d: appiattirebbe
+ * il cubo in una figura piatta - e' la trappola gia' pagata, ed e' sorvegliata
+ * da un test.
+ *
+ * IL CICLO SI SPEGNE. Nel prototipo il rAF del dado girava incondizionato:
+ * sessanta volte al secondo riscriveva un transform identico, anche mentre eri
+ * sulla soglia e il dado non era neppure sullo schermo. E' il difetto #6 in un
+ * secondo posto, e vuole lo stesso rimedio: vivo mentre serve, spento appena
+ * arriva a destinazione.
+ */
+import type { Translations } from '../i18n/index';
+
+interface Props {
+  t: Translations;
+}
+const { t } = Astro.props;
+const g = t.company.gamesBand;
+---
+<div class="die-stage" id="dieStage">
+  <div class="die-shadow" id="dieShadow" aria-hidden="true"></div>
+  <div class="die3d" id="die" role="button" tabindex="0" aria-label={g.dieAria}>
+    <div class="face f1"></div><div class="face f2"></div><div class="face f3"></div>
+    <div class="face f4"></div><div class="face f5"></div><div class="face f6"></div>
+  </div>
+</div>
+<div class="die-hint" id="dieHint">
+  <span class="roll-hint">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+         stroke-linecap="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    {g.dieHint}
+  </span>
+</div>
+
+<style>
+  .die-stage { perspective: 950px; position: relative; display: grid; place-items: center; min-height: 300px; }
+  .die-shadow {
+    position: absolute; bottom: 52px; left: 50%; width: 134px; height: 26px; margin-left: -67px;
+    border-radius: 50%; background: rgba(46,39,67,.45); filter: blur(15px);
+    transform: scale(var(--sh, 1)); transition: transform .3s ease;
+  }
+  .die3d {
+    position: relative; width: 124px; height: 124px;
+    transform-style: preserve-3d;
+    transform: rotateX(-20deg) rotateY(24deg);
+    cursor: grab;
+  }
+  .die3d:active { cursor: grabbing; }
+  .die3d.throw { transition: transform 1400ms cubic-bezier(.13,.78,.2,1); }
+  .die3d:focus-visible { outline: 3px solid #FFC24B; outline-offset: 8px; border-radius: 4px; }
+
+  .face {
+    position: absolute; inset: 0;
+    display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr);
+    padding: 15px;
+    box-shadow:
+      inset 0 0 0 4px #2E2743,                       /* il contorno, DENTRO la faccia */
+      inset 0 0 26px rgba(46,39,67,.42),             /* curvatura verso i bordi */
+      inset 6px 6px 14px rgba(255,255,255,.14);      /* luce dall'alto a sinistra */
+  }
+  .face :global(span) { display: grid; place-items: center; }
+  .face :global(i) {
+    width: 15px; height: 15px; border-radius: 50%;
+    background: radial-gradient(circle at 34% 30%, #FFF0BF, #FFC24B 58%, #D89A28);
+    box-shadow: inset 0 -2px 3px rgba(0,0,0,.3), 0 0 8px rgba(255,194,75,.5);
+  }
+  .f1 { transform: translateZ(62px);                 background: linear-gradient(142deg, #B78CFF, #9B6BFF 58%, #7B4CE0); }
+  .f2 { transform: rotateY(90deg)  translateZ(62px); background: linear-gradient(142deg, #A67BF5, #8659E8 58%, #6741C9); }
+  .f3 { transform: rotateY(180deg) translateZ(62px); background: linear-gradient(142deg, #B183FF, #9160F5 58%, #7248D4); }
+  .f4 { transform: rotateY(-90deg) translateZ(62px); background: linear-gradient(142deg, #A876FF, #8B5AEE 58%, #6B44CE); }
+  .f5 { transform: rotateX(90deg)  translateZ(62px); background: linear-gradient(142deg, #C6A8FF, #A87CFF 58%, #8659E0); }
+  .f6 { transform: rotateX(-90deg) translateZ(62px); background: linear-gradient(142deg, #9E77F0, #7E52DC 58%, #5C34B6); }
+
+  .die-hint {
+    margin-top: 22px; text-align: center; min-height: 34px;
+    transition: opacity .6s ease;
+  }
+  .die-hint.gone { opacity: 0; }
+  .roll-hint {
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: #6B5F86;
+    border: 1px dashed currentColor; border-radius: 999px; padding: 6px 14px;
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+  const PIPS: Record<number, number[]> = {
+    1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8],
+  };
+  document.querySelectorAll('.face').forEach((f, fi) => {
+    for (let c = 0; c < 9; c++) {
+      const cell = document.createElement('span');
+      if (PIPS[fi + 1].includes(c)) cell.appendChild(document.createElement('i'));
+      f.appendChild(cell);
+    }
+  });
+  const FACE_ROT: Record<number, [number, number]> = {
+    1: [0, 0], 2: [0, -90], 3: [0, 180], 4: [0, 90], 5: [-90, 0], 6: [90, 0],
+  };
+
+  const stage = document.getElementById('dieStage');
+  const die = document.getElementById('die');
+  const shadow = document.getElementById('dieShadow');
+  const hint = document.getElementById('dieHint');
+
+  if (stage && die && shadow && hint) {
+    let base = { x: -20, y: 24 }, cur = { x: -20, y: 24 }, tgt = { x: -20, y: 24 };
+    let spins = 0, busy = false;
+
+    if (fine && !reduce) {
+      /* Vivo mentre serve, spento appena arriva. Un rAF che riscrive lo stesso
+         transform sessanta volte al secondo e' CPU rubata allo scroll. */
+      let dieRaf = 0, dieLive = false;
+      const wake = () => { if (!dieRaf) dieRaf = requestAnimationFrame(spin); };
+      function spin() {
+        dieRaf = 0;
+        if (busy) return;   /* il lancio lo anima una transizione CSS: qui non serviamo */
+        cur.x = lerp(cur.x, tgt.x, .12);
+        cur.y = lerp(cur.y, tgt.y, .12);
+        die!.style.transform = `rotateX(${cur.x.toFixed(2)}deg) rotateY(${cur.y.toFixed(2)}deg)`;
+        shadow!.style.setProperty('--sh',
+          (1 - clamp(Math.abs(cur.y - base.y) / 40, 0, 1) * .16).toFixed(3));
+        if (dieLive || Math.abs(cur.x - tgt.x) > .05 || Math.abs(cur.y - tgt.y) > .05) wake();
+      }
+
+      stage.addEventListener('pointermove', (e) => {
+        if (busy) return;
+        const r = stage.getBoundingClientRect();
+        tgt.y = base.y + ((e.clientX - r.left) / r.width - .5) * 66;
+        tgt.x = base.x - ((e.clientY - r.top) / r.height - .5) * 56;
+        dieLive = true; wake();
+      });
+      stage.addEventListener('pointerleave', () => {
+        tgt.x = base.x; tgt.y = base.y; dieLive = false; wake();
+      });
+
+      spin();   /* la posa iniziale, e poi si ferma da solo */
+    }
+
+    function rollDie() {
+      if (busy) return;
+      busy = true;
+      hint!.classList.add('gone');
+      const n = 1 + Math.floor(Math.random() * 6);
+      spins += 3 + Math.floor(Math.random() * 3);
+      const [fx, fy] = FACE_ROT[n];
+      const RX = fx + 360 * spins, RY = fy + 360 * spins;
+      die!.classList.add('throw');
+      die!.style.transform = `rotateX(${RX}deg) rotateY(${RY}deg)`;
+      shadow!.style.setProperty('--sh', '1.2');
+      setTimeout(() => {
+        die!.classList.remove('throw');
+        base = { x: RX, y: RY }; cur = { x: RX, y: RY }; tgt = { x: RX, y: RY };
+        shadow!.style.setProperty('--sh', '1');
+        busy = false;
+      }, reduce ? 0 : 1400);
+    }
+
+    die.addEventListener('click', rollDie);
+    die.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); rollDie(); }
+    });
+  }
+</script>

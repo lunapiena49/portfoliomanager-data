@@ -1,56 +1,100 @@
-// Dynamic sitemap generator for Astro static output
-// Outputs /sitemap.xml at the site root
-//
-// W7.D-CC.X (2026-05-11) -- BASE URL canonical switch from
-// lunapiena49.github.io/portfoliomanager-data to plurifin.app (custom
-// domain on GitHub Pages, see portfoliomanager-data CNAME + 4B.3 in
-// master plan).
+/**
+ * LA SITEMAP - derivata dalle pagine che ESISTONO, non da una lista scritta a mano.
+ *
+ * Prima qui c'era:
+ *     const pages = ['', 'privacy', 'terms', 'disclaimer', 'about', 'contact', 'faq'];
+ * moltiplicata per le sei lingue. Due difetti, tutti e due misurati sul sito live:
+ *
+ *   1. DICHIARAVA 404. `contact` esiste SOLO in italiano, ma la lista lo
+ *      moltiplicava per sei: /en/contact, /es/contact... sono 404 (verificato
+ *      con curl). La sitemap li offriva ai crawler come pagine buone.
+ *   2. OMETTEVA PAGINE VERE. press, pricing, dmca, blog erano nel sito e non
+ *      nella sitemap. E dal porting di S11 mancherebbero anche home, finance
+ *      e games - cioe' meta' del sito nuovo.
+ *
+ * Una lista a mano si sfalda a ogni pagina aggiunta, e si sfalda IN SILENZIO.
+ * Qui le rotte si leggono dal filesystem a build time (`import.meta.glob`): se
+ * un file esiste, la sua rotta e' nella sitemap; se non esiste, non c'e'.
+ * Non puo' piu' divergere, perche' non c'e' piu' niente da tenere allineato.
+ */
 import type { APIRoute } from 'astro';
+import { getCollection } from 'astro:content';
 import { LOCALES } from '../i18n/index';
 
 const BASE = 'https://plurifin.app';
 
-const pages = ['', 'privacy', 'terms', 'disclaimer', 'about', 'contact', 'faq'];
+/** Ogni pagina .astro sotto src/pages/. Eager: serve a build time, non a runtime. */
+const FILES = import.meta.glob('./**/*.astro', { eager: true });
 
-// W7.D-CC.1 v2 (2026-05-11) -- per-language RSS feeds + unified feed
-// are listed alongside the canonical HTML routes so crawlers discover
-// the syndication endpoints during the same sitemap pass.
-const rssFeeds = [
-  '/blog/rss.xml',
-  '/blog/rss-it.xml',
-  '/blog/rss-en.xml',
-  '/blog/rss-es.xml',
-  '/blog/rss-fr.xml',
-  '/blog/rss-de.xml',
-  '/blog/rss-pt.xml',
-];
+/**
+ * Dal path del file alla rotta servita. `build.format: 'file'` -> nessuno slash
+ * finale: `/en` e' 200, `/en/` e' 404.
+ *   ./index.astro          -> ''
+ *   ./privacy.astro        -> 'privacy'
+ *   ./en/index.astro       -> 'en'
+ *   ./en/privacy.astro     -> 'en/privacy'
+ */
+function rottaDi(file: string): string | null {
+  let r = file.replace(/^\.\//, '').replace(/\.astro$/, '');
 
-function url(locale: string, page: string): string {
-  const prefix = locale === 'it' ? '' : `/${locale}`;
-  const pagePart = page ? `/${page}` : '';
-  return `${BASE}${prefix}${pagePart}`;
+  // Le rotte dinamiche non sono pagine: sono generatori. I loro figli (i post
+  // del blog) li enumeriamo dalla collection, dove hanno anche una data vera.
+  if (r.includes('[')) return null;
+
+  r = r.replace(/\/index$/, '').replace(/^index$/, '');
+  return r;
 }
 
-export const GET: APIRoute = () => {
-  const today = new Date().toISOString().split('T')[0];
+/** Priorita' e frequenza in base a COSA e' la pagina, non a dove sta. */
+function peso(rotta: string): { priority: string; changefreq: string } {
+  const foglia = rotta.split('/').pop() ?? '';
+  const isHome = rotta === '' || LOCALES.includes(rotta as never);
+  if (isHome) return { priority: '1.0', changefreq: 'weekly' };
+  if (foglia === 'home' || foglia === 'finance' || foglia === 'games') {
+    return { priority: '0.9', changefreq: 'weekly' };
+  }
+  if (foglia === 'blog') return { priority: '0.8', changefreq: 'daily' };
+  if (foglia === 'pricing' || foglia === 'press') return { priority: '0.8', changefreq: 'monthly' };
+  return { priority: '0.6', changefreq: 'monthly' };  // legali, faq, about, contact
+}
+
+const RSS = [
+  '/blog/rss.xml',
+  ...LOCALES.map((l) => `/blog/rss-${l}.xml`),
+];
+
+function entry(loc: string, lastmod: string, changefreq: string, priority: string): string {
+  return `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n`
+       + `    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`;
+}
+
+export const GET: APIRoute = async () => {
+  const oggi = new Date().toISOString().split('T')[0];
   const entries: string[] = [];
 
-  for (const locale of LOCALES) {
-    for (const page of pages) {
-      const loc = url(locale, page);
-      // Landing pages are high priority, legal pages lower
-      const priority = page === '' ? '1.0' : '0.7';
-      const changefreq = page === '' ? 'weekly' : 'monthly';
-      entries.push(
-        `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>${changefreq}</changefreq>\n    <priority>${priority}</priority>\n  </url>`
-      );
-    }
+  const rotte = Object.keys(FILES)
+    .map(rottaDi)
+    .filter((r): r is string => r !== null)
+    .sort();
+
+  for (const r of rotte) {
+    const { priority, changefreq } = peso(r);
+    entries.push(entry(r ? `${BASE}/${r}` : `${BASE}/`, oggi, changefreq, priority));
   }
 
-  for (const feed of rssFeeds) {
-    entries.push(
-      `  <url>\n    <loc>${BASE}${feed}</loc>\n    <lastmod>${today}</lastmod>\n    <changefreq>daily</changefreq>\n    <priority>0.5</priority>\n  </url>`
-    );
+  /* I post del blog. `draft: true` NON entra: un post non pubblicato offerto a
+     un crawler e' una pagina che non esiste ancora - lo stesso difetto della
+     lista a mano, in un altro punto. */
+  const posts = await getCollection('blog', ({ data }) => data.draft !== true);
+  for (const p of posts) {
+    // Lo schema (src/content.config.ts) lo chiama `publishedAt`, non `pubDate`.
+    const quando = p.data.updatedAt ?? p.data.publishedAt;
+    const data = (quando instanceof Date ? quando : new Date(quando)).toISOString().split('T')[0];
+    entries.push(entry(`${BASE}/blog/${p.id}`, data, 'monthly', '0.7'));
+  }
+
+  for (const feed of RSS) {
+    entries.push(entry(`${BASE}${feed}`, oggi, 'daily', '0.5'));
   }
 
   const xml = `<?xml version="1.0" encoding="UTF-8"?>

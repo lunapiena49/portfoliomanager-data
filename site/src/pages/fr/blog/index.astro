@@ -9,7 +9,7 @@ const posts = all.sort(
 );
 
 const toc = posts.map((p) => ({
-  id: p.slug,
+  id: p.id,
   label: p.data.title,
 }));
 ---
@@ -29,7 +29,7 @@ const toc = posts.map((p) => ({
     <p>Aucun article publie pour l'instant. Revenez bientot.</p>
   ) : (
     posts.map((post) => (
-      <article class="blog-card" id={post.slug}>
+      <article class="blog-card" id={post.id}>
         <p class="meta">
           <time datetime={post.data.publishedAt.toISOString()}>
             {post.data.publishedAt.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -45,9 +45,9 @@ const toc = posts.map((p) => ({
             </span>
           )}
         </p>
-        <h2><a href={`/blog/${post.slug}`}>{post.data.title}</a></h2>
+        <h2><a href={`/blog/${post.id}`}>{post.data.title}</a></h2>
         <p>{post.data.summary}</p>
-        <p><a href={`/blog/${post.slug}`} class="read-more">Lire la suite -&gt;</a></p>
+        <p><a href={`/blog/${post.id}`} class="read-more">Lire la suite -&gt;</a></p>
       </article>
     ))
   )}

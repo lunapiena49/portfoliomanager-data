@@ -1,0 +1,118 @@
+---
+/**
+ * LA PAGINA CONTATTI - una sola, per tutte e sei le lingue.
+ *
+ * Prima esisteva SOLO in italiano, con i testi scritti a mano nel markup: per
+ * questo `/en/contact`, `/es/contact` e gli altri tre erano **404** (verificato
+ * sul sito live), mentre il footer ci linkava da ogni pagina, in ogni lingua.
+ *
+ * E IL FORM NON C'E' PIU'. C'era, e faceva questo:
+ *
+ *     const FORMSPREE_CONTACT = 'https://formspree.io/f/PLACEHOLDER_CONTACT_ID';
+ *
+ * Un ID segnaposto. Chi compilava quel form vedeva **"Messaggio inviato!"** e il
+ * messaggio non arrivava a nessuno: il fetch falliva, il `catch` faceva un submit
+ * nativo verso un endpoint inesistente, e la richiesta di un utente - magari una
+ * richiesta GDPR, che ha termini di legge - spariva.
+ *
+ * Un form che finge di consegnare e' peggio di nessun form: promette, e non
+ * mantiene. Finche' non c'e' un endpoint VERO, qui ci sono gli indirizzi email -
+ * che funzionano davvero (alias Cloudflare attivi) e che il destinatario puo'
+ * verificare col suo client di posta.
+ */
+import type { Translations, Locale } from '../i18n/index';
+import { localePath } from '../i18n/index';
+import Layout from '../layouts/Layout.astro';
+import Navbar from './Navbar.astro';
+import Footer from './Footer.astro';
+
+interface Props {
+  t: Translations;
+  lang: Locale;
+}
+
+const { t, lang } = Astro.props;
+const c = t.contact;
+
+/* Gli alias di plurifin.app, non i Gmail personali che stavano qui prima.
+   Il catch-all del dominio e' su DROP: un alias senza regola di routing perde
+   la posta IN SILENZIO. Questi quattro sono stati creati in S9/S10 - la verifica
+   via API dei tre di S10 (legal@, gdpr@, support@) e' ancora da fare. */
+const CONTATTI = [
+  { titolo: c.generalTitle, valore: 'info@plurifin.app', href: 'mailto:info@plurifin.app' },
+  { titolo: c.gdprTitle, valore: 'gdpr@plurifin.app', href: 'mailto:gdpr@plurifin.app' },
+  { titolo: c.pressTitle, valore: 'press@plurifin.app', href: 'mailto:press@plurifin.app' },
+  {
+    titolo: c.githubTitle,
+    valore: 'portfoliomanager-data',
+    href: 'https://github.com/lunapiena49/portfoliomanager-data',
+    esterno: true,
+  },
+];
+---
+<Layout
+  title={`${c.h1} — PluriFin`}
+  description={c.intro}
+  lang={lang}
+  section="company"
+>
+  <Navbar t={t} currentLang={lang} />
+
+  <main id="main">
+    <div class="wrap contact-wrap">
+      <p class="eyebrow">{c.eyebrow}</p>
+      <h1>{c.h1}</h1>
+      <p class="intro">{c.intro}</p>
+
+      <div class="cards">
+        {CONTATTI.map((k) => (
+          <div class="card">
+            <strong>{k.titolo}</strong>
+            {k.esterno ? (
+              <a href={k.href} rel="noopener noreferrer" target="_blank">{k.valore}</a>
+            ) : (
+              <a href={k.href}>{k.valore}</a>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <p class="privacy-note">
+        <a href={localePath(lang, 'privacy')}>{t.privacy.cta}</a>
+      </p>
+    </div>
+  </main>
+
+  <Footer t={t} currentLang={lang} />
+</Layout>
+
+<style>
+  .contact-wrap { padding: 64px 0 96px; max-width: 720px; }
+  .eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--text-3); margin: 0 0 10px;
+  }
+  h1 { margin: 0 0 14px; }
+  .intro { color: var(--text-2); font-size: 17px; line-height: 1.65; margin: 0 0 36px; }
+
+  .cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--divider);
+    border-radius: var(--radius);
+    padding: 16px 18px;
+  }
+  .card strong {
+    display: block; font-size: 12px; font-weight: 600; color: var(--text-3);
+    text-transform: uppercase; letter-spacing: .06em; margin-bottom: 5px;
+  }
+  .card a { font-size: 15px; font-weight: 500; color: var(--primary); text-decoration: none; }
+  .card a:hover { text-decoration: underline; }
+
+  .privacy-note { margin-top: 32px; font-size: 14px; }
+  .privacy-note a { color: var(--text-2); }
+
+  @media (max-width: 640px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+</style>
