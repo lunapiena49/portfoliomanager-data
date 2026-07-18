@@ -239,6 +239,24 @@ const g = t.company.gate;
     M.x = e.clientX; M.y = e.clientY; M.on = true;
   }, { passive: true });
 
+  /* Su touch il pointermove MUORE col pointercancel appena il browser
+     interpreta il gesto come pan (spec Pointer Events): il campo seguiva il
+     dito solo fino al takeover dello scroll - "si muove e poi si blocca"
+     (P0 S19, visto su smartphone vero, mai in emulazione: l'emulatore non
+     prende mai il controllo del gesto). I touchmove PASSIVI invece continuano
+     ad arrivare anche durante il pan: su touch il canale di M e' questo. */
+  addEventListener('touchstart', (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    M.x = t.clientX; M.y = t.clientY; M.on = true;
+  }, { passive: true });
+  addEventListener('touchmove', (e) => {
+    const t = e.touches[0];
+    if (!t) return;
+    M.x = t.clientX; M.y = t.clientY; M.on = true;
+  }, { passive: true });
+
+
   const cv = document.getElementById('field') as HTMLCanvasElement;
   const ctx = cv.getContext('2d')!;
   const lemPath = document.getElementById('lem') as unknown as SVGPathElement;
@@ -529,6 +547,29 @@ const g = t.company.gate;
   enterBtn.addEventListener('click', (e) => esci(e, enterBtn.href));
   skipBtn.addEventListener('click', (e) => esci(e, skipBtn.href));
 
+  /* ================= LA RESURREZIONE (bfcache) =================
+     Col back il bfcache ripristina il documento ESATTAMENTE com'era dopo
+     esci(): canvas azzerato da kill(), gateAlive=false, e il gate tenuto a
+     opacity 0 dall'animate() con fill:'forwards'. Risultato: pagina NERA
+     (P0 S19, smartphone vero; sul desktop capitava meno perche' il bfcache
+     e' meno aggressivo e un reload vero riparte da zero). pageshow con
+     event.persisted e' il punto di resurrezione definito dalla piattaforma:
+     si cancella l'animazione d'uscita, si ricostruisce il campo (build() con
+     exploding ancora true -> keep=false -> nodi A CASA) e si riavvia il
+     ciclo SOLO se era stato fermato (se il documento era vivo, il suo rAF
+     riprende da solo: niente doppio loop). */
+  addEventListener('pageshow', (e) => {
+    if (!(e as PageTransitionEvent).persisted) return;
+    const gate = document.getElementById('gate');
+    if (gate) for (const a of gate.getAnimations()) a.cancel();
+    build();
+    exploding = false;
+    if (!gateAlive) {
+      gateAlive = true;
+      requestAnimationFrame(frame);
+    }
+  });
+
   /* ================= LE SONDE (harness visivo) =================
      Tre funzioni in sola lettura. Nessuna e' chiamata dal ciclo di disegno:
      le chiama solo Playwright, dall'esterno. Costo per frame: zero.
@@ -553,6 +594,9 @@ const g = t.company.gate;
     gateAlive() { return gateAlive; },
     /** Il puntatore si e' MOSSO davvero, o e' il fantasma a meta' schermo? */
     pointerSeen() { return M.on; },
+    /** DOVE sta il puntatore per il campo (S19): con un dispatch touch
+     *  sintetico deve coincidere col punto del dito. Read-only come le altre. */
+    pointerAt() { return { x: M.x, y: M.y }; },
     nodeCount() { return nodes.length; },
   };
 </script>
