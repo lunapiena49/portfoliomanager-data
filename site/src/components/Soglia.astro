@@ -256,6 +256,19 @@ const g = t.company.gate;
     M.x = t.clientX; M.y = t.clientY; M.on = true;
   }, { passive: true });
 
+  /* Il dito si STACCA (touchend) o il gesto viene interrotto dal sistema
+     (touchcancel): allora M si SPEGNE e il campo torna a riposo. Senza questo
+     M.on resta true e il campo resta deformato all'ultima posizione del dito -
+     il mouse non ha bisogno del rilascio perche' il cursore resta sempre sullo
+     schermo, il dito invece si solleva (S19 residuo, visto su device vero: "si
+     muove ma non torna alla posizione"). Solo quando l'ULTIMO dito lascia
+     (touches vuoto), per non spegnere M in mezzo a un multi-touch. */
+  const releaseTouch = (e: TouchEvent) => {
+    if (e.touches.length === 0) M.on = false;
+  };
+  addEventListener('touchend', releaseTouch, { passive: true });
+  addEventListener('touchcancel', releaseTouch, { passive: true });
+
 
   const cv = document.getElementById('field') as HTMLCanvasElement;
   const ctx = cv.getContext('2d')!;
