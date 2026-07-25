@@ -228,14 +228,22 @@ const g = t.company.gate;
   /* Sotto i 420px le due colonne laterali non hanno piu' la larghezza di
      .skip (le tracce `1fr` non scendono sotto il proprio contenuto, quindi
      resterebbero asimmetriche e il centro tornerebbe a spostarsi, che e' il
-     difetto stesso). Si impila: la CTA resta centrata in entrambi i layout,
-     e .skip smette di essere in linea invece di comprimere il bottone.
-     Costo verticale ~30px, dentro il budget mobile misurato in S16 (la CTA
-     stava a 741-801px su 800 di fold PRIMA di quel fix, ora molto sopra). */
+     difetto stesso).
+     .skip esce dal FLUSSO invece di impilarsi. La prima versione lo impilava
+     sotto la CTA e il probe S16 "l intero ingresso sta nel primo viewport"
+     e' andato ROSSO: divisioni a 826px contro un fold di 800 su androidSmall.
+     Il commento di quella versione dichiarava "dentro il budget mobile
+     misurato in S16" - una dichiarazione mai misurata, e la misura l'ha
+     smentita. Fuori dal flusso il costo verticale e' ZERO: il bottone resta
+     centrato per costruzione (colonna unica) e .skip si appoggia a destra
+     senza spostare nulla ne' in orizzontale ne' in verticale. */
   @media (max-width: 420px) {
-    .cta-row { grid-template-columns: auto; justify-items: center; row-gap: 4px; }
+    .cta-row { position: relative; grid-template-columns: auto; justify-items: center; }
     .cta-row .enter { grid-column: 1; }
-    .cta-row .skip { grid-column: 1; justify-self: center; margin-left: 0; }
+    .cta-row .skip {
+      grid-column: 1; position: absolute; right: 0; top: 50%;
+      transform: translateY(-50%); margin-left: 0;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -325,7 +333,19 @@ const g = t.company.gate;
   ];
 
   function build() {
-    DPR = Math.min(2, devicePixelRatio || 1);
+    /* Tetto DPR 2 -> 3 (S35). Il marchio non e' un'immagine: e' questo canvas,
+       quindi la sua nitidezza E' la risoluzione del backing store. Su schermi
+       3x - la maggioranza degli Android di fascia media e alta - il tetto a 2
+       rasterizzava a due terzi della densita' fisica, ed era una delle due
+       cause vere del "logo sfocato" segnalato dall'utente in S23 (l'ipotesi a
+       verbale, "il canvas non e' DPR-aware", era FALSA: lo era gia').
+       Il prezzo e' 2,25x pixel da disegnare su quei device. E' accettato qui e
+       NON e' misurato dall'harness: @metrics guarda FCP/LCP/CLS/peso, non il
+       frame rate di un canvas animato, e il sandbox non ha uno schermo 3x. Se
+       un device reale mostra un calo di fluidita' sulla soglia, il sospetto
+       numero uno e' questa riga - non allargare oltre 3 senza misurare su
+       hardware vero. */
+    DPR = Math.min(3, devicePixelRatio || 1);
     W = cv.clientWidth; H = cv.clientHeight;
     if (!W || !H) return;
     cv.width = W * DPR; cv.height = H * DPR;
