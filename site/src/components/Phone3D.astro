@@ -170,8 +170,32 @@
     position: relative; width: 258px; aspect-ratio: 9 / 19;
     transform-style: preserve-3d;
     transform: rotateX(calc(var(--rx, 4) * 1deg)) rotateY(calc(var(--ry, -15) * 1deg));
-    transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
-    will-change: transform;
+  }
+
+  /* IL `will-change` VA DICHIARATO SOLO DOVE IL TILT ESISTE DAVVERO.
+     Lo script installa i listener solo se `(hover: hover) and (pointer: fine)`
+     (v. `const fine` in fondo al file): su un touch --rx/--ry non cambiano MAI
+     e il telefono e' un oggetto STATICO. Dichiarare `will-change: transform`
+     anche li' e' una PROMESSA FALSA al compositor, e si paga: `#phone` ha 55
+     figli in un contesto `preserve-3d`, ognuno un quad da ordinare in
+     profondita'. Misurato sul live (2026-07-26): box 253x558 CSS, cioe' 4,85 MB
+     di texture per layer a DPR 3 e **266,8 MB** in tutto. Su un Android di
+     fascia media quel budget non c'e': il compositor scarta il subtree (il
+     telefono diventa NERO) e lo scroll lo ri-rasterizza (gli SCATTI). Sono i
+     due sintomi che l'utente riporta dalla S18, ed erano il "candidato A" mai
+     verificato del device debug.
+     La media query e' la STESSA CONDIZIONE del gate JS: se una delle due
+     cambia, l'altra va cambiata con lei (c'e' un probe che lo sorveglia). */
+  @media (hover: hover) and (pointer: fine) {
+    .phone3d {
+      transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
+      will-change: transform;
+    }
+    .phone3d :global(.p-glare),
+    .phone3d :global(.p-btn-glare) {
+      will-change: transform;
+      transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
+    }
   }
   .phone3d.live { transition: transform .08s linear; }
   .phone3d.live :global(.p-glare),
@@ -211,7 +235,6 @@
   .phone3d :global(.p-btn-head) { position: absolute; left: 50%; border-radius: 4px; overflow: hidden; }
   .phone3d :global(.p-btn-glare) {
     position: absolute; top: -60%; left: -60%; width: 220%; height: 220%;
-    will-change: transform; transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
     transform: translate3d(calc((var(--ry, -15) + 15) * -1.15px),
                            calc((var(--rx, 4) - 4) * .85px), 0);
     background: linear-gradient(103deg,
@@ -263,7 +286,6 @@
   }
   .p-glare {
     position: absolute; top: -45%; left: -45%; width: 190%; height: 190%;
-    will-change: transform; transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
     transform: translate3d(calc((var(--ry, -15) + 15) * -3.231px),
                            calc((var(--rx, 4) - 4) * 3.444px), 0);
     background: linear-gradient(112deg,
