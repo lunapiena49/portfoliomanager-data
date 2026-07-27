@@ -1,4 +1,17 @@
 ---
+/* LE TRE DENSITA' DELLA SCOCCA COTTA, IMPORTATE E NON REFERENZIATE A MANO.
+   Stavano in `public/assets/`, dove Astro copia i file verbatim: l'URL restava
+   `/assets/phone-shell@3x.webp` mentre il contenuto cambiava. Col sito servito
+   a `Cache-Control: max-age=14400`, chi aveva gia' aperto la pagina teneva
+   l'immagine VECCHIA per quattro ore senza chiedere niente al server - ed e'
+   successo davvero: dopo la riparazione della cottura l'asset era giusto
+   all'origine e il telefono dell'utente era ancora rotto.
+   Importate da `src/`, Astro le emette con un suffisso derivato dal CONTENUTO:
+   una cottura nuova ha un URL nuovo e la copia stantia non e' piu'
+   raggiungibile da nessuno. */
+import shell1x from '../assets/phone-shell-1x.webp';
+import shell2x from '../assets/phone-shell-2x.webp';
+import shell3x from '../assets/phone-shell-3x.webp';
 /**
  * IL TELEFONO 3D - divisione Finance (Portfolio Manager). Porting del v7.
  *
@@ -29,8 +42,8 @@
   <!-- La scocca COTTA: si vede solo dove il tilt non esiste (v. .p-baked nel
        CSS). Non e' un disegno alternativo, e' uno scatto del solido stesso,
        prodotto da tools/visual/bake_phone_shell.mjs dalla build reale. -->
-  <img class="p-baked" src="/assets/phone-shell@2x.webp"
-       srcset="/assets/phone-shell@1x.webp 1x, /assets/phone-shell@2x.webp 2x, /assets/phone-shell@3x.webp 3x"
+  <img class="p-baked" src={shell2x.src}
+       srcset={`${shell1x.src} 1x, ${shell2x.src} 2x, ${shell3x.src} 3x`}
        alt="" aria-hidden="true" width="300" height="589" decoding="async" />
   <div class="phone3d" id="phone">
     <!-- lamine dello spessore e tasti: iniettati da script (la geometria e'
