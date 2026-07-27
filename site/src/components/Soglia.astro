@@ -114,7 +114,15 @@ const g = t.company.gate;
   .gate-inner {
     position: relative; z-index: 4; width: 100%; max-width: 860px; text-align: center;
     display: flex; flex-direction: column; align-items: center;
+    /* `svh`, non `vh` (S44). Il contenitore `.gate` e' dimensionato in `100svh`
+       - il viewport con le barre del browser ESTESE - mentre il suo contenuto
+       si misurava in `vh`, che su mobile e' il viewport con le barre RITRATTE.
+       Due unita' diverse nello stesso blocco: su Chrome Android sono 616 contro
+       560, e la composizione nasce gia' fuori misura. La prima riga resta come
+       ripiego per i browser che `svh` non lo conoscono (< 2022): senza, l'intera
+       dichiarazione sarebbe invalida e il padding cadrebbe a zero. */
     padding-top: min(44vh, 400px);
+    padding-top: min(44svh, 400px);
   }
   .wordmark {
     margin: 0; font-size: clamp(48px, 8.8vw, 98px);
@@ -209,7 +217,7 @@ const g = t.company.gate;
   .sep { width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: .5; }
 
   @media (max-width: 940px) {
-    .gate-inner { padding-top: min(36vh, 290px); }
+    .gate-inner { padding-top: min(36vh, 290px); padding-top: min(36svh, 290px); }
   }
 
   /* Composizione mobile (S16). Misurato a 360x800 PRIMA del fix: la CTA
@@ -218,7 +226,7 @@ const g = t.company.gate;
      CTA stiano nel PRIMO viewport, senza scroll ne' attese. I margini sono
      budget verticale, non estetica: se li allarghi, rimisura. */
   @media (max-width: 640px) {
-    .gate-inner { padding-top: min(29vh, 232px); }
+    .gate-inner { padding-top: min(29vh, 232px); padding-top: min(29svh, 232px); }
     .blurb { margin-top: 18px; max-width: 46ch; }
     .ln > :global(span) { font-size: 15px; line-height: 1.55; }
     .cta-row { margin-top: 28px; }
@@ -244,6 +252,33 @@ const g = t.company.gate;
       grid-column: 1; position: absolute; right: 0; top: 50%;
       transform: translateY(-50%); margin-left: 0;
     }
+  }
+
+  /* SCHERMI BASSI - IL FOLD VERO DEL BROWSER MOBILE (S44, decisione utente).
+     Tutte le media query di questo file guardano la LARGHEZZA. L'altezza non
+     l'ha mai guardata nessuno, e nemmeno l'harness: la sua matrice non ha un
+     solo viewport sotto 800px di altezza, perche' usa le altezze di SCHERMO
+     come altezze di VIEWPORT. Chrome Android si prende 80px CSS fra barra di
+     stato e barra URL - misurato su device vero: schermo 360x640, viewport
+     360x560 - e in quello spazio la CTA "Entra" cadeva a 572,3-632,7px, cioe'
+     FUORI, con il test "l intero ingresso sta nel primo viewport" verde perche'
+     misurava a 360x800.
+     Qui si compatta cio' che e' budget verticale e NON contenuto: nessun testo
+     accorciato, nessuna delle sei lingue toccata. Misurato a 360x560:
+     padding -28, kicker -8, blurb -6, interlinea -13,5, CTA -10 = -65,5px, che
+     porta il fondo della CTA da 616,4 a ~551 dentro un fold di 560.
+     Le divisioni restano sotto il fold: e' dichiarato, non dimenticato - farle
+     entrare vorrebbe dire accorciare i testi in sei lingue.
+     La soglia e' 640 e non 560 perche' deve scattare PRIMA del caso peggiore;
+     a 720 (Galaxy 360x800 meno le barre) la CTA e' gia' dentro e la query non
+     serve. Nessun viewport della matrice la attiva: le baseline non si muovono. */
+  @media (max-height: 640px) {
+    .gate-inner { padding-top: min(24vh, 232px); padding-top: min(24svh, 232px); }
+    .kicker { margin-top: 14px; }
+    .blurb { margin-top: 12px; }
+    .ln > :global(span) { line-height: 1.45; }
+    .cta-row { margin-top: 18px; }
+    .divisions { margin-top: 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -307,8 +342,38 @@ const g = t.company.gate;
   const lemPath = document.getElementById('lem') as unknown as SVGPathElement;
   const LEN = lemPath.getTotalLength();
   const spot = document.getElementById('spot') as HTMLElement;
+  const wm = document.getElementById('wordmark')!;
 
   const NODES = 170, HALO_PER_NODE = 3;
+
+  /* La DISPERSIONE degli aloni, in px SCHERMO (non scalati da SC). Costanti
+     nominate e non letterali sparsi dentro build() perche' da qui esce
+     GAP_MARCHIO: i numeri sono ACCOPPIATI e devono muoversi insieme. Se un
+     domani si allarga la semina delle particelle, il respiro del marchio si
+     allarga da solo - altrimenti il difetto S44 tornerebbe con la sonda ancora
+     verde, che e' la trappola dei presidi ciechi di S43. */
+  const HALO_OFF_MIN = 3, HALO_OFF_SPAN = 15;   // distanza del centro dal nodo
+  const HALO_R_MIN = .7, HALO_R_SPAN = 1.2;     // raggio della particella
+
+  /* Quanto respiro deve restare fra il fondo della lemniscata e la cima del
+     wordmark. NON e' un numero estetico: e' la dispersione degli aloni A
+     RIPOSO - offset massimo piu' raggio massimo = 19,9px - piu' 2px per
+     l'arrotondamento subpixel del canvas. Sotto quella soglia le particelle
+     finiscono SULLE LETTERE.
+
+     E' un budget di QUIETE, e va detto perche' un oracolo indipendente ha
+     misurato i due casi in cui non lo e': a riposo e senza puntatore il
+     massimo osservato su 30 misure e' 18,93px (margine reale 3,07); ma col
+     DITO sul marchio la repulsione dei nodi porta il gap fino a 8,98px su
+     androidSmall, e durante il volo d'ingresso gli aloni scavalcano di
+     centinaia di px. Nessuno dei due e' un difetto - il campo che reagisce al
+     tocco e' la soglia stessa, e il volo dura meno di un secondo - ma
+     entrambi stanno FUORI da questo numero, che descrive lo stato in cui il
+     marchio si guarda, non quello in cui lo si tocca. (Il caso del volo con
+     `prefers-reduced-motion` invece ERA un difetto, ed e' chiuso: v. la
+     semina degli aloni in build().) */
+  const HALO_PORTATA = HALO_OFF_MIN + HALO_OFF_SPAN + HALO_R_MIN + HALO_R_SPAN;
+  const GAP_MARCHIO = Math.ceil(HALO_PORTATA) + 2; // 19,9 -> 20 -> 22
   let W = 0, H = 0, DPR = 1;
   let nodes: Array<{ hx: number; hy: number; x: number; y: number; vx: number; vy: number }> = [];
   let halos: Array<{ n: number; ox: number; oy: number; x: number; y: number; vx: number; vy: number; r: number; ph: number; sp: number }> = [];
@@ -351,11 +416,67 @@ const g = t.company.gate;
     cv.width = W * DPR; cv.height = H * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
 
-    SC = Math.min(W * .74 / 400, H * .40 / 210);
     CX = W / 2;
-    // Su schermi stretti la lemniscata sale (.23H invece di .30H): il blocco
-    // testo mobile parte a ~26vh e a .30H i due si sovrappongono (S16).
-    CY = Math.min(H * (W <= 640 ? .23 : .30), 260);
+
+    /* IL MARCHIO ADDOSSO AL WORDMARK (S44) - segnalazione utente "logo sfocato
+       e non nitido", riprodotta su Chrome Android VERO (LDPlayer, DPR 3).
+       Non era nitidezza: era una COLLISIONE. Misurata sul device, il fondo
+       della lemniscata cadeva a 219,7px e la cima del wordmark a 208,6 -
+       **11,1px CSS di sovrapposizione**, 33 pixel fisici: le lettere finivano
+       DENTRO l'infinito, sopra il tratto luminoso e le particelle. Un contorno
+       che non ha mai fondo pulito si legge come "impastato", ed e' esattamente
+       la parola che l'utente ha usato.
+
+       CAUSA A MONTE: le due meta' del marchio erano ancorate a grandezze
+       DIVERSE e non coordinate. La lemniscata a `H` = altezza del CANVAS (che
+       segue il gate, quindi il CONTENUTO); il wordmark a `min(29vh, 232px)`,
+       cioe' al VIEWPORT. Finche' i due coincidono (headless: gate 800 =
+       viewport 800) la distanza sembra stabile; su Chrome Android le barre si
+       prendono **80px CSS** (240 pixel fisici a DPR 3), il viewport scende a
+       560 e le due ancore divergono: misurato sul device, il padding cala di
+       53,4px (232 -> 178,64 = 0,29*616, cioe' il viewport GRANDE) mentre CY
+       cala di 12,2 (190 -> 177,8). Nessun viewport dell'harness aveva
+       un'altezza sotto 800: il presidio misurava un'altezza che il device non
+       concede mai.
+
+       LA CURA: una sola sorgente di verita' per la geometria verticale. Il
+       canvas LEGGE dove il layout ha messo il wordmark e ci si tiene sopra.
+       Non c'e' circolarita': il canvas e' `position:absolute`, non entra nel
+       flusso, quindi non puo' spostare cio' che misura.
+
+       E LA MISURA COMANDA ANCHE LA TAGLIA, non solo la posizione. La prima
+       versione di questa cura clampava solo `CY` e teneva `SC` fisso: dove lo
+       spazio sopra il wordmark non bastava, il clamp non poteva far altro che
+       cedere, e il gap tornava NEGATIVO. Un oracolo indipendente l'ha
+       misurato dove nessun test guardava - **il telefono RUOTATO**: a 640x280
+       il gap era **-30,8px**, quasi tre volte peggio del difetto verticale che
+       ha aperto la sessione, e lo stesso accadeva a 800x310 e 844x310. Stessa
+       radice su finestre desktop basse (1024x600 -> 16,5px, 1440x620 -> 18,2:
+       sotto i 20 che l'harness pretende).
+       Quindi: se il marchio non ci sta, **si rimpicciolisce**. `spazioSopra` e'
+       cio' che il layout concede davvero, e la lemniscata non puo' essere piu'
+       alta di quello. Cosi' il tetto non ha mai bisogno di cedere e il
+       pavimento smette di essere l'ultima parola: e' il rimedio a monte, non
+       un clamp che nasconde il sintomo.
+
+       Misurato su tutti e sette i viewport della matrice: delta 0,0px - non
+       cambia una riga di quello che gia' funziona, perche' li' lo spazio
+       abbonda e il limite non morde. */
+    const MARGINE_ALTO = 8;                   // respiro fra il bordo del gate e il marchio
+    const ALTEZZA_PATH = 126;                 // i punti del path: y in [42,168]
+    const spazioSopra = (wm.getBoundingClientRect().top - cv.getBoundingClientRect().top)
+                      - GAP_MARCHIO - MARGINE_ALTO;
+    /* Il pavimento di SC non e' estetica: sotto una certa taglia il marchio non
+       si legge piu'. Se nemmeno cosi' ci sta, meglio un marchio piccolo e
+       leggibile che uno sovrapposto alle lettere - ed e' il caso che la sonda
+       del respiro continua a sorvegliare. */
+    SC = Math.max(.2, Math.min(W * .74 / 400, H * .40 / 210, spazioSopra / ALTEZZA_PATH));
+
+    const semiAltezza = 63 * SC;
+    const design = Math.min(H * (W <= 640 ? .23 : .30), 260);
+    const tetto = (wm.getBoundingClientRect().top - cv.getBoundingClientRect().top)
+                - GAP_MARCHIO - semiAltezza;
+    CY = Math.max(semiAltezza + MARGINE_ALTO, Math.min(design, tetto));
 
     const keep = nodes.length === NODES && !exploding;
     const old = nodes;
@@ -371,13 +492,24 @@ const g = t.company.gate;
     halos = [];
     for (let i = 0; i < NODES; i++) {
       for (let k = 0; k < HALO_PER_NODE; k++) {
-        const a = Math.random() * 6.283, d = 3 + Math.random() * 15;
+        const a = Math.random() * 6.283, d = HALO_OFF_MIN + Math.random() * HALO_OFF_SPAN;
+        const ox = Math.cos(a) * d, oy = Math.sin(a) * d;
+        /* Il volo d'ingresso: gli aloni nascono lontanissimi (fino a `max(W,H)*.8`)
+           e convergono. Con `prefers-reduced-motion` NON devono volare, e non e'
+           un vezzo: le lettere del wordmark sono opache da t=0 (la regola reduce
+           forza `opacity:1`) mentre le particelle attraversavano ancora lo
+           schermo - un oracolo indipendente ha misurato **-568,6px** di
+           scavalcamento nella finestra 0-500ms, cioe' quasi un secondo di
+           coriandoli SULLE lettere per chi ha chiesto meno movimento. Nascono
+           gia' a casa. */
+        const casa = nodes[i];
         const sa = Math.random() * 6.283, sr = Math.max(W, H) * (.3 + Math.random() * .5);
         halos.push({
-          n: i, ox: Math.cos(a) * d, oy: Math.sin(a) * d,
-          x: CX + Math.cos(sa) * sr, y: CY + Math.sin(sa) * sr,
+          n: i, ox, oy,
+          x: reduce ? casa.hx + ox : CX + Math.cos(sa) * sr,
+          y: reduce ? casa.hy + oy : CY + Math.sin(sa) * sr,
           vx: 0, vy: 0,
-          r: .7 + Math.random() * 1.2, ph: Math.random() * 6.283, sp: .4 + Math.random() * .8,
+          r: HALO_R_MIN + Math.random() * HALO_R_SPAN, ph: Math.random() * 6.283, sp: .4 + Math.random() * .8,
         });
       }
     }
@@ -550,13 +682,17 @@ const g = t.company.gate;
   new ResizeObserver(() => { if (gateAlive) build(); }).observe(document.getElementById('gate')!);
 
   /* wordmark: una lettera per <span>, ognuna col suo ritardo */
-  const wm = document.getElementById('wordmark')!;
   'PluriFin'.split('').forEach((ch, i) => {
     const s = document.createElement('span');
     s.textContent = ch;
     s.style.animationDelay = (1100 + i * 55) + 'ms';
     wm.appendChild(s);
   });
+  /* Il primo build() e' girato su un <h1> ANCORA VUOTO. Il suo bordo superiore
+     e' gia' quello giusto (e' il primo figlio del blocco, con margin 0), ma
+     dipendere da quel dettaglio significherebbe legare la geometria del marchio
+     all'ordine di due istruzioni. Si rimisura, e costa un frame. */
+  build();
   requestAnimationFrame(() => document.body.classList.add('go'));
 
   /* ================= L'USCITA =================
@@ -655,5 +791,30 @@ const g = t.company.gate;
      *  sintetico deve coincidere col punto del dito. Read-only come le altre. */
     pointerAt() { return { x: M.x, y: M.y }; },
     nodeCount() { return nodes.length; },
+    /** Il rettangolo REALMENTE occupato dai nodi della lemniscata, in px CSS
+     *  relativi al canvas (S44). Serve alla sonda che pretende respiro fra il
+     *  marchio grafico e il wordmark: legge le posizioni VERE dei nodi - molla
+     *  e repulsione comprese - invece di ricopiare la formula di build(). Un
+     *  test che ricalcola la formula che vuole verificare non verifica niente:
+     *  concorderebbe con l'errore. */
+    markBounds() {
+      /* Senza nodi NON si restituisce un rettangolo: si alza. Con `nodes` vuoto
+         i minimi resterebbero a +/-Infinity, il gap calcolato a valle sarebbe
+         +Infinity e la sonda dell'harness passerebbe A VUOTO - verde senza aver
+         guardato niente, che e' il difetto peggiore di tutti (S43). `nodes` e'
+         vuoto solo se build() non ha mai visto un canvas dimensionato: e' una
+         condizione anomala, e va detta. */
+      if (nodes.length === 0) {
+        throw new Error('markBounds: nessun nodo - la lemniscata non e stata costruita');
+      }
+      let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+      for (const n of nodes) {
+        if (n.x < x0) x0 = n.x;
+        if (n.x > x1) x1 = n.x;
+        if (n.y < y0) y0 = n.y;
+        if (n.y > y1) y1 = n.y;
+      }
+      return { x0, y0, x1, y1 };
+    },
   };
 </script>
