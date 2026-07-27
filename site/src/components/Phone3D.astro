@@ -26,6 +26,12 @@
 <div class="phone-wrap" id="phoneWrap">
   <div class="p-shadow" aria-hidden="true"></div>
   <div class="p-contact" aria-hidden="true"></div>
+  <!-- La scocca COTTA: si vede solo dove il tilt non esiste (v. .p-baked nel
+       CSS). Non e' un disegno alternativo, e' uno scatto del solido stesso,
+       prodotto da tools/visual/bake_phone_shell.mjs dalla build reale. -->
+  <img class="p-baked" src="/assets/phone-shell@2x.webp"
+       srcset="/assets/phone-shell@1x.webp 1x, /assets/phone-shell@2x.webp 2x, /assets/phone-shell@3x.webp 3x"
+       alt="" aria-hidden="true" width="300" height="589" decoding="async" />
   <div class="phone3d" id="phone">
     <!-- lamine dello spessore e tasti: iniettati da script (la geometria e'
          calcolata, non disegnata) -->
@@ -186,7 +192,36 @@
      verificato del device debug.
      La media query e' la STESSA CONDIZIONE del gate JS: se una delle due
      cambia, l'altra va cambiata con lei (c'e' un probe che lo sorveglia). */
+  /* ---- LA SCOCCA COTTA (S42) ----
+     La prima cura (il will-change condizionale) ha tolto la PROMESSA al
+     compositor ma non i 55 quad, e sul device dell'utente il telefono era
+     ancora in affanno: misurato, non supposto. I quad sono strutturali al
+     `preserve-3d`, quindi l'unico modo di toglierli e' non avere il solido
+     dove non serve - e su touch non serve, perche' li' il tilt non esiste e
+     la scocca e' un'immagine ferma che si paga come un solido vivo.
+     Restano vivi `.p-face` (l'app: il saldo che sale, il grafico che si
+     disegna, le righe che entrano) e `.p-glass` (il riflesso, che va SOPRA
+     lo schermo): da 55 superfici a 2.
+     L'ALLINEAMENTO NON E' CALCOLATO, E' PER COSTRUZIONE: l'immagine e' uno
+     scatto del solido nella sua stessa proiezione, ripreso su una fascia
+     centrata sul telefono. 300x589 sono le misure di quella fascia e VIVONO
+     ANCHE in bake_phone_shell.mjs (BAKE_W e l'altezza del wrapper: 14 + 545
+     + 30, con 545 = 258 * 19/9). Cambiarne una sola sposta l'immagine. */
+  .p-baked {
+    position: absolute; left: 50%; top: 0;
+    width: 300px; height: 589px; margin-left: -150px;
+    pointer-events: none;
+  }
+
+  /* Il DEFAULT e' il caso senza tilt - il telefono, dove il difetto morde.
+     Cio' che l'immagine gia' contiene non si disegna una seconda volta; le
+     lamine e i tasti non vengono nemmeno CREATI (v. la guardia nello script). */
+  .p-shadow, .p-contact, .p-back { display: none; }
+
   @media (hover: hover) and (pointer: fine) {
+    .p-baked { display: none; }
+    .p-shadow, .p-contact { display: block; }
+    .p-back { display: block; }
     .phone3d {
       transition: transform .9s cubic-bezier(0.34, 1.4, 0.5, 1);
       will-change: transform;
@@ -449,13 +484,21 @@
        il profilo curva (agli estremi) e non sprecano nodi sulla banda dritta.
        La luce cresce verso il fronte: le lamine dello smusso frontale sono le
        piu' chiare e, viste di taglio, diventano la riga lucida sul bordo. */
+    /* IL SOLIDO SI COSTRUISCE SOLO DOVE IL TILT ESISTE (S42).
+       Su touch il telefono e' fermo e la sua scocca e' gia' nell'immagine
+       cotta (.p-baked): crearla comunque significherebbe pagare 52 superfici
+       in un contesto preserve-3d - misurate 4,85 MB di texture ciascuna a
+       DPR 3 - per disegnare cio' che l'immagine mostra gia'. Lo schermo e il
+       riflesso restano vivi in ogni caso: sono 2 elementi, non 52. */
+    const SOLIDO = fine;
+
     const N = 34, ZMAX = 14, EDGE = 4.5, R0 = 36;
     const MIX = (a: number[], b: number[], t: number) => a.map((v, i) => Math.round(v + (b[i] - v) * t));
     const RGB = (c: number[]) => `rgb(${c[0]},${c[1]},${c[2]})`;
     const DARK = [[14,18,25], [35,41,47], [23,28,36], [12,16,21]];              /* metallo in ombra */
     const LITE = [[112,122,137], [172,182,196], [128,137,150], [92,100,114]];   /* smusso in luce */
 
-    for (let i = 0; i < N; i++) {
+    for (let i = 0; SOLIDO && i < N; i++) {
       const t = i / (N - 1);
       const z = ZMAX * Math.sin(Math.PI * (t - .5));
       const inset = EDGE * Math.pow(Math.abs(z) / ZMAX, 3);
@@ -514,7 +557,7 @@
     const add = (el: HTMLElement) => phone.insertBefore(el, pFace);
     const div = (cls: string) => { const d = document.createElement('div'); d.className = cls; return d; };
 
-    for (const b of BTNS) {
+    for (const b of SOLIDO ? BTNS : []) {
       /* LO ZOCCOLO: la sede scavata nel fianco. Sepolto (x < HALF), piu' grande
          del tasto di BG per lato, quasi nero. Il bordo che se ne vede intorno
          alla testa e' la fessura; l'alone scuro all'esterno e' l'ombra di
