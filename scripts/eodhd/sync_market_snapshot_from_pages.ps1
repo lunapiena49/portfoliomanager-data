@@ -52,7 +52,11 @@ $files = @(
 )
 
 Write-Step "Preparing output directory"
-New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+try {
+    New-Item -ItemType Directory -Path $OutputDir -Force | Out-Null
+} catch {
+    throw "Cannot create $OutputDir : $($_.Exception.Message)"
+}
 Write-Ok "Output: $OutputDir"
 
 Write-Step "Downloading snapshot JSONs from $BaseUrl"
