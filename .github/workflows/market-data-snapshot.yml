@@ -12,7 +12,13 @@ on:
     # 2026-05-07 burned ~100k EODHD calls across cancelled mid-runs.
     # Only re-trigger when EODHD pipeline code or this workflow changes.
     paths:
-      - 'scripts/eodhd/**'
+      # S53 (2026-07-30): narrowed from 'scripts/eodhd/**'. That glob also
+      # matched sync_market_snapshot_from_pages.ps1 - a LOCAL mirror helper
+      # that never runs in this pipeline - so merging its fix (PR #51) fired
+      # a full 8-market rebuild at 15:58 UTC, which 403ed on every market
+      # and opened issue #52. The trigger now names the one file this
+      # pipeline actually executes.
+      - 'scripts/eodhd/build_daily_market_snapshot.py'
       - '.github/workflows/market-data-snapshot.yml'
   schedule:
     # Daily after US market close (UTC-based schedule)
