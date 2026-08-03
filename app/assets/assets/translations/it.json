@@ -38,7 +38,7 @@
     "copied": "Copiato negli appunti",
     "delete_confirm": {
       "title": "Conferma eliminazione",
-      "message": "Vuoi eliminare {item}? L'operazione non puo essere annullata.",
+      "message": "Vuoi eliminare {item}? L'operazione non può essere annullata.",
       "confirm": "Elimina"
     }
   },
@@ -62,13 +62,13 @@
       },
       "tracking": {
         "title": "Prezzi live e performance",
-        "description": "Monitora prezzi posizioni con badge fonte: snapshot pubblici giornalieri (gratis), EODHD real-time o FMP fallback se aggiungi le tue chiavi, piu' Gemini AI per analisi opzionali."
+        "description": "Monitora prezzi posizioni con badge fonte: snapshot pubblici giornalieri (gratis), EODHD real-time o FMP fallback se aggiungi le tue chiavi, più Gemini AI per analisi opzionali."
       },
       "goals": {
         "title": "Obiettivi di investimento",
         "description": "Pianifica obiettivi finanziari di breve, medio e lungo termine con tracking del progresso e ribilanciamento guidato.",
         "content": "Pianifica obiettivi finanziari di breve, medio e lungo termine adatti al tuo livello.",
-        "details": "**Cosa sono gli obiettivi**\nUn obiettivo e' un traguardo finanziario monetizzabile (importo target + scadenza) che l'app tiene tracciato accanto al portafoglio reale. Niente viene inviato online: tutti gli obiettivi vivono solo sul tuo dispositivo.\n\n**Tre livelli di esperienza**\nPer non sovraccaricare i nuovi utenti con il gergo finanziario, l'app raggruppa i 20 modelli di obiettivo in tre livelli:\n\n- **Base (entry level)** — Fondo emergenza, Risparmio generico, Estinzione debiti, Grande acquisto, Viaggi, Matrimonio, Famiglia / figli, Istruzione. Obiettivi concreti di breve-medio termine, ideali per chi si avvicina al risparmio strutturato per la prima volta.\n- **Intermedio** — Casa, Auto, Pensione, Rendita passiva, Crescita portafoglio, Personalizzato. Obiettivi a piu lungo orizzonte che richiedono pianificazione mensile costante e composizione del rendimento.\n- **Esperto** — Pensione anticipata (FIRE), Reddito da dividendi, Target diversificazione, Gestione rischio, Ottimizzazione fiscale, Pianificazione successoria. Obiettivi di costruzione e protezione del patrimonio per investitori avanzati.\n\n**Stati di un obiettivo**\nattivo, completato, in pausa, annullato. La transizione a 'completato' avviene automaticamente quando l'importo accumulato raggiunge il target.\n\n**Campi del form**\n- Tipo (con suggerimento di orizzonte temporale)\n- Nome e descrizione\n- Importo target e valuta\n- Importo gia accumulato\n- Data target (opzionale, pre-compilata in base al tipo)\n- Contributo mensile (opzionale)\n\n**Metriche calcolate**\n- Percentuale di progresso e importo residuo\n- Mesi mancanti alla data target\n- Contributo mensile richiesto per arrivare in tempo\n- Flag 'on-track' se contributo attuale >= contributo richiesto\n\n**Privacy**\nGli obiettivi sono salvati nella Hive box locale goals. Nessun obiettivo viene mai inviato a server esterni, nemmeno alle chiavi API attive. Il reset dati elimina anche tutti gli obiettivi.\n\n**Workflow consigliato per ogni livello**\n- *Base*: Crea per primo un Fondo emergenza pari a 3-6 mesi di spese fisse. Affianca un obiettivo di Risparmio per progetti specifici. Abbi pazienza: la regolarita' del contributo mensile conta piu' del rendimento.\n- *Intermedio*: Aggiungi obiettivi di Pensione e Casa con orizzonte 5-30 anni. Imposta un'allocazione target e collega il modulo Ribilanciamento per allinearti.\n- *Esperto*: Crea obiettivi FIRE / Reddito da dividendi / Diversificazione e usa il glossario per definire bande di tolleranza, max drawdown ammesso e regola del 4% per il safe withdrawal rate."
+        "details": "**Cosa sono gli obiettivi**\nUn obiettivo è un traguardo finanziario monetizzabile (importo target + scadenza) che l'app tiene tracciato accanto al portafoglio reale. Niente viene inviato online: tutti gli obiettivi vivono solo sul tuo dispositivo.\n\n**Tre livelli di esperienza**\nPer non sovraccaricare i nuovi utenti con il gergo finanziario, l'app raggruppa i 20 modelli di obiettivo in tre livelli:\n\n- **Base (entry level)** — Fondo emergenza, Risparmio generico, Estinzione debiti, Grande acquisto, Viaggi, Matrimonio, Famiglia / figli, Istruzione. Obiettivi concreti di breve-medio termine, ideali per chi si avvicina al risparmio strutturato per la prima volta.\n- **Intermedio** — Casa, Auto, Pensione, Rendita passiva, Crescita portafoglio, Personalizzato. Obiettivi a più lungo orizzonte che richiedono pianificazione mensile costante e composizione del rendimento.\n- **Esperto** — Pensione anticipata (FIRE), Reddito da dividendi, Target diversificazione, Gestione rischio, Ottimizzazione fiscale, Pianificazione successoria. Obiettivi di costruzione e protezione del patrimonio per investitori avanzati.\n\n**Stati di un obiettivo**\nattivo, completato, in pausa, annullato. La transizione a 'completato' avviene automaticamente quando l'importo accumulato raggiunge il target.\n\n**Campi del form**\n- Tipo (con suggerimento di orizzonte temporale)\n- Nome e descrizione\n- Importo target e valuta\n- Importo già accumulato\n- Data target (opzionale, pre-compilata in base al tipo)\n- Contributo mensile (opzionale)\n\n**Metriche calcolate**\n- Percentuale di progresso e importo residuo\n- Mesi mancanti alla data target\n- Contributo mensile richiesto per arrivare in tempo\n- Flag 'on-track' se contributo attuale >= contributo richiesto\n\n**Privacy**\nGli obiettivi sono salvati nella Hive box locale goals. Nessun obiettivo viene mai inviato a server esterni, nemmeno alle chiavi API attive. Il reset dati elimina anche tutti gli obiettivi.\n\n**Workflow consigliato per ogni livello**\n- *Base*: Crea per primo un Fondo emergenza pari a 3-6 mesi di spese fisse. Affianca un obiettivo di Risparmio per progetti specifici. Abbi pazienza: la regolarità del contributo mensile conta più del rendimento.\n- *Intermedio*: Aggiungi obiettivi di Pensione e Casa con orizzonte 5-30 anni. Imposta un'allocazione target e collega il modulo Ribilanciamento per allinearti.\n- *Esperto*: Crea obiettivi FIRE / Reddito da dividendi / Diversificazione e usa il glossario per definire bande di tolleranza, max drawdown ammesso e regola del 4% per il safe withdrawal rate."
       },
       "market": {
         "title": "Top mover globali gratis",
@@ -113,7 +113,7 @@
       "bullets": {
         "root": {
           "title": "PortfolioManager/",
-          "description": "Cartella radice creata nella directory documenti privata dell'app. Nome esplicito, cosi riconosci subito lo spazio riservato a questa app."
+          "description": "Cartella radice creata nella directory documenti privata dell'app. Nome esplicito, così riconosci subito lo spazio riservato a questa app."
         },
         "data": {
           "title": "PortfolioManager/data/",
@@ -162,7 +162,7 @@
       "intro": "Per usare l'app devi accettare i 3 documenti seguenti. Toccali per leggerli per intero prima di accettare.",
       "view_documents": "Apri i documenti completi",
       "read_full": "Leggi documento completo",
-      "footnote": "Senza la tua accettazione esplicita non e' possibile proseguire. Potrai consultare di nuovo i documenti da Impostazioni > Documenti legali in qualsiasi momento.",
+      "footnote": "Senza la tua accettazione esplicita non è possibile proseguire. Potrai consultare di nuovo i documenti da Impostazioni > Documenti legali in qualsiasi momento.",
       "checks": {
         "privacy_policy": "Ho letto e accetto la Privacy Policy",
         "terms_of_service": "Ho letto e accetto i Termini di Servizio",
@@ -170,15 +170,15 @@
       },
       "summary": {
         "privacy_policy": "Come trattiamo i tuoi dati: solo locale, nessuna analytics, nessun server proprietario.",
-        "terms_of_service": "Regole d'uso dell'app, limiti di responsabilita' e termini dell'abbonamento.",
-        "financial_disclaimer": "L'app e' uno strumento informativo. Nessun consiglio di investimento, nessuna garanzia di risultato."
+        "terms_of_service": "Regole d'uso dell'app, limiti di responsabilità e termini dell'abbonamento.",
+        "financial_disclaimer": "L'app è uno strumento informativo. Nessun consiglio di investimento, nessuna garanzia di risultato."
       },
       "required": "Conferma tutti e 3 i documenti per continuare"
     },
     "get_started": "Inizia",
     "skip_for_returning": {
       "banner_title": "Bentornato",
-      "banner_message": "Hai gia' completato l'onboarding in precedenza. Puoi saltare il tutorial e andare direttamente alla home.",
+      "banner_message": "Hai già completato l'onboarding in precedenza. Puoi saltare il tutorial e andare direttamente alla home.",
       "cta": "Salta"
     }
   },
@@ -213,7 +213,7 @@
     "no_positions": "Nessuna posizione trovata",
     "position_not_found": {
       "title": "Posizione non trovata",
-      "description": "La posizione richiesta non esiste piu nel portafoglio.",
+      "description": "La posizione richiesta non esiste più nel portafoglio.",
       "back_to_home": "Torna al portafoglio"
     },
     "empty_portfolio": {
@@ -241,7 +241,7 @@
     "position": {
       "symbol": "Simbolo",
       "name": "Nome",
-      "quantity": "Quantita",
+      "quantity": "Quantità",
       "price": "Prezzo",
       "value": "Valore",
       "cost_basis": "Costo Base",
@@ -306,7 +306,7 @@
       "positions_title": "Treemap Posizioni",
       "positions_subtitle": "Ogni blocco mostra il ticker e il peso sul valore totale.",
       "regions_title": "Treemap Esposizione Geografica",
-      "regions_subtitle": "Esposizione regionale per area e liquidita.",
+      "regions_subtitle": "Esposizione regionale per area e liquidità.",
       "empty": "Nessun dato disponibile",
       "other": "Altre",
       "other_label": "Altre {count} posizioni",
@@ -319,7 +319,7 @@
         "europe": "Europa",
         "asia": "Asia",
         "rest_world": "Resto del Mondo",
-        "liquidity": "Liquidita",
+        "liquidity": "Liquidità",
         "commodities": "Materie Prime",
         "unassigned": "Non Assegnato"
       }
@@ -350,11 +350,11 @@
     "select_existing_portfolio": "Seleziona portafoglio esistente",
     "select_existing_portfolio_hint": "Scegli un portafoglio...",
     "no_portfolios": "Nessun portafoglio disponibile",
-    "merge_conflict_title": "Posizioni gia presenti",
-    "merge_conflict_message": "{count} posizioni sono gia presenti in questo portafoglio. Come vuoi gestirle?",
+    "merge_conflict_title": "Posizioni già presenti",
+    "merge_conflict_message": "{count} posizioni sono già presenti in questo portafoglio. Come vuoi gestirle?",
     "merge_ignore": "Ignora duplicati",
     "merge_replace": "Sostituisci esistenti",
-    "merge_add": "Somma quantita",
+    "merge_add": "Somma quantità",
     "brokers": {
       "ibkr": "Interactive Brokers",
       "td_ameritrade": "TD Ameritrade",
@@ -459,7 +459,7 @@
       },
       "recommendations": {
         "title": "Raccomandazioni",
-        "description": "Da 3 a 5 azioni concrete in ordine di priorita."
+        "description": "Da 3 a 5 azioni concrete in ordine di priorità."
       },
       "geographic": {
         "title": "Esposizione geografica",
@@ -480,7 +480,7 @@
       "concentration": "Indicatori di concentrazione (HHI, top N)",
       "statistics": "Statistiche del conto (return cumulato, dividendi, commissioni)",
       "performance_history": "Storico performance per periodo",
-      "investor_profile": "Profilo investitore (eta, obiettivi, patrimonio)"
+      "investor_profile": "Profilo investitore (età, obiettivi, patrimonio)"
     },
     "transparency": {
       "title": "Cosa vedra l'AI",
@@ -515,7 +515,7 @@
     "top_losers": "Peggiori Ribassi",
     "mover_filters_concise": "Solo titoli investor-grade: prezzo >= {minPrice} USD, controvalore >= {dollarVolume}, no split/spike. Tocca per i criteri.",
     "mover_filters_dialog_title": "Criteri di selezione dei top mover",
-    "mover_filters_dialog_intro": "Per evitare penny stock, pump-and-dump e variazioni distorte da split o operazioni straordinarie, mostriamo solo titoli che superano questi filtri di qualita per ciascun timeframe:",
+    "mover_filters_dialog_intro": "Per evitare penny stock, pump-and-dump e variazioni distorte da split o operazioni straordinarie, mostriamo solo titoli che superano questi filtri di qualità per ciascun timeframe:",
     "mover_filters_dialog_row": "Prezzo >= {minPrice} USD - controvalore minimo {dollarVolume} - variazione massima accettata: ±{maxAbsChange}%",
     "mover_filters_excluded_patterns": "Esclusi inoltre: warrant, diritti, unit e azioni privilegiate; per le finestre 1M e 1Y il titolo deve avere uno storico di scambi sufficiente (rispettivamente >=22 e >=200 giorni di trading nel database) per evitare IPO troppo recenti.",
     "mover_filters_empty_state": "Nessun titolo investor-grade su questo timeframe nei dati attuali. I filtri escludono penny stock, pump-and-dump, e movimenti distorti da split. La lista si popolera al prossimo aggiornamento dei dati di mercato.",
@@ -528,7 +528,7 @@
     "updated": "Aggiornato: {time}",
     "snapshot_source": "Dati snapshot dal feed distribuito",
     "stale_warning": "Dati mercato non aggiornati da {days} giorni",
-    "stale_hint": "Verifica la connessione o riprova piu tardi",
+    "stale_hint": "Verifica la connessione o riprova più tardi",
     "no_data": "Nessun dato disponibile",
     "no_events": "Nessun evento in arrivo",
     "portfolio_not_loaded": "Portafoglio non ancora caricato",
@@ -539,7 +539,7 @@
     "portfolio_live_subtitle_no_key": "Nessuna fonte dati disponibile. Aggiungi chiave EODHD o FMP nelle Impostazioni.",
     "portfolio_live_optional_key_hint": "Opzionale: aggiungi la tua chiave API EODHD o FMP nelle Impostazioni per quotazioni in tempo reale",
     "live_positions": "Posizioni aggiornate",
-    "cash_included": "La liquidita e inclusa aritmeticamente nel valore totale",
+    "cash_included": "La liquidità e inclusa aritmeticamente nel valore totale",
     "updated_positions": "Posizioni aggiornate: {count}",
     "badges": {
       "source": "Fonte: {source}",
@@ -667,7 +667,7 @@
       "trial_active_title": "Prova gratuita attiva",
       "trial_remaining": "{} giorni rimasti",
       "trial_dialog_title": "Prova gratuita in corso",
-      "trial_dialog_message": "La tua prova gratuita di 7 giorni e' attiva. Mancano {} giorni alla fine. Tutte le funzionalita' premium sono sbloccate fino allo scadere.",
+      "trial_dialog_message": "La tua prova gratuita di 7 giorni è attiva. Mancano {} giorni alla fine. Tutte le funzionalità premium sono sbloccate fino allo scadere.",
       "trial_dialog_view_plans": "Vedi piani",
       "premium_active_title": "Piano attivo: {}",
       "premium_active_subtitle": "Gestisci abbonamento o ripristina acquisti",
@@ -694,10 +694,10 @@
     },
     "market_data": {
       "title": "Dati di mercato",
-      "intro": "Configura uno o piu provider per ottenere quotazioni storiche e in tempo reale. Senza nessuna chiave l'app usa lo snapshot giornaliero gratuito (aggiornato una volta al giorno alle 22:35 UTC dalla pipeline pubblica).",
+      "intro": "Configura uno o più provider per ottenere quotazioni storiche e in tempo reale. Senza nessuna chiave l'app usa lo snapshot giornaliero gratuito (aggiornato una volta al giorno alle 22:35 UTC dalla pipeline pubblica).",
       "refresh_interval": {
         "title": "Frequenza di aggiornamento",
-        "description": "Sceglie ogni quanto i prezzi delle posizioni vengono considerati \"vecchi\" e quindi rifetchati. Piu corto e piu chiamate consumi sul tier gratuito del provider; piu lungo e piu risparmi ma le quotazioni restano stantie. La formula: chiamate al giorno = posizioni x refresh al giorno.",
+        "description": "Sceglie ogni quanto i prezzi delle posizioni vengono considerati \"vecchi\" e quindi rifetchati. Più corto e più chiamate consumi sul tier gratuito del provider; più lungo e più risparmi ma le quotazioni restano stantie. La formula: chiamate al giorno = posizioni x refresh al giorno.",
         "options": {
           "manual": "Manuale (solo on demand)",
           "hourly": "Ogni ora (~24 chiamate/giorno per posizione)",
@@ -728,12 +728,12 @@
       "tag_realtime": "Real-time",
       "tag_historic": "Storico",
       "eodhd": {
-        "short": "Storico EOD + real-time + calendario economico (gia integrato).",
+        "short": "Storico EOD + real-time + calendario economico (già integrato).",
         "description": "Provider \"end-of-day\" e real-time storicamente integrato nell'app. Endpoint corrente: https://eodhd.com/api con parametro api_token. Usato dalla cascata prezzi (real-time -> EOD -> snapshot) e dalla sezione calendario economico.",
         "free_quota": "Tier free: 20 chiamate/giorno, storico 1 anno, ticker DEMO disponibili (AAPL.US, TSLA.US, BTC-USD.CC...)."
       },
       "fmp": {
-        "short": "Quotazioni, top movers e calendario economico (gia integrato).",
+        "short": "Quotazioni, top movers e calendario economico (già integrato).",
         "description": "Financial Modeling Prep, integrato in app per fallback prezzi e top movers su backup. Endpoint corrente: https://financialmodelingprep.com/stable con parametro apikey. La famiglia /api/v3/ legacy resta accessibile per piani esistenti.",
         "free_quota": "Tier free Basic: 250 chiamate/giorno, ~5 anni di storico EOD, banda 500 MB/30 giorni."
       },
@@ -858,17 +858,17 @@
       "providers_catalog": {
         "title": "Catalogo provider supportati",
         "content": "I 10 provider di dati storici/real-time integrati nell'app, con endpoint, free tier e quando usarli.",
-        "details": "**Provider integrati (10 + Gemini AI)**\nL'app supporta 10 provider di dati di mercato (storico + real-time) e Google Gemini per l'analisi AI. Per ogni provider trovi una scheda espandibile in Impostazioni > Dati di mercato con endpoint di esempio, link signup, link docs e form per inserire la chiave. Le chiavi sono salvate in flutter_secure_storage (Keychain/DPAPI/libsecret).\n\n**EODHD** (gia integrato a runtime)\n- Endpoint: https://eodhd.com/api -- parametro api_token\n- Free tier: 20 calls/giorno, 1 anno storico, ticker DEMO disponibili\n- Forte su: real-time + EOD + calendario economico globale\n\n**Financial Modeling Prep (FMP)** (gia integrato a runtime)\n- Endpoint: https://financialmodelingprep.com/stable -- parametro apikey\n- Free tier Basic: 250 calls/giorno, 5 anni storico, 500 MB/30g banda\n- Forte su: top movers, fundamentals, calendario economico\n\n**Alpha Vantage**\n- Endpoint: https://www.alphavantage.co/query -- parametro apikey\n- Free tier: 25 calls/giorno, 5 calls/minuto, chiave a vita gratuita\n- Forte su: TIME_SERIES_DAILY profondo (20+ anni), 50+ indicatori tecnici, FX/crypto\n\n**Twelve Data**\n- Endpoint: https://api.twelvedata.com -- parametro apikey\n- Trial: 800 credits/giorno + WebSocket real-time gratuito\n- Forte su: multi-asset (azioni/forex/crypto/indici globali), real-time push\n\n**Finnhub**\n- Endpoint: https://finnhub.io/api/v1 -- parametro token\n- Free tier: 60 calls/minuto su endpoint base US\n- Forte su: real-time quote US, news, earnings calendar, fundamentals\n\n**Polygon.io**\n- Endpoint: https://api.polygon.io -- parametro apiKey\n- Free tier: 5 calls/minuto, EOD only, 2 anni storico\n- Forte su: aggregates OHLC su finestre custom (1m, 5m, 1h, 1d)\n\n**Marketstack** (apilayer)\n- Endpoint: https://api.marketstack.com/v2 -- parametro access_key\n- Free tier: 100 calls/mese (1.000 sul piano Free 1K aggiornato), EOD globale\n- Forte su: copertura 30.000+ ticker su molte borse europee/asiatiche\n\n**Tiingo**\n- Endpoint: https://api.tiingo.com -- parametro token (o header Authorization: Token <chiave>)\n- Free tier: 50 simboli/mese, 1.000 calls/ora, 30+ anni storico\n- Forte su: backtesting (storico profondo e affidabile), IEX delayed/real-time\n\n**Nasdaq Data Link** (ex-Quandl)\n- Endpoint: https://data.nasdaq.com/api/v3 -- parametro api_key\n- Free tier: 50.000 calls/giorno (300/10s, 2.000/10min), 40 dataset gratuiti\n- Forte su: time-series macro/commodity/alt-data, dataset esoterici\n\n**Stooq**\n- Endpoint: https://stooq.com/q/d/l/?s=<ticker>&i=d -- nessuna chiave\n- CSV pubblico, EOD su 12.000+ asset (azioni, indici, ETF, forex, crypto)\n- Forte su: fallback gratuito senza registrazione, storico decennale\n\n**Quale scegliere?**\n- Per **portafoglio US esclusivo + refresh frequente**: Finnhub (60/min) o Twelve Data (800/giorno).\n- Per **storico profondo per backtesting**: Tiingo o Alpha Vantage.\n- Per **mercati europei/asiatici**: Marketstack (paid plan), EODHD, FMP.\n- Per **macroeconomia / commodity**: Nasdaq Data Link.\n- Per **aggregates intraday gratuiti**: Polygon (5/min sufficienti per testing).\n- Per **fallback puro senza chiave**: Stooq.\n\n**Cascata di fallback prezzo (gia attiva)**\n1. EODHD real-time (se chiave)\n2. EODHD EOD (se chiave)\n3. FMP (se chiave)\n4. Snapshot pubblico GitHub Pages\n\nGli altri 7 provider sono attualmente \"chiavi salvate + endpoint documentati\": l'integrazione runtime puo' essere abilitata per ogni provider nelle release future.\n\n**Sicurezza chiavi**\nOgni chiave e' cifrata sul keystore di sistema. Mai loggata, mai esportata. Reset dati nelle Impostazioni cancella tutte le chiavi salvate."
+        "details": "**Provider integrati (10 + Gemini AI)**\nL'app supporta 10 provider di dati di mercato (storico + real-time) e Google Gemini per l'analisi AI. Per ogni provider trovi una scheda espandibile in Impostazioni > Dati di mercato con endpoint di esempio, link signup, link docs e form per inserire la chiave. Le chiavi sono salvate in flutter_secure_storage (Keychain/DPAPI/libsecret).\n\n**EODHD** (già integrato a runtime)\n- Endpoint: https://eodhd.com/api -- parametro api_token\n- Free tier: 20 calls/giorno, 1 anno storico, ticker DEMO disponibili\n- Forte su: real-time + EOD + calendario economico globale\n\n**Financial Modeling Prep (FMP)** (già integrato a runtime)\n- Endpoint: https://financialmodelingprep.com/stable -- parametro apikey\n- Free tier Basic: 250 calls/giorno, 5 anni storico, 500 MB/30g banda\n- Forte su: top movers, fundamentals, calendario economico\n\n**Alpha Vantage**\n- Endpoint: https://www.alphavantage.co/query -- parametro apikey\n- Free tier: 25 calls/giorno, 5 calls/minuto, chiave a vita gratuita\n- Forte su: TIME_SERIES_DAILY profondo (20+ anni), 50+ indicatori tecnici, FX/crypto\n\n**Twelve Data**\n- Endpoint: https://api.twelvedata.com -- parametro apikey\n- Trial: 800 credits/giorno + WebSocket real-time gratuito\n- Forte su: multi-asset (azioni/forex/crypto/indici globali), real-time push\n\n**Finnhub**\n- Endpoint: https://finnhub.io/api/v1 -- parametro token\n- Free tier: 60 calls/minuto su endpoint base US\n- Forte su: real-time quote US, news, earnings calendar, fundamentals\n\n**Polygon.io**\n- Endpoint: https://api.polygon.io -- parametro apiKey\n- Free tier: 5 calls/minuto, EOD only, 2 anni storico\n- Forte su: aggregates OHLC su finestre custom (1m, 5m, 1h, 1d)\n\n**Marketstack** (apilayer)\n- Endpoint: https://api.marketstack.com/v2 -- parametro access_key\n- Free tier: 100 calls/mese (1.000 sul piano Free 1K aggiornato), EOD globale\n- Forte su: copertura 30.000+ ticker su molte borse europee/asiatiche\n\n**Tiingo**\n- Endpoint: https://api.tiingo.com -- parametro token (o header Authorization: Token <chiave>)\n- Free tier: 50 simboli/mese, 1.000 calls/ora, 30+ anni storico\n- Forte su: backtesting (storico profondo e affidabile), IEX delayed/real-time\n\n**Nasdaq Data Link** (ex-Quandl)\n- Endpoint: https://data.nasdaq.com/api/v3 -- parametro api_key\n- Free tier: 50.000 calls/giorno (300/10s, 2.000/10min), 40 dataset gratuiti\n- Forte su: time-series macro/commodity/alt-data, dataset esoterici\n\n**Stooq**\n- Endpoint: https://stooq.com/q/d/l/?s=<ticker>&i=d -- nessuna chiave\n- CSV pubblico, EOD su 12.000+ asset (azioni, indici, ETF, forex, crypto)\n- Forte su: fallback gratuito senza registrazione, storico decennale\n\n**Quale scegliere?**\n- Per **portafoglio US esclusivo + refresh frequente**: Finnhub (60/min) o Twelve Data (800/giorno).\n- Per **storico profondo per backtesting**: Tiingo o Alpha Vantage.\n- Per **mercati europei/asiatici**: Marketstack (paid plan), EODHD, FMP.\n- Per **macroeconomia / commodity**: Nasdaq Data Link.\n- Per **aggregates intraday gratuiti**: Polygon (5/min sufficienti per testing).\n- Per **fallback puro senza chiave**: Stooq.\n\n**Cascata di fallback prezzo (già attiva)**\n1. EODHD real-time (se chiave)\n2. EODHD EOD (se chiave)\n3. FMP (se chiave)\n4. Snapshot pubblico GitHub Pages\n\nGli altri 7 provider sono attualmente \"chiavi salvate + endpoint documentati\": l'integrazione runtime può essere abilitata per ogni provider nelle release future.\n\n**Sicurezza chiavi**\nOgni chiave è cifrata sul keystore di sistema. Mai loggata, mai esportata. Reset dati nelle Impostazioni cancella tutte le chiavi salvate."
       },
       "refresh_interval": {
         "title": "Frequenza di aggiornamento dati",
         "content": "Ogni quanto i prezzi vengono considerati stantii e quindi rifetchati dal provider attivo.",
-        "details": "**Cosa controlla questa impostazione**\nIl menu Impostazioni > Dati di mercato > Frequenza di aggiornamento definisce la **soglia di staleness della cache prezzi**. Quando una posizione e' visualizzata e la sua quotazione cached e' piu vecchia della soglia, l'app rifetcha. Tra due fetch consecutivi nessuna chiamata di rete viene fatta.\n\n**Senza nessuna chiave API personale**\nL'app si appoggia esclusivamente allo **snapshot giornaliero pubblico** generato dalla pipeline GitHub Actions:\n- Workflow `market-data-snapshot.yml` gira ogni giorno alle 22:35 UTC.\n- Workflow `daily-data-commit.yml` committa la \"proof of freshness\" alle 07:00 UTC.\n- L'hook locale `session-start.ps1` fa il pull dei nuovi dati a ogni apertura sessione.\n- Risultato: dati aggiornati **una volta al giorno**, allineati al close del giorno precedente. Nessuna chiamata API fatta dall'app.\n\n**Con chiave API personale**\nL'app puo' rifetchare in tempo reale (compatibilmente con il tier del provider). La frequenza scelta determina quante chiamate al giorno saranno necessarie.\n\n**Le 5 opzioni disponibili**\n- **Manuale** (default per tier free stretti): nessun fetch automatico. Tocchi 'Aggiorna' quando vuoi. Zero consumo API.\n- **Ogni ora**: ~24 chiamate/posizione/giorno. Solo per tier generosi (Finnhub 60/min, Twelve Data 800/giorno).\n- **Ogni 4 ore**: ~6 chiamate/posizione/giorno. Bilanciato per tier comfort (Twelve Data 130 posizioni, Tiingo 50 simboli/ora).\n- **Ogni 12 ore**: ~2 chiamate/posizione/giorno. Adatto a tier moderati (FMP 250/giorno = 125 posizioni, Polygon 5/min).\n- **Giornaliera** (default consigliato): 1 chiamata/posizione/giorno. Adatto anche al tier Alpha Vantage (25/giorno = 25 posizioni). Allineato con la cadenza dello snapshot pubblico.\n\n**Calcolo chiamate giornaliere**\nFormula semplice: `chiamate_giorno = posizioni x refresh_giorno`.\n\nEsempi:\n- 30 posizioni + Giornaliera = 30 chiamate/giorno (Alpha Vantage 25/giorno: SUPERA la quota).\n- 30 posizioni + Ogni 12h = 60 chiamate/giorno (FMP 250/giorno: 24% del tier).\n- 30 posizioni + Ogni 4h = 180 chiamate/giorno (Twelve Data 800/giorno: 22% del tier).\n- 30 posizioni + Ogni ora = 720 chiamate/giorno (Finnhub 60/min = 86.400/giorno: largamente sotto).\n\n**Semantica precisa**\nL'app non fa polling con un timer. La staleness e' valutata **on-access**: quando apri Home/Mercato o tocchi 'Aggiorna', l'app verifica per ogni posizione `(ora_attuale - ora_cached) >= soglia` e rifetcha solo le posizioni che hanno bisogno. Questo evita chiamate inutili quando l'app e' in background.\n\n**Quando alzare la frequenza**\n- Trading intraday su poche posizioni: Ogni ora con Finnhub.\n- Monitoraggio durante orario di mercato: Ogni 4h.\n- Rebalancing settimanale o controllo casual: Giornaliera o Manuale.\n\n**Quando abbassarla**\n- Tier free molto stretto (Alpha Vantage 25/giorno, Marketstack 100/mese).\n- Connessione metered/lenta.\n- Privacy-first: meno chiamate = meno tracce su provider esterni."
+        "details": "**Cosa controlla questa impostazione**\nIl menu Impostazioni > Dati di mercato > Frequenza di aggiornamento definisce la **soglia di staleness della cache prezzi**. Quando una posizione è visualizzata e la sua quotazione cached è più vecchia della soglia, l'app rifetcha. Tra due fetch consecutivi nessuna chiamata di rete viene fatta.\n\n**Senza nessuna chiave API personale**\nL'app si appoggia esclusivamente allo **snapshot giornaliero pubblico** generato dalla pipeline GitHub Actions:\n- Workflow `market-data-snapshot.yml` gira ogni giorno alle 22:35 UTC.\n- Workflow `daily-data-commit.yml` committa la \"proof of freshness\" alle 07:00 UTC.\n- L'hook locale `session-start.ps1` fa il pull dei nuovi dati a ogni apertura sessione.\n- Risultato: dati aggiornati **una volta al giorno**, allineati al close del giorno precedente. Nessuna chiamata API fatta dall'app.\n\n**Con chiave API personale**\nL'app può rifetchare in tempo reale (compatibilmente con il tier del provider). La frequenza scelta determina quante chiamate al giorno saranno necessarie.\n\n**Le 5 opzioni disponibili**\n- **Manuale** (default per tier free stretti): nessun fetch automatico. Tocchi 'Aggiorna' quando vuoi. Zero consumo API.\n- **Ogni ora**: ~24 chiamate/posizione/giorno. Solo per tier generosi (Finnhub 60/min, Twelve Data 800/giorno).\n- **Ogni 4 ore**: ~6 chiamate/posizione/giorno. Bilanciato per tier comfort (Twelve Data 130 posizioni, Tiingo 50 simboli/ora).\n- **Ogni 12 ore**: ~2 chiamate/posizione/giorno. Adatto a tier moderati (FMP 250/giorno = 125 posizioni, Polygon 5/min).\n- **Giornaliera** (default consigliato): 1 chiamata/posizione/giorno. Adatto anche al tier Alpha Vantage (25/giorno = 25 posizioni). Allineato con la cadenza dello snapshot pubblico.\n\n**Calcolo chiamate giornaliere**\nFormula semplice: `chiamate_giorno = posizioni x refresh_giorno`.\n\nEsempi:\n- 30 posizioni + Giornaliera = 30 chiamate/giorno (Alpha Vantage 25/giorno: SUPERA la quota).\n- 30 posizioni + Ogni 12h = 60 chiamate/giorno (FMP 250/giorno: 24% del tier).\n- 30 posizioni + Ogni 4h = 180 chiamate/giorno (Twelve Data 800/giorno: 22% del tier).\n- 30 posizioni + Ogni ora = 720 chiamate/giorno (Finnhub 60/min = 86.400/giorno: largamente sotto).\n\n**Semantica precisa**\nL'app non fa polling con un timer. La staleness è valutata **on-access**: quando apri Home/Mercato o tocchi 'Aggiorna', l'app verifica per ogni posizione `(ora_attuale - ora_cached) >= soglia` e rifetcha solo le posizioni che hanno bisogno. Questo evita chiamate inutili quando l'app è in background.\n\n**Quando alzare la frequenza**\n- Trading intraday su poche posizioni: Ogni ora con Finnhub.\n- Monitoraggio durante orario di mercato: Ogni 4h.\n- Rebalancing settimanale o controllo casual: Giornaliera o Manuale.\n\n**Quando abbassarla**\n- Tier free molto stretto (Alpha Vantage 25/giorno, Marketstack 100/mese).\n- Connessione metered/lenta.\n- Privacy-first: meno chiamate = meno tracce su provider esterni."
       },
       "quota_alerts": {
         "title": "Alert quota e rate limit",
         "content": "L'app mostra un banner persistente quando una chiave esaurisce la quota o riceve rate limit.",
-        "details": "**Cosa attiva l'alert**\nQuando una qualsiasi delle tue chiavi API riceve dal provider una risposta interpretata come limite raggiunto, l'app mostra un banner colorato in alto sopra qualsiasi schermata.\n\n**Le tre categorie rilevate**\n- **Rate limit** (HTTP 429 generico): troppe chiamate nella finestra temporale. Banner arancione, scompare dopo 12 secondi. Riprovare piu tardi tipicamente risolve.\n- **Quota esaurita** (HTTP 429 + body con \"quota/exhausted/daily/monthly\" oppure HTTP 403 con \"limit/exceeded\"): tier giornaliero o mensile finito. Banner rosso. Devi attendere il reset o passare a un tier superiore.\n- **Chiave non valida** (HTTP 401 o 403 senza pattern di quota): chiave revocata, scaduta, mai esistita o digitata male. Banner rosso scuro. Vai in Impostazioni e rigenera/correggi la chiave.\n\n**Provider monitorati**\nGemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon, Marketstack, Tiingo, Nasdaq Data Link. Ogni provider ha la propria etichetta nel banner per sapere subito quale chiave intervenire.\n\n**De-duplicazione**\nSe lo stesso `(provider, motivo)` si ripete entro 60 secondi, l'app **non** mostra di nuovo il banner per evitare spam. Dopo 60 secondi un nuovo errore identico fara riapparire l'alert.\n\n**Auto-dismiss**\nIl banner si chiude automaticamente dopo 12 secondi anche senza tap. Puoi chiuderlo manualmente con il bottone 'Chiudi' del banner.\n\n**Privacy del banner**\nIl banner mostra solo: nome provider, motivo (rate limit / quota / chiave invalida), e una traduzione del corpo errore se disponibile. **Mai** la chiave, mai gli endpoint completi, mai l'utente o l'IP.\n\n**Cosa fare quando appare un banner**\n1. **Rate limit**: aspetta 30-60 secondi e riprova. Se persiste, abbassa la frequenza di aggiornamento.\n2. **Quota esaurita**: vai sul pannello del provider, controlla l'utilizzo del giorno/mese. Considera un tier piu alto o passa a un altro provider configurato in app.\n3. **Chiave non valida**: apri Impostazioni > Dati di mercato, espandi il provider, salva una nuova chiave.\n\n**Telemetria**\nL'evento e' usato **solo** per il banner. Non viene loggato esternamente, non viene mandato a server di terze parti, non viene persistito tra sessioni."
+        "details": "**Cosa attiva l'alert**\nQuando una qualsiasi delle tue chiavi API riceve dal provider una risposta interpretata come limite raggiunto, l'app mostra un banner colorato in alto sopra qualsiasi schermata.\n\n**Le tre categorie rilevate**\n- **Rate limit** (HTTP 429 generico): troppe chiamate nella finestra temporale. Banner arancione, scompare dopo 12 secondi. Riprovare più tardi tipicamente risolve.\n- **Quota esaurita** (HTTP 429 + body con \"quota/exhausted/daily/monthly\" oppure HTTP 403 con \"limit/exceeded\"): tier giornaliero o mensile finito. Banner rosso. Devi attendere il reset o passare a un tier superiore.\n- **Chiave non valida** (HTTP 401 o 403 senza pattern di quota): chiave revocata, scaduta, mai esistita o digitata male. Banner rosso scuro. Vai in Impostazioni e rigenera/correggi la chiave.\n\n**Provider monitorati**\nGemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon, Marketstack, Tiingo, Nasdaq Data Link. Ogni provider ha la propria etichetta nel banner per sapere subito quale chiave intervenire.\n\n**De-duplicazione**\nSe lo stesso `(provider, motivo)` si ripete entro 60 secondi, l'app **non** mostra di nuovo il banner per evitare spam. Dopo 60 secondi un nuovo errore identico fara riapparire l'alert.\n\n**Auto-dismiss**\nIl banner si chiude automaticamente dopo 12 secondi anche senza tap. Puoi chiuderlo manualmente con il bottone 'Chiudi' del banner.\n\n**Privacy del banner**\nIl banner mostra solo: nome provider, motivo (rate limit / quota / chiave invalida), e una traduzione del corpo errore se disponibile. **Mai** la chiave, mai gli endpoint completi, mai l'utente o l'IP.\n\n**Cosa fare quando appare un banner**\n1. **Rate limit**: aspetta 30-60 secondi e riprova. Se persiste, abbassa la frequenza di aggiornamento.\n2. **Quota esaurita**: vai sul pannello del provider, controlla l'utilizzo del giorno/mese. Considera un tier più alto o passa a un altro provider configurato in app.\n3. **Chiave non valida**: apri Impostazioni > Dati di mercato, espandi il provider, salva una nuova chiave.\n\n**Telemetria**\nL'evento è usato **solo** per il banner. Non viene loggato esternamente, non viene mandato a server di terze parti, non viene persistito tra sessioni."
       },
       "privacy_security": {
         "title": "Privacy e sicurezza",
@@ -888,7 +888,7 @@
       "glossary": {
         "title": "Glossario degli investimenti",
         "content": "Definizioni dei termini principali usati nell'app, nei report AI e nella sezione obiettivi.",
-        "details": "**P&L** — Profit & Loss. Differenza tra valore corrente e costo base, in assoluto o in percentuale.\n\n**Costo Base** — Capitale originariamente investito nella posizione, pre-commissioni se non diversamente specificato.\n\n**Allocazione** — Peso percentuale di una posizione sul valore totale del portafoglio.\n\n**Asset Class** — Categoria di strumento: azioni, ETF, obbligazioni, crypto, opzioni, future, materie prime, liquidita'.\n\n**Asset Allocation** — Distribuzione strategica del capitale fra asset class diverse, decisa in funzione di orizzonte temporale, tolleranza al rischio e obiettivi.\n\n**Volatilita'** — Misura della dispersione dei rendimenti nel tempo, di solito espressa come deviazione standard annualizzata.\n\n**Drawdown** — Discesa percentuale dal picco locale al minimo successivo. Il max drawdown e' il peggior calo storico.\n\n**Sharpe Ratio** — Rendimento eccedente il risk-free, normalizzato per volatilita' totale.\n\n**Sortino Ratio** — Variante dello Sharpe con sola volatilita' negativa al denominatore.\n\n**Beta** — Sensibilita' della posizione/portafoglio rispetto al benchmark.\n\n**Alpha** — Extra-rendimento rispetto a quello atteso dato il beta, ovvero 'valore aggiunto' rispetto al passivo.\n\n**Diversificazione** — Distribuzione del rischio su piu' asset, settori, regioni e valute per ridurre la concentrazione.\n\n**Herfindahl (HHI)** — Indice di concentrazione: somma dei quadrati delle quote. 10.000 = una sola posizione.\n\n**Valuta Base** — Valuta in cui l'app aggrega totali e P&L. Configurata in Impostazioni > Generali.\n\n**FX Rate** — Tasso di cambio applicato alle posizioni in valuta diversa per il consolidamento in valuta base.\n\n**ISIN** — International Securities Identification Number, codice univoco a 12 caratteri di uno strumento finanziario.\n\n**Ticker** — Sigla breve dello strumento (es. AAPL per Apple), specifico per borsa.\n\n**Treemap** — Visualizzazione gerarchica in cui l'area di ogni rettangolo e' proporzionale alla grandezza dell'elemento.\n\n**Squarified** — Algoritmo di treemap che minimizza l'aspect ratio dei rettangoli per leggibilita'.\n\n**Obiettivo SMART** — Specifico, Misurabile, Achievable (raggiungibile), Realistico, Temporizzato. Una buona definizione di obiettivo deve rispettare i 5 criteri.\n\n**Orizzonte temporale** — Tempo che separa il momento attuale dalla data in cui ti servira' il capitale. Influenza la tolleranza al rischio e la scelta degli asset.\n\n**Tolleranza al rischio** — Capacita' soggettiva di sopportare oscillazioni di valore senza modificare la strategia. Conservativa, moderata, aggressiva.\n\n**Liquidita'** — Velocita' con cui un asset si converte in contanti senza perdita significativa di valore.\n\n**Interesse composto** — Rendimento generato non solo dal capitale iniziale, ma anche dai rendimenti accumulati nel tempo. Motore principale della crescita di lungo periodo.\n\n**DCA (Dollar Cost Averaging)** — Strategia di ingresso che frammenta l'investimento in piccole quote ricorrenti per attenuare l'effetto del market timing.\n\n**Lump Sum** — Strategia opposta al DCA: investi tutto il capitale in un unico momento.\n\n**Fondo di emergenza** — Riserva di liquidita' (3-6 mesi di spese fisse) tenuta fuori dal portafoglio investito, pensata per eventi inattesi.\n\n**FIRE (Financial Independence, Retire Early)** — Obiettivo di accumulare capitale tale che la rendita passiva superi le spese annuali, smettendo di dipendere dal lavoro retribuito.\n\n**Safe Withdrawal Rate (regola del 4%)** — Stima storica del prelievo annuale sostenibile da un portafoglio diversificato (~4%) senza esaurire il capitale in 30 anni.\n\n**Dividend Yield** — Rapporto fra dividendo annuo per azione e prezzo corrente. Misura di rendita immediata da una azione/ETF.\n\n**Yield on Cost** — Dividendo annuo diviso per il costo base personale, non per il prezzo di mercato. Mostra la rendita effettiva sul prezzo a cui hai comprato.\n\n**Total Return** — Rendimento complessivo che include sia plusvalenze sia dividendi reinvestiti.\n\n**Bond Ladder** — Tecnica di diversificazione obbligazionaria con scadenze scaglionate per ridurre il rischio tasso e mantenere liquidita' costante.\n\n**Inflation Hedge** — Asset che proteggono dal calo del potere d'acquisto: azioni reali, immobili, oro, TIPS.\n\n**Tax-Loss Harvesting** — Vendita di posizioni in perdita per realizzare minusvalenze fiscali, compensando plusvalenze altrove.\n\n**Glide Path** — Curva di riduzione dell'esposizione azionaria man mano che ci si avvicina alla data obiettivo.\n\n**Portfolio Drift** — Scostamento progressivo dei pesi reali rispetto all'allocazione target dovuto ai movimenti di mercato.\n\n**Banda di Ribilanciamento** — Soglia di scostamento (es. +/- 5%) oltre la quale conviene ribilanciare per riportarsi al target.\n\n**Pianificazione successoria** — Insieme di strumenti (testamento, trust, polizze) per trasferire il patrimonio agli eredi minimizzando le imposte."
+        "details": "**P&L** — Profit & Loss. Differenza tra valore corrente e costo base, in assoluto o in percentuale.\n\n**Costo Base** — Capitale originariamente investito nella posizione, pre-commissioni se non diversamente specificato.\n\n**Allocazione** — Peso percentuale di una posizione sul valore totale del portafoglio.\n\n**Asset Class** — Categoria di strumento: azioni, ETF, obbligazioni, crypto, opzioni, future, materie prime, liquidità.\n\n**Asset Allocation** — Distribuzione strategica del capitale fra asset class diverse, decisa in funzione di orizzonte temporale, tolleranza al rischio e obiettivi.\n\n**Volatilità** — Misura della dispersione dei rendimenti nel tempo, di solito espressa come deviazione standard annualizzata.\n\n**Drawdown** — Discesa percentuale dal picco locale al minimo successivo. Il max drawdown è il peggior calo storico.\n\n**Sharpe Ratio** — Rendimento eccedente il risk-free, normalizzato per volatilità totale.\n\n**Sortino Ratio** — Variante dello Sharpe con sola volatilità negativa al denominatore.\n\n**Beta** — Sensibilità della posizione/portafoglio rispetto al benchmark.\n\n**Alpha** — Extra-rendimento rispetto a quello atteso dato il beta, ovvero 'valore aggiunto' rispetto al passivo.\n\n**Diversificazione** — Distribuzione del rischio su più asset, settori, regioni e valute per ridurre la concentrazione.\n\n**Herfindahl (HHI)** — Indice di concentrazione: somma dei quadrati delle quote. 10.000 = una sola posizione.\n\n**Valuta Base** — Valuta in cui l'app aggrega totali e P&L. Configurata in Impostazioni > Generali.\n\n**FX Rate** — Tasso di cambio applicato alle posizioni in valuta diversa per il consolidamento in valuta base.\n\n**ISIN** — International Securities Identification Number, codice univoco a 12 caratteri di uno strumento finanziario.\n\n**Ticker** — Sigla breve dello strumento (es. AAPL per Apple), specifico per borsa.\n\n**Treemap** — Visualizzazione gerarchica in cui l'area di ogni rettangolo è proporzionale alla grandezza dell'elemento.\n\n**Squarified** — Algoritmo di treemap che minimizza l'aspect ratio dei rettangoli per leggibilità.\n\n**Obiettivo SMART** — Specifico, Misurabile, Achievable (raggiungibile), Realistico, Temporizzato. Una buona definizione di obiettivo deve rispettare i 5 criteri.\n\n**Orizzonte temporale** — Tempo che separa il momento attuale dalla data in cui ti servirà il capitale. Influenza la tolleranza al rischio e la scelta degli asset.\n\n**Tolleranza al rischio** — Capacità soggettiva di sopportare oscillazioni di valore senza modificare la strategia. Conservativa, moderata, aggressiva.\n\n**Liquidità** — Velocità con cui un asset si converte in contanti senza perdita significativa di valore.\n\n**Interesse composto** — Rendimento generato non solo dal capitale iniziale, ma anche dai rendimenti accumulati nel tempo. Motore principale della crescita di lungo periodo.\n\n**DCA (Dollar Cost Averaging)** — Strategia di ingresso che frammenta l'investimento in piccole quote ricorrenti per attenuare l'effetto del market timing.\n\n**Lump Sum** — Strategia opposta al DCA: investi tutto il capitale in un unico momento.\n\n**Fondo di emergenza** — Riserva di liquidità (3-6 mesi di spese fisse) tenuta fuori dal portafoglio investito, pensata per eventi inattesi.\n\n**FIRE (Financial Independence, Retire Early)** — Obiettivo di accumulare capitale tale che la rendita passiva superi le spese annuali, smettendo di dipendere dal lavoro retribuito.\n\n**Safe Withdrawal Rate (regola del 4%)** — Stima storica del prelievo annuale sostenibile da un portafoglio diversificato (~4%) senza esaurire il capitale in 30 anni.\n\n**Dividend Yield** — Rapporto fra dividendo annuo per azione e prezzo corrente. Misura di rendita immediata da una azione/ETF.\n\n**Yield on Cost** — Dividendo annuo diviso per il costo base personale, non per il prezzo di mercato. Mostra la rendita effettiva sul prezzo a cui hai comprato.\n\n**Total Return** — Rendimento complessivo che include sia plusvalenze sia dividendi reinvestiti.\n\n**Bond Ladder** — Tecnica di diversificazione obbligazionaria con scadenze scaglionate per ridurre il rischio tasso e mantenere liquidità costante.\n\n**Inflation Hedge** — Asset che proteggono dal calo del potere d'acquisto: azioni reali, immobili, oro, TIPS.\n\n**Tax-Loss Harvesting** — Vendita di posizioni in perdita per realizzare minusvalenze fiscali, compensando plusvalenze altrove.\n\n**Glide Path** — Curva di riduzione dell'esposizione azionaria man mano che ci si avvicina alla data obiettivo.\n\n**Portfolio Drift** — Scostamento progressivo dei pesi reali rispetto all'allocazione target dovuto ai movimenti di mercato.\n\n**Banda di Ribilanciamento** — Soglia di scostamento (es. +/- 5%) oltre la quale conviene ribilanciare per riportarsi al target.\n\n**Pianificazione successoria** — Insieme di strumenti (testamento, trust, polizze) per trasferire il patrimonio agli eredi minimizzando le imposte."
       }
     }
   },
@@ -905,7 +905,7 @@
     "network": "Errore di rete. Controlla la tua connessione.",
     "file_invalid": "Formato file non valido. Seleziona un file CSV o PDF valido.",
     "parse_error": "Impossibile elaborare il file. Controlla il formato.",
-    "api_error": "Errore API. Riprova piu tardi.",
+    "api_error": "Errore API. Riprova più tardi.",
     "storage_error": "Impossibile salvare i dati. Riprova.",
     "market": {
       "snapshot_unavailable": "Snapshot del mercato non disponibile. Verifica la connessione e riprova."
@@ -929,7 +929,7 @@
       "action": "Aggiungi",
       "first": "Aggiungi il primo obiettivo",
       "title": "Nuovo obiettivo",
-      "coming_soon": "Questa funzionalita sara disponibile presto"
+      "coming_soon": "Questa funzionalità sara disponibile presto"
     },
     "tabs": {
       "list": "Elenco",
@@ -954,7 +954,7 @@
     },
     "settings": {
       "show_completed": "Mostra obiettivi completati",
-      "show_completed_desc": "Includi gli obiettivi gia completati nell'elenco",
+      "show_completed_desc": "Includi gli obiettivi già completati nell'elenco",
       "default_currency": "Valuta predefinita",
       "default_currency_desc": "Valuta usata per i nuovi obiettivi"
     },
@@ -1016,7 +1016,7 @@
       "description": "Descrizione (opzionale)",
       "description_hint": "Note personali, contesto o motivazione",
       "target_amount": "Importo target",
-      "current_amount": "Importo gia accumulato",
+      "current_amount": "Importo già accumulato",
       "current_amount_help": "Lascia 0 se non hai ancora iniziato",
       "amount_required": "Inserisci un importo",
       "amount_invalid": "Inserisci un importo positivo",
@@ -1072,7 +1072,7 @@
   },
   "legal": {
     "banner": {
-      "ai_disclaimer": "I contenuti AI non sono consulenza finanziaria. Decisioni e responsabilita restano tue."
+      "ai_disclaimer": "I contenuti AI non sono consulenza finanziaria. Decisioni e responsabilità restano tue."
     },
     "disclaimer": {
       "title": "Disclaimer finanziario",
@@ -1093,13 +1093,13 @@
         },
         "risk": {
           "title": "Rischio di mercato",
-          "body": "Gli investimenti possono perdere valore. Performance passate non garantiscono risultati futuri. Esposizione a strumenti complessi (derivati, leverage, crypto) puo comportare la perdita totale del capitale."
+          "body": "Gli investimenti possono perdere valore. Performance passate non garantiscono risultati futuri. Esposizione a strumenti complessi (derivati, leverage, crypto) può comportare la perdita totale del capitale."
         }
       },
       "checks": {
         "not_advice": "Capisco che l'app non fornisce consulenza finanziaria.",
         "not_fiduciary": "Capisco che PluriFin non gestisce i miei capitali.",
-        "own_responsibility": "Mi assumo la responsabilita delle decisioni di investimento."
+        "own_responsibility": "Mi assumo la responsabilità delle decisioni di investimento."
       }
     },
     "documents": {
@@ -1113,7 +1113,7 @@
       },
       "terms": {
         "title": "Termini di servizio",
-        "description": "Condizioni d'uso dell'app, incluse le limitazioni di responsabilita."
+        "description": "Condizioni d'uso dell'app, incluse le limitazioni di responsabilità."
       },
       "disclaimer": {
         "title": "Disclaimer finanziario (testo pubblicato)",
