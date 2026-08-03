@@ -17,9 +17,9 @@ const steps = [
       <h2 id="how-h2">{t.how.h2}</h2>
     </div>
 
-    <div class="steps" role="list">
+    <div class="steps">
       {steps.map((s, i) => (
-        <div class={`step reveal`} style={`transition-delay: ${i * 100}ms`} role="listitem">
+        <div class={`step reveal`} style={`transition-delay: ${i * 100}ms`}>
           <div class="step-num" aria-hidden="true">{s.num}</div>
           <h3>{s.title}</h3>
           <p>{s.body}</p>

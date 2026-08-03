@@ -26,11 +26,11 @@ const brokers = [
       <p class="lede">{t.brokers.lede}</p>
     </div>
 
-    <div class="brokers reveal" role="list" aria-label="Supported brokers">
+    <div class="brokers reveal" aria-label="Supported brokers">
       {brokers.map(b => (
-        <div class="brk" role="listitem">{b}</div>
+        <div class="brk">{b}</div>
       ))}
-      <div class="brk generic" role="listitem">
+      <div class="brk generic">
         <span>Generic CSV</span>
       </div>
     </div>

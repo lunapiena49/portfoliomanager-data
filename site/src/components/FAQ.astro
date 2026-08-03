@@ -20,9 +20,9 @@ const items = [
     <div class="section-head reveal">
       <h2 id="faq-h2">{t.faq.h2}</h2>
     </div>
-    <div class="faq" role="list">
+    <div class="faq">
       {items.map((item, i) => (
-        <div class="faq-item reveal" style={`transition-delay: ${i * 40}ms`} role="listitem">
+        <div class="faq-item reveal" style={`transition-delay: ${i * 40}ms`}>
           <button
             class="faq-q"
             aria-expanded="false"

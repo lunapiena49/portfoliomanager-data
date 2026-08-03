@@ -27,11 +27,11 @@ const legalUrl = (page: string) => localePath(currentLang, page);
       <span class="brand-name">PluriFin</span>
     </a>
 
-    <div class="nav-links" role="list">
-      <a href="#features" role="listitem">{t.nav.features}</a>
-      <a href="#privacy" role="listitem">{t.nav.privacy}</a>
-      <a href="#brokers" role="listitem">{t.nav.brokers}</a>
-      <a href={legalUrl('faq')} role="listitem">{t.nav.faq}</a>
+    <div class="nav-links">
+      <a href="#features">{t.nav.features}</a>
+      <a href="#privacy">{t.nav.privacy}</a>
+      <a href="#brokers">{t.nav.brokers}</a>
+      <a href={legalUrl('faq')}>{t.nav.faq}</a>
     </div>
 
     <span class="nav-spacer" aria-hidden="true"></span>
