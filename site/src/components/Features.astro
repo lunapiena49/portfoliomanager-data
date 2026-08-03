@@ -38,9 +38,9 @@ const cards = [
       <h2 id="features-h2">{t.features.h2}</h2>
       <p class="lede">{t.features.lede}</p>
     </div>
-    <div class="features" role="list">
+    <div class="features">
       {cards.map((c, i) => (
-        <div class={`feat-card reveal`} style={`transition-delay: ${i * 80}ms`} role="listitem">
+        <div class={`feat-card reveal`} style={`transition-delay: ${i * 80}ms`}>
           <div class={`feat-icon ${c.accentClass}`} aria-hidden="true" set:html={c.icon} />
           <h3>{c.title}</h3>
           <p>{c.body}</p>

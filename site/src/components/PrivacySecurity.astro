@@ -38,9 +38,9 @@ const bullets = [
         <p class="intro">{t.privacy.intro}</p>
       </div>
 
-      <div class="privacy-grid" role="list">
+      <div class="privacy-grid">
         {bullets.map((b, i) => (
-          <div class={`privacy-item reveal`} style={`transition-delay: ${i * 70}ms`} role="listitem">
+          <div class={`privacy-item reveal`} style={`transition-delay: ${i * 70}ms`}>
             <div class="ico" aria-hidden="true" set:html={b.icon} />
             <div>
               <h3>{b.title}</h3>

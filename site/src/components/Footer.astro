@@ -29,7 +29,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
 
       <!-- Product -->
       <nav aria-label={t.footer.colProduct}>
-        <h4>{t.footer.colProduct}</h4>
+        <h3>{t.footer.colProduct}</h3>
         <ul>
           <li><a href={`${base}/app/`}>{t.footer.linkWebapp}</a></li>
           <li><a href="#" aria-disabled="true">{t.footer.linkPlayStore}</a></li>
@@ -40,7 +40,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
 
       <!-- Legal -->
       <nav aria-label={t.footer.colLegal}>
-        <h4>{t.footer.colLegal}</h4>
+        <h3>{t.footer.colLegal}</h3>
         <ul>
           <li><a href={legalUrl('privacy')}>{t.footer.linkPrivacy}</a></li>
           <li><a href={legalUrl('terms')}>{t.footer.linkTerms}</a></li>
@@ -52,7 +52,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
 
       <!-- Contact -->
       <nav aria-label={t.footer.colContact}>
-        <h4>{t.footer.colContact}</h4>
+        <h3>{t.footer.colContact}</h3>
         <ul>
           <li>
             <a href="mailto:info@plurifin.app">
@@ -100,7 +100,7 @@ const legalUrl = (page: string) => localePath(currentLang, page);
     padding: 64px 0 32px;
     font-size: 14px;
   }
-  footer h4 {
+  footer h3 {
     color: #fff;
     font-size: 13px;
     font-weight: 600;
