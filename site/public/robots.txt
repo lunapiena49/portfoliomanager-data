@@ -1,11 +1,18 @@
 # PluriFin marketing site
+#
+# I percorsi qui sotto sono quelli del dominio SERVITO. In precedenza questo
+# file parlava di `/portfoliomanager-data/...`, il vecchio indirizzo su
+# github.io: da quando il sito sta su plurifin.app (root) nessuna di quelle
+# regole aveva piu' effetto - /app/ rispondeva 200 ed era indicizzabile mentre
+# questo file credeva di escluderlo, e la Sitemap puntava a un altro host.
 User-agent: *
-Allow: /portfoliomanager-data/
+Allow: /
 
-# Block indexing of the Flutter webapp (separate product page on Play Store)
-Disallow: /portfoliomanager-data/app/
+# La webapp Flutter e' una DEMO: la pagina di prodotto e' quella dello store.
+Disallow: /app/
 
-# Block market data JSON files (not meant for search engines)
-Disallow: /portfoliomanager-data/dist/
+# Dati di mercato: servono all'app, non ai motori di ricerca (13 MB di JSON).
+Disallow: /top_movers.json
+Disallow: /prices_index.json
 
-Sitemap: https://lunapiena49.github.io/portfoliomanager-data/sitemap.xml
+Sitemap: https://plurifin.app/sitemap.xml

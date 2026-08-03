@@ -1,8 +1,12 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
+// I commenti di sviluppo non escono nell'HTML servito: misurato prima del fix,
+// games.html ne conteneva 56, per il 26% del suo peso. Restano nei sorgenti;
+// `compressHTML` non li tocca (comprime gli spazi, non rimuove i commenti).
+import stripHtmlComments from './integrations/strip-html-comments.mjs';
 
 // The production site lives at the root of plurifin.app (custom domain on
-// GitHub Pages via CNAME, see master plan 4B.3). The site-deploy.yml workflow
+// GitHub Pages via CNAME). The site-deploy.yml workflow
 // already sets SITE_URL=https://plurifin.app + SITE_BASE=/ for production
 // deploys; these defaults match so local dev builds emit the same URLs.
 // Legacy github.io override remains available for local debugging:
@@ -40,14 +44,15 @@ export default defineConfig({
   },
   build: {
     assets: '_assets',
-    // 4A.1bis: emit /privacy.html instead of /privacy/index.html so URLs like
+    // Emit /privacy.html instead of /privacy/index.html so URLs like
     // /legal/<lang>/privacy.html (linked in-app + on Play Store listing) resolve
     // directly to a single .html file without trailing-slash redirects.
     format: 'file',
   },
   compressHTML: true,
+  integrations: [stripHtmlComments()],
   output: 'static',
-  // S33.6, upgrade ad Astro 7: Vite 8 minifica il CSS con Lightning CSS, che
+  // Upgrade ad Astro 7: Vite 8 minifica il CSS con Lightning CSS, che
   // per default riscrive `(max-width: 640px)` nella sintassi RANGE di Media
   // Queries Level 4, `(width <= 640px)`. Quella sintassi non esiste per
   // Safari < 16.4, Chrome < 104 e Firefox < 102: su quei browser TUTTI i
