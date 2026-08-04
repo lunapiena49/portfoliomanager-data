@@ -58,7 +58,7 @@ churn da combattere con sconti, non c'è un team da pagare. L'obiettivo è copri
 operativi e tenere viva una community di utenti che apprezzano un approccio onesto al
 risparmio.
 
-Se PluriFin un giorno dovesse cesserare le operazioni, l'export GDPR ti restituisce tutti
+Se PluriFin un giorno dovesse cessare le operazioni, l'export GDPR ti restituisce tutti
 i tuoi dati in un singolo JSON portabile -- e i piani Lifetime restano accessibili a vita
 sul tuo Google account.
 
