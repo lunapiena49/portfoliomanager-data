@@ -1160,22 +1160,22 @@
         "yearly_single": {
           "title": "Annuel Individuel",
           "description": "1 appareil. Renouvellement annuel automatique.",
-          "cta": "S'abonner à 0,99 €/an"
+          "cta": "S'abonner à 4,99 €/an"
         },
         "lifetime_single": {
           "title": "Lifetime Individuel",
           "description": "1 appareil. Paiement unique, accès à vie.",
-          "cta": "Acheter pour 4,99 €"
+          "cta": "Acheter pour 29,99 €"
         },
         "yearly_family": {
           "title": "Annuel Famille",
           "description": "Jusqu'à 5 membres Google Family. Renouvellement annuel automatique.",
-          "cta": "S'abonner à 1,99 €/an"
+          "cta": "S'abonner à 9,99 €/an"
         },
         "lifetime_family": {
           "title": "Lifetime Famille",
           "description": "Jusqu'à 5 membres Google Family. Paiement unique, accès à vie.",
-          "cta": "Acheter pour 9,99 €"
+          "cta": "Acheter pour 49,99 €"
         }
       }
     },
