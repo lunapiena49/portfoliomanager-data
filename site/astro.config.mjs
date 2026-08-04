@@ -4,6 +4,11 @@ import { defineConfig } from 'astro/config';
 // games.html ne conteneva 56, per il 26% del suo peso. Restano nei sorgenti;
 // `compressHTML` non li tocca (comprime gli spazi, non rimuove i commenti).
 import stripHtmlComments from './integrations/strip-html-comments.mjs';
+// Il reset di Tailwind (`list-style:none`) toglie a Safari+VoiceOver la
+// semantica di lista: 73 contenitori su 227 avevano il `role="list"` scritto a
+// mano, 154 no. Si marca in build perche' meta' di quelle liste nasce dal
+// markdown dei post e dei legali e non ha un sorgente su cui scrivere.
+import roleList from './integrations/role-list.mjs';
 
 // The production site lives at the root of plurifin.app (custom domain on
 // GitHub Pages via CNAME). The site-deploy.yml workflow
@@ -50,7 +55,7 @@ export default defineConfig({
     format: 'file',
   },
   compressHTML: true,
-  integrations: [stripHtmlComments()],
+  integrations: [stripHtmlComments(), roleList()],
   output: 'static',
   // Upgrade ad Astro 7: Vite 8 minifica il CSS con Lightning CSS, che
   // per default riscrive `(max-width: 640px)` nella sintassi RANGE di Media

@@ -27,7 +27,7 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, extname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const PROTETTI = ['script', 'style', 'pre', 'textarea'];
+export const PROTETTI = ['script', 'style', 'pre', 'textarea'];
 
 /**
  * Rimuove i commenti HTML preservando le regioni protette.
@@ -92,7 +92,7 @@ export function togliCommenti(html) {
  * `null` se li' non comincia un tag: testo, `<!doctype>`, `<!--`, o un `<`
  * solitario (che in HTML e' legale come testo).
  */
-function nomeTag(html, i) {
+export function nomeTag(html, i) {
   if (html[i] !== '<') return null;
   let j = i + 1;
   if (html[j] === '/') j += 1;
@@ -108,7 +108,7 @@ function nomeTag(html, i) {
  * che stanno dentro un valore di attributo virgolettato. Se il tag non viene
  * mai chiuso, la fine del documento.
  */
-function fineTag(html, i) {
+export function fineTag(html, i) {
   let j = i + 1;
   let virgoletta = null;
   while (j < html.length) {

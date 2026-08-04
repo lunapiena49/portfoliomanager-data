@@ -46,7 +46,7 @@
   <!-- Trust badges -->
   <g transform="translate(80 490)">
     <rect width="200" height="44" rx="22" fill="rgba(91,252,190,0.10)" stroke="rgba(91,252,190,0.30)" stroke-width="1"/>
-    <text x="100" y="28" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#5BFCBE" text-anchor="middle">12 broker</text>
+    <text x="100" y="28" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#5BFCBE" text-anchor="middle">11 broker</text>
   </g>
   <g transform="translate(296 490)">
     <rect width="200" height="44" rx="22" fill="rgba(91,252,190,0.10)" stroke="rgba(91,252,190,0.30)" stroke-width="1"/>
