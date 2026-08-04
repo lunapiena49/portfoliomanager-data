@@ -141,6 +141,15 @@ const homeUrl = localePath(lang);
     line-height: 1.7; margin-bottom: 14px; text-wrap: pretty;
   }
   :global(.prose ul) { padding-left: 24px; margin: 8px 0 16px; }
+  /* Gli <ol> RIACCENDONO il numero, gli <ul> restano senza pallino.
+     Non e' un'incoerenza: il reset globale (`ol,ul,menu{list-style:none}`) li
+     spegneva entrambi, ma su una lista ordinata il numero e' CONTENUTO, non
+     decorazione. Misurato in S77: i 7 <ol> del sito - i post "perche' PluriFin"
+     nelle 6 lingue e la guida italiana - uscivano tutti senza numeri, e in
+     `portfolio-tracker-italia-2026` quella e' una procedura in tre passi
+     servita come tre blocchi indistinti su una pagina pubblica. Nulla la
+     compensava: zero counter, zero ::marker, zero ::before in tutto il dist. */
+  :global(.prose ol) { list-style: decimal; padding-left: 24px; margin: 8px 0 16px; }
   :global(.prose li) { margin-bottom: 6px; color: var(--text-2); font-size: 15px; line-height: 1.65; }
   :global(.prose strong) { color: var(--text); font-weight: 600; }
   :global(.prose a) { color: var(--primary); }
