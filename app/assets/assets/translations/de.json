@@ -1160,22 +1160,22 @@
         "yearly_single": {
           "title": "Einzeln Jährlich",
           "description": "1 Gerät. Automatische jährliche Verlängerung.",
-          "cta": "Für 0,99 €/Jahr abonnieren"
+          "cta": "Für 4,99 €/Jahr abonnieren"
         },
         "lifetime_single": {
           "title": "Einzeln Lifetime",
           "description": "1 Gerät. Einmalig, lebenslanger Zugriff.",
-          "cta": "Für 4,99 € kaufen"
+          "cta": "Für 29,99 € kaufen"
         },
         "yearly_family": {
           "title": "Familie Jährlich",
           "description": "Bis zu 5 Google Family-Mitglieder. Automatische jährliche Verlängerung.",
-          "cta": "Für 1,99 €/Jahr abonnieren"
+          "cta": "Für 9,99 €/Jahr abonnieren"
         },
         "lifetime_family": {
           "title": "Familie Lifetime",
           "description": "Bis zu 5 Google Family-Mitglieder. Einmalig, lebenslanger Zugriff.",
-          "cta": "Für 9,99 € kaufen"
+          "cta": "Für 49,99 € kaufen"
         }
       }
     },

@@ -1160,22 +1160,22 @@
         "yearly_single": {
           "title": "Single Annual",
           "description": "1 device. Auto-renewing yearly.",
-          "cta": "Subscribe for EUR 0.99/year"
+          "cta": "Subscribe for EUR 4.99/year"
         },
         "lifetime_single": {
           "title": "Single Lifetime",
           "description": "1 device. One-time, lifetime access.",
-          "cta": "Buy for EUR 4.99"
+          "cta": "Buy for EUR 29.99"
         },
         "yearly_family": {
           "title": "Family Annual",
           "description": "Up to 5 Google Family members. Auto-renewing yearly.",
-          "cta": "Subscribe for EUR 1.99/year"
+          "cta": "Subscribe for EUR 9.99/year"
         },
         "lifetime_family": {
           "title": "Family Lifetime",
           "description": "Up to 5 Google Family members. One-time, lifetime access.",
-          "cta": "Buy for EUR 9.99"
+          "cta": "Buy for EUR 49.99"
         }
       }
     },
