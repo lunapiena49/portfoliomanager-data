@@ -10,6 +10,44 @@
  * 2.5 sui crinali, 2 sulla Torre, 0 sul fondale) e il colore si lava verso il
  * cielo: e' cosi' che la profondita' si legge invece di appiattirsi.
  *
+ * LA PALETTE E' GOTICA (canone artistico). Non e' un
+ * ritocco di tinte: e' un cambio di SORGENTE. Prima il sole stava sull'orizzonte
+ * e ogni cosa era lavata verso l'alba; adesso la sorgente e' la LUNA e il fondo
+ * si spegne su Notte #1E1830. Tre regole governano ogni hex qui sotto:
+ *   1. i pieni vengono TUTTI dalle tabelle 3.1/3.2 del canone; le ombre non si
+ *      scelgono, si DERIVANO (k_ombra 0.72 applicato in spazio LINEARE, sez.
+ *      9.3): Pietra alta -> #4E416E, Pietra viva -> #5B4D7E, Crema -> #DDD5CA.
+ *   2. ogni accento ha UN significato. Ambra = luce (finestre della Torre,
+ *      fessura dell'elmo, corona, occhi), Arancio = fuoco (le braci), Turchese
+ *      = la scia fatata delle lucciole. Un accento usato per decorare e' un
+ *      difetto, non uno stile: percio' la guglia arancio e' diventata pietra,
+ *      e con lei la BANDIERA che ci sta sopra (un drappo non emette e non si
+ *      guadagna: v. il commento alla guglia); gli occhi ROSSI di Corvax sono
+ *      usciti (pilastro 4: nessun occhio rosso in tutto il gioco - erano anche
+ *      illeggibili, 1.87:1 sul manto).
+ *   3. LA LUNA #A8B8E0 E' LUCE, MAI MATERIA. E' l'unica riga di canone che
+ *      questa scena aveva allargato in silenzio: elmo, guanto, becco e zampe
+ *      erano dipinti di Luna "perche' non e' un accento funzionale, quindi
+ *      puo' fare da materia". La sez. 3.1 le da' un uso solo - "luce di rim,
+ *      controluce, riflessi" - e il mestiere che serviva li' ha gia' il suo
+ *      colore, Pietra viva #6A5A93 = "ferro battuto chiaro". Due misure lo
+ *      chiudono: il rim E' Luna, quindi su un fill di Luna vale 1.00:1 e
+ *      smette di staccare la sagoma; e la fessura accesa dell'elmo - l'unica
+ *      luce di Rollo - passa da 1.23:1 (su Luna) a 3.74:1 (su Pietra viva).
+ *      Nel file vivo la Luna resta solo dove e' luce: il disco della luna, il
+ *      suo alone e i due drop-shadow del rim.
+ *   4. su fondo scuro il contorno fa DUE lavori e servono due mezzi (sez. 4):
+ *      la LINEA Ink #14101F disegna DENTRO la luce (2.51:1 sulla pietra alta,
+ *      17.46:1 sul dado), il RIM Luna #A8B8E0 stacca la sagoma DAL CIELO. Ink
+ *      sul cielo vale 1.09:1 - da solo sarebbe invisibile. Il rim e' un
+ *      drop-shadow doppio, e i suoi raggi NON sono numeri: sono una funzione
+ *      della scala di resa (v. il blocco "IL RIM DI LUNA" nel CSS), perche' un
+ *      raggio in unita' di viewBox vale 2.61 volte meno pixel veri su un
+ *      telefono che sul desktop.
+ * L'alba non e' sparita: e' rimasta il CHIARORE all'orizzonte (sez. 5.1), alto
+ * 82 unita' su 900 = 9.1% del fotogramma (tetto del canone: 12%). E' una
+ * promessa, non un arrivo - ed e' l'unico posto dove #FFE8C8 sopravvive.
+ *
  * PERCHE' IL viewBox E' LARGO 4800 E NON 2400: con `slice` la scala e'
  * max(W/vbW, H/vbH). Se il contenitore e' piu' "largo" del viewBox, il ritaglio
  * cade in ALTEZZA - e su uno schermo largo mangiava la cima della Torre. Con un
@@ -31,27 +69,37 @@ const { t } = Astro.props;
 ---
 <div class="scene" id="scene" role="img" aria-label={t.company.gamesBand.sceneAlt}>
 
-  <!-- P5 - il fondale. Il sole sta DENTRO il viewBox: non puo' scollarsi
-       dall'orizzonte a nessuna larghezza. -->
+  <!-- P5 - il fondale. La LUNA sta DENTRO il viewBox: non puo' scollarsi
+       dall'orizzonte a nessuna larghezza. La posizione non cambia (e' un
+       vincolo di composizione, v. sopra), cambia la TEMPERATURA: l'alone e' un
+       alone freddo, Luna al centro e bruma Indaco lontano ai bordi. La luna
+       vale 8.63:1 sul cielo e resta SOTTO il dado (15.97:1): l'oggetto piu'
+       luminoso della scena e' il dado, come vuole il canone (sez. 6). -->
   <div class="lyr" data-par="0.30">
     <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <defs>
-        <radialGradient id="gSun">
-          <stop offset="0%" stop-color="#FFF8E4" stop-opacity=".95"/>
-          <stop offset="26%" stop-color="#FFDFA8" stop-opacity=".62"/>
-          <stop offset="58%" stop-color="#FFBC84" stop-opacity=".24"/>
-          <stop offset="100%" stop-color="#FF9E62" stop-opacity="0"/>
+        <radialGradient id="gMoon">
+          <stop offset="0%" stop-color="#A8B8E0" stop-opacity=".52"/>
+          <stop offset="26%" stop-color="#A8B8E0" stop-opacity=".26"/>
+          <stop offset="58%" stop-color="#2B3566" stop-opacity=".40"/>
+          <stop offset="100%" stop-color="#2B3566" stop-opacity="0"/>
         </radialGradient>
+        <!-- IL CHIARORE, non piu' la foschia d'alba. E' l'unico posto dove il
+             vecchio cielo #FFE8C8 sopravvive (canone 3.6 + 5.1): una promessa
+             bassa sull'orizzonte, alfa massima 0.18 -> #463D4B, 1.65:1 sul
+             cielo. Alto 82 unita' su 900 = 9.1%, sotto il tetto del 12%. -->
         <linearGradient id="gHaze" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stop-color="#FFDCB4" stop-opacity="0"/>
-          <stop offset="100%" stop-color="#FFE6C8" stop-opacity=".8"/>
+          <stop offset="0%" stop-color="#FFE8C8" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#FFE8C8" stop-opacity=".18"/>
         </linearGradient>
       </defs>
       <g transform="translate(1200,0)">
-        <circle cx="1200" cy="556" r="370" fill="url(#gSun)"/>
-        <circle cx="1200" cy="558" r="78" fill="#FFF4D8" opacity=".9"/>
-        <!-- guglie lontanissime: zero contorno, tinta gia' meta' cielo -->
-        <g fill="#C8A8C4" opacity=".36">
+        <circle cx="1200" cy="556" r="370" fill="url(#gMoon)"/>
+        <circle cx="1200" cy="558" r="78" fill="#A8B8E0" opacity=".9"/>
+        <!-- guglie lontanissime: zero contorno, tinta gia' meta' cielo. Indaco
+             lontano al 55% = #25284E, 1.21:1 sul cielo: si vedono appena, ed e'
+             la fascia d'aria 1 del canone ("orizzonte chiuso"). -->
+        <g fill="#2B3566" opacity=".55">
           <path d="M-1080 580 L-1080 520 L-1064 494 L-1048 520 L-1048 580 Z"/>
           <path d="M-880 582 L-880 542 L-868 522 L-856 542 L-856 582 Z"/>
           <path d="M-600 578 L-600 508 L-582 478 L-564 508 L-564 578 Z"/>
@@ -72,7 +120,7 @@ const { t } = Astro.props;
           <path d="M3220 580 L3220 510 L3238 482 L3256 510 L3256 580 Z"/>
           <path d="M3480 582 L3480 538 L3494 516 L3508 538 L3508 582 Z"/>
         </g>
-        <rect x="-1300" y="498" width="5000" height="130" fill="url(#gHaze)"/>
+        <rect x="-1300" y="546" width="5000" height="82" fill="url(#gHaze)"/>
       </g>
     </svg>
   </div>
@@ -83,49 +131,65 @@ const { t } = Astro.props;
      <g transform="translate(1200,0)">
       <path d="M-1300 636 L0 618 Q 320 572 640 598 Q 940 622 1240 590 Q 1540 560 1840 594 Q 2140 626 2400 588
                L3700 612 L3700 900 L-1300 900 Z"
-            fill="#C2A6C2" opacity=".8"/>
+            fill="#2B3566" opacity=".8"/>
 
       <!-- LA TORRE. Contorno 2u: e' lontana, il segno deve pesare meno.
            Quattro tronchi rastremati separati da ballatoi che sporgono: i PIANI
            si devono contare, perche' il gioco consiste nel salirli. La porta
            alla base da' la scala - senza, una torre e' solo un cilindro di
            dimensione ignota. -->
-      <g stroke="#3A3153" stroke-width="2" stroke-linejoin="round">
+      <g class="rim-far" stroke="#14101F" stroke-width="2" stroke-linejoin="round">
         <!-- tronco 1 (base) -->
-        <path d="M1630 665 L1634 558 L1766 558 L1770 665 Z" fill="#F6E7D2"/>
-        <path d="M1630 665 L1634 558 L1700 558 L1700 665 Z" fill="#C8ACBE" stroke="none"/>
-        <path d="M1682 665 L1682 640 Q1700 622 1718 640 L1718 665 Z" fill="#6E5C7E"/>
+        <path d="M1630 665 L1634 558 L1766 558 L1770 665 Z" fill="#5B4D80"/>
+        <path d="M1630 665 L1634 558 L1700 558 L1700 665 Z" fill="#4E416E" stroke="none"/>
+        <!-- la porta: Ink. La via dentro la Torre e' buia, la luce e' alle
+             finestre - 2.51:1 sul corpo, cioe' si legge come apertura. -->
+        <path d="M1682 665 L1682 640 Q1700 622 1718 640 L1718 665 Z" fill="#14101F"/>
         <!-- ballatoio 1 -->
-        <path d="M1622 540 L1778 540 L1774 558 L1626 558 Z" fill="#EADAC4"/>
-        <path d="M1622 540 L1700 540 L1700 558 L1626 558 Z" fill="#BC9EB2" stroke="none"/>
+        <path d="M1622 540 L1778 540 L1774 558 L1626 558 Z" fill="#6A5A93"/>
+        <path d="M1622 540 L1700 540 L1700 558 L1626 558 Z" fill="#5B4D7E" stroke="none"/>
         <!-- tronco 2 -->
-        <path d="M1638 540 L1642 428 L1758 428 L1762 540 Z" fill="#F6E7D2"/>
-        <path d="M1638 540 L1642 428 L1700 428 L1700 540 Z" fill="#C8ACBE" stroke="none"/>
+        <path d="M1638 540 L1642 428 L1758 428 L1762 540 Z" fill="#5B4D80"/>
+        <path d="M1638 540 L1642 428 L1700 428 L1700 540 Z" fill="#4E416E" stroke="none"/>
         <!-- ballatoio 2 -->
-        <path d="M1630 410 L1770 410 L1766 428 L1634 428 Z" fill="#EADAC4"/>
-        <path d="M1630 410 L1700 410 L1700 428 L1634 428 Z" fill="#BC9EB2" stroke="none"/>
+        <path d="M1630 410 L1770 410 L1766 428 L1634 428 Z" fill="#6A5A93"/>
+        <path d="M1630 410 L1700 410 L1700 428 L1634 428 Z" fill="#5B4D7E" stroke="none"/>
         <!-- tronco 3 -->
-        <path d="M1647 410 L1650 303 L1750 303 L1753 410 Z" fill="#F6E7D2"/>
-        <path d="M1647 410 L1650 303 L1700 303 L1700 410 Z" fill="#C8ACBE" stroke="none"/>
+        <path d="M1647 410 L1650 303 L1750 303 L1753 410 Z" fill="#5B4D80"/>
+        <path d="M1647 410 L1650 303 L1700 303 L1700 410 Z" fill="#4E416E" stroke="none"/>
         <!-- ballatoio 3 -->
-        <path d="M1639 285 L1761 285 L1757 303 L1643 303 Z" fill="#EADAC4"/>
-        <path d="M1639 285 L1700 285 L1700 303 L1643 303 Z" fill="#BC9EB2" stroke="none"/>
+        <path d="M1639 285 L1761 285 L1757 303 L1643 303 Z" fill="#6A5A93"/>
+        <path d="M1639 285 L1700 285 L1700 303 L1643 303 Z" fill="#5B4D7E" stroke="none"/>
         <!-- tronco 4 (cima) -->
-        <path d="M1656 285 L1658 200 L1742 200 L1744 285 Z" fill="#F6E7D2"/>
-        <path d="M1656 285 L1658 200 L1700 200 L1700 285 Z" fill="#C8ACBE" stroke="none"/>
+        <path d="M1656 285 L1658 200 L1742 200 L1744 285 Z" fill="#5B4D80"/>
+        <path d="M1656 285 L1658 200 L1700 200 L1700 285 Z" fill="#4E416E" stroke="none"/>
         <!-- merlature -->
-        <g fill="#EADAC4">
+        <g fill="#6A5A93">
           <path d="M1656 200 L1656 180 L1668 180 L1668 200 Z"/>
           <path d="M1675 200 L1675 180 L1687 180 L1687 200 Z"/>
           <path d="M1694 200 L1694 180 L1706 180 L1706 200 Z"/>
           <path d="M1713 200 L1713 180 L1725 180 L1725 200 Z"/>
           <path d="M1732 200 L1732 180 L1744 180 L1744 200 Z"/>
         </g>
-        <!-- guglia + bandiera -->
-        <path d="M1700 125 L1754 180 L1646 180 Z" fill="#FF8A3D"/>
-        <path d="M1700 125 L1700 180 L1646 180 Z" fill="#D9662B" stroke="none"/>
+        <!-- guglia + bandiera, E LO STESSO ARGOMENTO VALE PER TUTTE E DUE.
+             La guglia era ARANCIO: nel canone l'arancio significa "azione e
+             fuoco" (bottone TIRA, braci) e un tetto non e' ne' l'uno ne'
+             l'altro - decorare con un accento funzionale e' un difetto
+             (sez. 3.2). Diventa ferro battuto in piena luna.
+             La bandiera era rimasta Ambra "perche' e' il faro della vetta", e
+             quell'argomento non regge la stessa riga di canone: l'Ambra
+             significa "ricompensa e luce" e la sez. 5.2 la assegna a lanterne
+             e finestre, cioe' a cose che EMETTONO. Un drappo di stoffa
+             piantato sul tetto non emette e non si guadagna: e' esattamente il
+             tetto di tre righe piu' su, e si declassa con lui. La vetta resta
+             segnata dalla luce che la merita - la finestra accesa dell'ultimo
+             piano (y=228), stessa famiglia di tutte le altre. Contro il cielo
+             la bandiera vale 2.85:1 e la stacca il rim, come ogni altra
+             sagoma di pietra della scena. -->
+        <path d="M1700 125 L1754 180 L1646 180 Z" fill="#6A5A93"/>
+        <path d="M1700 125 L1700 180 L1646 180 Z" fill="#5B4D7E" stroke="none"/>
         <path d="M1700 125 L1700 90" stroke-width="3"/>
-        <path d="M1700 92 L1746 104 L1700 116 Z" fill="#FFC24B"/>
+        <path d="M1700 92 L1746 104 L1700 116 Z" fill="#6A5A93"/>
 
         <!-- SONDA = LA SAGOMA DELLA TORRE. Non "la sua cima": la sagoma.
              (difetti #4 e #4-ter)
@@ -140,7 +204,7 @@ const { t } = Astro.props;
                  W=360  il test leggeva 13,8px di margine | la Torre ne aveva 5,3
                  W=280  il test leggeva  8,0px (= la sua soglia: VERDE) | 1,3
              Il test pretendeva 8px su un rettangolo che finisce 29 unita' prima
-             del bordo vero: garantiva la sonda, non la Torre. E' il difetto #4
+             del bordo vero: garantiva la sonda, non la Torre. E' la stessa classe
              per la TERZA volta - "curare i punti che si testano non e' curare" -
              e stavolta il punto che si testava era dentro il disegno.
 
@@ -165,14 +229,24 @@ const { t } = Astro.props;
     </svg>
   </div>
 
-  <!-- P3 - crinale medio: occlude la base della Torre. Il verde comincia -->
+  <!-- P3 - crinale medio: occlude la base della Torre. Qui la BRUMA finisce e
+       comincia la PIETRA: il crinale e' Pietra in ombra (#3F3657, la banda
+       derivata k=0.72 del prato), il fondale dietro e' Indaco lontano. Fra i
+       due ci sono 1.16:1 di valore ma soprattutto un cambio di TINTA - blu
+       lontano contro viola caldo vicino - che e' il modo in cui il canone fa
+       leggere la distanza quando i valori sono per forza vicini (sez. 3.1).
+       La linea del crinale sale da .3 a .5 di alfa: su fondo scuro lo stacco
+       lo porta la LINEA, non il salto di valore. -->
   <div class="lyr" data-par="0.75">
     <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
      <g transform="translate(1200,0)">
       <path d="M-1300 682 L0 664 Q 280 616 560 642 Q 840 668 1120 634 Q 1420 598 1720 638 Q 2020 676 2400 626
                L3700 652 L3700 900 L-1300 900 Z"
-            fill="#A2B993" stroke="#3A3153" stroke-width="2.5" stroke-opacity=".3" stroke-linejoin="round"/>
-      <g fill="#7FA173" opacity=".8">
+            fill="#3F3657" stroke="#14101F" stroke-width="2.5" stroke-opacity=".5" stroke-linejoin="round"/>
+      <!-- gli alberi diventano sagome: Ink all'80% sul crinale = #19172D,
+           1.50:1 sul crinale stesso. Scure contro la bruma, come vuole il
+           chiaroscuro - non piu' macchie piu' chiare del fondo. -->
+      <g fill="#14101F" opacity=".8">
         <path d="M-900 668 L-894 644 L-888 668 Z"/><circle cx="-891" cy="636" r="15"/>
         <path d="M-420 660 L-414 638 L-408 660 Z"/><circle cx="-411" cy="630" r="13"/>
         <path d="M-120 648 L-114 624 L-108 648 Z"/><circle cx="-111" cy="616" r="16"/>
@@ -192,24 +266,31 @@ const { t } = Astro.props;
   <div class="lyr" data-par="1.00">
     <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
       <defs>
+        <!-- l'alone del dado e' DIPINTO (canone 9.5: mai post-process) e sta
+             su un solo hex di canone, Ambra: la luce che promette ricompensa.
+             L'alfa fa la rampa, non un secondo colore. -->
         <radialGradient id="gDie">
-          <stop offset="0%" stop-color="#FFD98A" stop-opacity=".9"/>
+          <stop offset="0%" stop-color="#FFC24B" stop-opacity=".8"/>
           <stop offset="100%" stop-color="#FFC24B" stop-opacity="0"/>
         </radialGradient>
       </defs>
      <g transform="translate(1200,0)">
       <path d="M-1300 806 L0 792 Q 300 758 640 778 Q 980 798 1320 772 Q 1660 746 2000 780 Q 2210 798 2400 774
                L3700 796 L3700 900 L-1300 900 Z"
-            fill="#7FA871" stroke="#3A3153" stroke-width="3" stroke-opacity=".45" stroke-linejoin="round"/>
+            fill="#4A4066" stroke="#14101F" stroke-width="3" stroke-opacity=".45" stroke-linejoin="round"/>
 
       <!-- OMBRE DI CONTATTO: senza queste, tutto galleggia. Sotto i piedi, non
            "vicino ai piedi". Il dado ne ha una piu' piccola e piu' chiara: e' in
-           aria, e si vede. -->
-      <ellipse cx="1000" cy="806" rx="66" ry="12" fill="#3A3153" opacity=".24"/>
-      <ellipse cx="1388" cy="790" rx="134" ry="18" fill="#3A3153" opacity=".22"/>
-      <ellipse cx="1180" cy="800" rx="28" ry="7" fill="#3A3153" opacity=".12"/>
+           aria, e si vede.
+           Su fondo scuro un'ombra tenue SPARISCE. Il canone (9.5) le vuole
+           Ink al 45% di alfa, ed e' quello che serve anche qui: al 45% valgono
+           #322A46, 1.43:1 sul prato - si vedono. Al 24% di prima, sul prato
+           Pietra, sarebbero state 1.22:1: un'ombra che non ombreggia. -->
+      <ellipse cx="1000" cy="806" rx="66" ry="12" fill="#14101F" opacity=".45"/>
+      <ellipse cx="1388" cy="790" rx="134" ry="18" fill="#14101F" opacity=".42"/>
+      <ellipse cx="1180" cy="800" rx="28" ry="7" fill="#14101F" opacity=".22"/>
 
-      <!-- SONDA - il fondo delle ombre di contatto (difetto #1).
+      <!-- SONDA - il fondo delle ombre di contatto.
            E' l'estremo BASSO del contenuto vivo, come la cima della Torre e'
            quello alto. La scena deve contenerli tutti e due, a ogni larghezza e
            in ogni punto dello scroll: se le ombre escono dal bordo, le figure
@@ -220,36 +301,84 @@ const { t } = Astro.props;
       <!-- ================= ROLLO =================
            Corpo a pera, elmo semisferico con visiera a UNA fessura, scudo
            esagonale sulla schiena. Ha appena lanciato: il braccio e' alzato. -->
-      <g stroke="#3A3153" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M930 706 L962 724 L962 760 L930 778 L898 760 L898 724 Z" fill="#3EC6C0"/>
-        <path d="M930 718 L951 730 L951 754 L930 766 L909 754 L909 730 Z" fill="none" stroke="#FFC24B" stroke-width="3"/>
-        <path d="M950 780 L982 780 L982 806 Q982 812 972 812 L954 812 Q946 812 947 804 Z" fill="#35429A"/>
-        <path d="M1018 780 L1050 780 L1052 804 Q1053 812 1045 812 L1027 812 Q1017 812 1017 806 Z" fill="#35429A"/>
-        <path d="M1000 698 C1052 698 1068 746 1062 786 C1060 794 1040 798 1000 798 C960 798 940 794 938 786 C932 746 948 698 1000 698 Z" fill="#5566CC"/>
-        <!-- ombra: cel-shading a due toni, mai un gradiente -->
-        <path d="M1000 698 C948 698 932 746 938 786 C940 794 960 798 1000 798 Z" fill="#3F4CA8" stroke="none"/>
-        <path d="M944 760 Q1000 770 1058 760 L1056 776 Q1000 786 946 776 Z" fill="#FFC24B"/>
-        <circle cx="1000" cy="770" r="8" fill="#FF8A3D"/>
+      <g class="rim" stroke="#14101F" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <!-- scudo e stivali: ferro battuto in piena luna (Pietra viva). Lo
+             scudo era TURCHESE, e il turchese nel canone significa una cosa
+             sola - "interattivo, si puo' toccare": su un'illustrazione non c'e'
+             niente da toccare, quindi era decorazione con un accento
+             funzionale. L'esagono inciso passa da Ambra a Ink: 3.11:1 sul
+             ferro, cioe' si legge come incisione invece che come luce. -->
+        <path d="M930 706 L962 724 L962 760 L930 778 L898 760 L898 724 Z" fill="#6A5A93"/>
+        <path d="M930 718 L951 730 L951 754 L930 766 L909 754 L909 730 Z" fill="none" stroke="#14101F" stroke-width="3"/>
+        <path d="M950 780 L982 780 L982 806 Q982 812 972 812 L954 812 Q946 812 947 804 Z" fill="#6A5A93"/>
+        <path d="M1018 780 L1050 780 L1052 804 Q1053 812 1045 812 L1027 812 Q1017 812 1017 806 Z" fill="#6A5A93"/>
+        <!-- il corpo e' il LEGAME DI MARCHIO. L'indaco #4A5AB9 (e le sue
+             derive #5566CC / #3F4CA8) non regge il fondo scuro: 2.81:1 sulla
+             Notte. Il canone lo sostituisce con Indaco lunare #8A97E8
+             (6.25:1), che e' esattamente il suo mestiere: "il legame di
+             marchio su fondo scuro" (sez. 3.6). -->
+        <path d="M1000 698 C1052 698 1068 746 1062 786 C1060 794 1040 798 1000 798 C960 798 940 794 938 786 C932 746 948 698 1000 698 Z" fill="#8A97E8"/>
+        <!-- ombra: cel-shading a due toni, mai un gradiente. E il tono scuro
+             non si sceglie: e' la banda k=0.72 dell'Indaco lunare. -->
+        <path d="M1000 698 C948 698 932 746 938 786 C940 794 960 798 1000 798 Z" fill="#7782C9" stroke="none"/>
+        <!-- cintura e fibbia erano Ambra e Arancio: due accenti funzionali su
+             un fermaglio. Diventano cuoio (Pietra) e ferro (Pietra viva), e
+             l'UNICO punto caldo di Rollo resta la fessura dell'elmo. -->
+        <path d="M944 760 Q1000 770 1058 760 L1056 776 Q1000 786 946 776 Z" fill="#4A4066"/>
+        <circle cx="1000" cy="770" r="8" fill="#6A5A93"/>
         <path d="M1048 724 Q1082 706 1098 670" fill="none" stroke-width="27"/>
-        <path d="M1048 724 Q1082 706 1098 670" fill="none" stroke="#5566CC" stroke-width="19"/>
-        <circle cx="1100" cy="666" r="15" fill="#EDF1F7"/>
-        <path d="M960 678 L1040 678 L1036 700 Q1000 711 964 700 Z" fill="#D5DCE7"/>
-        <path d="M958 678 A42 42 0 0 1 1042 678 Z" fill="#EDF1F7"/>
-        <path d="M958 678 A42 42 0 0 1 1000 636 L1000 678 Z" fill="#C3CBD9" stroke="none"/>
-        <path d="M984 644 Q1000 620 1016 644 Q1000 638 984 644 Z" fill="#FF8A3D"/>
-        <rect x="972" y="684" width="56" height="9" rx="4.5" fill="#241E36" stroke="none"/>
-        <rect class="lit" x="988" y="686" width="20" height="4" rx="2" fill="#3EC6C0" stroke="none"/>
+        <path d="M1048 724 Q1082 706 1098 670" fill="none" stroke="#8A97E8" stroke-width="19"/>
+        <!-- ELMO E GUANTO: FERRO BATTUTO, NON LUNA. Erano Luna nelle sue tre
+             bande (#A8B8E0 / #9FAED4 / #919FC2), col ragionamento "Luna non e'
+             un accento funzionale, quindi puo' fare da materia". Il canone dice
+             il contrario, e per due volte: la sua colonna d'uso e' "luce di
+             rim, controluce, riflessi" (3.1), e il mestiere che serve qui ha
+             gia' un colore che lo NOMINA - Pietra viva #6A5A93, "ferro battuto
+             chiaro". Le due misure che chiudono la questione:
+               - il rim e' Luna, quindi su un elmo di Luna vale 1.00:1: il
+                 dispositivo che la sez. 4 incarica di staccare la sagoma dal
+                 cielo diventa inerte esattamente sul pezzo piu' alto di Rollo;
+               - la fessura accesa - che il canone (sez. 6) da' a Rollo come la
+                 sua UNICA luce - vale 1.23:1 su un elmo di Luna e 3.74:1 su
+                 Pietra viva. Un elmo piu' luminoso della lanterna che ci sta
+                 dentro non e' un elmo lucido: e' una lanterna spenta.
+             Tre bande derivate col k del canone (9.3): #6A5A93 / #64558B /
+             #5B4D7E. Il guanto ci guadagna anche di suo: sul braccio Indaco
+             lunare passa da 1.38:1 (Luna) a 2.19:1 (Pietra viva). -->
+        <circle cx="1100" cy="666" r="15" fill="#6A5A93"/>
+        <path d="M960 678 L1040 678 L1036 700 Q1000 711 964 700 Z" fill="#64558B"/>
+        <path d="M958 678 A42 42 0 0 1 1042 678 Z" fill="#6A5A93"/>
+        <path d="M958 678 A42 42 0 0 1 1000 636 L1000 678 Z" fill="#5B4D7E" stroke="none"/>
+        <!-- la cresta resta Pietra viva: sta per tre quarti SOPRA la calotta,
+             cioe' contro il cielo, dove la stacca il rim; nel quarto che si
+             sovrappone la disegna la linea Ink (3.11:1 su Pietra viva), che e'
+             il mestiere che il canone le da' (sez. 4). -->
+        <path d="M984 644 Q1000 620 1016 644 Q1000 638 984 644 Z" fill="#6A5A93"/>
+        <!-- LA FESSURA E' AMBRA, ed e' il cuore della migrazione: il canone
+             (sez. 6) dice che Rollo ha "una lanterna dentro l'elmo", ed e' la
+             ragione fisica per cui su un fondo nero l'occhio lo trova subito.
+             Prima era turchese su una feritoia #241E36; adesso e' Ambra su Ink
+             = 11.63:1, il punto piu' caldo di tutta la figura. -->
+        <rect x="972" y="684" width="56" height="9" rx="4.5" fill="#14101F" stroke="none"/>
+        <rect class="lit" x="988" y="686" width="20" height="4" rx="2" fill="#FFC24B" stroke="none"/>
       </g>
 
       <!-- ================= IL DADO =================
            L'istante e' sospeso: fermo a mezz'aria. Nessuna animazione di forma
            dentro un SVG grande - solo l'alone pulsa (opacita' = compositor). -->
       <circle class="glow" cx="1180" cy="616" r="82" fill="url(#gDie)"/>
-      <g stroke="#3A3153" stroke-width="4" stroke-linejoin="round">
+      <!-- IL DADO E' L'OGGETTO PIU' LUMINOSO DELLA SCENA, e adesso lo e' per
+           misura: crema 15.97:1 sul cielo contro 8.63:1 della luna. Le due
+           facce in ombra non sono piu' scelte a occhio (#CFB9A4 / #E9D7C0) ma
+           DERIVATE dal crema con i k del canone: mezzo #F1E9DD, ombra #DDD5CA
+           (tabella 9.3). E i pip passano da Ambra a Ink: erano 1.50:1 sul
+           corpo crema - il singolo numero peggiore di tutta la scena, tre
+           stelle praticamente invisibili - adesso sono 17.46:1 (sez. 7.3). -->
+      <g class="rim" stroke="#14101F" stroke-width="4" stroke-linejoin="round">
         <path d="M1180 582 L1212 599 L1180 616 L1148 599 Z" fill="#FFF6EA"/>
-        <path d="M1148 599 L1180 616 L1180 652 L1148 635 Z" fill="#CFB9A4"/>
-        <path d="M1212 599 L1180 616 L1180 652 L1212 635 Z" fill="#E9D7C0"/>
-        <g fill="#FFC24B" stroke="none">
+        <path d="M1148 599 L1180 616 L1180 652 L1148 635 Z" fill="#DDD5CA"/>
+        <path d="M1212 599 L1180 616 L1180 652 L1212 635 Z" fill="#F1E9DD"/>
+        <g fill="#14101F" stroke="none">
           <path d="M1180 592 L1183 598 L1189 599 L1183 602 L1180 608 L1177 602 L1171 599 L1177 598 Z"/>
           <path d="M1164 616 L1166 621 L1171 622 L1166 625 L1164 630 L1162 625 L1157 622 L1162 621 Z"/>
           <path d="M1196 618 L1198 623 L1203 624 L1198 627 L1196 632 L1194 627 L1189 624 L1194 623 Z"/>
@@ -267,9 +396,31 @@ const { t } = Astro.props;
            76-120u di larghezza; solo sotto le spalle il mantello si apre fino a
            270. Prima era largo quasi quanto alto - ed e' per questo che leggeva
            "pinguino" invece che "re corvo". -->
-      <g stroke="#3A3153" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
-        <path d="M1334 770 L1334 788 M1318 788 L1352 788" stroke="#FFC24B" stroke-width="7" fill="none"/>
-        <path d="M1428 770 L1428 788 M1412 788 L1446 788" stroke="#FFC24B" stroke-width="7" fill="none"/>
+      <g class="rim" stroke="#14101F" stroke-width="4" stroke-linejoin="round" stroke-linecap="round">
+        <!-- zampe: CORNO, non luce e non ambra. Erano Ambra (un accento che
+             significa "ricompensa": una zampa non lo e'), poi Luna, e Luna qui
+             era una deriva: e' la LUCE del rim, e un fill di Luna sotto un rim
+             di Luna vale 1.00:1.
+             MA TOGLIERE LA LUNA HA SCOPERTO UN DIFETTO PIU' VECCHIO, e si vede
+             solo misurando: queste erano le uniche due parti del cast disegnate
+             SENZA la linea Ink. Con la Luna non si notava - a 184 di grigio la
+             zampa si staccava da sola dal prato (4.79:1) - ma in Pietra viva
+             sul prato si scende a 1.58:1 (2.19:1 sopra l'ombra di contatto) e
+             l'unico stacco resta l'alone, che sul PRATO (non sul cielo) arriva
+             a 2.38:1 MISURATO sul PNG: sotto il floor del canone. Su un fondo
+             chiaro come il prato lo stacco non lo porta il rim, lo porta la
+             LINEA (sez. 4), ed e' esattamente cio' che qui mancava. La cura e'
+             l'idioma che questo file usa gia' per il braccio di Rollo (stroke
+             27 di Ink + stroke 19 di colore): una passata di Ink sotto e una di
+             colore sopra, con 2 unita' di linea per lato - la stessa linea
+             visibile di ogni forma piena del cast (stroke 4 centrato = 2
+             fuori). La zampa passa da 1.58:1 a 3.11:1 contro la propria linea,
+             come gli stivali, e il salto misurato lungo la colonna passa da
+             2.38:1 a 3.68:1. -->
+        <path d="M1334 770 L1334 788 M1318 788 L1352 788" stroke-width="11" fill="none"/>
+        <path d="M1334 770 L1334 788 M1318 788 L1352 788" stroke="#6A5A93" stroke-width="7" fill="none"/>
+        <path d="M1428 770 L1428 788 M1412 788 L1446 788" stroke-width="11" fill="none"/>
+        <path d="M1428 770 L1428 788 M1412 788 L1446 788" stroke="#6A5A93" stroke-width="7" fill="none"/>
 
         <!-- UN CORPO SOLO. Cranio, collo e mantello sono LO STESSO profilo: e'
              cosi' che un corvo si legge. Montandolo a pezzi la testa galleggia
@@ -280,22 +431,45 @@ const { t } = Astro.props;
                  L1470 764 L1448 792 L1424 764 L1400 794 L1380 766
                  L1360 794 L1336 764 L1312 792 L1290 764 L1266 788
                  L1286 706 L1316 616
-                 Q1332 578 1336 542 Q1342 500 1380 496 Z" fill="#7B4FE0"/>
+                 Q1332 578 1336 542 Q1342 500 1380 496 Z" fill="#6A5A93"/>
         <path d="M1380 496
                  Q1342 500 1336 542 Q1332 578 1316 616
                  L1286 706 L1266 788
-                 L1290 764 L1312 792 L1336 764 L1360 794 L1380 766 Z" fill="#5734B8" stroke="none"/>
+                 L1290 764 L1312 792 L1336 764 L1360 794 L1380 766 Z" fill="#5B4D7E" stroke="none"/>
         <path d="M1348 622 Q1310 700 1302 778" fill="none" stroke-width="3.5" stroke-opacity=".45"/>
         <path d="M1412 622 Q1450 700 1458 778" fill="none" stroke-width="3.5" stroke-opacity=".45"/>
         <path d="M1330 600 Q1380 634 1432 600" fill="none" stroke-width="4" stroke-opacity=".55"/>
         <path d="M1318 664 Q1380 696 1444 664" fill="none" stroke-width="3.5" stroke-opacity=".45"/>
-        <path d="M1344 522 Q1298 534 1256 550 Q1298 560 1348 556 Z" fill="#FFC24B"/>
+        <!-- IL BECCO E' CHERATINA, e la parola conta quanto il colore.
+             (1) Di canone: era Luna, cioe' il tono che la sez. 3.1 riserva
+             alla LUCE (rim, controluce, riflessi); un becco e' materia, e la
+             materia dura e chiara di questa scena e' Pietra viva. Su un fill
+             di Luna il rim - che e' Luna - vale 1.00:1.
+             (2) Di lettura: il canone (sez. 6) pretende un becco VERO di
+             uccello, con la testa e le piume che gli stanno attorno; chiamarlo
+             "di metallo" tirava il disegno dalla parte sbagliata, e su una
+             figura non umana quella parte non e' nemmeno la nostra.
+             Contro la testa in ombra vale 1.25:1 e lo disegna la linea Ink;
+             contro il cielo lo stacca il rim, ed e' li' che il becco fa il suo
+             lavoro di silhouette. -->
+        <path d="M1344 522 Q1298 534 1256 550 Q1298 560 1348 556 Z" fill="#6A5A93"/>
         <path d="M1344 540 Q1300 548 1256 550" fill="none" stroke-width="2.5" stroke-opacity=".6"/>
-        <ellipse class="eye" cx="1366" cy="528" rx="8" ry="10" fill="#FF6B6B" stroke-width="3"/>
-        <ellipse class="eye" cx="1402" cy="524" rx="8" ry="10" fill="#FF6B6B" stroke-width="3" style="animation-delay:-.5s"/>
+        <!-- GLI OCCHI NON SONO PIU' ROSSI, e non e' una scelta di gusto: il
+             pilastro 4 del canone dice "nessun occhio rosso in tutto il
+             gioco" e riserva il corallo #FF6B6B ai numeri di danno. Erano
+             anche il dettaglio meno leggibile della testa (1.87:1 sul manto
+             viola). Ambra su Pietra viva = 3.74:1, ed e' lo stesso occhio-
+             lanterna che il canone da' al gufo. -->
+        <ellipse class="eye" cx="1366" cy="528" rx="8" ry="10" fill="#FFC24B" stroke-width="3"/>
+        <ellipse class="eye" cx="1402" cy="524" rx="8" ry="10" fill="#FFC24B" stroke-width="3" style="animation-delay:-.5s"/>
+        <!-- la corona resta Ambra: nel canone e' letteralmente il posto
+             dell'Ambra ("Corone"), e regge le Stelle imprigionate. La gemma
+             era Astrale: nel canone l'astrale significa PREMIUM (astraliti,
+             gacha) e su un boss non significa niente - diventa Ink, che e' la
+             regola generale del dettaglio sopra un accento (11.63:1). -->
         <g transform="rotate(-10 1382 500)">
           <path d="M1346 504 L1354 466 L1372 492 L1384 454 L1398 490 L1416 464 L1422 504 Z" fill="#FFC24B"/>
-          <circle cx="1384" cy="470" r="5" fill="#9B6BFF" stroke-width="2.5"/>
+          <circle cx="1384" cy="470" r="5" fill="#14101F" stroke-width="2.5"/>
         </g>
       </g>
      </g>
@@ -313,8 +487,14 @@ const { t } = Astro.props;
      <g transform="translate(1200,0)">
       <path d="M-1300 846 L0 838 Q 240 816 500 830 Q 760 844 1020 826 Q 1280 808 1540 828 Q 1800 848 2060 824 Q 2230 810 2400 828
                L3700 842 L3700 900 L-1300 900 Z"
-            fill="#4C7355" stroke="#3A3153" stroke-width="5" stroke-opacity=".6" stroke-linejoin="round"/>
-      <g fill="#41654A" stroke="#3A3153" stroke-width="4" stroke-linejoin="round" stroke-opacity=".5">
+            fill="#3F3657" stroke="#14101F" stroke-width="5" stroke-opacity=".6" stroke-linejoin="round"/>
+      <!-- I CIUFFI DIVENTANO INK, e qui il rapporto si inverte per una
+           ragione misurata. Devono passare DAVANTI agli stivali di Rollo e
+           alla base del manto di Corvax, che adesso sono ferro battuto
+           (Pietra viva): un ciuffo Ink su Pietra viva vale 3.11:1, un ciuffo
+           piu' chiaro del fondo sarebbe sparito dentro le figure. Sul loro
+           stesso terreno valgono 1.67:1, e dove sporgono sul prato 1.97:1. -->
+      <g fill="#14101F" stroke="#14101F" stroke-width="4" stroke-linejoin="round" stroke-opacity=".5">
         <!-- davanti ai piedi di Rollo (i suoi stivali stanno a y 780-812) -->
         <path d="M934 830 Q941 792 950 826 Q959 784 968 824 Q975 796 980 830 Z"/>
         <path d="M988 828 Q995 786 1004 822 Q1013 778 1021 820 Q1027 792 1032 828 Z"/>
@@ -333,7 +513,11 @@ const { t } = Astro.props;
         <path d="M3080 846 Q3090 810 3100 844 Z"/>
         <path d="M3480 840 Q3490 806 3500 838 Q3510 810 3520 840 Z"/>
       </g>
-      <g fill="#FFC24B" stroke="none" opacity=".85">
+      <!-- le lucciole sono TURCHESE: nel canone la lucciola e' un personaggio
+           (Lumen) e il turchese e' la sua scia fatata - "la luce fredda-satura
+           segna cio' che si puo' toccare" (sez. 5.2). In Ambra erano il quarto
+           uso decorativo dello stesso accento nella stessa scena. -->
+      <g fill="#3EC6C0" stroke="none" opacity=".85">
         <circle cx="878" cy="836" r="5"/><circle cx="1108" cy="842" r="4"/>
         <circle cx="1560" cy="834" r="5"/><circle cx="700" cy="846" r="4"/>
         <circle cx="-320" cy="844" r="5"/><circle cx="2380" cy="838" r="4"/>
@@ -349,7 +533,17 @@ const { t } = Astro.props;
 <style>
   /* I piani si muovono SOLO con translate3d: lavoro del compositor, zero
      repaint. Il margine negativo (top/bottom) e' la corsa del parallasse. */
-  .scene { position: relative; height: 560px; overflow: hidden; }
+  /* I QUATTRO RAGGI DEL RIM VIVONO QUI, non dentro il filtro, perche' non sono
+     numeri: sono una FUNZIONE DELLA SCALA DI RESA, e la scala la decidono le
+     due media query qui sotto. Il perche' sta per esteso nel blocco "IL RIM DI
+     LUNA" in fondo a questo foglio. */
+  .scene {
+    position: relative; height: 560px; overflow: hidden;
+    --rim-n: 5px;     /* .rim     passata stretta -> 3.6 px veri a s = 0.711 */
+    --rim-w: 11px;    /* .rim     passata larga   -> 7.8 px veri            */
+    --rimf-n: 4px;    /* .rim-far passata stretta -> 2.8 px veri            */
+    --rimf-w: 9px;    /* .rim-far passata larga   -> 6.4 px veri            */
+  }
   .lyr {
     position: absolute; left: 0; right: 0; top: -44px; bottom: -36px;
     pointer-events: none; will-change: transform;
@@ -366,7 +560,13 @@ const { t } = Astro.props;
      corsa si accorcia (parAmp, nello script). Sopra i 900px non cambia UN
      PIXEL: la composizione approvata in S7 e' quella, e non si tocca. */
   @media (max-width: 900px) {
-    .scene { height: 400px; }
+    /* H_layer = 400 + 22 + 22 = 444 -> s = 444/900 = 0.4933. I raggi del rim
+       si ricalcolano per tenere FERMI i pixel veri: 3.556/0.4933 = 7.21,
+       7.822/0.4933 = 15.86, 2.844/0.4933 = 5.77, 6.400/0.4933 = 12.97. */
+    .scene {
+      height: 400px;
+      --rim-n: 7.2px; --rim-w: 15.9px; --rimf-n: 5.8px; --rimf-w: 13px;
+    }
     .lyr { top: -22px; bottom: -22px; }
   }
 
@@ -381,10 +581,10 @@ const { t } = Astro.props;
      76px a destra.
 
      (2) La prima cura fu un'altezza FISSA (270px sotto i 600). Risolveva a
-     390px - il viewport piu' stretto della matrice - e un oracolo adversariale
+     390px - il viewport piu' stretto della matrice - e una verifica indipendente
      ha fatto notare che a 360px il margine scendeva a **0,3px**, e sotto i 359
      la Torre usciva di nuovo. **360px e' la larghezza Android piu' diffusa al
-     mondo** (Galaxy, Pixel). Era il difetto #4 daccapo, con altri numeri: "il
+     mondo** (Galaxy, Pixel). Era la stessa classe di difetto daccapo, con altri numeri: "il
      mio browser era 1568, quello dell'utente 1920" diventato "il mio minimo e'
      390, quello dell'utente e' 360". Curare i punti che si testano non e'
      curare: e' spostare il bordo del precipizio appena fuori dall'inquadratura.
@@ -411,7 +611,7 @@ const { t } = Astro.props;
      disuguaglianza solo da W >= 514px: sotto, NO. Serve **8/5** (0,625*W):
      H_layer = 0,625*W + 20 <= 0,739*W per ogni W >= 176px. Ma 176px e' il bordo
      della SOLA disuguaglianza della Torre - NON e' il pavimento della scena. Gli
-     altri due vincoli (ombre, piano P1) cedono prima: l'oracolo S12 ha misurato
+     altri due vincoli (ombre, piano P1) cedono prima: una verifica indipendente ha misurato
      hero-feet ROSSO a 264px (6,8 < 8), quindi il pavimento VERO della scena e'
      ~285px, non 176. Resta comunque sotto il viewport testato piu' stretto (360px,
      androidSmall), dove tutto e' verde, e il bordo dei 600px ora lo sorveglia il
@@ -434,8 +634,65 @@ const { t } = Astro.props;
        < 15) `height:auto` su un contenitore di soli figli assoluti collassa a
        ZERO e la scena sparisce. Il fallback tiene in piedi l'altezza. */
     .scene { height: 62.5vw; }
-    .scene { height: auto; aspect-ratio: 8 / 5; }
+    /* QUI LA SCALA NON E' COSTANTE: H_layer = 0.625*W + 20, quindi s cresce
+       con la larghezza (0.272 a 360, 0.293 a 390, 0.439 a 600). I raggi si
+       tarano sul PUNTO PIU' PICCOLO della matrice - 360px, la larghezza
+       Android piu' diffusa al mondo, ed e' li' che il rim cadeva:
+       3.556/0.2722 = 13.06, 7.822/0.2722 = 28.73, 2.844/0.2722 = 10.45,
+       6.400/0.2722 = 23.51. Sopra i 360 la passata resta piu' larga del
+       necessario in pixel veri, ma non in DISEGNO: in unita' di viewBox il
+       raggio e' costante dentro la banda, quindi l'alone pesa sulla sagoma
+       esattamente come a 360 - e' la stessa immagine, piu' grande. */
+    .scene {
+      height: auto; aspect-ratio: 8 / 5;
+      --rim-n: 13px; --rim-w: 28.7px; --rimf-n: 10.4px; --rimf-w: 23.5px;
+    }
     .lyr { top: -10px; bottom: -10px; }
+  }
+
+  /* IL RIM DI LUNA - il contorno su fondo scuro fa DUE lavori (canone sez. 4).
+     Su fondo chiaro una linea sola bastava: disegnava la forma E la staccava
+     dal fondo. Su carbone i due lavori si separano, e la misura lo dice senza
+     appello: la linea Ink vale 1.09:1 sul cielo Notte, cioe' e' INVISIBILE.
+     Disegna benissimo DENTRO la luce (2.51:1 sulla pietra alta, 17.46:1 sul
+     dado) ma non stacca niente. Lo stacco lo porta il rim di Luna, e il canone
+     gli mette un pavimento: 3:1 sul fondo.
+     I RAGGI SONO IN UNITA' DI viewBox, NON IN PIXEL, E PER QUESTO NON SONO
+     NUMERI MA UNA FUNZIONE DELLA SCALA. Il filtro di un elemento SVG lavora
+     nello spazio utente: un raggio scritto "5px" qui dentro vale 5*s pixel
+     VERI, dove s e' la scala di resa. E s non e' una costante - con
+     `preserveAspectRatio slice` vale max(W/4800, H_layer/900), e H_layer lo
+     decidono le due media query qui sopra:
+
+         > 900px    H = 560 + 44 + 36 = 640        ->  s = 0.711
+         601-900    H = 400 + 22 + 22 = 444        ->  s = 0.493
+         <= 600     H = 0.625*W + 20               ->  s = 0.272 a 360px
+
+     cioe' 2.61x fra desktop e androidSmall. La prima stesura di questa scena
+     l'aveva capito a meta': aveva ALZATO i raggi (3/6 e 2/4 -> 5/11 e 4/9)
+     misurando sul solo desktop, e cosi' ha curato il desktop lasciando i
+     telefoni sotto il pavimento. MISURATO sui PNG dell'harness, 7 viewport,
+     bordo sinistro della Torre: mediana 3.14:1 a 360px e 3.04:1 a 390px, con
+     41% e 48% delle righe sotto 3:1, contro 3.83:1 e 4% sul desktop. E' il
+     lo stesso difetto ancora una volta - un numero misurato su UN viewport
+     spacciato per una regola - e la cura ha la stessa forma delle altre due
+     (parAmp nello script, aspect-ratio qui sopra): non un numero, una FUNZIONE
+     DELLA BANDA.
+     Il raggio si sceglie quindi in PIXEL VERI - 3.6 / 7.8 sulla sagoma vicina,
+     2.8 / 6.4 su quella lontana, che sono i valori con cui il desktop misura
+     3.83:1 - e si divide per la s della banda. Piu' in alto non si va: la
+     banda 601-900, che ha la passata stretta a 2.9 px veri, misurava gia'
+     3.71:1, e un rim che cresce oltre il necessario ruba l'occhio agli accenti
+     funzionali (canone 4.2). Restano DUE passate impilate: la stretta porta il
+     valore al bordo, la larga gli da' corpo. Il rim NON sostituisce la linea:
+     da solo il look diventa "neon". */
+  .lyr :global(.rim) {
+    filter: drop-shadow(0 0 var(--rim-n) rgba(168,184,224,1))
+            drop-shadow(0 0 var(--rim-w) rgba(168,184,224,.75));
+  }
+  .lyr :global(.rim-far) {
+    filter: drop-shadow(0 0 var(--rimf-n) rgba(168,184,224,1))
+            drop-shadow(0 0 var(--rimf-w) rgba(168,184,224,.70));
   }
 
   /* Anima solo l'opacita': proprieta' del compositor, non ridipinge nulla.
@@ -510,7 +767,7 @@ const { t } = Astro.props;
   }
 
   /* Il ciclo NON resta acceso: si sveglia sullo scroll, fa un frame, si spegne.
-     Un rAF che gira a vuoto dietro una pagina ferma e' il difetto #6, e vale
+     Un rAF che gira a vuoto dietro una pagina ferma e' un difetto noto, e vale
      anche qui - non solo sulla soglia. */
   addEventListener('scroll', () => {
     if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }

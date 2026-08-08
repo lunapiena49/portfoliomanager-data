@@ -4,7 +4,7 @@
 
 /* ===========================================================================
    PluriFin design system -- S6 redesign (brand ombrello, 2 divisioni)
-   Sorgente dei token: C:\Plurifin\company\BRAND_GUIDELINES.md (canonico).
+   Sorgente dei token: le brand guidelines interne (documento canonico).
 
    Tre idee portanti:
    1. Il GUSCIO e' della casa madre (ink / silver / mint) e resta quieto.
@@ -83,16 +83,28 @@
     --finance-soft:   #7FC0F5;   /* AA su fondo scuro */
     --accent:         #00BFA5;   /* teal legacy: NON e' l'accento di sezione */
 
-    /* ---- Divisione Games (palette ROLLQUEST, art/ART_DIRECTION.md) ---- */
+    /* ---- Divisione Games (palette ROLLQUEST, canone artistico) ----
+       La palette del gioco e' passata al canone GOTICO.
+       ember, astral e amber NON cambiano: sono i tre hex che il canone tiene
+       accesi (Arancio, Astrale, Ambra della sez. 3.2) e i primi due sono anche
+       canone AZIENDALE (linee guida di marchio, 4.3), quindi valgono per il marchio
+       ombrello e non solo per la divisione. Cambiano i due che il canone
+       RITIRA per nome nella sez. 3.6. */
     --ember:          #FF8A3D;
     --ember-deep:     #A8431E;   /* AA su chiaro */
     --ember-soft:     #FFA867;   /* AA su scuro */
     --astral:         #9B6BFF;
     --amber:          #FFC24B;
-    --games-outline:  #3A3153;   /* nel gioco il contorno non e' mai nero puro */
+    /* era #3A3153: sul fondo notturno non e' ne' linea ne' forma (1,42:1).
+       Ink e' il contorno del canone - e non e' nero puro nemmeno lui. */
+    --games-outline:  #14101F;
     --games-cream:    #FFF6EA;
-    --sky-hi:         #B8E0FF;
-    --sky-lo:         #FFE8C8;
+    /* IL CIELO NON E' PIU' L'ALBA. Il gradiente #B8E0FF -> #FFE8C8 e' ritirato
+       dalle scene (sez. 3.6): al suo posto il cielo del canone, Notte in alto
+       e la bruma Indaco lontano all'orizzonte. L'alba sopravvive solo come
+       CHIARORE basso (sez. 5.1), e nel sito vive dentro Scena.astro. */
+    --sky-hi:         #1E1830;
+    --sky-lo:         #2B3566;
 
     /* ---- Semantica mercati (invariante) ---- */
     --success:        #4CAF50;
@@ -163,7 +175,11 @@
   }
   :root[data-section='games'] {
     --sec:       var(--ember);
-    --sec-ink:   #2A2340;     /* nel gioco il bottone arancio ha testo scuro */
+    /* Il testo sopra un accento e' SEMPRE Ink (canone 3.4): e' la regola che
+       si sbaglia piu' facilmente migrando, perche' sul cielo chiaro valeva
+       l'opposto. #2A2340 era un viola scuro scelto a occhio (6,34:1
+       sull'arancio), Ink e' il canone e vale 7,97:1. */
+    --sec-ink:   #14101F;
     --sec-text:  var(--ember-deep);
     --sec-glow:  rgba(255,138,61,.40);
     --sec-tint:  rgba(255,138,61,.10);
@@ -353,8 +369,21 @@
     }
   }
 
+  /* L'ANELLO DI FOCUS E' DELLA SUPERFICIE, NON DEL TEMA.
+     `--sec-text` ha un contratto preciso - "testo/link sul TERRENO corrente,
+     sempre AA" - e finche' il terreno segue il tema quel contratto vale anche
+     per l'anello. Due superfici NON seguono piu' il tema (il `main` di
+     /games e la banda Games della home sono notturni anche in tema chiaro) e
+     li' il contratto si rompe in silenzio: in tema chiaro `--sec-text` di
+     sezione Games vale #A8431E, che sulla Notte #1E1830 fa **2,84:1**, sotto
+     il floor di 3:1 di WCAG 1.4.11 - e sul vecchio fondo #0A0E14 faceva
+     3,21:1, cioe' la migrazione ha PEGGIORATO una misura che era conforme.
+     La cura sta a monte, non sul singolo bottone: il colore dell'anello
+     diventa un token suo, che ogni superficie ridefinisce per se'. Chi non lo
+     ridefinisce ricade su `--sec-text`, cioe' sul comportamento di prima:
+     zero regressioni su Finance e sull'azienda. */
   :focus-visible {
-    outline: 2px solid var(--sec-text);
+    outline: 2px solid var(--focus-ring, var(--sec-text));
     outline-offset: 3px;
     border-radius: 4px;
   }

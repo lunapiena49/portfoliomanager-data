@@ -1,0 +1,639 @@
+---
+/**
+ * LA SCENA DI ROLLQUEST - VARIANTE RASTER (nata come provino S57, PROMOSSA a
+ * scena servita in S81 sulla consegna `art/export/scena_sito/CONSEGNA_S75.md`,
+ * sei sha256 verificati alla copia).
+ *
+ * RICOMPOSTA IN S95 SUL CAST COMPLETO (direttiva utente S81: "la scena si rifa'
+ * SOLO col cast giusto e UNA volta sola", dichiarata soddisfatta dalla
+ * `CONSEGNA_S91.md`). I sei PNG sono ora bit-identici a
+ * `art/export/scena_sito/`: Rollo resta l'S57 per DECISIONE UTENTE (S91, a
+ * verbale in CONSEGNA_S91 par. 1: *"tengo s57, tanto poi rollo che e' il
+ * protagonista cambiera' in game mobile in base all'equipaggiamento che
+ * equipaggia. s57 e' la forma base"*), Corvax e' il
+ * BOSS del gioco (`s7165`), Torre il candidato `s6739` (S87), crinale lontano
+ * `s7903` e guglie `s7910` (lotto S79, scelti in S83).
+ *
+ * Stessa impalcatura di Scena.astro (5 piani, un viewBox 4800x900, orizzonte
+ * y=560, rim di Luna in CSS, parallasse, sonde).
+ *
+ * COLLOCAZIONI: la FORMULA e' quella della spec SCENA_SITO_S47_MANIFEST.md
+ * sez. 4.2-4.5; i NUMERI sono ricalcolati sugli asset SERVITI, perche' quelli
+ * della spec sono aritmetica su dimensioni che non esistono piu'. Il datum e'
+ * l'ULTIMA RIGA OPACA (alfa >= 28, la stessa soglia di `scena_registro.py`),
+ * non il fondo del rect: e' il difetto che in S81 fece misurare il piede della
+ * Torre dentro 53 righe trasparenti.
+ *   rollo   1024x1024  bbox(262,76,820,927)  span cupola116->suola926 = 810
+ *           u = 170/810*1.0250 = 0.215123  x=883.62 y=610.58 w=h=220.29
+ *           INVARIATO: il file non e' cambiato, quindi non cambia il numero.
+ *   corvax  1152x1024  bbox(84,22,1096,1000) span cranio172->orlo999 = 827
+ *           u = 306/827*0.9583 = 0.354583 x=1190.32 y=439.47 w=408.48 h=363.09
+ *           (il cranio e' il minimo locale del profilo di riga dove la corona
+ *            finisce e la testa comincia - una LETTURA, non un bordo netto,
+ *            come dichiara S47 sez. 7.3; controllo positivo: la stessa lettura
+ *            sul Corvax S57 ridA' il 166 pubblicato. La corona NON entra
+ *            nell'altezza nominale - S47 4.3, "e' un'aggiunta sopra la testa";
+ *            le ALI si': sono parte della figura, e portano la sagoma resa a
+ *            346u contro i 293u nominali.)
+ *            ANCORATO AI PIEDI, non al centro del bbox: le ali sono asimmetriche
+ *            e i piedi cadono a 557,5 px contro un bbox centrato a 590. Chi sta
+ *            in piedi sta sopra la SUA ombra.
+ *   torre    768x1280  bbox(221,26,554,1239) sagoma alta 1212 px
+ *           u = 680/1212 = 0.561056  x=1452.59 y=85.41 w=430.89 h=718.15
+ *           680u = 4,0x le 170u nominali di Rollo (decisione utente S83:
+ *           "alzarla a 4-5x"; era 460u = 2,7x). CIMA a y=100, PIEDE a y=780.
+ *           Il 4,0x e' NOMINALE contro NOMINALE: Rollo e' reso a scala 1,0250,
+ *           quindi il rapporto fra le due figure sullo schermo e' 3,90x, e
+ *           quello APPARENTE (col piede della Torre dietro il crinale) 2,95x.
+ *           Tre numeri diversi per la stessa Torre: quello che decide una
+ *           taglia e' il primo, quello che si vede e' il terzo.
+ *
+ * PERCHE' IL PIEDE DELLA TORRE STA A 780 E NON SULLA LINEA DEL CRINALE. Fra il
+ * ritaglio alto della scena (61,9u: `.scene` alta 560px con `.lyr` che sporge
+ * di 44px, viewBox in `slice`) e la linea del crinale medio sotto la Torre
+ * (614,8..634,1u) ci sono 553-572 unita', e la sonda ne pretende ~38 di
+ * margine in alto. Una Torre di 680u NON ci sta: o si
+ * taglia la guglia in alto, o il piede scende DIETRO il crinale. Scende il
+ * piede - una guglia tagliata e' un difetto, un piede sepolto dietro una collina
+ * e' come stanno le torri lontane. Conseguenza da dichiarare: l'altezza
+ * APPARENTE (dalla cima alla linea del crinale) e' 515-534u, cioe' 3,0x Rollo,
+ * mentre il nominale e' 4,0x. Il 4x compra LARGHEZZA (sagoma 186,8u contro
+ * 130,7u) piu' che altezza vista: sopra i ~534u apparenti non si va senza
+ * rifare il ritaglio o il piano del crinale.
+ *
+ * ALTEZZE RESE, per non doverle ricavare: Rollo 174,25u nominali (sagoma 182,6u
+ * con l'elmo), Corvax 293,24u nominali (sagoma 346,4u con le ali), Torre 680u.
+ * Il rapporto Corvax/Rollo resta 1,68x RESO (1,80 nel mondo a profondita'
+ * diverse: 0,9583 contro 1,0250) - v. il capoverso qui sotto.
+ *   bande (profilo min/mediana/max e cresta RIMISURATI in S95 sull'asset
+ *          SERVITO, con la soglia alfa 28 di `scena_registro.py`; il conteggio
+ *          delle tessere e' quello del codice qui sotto, non quello che questo
+ *          blocco dichiarava - diceva 6 e 8 dove il codice ha sempre avuto 8 e 9):
+ *           guglie          117/371/429  cresta x=776  u_y=0.175000  8 tessere (k 0..7)  625.0x112.0  y=410.6
+ *           crinale lontano 191/246/347  cresta x=505  u_y=0.453125  8 tessere (k -1..6) 833.3x290.0  y=378.9
+ *           crinale medio    64/182/320  cresta x=303  u_y=0.216927  9 tessere (k -1..7) 625.0x 83.3  y=589.2
+ *          Le ALTEZZE di tessera NON si sono ritarate: i tre asset nuovi hanno
+ *          le stesse misure dei sostituiti (1536x640, 1536x640, 2048x384), e
+ *          ritoccare u_y rifarebbe le bande invece di sostituire i disegni.
+ *          Specchiate alterne; il crinale lontano ha fase -0.1073 di tessera
+ *          perche' la sua cresta ALTA cada sotto la Torre - RICALCOLATA in S95
+ *          sull'asset `s7903`, la cui cresta e' a 505 e non piu' a 825: con la
+ *          fase vecchia (+0.26) cadeva 213u a destra della Torre. Rect di continuazione
+ *          appena SOPRA il bordo basso della tessera: la riga di fondo "piena
+ *          al 100%" degli asset S47 era vera su 2 px su 1536 (HANDOFF_S49 par.
+ *          1.2), quindi la continuazione non si fida di quella riga.
+ *
+ * PROPORZIONE DEL CAST, perche' il numero atteso non e' quello che sembra: il
+ * canone da' Corvax = 1,8 Rollo NEL MONDO, ma i due stanno a profondita'
+ * diverse (scala 0,9583 contro 1,0250), quindi RESI il rapporto vale 1,68x -
+ * ed e' lo stesso numero che danno le due `u` pubblicate nella spec S47
+ * (293,25 / 174,25). Chi misura 1,80 sul reso sta guardando una scena in cui
+ * la prospettiva non e' stata applicata a uno dei due.
+ *
+ * DIFFERENZE DICHIARATE rispetto alla scena vettoriale:
+ *   - la LUNA sta DAVANTI alla banda delle guglie (nel vettoriale sta dietro
+ *     ai path, che pero' sono sparsi; il rect di continuazione raster e' un
+ *     muro e la spegnerebbe);
+ *   - le finestre della Torre sono COTTE nell'asset: niente animazione .lit
+ *     per-finestra;
+ *   - il contorno complementare del cast (spec 4.3: 4u totali) e' il filtro
+ *     feMorphology qui sotto: rollo radius 1.05, corvax 0.88, torre 1.0,
+ *     crinale medio 1.25 a opacita' .5 (spec 4.5).
+ *   - dado, luna, chiarore, ciuffi P1, ombre di contatto, prato: PATH A MANO
+ *     INVARIATI da Scena.astro (restano cosi' anche nell'integrazione vera).
+ *
+ * Le due sonde restano il contratto con l'harness: tower-top e' RIANCORATA
+ * alla sagoma resa del raster (1575..1765 x 99..781, dilatazione del filtro
+ * inclusa - era 1633..1767 x 149..611 sulla Torre da 460u); hero-feet non
+ * cambia, e non perche' nulla si sia mosso ma perche' le tre ombre stanno
+ * ancora dentro IN ASCISSA: 934..1488 dentro 934..1522 - col bordo sinistro
+ * che coincide esattamente (l'ombra di Rollo parte a 934 come la sonda: zero
+ * margine, e va saputo). In ORDINATA la sonda NON le contiene e non ha mai
+ * preteso di farlo: e' alta 24u (794..818) e l'ombra del Corvax ne occupa
+ * 772..808. Il test misura il margine BASSO, che e' cio' per cui la sonda
+ * esiste (le figure che escono dai piedi), quindi la cosa non ha conseguenze -
+ * ma "restano dentro la sonda" detto senza asse era falso (oracolo S95).
+ *
+ * IL MARGINE IN ALTO NON E' AVANZATO, E' SCELTO. `site.spec.ts` pretende che
+ * tower-top stia a >= 8px dal bordo della scena nel punto PEGGIORE dello
+ * scroll. Con la cima a y=100 l'harness MISURA, nel punto peggiore: 15,9px ad
+ * androidSmall, 17,9 a mobile, 22,9-25,3 dai 601px in su - tutti sopra la
+ * soglia, il piu' stretto con quasi il doppio del margine. La scena
+ * vettoriale, che quel test lo passa oggi, parte da 18,6px STATICI. Alzare
+ * la Torre di altre 40 unita' avrebbe fatto passare il test per un pelo,
+ * che e' il modo in cui questa scena si e' gia' rotta una volta.
+ *
+ * E LA CORSA DELLO SCROLL NON E' QUELLA CHE SEMBRA (refutato da un oracolo in
+ * S95). La prima stesura di questo capoverso diceva "+-11px a 1440", cioe'
+ * `amp * par`: e' l'escursione TEORICA, ma `worstContainmentDuringScroll`
+ * campiona solo da "bordo basso appena dentro" a "bordo alto appena dentro",
+ * quindi la corsa MISURABILE e' `amp * par * (vh-h)/(vh+h)` = **2,6px** a
+ * 1440, non 11. La prova che l'11 e' sbagliato sta nel dato di controllo: con
+ * +-11 la scena vettoriale starebbe a 18,6-11 = 7,6px e il test `#4` sarebbe
+ * ROSSO oggi, mentre passa. Il margine vero e' piu' largo di quello che il
+ * conto pessimistico dava - ma il numero da portare in giro e' questo.
+ */
+import type { Translations } from '../i18n/index';
+import sprRollo from '../assets/scena/spr_rollo.png';
+import sprCorvax from '../assets/scena/spr_corvax.png';
+import sprTorre from '../assets/scena/spr_torre.png';
+import sprGuglie from '../assets/scena/spr_guglie_lontane.png';
+import sprCrinaleLontano from '../assets/scena/spr_crinale_lontano.png';
+import sprCrinaleMedio from '../assets/scena/spr_crinale_medio.png';
+
+interface Props {
+  t: Translations;
+}
+const { t } = Astro.props;
+
+const guglieTiles = Array.from({ length: 8 }, (_, k) => ({
+  x: -1300 + k * 625.013,
+  flip: k % 2 === 1,
+}));
+/* Fase -0.1073, RICALCOLATA IN S95: porta la cresta ALTA della tessera sotto la
+   Torre (tessera k=3, SPECCHIATA, quindi la cresta corre da destra a sinistra).
+   Questo piano sta DIETRO alla Torre (v. il commento di P4): non le occlude il
+   piede, le da' la massa su cui poggiare.
+
+   IL RICALCOLO NON E' UN RITOCCO, E' L'AVVERTENZA S83/S87 CONSUMATA. L'asset
+   nuovo (`s7903`) ha la cresta a x sorgente **505**, non piu' a 825, e con la
+   fase vecchia (+0.26) quel punto cadeva a x resa **1976,1** - cioe' 213 unita'
+   a DESTRA della sagoma della Torre (1576,6..1763,4): la cresta non stava piu'
+   sotto niente. Le due consegne lo dichiaravano da due sessioni ("FUORI: la
+   fase va RICALCOLATA") e nessuno l'aveva consumato.
+   Con -0.1073 la cresta cade a x=1670,0, cioe' esattamente al centro della
+   sagoma. La tolleranza NUOVA - l'insieme dei punti sorgente che a questa fase
+   restano sotto la sagoma - e' **333..677** (specchiati: 333 -> 1763,4 e
+   677 -> 1576,6).
+   La fase e' stata ricalcolata DUE volte in questa sessione: la prima
+   (-0.0713) centrava la cresta su x=1700, ma poi l'harness visivo ha imposto
+   di spostare la Torre di 30u a sinistra (v. il commento della sonda in P4) e
+   una cresta lasciata dov'era avrebbe smesso di stare sotto la Torre. E' la
+   stessa forma del difetto che questo blocco cura: un numero derivato che non
+   segue il numero da cui deriva.
+   Reso: su tutta la campata del rect il profilo di questo piano sta fra y=465
+   e y=536, cioe' interamente sopra il piede della Torre (780,0): niente cielo
+   dietro il piede.
+   La fase e' NEGATIVA e deve restarlo: sommarle 1 sposterebbe la tessera su k
+   PARI, che non e' specchiata, e la stessa fase leggerebbe una colonna
+   sorgente diversa. La parita' di k fa parte della geometria, non e' un
+   dettaglio di indicizzazione.
+   E VA TENUTA LA FORMA LETTERALE `(k + <numero con segno>)`: il lettore del
+   presidio (`scena_registro.banda()`) pretende un `+` nel sorgente, quindi
+   riscrivere questa riga come `(k - 0.0713)` - che e' la stessa aritmetica -
+   gli fa perdere l'ancora. Non e' un guasto silenzioso (solleva
+   `LetturaFallita` e lo dice), ma e' mezz'ora buttata a chi ci arriva senza
+   saperlo.
+   k parte da -1 per non scoprire il bordo sinistro della corsa (-1300). */
+const crinaleLontanoTiles = Array.from({ length: 8 }, (_, i) => {
+  const k = i - 1;
+  return { x: -1300 + (k + -0.1073) * 833.35, flip: ((k % 2) + 2) % 2 === 1 };
+});
+/* Fase +0.149 (il titolo di questo blocco dichiarava -0.149 fino a S81: era la
+   didascalia a sbagliare, il codice ha sempre detto piu').
+
+   E' il crinale che DEVE occludere il piede della Torre - piu' vicino, piu'
+   scuro e con una cresta mossa - dopo che l'ordine di disegno di P4 e' stato
+   invertito (v. il commento in P4). Fino a S57 la fase si tarava mettendo la
+   CRESTA sotto la Torre; con l'asset S75 quella regola si e' ROVESCIATA e la
+   fase resta dov'e'. Misurato lungo la campata della SAGOMA della Torre
+   [1576.58, 1763.41], `esposizione` = il tratto peggiore di piede scoperto
+   (S81 misurava sul rect [1548.37, 1838.42]: il cambio di campata e' di S95 e
+   ha una ragione sua, v. `_campata_dalla_sagoma` in scena_registro.py):
+
+     S81, piede a 609,63    esposizione 27.08u   copertura del piede    0,0%
+     S95, piede a 780,00    esposizione  0.00u   copertura del piede  100,0%
+                            coperto da TESSERA 100,0%   rilievo 19,31u
+                            in scroll (parallasse)  esposizione 7.73u
+
+   ATTENZIONE - QUESTO BLOCCO E' STATO RISCRITTO DUE VOLTE. In S81 dopo una
+   REFUTAZIONE: la prima stesura pubblicava "6.69u / 81,1% di copertura" ed era
+   un artefatto del DATUM, perche' misurava il piede a `y + height` del rect
+   mentre `spr_torre.png` ha righe INTERAMENTE TRASPARENTI sotto la sagoma. Il
+   piede vero stava a 609,63 e il crinale medio ne copriva lo ZERO PER CENTO -
+   esattamente cio' che l'utente aveva visto all'anteprima ("la torre e'
+   buttata li' senza proporzioni e volante") mentre il presidio dava 81,1%.
+   Allora S81 concluse che NESSUNA fase salvava quella composizione, e aveva
+   ragione: la cura non era la fase, era la composizione.
+
+   IN S95 LA COMPOSIZIONE E' STATA RIFATTA, e la cura e' a monte della fase.
+   Il piede della Torre e' ora a **780,0** e il bordo alto di questo crinale
+   sotto la campata sta fra **614,8 e 634,1**: il piede e' coperto al 100% con
+   149 unita' di margine, contro uno slittamento di parallasse di 7,73u nel
+   punto peggiore dello scroll. Cioe': la copertura non dipende piu' dalla
+   fase, e non deve dipenderne - un registro che regge solo alla fase giusta e'
+   un registro che si rompe alla prossima rigenerazione dell'asset.
+
+   QUELLO CHE LA FASE DECIDE ANCORA, ED E' IL DIFETTO S57. Restando la
+   copertura garantita, la fase governa il RILIEVO: quanto la linea dove la
+   Torre sparisce dietro il crinale e' MOSSA invece che dritta. Misurato sulla
+   campata della SAGOMA (1576,6..1763,4 - non quella del rect, che e' larga
+   430,9 e diluisce: li' il rilievo non scende mai sotto 21,9u e il taglio
+   piatto non si vedrebbe nemmeno alla fase peggiore), il rilievo va da 7,81u
+   (fase 0.39: un taglio quasi orizzontale) a 47,29u su 400 fasi.
+   La fase 0.149 ne da' **19,31u**, che e' il 27esimo percentile: 107 fasi su
+   400 fanno peggio, 293 fanno meglio (mediana 30,37u). La fase servita e'
+   onesta, non ottima, e questo va scritto qui e non solo nel test.
+   Conta perche' e' il
+   difetto che l'utente boccio' in S57: *"un layer di sfondo di montagne copre
+   la torre e la torre stessa sembra volare"* - una sagoma tagliata da una
+   linea dritta galleggia anche quando i numeri di copertura sono perfetti.
+   Per questo `scena_registro.py` dalla S95 misura DUE cose e non una: che il
+   piede sia coperto, e che a coprirlo sia una SILHOUETTE (le tessere), non il
+   rect di fondo. La fase resta 0.149: al ricalcolo delle candidate le fasi ad
+   alto rilievo portavano in campo chiazze chiare dell'asset (provate a fondo
+   0.30/0.55/0.75 sul dist vero, e guardate), peggio a vedersi. Chi ritarera'
+   l'asset ha 293 fasi migliori davanti: lo spazio c'e', la scelta e' stata
+   fatta con gli occhi e non col numero.
+
+   Il presidio di registro si ARMA DA SOLO quando questa scena torna servita
+   (`scena_registro.promossa()` legge l'import di CompanyHome.astro): finche'
+   il sito monta la vettoriale, i due test di registro si dichiarano saltati
+   coi numeri, invece di restare rossi su una scena che nessuno vede.
+
+   Il presidio che rifa' questi numeri e li fa fallire in rosso:
+     python scripts/release/test_scena_registro.py
+   La tessera k=4 e' pari, quindi non specchiata. */
+const crinaleMedioTiles = Array.from({ length: 9 }, (_, i) => {
+  const k = i - 1;
+  return { x: -1300 + (k + 0.149) * 625.013, flip: ((k % 2) + 2) % 2 === 1 };
+});
+const TESSERA = {
+  guglie: { y: 410.6, w: 625.013, h: 112.0, fondo: 520 },
+  crinaleLontano: { y: 378.9, w: 833.35, h: 290.0, fondo: 667 },
+  crinaleMedio: { y: 589.2, w: 625.013, h: 83.3, fondo: 670 },
+};
+---
+<div class="scene" id="scene" role="img" aria-label={t.company.gamesBand.sceneAlt}>
+
+  <!-- P5 - il fondale: banda raster delle guglie, poi la LUNA davanti. -->
+  <div class="lyr" data-par="0.30">
+    <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="gMoon">
+          <stop offset="0%" stop-color="#A8B8E0" stop-opacity=".52"/>
+          <stop offset="26%" stop-color="#A8B8E0" stop-opacity=".26"/>
+          <stop offset="58%" stop-color="#2B3566" stop-opacity=".40"/>
+          <stop offset="100%" stop-color="#2B3566" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="gHaze" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#FFE8C8" stop-opacity="0"/>
+          <stop offset="100%" stop-color="#FFE8C8" stop-opacity=".18"/>
+        </linearGradient>
+      </defs>
+      <g transform="translate(1200,0)">
+        <g opacity=".55">
+          <rect x="-1300" y={TESSERA.guglie.fondo} width="5000" height={900 - TESSERA.guglie.fondo} fill="#2B3566"/>
+          {guglieTiles.map((tl) => (
+            <image
+              href={sprGuglie.src}
+              x={tl.x} y={TESSERA.guglie.y} width={TESSERA.guglie.w} height={TESSERA.guglie.h}
+              preserveAspectRatio="none"
+              transform={tl.flip ? `translate(${2 * tl.x + TESSERA.guglie.w},0) scale(-1,1)` : undefined}
+            />
+          ))}
+        </g>
+        <circle cx="1200" cy="556" r="370" fill="url(#gMoon)"/>
+        <circle cx="1200" cy="558" r="78" fill="#A8B8E0" opacity=".9"/>
+        <rect x="-1300" y="546" width="5000" height="82" fill="url(#gHaze)"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- P4 - IL CRINALE PRIMA, LA TORRE SOPRA.
+       La spec 4.4 prescriveva l'ordine inverso ("ordine di disegno: PRIMA del
+       crinale P4, cosi' il crinale ne occlude il piede") e il primo giro di
+       S57 l'ha seguita alla lettera. L'utente ha bocciato il risultato:
+       *"un layer di sfondo di montagne copre la torre e la torre stessa sembra
+       volare, non poggia su nulla"*. La ragione e' misurabile: sotto la Torre
+       la cresta del crinale lontano e' quasi PIATTA, quindi la sua occlusione
+       non legge come un pendio davanti ma come un TAGLIO orizzontale - e una
+       sagoma tagliata da una linea dritta galleggia.
+       La scena vettoriale, su cui questo difetto non e' mai stato sollevato,
+       fa il contrario: disegna il crinale P4 PRIMA e la Torre SOPRA, e lascia
+       l'occlusione del piede al crinale P3, che e' piu' vicino, piu' scuro e
+       ha una cresta mossa. Qui si fa lo stesso: la Torre POGGIA sulla massa
+       del crinale invece di esserne tagliata. -->
+  <div class="lyr" data-par="0.50">
+    <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <filter id="linea-torre" x="-8%" y="-8%" width="116%" height="116%">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="1" result="d"/>
+          <feFlood flood-color="#14101F" result="ink"/>
+          <feComposite in="ink" in2="d" operator="in" result="linea"/>
+          <feMerge><feMergeNode in="linea"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+     <g transform="translate(1200,0)">
+      <g opacity=".8">
+        <rect x="-1300" y={TESSERA.crinaleLontano.fondo} width="5000" height={900 - TESSERA.crinaleLontano.fondo} fill="#2B3566"/>
+        {crinaleLontanoTiles.map((tl) => (
+          <image
+            href={sprCrinaleLontano.src}
+            x={tl.x} y={TESSERA.crinaleLontano.y} width={TESSERA.crinaleLontano.w} height={TESSERA.crinaleLontano.h}
+            preserveAspectRatio="none"
+            transform={tl.flip ? `translate(${2 * tl.x + TESSERA.crinaleLontano.w},0) scale(-1,1)` : undefined}
+          />
+        ))}
+      </g>
+      <g class="rim-far">
+        <g filter="url(#linea-torre)">
+          <image href={sprTorre.src} x="1452.59" y="85.41" width="430.89" height="718.15"/>
+        </g>
+        <!-- La sonda segue la SAGOMA RESA (1576,6..1763,4 x 100,0..780,0) piu'
+             il raggio 1 del feMorphology, non il rect: il rect e' 430,89 largo
+             e la Torre ne occupa 186,8. Misurare la scatola direbbe che la
+             Torre esce dall'inquadratura 122 unita' prima di uscirne davvero.
+
+             LA X E' 1452,59 E NON 1482,59, E IL PERCHE' VA SCRITTO. La prima
+             stesura S95 centrava la sagoma a x=1700 come la Torre vecchia, e
+             l'harness visivo l'ha BOCCIATA: `la Torre e inquadrata
+             orizzontalmente` misurava **6,97px** di margine destro al viewport
+             `narrow` (601px), sotto la soglia di 8. Non e' un caso limite: e'
+             la Torre nuova che, essendo larga 186,8u invece di 130,7, spinge
+             il bordo destro 28 unita' piu' in la'. `narrow` e' il viewport
+             critico perche' sta appena SOPRA il breakpoint dei 600px, quindi
+             prende la scena da 400px (scala 0,4933) con soli 601px di
+             larghezza: la finestra visibile e' 1218u, la piu' stretta di tutta
+             la matrice - piu' stretta di quella dei telefoni, che hanno un
+             rapporto piu' alto. Spostata di 30u a sinistra il margine minimo
+             sulla matrice torna a **21,8px**, cioe' dove stava con la Torre
+             vecchia (21px). Il conto e' riproducibile: scala =
+             max(W/4800, h_layer/900), finestra = W/scala, centrata sul viewBox.
+
+             LIMITE DA TENERE D'OCCHIO (rilievo di un oracolo, S95): il test
+             della cima sceglie il campione peggiore con `min(top, bottom)` e
+             poi asserisce il `top` di QUEL campione. Oggi regge perche' il
+             margine basso (48,6u a 1440) e' quasi il doppio di quello alto
+             (26,4u), ma questa sonda in S95 e' passata da 462u a 682u di
+             altezza: se crescesse ancora di una trentina i due si
+             incrocerebbero e il test riporterebbe, in silenzio, un `top` che
+             non e' il peggiore. -->
+        <rect data-probe="tower-top" x="1575" y="99" width="190" height="682"
+              fill="none" stroke="none" pointer-events="none"/>
+      </g>
+     </g>
+    </svg>
+  </div>
+
+  <!-- P3 - crinale medio raster: contorno 2.5u @ .5 (spec 4.5). -->
+  <div class="lyr" data-par="0.75">
+    <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <filter id="linea-cm" x="-8%" y="-8%" width="116%" height="116%">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="1.25" result="d"/>
+          <feFlood flood-color="#14101F" flood-opacity=".5" result="ink"/>
+          <feComposite in="ink" in2="d" operator="in" result="linea"/>
+          <feMerge><feMergeNode in="linea"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+     <g transform="translate(1200,0)">
+      <g filter="url(#linea-cm)">
+        <rect x="-1300" y={TESSERA.crinaleMedio.fondo} width="5000" height={900 - TESSERA.crinaleMedio.fondo} fill="#3F3657"/>
+        {crinaleMedioTiles.map((tl) => (
+          <image
+            href={sprCrinaleMedio.src}
+            x={tl.x} y={TESSERA.crinaleMedio.y} width={TESSERA.crinaleMedio.w} height={TESSERA.crinaleMedio.h}
+            preserveAspectRatio="none"
+            transform={tl.flip ? `translate(${2 * tl.x + TESSERA.crinaleMedio.w},0) scale(-1,1)` : undefined}
+          />
+        ))}
+      </g>
+     </g>
+    </svg>
+  </div>
+
+  <!-- P2 - prato, ombre, sonda hero-feet, CAST raster, dado a mano. -->
+  <div class="lyr" data-par="1.00">
+    <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <defs>
+        <radialGradient id="gDie">
+          <stop offset="0%" stop-color="#FFC24B" stop-opacity=".8"/>
+          <stop offset="100%" stop-color="#FFC24B" stop-opacity="0"/>
+        </radialGradient>
+        <filter id="linea-rollo" x="-8%" y="-8%" width="116%" height="116%">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="1.05" result="d"/>
+          <feFlood flood-color="#14101F" result="ink"/>
+          <feComposite in="ink" in2="d" operator="in" result="linea"/>
+          <feMerge><feMergeNode in="linea"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="linea-corvax" x="-8%" y="-8%" width="116%" height="116%">
+          <feMorphology in="SourceAlpha" operator="dilate" radius="0.88" result="d"/>
+          <feFlood flood-color="#14101F" result="ink"/>
+          <feComposite in="ink" in2="d" operator="in" result="linea"/>
+          <feMerge><feMergeNode in="linea"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+     <g transform="translate(1200,0)">
+      <path d="M-1300 806 L0 792 Q 300 758 640 778 Q 980 798 1320 772 Q 1660 746 2000 780 Q 2210 798 2400 774
+               L3700 796 L3700 900 L-1300 900 Z"
+            fill="#4A4066" stroke="#14101F" stroke-width="3" stroke-opacity=".45" stroke-linejoin="round"/>
+
+      <!-- L'ombra del Corvax e' l'UNICO path a mano che diverge da Scena.astro,
+           e diverge per necessita': il Corvax vecchio era una campana che
+           toccava terra per 178,5u, quello nuovo poggia su due zampe larghe
+           133,3u - misurate sulle ULTIME 40 RIGHE OPACHE, e la finestra va
+           dichiarata perche' il numero ci dipende: sulle ultime 10 l'impronta
+           e' 125,5u e il rapporto sale a 1,59 (nit di un oracolo, S95). Il
+           rapporto ombra/impronta resta quello di prima (1,50x) alla finestra
+           scelta: rx 134 -> 100. Lasciarla a 134 avrebbe steso 268u d'ombra sotto una
+           figura che ne appoggia 133, ed e' esattamente cio' che fa sembrare
+           una figura INCOLLATA (difetto #1). Centro e quota non si toccano:
+           la sonda `hero-feet` (934..1522) contiene ancora tutte e tre le
+           ombre, che ora arrivano al massimo a 1488. -->
+      <ellipse cx="1000" cy="806" rx="66" ry="12" fill="#14101F" opacity=".45"/>
+      <ellipse cx="1388" cy="790" rx="100" ry="18" fill="#14101F" opacity=".42"/>
+      <ellipse cx="1180" cy="800" rx="28" ry="7" fill="#14101F" opacity=".22"/>
+
+      <rect data-probe="hero-feet" x="934" y="794" width="588" height="24"
+            fill="none" stroke="none" pointer-events="none"/>
+
+      <!-- ROLLO raster: S47 + correzione d'accento (fessura Ambra accesa,
+           stemma spento). Posa statica, decisione utente S47. -->
+      <g class="rim">
+        <g filter="url(#linea-rollo)">
+          <image href={sprRollo.src} x="883.62" y="610.58" width="220.29" height="220.29"/>
+        </g>
+      </g>
+
+      <!-- IL DADO resta a mano: e' l'oggetto piu' luminoso della scena. -->
+      <circle class="glow" cx="1180" cy="616" r="82" fill="url(#gDie)"/>
+      <g class="rim" stroke="#14101F" stroke-width="4" stroke-linejoin="round">
+        <path d="M1180 582 L1212 599 L1180 616 L1148 599 Z" fill="#FFF6EA"/>
+        <path d="M1148 599 L1180 616 L1180 652 L1148 635 Z" fill="#DDD5CA"/>
+        <path d="M1212 599 L1180 616 L1180 652 L1212 635 Z" fill="#F1E9DD"/>
+        <g fill="#14101F" stroke="none">
+          <path d="M1180 592 L1183 598 L1189 599 L1183 602 L1180 608 L1177 602 L1171 599 L1177 598 Z"/>
+          <path d="M1164 616 L1166 621 L1171 622 L1166 625 L1164 630 L1162 625 L1157 622 L1162 621 Z"/>
+          <path d="M1196 618 L1198 623 L1203 624 L1198 627 L1196 632 L1194 627 L1189 624 L1194 623 Z"/>
+        </g>
+      </g>
+      <g fill="#FFC24B" opacity=".9">
+        <path class="glow" d="M1252 566 L1256 578 L1268 582 L1256 586 L1252 598 L1248 586 L1236 582 L1248 578 Z"/>
+        <path class="glow" d="M1116 556 L1119 565 L1128 568 L1119 571 L1116 580 L1113 571 L1104 568 L1113 565 Z" style="animation-delay:-1.1s"/>
+      </g>
+
+      <!-- RE CORVAX raster: il BOSS del gioco (seme s7165), corona esclusa
+           dall'altezza nominale, ali comprese. Sostituisce il seme 5701 del
+           lotto S57, che usava 5 tinte su 138 (derivazione vecchia). -->
+      <g class="rim">
+        <g filter="url(#linea-corvax)">
+          <image href={sprCorvax.src} x="1190.32" y="439.47" width="408.48" height="363.09"/>
+        </g>
+      </g>
+     </g>
+    </svg>
+  </div>
+
+  <!-- P1 - primissimo piano: INVARIATO (ciuffi davanti al cast, lucciole). -->
+  <div class="lyr" data-par="1.40">
+    <svg viewBox="0 0 4800 900" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+     <g transform="translate(1200,0)">
+      <path d="M-1300 846 L0 838 Q 240 816 500 830 Q 760 844 1020 826 Q 1280 808 1540 828 Q 1800 848 2060 824 Q 2230 810 2400 828
+               L3700 842 L3700 900 L-1300 900 Z"
+            fill="#3F3657" stroke="#14101F" stroke-width="5" stroke-opacity=".6" stroke-linejoin="round"/>
+      <g fill="#14101F" stroke="#14101F" stroke-width="4" stroke-linejoin="round" stroke-opacity=".5">
+        <path d="M934 830 Q941 792 950 826 Q959 784 968 824 Q975 796 980 830 Z"/>
+        <path d="M988 828 Q995 786 1004 822 Q1013 778 1021 820 Q1027 792 1032 828 Z"/>
+        <path d="M1040 832 Q1047 796 1055 828 Q1063 790 1070 830 Z"/>
+        <path d="M1288 814 Q1295 776 1304 810 Q1313 772 1322 808 Q1329 784 1334 814 Z"/>
+        <path d="M1442 816 Q1449 780 1458 812 Q1467 776 1476 810 Z"/>
+        <path d="M-1020 848 Q-1010 812 -1000 846 Q-990 816 -980 848 Z"/>
+        <path d="M-560 840 Q-550 804 -540 838 Q-530 808 -520 840 Z"/>
+        <path d="M-140 836 Q-130 800 -120 834 Z"/>
+        <path d="M600 842 Q610 806 620 840 Q630 810 640 842 Z"/>
+        <path d="M1900 830 Q1910 794 1920 828 Q1930 800 1940 830 Z"/>
+        <path d="M2180 824 Q2190 790 2200 822 Z"/>
+        <path d="M2620 838 Q2630 802 2640 836 Q2650 806 2660 838 Z"/>
+        <path d="M3080 846 Q3090 810 3100 844 Z"/>
+        <path d="M3480 840 Q3490 806 3500 838 Q3510 810 3520 840 Z"/>
+      </g>
+      <g fill="#3EC6C0" stroke="none" opacity=".85">
+        <circle cx="878" cy="836" r="5"/><circle cx="1108" cy="842" r="4"/>
+        <circle cx="1560" cy="834" r="5"/><circle cx="700" cy="846" r="4"/>
+        <circle cx="-320" cy="844" r="5"/><circle cx="2380" cy="838" r="4"/>
+        <circle cx="2900" cy="846" r="5"/>
+      </g>
+     </g>
+    </svg>
+  </div>
+
+  <div class="embers" id="embers"></div>
+</div>
+
+<style>
+  /* IL RIM SU UN RASTER NON E' IL RIM SU UN PATH, e i numeri della scena
+     vettoriale qui non si ereditano: `drop-shadow` lavora sull'ALFA, e l'alfa
+     di un path e' netta mentre quella di un PNG generato e' antialiasata su
+     2-3 px. La stessa coppia di passate che sul vettoriale disegna un filo
+     produce sul raster una nuvola - l'utente l'ha vista e l'ha detta:
+     *"gli aloni intorno a corvax e rollo sono troppo innaturali"*.
+     La passata STRETTA e' quella che fa il lavoro di canone (portare il valore
+     al bordo, pavimento 3:1 sul fondo) e resta; quella LARGA, che serviva solo
+     a dare corpo, si dimezza e perde alfa. Il rapporto fra le due bande e' lo
+     stesso su tutti e tre gli scaglioni di scala, come nell'originale: i
+     raggi restano una FUNZIONE della scala di resa, non dei numeri. */
+  .scene {
+    position: relative; height: 560px; overflow: hidden;
+    --rim-n: 5px;
+    --rim-w: 6px;
+    --rimf-n: 4px;
+    --rimf-w: 5px;
+  }
+  .lyr {
+    position: absolute; left: 0; right: 0; top: -44px; bottom: -36px;
+    pointer-events: none; will-change: transform;
+  }
+  .lyr svg { width: 100%; height: 100%; display: block; }
+
+  @media (max-width: 900px) {
+    .scene {
+      height: 400px;
+      --rim-n: 7.2px; --rim-w: 8.7px; --rimf-n: 5.8px; --rimf-w: 7.2px;
+    }
+    .lyr { top: -22px; bottom: -22px; }
+  }
+
+  @media (max-width: 600px) {
+    .scene { height: 62.5vw; }
+    .scene {
+      height: auto; aspect-ratio: 8 / 5;
+      --rim-n: 13px; --rim-w: 15.7px; --rimf-n: 10.4px; --rimf-w: 13px;
+    }
+    .lyr { top: -10px; bottom: -10px; }
+  }
+
+  .lyr :global(.rim) {
+    filter: drop-shadow(0 0 var(--rim-n) rgba(168,184,224,1))
+            drop-shadow(0 0 var(--rim-w) rgba(168,184,224,.75));
+  }
+  .lyr :global(.rim-far) {
+    filter: drop-shadow(0 0 var(--rimf-n) rgba(168,184,224,1))
+            drop-shadow(0 0 var(--rimf-w) rgba(168,184,224,.70));
+  }
+
+  .lyr :global(.eye) { animation: eye 2.6s ease-in-out infinite; }
+  @keyframes eye { 0%, 100% { opacity: 1; } 50% { opacity: .42; } }
+  .lyr :global(.glow) { animation: glow 2.2s ease-in-out infinite; }
+  @keyframes glow { 0%, 100% { opacity: .32; } 50% { opacity: .72; } }
+  .lyr :global(.lit) { animation: lit 3.4s ease-in-out infinite; }
+  @keyframes lit { 0%, 100% { opacity: .95; } 50% { opacity: .6; } }
+
+  .embers { position: absolute; inset: 0; z-index: 3; pointer-events: none; overflow: hidden; }
+  .embers :global(.em) {
+    position: absolute; bottom: -14px; width: 5px; height: 5px; border-radius: 50%;
+    background: #FF8A3D; box-shadow: 0 0 10px #FFC24B;
+    opacity: 0; animation: rise linear infinite;
+  }
+  @keyframes rise {
+    0%   { opacity: 0; transform: translate(0,0) scale(.5); }
+    10%  { opacity: .9; }
+    100% { opacity: 0; transform: translate(var(--dx, 0px), -430px) scale(1.15); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .embers :global(.em) { display: none; }
+  }
+</style>
+
+<script>
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
+
+  const emb = document.getElementById('embers');
+  if (emb && !reduce) {
+    for (let i = 0; i < 30; i++) {
+      const e = document.createElement('span');
+      e.className = 'em';
+      e.style.left = (Math.random() * 100) + '%';
+      e.style.animationDuration = (5 + Math.random() * 7) + 's';
+      e.style.animationDelay = (Math.random() * 9) + 's';
+      e.style.setProperty('--dx', (Math.random() * 90 - 45) + 'px');
+      emb.appendChild(e);
+    }
+  }
+
+  const sceneEl = document.getElementById('scene');
+  const lyrs = Array.from(document.querySelectorAll<HTMLElement>('.lyr'));
+  const parAmp = () => (innerWidth <= 600 ? 4 : innerWidth <= 900 ? 8 : 22);
+  let ticking = false;
+
+  function onScroll() {
+    if (reduce || !sceneEl) return;
+    const vh = innerHeight;
+    const sr = sceneEl.getBoundingClientRect();
+    const p = clamp((vh - sr.top) / (vh + sr.height), 0, 1);
+    const k = (.5 - p) * 2 * parAmp();
+    for (const l of lyrs) {
+      l.style.transform = `translate3d(0,${(k * parseFloat(l.dataset.par!)).toFixed(1)}px,0)`;
+    }
+    ticking = false;
+  }
+
+  addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  addEventListener('resize', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+</script>

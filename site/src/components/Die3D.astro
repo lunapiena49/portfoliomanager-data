@@ -14,9 +14,30 @@
  *
  * IL CICLO SI SPEGNE. Nel prototipo il rAF del dado girava incondizionato:
  * sessanta volte al secondo riscriveva un transform identico, anche mentre eri
- * sulla soglia e il dado non era neppure sullo schermo. E' il difetto #6 in un
+ * sulla soglia e il dado non era neppure sullo schermo. E' la stessa classe di difetto in un
  * secondo posto, e vuole lo stesso rimedio: vivo mentre serve, spento appena
  * arriva a destinazione.
+ *
+ * QUESTO E' IL DADO DEL DESTINO (canone artistico, sez. 3.5 nota 3).
+ * Un dado viola non e' un dado qualunque: nel canone l'astrale significa
+ * PREMIUM, e il dado premium ha un corpo suo. Tre cose cambiano, tutte perche'
+ * il canone le misura:
+ *   - il corpo passa da #9B6BFF ad Astrale chiaro #B58CFF. Il canone RITIRA
+ *     #9B6BFF come corpo: le sue tre bande valgono 136/129/117 di grigio, media
+ *     127,3, cioe' dentro la fascia vietata 100-135. Le bande di #B58CFF valgono
+ *     161/152/139, media 150,7: fuori.
+ *   - i pip passano da Ambra a Ink. Ambra su corpo astrale vale 2,20:1 - dei
+ *     numeri che non si contano; Ink vale 7,26:1 ed e' la stessa costruzione
+ *     delle rune incise del canone.
+ *   - l'ombra sotto il dado diventa il suo ALONE. Su un fondo notturno
+ *     un'ombra scura non e' un'ombra: e' niente (Ink su Notte = 1,09:1). Il
+ *     canone al posto suo prescrive un alone DIPINTO in Astrale #9B6BFF dietro
+ *     l'oggetto, "dove il viola profondo fa il suo mestiere senza dover essere
+ *     leggibile". L'elemento e' lo stesso e conserva la sua animazione: quando
+ *     il dado vola, l'alone si allarga.
+ * Le facce sono PIATTE. Il canone vuole tre bande costanti senza interpolazione
+ * (sez. 9.3): il gradiente su una faccia e' esattamente cio' che fa leggere un
+ * render come simulazione invece che come disegno.
  */
 import type { Translations } from '../i18n/index';
 
@@ -43,9 +64,12 @@ const g = t.company.gamesBand;
 
 <style>
   .die-stage { perspective: 950px; position: relative; display: grid; place-items: center; min-height: 300px; }
+  /* Non piu' un'ombra: l'ALONE del Dado del Destino (v. intestazione). Astrale
+     al 55% sotto un blur da 15px; l'astrale pieno vale 4,84:1 sul fondo Notte,
+     quindi si vede - mentre l'Ink dell'ombra vecchia valeva 1,09:1. */
   .die-shadow {
     position: absolute; bottom: 52px; left: 50%; width: 134px; height: 26px; margin-left: -67px;
-    border-radius: 50%; background: rgba(46,39,67,.45); filter: blur(15px);
+    border-radius: 50%; background: rgba(155,107,255,.55); filter: blur(15px);
     transform: scale(var(--sh, 1)); transition: transform .3s ease;
   }
   .die3d {
@@ -56,37 +80,52 @@ const g = t.company.gamesBand;
   }
   .die3d:active { cursor: grabbing; }
   .die3d.throw { transition: transform 1400ms cubic-bezier(.13,.78,.2,1); }
-  .die3d:focus-visible { outline: 3px solid #FFC24B; outline-offset: 8px; border-radius: 4px; }
+  /* Il focus ring resta l'accento della SEZIONE (linee guida di marchio, 7 e 8): qui
+     e' l'arancio Games #FF8A3D, 7,29:1 sul fondo notturno. Il turchese - che
+     nel canone di gioco significa "selezione attiva" - avrebbe portato la
+     semantica di ROLLQUEST dentro una regola di marchio che vale per tutte e
+     tre le sezioni del sito, e sarebbe stata l'unica CTA non arancione. */
+  .die3d:focus-visible { outline: 3px solid #FF8A3D; outline-offset: 8px; border-radius: 4px; }
 
   .face {
     position: absolute; inset: 0;
     display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: repeat(3,1fr);
     padding: 15px;
     box-shadow:
-      inset 0 0 0 4px #2E2743,                       /* il contorno, DENTRO la faccia */
-      inset 0 0 26px rgba(46,39,67,.42),             /* curvatura verso i bordi */
-      inset 6px 6px 14px rgba(255,255,255,.14);      /* luce dall'alto a sinistra */
+      inset 0 0 0 4px #14101F,                       /* il contorno, DENTRO la faccia */
+      inset 0 0 26px rgba(20,16,31,.42),             /* curvatura verso i bordi */
+      inset 6px 6px 14px rgba(168,184,224,.16);      /* la luna, dall'alto a sinistra */
   }
   .face :global(span) { display: grid; place-items: center; }
+  /* Il pip e' INCISO, non applicato: Ink pieno + un labbro di luna sul bordo
+     basso, che e' il modo in cui il canone costruisce i pip (incassati, con
+     ombra propria). Il vecchio alone ambra intorno a ogni pip faceva il
+     contrario: li faceva galleggiare sopra la faccia. */
   .face :global(i) {
     width: 15px; height: 15px; border-radius: 50%;
-    background: radial-gradient(circle at 34% 30%, #FFF0BF, #FFC24B 58%, #D89A28);
-    box-shadow: inset 0 -2px 3px rgba(0,0,0,.3), 0 0 8px rgba(255,194,75,.5);
+    background: #14101F;
+    box-shadow: 0 1px 0 rgba(168,184,224,.22), inset 0 -1px 2px rgba(168,184,224,.10);
   }
-  .f1 { transform: translateZ(62px);                 background: linear-gradient(142deg, #B78CFF, #9B6BFF 58%, #7B4CE0); }
-  .f2 { transform: rotateY(90deg)  translateZ(62px); background: linear-gradient(142deg, #A67BF5, #8659E8 58%, #6741C9); }
-  .f3 { transform: rotateY(180deg) translateZ(62px); background: linear-gradient(142deg, #B183FF, #9160F5 58%, #7248D4); }
-  .f4 { transform: rotateY(-90deg) translateZ(62px); background: linear-gradient(142deg, #A876FF, #8B5AEE 58%, #6B44CE); }
-  .f5 { transform: rotateX(90deg)  translateZ(62px); background: linear-gradient(142deg, #C6A8FF, #A87CFF 58%, #8659E0); }
-  .f6 { transform: rotateX(-90deg) translateZ(62px); background: linear-gradient(142deg, #9E77F0, #7E52DC 58%, #5C34B6); }
+  .f1 { transform: translateZ(62px);                 background: #AB84F1; }
+  .f2 { transform: rotateY(90deg)  translateZ(62px); background: #9C78DD; }
+  .f3 { transform: rotateY(180deg) translateZ(62px); background: #9C78DD; }
+  .f4 { transform: rotateY(-90deg) translateZ(62px); background: #AB84F1; }
+  .f5 { transform: rotateX(90deg)  translateZ(62px); background: #B58CFF; }
+  .f6 { transform: rotateX(-90deg) translateZ(62px); background: #9C78DD; }
 
   .die-hint {
     margin-top: 22px; text-align: center; min-height: 34px;
     transition: opacity .6s ease;
   }
   .die-hint.gone { opacity: 0; }
+  /* IL SUGGERIMENTO ERA ILLEGGIBILE, e non per poco: #6B5F86 sul tratto
+     centrale del vecchio gradiente alba valeva fra 1,03:1 e 2,68:1 - sotto il
+     4,5:1 che l'AA pretende a 12,5px, e nel punto peggiore letteralmente lo
+     stesso valore del fondo. Il canone ha un tono per questo mestiere (testo
+     spento #A79DBD): sul fondo Notte vale 6,68:1. Il bordo tratteggiato usa
+     currentColor, quindi guadagna la stessa leggibilita'. */
   .roll-hint {
-    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: #6B5F86;
+    display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: #A79DBD;
     border: 1px dashed currentColor; border-radius: 999px; padding: 6px 14px;
   }
 </style>
