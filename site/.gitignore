@@ -7,3 +7,6 @@ node_modules/
 Thumbs.db
 *.log
 .astro/
+# Output di Playwright quando l'harness visivo punta qui via VISUAL_SITE_DIR:
+# rigenerabile a ogni giro, quindi si ignora invece di committarlo.
+test-results/

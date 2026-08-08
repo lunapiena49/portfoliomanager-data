@@ -15,7 +15,22 @@ import { localePath } from '../i18n/index';
 import CompanyNav from './CompanyNav.astro';
 import Phone3D from './Phone3D.astro';
 import Die3D from './Die3D.astro';
-import Scena from './Scena.astro';
+/* S95: la scena RASTER e' PROMOSSA, con approvazione esplicita dell'utente
+   sull'anteprima (la stessa che in S81 aveva fermato la promozione).
+   I tre rilievi che l'avevano fermata sono chiusi, ognuno con la sua fonte:
+     - Corvax: ora e' il BOSS del gioco (`s7165`), bit-identico a
+       `art/export/boss/spr_boss_a1_corvax_ombra.png` - consegna S83;
+     - Rollo: NON esiste un approvato nuovo, e non deve esistere - decisione
+       utente S91, l'S57 e' la FORMA BASE del protagonista, che in gioco
+       cambiera' con l'equipaggiamento. Stato dichiarato e accettato, non una
+       svista: quel file usa 45 tinte contro le ~128 di Torre e Corvax;
+     - Torre: `s6739` (S87) e RICOMPOSTA a 680u = 4,0x Rollo, col piede a 780
+       coperto dal crinale medio invece che sospeso sopra di esso.
+   Il DEPLOY resta un passo separato e deliberato (PR verso il repo pubblico):
+   promuovere qui non pubblica niente. Il provino resta su /provino-scena.
+   Da questa riga dipende l'armamento del presidio: `scena_registro.promossa()`
+   legge proprio questo import. */
+import Scena from './ScenaRaster.astro';
 import Footer from './Footer.astro';
 
 interface Props {
@@ -108,19 +123,19 @@ const pressUrl = localePath(lang, 'press');
 
           <div class="facts">
             <div class="fact">
-              <span class="ico" style="background:rgba(88,196,112,.18);color:#3E9B58">
+              <span class="ico" style="background:rgba(20,16,31,.55);color:#58C470">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
               </span>
               <span set:html={c.gamesBand.fact1} />
             </div>
             <div class="fact">
-              <span class="ico" style="background:rgba(155,107,255,.18);color:#7A4FD4">
+              <span class="ico" style="background:rgba(20,16,31,.55);color:#B58CFF">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 3l2.6 5.6 6.1.7-4.5 4.1 1.2 6-5.4-3-5.4 3 1.2-6L3.3 9.3l6.1-.7Z"/></svg>
               </span>
               <span set:html={c.gamesBand.fact2} />
             </div>
             <div class="fact">
-              <span class="ico" style="background:rgba(255,138,61,.20);color:#C4552F">
+              <span class="ico" style="background:rgba(20,16,31,.55);color:#FF8A3D">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18 14 14 0 0 1 0-18"/></svg>
               </span>
               <span set:html={c.gamesBand.fact3} />
@@ -250,7 +265,11 @@ const pressUrl = localePath(lang, 'press');
     transition: background-position .7s cubic-bezier(.16,1,.3,1), box-shadow .4s;
   }
   .cta-fin { background-image: linear-gradient(115deg, #3EC6C0, #1E88E5 45%, #4A5AB9); color: #fff; box-shadow: 0 14px 32px -14px rgba(30,136,229,.95); }
-  .cta-gam { background-image: linear-gradient(115deg, #FFC24B, #FF8A3D 48%, #E8632A); color: #2A1F16; box-shadow: 0 14px 32px -14px rgba(255,138,61,.95); }
+  /* Il testo sopra un accento e' SEMPRE Ink (canone 3.4): #2A1F16 era un
+     marrone scelto a occhio, Ink e' la regola e vale di piu' (7,97:1 contro
+     6,86:1 sull'arancio). Lo stop scuro del gradiente non si sceglie: e' la
+     banda k=0.72 dell'arancio, #DD7733. */
+  .cta-gam { background-image: linear-gradient(115deg, #FFC24B, #FF8A3D 48%, #DD7733); color: #14101F; box-shadow: 0 14px 32px -14px rgba(255,138,61,.95); }
   .cta:hover { background-position: 100% 0; }
 
   .ticker {
@@ -268,26 +287,50 @@ const pressUrl = localePath(lang, 'press');
   .tk-cap { text-align: center; font-size: 10.5px; color: #79828F; margin-top: 8px; }
 
   /* =========== GAMES =========== */
+  /* LA BANDA SCENDE NELLA NOTTE, non piu' nell'alba. Il gradiente vecchio
+     era il CIELO della scena illustrata (la scena non ha un fondo suo: e'
+     trasparente, e questa banda si vede attraverso), quindi migrarla non e'
+     decorazione: e' la migrazione del cielo. Parte dall'ink aziendale - cosi'
+     la giunzione con la banda Finance resta invisibile - passa per Ink e si
+     ferma su Notte #1E1830, che e' il fondo che il canone gotico da' alle
+     scene. Su Notte il dado crema vale 15,97:1 e le braci arancio 7,29:1;
+     sull'alba #FFE8C8 valevano 1,50:1 e 2,19:1. */
+  /* L'ANELLO DI FOCUS DELLA BANDA, che qui e' messo peggio che su /games e per
+     un motivo in piu': questa pagina e' sezione AZIENDA, quindi il default
+     globale (`--sec-text`) e' la menta scura #0B7F5A - e la CTA della card ha
+     l'anello sulla PIETRA della card, dove la menta scura vale **1,89:1**
+     (sulla Notte, dove cade l'anello del resto della banda, 3,42:1: passa per
+     0,42). Nessuno dei due e' un numero da lasciare. Il token della superficie
+     porta l'arancio di sezione: 4,04:1 sulla Pietra, 4,77:1 sulla Pietra in
+     ombra, 7,29:1 sulla Notte. Il Dado ha gia' il suo anello arancio scritto a
+     mano e non cambia. */
   .gam-band {
     position: relative; overflow: hidden; padding: 118px 0 0;
     background: linear-gradient(180deg,
-      #0A0E14 0%, #1B1730 6%, #33265A 14%, #5B3A73 22%,
-      #96507A 31%, #CE6F6C 40%, #F49A63 49%, #FFC98F 60%, #FFE0BC 71%, #FFE8C8 100%);
+      #0A0E14 0%, #14101F 16%, #1E1830 42%, #1E1830 100%);
+    --focus-ring: #FF8A3D;
   }
   .gam-in { position: relative; z-index: 4; }
+  /* La card era CREMA con testo scuro: una finestra chiara dentro una sezione
+     notturna. Nel canone il pannello e' Pietra (#4A4066, "pannelli UI, carta
+     scura") con la sua banda d'ombra derivata, e il testo sopra e' quello
+     della tabella 3.4: primario crema 8,85:1, secondario 5,44:1. */
   .gam-card {
-    background: linear-gradient(165deg, rgba(255,246,234,.95), rgba(255,236,214,.9));
-    border: 1px solid rgba(46,39,67,.14);
+    background: linear-gradient(165deg, #4A4066, #3F3657);
+    border: 1px solid #6A5A93;
     border-radius: 22px; padding: 30px 32px;
-    box-shadow: 0 40px 70px -40px rgba(46,39,67,.6);
+    box-shadow: 0 40px 70px -40px rgba(20,16,31,.85);
     backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
   }
-  .gam-card .lab { color: #9A3E17; }
-  .gam-card .h2 { color: #2E2743; font-size: clamp(34px, 4.2vw, 50px); letter-spacing: -.012em; font-weight: 800; }
-  .gam-card .lede { color: #574A73; }
-  .gam-card .lede :global(b) { color: #2E2743; }
-  .gam-card .fact { color: #574A73; }
-  .gam-card .fact :global(b) { color: #2E2743; }
+  /* L'etichetta e' AMBRA e non arancio, ed e' una misura non un gusto: a
+     10,5px l'AA vuole 4,5:1, e l'arancio sulla pietra si ferma a 4,04:1.
+     L'ambra vale 5,90:1. */
+  .gam-card .lab { color: #FFC24B; }
+  .gam-card .h2 { color: #FFF6EA; font-size: clamp(34px, 4.2vw, 50px); letter-spacing: -.012em; font-weight: 800; }
+  .gam-card .lede { color: #C9C0DC; }
+  .gam-card .lede :global(b) { color: #FFF6EA; }
+  .gam-card .fact { color: #C9C0DC; }
+  .gam-card .fact :global(b) { color: #FFF6EA; }
 
   /* =========== LO STUDIO =========== */
   .about { padding: 90px 0; background: #0A0E14; position: relative; z-index: 4; }
