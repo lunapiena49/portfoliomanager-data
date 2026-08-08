@@ -234,7 +234,7 @@ const fr: Translations = {
       cta: "Entrez dans l'atelier",
       dieHint: 'bougez la souris pour le tourner · cliquez pour le lancer',
       dieAria: 'Lancer le dé',
-      sceneAlt: "Rollo et le Roi Corvax devant la Tour, avec le dé suspendu en l'air.",
+      sceneAlt: "Rollo et l'Ombre de Corvax devant la Tour, avec le dé suspendu en l'air.",
     },
     studio: {
       h3: 'Le studio',
@@ -270,8 +270,8 @@ const fr: Translations = {
       lede: "Personnages originaux, dessinés pour ce jeu. La Tour se gravit un étage à la fois : les étages se comptent, parce que les gravir, c'est le jeu.",
       rolloName: 'Rollo',
       rolloBody: "Corps en forme de poire, casque hémisphérique à visière à une fente, bouclier hexagonal dans le dos. C'est l'unité de mesure de la scène : tout le reste est grand comparé à Rollo.",
-      corvaxName: 'Roi Corvax',
-      corvaxBody: "Long bec, couronne à trois pointes tordue, cape de plumes qui finit en zigzag. Grand et triangulaire : la masse ne s'élargit que sous les épaules.",
+      corvaxName: "Ombre de Corvax",
+      corvaxBody: "Armure de plumes sombres, ailes qui s'ouvrent comme des vitraux, une couronne d'étoiles. C'est la projection du roi qui garde le premier tronçon de la Tour : le roi n'est pas là, il a laissé son ombre.",
     },
     followUp: {
       h2: 'Envie de savoir quand on pourra jouer ?',

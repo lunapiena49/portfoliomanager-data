@@ -259,7 +259,7 @@ const it: Translations = {
       cta: 'Entra nel cantiere',
       dieHint: 'muovi il mouse per girarlo · clicca per lanciarlo',
       dieAria: 'Lancia il dado',
-      sceneAlt: 'Rollo e Re Corvax davanti alla Torre, con il dado sospeso a mezz\'aria.',
+      sceneAlt: "Rollo e l'Ombra di Corvax davanti alla Torre, con il dado sospeso a mezz'aria.",
     },
     studio: {
       h3: 'Lo studio',
@@ -298,8 +298,8 @@ const it: Translations = {
       lede: 'Personaggi originali, disegnati per questo gioco. La Torre si sale un piano alla volta: i piani si contano, perché salirli è il gioco.',
       rolloName: 'Rollo',
       rolloBody: "Corpo a pera, elmo semisferico con visiera a una fessura, scudo esagonale sulla schiena. È l'unità di misura della scena: tutto il resto è alto in Rollo.",
-      corvaxName: 'Re Corvax',
-      corvaxBody: 'Becco lungo, corona a tre punte storta, mantello di piume che finisce a zig-zag. Alto e triangolare: la massa si apre solo sotto le spalle.',
+      corvaxName: "Ombra di Corvax",
+      corvaxBody: "Armatura di piume scure, ali che si aprono come vetrate, corona di stelle. È la proiezione del re a guardia del primo tratto della Torre: il re non c'è, ha lasciato la sua ombra.",
     },
     followUp: {
       h2: 'Vuoi sapere quando si gioca?',

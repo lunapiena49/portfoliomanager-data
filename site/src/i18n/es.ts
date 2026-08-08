@@ -234,7 +234,7 @@ const es: Translations = {
       cta: 'Entra en el taller',
       dieHint: 'mueve el ratón para girarlo · haz clic para lanzarlo',
       dieAria: 'Lanza el dado',
-      sceneAlt: 'Rollo y el Rey Corvax frente a la Torre, con el dado suspendido en el aire.',
+      sceneAlt: "Rollo y la Sombra de Corvax frente a la Torre, con el dado suspendido en el aire.",
     },
     studio: {
       h3: 'El estudio',
@@ -270,8 +270,8 @@ const es: Translations = {
       lede: 'Personajes originales, diseñados para este juego. La Torre se sube un piso cada vez: los pisos se cuentan, porque subirlos es el juego.',
       rolloName: 'Rollo',
       rolloBody: "Cuerpo con forma de pera, casco semiesférico con visera de una sola rendija, escudo hexagonal en la espalda. Es la unidad de medida de la escena: todo lo demás es alto comparado con Rollo.",
-      corvaxName: 'Rey Corvax',
-      corvaxBody: 'Pico largo, corona de tres puntas torcida, capa de plumas que termina en zigzag. Alto y triangular: el volumen solo se abre por debajo de los hombros.',
+      corvaxName: "Sombra de Corvax",
+      corvaxBody: "Armadura de plumas oscuras, alas que se abren como vidrieras, una corona de estrellas. Es la proyección del rey que guarda el primer tramo de la Torre: el rey no está, ha dejado su sombra.",
     },
     followUp: {
       h2: '¿Quieres saber cuándo se puede jugar?',
