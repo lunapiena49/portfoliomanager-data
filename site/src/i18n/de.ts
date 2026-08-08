@@ -234,7 +234,7 @@ const de: Translations = {
       cta: 'Betritt die Werkstatt',
       dieHint: 'Maus bewegen, um ihn zu drehen · klicken, um ihn zu würfeln',
       dieAria: 'Würfel werfen',
-      sceneAlt: 'Rollo und König Corvax vor dem Turm, mit dem Würfel in der Luft schwebend.',
+      sceneAlt: "Rollo und der Schatten von Corvax vor dem Turm, mit dem Würfel in der Luft schwebend.",
     },
     studio: {
       h3: 'Das Studio',
@@ -270,8 +270,8 @@ const de: Translations = {
       lede: 'Originalcharaktere, für dieses Spiel gezeichnet. Der Turm wird ein Stockwerk nach dem anderen erklommen: Die Stockwerke werden gezählt, denn sie zu erklimmen ist das Spiel.',
       rolloName: 'Rollo',
       rolloBody: 'Birnenförmiger Körper, halbkugelförmiger Helm mit einschlitzigem Visier, sechseckiger Schild auf dem Rücken. Er ist die Maßeinheit der Szene: Alles andere ist groß im Vergleich zu Rollo.',
-      corvaxName: 'König Corvax',
-      corvaxBody: 'Langer Schnabel, schiefe dreizackige Krone, Federumhang, der im Zickzack endet. Groß und dreieckig: Die Masse weitet sich erst unterhalb der Schultern.',
+      corvaxName: "Schatten von Corvax",
+      corvaxBody: "Rüstung aus dunklen Federn, Flügel, die sich wie Kirchenfenster öffnen, eine Krone aus Sternen. Es ist die Projektion des Königs, die den ersten Abschnitt des Turms bewacht: Der König ist nicht da, er ließ seinen Schatten zurück.",
     },
     followUp: {
       h2: 'Willst du wissen, wann gespielt wird?',

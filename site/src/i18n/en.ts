@@ -234,7 +234,7 @@ const en: Translations = {
       cta: 'Enter the workshop',
       dieHint: 'move the mouse to turn it · click to roll it',
       dieAria: 'Roll the die',
-      sceneAlt: 'Rollo and King Corvax in front of the Tower, with the die suspended mid-air.',
+      sceneAlt: "Rollo and the Shadow of Corvax in front of the Tower, with the die suspended mid-air.",
     },
     studio: {
       h3: 'The studio',
@@ -270,8 +270,8 @@ const en: Translations = {
       lede: 'Original characters, designed for this game. The Tower is climbed one floor at a time: the floors are counted, because climbing them is the game.',
       rolloName: 'Rollo',
       rolloBody: "Pear-shaped body, hemispherical helmet with a single-slit visor, hexagonal shield on his back. He's the scene's unit of measure: everything else is tall compared to Rollo.",
-      corvaxName: 'King Corvax',
-      corvaxBody: 'Long beak, crooked three-point crown, feather cloak that ends in a zigzag. Tall and triangular: the mass only widens below the shoulders.',
+      corvaxName: "Shadow of Corvax",
+      corvaxBody: "Dark feathered armour, wings that open like stained glass, a crown of stars. It is the king's projection, guarding the Tower's first stretch: the king is not there, he left his shadow behind.",
     },
     followUp: {
       h2: 'Want to know when you can play?',
