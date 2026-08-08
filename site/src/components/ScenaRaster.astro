@@ -143,8 +143,201 @@ import sprCrinaleMedio from '../assets/scena/spr_crinale_medio.png';
 
 interface Props {
   t: Translations;
+  /** PROVINO S105: mette il Corvax in volo. Default false = scena SPEDITA,
+   *  identica byte per byte a quella di prima (verificato sul dist). */
+  animata?: boolean;
 }
-const { t } = Astro.props;
+const { t, animata = false } = Astro.props;
+
+/* ==================================================================== *
+ *  IL VOLO DEL CORVAX - provino della scena ANIMATA 2.5D (S105)
+ *
+ *  ESITO: PROVINO NON APPROVATO. L'utente l'ha visto e l'ha respinto con la
+ *  ragione, che vale piu' del provino stesso: *"non deve solo essere una
+ *  immagine che si sposta su piu' piani. deve volare come farebbe un uccello,
+ *  realisticamente. vorticare, spostarsi a testa in giu', muovere mani e gambe.
+ *  devo poter vedere in piu' riprese tutta la figura di corvax, i fianchi, la
+ *  schiena."*
+ *
+ *  Il codice resta dietro `animata`, che di default e' FALSE: la scena servita
+ *  non e' toccata (verificato sul dist - `home.html` e `games.html` non cambiano
+ *  nel rendering). Resta perche' due cose qui dentro sono vere comunque: la
+ *  LEGGE di profondita' qui sotto, che e' una misura e non una scelta, e la
+ *  sonda che la rimisura sul reso.
+ *
+ *  PERCHE' LA RICHIESTA NON E' SODDISFACIBILE DA QUESTA PARTE - misurato, non
+ *  supposto, ed e' il dato utile a chi la riprendera':
+ *   - `spr_corvax.png` e' UN raster frontale. I fianchi e la schiena non sono
+ *     informazione degradata, sono informazione ASSENTE: nessuna trasformazione
+ *     2D li puo' produrre. Lo stesso per "muovere mani e gambe" - le parti non
+ *     sono separabili in un PNG piatto;
+ *   - il modello 3D del Corvax ESISTE, ma come SCRIPT che lo costruisce
+ *     (`art/tools/blender_corvax.py`: cilindri, sfere, tori, mesh da
+ *     `from_pydata`), non come file. E' geometria a 360 gradi, quindi le viste
+ *     laterale e posteriore sono ottenibili girando la camera - ma NESSUNO le
+ *     ha mai rese: la sagoma e' stata progettata e validata in vista FRONTALE
+ *     (S58/S59), e cosa si veda da dietro e' oggi ignoto. Il mantello, poi, e'
+ *     un profilo estruso;
+ *   - non c'e' RIG. "Vorticare, a testa in giu', muovendo mani e gambe" vuole
+ *     uno scheletro e una sequenza animata, che vanno progettati: e' lavoro di
+ *     ARTE (Blender + render di sequenza + clean-room + asset-reviewer), non di
+ *     sito, e sta nell'albero che il perimetro di questa chat esclude.
+ *  La rotta, se la si riprende: sprite sheet multi-posa/multi-vista reso da
+ *  Blender -> montato qui con la stessa impalcatura del volo (keyframe generati
+ *  in build, zero rAF). Il pezzo che manca e' l'ARTE, non il montaggio.
+ *
+ *  Mandato utente S102, par. 0.5: *"Corvax che percorre il cielo su una
+ *  traiettoria con la SCALA legata alla profondita' - derivata dalle unita'
+ *  misurate dei piani, non inventata"*.
+ *
+ *  LA LEGGE E' `scala = (y_ancora - 560) / 240`. Le 240 unita' sono la distanza
+ *  sotto l'orizzonte a cui una figura e' resa a scala 1.
+ *
+ *  DA DOVE VIENE, DETTO GIUSTO AL SECONDO TENTATIVO. La prima stesura di questo
+ *  blocco diceva *"non e' stata scelta, e' stata TROVATA... letta all'indietro
+ *  dagli asset serviti"*, e un oracolo indipendente l'ha refutata: la legge era
+ *  gia' PUBBLICATA, in due posti che questa sessione non ha toccato -
+ *  `Scena.astro:6` (*"orizzonte y=560, scala(y) = (y-560)/240"*, dal porting
+ *  Astro) e `art/SCENA_SITO_S47_MANIFEST.md:635-636`. Peggio: quel manifest
+ *  mostra che 1,0250 e 0,9583 sono stati CALCOLATI da essa. Quindi "riproduce
+ *  Rollo a errore zero" e' una tautologia, non una conferma, e il 3,3e-05 del
+ *  Corvax e' solo l'arrotondamento di 0,958333 a quattro decimali.
+ *  Cio' che questa sessione ha fatto davvero, e che ha comunque valore, e'
+ *  VERIFICARE che la legge sia ancora quella che gli asset SERVITI rispettano
+ *  dopo tre ricomposizioni della scena (S83, S87, S95) - e prenderla come
+ *  sorgente del moto invece di tarare keyframe a occhio.
+ *
+ *  IL CONTROLLO CHE NON E' TAUTOLOGICO l'ha trovato lo stesso oracolo, e sta
+ *  nella terza ombra: `<ellipse cx="1180" cy="800">`, quella del dado, non
+ *  entra in nessuna derivazione e cade su `(800-560)/240 = 1,0000` esatto, cioe'
+ *  sulla riga che il manifest dichiara per conto suo ("a y=800 la scala e' 1").
+ *
+ *  E IL SOGGETTO SU CUI LA LEGGE NON REGGE, che va detto qui perche' e' l'unico
+ *  posto dove qualcuno lo leggera': la TORRE. Col piede a y=780 la legge le
+ *  darebbe scala 0,9167, cioe' 741,8 unita' di mondo per i suoi 680 unita' rese
+ *  - mentre la spec S47 la colloca a 460u con base y=610. Per stare sulla legge
+ *  coi 680u di oggi il piede dovrebbe cadere a y=633,8, **146 unita' piu' in
+ *  alto**. La ragione del piede a 780 e' compositiva ed e' argomentata sopra
+ *  (ritaglio + crinale), ma la scelta ROMPE la prospettiva e finora nessun
+ *  documento lo diceva. La sonda del volo verifica la legge sul solo Corvax,
+ *  cioe' sull'unico soggetto che per costruzione non puo' violarla.
+ *
+ *  DA QUI IL VOLO. Il Corvax percorre un'ellisse in PIANTA (una circonferenza
+ *  vista di scorcio): la sua ancora a terra gira, e a ogni istante la scala
+ *  esce dalla legge invece che da una keyframe scelta a mano. La quota di volo
+ *  e' costante nel MONDO (`H_VOLO`), quindi a schermo si comprime con la
+ *  distanza come si comprime tutto il resto:
+ *
+ *      y_orlo = ya - H * s = 560 + (240 - H) * s
+ *
+ *  con H > 240 il Corvax sta sopra l'orizzonte a ogni punto del giro, e piu' e'
+ *  vicino piu' e' ALTO nel fotogramma - che e' come si vede davvero un volatile
+ *  che ti passa sopra.
+ *
+ *  PERCHE' I KEYFRAME SI CALCOLANO QUI E NON A RUNTIME. Il sito ha un presidio
+ *  che pretende ZERO loop rAF a pagina ferma (difetto #6: lo scroll a scatti
+ *  dopo l'ingresso). Animare il Corvax in JavaScript lo violerebbe - e non
+ *  sarebbe un cavillo: e' proprio il costo che quel presidio esiste per tenere
+ *  fuori. Quindi la legge gira in BUILD, produce N keyframe CSS, e a runtime
+ *  resta una sola animazione sul compositor. Fra due keyframe il browser
+ *  interpola linearmente: con N=48 il passo e' 7,5 gradi di giro e lo scarto
+ *  dalla legge resta sotto il decimo di unita' - ma non e' un numero da
+ *  credere sulla parola, e infatti c'e' una sonda che ricampiona la posizione
+ *  RESA e la confronta con la legge (`site.spec.ts`, "il volo del Corvax
+ *  rispetta la legge di profondita'").
+ * ==================================================================== */
+const VOLO = {
+  /* IL CENTRO E LA CORSA NON SONO SCELTI A OCCHIO: LI HA DECISI LA SONDA.
+     La prima stesura metteva `cx: 1300, rx: 1000` - un traverso largo, che a
+     occhio sul mio schermo (1440px) sembrava giusto. Il presidio del volo ha
+     misurato che il Corvax USCIVA di lato su CINQUE viewport su sette, fino a
+     -301px a `narrow`: e' il difetto #4 della Torre in un'altra veste, e per la
+     stessa ragione - con `preserveAspectRatio slice` la finestra visibile del
+     viewBox si STRINGE sugli schermi stretti (1218 unita' a `narrow`, la piu'
+     stretta della matrice), quindi una corsa che sta comoda a 1440px sfora dove
+     nessuno l'aveva guardata.
+     `cx` e' 1200 e non 1300 perche' la finestra e' centrata sul viewBox e il
+     gruppo e' traslato di 1200: 1200 locale E' il centro di cio' che si vede.
+     `rx` e' il massimo che regge su tutti e sette con 8px di margine, misurato
+     e non calcolato. */
+  cx: 1200,
+  cy: 700,
+  /** Semiassi: rx e' la corsa in ascissa, ry la corsa in PROFONDITA'. */
+  rx: 440,
+  ry: 80,
+  /** Quota di volo in unita'-mondo. > 240 = sempre sopra l'orizzonte. */
+  H: 360,
+  /** Un giro completo. Lento di proposito: la scena e' un fondale, non un video. */
+  durata: 24,
+  passi: 48,
+};
+
+const ORIZZONTE = 560;
+const K_PROFONDITA = 240;
+
+/* Geometria del Corvax a scala 1, ricavata dai numeri della posa spedita e non
+   ridichiarata: u(s) = (306/827) * s, quindi il rect reso vale 1152 x u per
+   1024 x u. A s = 0,9583 questo ridA' esattamente 408,48 x 363,09. */
+const CORVAX_U1 = 306 / 827;
+const CORVAX_W1 = 1152 * CORVAX_U1;
+const CORVAX_H1 = 1024 * CORVAX_U1;
+/* Ancoraggio ai PIEDI, non al centro del bbox: le ali sono asimmetriche.
+   557,5/1152 in ascissa e 999/1024 in ordinata sono le stesse frazioni con cui
+   e' collocata la posa ferma. */
+const CORVAX_ANCORA_X = 557.5 / 1152;
+const CORVAX_ANCORA_Y = 999 / 1024;
+
+const volo = Array.from({ length: VOLO.passi + 1 }, (_, i) => {
+  const th = (2 * Math.PI * i) / VOLO.passi;
+  const xa = VOLO.cx + VOLO.rx * Math.sin(th);
+  const ya = VOLO.cy + VOLO.ry * Math.cos(th);
+  const s = (ya - ORIZZONTE) / K_PROFONDITA;
+  const w = CORVAX_W1 * s;
+  const h = CORVAX_H1 * s;
+  const yOrlo = ya - VOLO.H * s;
+  return {
+    pct: ((100 * i) / VOLO.passi).toFixed(4),
+    /* Si emette una translate + scale invece di x/y/width/height perche' e' cio'
+       che il compositor sa animare senza rifare il layout a ogni fotogramma. */
+    tx: (xa - w * CORVAX_ANCORA_X).toFixed(3),
+    ty: (yOrlo - h * CORVAX_ANCORA_Y).toFixed(3),
+    s: s.toFixed(5),
+  };
+});
+
+/* La posa FERMA resta il riferimento a `prefers-reduced-motion` ed e' quella
+   spedita: stesse coordinate del ramo statico, scritte una volta sola. */
+const CORVAX_FERMO = { x: 1190.32, y: 439.47, w: 408.48, h: 363.09 };
+const scalaFerma = CORVAX_W1 === 0 ? 1 : CORVAX_FERMO.w / CORVAX_W1;
+
+/* Il CSS del volo si emette SOLO nel provino: con `animata` a false questo
+   componente deve restare identico byte per byte a quello spedito, e la
+   verifica non e' un'intenzione - le pagine `home.html` e `games.html` del dist
+   sono state confrontate prima e dopo. */
+const cssVolo = animata
+  ? [
+      '  .corvax-volo {',
+      /* `view-box` + origine a zero: senza, i px del transform si misurerebbero
+         dal bounding box dell'elemento e non dalle unita' del viewBox, e le
+         coordinate calcolate qui sopra vorrebbero dire un'altra cosa. */
+      '    transform-box: view-box;',
+      '    transform-origin: 0 0;',
+      '    will-change: transform;',
+      `    animation: corvaxVolo ${VOLO.durata}s linear infinite;`,
+      '  }',
+      '  @keyframes corvaxVolo {',
+      ...volo.map((k) => `    ${k.pct}% { transform: translate(${k.tx}px, ${k.ty}px) scale(${k.s}); }`),
+      '  }',
+      /* La preferenza dell'utente vince, e non con un fermo-immagine qualunque:
+         si torna alla posa SPEDITA, quella che la scena mostra da S95. */
+      '  @media (prefers-reduced-motion: reduce) {',
+      '    .corvax-volo {',
+      '      animation: none;',
+      `      transform: translate(${CORVAX_FERMO.x}px, ${CORVAX_FERMO.y}px) scale(${scalaFerma.toFixed(5)});`,
+      '    }',
+      '  }',
+    ].join('\n')
+  : '';
 
 const guglieTiles = Array.from({ length: 8 }, (_, k) => ({
   x: -1300 + k * 625.013,
@@ -442,7 +635,11 @@ const TESSERA = {
            la sonda `hero-feet` (934..1522) contiene ancora tutte e tre le
            ombre, che ora arrivano al massimo a 1488. -->
       <ellipse cx="1000" cy="806" rx="66" ry="12" fill="#14101F" opacity=".45"/>
-      <ellipse cx="1388" cy="790" rx="100" ry="18" fill="#14101F" opacity=".42"/>
+      {/* L'ombra del Corvax appartiene alla posa POSATA: in volo non c'e'
+          figura che la proietti li'. Nel provino animato sparisce invece di
+          restare come una macchia orfana sul prato - il difetto #1 al
+          contrario, un'ombra senza il suo corpo. */}
+      {!animata && <ellipse cx="1388" cy="790" rx="100" ry="18" fill="#14101F" opacity=".42"/>}
       <ellipse cx="1180" cy="800" rx="28" ry="7" fill="#14101F" opacity=".22"/>
 
       <rect data-probe="hero-feet" x="934" y="794" width="588" height="24"
@@ -478,7 +675,16 @@ const TESSERA = {
            lotto S57, che usava 5 tinte su 138 (derivazione vecchia). -->
       <g class="rim">
         <g filter="url(#linea-corvax)">
-          <image href={sprCorvax.src} x="1190.32" y="439.47" width="408.48" height="363.09"/>
+          {animata ? (
+            /* In volo l'immagine sta a scala 1 nell'origine e il moto e' TUTTO
+               nel transform: e' l'unica forma che il compositor sa animare
+               senza rifare il layout a ogni fotogramma. */
+            <g class="corvax-volo">
+              <image href={sprCorvax.src} x="0" y="0" width={CORVAX_W1} height={CORVAX_H1}/>
+            </g>
+          ) : (
+            <image href={sprCorvax.src} x="1190.32" y="439.47" width="408.48" height="363.09"/>
+          )}
         </g>
       </g>
      </g>
@@ -595,19 +801,45 @@ const TESSERA = {
   }
 </style>
 
+{animata && <style set:html={cssVolo} />}
+
 <script>
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const clamp = (v: number, a: number, b: number) => Math.min(b, Math.max(a, v));
 
+  /* LE BRACI SONO SEMINATE, NON CASUALI (S105).
+     Fino alla S101 le trenta braci nascevano da `Math.random()`: posizione,
+     durata, ritardo e deriva orizzontale cambiavano a ogni caricamento. Le
+     quattordici baseline della scena non ballavano lo stesso, ma per EFFETTO
+     COLLATERALE, non per costruzione: l'animazione e' infinita e Playwright la
+     riporta al fotogramma iniziale, dove `opacity` e' 0 e la brace non c'e'.
+     Un oracolo l'ha misurato in S101 (35/35 identici su due giri indipendenti) e
+     ha dichiarato il rischio LATENTE: basta cambiare la configurazione degli
+     scatti, o entrare in uno stato con opacita' non nulla, e quattordici
+     baseline diventano lunatiche senza che nulla sia rotto. Il difetto non e'
+     che le braci si vedano - e' che la RAGIONE per cui non si vedono e' fragile.
+     Con un seme fisso lo stato della scena e' una funzione del codice e basta.
+     `mulberry32`: generatore a stato singolo, tre righe, nessuna dipendenza -
+     qui non serve qualita' statistica, serve RIPETIBILITA'. Il seme e' un
+     numero qualunque, ma FISSO e scritto: cambiarlo ridispone le braci, e va
+     fatto sapendo che si stanno muovendo trenta oggetti. */
+  const semina = (s: number) => () => {
+    s = (s + 0x6D2B79F5) | 0;
+    let t = Math.imul(s ^ (s >>> 15), 1 | s);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+
   const emb = document.getElementById('embers');
   if (emb && !reduce) {
+    const caso = semina(0x5CE9A);
     for (let i = 0; i < 30; i++) {
       const e = document.createElement('span');
       e.className = 'em';
-      e.style.left = (Math.random() * 100) + '%';
-      e.style.animationDuration = (5 + Math.random() * 7) + 's';
-      e.style.animationDelay = (Math.random() * 9) + 's';
-      e.style.setProperty('--dx', (Math.random() * 90 - 45) + 'px');
+      e.style.left = (caso() * 100) + '%';
+      e.style.animationDuration = (5 + caso() * 7) + 's';
+      e.style.animationDelay = (caso() * 9) + 's';
+      e.style.setProperty('--dx', (caso() * 90 - 45) + 'px');
       emb.appendChild(e);
     }
   }
