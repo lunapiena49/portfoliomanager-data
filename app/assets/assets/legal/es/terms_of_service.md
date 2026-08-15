@@ -1,7 +1,7 @@
 # Términos de Servicio -- Portfolio Manager by PluriFin
 
-**Versión**: 1.0.0
-**Última actualización**: 2026-05-02
+**Versión**: 1.1.0
+**Última actualización**: 2026-08-15
 **Idioma original**: Italiano (versión vinculante para la jurisdicción)
 
 ---
@@ -44,10 +44,10 @@ Google vs hasta 6 cuentas en un Google Family Group).
 |---|---|---|---|
 | Webapp demo | Gratis | n/a | Max 5 posiciones manuales, sin import, mercado semanal, IA y objetivos bloqueados |
 | Trial Android (7 días) | Gratis, sin tarjeta | n/a | Premium completo durante 7 días |
-| Premium Single Annual | EUR 0,99/año | Renovación automática anual | Todo desbloqueado, una sola cuenta Google |
-| Premium Single Lifetime | EUR 4,99 pago único | Pago único, **sin renovación** | Todo desbloqueado de por vida, una sola cuenta Google |
-| Premium Family Annual | EUR 1,99/año | Renovación automática anual | Todo desbloqueado para el Account Holder + hasta 5 Family Members del mismo Google Family Group |
-| Premium Family Lifetime | EUR 9,99 pago único | Pago único, **sin renovación** | Todo desbloqueado de por vida para el Account Holder + hasta 5 Family Members del mismo Google Family Group |
+| Premium Single Annual | EUR 4,99/año | Renovación automática anual | Todo desbloqueado, una sola cuenta Google |
+| Premium Single Lifetime | EUR 29,99 pago único | Pago único, **sin renovación** | Todo desbloqueado de por vida, una sola cuenta Google |
+| Premium Family Annual | EUR 9,99/año | Renovación automática anual | Todo desbloqueado para el Account Holder + hasta 5 Family Members del mismo Google Family Group |
+| Premium Family Lifetime | EUR 49,99 pago único | Pago único, **sin renovación** | Todo desbloqueado de por vida para el Account Holder + hasta 5 Family Members del mismo Google Family Group |
 
 Precios fijados en EUR para el mercado italiano. En otros países Google
 Play aplica conversión automática con paridad de poder adquisitivo. IVA,
@@ -98,10 +98,8 @@ Holder es civilmente responsable del uso de la App por parte de los
 Family Members.
 
 **Cambio de precio**: aplica solo a abonamientos **Annual** (Single y
-Family). Aviso 30 días antes vía app + email. Promesa "EUR 0,99/año
-lifetime" para los primeros 1000 abonados **Single Annual**. Los
-abonamientos **Lifetime** no están sujetos a cambios de precio tras el
-pago.
+Family). Aviso 30 días antes vía app + email. Los abonamientos
+**Lifetime** no están sujetos a cambios de precio tras el pago.
 
 ## 5. Licencia
 

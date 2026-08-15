@@ -1,7 +1,7 @@
 # Conditions de Service -- Portfolio Manager by PluriFin
 
-**Version**: 1.0.0
-**Dernière mise à jour**: 2026-05-02
+**Version**: 1.1.0
+**Dernière mise à jour**: 2026-08-15
 **Langue originale**: Italien (version contraignante pour la juridiction)
 
 ---
@@ -45,10 +45,10 @@ Family Group).
 |---|---|---|---|
 | Webapp démo | Gratuit | n/a | Max 5 positions manuelles, sans import, marché hebdo, IA et objectifs verrouillés |
 | Trial Android (7 jours) | Gratuit, sans carte | n/a | Premium complet pendant 7 jours |
-| Premium Single Annual | EUR 0,99/an | Renouvellement annuel automatique | Tout débloqué, compte Google unique |
-| Premium Single Lifetime | EUR 4,99 paiement unique | Paiement unique, **sans renouvellement** | Tout débloqué à vie, compte Google unique |
-| Premium Family Annual | EUR 1,99/an | Renouvellement annuel automatique | Tout débloqué pour Account Holder + jusqu'à 5 Family Members du même Google Family Group |
-| Premium Family Lifetime | EUR 9,99 paiement unique | Paiement unique, **sans renouvellement** | Tout débloqué à vie pour Account Holder + jusqu'à 5 Family Members du même Google Family Group |
+| Premium Single Annual | EUR 4,99/an | Renouvellement annuel automatique | Tout débloqué, compte Google unique |
+| Premium Single Lifetime | EUR 29,99 paiement unique | Paiement unique, **sans renouvellement** | Tout débloqué à vie, compte Google unique |
+| Premium Family Annual | EUR 9,99/an | Renouvellement annuel automatique | Tout débloqué pour Account Holder + jusqu'à 5 Family Members du même Google Family Group |
+| Premium Family Lifetime | EUR 49,99 paiement unique | Paiement unique, **sans renouvellement** | Tout débloqué à vie pour Account Holder + jusqu'à 5 Family Members du même Google Family Group |
 
 Prix fixés en EUR pour le marché italien. Pour les autres pays, Google
 Play applique une conversion automatique avec parité de pouvoir d'achat.
@@ -101,10 +101,9 @@ résolution ex sec. 10. L'Account Holder est civilement responsable de
 l'usage de l'App par les Family Members.
 
 **Changement de prix**: s'applique uniquement aux abonnements **Annual**
-(Single et Family). Préavis 30 jours via app + email. Promesse "EUR
-0,99/an à vie" pour les 1000 premiers abonnés **Single Annual**. Les
-abonnements **Lifetime** ne sont pas soumis à modifications de prix
-après le paiement.
+(Single et Family). Préavis 30 jours via app + email. Les abonnements
+**Lifetime** ne sont pas soumis à modifications de prix après le
+paiement.
 
 ## 5. Licence
 

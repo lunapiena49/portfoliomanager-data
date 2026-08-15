@@ -1,7 +1,7 @@
 # Termini di Servizio -- Portfolio Manager by PluriFin
 
-**Versione**: 1.0.0
-**Ultimo aggiornamento**: 2026-07-14
+**Versione**: 1.1.0
+**Ultimo aggiornamento**: 2026-08-15
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 
 ---
@@ -75,10 +75,10 @@ Google Family Group).
 |---|---|---|---|
 | Web demo | Gratuita | n/a | Max 5 posizioni manuali, no import CSV/PDF, mercato weekly, obiettivi locked, AI locked |
 | Trial Android (7 giorni) | Gratuita, **senza richiesta carta upfront** | n/a | Tutte le funzionalita' Premium attive per 7 giorni dal primo avvio |
-| Premium Single Annual | EUR 0,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive, singolo account Google |
-| Premium Single Lifetime | EUR 4,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita, singolo account Google |
-| Premium Family Annual | EUR 1,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
-| Premium Family Lifetime | EUR 9,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
+| Premium Single Annual | EUR 4,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive, singolo account Google |
+| Premium Single Lifetime | EUR 29,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita, singolo account Google |
+| Premium Family Annual | EUR 9,99 / anno | Rinnovo automatico annuale | Tutte le funzionalita' attive per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
+| Premium Family Lifetime | EUR 49,99 una tantum | Pagamento unico, **nessun rinnovo** | Tutte le funzionalita' attive a vita per Account Holder + fino a 5 Family Members del medesimo Google Family Group |
 
 I prezzi sono definiti in EUR per il mercato italiano. Per altri paesi
 Google Play applica una conversione automatica con parita' di potere
@@ -244,10 +244,6 @@ gia' abbonati:
 - Notifica via app + email (se l'Utente ha fornito email) almeno **30 giorni
   prima** della scadenza dell'abbonamento corrente
 - Possibilita' per l'Utente di disattivare il rinnovo senza alcuna penale
-- Promessa "lifetime EUR 0,99/anno" per i primi 1000 abbonati **Single
-  Annual**: il prezzo annuo resta EUR 0,99 finche' l'abbonamento non viene
-  mai cancellato (decisione commerciale documentata, vincolante per
-  PluriFin)
 
 Gli abbonamenti **Lifetime** (Single Lifetime e Family Lifetime) non sono
 soggetti a variazioni di prezzo dopo l'acquisto, in quanto il pagamento
