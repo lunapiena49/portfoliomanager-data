@@ -1,7 +1,7 @@
 # Terms of Service -- Portfolio Manager by PluriFin
 
-**Version**: 1.0.0
-**Last update**: 2026-07-14
+**Version**: 1.1.0
+**Last update**: 2026-08-15
 **Original language**: Italian (binding version for jurisdiction)
 
 ---
@@ -71,10 +71,10 @@ up to 6 accounts in a Google Family Group).
 |---|---|---|---|
 | Web demo | Free | n/a | Max 5 manual positions, no CSV/PDF import, weekly market data, goals locked, AI locked |
 | Android trial (7 days) | Free, **no card required upfront** | n/a | All Premium features active for 7 days from first launch |
-| Premium Single Annual | EUR 0.99 / year | Auto-renewing yearly | All features unlocked, single Google account |
-| Premium Single Lifetime | EUR 4.99 one-time | One-time payment, **no renewal** | All features unlocked for life, single Google account |
-| Premium Family Annual | EUR 1.99 / year | Auto-renewing yearly | All features unlocked for Account Holder + up to 5 Family Members in the same Google Family Group |
-| Premium Family Lifetime | EUR 9.99 one-time | One-time payment, **no renewal** | All features unlocked for life for Account Holder + up to 5 Family Members in the same Google Family Group |
+| Premium Single Annual | EUR 4.99 / year | Auto-renewing yearly | All features unlocked, single Google account |
+| Premium Single Lifetime | EUR 29.99 one-time | One-time payment, **no renewal** | All features unlocked for life, single Google account |
+| Premium Family Annual | EUR 9.99 / year | Auto-renewing yearly | All features unlocked for Account Holder + up to 5 Family Members in the same Google Family Group |
+| Premium Family Lifetime | EUR 49.99 one-time | One-time payment, **no renewal** | All features unlocked for life for Account Holder + up to 5 Family Members in the same Google Family Group |
 
 Prices are set in EUR for the Italian market. For other countries Google
 Play applies automatic purchasing-power conversion. VAT, where applicable,
@@ -233,10 +233,6 @@ subscribers:
 - In-app + email notice (if email provided) at least **30 days before**
   current subscription expires
 - Right to cancel renewal without penalty
-- "EUR 0.99/year lifetime" promise for the first 1000 **Single Annual**
-  subscribers: the yearly price stays at EUR 0.99 as long as the
-  subscription is never cancelled (documented commercial commitment,
-  binding for PluriFin)
 
 **Lifetime** subscriptions (Single Lifetime and Family Lifetime) are not
 subject to price changes after purchase, as the payment is one-time and

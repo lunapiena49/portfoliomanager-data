@@ -1,7 +1,7 @@
 # Nutzungsbedingungen -- Portfolio Manager by PluriFin
 
-**Version**: 1.0.0
-**Letzte Aktualisierung**: 2026-07-14
+**Version**: 1.1.0
+**Letzte Aktualisierung**: 2026-08-15
 **Originalsprache**: Italienisch (verbindliche Fassung)
 
 ---
@@ -44,10 +44,10 @@ Family Group).
 |---|---|---|---|
 | Webapp Demo | Gratis | n/a | Max 5 manuelle Positionen, kein Import, wöchentl. Markt, KI/Ziele gesperrt |
 | Trial Android (7 Tage) | Gratis, ohne Karte | n/a | Premium komplett für 7 Tage |
-| Premium Single Annual | EUR 0,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet, ein Google-Konto |
-| Premium Single Lifetime | EUR 4,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet, ein Google-Konto |
-| Premium Family Annual | EUR 1,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
-| Premium Family Lifetime | EUR 9,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
+| Premium Single Annual | EUR 4,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet, ein Google-Konto |
+| Premium Single Lifetime | EUR 29,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet, ein Google-Konto |
+| Premium Family Annual | EUR 9,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
+| Premium Family Lifetime | EUR 49,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
 
 Preise in EUR für den italienischen Markt. Für andere Länder wendet
 Google Play eine automatische Kaufkraftparität-Umrechnung an. MwSt., wo
@@ -104,8 +104,7 @@ gemäß Abschn. 10. Der Account Holder haftet zivilrechtlich für die
 Nutzung der App durch die Family Members.
 
 **Preisänderung**: gilt nur für **Annual**-Abonnements (Single und
-Family). Mitteilung 30 Tage vorher via App + E-Mail. Versprechen "EUR
-0,99/Jahr lifetime" für die ersten 1000 **Single Annual**-Abonnenten.
+Family). Mitteilung 30 Tage vorher via App + E-Mail.
 **Lifetime**-Abonnements unterliegen nach dem Kauf keinen
 Preisänderungen.
 

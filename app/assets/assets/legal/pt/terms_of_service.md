@@ -1,7 +1,7 @@
 # Termos de Serviço -- Portfolio Manager by PluriFin
 
-**Versão**: 1.0.0
-**Última atualização**: 2026-05-02
+**Versão**: 1.1.0
+**Última atualização**: 2026-08-15
 **Idioma original**: Italiano (versão vinculante)
 
 ---
@@ -45,10 +45,10 @@ Google Family Group).
 |---|---|---|---|
 | Webapp demo | Grátis | n/a | Max 5 posições manuais, sem import, mercado semanal, IA e objetivos bloqueados |
 | Trial Android (7 dias) | Grátis, sem cartão | n/a | Premium completo durante 7 dias |
-| Premium Single Annual | EUR 0,99/ano | Renovação automática anual | Tudo desbloqueado, uma só conta Google |
-| Premium Single Lifetime | EUR 4,99 pagamento único | Pagamento único, **sem renovação** | Tudo desbloqueado vitalício, uma só conta Google |
-| Premium Family Annual | EUR 1,99/ano | Renovação automática anual | Tudo desbloqueado para Account Holder + até 5 Family Members do mesmo Google Family Group |
-| Premium Family Lifetime | EUR 9,99 pagamento único | Pagamento único, **sem renovação** | Tudo desbloqueado vitalício para Account Holder + até 5 Family Members do mesmo Google Family Group |
+| Premium Single Annual | EUR 4,99/ano | Renovação automática anual | Tudo desbloqueado, uma só conta Google |
+| Premium Single Lifetime | EUR 29,99 pagamento único | Pagamento único, **sem renovação** | Tudo desbloqueado vitalício, uma só conta Google |
+| Premium Family Annual | EUR 9,99/ano | Renovação automática anual | Tudo desbloqueado para Account Holder + até 5 Family Members do mesmo Google Family Group |
+| Premium Family Lifetime | EUR 49,99 pagamento único | Pagamento único, **sem renovação** | Tudo desbloqueado vitalício para Account Holder + até 5 Family Members do mesmo Google Family Group |
 
 Preços fixados em EUR para o mercado italiano. Para outros países a
 Google Play aplica conversão automática com paridade de poder de compra.
@@ -102,10 +102,8 @@ Account Holder é civilmente responsável pelo uso da App pelos Family
 Members.
 
 **Alteração de preço**: aplica-se apenas a subscrições **Annual**
-(Single e Family). Aviso 30 dias antes via app + email. Promessa
-"EUR 0,99/ano lifetime" para os primeiros 1000 subscritores **Single
-Annual**. As subscrições **Lifetime** não estão sujeitas a alterações
-de preço após o pagamento.
+(Single e Family). Aviso 30 dias antes via app + email. As subscrições
+**Lifetime** não estão sujeitas a alterações de preço após o pagamento.
 
 ## 5. Licença
 
