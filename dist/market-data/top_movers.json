@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-08-30T00:41:37.832132+00:00",
+  "generated_at_utc": "2026-08-31T00:51:07.932669+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -54,9 +54,9 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 2607,
-          "eligible_before_filters": 42568,
-          "eligible_after_price_filter": 39771,
-          "eligible_after_dollar_volume_filter": 6566,
+          "eligible_before_filters": 44375,
+          "eligible_after_price_filter": 41535,
+          "eligible_after_dollar_volume_filter": 6567,
           "eligible_after_investor_filters": 2637,
           "filters": {
             "min_price": 5.0,
@@ -79,7 +79,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 441,
-            "skipped_below_investor_dollar_volume": 3475,
+            "skipped_below_investor_dollar_volume": 3476,
             "skipped_above_change_cap": 0,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 13
@@ -960,9 +960,9 @@
               "name": "XLAB",
               "price": 5.14,
               "close": 5.14,
-              "volume": 5738805,
-              "dollar_volume": 29497457.7,
-              "dollarVolume": 29497457.7,
+              "volume": 5791661,
+              "dollar_volume": 29769137.54,
+              "dollarVolume": 29769137.54,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "USD",
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 1683,
-          "eligible_before_filters": 42477,
-          "eligible_after_price_filter": 39698,
+          "eligible_before_filters": 44285,
+          "eligible_after_price_filter": 41464,
           "eligible_after_dollar_volume_filter": 6558,
           "eligible_after_investor_filters": 1690,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 1640,
-          "eligible_before_filters": 41985,
-          "eligible_after_price_filter": 39243,
+          "eligible_before_filters": 43778,
+          "eligible_after_price_filter": 40993,
           "eligible_after_dollar_volume_filter": 6524,
           "eligible_after_investor_filters": 1646,
           "filters": {
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 940,
-          "eligible_before_filters": 37371,
-          "eligible_after_price_filter": 34904,
+          "eligible_before_filters": 39059,
+          "eligible_after_price_filter": 36555,
           "eligible_after_dollar_volume_filter": 6018,
           "eligible_after_investor_filters": 940,
           "filters": {
@@ -7012,7 +7012,7 @@
           "eligible_symbols": 802,
           "eligible_before_filters": 6809,
           "eligible_after_price_filter": 6600,
-          "eligible_after_dollar_volume_filter": 2121,
+          "eligible_after_dollar_volume_filter": 2122,
           "eligible_after_investor_filters": 850,
           "filters": {
             "min_price": 5.0,
@@ -7035,8 +7035,8 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 74,
-            "skipped_below_investor_dollar_volume": 1196,
-            "skipped_above_change_cap": 1,
+            "skipped_below_investor_dollar_volume": 1198,
+            "skipped_above_change_cap": 0,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
           },
@@ -8749,7 +8749,7 @@
           "eligible_symbols": 575,
           "eligible_before_filters": 6797,
           "eligible_after_price_filter": 6588,
-          "eligible_after_dollar_volume_filter": 2116,
+          "eligible_after_dollar_volume_filter": 2117,
           "eligible_after_investor_filters": 589,
           "filters": {
             "min_price": 5.0,
@@ -8772,8 +8772,8 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 73,
-            "skipped_below_investor_dollar_volume": 1451,
-            "skipped_above_change_cap": 3,
+            "skipped_below_investor_dollar_volume": 1453,
+            "skipped_above_change_cap": 2,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
           },
@@ -10486,8 +10486,8 @@
           "eligible_symbols": 570,
           "eligible_before_filters": 6731,
           "eligible_after_price_filter": 6524,
-          "eligible_after_dollar_volume_filter": 2103,
-          "eligible_after_investor_filters": 579,
+          "eligible_after_dollar_volume_filter": 2104,
+          "eligible_after_investor_filters": 578,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 50000000,
@@ -10509,7 +10509,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 72,
-            "skipped_below_investor_dollar_volume": 1439,
+            "skipped_below_investor_dollar_volume": 1441,
             "skipped_above_change_cap": 13,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -12223,7 +12223,7 @@
           "eligible_symbols": 387,
           "eligible_before_filters": 6294,
           "eligible_after_price_filter": 6099,
-          "eligible_after_dollar_volume_filter": 2034,
+          "eligible_after_dollar_volume_filter": 2035,
           "eligible_after_investor_filters": 387,
           "filters": {
             "min_price": 5.0,
@@ -12246,8 +12246,8 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 67,
-            "skipped_below_investor_dollar_volume": 1538,
-            "skipped_above_change_cap": 42,
+            "skipped_below_investor_dollar_volume": 1540,
+            "skipped_above_change_cap": 41,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
           },
@@ -15737,8 +15737,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 43,
-          "eligible_before_filters": 1312,
-          "eligible_after_price_filter": 1183,
+          "eligible_before_filters": 1311,
+          "eligible_after_price_filter": 1182,
           "eligible_after_dollar_volume_filter": 155,
           "eligible_after_investor_filters": 43,
           "filters": {
@@ -16505,8 +16505,8 @@
         },
         "5D": {
           "eligible_symbols": 26,
-          "eligible_before_filters": 1312,
-          "eligible_after_price_filter": 1183,
+          "eligible_before_filters": 1311,
+          "eligible_after_price_filter": 1182,
           "eligible_after_dollar_volume_filter": 155,
           "eligible_after_investor_filters": 26,
           "filters": {
@@ -16984,8 +16984,8 @@
         },
         "1M": {
           "eligible_symbols": 26,
-          "eligible_before_filters": 1308,
-          "eligible_after_price_filter": 1182,
+          "eligible_before_filters": 1307,
+          "eligible_after_price_filter": 1181,
           "eligible_after_dollar_volume_filter": 155,
           "eligible_after_investor_filters": 26,
           "filters": {
@@ -17463,8 +17463,8 @@
         },
         "1Y": {
           "eligible_symbols": 13,
-          "eligible_before_filters": 1115,
-          "eligible_after_price_filter": 990,
+          "eligible_before_filters": 1114,
+          "eligible_after_price_filter": 989,
           "eligible_after_dollar_volume_filter": 151,
           "eligible_after_investor_filters": 13,
           "filters": {
@@ -17729,8 +17729,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 139,
-          "eligible_before_filters": 2225,
-          "eligible_after_price_filter": 2153,
+          "eligible_before_filters": 2230,
+          "eligible_after_price_filter": 2158,
           "eligible_after_dollar_volume_filter": 590,
           "eligible_after_investor_filters": 139,
           "filters": {
@@ -19466,8 +19466,8 @@
         },
         "5D": {
           "eligible_symbols": 76,
-          "eligible_before_filters": 2211,
-          "eligible_after_price_filter": 2139,
+          "eligible_before_filters": 2216,
+          "eligible_after_price_filter": 2144,
           "eligible_after_dollar_volume_filter": 587,
           "eligible_after_investor_filters": 76,
           "filters": {
@@ -20795,8 +20795,8 @@
         },
         "1M": {
           "eligible_symbols": 76,
-          "eligible_before_filters": 2202,
-          "eligible_after_price_filter": 2132,
+          "eligible_before_filters": 2207,
+          "eligible_after_price_filter": 2137,
           "eligible_after_dollar_volume_filter": 585,
           "eligible_after_investor_filters": 76,
           "filters": {
@@ -22124,8 +22124,8 @@
         },
         "1Y": {
           "eligible_symbols": 36,
-          "eligible_before_filters": 1953,
-          "eligible_after_price_filter": 1886,
+          "eligible_before_filters": 1958,
+          "eligible_after_price_filter": 1891,
           "eligible_after_dollar_volume_filter": 541,
           "eligible_after_investor_filters": 36,
           "filters": {
@@ -32527,11 +32527,11 @@
       "as_of_date": "2026-08-28",
       "timeframes": {
         "1D": {
-          "eligible_symbols": 1361,
-          "eligible_before_filters": 2686,
-          "eligible_after_price_filter": 2668,
-          "eligible_after_dollar_volume_filter": 2159,
-          "eligible_after_investor_filters": 1374,
+          "eligible_symbols": 1369,
+          "eligible_before_filters": 2702,
+          "eligible_after_price_filter": 2684,
+          "eligible_after_dollar_volume_filter": 2173,
+          "eligible_after_investor_filters": 1382,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 20000000,
@@ -32553,7 +32553,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 25,
-            "skipped_below_investor_dollar_volume": 759,
+            "skipped_below_investor_dollar_volume": 765,
             "skipped_above_change_cap": 0,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 1
@@ -33189,6 +33189,23 @@
               "asOfDate": "2026-08-28"
             },
             {
+              "symbol": "YUKEN",
+              "ticker": "YUKEN",
+              "name": "YUKEN",
+              "price": 993.4,
+              "close": 993.4,
+              "volume": 43882,
+              "dollar_volume": 43592378.8,
+              "dollarVolume": 43592378.8,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "INR",
+              "change_percent": 5.990931,
+              "changePercent": 5.990931,
+              "as_of_date": "2026-08-28",
+              "asOfDate": "2026-08-28"
+            },
+            {
               "symbol": "JPOLYINVST",
               "ticker": "JPOLYINVST",
               "name": "JPOLYINVST",
@@ -33389,23 +33406,6 @@
               "currency": "INR",
               "change_percent": 5.351171,
               "changePercent": 5.351171,
-              "as_of_date": "2026-08-28",
-              "asOfDate": "2026-08-28"
-            },
-            {
-              "symbol": "CGCL",
-              "ticker": "CGCL",
-              "name": "CGCL",
-              "price": 257.98,
-              "close": 257.98,
-              "volume": 29680127,
-              "dollar_volume": 7656879163.46,
-              "dollarVolume": 7656879163.46,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "INR",
-              "change_percent": 5.297959,
-              "changePercent": 5.297959,
               "as_of_date": "2026-08-28",
               "asOfDate": "2026-08-28"
             }
@@ -34264,11 +34264,11 @@
           ]
         },
         "5D": {
-          "eligible_symbols": 1035,
-          "eligible_before_filters": 2606,
-          "eligible_after_price_filter": 2588,
-          "eligible_after_dollar_volume_filter": 2089,
-          "eligible_after_investor_filters": 1040,
+          "eligible_symbols": 1038,
+          "eligible_before_filters": 2622,
+          "eligible_after_price_filter": 2604,
+          "eligible_after_dollar_volume_filter": 2103,
+          "eligible_after_investor_filters": 1043,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 50000000,
@@ -34290,7 +34290,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 25,
-            "skipped_below_investor_dollar_volume": 1018,
+            "skipped_below_investor_dollar_volume": 1029,
             "skipped_above_change_cap": 5,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 1
@@ -36001,11 +36001,11 @@
           ]
         },
         "1M": {
-          "eligible_symbols": 1007,
-          "eligible_before_filters": 2547,
-          "eligible_after_price_filter": 2529,
-          "eligible_after_dollar_volume_filter": 2038,
-          "eligible_after_investor_filters": 1010,
+          "eligible_symbols": 1010,
+          "eligible_before_filters": 2563,
+          "eligible_after_price_filter": 2545,
+          "eligible_after_dollar_volume_filter": 2052,
+          "eligible_after_investor_filters": 1013,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 50000000,
@@ -36027,7 +36027,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 25,
-            "skipped_below_investor_dollar_volume": 986,
+            "skipped_below_investor_dollar_volume": 997,
             "skipped_above_change_cap": 16,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 1
@@ -37738,11 +37738,11 @@
           ]
         },
         "1Y": {
-          "eligible_symbols": 670,
-          "eligible_before_filters": 2457,
-          "eligible_after_price_filter": 2439,
-          "eligible_after_dollar_volume_filter": 1955,
-          "eligible_after_investor_filters": 673,
+          "eligible_symbols": 672,
+          "eligible_before_filters": 2473,
+          "eligible_after_price_filter": 2455,
+          "eligible_after_dollar_volume_filter": 1969,
+          "eligible_after_investor_filters": 675,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 100000000,
@@ -37764,7 +37764,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 25,
-            "skipped_below_investor_dollar_volume": 1157,
+            "skipped_below_investor_dollar_volume": 1169,
             "skipped_above_change_cap": 98,
             "skipped_below_history_depth": 2,
             "skipped_excluded_pattern": 0
@@ -38247,6 +38247,23 @@
               "asOfDate": "2026-08-28"
             },
             {
+              "symbol": "BBOX",
+              "ticker": "BBOX",
+              "name": "BBOX",
+              "price": 745.9,
+              "close": 745.9,
+              "volume": 139959,
+              "dollar_volume": 104395418.1,
+              "dollarVolume": 104395418.1,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "INR",
+              "change_percent": 63.736143,
+              "changePercent": 63.736143,
+              "as_of_date": "2026-08-28",
+              "asOfDate": "2026-08-28"
+            },
+            {
               "symbol": "KMEW",
               "ticker": "KMEW",
               "name": "KMEW",
@@ -38600,23 +38617,6 @@
               "currency": "INR",
               "change_percent": 56.566514,
               "changePercent": 56.566514,
-              "as_of_date": "2026-08-28",
-              "asOfDate": "2026-08-28"
-            },
-            {
-              "symbol": "BSE",
-              "ticker": "BSE",
-              "name": "BSE",
-              "price": 3405.0,
-              "close": 3405.0,
-              "volume": 4771876,
-              "dollar_volume": 16248237780.0,
-              "dollarVolume": 16248237780.0,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "INR",
-              "change_percent": 56.307382,
-              "changePercent": 56.307382,
               "as_of_date": "2026-08-28",
               "asOfDate": "2026-08-28"
             }
@@ -39478,7 +39478,7 @@
     }
   ],
   "counts": {
-    "input_rows": 65793,
+    "input_rows": 67620,
     "markets": 8
   },
   "market": "US",
@@ -40359,9 +40359,9 @@
       "name": "XLAB",
       "price": 5.14,
       "close": 5.14,
-      "volume": 5738805,
-      "dollar_volume": 29497457.7,
-      "dollarVolume": 29497457.7,
+      "volume": 5791661,
+      "dollar_volume": 29769137.54,
+      "dollarVolume": 29769137.54,
       "market_cap": 0,
       "marketCap": 0,
       "currency": "USD",
