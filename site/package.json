@@ -10,7 +10,7 @@
     "test": "node --test integrations/*.test.mjs"
   },
   "dependencies": {
-    "astro": "^7.1.3",
+    "astro": "^7.2.8",
     "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
