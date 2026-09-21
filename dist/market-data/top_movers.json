@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-09-20T00:23:03.915691+00:00",
+  "generated_at_utc": "2026-09-21T00:30:16.494177+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -53,11 +53,11 @@
       "as_of_date": "2026-09-18",
       "timeframes": {
         "1D": {
-          "eligible_symbols": 3131,
-          "eligible_before_filters": 46832,
-          "eligible_after_price_filter": 42308,
-          "eligible_after_dollar_volume_filter": 7018,
-          "eligible_after_investor_filters": 3180,
+          "eligible_symbols": 3132,
+          "eligible_before_filters": 49031,
+          "eligible_after_price_filter": 43248,
+          "eligible_after_dollar_volume_filter": 7019,
+          "eligible_after_investor_filters": 3181,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 20000000,
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 2334,
-          "eligible_before_filters": 46751,
-          "eligible_after_price_filter": 42241,
+          "eligible_before_filters": 48943,
+          "eligible_after_price_filter": 43176,
           "eligible_after_dollar_volume_filter": 7005,
           "eligible_after_investor_filters": 2345,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 2334,
-          "eligible_before_filters": 46442,
-          "eligible_after_price_filter": 42004,
+          "eligible_before_filters": 48622,
+          "eligible_after_price_filter": 42935,
           "eligible_after_dollar_volume_filter": 6979,
           "eligible_after_investor_filters": 2337,
           "filters": {
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 1437,
-          "eligible_before_filters": 41295,
-          "eligible_after_price_filter": 37259,
+          "eligible_before_filters": 43221,
+          "eligible_after_price_filter": 38018,
           "eligible_after_dollar_volume_filter": 6440,
           "eligible_after_investor_filters": 1437,
           "filters": {
@@ -7011,8 +7011,8 @@
         "1D": {
           "eligible_symbols": 927,
           "eligible_before_filters": 6863,
-          "eligible_after_price_filter": 6653,
-          "eligible_after_dollar_volume_filter": 2309,
+          "eligible_after_price_filter": 6652,
+          "eligible_after_dollar_volume_filter": 2310,
           "eligible_after_investor_filters": 962,
           "filters": {
             "min_price": 5.0,
@@ -7035,7 +7035,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 93,
-            "skipped_below_investor_dollar_volume": 1250,
+            "skipped_below_investor_dollar_volume": 1251,
             "skipped_above_change_cap": 4,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -8748,8 +8748,8 @@
         "5D": {
           "eligible_symbols": 696,
           "eligible_before_filters": 6824,
-          "eligible_after_price_filter": 6617,
-          "eligible_after_dollar_volume_filter": 2302,
+          "eligible_after_price_filter": 6616,
+          "eligible_after_dollar_volume_filter": 2303,
           "eligible_after_investor_filters": 706,
           "filters": {
             "min_price": 5.0,
@@ -8772,7 +8772,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 93,
-            "skipped_below_investor_dollar_volume": 1499,
+            "skipped_below_investor_dollar_volume": 1500,
             "skipped_above_change_cap": 4,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -9908,9 +9908,9 @@
               "name": "ACG",
               "price": 1870.0,
               "close": 1870.0,
-              "volume": 50804,
-              "dollar_volume": 95003480.0,
-              "dollarVolume": 95003480.0,
+              "volume": 50752,
+              "dollar_volume": 94906240.0,
+              "dollarVolume": 94906240.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -10485,8 +10485,8 @@
         "1M": {
           "eligible_symbols": 692,
           "eligible_before_filters": 6784,
-          "eligible_after_price_filter": 6581,
-          "eligible_after_dollar_volume_filter": 2293,
+          "eligible_after_price_filter": 6580,
+          "eligible_after_dollar_volume_filter": 2294,
           "eligible_after_investor_filters": 697,
           "filters": {
             "min_price": 5.0,
@@ -10509,7 +10509,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 90,
-            "skipped_below_investor_dollar_volume": 1495,
+            "skipped_below_investor_dollar_volume": 1496,
             "skipped_above_change_cap": 11,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -12221,9 +12221,9 @@
         },
         "1Y": {
           "eligible_symbols": 463,
-          "eligible_before_filters": 6291,
+          "eligible_before_filters": 6292,
           "eligible_after_price_filter": 6096,
-          "eligible_after_dollar_volume_filter": 2226,
+          "eligible_after_dollar_volume_filter": 2227,
           "eligible_after_investor_filters": 463,
           "filters": {
             "min_price": 5.0,
@@ -12246,7 +12246,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 85,
-            "skipped_below_investor_dollar_volume": 1635,
+            "skipped_below_investor_dollar_volume": 1636,
             "skipped_above_change_cap": 40,
             "skipped_below_history_depth": 3,
             "skipped_excluded_pattern": 0
@@ -13966,8 +13966,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 79,
-          "eligible_before_filters": 4145,
-          "eligible_after_price_filter": 4059,
+          "eligible_before_filters": 4146,
+          "eligible_after_price_filter": 4060,
           "eligible_after_dollar_volume_filter": 533,
           "eligible_after_investor_filters": 80,
           "filters": {
@@ -45819,7 +45819,7 @@
     }
   ],
   "counts": {
-    "input_rows": 70131,
+    "input_rows": 72331,
     "markets": 8
   },
   "market": "US",
