@@ -1213,5 +1213,20 @@
     "review_prompt": {
       "unavailable_fallback": "Merci d'utiliser PluriFin! Laissez un avis sur Play Store quand vous voulez."
     }
+  },
+  "storage_locked": {
+    "title": "Données locales inaccessibles",
+    "message": "L'application n'a pas pu ouvrir les données enregistrées sur cet appareil : la clé de chiffrement conservée par le système ne correspond plus aux fichiers présents. Cela peut arriver après une mise à jour de l'application ou du système d'exploitation.",
+    "message_migration": "L'application n'a pas pu terminer une étape de mise à jour de vos données locales et s'est arrêtée plutôt que de les abîmer. Vos données sont toujours sur cet appareil : dans la plupart des cas, il suffit de réessayer ou de rouvrir l'application.",
+    "data_intact": "Vos données n'ont pas été supprimées : elles restent sur cet appareil et aucune opération automatique ne les effacera.",
+    "what_to_do": "Fermez puis rouvrez l'application, ou redémarrez l'appareil : sur certains systèmes, le coffre sécurisé n'est lisible qu'après le premier déverrouillage. Si le problème persiste, écrivez à support@plurifin.app en indiquant le code ci-dessous.",
+    "support_code": "Code d'assistance",
+    "details": "Détails techniques",
+    "retry_failed": "Les données ne sont toujours pas accessibles.",
+    "reset_button": "Repartir de zéro et supprimer les données locales",
+    "reset_dialog_title": "Supprimer les données locales ?",
+    "reset_dialog_body": "Les portefeuilles, objectifs, réglages, consentements et l'état de l'abonnement seront définitivement supprimés de cet appareil. L'opération est irréversible et n'affecte pas les sauvegardes que vous avez exportées.",
+    "reset_dialog_confirm": "Tout supprimer",
+    "reset_failed": "L'opération n'a pas pu être terminée."
   }
 }

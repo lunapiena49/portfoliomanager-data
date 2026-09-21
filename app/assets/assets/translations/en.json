@@ -1213,5 +1213,20 @@
     "review_prompt": {
       "unavailable_fallback": "Thanks for using PluriFin! Leave a review on Play Store whenever you like."
     }
+  },
+  "storage_locked": {
+    "title": "Local data is locked",
+    "message": "The app could not open the data stored on this device: the encryption key held by the system no longer matches the files on disk. This can happen after an app or operating system update.",
+    "message_migration": "The app could not finish an upgrade step on your local data and stopped rather than damage it. Your data is still on this device: in most cases retrying or reopening the app is enough.",
+    "data_intact": "Your data has not been deleted: it is still on this device, and nothing will remove it automatically.",
+    "what_to_do": "Close and reopen the app, or restart the device: on some systems the secure keystore only becomes readable after the first unlock. If the problem persists, write to support@plurifin.app quoting the code below.",
+    "support_code": "Support code",
+    "details": "Technical details",
+    "retry_failed": "The data is still not accessible.",
+    "reset_button": "Start over and delete local data",
+    "reset_dialog_title": "Delete local data?",
+    "reset_dialog_body": "This permanently deletes portfolios, goals, settings, consents and subscription state from this device. It cannot be undone and does not touch backups you have exported.",
+    "reset_dialog_confirm": "Delete everything",
+    "reset_failed": "The operation could not be completed."
   }
 }

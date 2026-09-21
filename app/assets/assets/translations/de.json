@@ -1213,5 +1213,20 @@
     "review_prompt": {
       "unavailable_fallback": "Danke für PluriFin! Bewerten Sie uns auf Play Store, wenn Sie möchten."
     }
+  },
+  "storage_locked": {
+    "title": "Lokale Daten nicht zugänglich",
+    "message": "Die App konnte die auf diesem Gerät gespeicherten Daten nicht öffnen: Der vom System verwahrte Verschlüsselungsschlüssel passt nicht mehr zu den vorhandenen Dateien. Das kann nach einem Update der App oder des Betriebssystems passieren.",
+    "message_migration": "Die App konnte einen Aktualisierungsschritt an deinen lokalen Daten nicht abschließen und hat angehalten, statt sie zu beschädigen. Deine Daten liegen weiterhin auf diesem Gerät: Meist genügt ein erneuter Versuch oder ein Neustart der App.",
+    "data_intact": "Deine Daten wurden nicht gelöscht: Sie liegen weiterhin auf diesem Gerät, und kein automatischer Vorgang entfernt sie.",
+    "what_to_do": "Schließe die App und öffne sie erneut oder starte das Gerät neu: Auf manchen Systemen ist der sichere Speicher erst nach dem ersten Entsperren lesbar. Wenn das Problem bestehen bleibt, schreibe an support@plurifin.app und nenne den Code unten.",
+    "support_code": "Support-Code",
+    "details": "Technische Details",
+    "retry_failed": "Die Daten sind weiterhin nicht zugänglich.",
+    "reset_button": "Neu beginnen und lokale Daten löschen",
+    "reset_dialog_title": "Lokale Daten löschen?",
+    "reset_dialog_body": "Portfolios, Ziele, Einstellungen, Einwilligungen und der Abonnementstatus werden endgültig von diesem Gerät gelöscht. Der Vorgang lässt sich nicht rückgängig machen und betrifft keine von dir exportierten Sicherungen.",
+    "reset_dialog_confirm": "Alles löschen",
+    "reset_failed": "Der Vorgang konnte nicht abgeschlossen werden."
   }
 }

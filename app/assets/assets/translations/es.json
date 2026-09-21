@@ -1213,5 +1213,20 @@
     "review_prompt": {
       "unavailable_fallback": "Gracias por usar PluriFin! Deja una resena en Play Store cuando quieras."
     }
+  },
+  "storage_locked": {
+    "title": "Datos locales no accesibles",
+    "message": "La aplicación no ha podido abrir los datos guardados en este dispositivo: la clave de cifrado que custodia el sistema ya no coincide con los archivos existentes. Puede ocurrir después de actualizar la aplicación o el sistema operativo.",
+    "message_migration": "La aplicación no ha podido completar un paso de actualización de los datos locales y se ha detenido para no dañarlos. Tus datos siguen en este dispositivo: en la mayoría de los casos basta con reintentar o volver a abrir la aplicación.",
+    "data_intact": "Tus datos no se han borrado: siguen en este dispositivo y ninguna operación automática los eliminará.",
+    "what_to_do": "Cierra y vuelve a abrir la aplicación, o reinicia el dispositivo: en algunos sistemas el almacén seguro solo se puede leer tras el primer desbloqueo. Si el problema continúa, escribe a support@plurifin.app indicando el código de abajo.",
+    "support_code": "Código de asistencia",
+    "details": "Detalles técnicos",
+    "retry_failed": "Los datos siguen sin estar accesibles.",
+    "reset_button": "Empezar de cero y borrar los datos locales",
+    "reset_dialog_title": "¿Borrar los datos locales?",
+    "reset_dialog_body": "Se eliminarán definitivamente de este dispositivo las carteras, los objetivos, los ajustes, los consentimientos y el estado de la suscripción. La operación no se puede deshacer y no afecta a las copias de seguridad que hayas exportado.",
+    "reset_dialog_confirm": "Borrar todo",
+    "reset_failed": "No se ha podido completar la operación."
   }
 }

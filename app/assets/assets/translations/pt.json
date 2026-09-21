@@ -1213,5 +1213,20 @@
     "review_prompt": {
       "unavailable_fallback": "Obrigado por usar o PluriFin! Deixe uma avaliacao na Play Store quando quiser."
     }
+  },
+  "storage_locked": {
+    "title": "Dados locais inacessíveis",
+    "message": "A aplicação não conseguiu abrir os dados guardados neste dispositivo: a chave de cifra guardada pelo sistema já não corresponde aos ficheiros existentes. Pode acontecer depois de uma atualização da aplicação ou do sistema operativo.",
+    "message_migration": "A aplicação não conseguiu concluir um passo de atualização dos dados locais e parou para não os danificar. Os teus dados continuam neste dispositivo: na maioria dos casos basta tentar de novo ou reabrir a aplicação.",
+    "data_intact": "Os teus dados não foram apagados: continuam neste dispositivo e nenhuma operação automática os vai remover.",
+    "what_to_do": "Fecha e volta a abrir a aplicação, ou reinicia o dispositivo: em alguns sistemas o cofre seguro só fica legível depois do primeiro desbloqueio. Se o problema persistir, escreve para support@plurifin.app indicando o código abaixo.",
+    "support_code": "Código de apoio",
+    "details": "Detalhes técnicos",
+    "retry_failed": "Os dados continuam inacessíveis.",
+    "reset_button": "Recomeçar do zero e apagar os dados locais",
+    "reset_dialog_title": "Apagar os dados locais?",
+    "reset_dialog_body": "Serão apagados definitivamente deste dispositivo as carteiras, os objetivos, as definições, os consentimentos e o estado da subscrição. A operação é irreversível e não afeta as cópias de segurança que tenhas exportado.",
+    "reset_dialog_confirm": "Apagar tudo",
+    "reset_failed": "Não foi possível concluir a operação."
   }
 }
