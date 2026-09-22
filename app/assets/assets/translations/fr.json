@@ -657,7 +657,8 @@
       "crash_diagnostics": {
         "title": "Diagnostic de crash anonyme",
         "subtitle": "Si active, en cas de crash envoie la trace d'appel, le modèle de l'appareil et la version de l'application a Firebase Crashlytics. Aucune donnee de portefeuille n'est incluse.",
-        "disabled_on_web": "Non disponible sur le web."
+        "disabled_on_web": "Non disponible sur le web.",
+        "not_active": "Le diagnostic de crash n'est pas actif pendant cette session. Votre choix est enregistré et sera appliqué dès qu'il démarrera."
       }
     },
     "subscription": {
@@ -1227,6 +1228,8 @@
     "reset_dialog_title": "Supprimer les données locales ?",
     "reset_dialog_body": "Les portefeuilles, objectifs, réglages, consentements et l'état de l'abonnement seront définitivement supprimés de cet appareil. L'opération est irréversible et n'affecte pas les sauvegardes que vous avez exportées.",
     "reset_dialog_confirm": "Tout supprimer",
-    "reset_failed": "L'opération n'a pas pu être terminée."
+    "reset_failed": "L'opération n'a pas pu être terminée.",
+    "reset_refused": "Rien n'a été supprimé. L'application n'a pas pu vérifier le résultat de la suppression et s'est arrêtée plutôt que de détruire la seule clé capable de lire encore vos données : vos données sont toujours sur cet appareil. Réessayez après avoir redémarré l'appareil, ou écrivez à support@plurifin.app en indiquant le code ci-dessus.",
+    "reset_partial": "La suppression n'a pas pu être terminée. Une partie des données locales a peut-être déjà été supprimée ; ce qui reste est toujours sur cet appareil, et l'application a conservé la seule clé capable de le lire encore. Réessayez après avoir redémarré l'appareil, ou écrivez à support@plurifin.app en indiquant le code ci-dessus."
   }
 }

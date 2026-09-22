@@ -657,7 +657,8 @@
       "crash_diagnostics": {
         "title": "Anonymous crash diagnostics",
         "subtitle": "If enabled, on a crash sends stack trace, device model and app version to Firebase Crashlytics. No portfolio data is included.",
-        "disabled_on_web": "Not available on the web."
+        "disabled_on_web": "Not available on the web.",
+        "not_active": "Crash diagnostics are not running in this session. Your choice is saved and will be applied as soon as they start."
       }
     },
     "subscription": {
@@ -1227,6 +1228,8 @@
     "reset_dialog_title": "Delete local data?",
     "reset_dialog_body": "This permanently deletes portfolios, goals, settings, consents and subscription state from this device. It cannot be undone and does not touch backups you have exported.",
     "reset_dialog_confirm": "Delete everything",
-    "reset_failed": "The operation could not be completed."
+    "reset_failed": "The operation could not be completed.",
+    "reset_refused": "Nothing was deleted. The app could not verify the result of the deletion and stopped rather than destroy the only key that can still read your data: your data is still on this device. Try again after restarting the device, or write to support@plurifin.app quoting the code above.",
+    "reset_partial": "The deletion could not be completed. Part of the local data may already have been deleted; what remains is still on this device, and the app kept the only key that can still read it. Try again after restarting the device, or write to support@plurifin.app quoting the code above."
   }
 }

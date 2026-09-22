@@ -1,7 +1,7 @@
 # Política de Privacidad -- Portfolio Manager by PluriFin
 
-**Versión**: 1.0.2
-**Última actualización**: 2026-05-20
+**Versión**: 1.0.3
+**Última actualización**: 2026-09-21
 **Idioma original**: Italiano (versión vinculante para la jurisdicción)
 
 ---
@@ -30,7 +30,7 @@ persona física fuera de los supuestos del art. 37 RGPD.
   futuras evoluciones: la versión 1.0.0+10 no incluye el SDK
   `firebase_analytics`, por lo que el binario no genera ningún evento de
   analítica. Ver sección 4 (sub-encargados) para la declaración completa.
-- En Android, la app integra una **diagnóstica anónima opcional de crash vía Firebase Crashlytics** (Google Ireland Limited): desactivada por defecto, activable por el usuario desde Ajustes > Privacidad. Nunca datos de cartera, claves API ni contenido de IA. Ver sección 4 (sub-encargados).
+- En Android, la app integra una **diagnóstica anónima opcional de crash vía Firebase Crashlytics** (Google Ireland Limited): desactivada por defecto, activable por el usuario desde Ajustes > Privacidad. Nunca datos de cartera, claves API ni contenido de IA. Cubre también los **fallos de arranque que la app ha gestionado por sí misma** (por ejemplo, el almacenamiento local que no se ha podido abrir). Con la opción desactivada no se transmite nada; los informes tampoco se descartan: el SDK de Crashlytics **los conserva en el dispositivo** y los envía solo si y cuando actives la opción. Residen en el almacenamiento de la app, así que desinstalarla o borrar sus datos los elimina. Ver sección 4 (sub-encargados).
 - La app **no comparte datos con anunciantes**. No hay publicidad.
 - Existen **funcionalidades opcionales** que, si el usuario las activa,
   transmiten datos a procesadores de terceros: IA Gemini, precios de
@@ -124,7 +124,7 @@ momento.
 | Tiingo | Precios real-time e históricos | Lista tickers | Solo si activa |
 | Nasdaq Data Link | Precios históricos | Lista tickers | Solo si activa |
 | Stooq | Descarga CSV pública precios históricos | Lista tickers (sin API key) | Solo si activa Stooq |
-| Google Ireland Limited -- Firebase Crashlytics | Diagnóstica anónima de crash | Stack trace ofuscado, modelo de dispositivo, OS, versión de la app, Firebase Installation ID anónimo | Solo si el usuario activa "Diagnóstica crash anónima" en Ajustes > Privacidad. Desactivada por defecto. |
+| Google Ireland Limited -- Firebase Crashlytics | Diagnóstica anónima de crash | Stack trace ofuscado, modelo de dispositivo, OS, versión de la app, Firebase Installation ID anónimo | Solo si el usuario activa "Diagnóstica crash anónima" en Ajustes > Privacidad. Desactivada por defecto. Los informes generados mientras la opción está desactivada (crashes y fallos de arranque gestionados) permanecen en el dispositivo a cargo del SDK y se transmiten solo después de que el usuario la active. |
 | Google LLC -- Google Analytics for Firebase (GA4) | Preparación futura para analítica agregada de estabilidad (propiedad GA4 vinculada al proyecto Firebase) | **Ningún dato transmitido en la versión 1.0.0+10** (el SDK `firebase_analytics` no está en pubspec). Cuando `firebase_analytics` se integre en una versión futura, GA4 recibirá eventos auto-recogidos (vistas de pantalla, app_start/app_foreground, `app_exception` agregado desde Crashlytics). El usuario será re-consentido en ese momento | Inactivo en la versión 1.0.0+10. Se activará solo después de una actualización futura de la app + re-consentimiento del usuario. |
 | Cloudflare Worker | Validación suscripción | device_id_hash, purchase_token, JWT | Siempre (gating subscription) |
 | GitHub Pages | Hosting legal/webapp/sitio | IP request HTTP | En cada visita |

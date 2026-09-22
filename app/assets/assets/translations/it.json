@@ -657,7 +657,8 @@
       "crash_diagnostics": {
         "title": "Diagnostica crash anonima",
         "subtitle": "Se attiva, in caso di crash invia stack trace, modello dispositivo e versione app a Firebase Crashlytics. Nessun dato del portafoglio incluso.",
-        "disabled_on_web": "Non disponibile sul web."
+        "disabled_on_web": "Non disponibile sul web.",
+        "not_active": "La diagnostica crash non è attiva in questa sessione. La tua scelta è salvata e verrà applicata non appena si avvierà."
       }
     },
     "subscription": {
@@ -1227,6 +1228,8 @@
     "reset_dialog_title": "Eliminare i dati locali?",
     "reset_dialog_body": "Verranno eliminati definitivamente da questo dispositivo portafogli, obiettivi, impostazioni, consensi e stato dell'abbonamento. L'operazione non e' reversibile e non tocca i backup che hai esportato.",
     "reset_dialog_confirm": "Elimina tutto",
-    "reset_failed": "Non e' stato possibile completare l'operazione."
+    "reset_failed": "Non e' stato possibile completare l'operazione.",
+    "reset_refused": "Non e' stato cancellato nulla. L'app non e' riuscita a verificare l'esito della cancellazione e si e' fermata invece di distruggere l'unica chiave che puo' ancora leggere i tuoi dati: i dati sono ancora su questo dispositivo. Riprova dopo aver riavviato il dispositivo, oppure scrivi a support@plurifin.app indicando il codice qui sopra.",
+    "reset_partial": "Non è stato possibile completare la cancellazione. Una parte dei dati locali potrebbe essere già stata cancellata; ciò che resta è ancora su questo dispositivo e l'app ha conservato l'unica chiave che può ancora leggerlo. Riprova dopo aver riavviato il dispositivo, oppure scrivi a support@plurifin.app indicando il codice qui sopra."
   }
 }

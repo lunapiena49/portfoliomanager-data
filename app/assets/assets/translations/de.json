@@ -657,7 +657,8 @@
       "crash_diagnostics": {
         "title": "Anonyme Crash-Diagnose",
         "subtitle": "Wenn aktiviert, werden im Falle eines Crashes Stack-Trace, Gerätemodell und App-Version an Firebase Crashlytics gesendet. Keine Portfolio-Daten werden übertragen.",
-        "disabled_on_web": "Im Web nicht verfügbar."
+        "disabled_on_web": "Im Web nicht verfügbar.",
+        "not_active": "Die Crash-Diagnose ist in dieser Sitzung nicht aktiv. Deine Auswahl ist gespeichert und wird angewendet, sobald sie startet."
       }
     },
     "subscription": {
@@ -1227,6 +1228,8 @@
     "reset_dialog_title": "Lokale Daten löschen?",
     "reset_dialog_body": "Portfolios, Ziele, Einstellungen, Einwilligungen und der Abonnementstatus werden endgültig von diesem Gerät gelöscht. Der Vorgang lässt sich nicht rückgängig machen und betrifft keine von dir exportierten Sicherungen.",
     "reset_dialog_confirm": "Alles löschen",
-    "reset_failed": "Der Vorgang konnte nicht abgeschlossen werden."
+    "reset_failed": "Der Vorgang konnte nicht abgeschlossen werden.",
+    "reset_refused": "Es wurde nichts gelöscht. Die App konnte das Ergebnis der Löschung nicht überprüfen und hat angehalten, statt den einzigen Schlüssel zu zerstören, der deine Daten noch lesen kann: deine Daten sind weiterhin auf diesem Gerät. Versuche es nach einem Neustart des Geräts erneut oder schreibe an support@plurifin.app und gib den Code oben an.",
+    "reset_partial": "Die Löschung konnte nicht abgeschlossen werden. Ein Teil der lokalen Daten wurde möglicherweise bereits gelöscht; der Rest ist weiterhin auf diesem Gerät, und die App hat den einzigen Schlüssel behalten, der ihn noch lesen kann. Versuche es nach einem Neustart des Geräts erneut oder schreibe an support@plurifin.app und gib den Code oben an."
   }
 }

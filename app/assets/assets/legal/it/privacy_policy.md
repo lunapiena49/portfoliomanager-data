@@ -1,7 +1,7 @@
 # Privacy Policy -- Portfolio Manager by PluriFin
 
-**Versione**: 1.0.2
-**Ultimo aggiornamento**: 2026-07-14
+**Versione**: 1.0.3
+**Ultimo aggiornamento**: 2026-09-21
 **Lingua originale**: Italiano (versione di riferimento per il foro competente)
 **Hash testo (per audit trail)**: SHA-256 generato dallo script `scripts/legal/build_legal_html.ps1`
 
@@ -35,7 +35,7 @@ persona fisica e l'attivita' non rientra fra i casi obbligatori previsti dall'ar
   evoluzioni: nella versione 1.0.0+10 nessun SDK `firebase_analytics` e'
   integrato, quindi nessun evento analytics e' generato dal binario
   dell'app. Vedi sezione 4 (sub-processor) per la dichiarazione completa.
-- Su Android, l'app integra una **diagnostica anonima opzionale di crash via Firebase Crashlytics** (Google Ireland Limited): disattivata di default, attivabile dall'utente in Impostazioni > Privacy. Mai dati di portafoglio, chiavi API o contenuto AI. Vedi sezione 4 (sub-processor).
+- Su Android, l'app integra una **diagnostica anonima opzionale di crash via Firebase Crashlytics** (Google Ireland Limited): disattivata di default, attivabile dall'utente in Impostazioni > Privacy. Mai dati di portafoglio, chiavi API o contenuto AI. Copre anche i **fallimenti di avvio che l'app ha gestito da sola** (per esempio l'archivio locale che non si e' potuto aprire). Con l'opzione disattivata non viene trasmesso nulla; i rapporti pero' non vengono scartati: l'SDK Crashlytics **li conserva sul dispositivo** e li invia solo se e quando attivi l'opzione. Restano nello spazio dell'app, quindi disinstallarla o cancellarne i dati li elimina. Vedi sezione 4 (sub-processor).
 - L'app **non condivide dati con inserzionisti**. Non e' presente pubblicita'.
 - Sono presenti **funzionalita' opzionali** che, se attivate dall'utente,
   comportano la trasmissione di dati a fornitori terzi (sub-processor): AI
@@ -159,7 +159,7 @@ l'utente attiva le feature corrispondenti) e':
 | **Tiingo** | Prezzi di mercato real-time e storici | Lista ticker | Solo se utente inserisce chiave Tiingo e seleziona il provider |
 | **Nasdaq Data Link** | Prezzi di mercato storici | Lista ticker | Solo se utente inserisce chiave Nasdaq Data Link e seleziona il provider |
 | **Stooq** | Download CSV pubblico prezzi storici | Lista ticker (no API key, richiesta HTTP pubblica) | Solo se utente seleziona Stooq come provider |
-| **Google Ireland Limited** -- Firebase Crashlytics | Diagnostica anonima di crash | Stack trace offuscato, modello device (es. "Pixel 7"), OS (es. "Android 14"), versione app (es. "1.0.0+10"), Firebase Installation ID anonimo | Solo se utente attiva "Diagnostica crash anonima" in Impostazioni > Privacy. Disattivata di default. |
+| **Google Ireland Limited** -- Firebase Crashlytics | Diagnostica anonima di crash | Stack trace offuscato, modello device (es. "Pixel 7"), OS (es. "Android 14"), versione app (es. "1.0.0+10"), Firebase Installation ID anonimo | Solo se utente attiva "Diagnostica crash anonima" in Impostazioni > Privacy. Disattivata di default. I rapporti prodotti mentre l'opzione e' disattivata (crash e fallimenti di avvio gestiti) restano sul dispositivo a cura dell'SDK e vengono trasmessi solo dopo che l'utente la attiva. |
 | **Google LLC** -- Google Analytics for Firebase (GA4) | Predisposizione futura per analytics aggregata di stabilita' (proprieta' GA4 linkata al progetto Firebase) | **Nessun dato trasmesso nella versione 1.0.0+10** (SDK `firebase_analytics` non integrato nel pubspec). Quando in una versione futura `firebase_analytics` verra' integrato, GA4 ricevera' eventi auto-collected (screen views, app_start/app_foreground, `app_exception` aggregato da Crashlytics). L'utente sara' re-consentito al momento dell'introduzione | Inattivo nella versione 1.0.0+10. Verra' attivato solo dopo aggiornamento dell'app + re-consenso utente. |
 | **Cloudflare, Inc.** -- Worker | Validazione trial e subscription | `device_id_hash`, `purchase_token`, `productId`, JWT | Sempre (necessario per gating subscription) |
 | **Microsoft GitHub** -- Pages | Hosting documenti legali, market data pubblici, webapp demo, vetrina | Indirizzo IP utente al momento della richiesta HTTP (log server Microsoft) | Sempre, ogni volta che l'utente apre la webapp o un documento legale |
@@ -251,7 +251,7 @@ Misure tecniche e organizzative adottate:
 - Codice: obfuscation Dart attiva su tutte le release (`--obfuscate
   --split-debug-info`)
 - Nessun log persistente di dati personali ne' in console ne' su file
-- Nessuna telemetria di crash by default (Sentry disattivato in v1.0)
+- Nessuna telemetria di crash trasmessa by default (niente Sentry; i rapporti Crashlytics, quando prodotti, restano sul dispositivo finche' non attivi l'opzione)
 
 ## 9. Minori (art. 8 GDPR)
 

@@ -657,7 +657,8 @@
       "crash_diagnostics": {
         "title": "Diagnostica de crash anonima",
         "subtitle": "Si esta activa, en caso de crash envia stack trace, modelo del dispositivo y versión de la app a Firebase Crashlytics. No se incluye ningún dato de la cartera.",
-        "disabled_on_web": "No disponible en la web."
+        "disabled_on_web": "No disponible en la web.",
+        "not_active": "El diagnóstico de crash no está activo en esta sesión. Tu elección está guardada y se aplicará en cuanto se inicie."
       }
     },
     "subscription": {
@@ -1227,6 +1228,8 @@
     "reset_dialog_title": "¿Borrar los datos locales?",
     "reset_dialog_body": "Se eliminarán definitivamente de este dispositivo las carteras, los objetivos, los ajustes, los consentimientos y el estado de la suscripción. La operación no se puede deshacer y no afecta a las copias de seguridad que hayas exportado.",
     "reset_dialog_confirm": "Borrar todo",
-    "reset_failed": "No se ha podido completar la operación."
+    "reset_failed": "No se ha podido completar la operación.",
+    "reset_refused": "No se ha borrado nada. La aplicación no ha podido verificar el resultado del borrado y se ha detenido en lugar de destruir la única clave que todavía puede leer tus datos: tus datos siguen en este dispositivo. Vuelve a intentarlo tras reiniciar el dispositivo o escribe a support@plurifin.app indicando el código anterior.",
+    "reset_partial": "No se ha podido completar el borrado. Es posible que una parte de los datos locales ya se haya borrado; lo que queda sigue en este dispositivo y la aplicación ha conservado la única clave que todavía puede leerlo. Vuelve a intentarlo tras reiniciar el dispositivo o escribe a support@plurifin.app indicando el código anterior."
   }
 }
