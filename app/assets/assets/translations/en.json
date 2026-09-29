@@ -341,6 +341,7 @@
     "processing": "Processing your portfolio...",
     "success": "Portfolio imported successfully!",
     "error": "Failed to import portfolio",
+    "no_positions_read": "No positions were found in the file, so nothing was imported. Check that the selected broker matches the file.",
     "positions_found": "{count} positions found",
     "preview": "Preview",
     "import_button": "Import",

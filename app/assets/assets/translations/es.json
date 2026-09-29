@@ -341,6 +341,7 @@
     "processing": "Procesando tu cartera...",
     "success": "Cartera importada exitosamente!",
     "error": "Error al importar la cartera",
+    "no_positions_read": "No se encontró ninguna posición en el archivo, así que no se importó nada. Comprueba que el broker seleccionado corresponde al archivo.",
     "positions_found": "{count} posiciones encontradas",
     "preview": "Vista Previa",
     "import_button": "Importar",

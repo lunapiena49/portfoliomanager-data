@@ -341,6 +341,7 @@
     "processing": "Portfolio wird verarbeitet...",
     "success": "Portfolio erfolgreich importiert!",
     "error": "Portfolio-Import fehlgeschlagen",
+    "no_positions_read": "In der Datei wurden keine Positionen gefunden, daher wurde nichts importiert. Prüfen Sie, ob der ausgewählte Broker zur Datei passt.",
     "positions_found": "{count} Positionen gefunden",
     "preview": "Vorschau",
     "import_button": "Importieren",

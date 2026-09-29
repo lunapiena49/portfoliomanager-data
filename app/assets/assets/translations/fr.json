@@ -341,6 +341,7 @@
     "processing": "Traitement du portefeuille...",
     "success": "Portefeuille importe avec succes!",
     "error": "Echec de l'importation du portefeuille",
+    "no_positions_read": "Aucune position n'a été trouvée dans le fichier, rien n'a donc été importé. Vérifiez que le courtier sélectionné correspond au fichier.",
     "positions_found": "{count} positions trouvees",
     "preview": "Aperçu",
     "import_button": "Importer",

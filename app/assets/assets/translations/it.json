@@ -341,6 +341,7 @@
     "processing": "Elaborazione del portafoglio...",
     "success": "Portafoglio importato con successo!",
     "error": "Impossibile importare il portafoglio",
+    "no_positions_read": "Nel file non è stata trovata nessuna posizione, quindi non è stato importato nulla. Verifica che il broker selezionato corrisponda al file.",
     "positions_found": "{count} posizioni trovate",
     "preview": "Anteprima",
     "import_button": "Importa",

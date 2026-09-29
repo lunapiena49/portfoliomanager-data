@@ -341,6 +341,7 @@
     "processing": "Processando sua carteira...",
     "success": "Carteira importada com sucesso!",
     "error": "Falha ao importar carteira",
+    "no_positions_read": "Nenhuma posição foi encontrada no arquivo, por isso nada foi importado. Verifique se a corretora selecionada corresponde ao arquivo.",
     "positions_found": "{count} posições encontradas",
     "preview": "Pre-visualização",
     "import_button": "Importar",
