@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-11T01:15:52.205543+00:00",
+  "generated_at_utc": "2026-10-12T01:44:06.148546+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -54,8 +54,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 2618,
-          "eligible_before_filters": 47877,
-          "eligible_after_price_filter": 42600,
+          "eligible_before_filters": 49654,
+          "eligible_after_price_filter": 43296,
           "eligible_after_dollar_volume_filter": 6709,
           "eligible_after_investor_filters": 2671,
           "filters": {
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 1726,
-          "eligible_before_filters": 47784,
-          "eligible_after_price_filter": 42536,
+          "eligible_before_filters": 49553,
+          "eligible_after_price_filter": 43225,
           "eligible_after_dollar_volume_filter": 6696,
           "eligible_after_investor_filters": 1732,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 1716,
-          "eligible_before_filters": 47482,
-          "eligible_after_price_filter": 42304,
+          "eligible_before_filters": 49221,
+          "eligible_after_price_filter": 42979,
           "eligible_after_dollar_volume_filter": 6649,
           "eligible_after_investor_filters": 1722,
           "filters": {
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 992,
-          "eligible_before_filters": 42282,
-          "eligible_after_price_filter": 37559,
+          "eligible_before_filters": 43867,
+          "eligible_after_price_filter": 38137,
           "eligible_after_dollar_volume_filter": 6165,
           "eligible_after_investor_filters": 993,
           "filters": {
@@ -7009,11 +7009,11 @@
       "as_of_date": "2026-10-09",
       "timeframes": {
         "1D": {
-          "eligible_symbols": 845,
-          "eligible_before_filters": 6809,
-          "eligible_after_price_filter": 6596,
-          "eligible_after_dollar_volume_filter": 2112,
-          "eligible_after_investor_filters": 886,
+          "eligible_symbols": 846,
+          "eligible_before_filters": 6815,
+          "eligible_after_price_filter": 6601,
+          "eligible_after_dollar_volume_filter": 2113,
+          "eligible_after_investor_filters": 887,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 20000000,
@@ -7962,6 +7962,23 @@
               "asOfDate": "2026-10-09"
             },
             {
+              "symbol": "AMC",
+              "ticker": "AMC",
+              "name": "AMC",
+              "price": 184.26,
+              "close": 184.26,
+              "volume": 34253850,
+              "dollar_volume": 6311614401.0,
+              "dollarVolume": 6311614401.0,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "GBP",
+              "change_percent": -5.989796,
+              "changePercent": -5.989796,
+              "as_of_date": "2026-10-09",
+              "asOfDate": "2026-10-09"
+            },
+            {
               "symbol": "CAPD",
               "ticker": "CAPD",
               "name": "CAPD",
@@ -8725,30 +8742,13 @@
               "changePercent": -2.256487,
               "as_of_date": "2026-10-09",
               "asOfDate": "2026-10-09"
-            },
-            {
-              "symbol": "0MPH",
-              "ticker": "0MPH",
-              "name": "0MPH",
-              "price": 24.72,
-              "close": 24.72,
-              "volume": 4196678,
-              "dollar_volume": 103741880.16,
-              "dollarVolume": 103741880.16,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "GBP",
-              "change_percent": -2.253855,
-              "changePercent": -2.253855,
-              "as_of_date": "2026-10-09",
-              "asOfDate": "2026-10-09"
             }
           ]
         },
         "5D": {
           "eligible_symbols": 607,
-          "eligible_before_filters": 6797,
-          "eligible_after_price_filter": 6585,
+          "eligible_before_filters": 6802,
+          "eligible_after_price_filter": 6589,
           "eligible_after_dollar_volume_filter": 2109,
           "eligible_after_investor_filters": 620,
           "filters": {
@@ -10484,8 +10484,8 @@
         },
         "1M": {
           "eligible_symbols": 610,
-          "eligible_before_filters": 6741,
-          "eligible_after_price_filter": 6532,
+          "eligible_before_filters": 6746,
+          "eligible_after_price_filter": 6536,
           "eligible_after_dollar_volume_filter": 2096,
           "eligible_after_investor_filters": 614,
           "filters": {
@@ -12221,8 +12221,8 @@
         },
         "1Y": {
           "eligible_symbols": 390,
-          "eligible_before_filters": 6227,
-          "eligible_after_price_filter": 6030,
+          "eligible_before_filters": 6232,
+          "eligible_after_price_filter": 6034,
           "eligible_after_dollar_volume_filter": 2023,
           "eligible_after_investor_filters": 391,
           "filters": {
@@ -13909,9 +13909,9 @@
               "name": "MGNS",
               "price": 4086.0,
               "close": 4086.0,
-              "volume": 138163,
-              "dollar_volume": 564534018.0,
-              "dollarVolume": 564534018.0,
+              "volume": 41315,
+              "dollar_volume": 168813090.0,
+              "dollarVolume": 168813090.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -38611,7 +38611,7 @@
     }
   ],
   "counts": {
-    "input_rows": 71551,
+    "input_rows": 73334,
     "markets": 8
   },
   "market": "US",
