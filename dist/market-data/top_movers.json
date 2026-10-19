@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-10-18T00:17:21.802722+00:00",
+  "generated_at_utc": "2026-10-19T00:29:01.679205+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -54,8 +54,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 2845,
-          "eligible_before_filters": 47041,
-          "eligible_after_price_filter": 42165,
+          "eligible_before_filters": 49693,
+          "eligible_after_price_filter": 43238,
           "eligible_after_dollar_volume_filter": 6976,
           "eligible_after_investor_filters": 2874,
           "filters": {
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 1930,
-          "eligible_before_filters": 46983,
-          "eligible_after_price_filter": 42120,
+          "eligible_before_filters": 49620,
+          "eligible_after_price_filter": 43184,
           "eligible_after_dollar_volume_filter": 6969,
           "eligible_after_investor_filters": 1932,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 1931,
-          "eligible_before_filters": 46723,
-          "eligible_after_price_filter": 41914,
+          "eligible_before_filters": 49333,
+          "eligible_after_price_filter": 42964,
           "eligible_after_dollar_volume_filter": 6934,
           "eligible_after_investor_filters": 1935,
           "filters": {
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 1176,
-          "eligible_before_filters": 41554,
-          "eligible_after_price_filter": 37194,
+          "eligible_before_filters": 43880,
+          "eligible_after_price_filter": 38069,
           "eligible_after_dollar_volume_filter": 6417,
           "eligible_after_investor_filters": 1177,
           "filters": {
@@ -7009,9 +7009,9 @@
       "as_of_date": "2026-10-16",
       "timeframes": {
         "1D": {
-          "eligible_symbols": 845,
-          "eligible_before_filters": 6638,
-          "eligible_after_price_filter": 6425,
+          "eligible_symbols": 844,
+          "eligible_before_filters": 6643,
+          "eligible_after_price_filter": 6428,
           "eligible_after_dollar_volume_filter": 2160,
           "eligible_after_investor_filters": 893,
           "filters": {
@@ -7034,8 +7034,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 80,
-            "skipped_below_investor_dollar_volume": 1187,
+            "skipped_below_investor_price": 81,
+            "skipped_below_investor_dollar_volume": 1186,
             "skipped_above_change_cap": 0,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -8370,23 +8370,6 @@
               "asOfDate": "2026-10-16"
             },
             {
-              "symbol": "ROAD",
-              "ticker": "ROAD",
-              "name": "ROAD",
-              "price": 53.5,
-              "close": 53.5,
-              "volume": 24794436,
-              "dollar_volume": 1326502326.0,
-              "dollarVolume": 1326502326.0,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "GBP",
-              "change_percent": -4.464286,
-              "changePercent": -4.464286,
-              "as_of_date": "2026-10-16",
-              "asOfDate": "2026-10-16"
-            },
-            {
               "symbol": "CWR",
               "ticker": "CWR",
               "name": "CWR",
@@ -8625,6 +8608,23 @@
               "asOfDate": "2026-10-16"
             },
             {
+              "symbol": "ROAD",
+              "ticker": "ROAD",
+              "name": "ROAD",
+              "price": 53.5,
+              "close": 53.5,
+              "volume": 24794435,
+              "dollar_volume": 1326502272.5,
+              "dollarVolume": 1326502272.5,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "GBP",
+              "change_percent": -3.603604,
+              "changePercent": -3.603604,
+              "as_of_date": "2026-10-16",
+              "asOfDate": "2026-10-16"
+            },
+            {
               "symbol": "HIDR",
               "ticker": "HIDR",
               "name": "HIDR",
@@ -8747,8 +8747,8 @@
         },
         "5D": {
           "eligible_symbols": 612,
-          "eligible_before_filters": 6601,
-          "eligible_after_price_filter": 6390,
+          "eligible_before_filters": 6606,
+          "eligible_after_price_filter": 6393,
           "eligible_after_dollar_volume_filter": 2149,
           "eligible_after_investor_filters": 621,
           "filters": {
@@ -8771,8 +8771,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 78,
-            "skipped_below_investor_dollar_volume": 1444,
+            "skipped_below_investor_price": 79,
+            "skipped_below_investor_dollar_volume": 1443,
             "skipped_above_change_cap": 6,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -10214,9 +10214,9 @@
               "name": "EWI",
               "price": 256.5,
               "close": 256.5,
-              "volume": 524205,
-              "dollar_volume": 134458582.5,
-              "dollarVolume": 134458582.5,
+              "volume": 524203,
+              "dollar_volume": 134458069.5,
+              "dollarVolume": 134458069.5,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -10484,8 +10484,8 @@
         },
         "1M": {
           "eligible_symbols": 613,
-          "eligible_before_filters": 6572,
-          "eligible_after_price_filter": 6363,
+          "eligible_before_filters": 6576,
+          "eligible_after_price_filter": 6366,
           "eligible_after_dollar_volume_filter": 2140,
           "eligible_after_investor_filters": 623,
           "filters": {
@@ -10508,8 +10508,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 78,
-            "skipped_below_investor_dollar_volume": 1436,
+            "skipped_below_investor_price": 79,
+            "skipped_below_investor_dollar_volume": 1435,
             "skipped_above_change_cap": 3,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -12221,9 +12221,9 @@
         },
         "1Y": {
           "eligible_symbols": 426,
-          "eligible_before_filters": 6036,
-          "eligible_after_price_filter": 5844,
-          "eligible_after_dollar_volume_filter": 2053,
+          "eligible_before_filters": 6041,
+          "eligible_after_price_filter": 5847,
+          "eligible_after_dollar_volume_filter": 2054,
           "eligible_after_investor_filters": 426,
           "filters": {
             "min_price": 5.0,
@@ -12245,7 +12245,7 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 67,
+            "skipped_below_investor_price": 68,
             "skipped_below_investor_dollar_volume": 1535,
             "skipped_above_change_cap": 25,
             "skipped_below_history_depth": 0,
@@ -13110,9 +13110,9 @@
               "name": "BRSC",
               "price": 271.0,
               "close": 271.0,
-              "volume": 1783539,
-              "dollar_volume": 483339069.0,
-              "dollarVolume": 483339069.0,
+              "volume": 2965294,
+              "dollar_volume": 803594674.0,
+              "dollarVolume": 803594674.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -30196,7 +30196,7 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 90,
-          "eligible_before_filters": 2300,
+          "eligible_before_filters": 2301,
           "eligible_after_price_filter": 979,
           "eligible_after_dollar_volume_filter": 412,
           "eligible_after_investor_filters": 90,
@@ -40430,7 +40430,7 @@
     }
   ],
   "counts": {
-    "input_rows": 70649,
+    "input_rows": 73307,
     "markets": 8
   },
   "market": "US",
