@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-08T01:49:34.416029+00:00",
+  "generated_at_utc": "2026-11-09T01:58:14.398858+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -54,8 +54,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 2893,
-          "eligible_before_filters": 48010,
-          "eligible_after_price_filter": 42267,
+          "eligible_before_filters": 49209,
+          "eligible_after_price_filter": 42714,
           "eligible_after_dollar_volume_filter": 6861,
           "eligible_after_investor_filters": 2945,
           "filters": {
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 2007,
-          "eligible_before_filters": 47948,
-          "eligible_after_price_filter": 42221,
+          "eligible_before_filters": 49146,
+          "eligible_after_price_filter": 42668,
           "eligible_after_dollar_volume_filter": 6847,
           "eligible_after_investor_filters": 2017,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 2004,
-          "eligible_before_filters": 47737,
-          "eligible_after_price_filter": 42055,
+          "eligible_before_filters": 48926,
+          "eligible_after_price_filter": 42497,
           "eligible_after_dollar_volume_filter": 6817,
           "eligible_after_investor_filters": 2005,
           "filters": {
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 1261,
-          "eligible_before_filters": 42449,
-          "eligible_after_price_filter": 37302,
+          "eligible_before_filters": 43523,
+          "eligible_after_price_filter": 37675,
           "eligible_after_dollar_volume_filter": 6350,
           "eligible_after_investor_filters": 1261,
           "filters": {
@@ -7009,11 +7009,11 @@
       "as_of_date": "2026-11-06",
       "timeframes": {
         "1D": {
-          "eligible_symbols": 953,
-          "eligible_before_filters": 6753,
-          "eligible_after_price_filter": 6524,
-          "eligible_after_dollar_volume_filter": 2316,
-          "eligible_after_investor_filters": 994,
+          "eligible_symbols": 954,
+          "eligible_before_filters": 6756,
+          "eligible_after_price_filter": 6527,
+          "eligible_after_dollar_volume_filter": 2324,
+          "eligible_after_investor_filters": 996,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 20000000,
@@ -7035,7 +7035,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 98,
-            "skipped_below_investor_dollar_volume": 1223,
+            "skipped_below_investor_dollar_volume": 1229,
             "skipped_above_change_cap": 1,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -7283,16 +7283,16 @@
               "symbol": "0R0X",
               "ticker": "0R0X",
               "name": "0R0X",
-              "price": 359.47,
-              "close": 359.47,
-              "volume": 240100,
-              "dollar_volume": 86308747.0,
-              "dollarVolume": 86308747.0,
+              "price": 359.98,
+              "close": 359.98,
+              "volume": 270898,
+              "dollar_volume": 97517862.04,
+              "dollarVolume": 97517862.04,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
-              "change_percent": 6.191841,
-              "changePercent": 6.191841,
+              "change_percent": 6.342501,
+              "changePercent": 6.342501,
               "as_of_date": "2026-11-06",
               "asOfDate": "2026-11-06"
             },
@@ -7463,6 +7463,23 @@
               "currency": "GBP",
               "change_percent": 4.890656,
               "changePercent": 4.890656,
+              "as_of_date": "2026-11-06",
+              "asOfDate": "2026-11-06"
+            },
+            {
+              "symbol": "SDG",
+              "ticker": "SDG",
+              "name": "SDG",
+              "price": 76.0,
+              "close": 76.0,
+              "volume": 335352,
+              "dollar_volume": 25486752.0,
+              "dollarVolume": 25486752.0,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "GBP",
+              "change_percent": 4.827586,
+              "changePercent": 4.827586,
               "as_of_date": "2026-11-06",
               "asOfDate": "2026-11-06"
             },
@@ -7871,23 +7888,6 @@
               "currency": "GBP",
               "change_percent": 3.601024,
               "changePercent": 3.601024,
-              "as_of_date": "2026-11-06",
-              "asOfDate": "2026-11-06"
-            },
-            {
-              "symbol": "0SEA",
-              "ticker": "0SEA",
-              "name": "0SEA",
-              "price": 118.1,
-              "close": 118.1,
-              "volume": 1409839,
-              "dollar_volume": 166501985.9,
-              "dollarVolume": 166501985.9,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "GBP",
-              "change_percent": 3.596491,
-              "changePercent": 3.596491,
               "as_of_date": "2026-11-06",
               "asOfDate": "2026-11-06"
             }
@@ -8746,11 +8746,11 @@
           ]
         },
         "5D": {
-          "eligible_symbols": 679,
-          "eligible_before_filters": 6731,
-          "eligible_after_price_filter": 6504,
-          "eligible_after_dollar_volume_filter": 2311,
-          "eligible_after_investor_filters": 692,
+          "eligible_symbols": 680,
+          "eligible_before_filters": 6734,
+          "eligible_after_price_filter": 6507,
+          "eligible_after_dollar_volume_filter": 2319,
+          "eligible_after_investor_filters": 693,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 50000000,
@@ -8772,7 +8772,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 98,
-            "skipped_below_investor_dollar_volume": 1513,
+            "skipped_below_investor_dollar_volume": 1520,
             "skipped_above_change_cap": 8,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -9175,9 +9175,9 @@
               "name": "MGNS",
               "price": 4342.0,
               "close": 4342.0,
-              "volume": 94631,
-              "dollar_volume": 410887802.0,
-              "dollarVolume": 410887802.0,
+              "volume": 111673,
+              "dollar_volume": 484884166.0,
+              "dollarVolume": 484884166.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -10192,23 +10192,6 @@
               "asOfDate": "2026-11-06"
             },
             {
-              "symbol": "0R0X",
-              "ticker": "0R0X",
-              "name": "0R0X",
-              "price": 359.47,
-              "close": 359.47,
-              "volume": 240100,
-              "dollar_volume": 86308747.0,
-              "dollarVolume": 86308747.0,
-              "market_cap": 0,
-              "marketCap": 0,
-              "currency": "GBP",
-              "change_percent": -9.95466,
-              "changePercent": -9.95466,
-              "as_of_date": "2026-11-06",
-              "asOfDate": "2026-11-06"
-            },
-            {
               "symbol": "HKOR",
               "ticker": "HKOR",
               "name": "HKOR",
@@ -10222,6 +10205,23 @@
               "currency": "GBP",
               "change_percent": -9.893384,
               "changePercent": -9.893384,
+              "as_of_date": "2026-11-06",
+              "asOfDate": "2026-11-06"
+            },
+            {
+              "symbol": "0R0X",
+              "ticker": "0R0X",
+              "name": "0R0X",
+              "price": 359.98,
+              "close": 359.98,
+              "volume": 270898,
+              "dollar_volume": 97517862.04,
+              "dollarVolume": 97517862.04,
+              "market_cap": 0,
+              "marketCap": 0,
+              "currency": "GBP",
+              "change_percent": -9.826908,
+              "changePercent": -9.826908,
               "as_of_date": "2026-11-06",
               "asOfDate": "2026-11-06"
             },
@@ -10483,11 +10483,11 @@
           ]
         },
         "1M": {
-          "eligible_symbols": 686,
-          "eligible_before_filters": 6675,
-          "eligible_after_price_filter": 6448,
-          "eligible_after_dollar_volume_filter": 2301,
-          "eligible_after_investor_filters": 687,
+          "eligible_symbols": 687,
+          "eligible_before_filters": 6678,
+          "eligible_after_price_filter": 6451,
+          "eligible_after_dollar_volume_filter": 2309,
+          "eligible_after_investor_filters": 688,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 50000000,
@@ -10509,7 +10509,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 98,
-            "skipped_below_investor_dollar_volume": 1504,
+            "skipped_below_investor_dollar_volume": 1511,
             "skipped_above_change_cap": 12,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -12220,11 +12220,11 @@
           ]
         },
         "1Y": {
-          "eligible_symbols": 458,
-          "eligible_before_filters": 6124,
-          "eligible_after_price_filter": 5918,
-          "eligible_after_dollar_volume_filter": 2211,
-          "eligible_after_investor_filters": 461,
+          "eligible_symbols": 459,
+          "eligible_before_filters": 6127,
+          "eligible_after_price_filter": 5921,
+          "eligible_after_dollar_volume_filter": 2219,
+          "eligible_after_investor_filters": 462,
           "filters": {
             "min_price": 5.0,
             "min_dollar_volume": 100000000,
@@ -12246,7 +12246,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 86,
-            "skipped_below_investor_dollar_volume": 1637,
+            "skipped_below_investor_dollar_volume": 1644,
             "skipped_above_change_cap": 25,
             "skipped_below_history_depth": 2,
             "skipped_excluded_pattern": 0
@@ -13399,9 +13399,9 @@
               "name": "GDWN",
               "price": 14480.0,
               "close": 14480.0,
-              "volume": 9356,
-              "dollar_volume": 135474880.0,
-              "dollarVolume": 135474880.0,
+              "volume": 9578,
+              "dollar_volume": 138689440.0,
+              "dollarVolume": 138689440.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -42555,7 +42555,7 @@
     }
   ],
   "counts": {
-    "input_rows": 71307,
+    "input_rows": 72509,
     "markets": 8
   },
   "market": "US",
