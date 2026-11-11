@@ -13,13 +13,12 @@ on:
     # 07:00 UTC = 08:00/09:00 CET, prima dell'orario tipico di utilizzo.
     - cron: "0 7 * * *"
 
+# S384 (security audit, lot S3): least privilege PER JOB. The default is
+# read-only; `commit` is the only job that writes to the repo, and
+# notify-failure already declared its own. Every action is pinned to a full
+# commit SHA (the tag stays in the trailing comment).
 permissions:
-  contents: write
-  issues: write
-  actions: read   # W3.CF-BOT-V2 (2026-05-06): needed for `gh run download`
-                  # to bypass Cloudflare BFM (which blocks GH Actions runner
-                  # IPs via curl on the Free plan -- WAF custom rules cannot
-                  # skip BFM basic, only SBFM Pro).
+  contents: read
 
 concurrency:
   group: daily-data-commit
@@ -28,10 +27,18 @@ concurrency:
 jobs:
   commit:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write   # the daily commit on main
+      actions: read     # W3.CF-BOT-V2 (2026-05-06): needed for `gh run download`
+                        # to bypass Cloudflare BFM (which blocks GH Actions runner
+                        # IPs via curl on the Free plan -- WAF custom rules cannot
+                        # skip BFM basic, only SBFM Pro).
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6
+        # Credentials stay persisted on purpose: this job pushes, and it runs
+        # no third-party action (the token is the job-scoped GITHUB_TOKEN).
+        uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -125,12 +132,16 @@ jobs:
 
       - name: Append to DATA_SNAPSHOT_LOG
         if: steps.download.outputs.skip != 'true'
+        # S384: the step output reaches the shell through env, never pasted
+        # into the script text. as_of is read from a JSON file: pasted, a
+        # crafted value would run as shell in a job that can push to main.
+        env:
+          AS_OF: ${{ steps.meta.outputs.as_of }}
         run: |
           set -euo pipefail
           mkdir -p docs
           LOG=docs/DATA_SNAPSHOT_LOG.md
           TODAY=$(date -u +%Y-%m-%d)
-          AS_OF="${{ steps.meta.outputs.as_of }}"
           if [ ! -f "$LOG" ]; then
             {
               echo "# Data Snapshot Log"
@@ -151,6 +162,8 @@ jobs:
 
       - name: Commit if changed
         if: steps.download.outputs.skip != 'true'
+        env:
+          AS_OF: ${{ steps.meta.outputs.as_of }}
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
@@ -161,7 +174,6 @@ jobs:
             exit 0
           fi
           DATE=$(date -u +%Y-%m-%d)
-          AS_OF="${{ steps.meta.outputs.as_of }}"
           git commit -m "chore(data): daily snapshot $DATE (as_of $AS_OF)"
           git push origin HEAD:main
 
@@ -174,7 +186,7 @@ jobs:
       issues: write
     steps:
       - name: Open or update failure issue
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const title = 'Daily Data Commit workflow failure';
