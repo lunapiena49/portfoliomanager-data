@@ -1,0 +1,123 @@
+{
+  "larghezza": 540,
+  "immagini": {
+    "spr_tower_seg_a1": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a1.png",
+      "sha256_sorgente": "cc380606d7868e28f0a64d08c1e0153ba95d313073ad972462d18e55dcf1746a",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a1_spenta.webp": "03c4c2412288e4f9e4932de8850d3df5fafd3842999d4cf230aa4b15157d233b",
+        "spr_tower_seg_a1_luce.webp": "0a30a44504ad53300bba19d2ee2e64f12747eb46a6298845b22522120b48e2bd"
+      }
+    },
+    "spr_tower_seg_a2": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a2.png",
+      "sha256_sorgente": "89a8e3b157235488d81d9a26dac083bab35e878d08fa1f15939ef0a543235b42",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a2_spenta.webp": "007f81f2eb3b2f6c3fe838feaa99489d3a5bc649a9ef8867be8741bb8fe06d4a",
+        "spr_tower_seg_a2_luce.webp": "82ac7ba204aef4cec07a5148ed914f5e8125362b0b96291220dad6298991d8d6",
+        "spr_tower_seg_a2_sagoma.webp": "619f6eb157328a888361a566dadb03c9431f2ff527e3d1884a273c948a7034be"
+      }
+    },
+    "spr_tower_seg_a3": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a3.png",
+      "sha256_sorgente": "6fb2795185ce3908ce438a2eeae17c2905acc21e612fe4d89e07597e09837235",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a3_spenta.webp": "dd8d734e06a1b7f25ae468cb7862ef783c8f79ec18cb7413e93b60bab4cddc78",
+        "spr_tower_seg_a3_luce.webp": "c00d2b22fabb3055d859cd6f6da1c8b682ab2aa012d17edbed6ee618bc463eec"
+      }
+    },
+    "spr_tower_seg_a4": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a4.png",
+      "sha256_sorgente": "134b5a3702f7a2b839fdd9869710a06284f4e9ac8514a87d856cd668b8215457",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a4_spenta.webp": "102a20f3dafb011fc476e4907de6b50b96317531007f6a231e1b5bdf86043d76",
+        "spr_tower_seg_a4_luce.webp": "7dc072cc88656ec7ee8c90303a505f88083df38eaa5cab65f420317700e23b84"
+      }
+    },
+    "spr_tower_seg_a5": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a5.png",
+      "sha256_sorgente": "aa1b879bcc8a45706b0f1ffd3c79947b421b609c4e40f88b0e8ce97e9bdc3146",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a5_spenta.webp": "3c6d262edee9c7c00d39811b773f830a0c26926be1f7164f5a9e71b0ee58bed3",
+        "spr_tower_seg_a5_luce.webp": "9f3a495179073257c8002e36f30e1c4b09ac3ee4c9526167f6828f6b39eef5e3"
+      }
+    },
+    "spr_tower_seg_a6": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a6.png",
+      "sha256_sorgente": "ea969d901a6012e8f6d8e3532fd8c6d8781bfc5ebf0d9c809bcdef7fc15ab136",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a6_spenta.webp": "f00daf644a0aef63683ed18744ccdc2a8eea2fcd72f6da0490496938657e4a3e",
+        "spr_tower_seg_a6_luce.webp": "ec1ab6d23bfc41f0c9113de727beb7e0a4afc2b8f46728fe1fc0a198f61e3c44"
+      }
+    },
+    "spr_tower_seg_a7": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a7.png",
+      "sha256_sorgente": "1761097d4af3971c289997b4b0e6296325b0f4ff1c43e9caac58fe51bfe46d0f",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a7_spenta.webp": "1076df2537df90a1e6a18847569667d793547089b772e744e7d78491d870465d",
+        "spr_tower_seg_a7_luce.webp": "296a2c486aa8ca3c86cf7f017156742907c170f24f18f8e14de26522eca713de"
+      }
+    },
+    "spr_tower_seg_a8": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_seg_a8.png",
+      "sha256_sorgente": "fb96eb87e6458d75d6cfd2699d64e58f9e354fd41efd801b2f6061f446e8a4d9",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_tower_seg_a8_spenta.webp": "b7dd30b012b627dbeb225f423ff9edcd691fc1f44798de03b5ae0abaf339a24f",
+        "spr_tower_seg_a8_luce.webp": "a77d08e204a464496e7fb4272c7a8b091ec9c1a8f432496377a6f4be261f84c0"
+      }
+    },
+    "spr_summit_corvax": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_summit_corvax.png",
+      "sha256_sorgente": "92f70d2900ec883b7030ac7bf3a46cd61db4d865a64db8d68a23e010d534fe36",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_summit_corvax.webp": "93ecda4d4dc3d5405c2f0f2bbb61ba24b6ec42e766c4009931b42723346c69a8",
+        "spr_summit_corvax_sagoma.webp": "1f9da866d35585158a5f36bc5799d65e3614521675ef19a204139b5eae05bf0d"
+      }
+    },
+    "spr_tower_sky": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_tower_sky.png",
+      "sha256_sorgente": "a4e91c631f57eca0670dad2e3e7e1d7579db1cf14c0c9120185a7b3dfcadd904",
+      "larghezza": 540,
+      "altezza": 1200,
+      "uscite": {
+        "spr_tower_sky.webp": "e1852d4560a0550e564affc395afb9831c8dee7878a95a07579535018d67c01c"
+      }
+    },
+    "spr_clouds_base": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_clouds_base.png",
+      "sha256_sorgente": "4686bd9040e2514e8fc48ff4e31e6fb104a5721d2d8717f71b229a4632888e74",
+      "larghezza": 540,
+      "altezza": 1000,
+      "uscite": {
+        "spr_clouds_base.webp": "47f431f95356b7b8162678931a53034dfe29a9070c447d92d0f83af988ff45b1"
+      }
+    },
+    "spr_seal_clouds": {
+      "sorgente": "rollquest/unity/Assets/Art/Fondi/spr_seal_clouds.png",
+      "sha256_sorgente": "20b2859f09831c4d30f681f183543cc04c238afde3a27e4cfb04696f340a7df5",
+      "larghezza": 300,
+      "altezza": 300,
+      "uscite": {
+        "spr_seal_clouds.webp": "996a9975b3b0b334e2480a7ce117cf76afa2bf0ca19538442bb83dc73ffeb667"
+      }
+    }
+  }
+}

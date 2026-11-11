@@ -19,7 +19,7 @@
  */
 import type { APIRoute } from 'astro';
 import { getCollection } from 'astro:content';
-import { LOCALES } from '../i18n/index';
+import { LOCALES } from '../i18n/lingue';
 
 const BASE = 'https://plurifin.app';
 
@@ -40,6 +40,8 @@ function rottaDi(file: string): string | null {
   // Le rotte dinamiche non sono pagine: sono generatori. I loro figli (i post
   // del blog) li enumeriamo dalla collection, dove hanno anche una data vera.
   if (r.includes('[')) return null;
+  // La pagina non trovata non e' una pagina: non va offerta ai motori.
+  if (r === '404') return null;
 
   r = r.replace(/\/index$/, '').replace(/^index$/, '');
   return r;

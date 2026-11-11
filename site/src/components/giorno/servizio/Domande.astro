@@ -1,0 +1,56 @@
+---
+/**
+ * DOMANDE (`/faq`): le domande che arrivano piu' spesso su Portfolio Manager,
+ * una per riga, con la risposta accanto. Tutte visibili: niente fisarmoniche.
+ *
+ * I dati strutturati FAQPage sono un blocco di dati, non uno script: non
+ * vengono eseguiti e la politica di sicurezza dei contenuti non li riguarda.
+ * Nascono dalle stesse stringhe che la pagina mostra, e il loro testo esce da
+ * `datiStrutturati` (src/lib/dati-strutturati.mjs), che scappa ogni `<`.
+ */
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { datiStrutturati } from '../../../lib/dati-strutturati.mjs';
+import Prosa from '../Prosa.astro';
+import Servizio from './Servizio.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const d = t.domande;
+
+const dati = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  inLanguage: lingua,
+  mainEntity: d.voci.map((v) => ({
+    '@type': 'Question',
+    name: v.domanda,
+    acceptedAnswer: { '@type': 'Answer', text: v.risposta },
+  })),
+};
+---
+<Servizio t={t} lingua={lingua} rotta="faq" corrente="finance" meta={d.meta} occhiello={d.occhiello} titolo={d.titolo} sommario={d.sommario}>
+  {d.voci.map((v, i) => (
+    <section class="riga" id={`d${i + 1}`}>
+      <h2><Prosa testo={v.domanda} /></h2>
+      <div><p><Prosa testo={v.risposta} /></p></div>
+    </section>
+  ))}
+
+  <section class="riga">
+    <h2><Prosa testo={t.finance.provare.titolo} /></h2>
+    <div>
+      <p class="azioni">
+        <a href={localePath(lingua, 'pricing')}>{t.comune.azioni.prezzi}</a>
+        <a href={localePath(lingua, 'finance')}><Prosa testo={t.comune.azioni.finance} /></a>
+      </p>
+      <p class="avviso"><Prosa testo={t.comune.avvisoFinance} /></p>
+    </div>
+  </section>
+
+  <script type="application/ld+json" set:html={datiStrutturati(dati)} />
+</Servizio>

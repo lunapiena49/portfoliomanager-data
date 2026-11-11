@@ -1,0 +1,120 @@
+---
+/**
+ * LA PRIMA PAGINA: un articolo che dura una giornata. Apertura, la casa, il
+ * capitolo di Finance di giorno, il listino, l'imbrunire, il capitolo di Games
+ * di notte, il colophon. Una sola struttura per tutte le lingue: la pagina di
+ * ogni lingua e' una riga che passa la lingua qui.
+ */
+import type { Locale } from '../../i18n/lingue';
+import { localePath } from '../../i18n/lingue';
+import { testi } from '../../i18n/testi';
+import { demoUrl, pmPlayUrl, pmSuPlay } from '../../lib/stato';
+import Pagina from '../../layouts/Pagina.astro';
+import Testata from './Testata.astro';
+import Colophon from './Colophon.astro';
+import Prosa from './Prosa.astro';
+import PalcoEstratti from './PalcoEstratti.astro';
+import PalcoTorre from './PalcoTorre.astro';
+import Mercato from './Mercato.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const h = t.home;
+const ultimoFinance = h.finance.passi.length - 1;
+const ultimoGames = h.games.passi.length - 1;
+---
+<Pagina titolo={h.meta.titolo} descrizione={h.meta.descrizione} lingua={lingua} tipo="organizzazione">
+  <Testata t={t} lingua={lingua} />
+  <main id="testo">
+    <section class="margini apertura">
+      <p class="occhiello">{h.occhiello}</p>
+      <h1><Prosa testo={h.titolo} /></h1>
+      <p class="sommario"><Prosa testo={h.sommario} /></p>
+    </section>
+
+    <section class="margini casa" id="casa">
+      <h2>{h.casa.titolo}</h2>
+      <div>{h.casa.paragrafi.map((p) => <p><Prosa testo={p} /></p>)}</div>
+    </section>
+
+    <section class="finance" id="finance" data-palco="estratti">
+      <div class="margini capitolo">
+        <div>
+          {h.finance.passi.map((passo, i) => (
+            <div class="passo">
+              {i === 0 && <p class="rubrica"><Prosa testo={h.finance.rubrica} /></p>}
+              {i === 0 && <h2>{h.finance.titolo}</h2>}
+              {passo.map((p) => <p><Prosa testo={p} /></p>)}
+              {i === 1 && <p class="avviso"><Prosa testo={t.comune.avvisoFinance} /></p>}
+              {i === ultimoFinance && (
+                <table class="listino">
+                  <caption>{h.finance.listinoNota}</caption>
+                  <thead><tr><th scope="col">{h.finance.colonne.piano}</th><th scope="col">{h.finance.colonne.prezzo}</th></tr></thead>
+                  <tbody>{t.prezzi.piani.map((piano) => <tr><td>{piano.nome}</td><td>{piano.prezzo}</td></tr>)}</tbody>
+                </table>
+              )}
+              {i === ultimoFinance && (
+                <p class="azioni">
+                  {pmSuPlay && <a class="azione" href={pmPlayUrl} rel="noopener noreferrer">{t.comune.azioni.play}</a>}
+                  <a class={pmSuPlay ? undefined : 'azione'} href={demoUrl}>{t.comune.azioni.demo}</a>
+                  <a href={localePath(lingua, 'finance')}><Prosa testo={t.comune.azioni.finance} /></a>
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+        <PalcoEstratti t={t} lingua={lingua} />
+      </div>
+    </section>
+
+    <Mercato t={t} lingua={lingua} />
+
+    {/* L'imbrunire: senza script e' una fascia di colore con la sua frase; con
+        lo script e' una scena fissa (giorno.css, `.palchi-vivi`) in cui il sole
+        scende, la carta si fa notte ed escono le stelle. Gli strati sono
+        decorativi; la frase resta testo vero. */}
+    <div class="imbrunire" data-palco="imbrunire">
+      <div class="imbrunire-scena" data-scena>
+        <div class="sera" aria-hidden="true">
+          <div class="sera-strato sera-tramonto"></div>
+          <div class="sera-strato sera-crepuscolo"></div>
+          <div class="sera-strato sera-buio"></div>
+          <div class="sera-bagliore"></div>
+          <div class="sera-sole"></div>
+          <div class="stelle"></div>
+          <div class="stelle stelle-fitte"></div>
+        </div>
+        <p>{h.imbrunire}</p>
+      </div>
+    </div>
+
+    <section class="notte" id="games" data-palco="torre">
+      <div class="margini capitolo">
+        <div>
+          {h.games.passi.map((passo, i) => (
+            <div class="passo">
+              {i === 0 && <p class="rubrica">{h.games.rubrica}</p>}
+              {i === 0 && <h2><Prosa testo={h.games.titolo} /></h2>}
+              {passo.map((p) => <p><Prosa testo={p} /></p>)}
+              {i === ultimoGames && (
+                <p class="azioni">
+                  <a href={localePath(lingua, 'games')}><Prosa testo={t.comune.azioni.games} /></a>
+                  <a href={localePath(lingua, 'blog')}>{t.comune.azioni.notizie}</a>
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+        <PalcoTorre t={t} />
+      </div>
+    </section>
+  </main>
+  <Colophon t={t} lingua={lingua} />
+</Pagina>
+
+<script>
+  import '../../lib/palco.ts';
+</script>

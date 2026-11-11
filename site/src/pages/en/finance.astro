@@ -1,7 +1,8 @@
 ---
-// `/en/finance` - il Portfolio Manager (divisione Finance). E' la landing che
-// fino a S11 stava sulla radice: stesso componente, nuovo indirizzo.
-import en from '../../i18n/en';
-import LandingPage from '../../components/LandingPage.astro';
+/**
+ * `/en/finance` - Portfolio Manager (divisione Finance), in inglese. La pagina e' una riga: struttura in
+ * `src/components/giorno/finance/PaginaFinance.astro`, testo in `src/i18n/testi/en.ts`.
+ */
+import PaginaFinance from '../../components/giorno/finance/PaginaFinance.astro';
 ---
-<LandingPage t={en} lang="en" />
+<PaginaFinance lingua="en" />

@@ -50,6 +50,16 @@ jobs:
         working-directory: site
         run: npm ci
 
+      # The template's own SOURCE tests (integrations/*.test.mjs: lock
+      # integrity, HTML comment stripping, role lists, the six dictionaries,
+      # the page components and style sheets, the structured-data escaping).
+      # Tailwind left the site in S384 (lane B6): its wiring tests went with
+      # it, and one test here now forbids its return. Node built-in runner,
+      # no browser and no network. Before S363 they ran in no CI at all.
+      - name: Test site
+        working-directory: site
+        run: npm test
+
       - name: Build site
         working-directory: site
         env:
@@ -57,6 +67,20 @@ jobs:
           SITE_URL: https://plurifin.app
           SITE_BASE: /
         run: npm run build
+
+      # S384 (closing review): the contracts on the BUILT site
+      # (integrations/costruito/*.test.mjs): the hash-based content security
+      # policy on every page, no `style` attribute, Google Play hidden while
+      # `pmSuPlay` is false, structured data that parse and stay inside their
+      # block. Before, only the source tests ran here, so a build breaking one
+      # of these contracts would still have been published. Keep this step
+      # right after the build and BEFORE the merge below: the contracts walk
+      # every page of site/dist as Astro wrote it, and the merged app/ and
+      # legal/ trees are not Astro pages. A red contract stops the job, and
+      # with it the Pages upload and the deploy.
+      - name: Test built site
+        working-directory: site
+        run: npm run test:dist
 
       # CC-P1-DB v2 + W3.CF-BOT-V4 (2026-05-08): restore market-data binary
       # assets (~830MB DB zip + lookup tables) from the most recent
@@ -222,6 +246,11 @@ jobs:
         uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist
+          # S384: without this the action drops every dot-file and dot-dir,
+          # so site/dist/.well-known/security.txt would never be served
+          # (measured: default `false` in the action's README). .git and
+          # .github are excluded by the action regardless.
+          include-hidden-files: true
 
   deploy:
     name: Deploy to GitHub Pages

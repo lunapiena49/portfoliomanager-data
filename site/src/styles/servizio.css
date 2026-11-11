@@ -1,0 +1,185 @@
+/* ===========================================================================
+   LE PAGINE DI SERVIZIO del sito rifatto in S384 (corsia B3): La casa, Stampa,
+   Prezzi, Domande, Contatti, Notizie e i documenti legali.
+
+   Sono le pagine interne del giornale. Chi arriva qui cerca un fatto, un
+   indirizzo o una clausola: niente palchi, niente scorrimento guidato, nessuno
+   script. La pagina e' un registro a righe: a sinistra la voce, a destra il
+   suo contenuto, un filo fra una riga e la successiva.
+
+   Token, font e scala vengono da giorno.css: questo foglio non li ridefinisce
+   e non tocca le sue classi. Taglie usate: serif 19 / 27 / 50, piu' la 72 che
+   la pagina non trovata usa gia' per un titolo di pagina; sans 14 e 16.
+   Spazi: 4 8 16 24 40 64 104. Niente attributi `style`: la politica di
+   sicurezza dei contenuti li vieta.
+   =========================================================================== */
+
+/* ------------------------------ la testa ------------------------------ */
+.servizio { padding-bottom: var(--s6); }
+.servizio-testa { padding-block: var(--s6) var(--s5); border-top: 1px solid var(--inchiostro); }
+.servizio-testa h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1.02; max-width: 15em; }
+.servizio-testa .sommario { margin-top: var(--s4); }
+
+/* ------------------- la riga del registro: voce | contenuto ------------------- */
+.riga {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s3) var(--s6);
+  padding-block: var(--s5); border-top: 1px solid var(--filo);
+}
+.riga > h2 { font-size: 27px; line-height: 1.2; letter-spacing: -.008em; margin: 0; max-width: 12em; }
+.riga > div > :last-child { margin-bottom: 0; }
+
+/* Elenco descrittivo: termine e spiegazione sulla stessa riga, come una
+   partita e il suo importo. Sono dati: Inter. */
+.voci {
+  margin: 0 0 var(--s4); max-width: var(--colonna);
+  display: grid; grid-template-columns: minmax(7rem, 10rem) minmax(0, 1fr);
+  font: 400 16px/1.5 var(--sans);
+}
+.voci dt, .voci dd { margin: 0; padding-block: var(--s2); border-top: 1px solid var(--filo); }
+.voci dt { font-weight: 600; padding-right: var(--s3); }
+.voci dd { overflow-wrap: break-word; min-width: 0; }
+.voci dt:first-of-type, .voci dt:first-of-type + dd { border-top: 2px solid var(--inchiostro); }
+
+/* Elenco di frasi (che cosa la casa non fa): una per riga, senza pallini. */
+.elenco { list-style: none; margin: 0; padding: 0; max-width: var(--colonna); }
+.elenco li { padding-block: var(--s3); border-top: 1px solid var(--filo); }
+.elenco li:first-child { border-top: 0; padding-top: 0; }
+.elenco li:last-child { padding-bottom: 0; }
+
+/* Un indirizzo di posta: e' la cosa che si viene a cercare, e si vede. */
+.indirizzo { font-size: 27px; line-height: 1.2; margin: 0 0 var(--s2); max-width: none; overflow-wrap: anywhere; }
+
+/* Un testo pronto da citare: un foglio. Un tocco lo seleziona per intero. */
+.pronto {
+  background: var(--foglio); border: 1px solid var(--filo-foglio);
+  padding: var(--s4); margin: 0 0 var(--s3); max-width: 40rem;
+  -webkit-user-select: all; user-select: all;
+}
+
+.nota { font: 400 14px/1.5 var(--sans); color: var(--inchiostro-2); max-width: var(--colonna); }
+
+/* ------------------------------ il listino ------------------------------ */
+.piani {
+  width: 100%; border-collapse: collapse; margin-block: var(--s4) var(--s5);
+  font: 400 16px/1.45 var(--sans); font-variant-numeric: tabular-nums;
+}
+.piani caption { caption-side: bottom; text-align: left; font-size: 14px; color: var(--inchiostro-2); padding-top: var(--s3); }
+.piani th, .piani td {
+  text-align: left; vertical-align: top;
+  padding: var(--s3) var(--s4) var(--s3) 0; border-bottom: 1px solid var(--filo);
+}
+.piani thead th { font-size: 14px; font-weight: 700; padding-block: var(--s2); border-bottom: 2px solid var(--inchiostro); }
+.piani tbody th { font-weight: 600; white-space: nowrap; }
+.piani .prezzo { font-weight: 700; white-space: nowrap; }
+
+/* ------------------------------ le notizie ------------------------------ */
+.notizie { list-style: none; margin: 0; padding: 0; }
+.notizia {
+  display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s3) var(--s6);
+  padding-block: var(--s5); border-top: 1px solid var(--filo);
+}
+.notizia h2 { font-size: 27px; line-height: 1.2; letter-spacing: -.008em; margin-bottom: var(--s3); max-width: none; }
+.notizia h2 a { color: var(--inchiostro); text-decoration: none; }
+.notizia h2 a:hover { text-decoration: underline; text-decoration-thickness: 2px; }
+.notizia div > :last-child { margin-bottom: 0; }
+.data { font: 500 14px/1.5 var(--sans); color: var(--inchiostro-2); margin: 0; max-width: none; }
+.data span { display: block; }
+
+/* ---------------- il documento: legali e articoli, lettura lunga ---------------- */
+.documento-pagina { padding-block: var(--s5) var(--s7); border-top: 1px solid var(--inchiostro); }
+.ritorno { font: 500 16px var(--sans); margin-bottom: var(--s5); max-width: none; }
+.documento-griglia {
+  display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: var(--s6);
+  align-items: start;
+}
+.documento-griglia.intera { grid-template-columns: minmax(0, 1fr); }
+.indice {
+  position: sticky; top: var(--s4); max-height: calc(100vh - 2 * var(--s4)); overflow-y: auto;
+  font: 400 14px/1.4 var(--sans);
+}
+/* Non e' un titolo: sta prima della h1 del documento, e la navigazione ha
+   gia' il suo nome (aria-label). Un h2 qui spezzava l'ordine dei titoli. */
+.indice-titolo { font: 600 14px/1.4 var(--sans); color: var(--inchiostro-2); margin: 0 0 var(--s2); max-width: none; }
+.indice ul { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--filo); }
+.indice a { display: block; padding: var(--s1) var(--s3); color: var(--inchiostro); text-decoration: none; }
+.indice a:hover { text-decoration: underline; }
+
+.documento { min-width: 0; max-width: 40rem; }
+.documento h1 {
+  font-size: clamp(31px, 3.7vw, 50px); line-height: 1.06; letter-spacing: -.016em;
+  margin-bottom: var(--s4); max-width: none;
+}
+.documento h2 { font-size: 27px; line-height: 1.2; letter-spacing: -.008em; margin: var(--s6) 0 var(--s3); max-width: none; }
+.documento h3 { font: 600 16px/1.4 var(--sans); margin: var(--s5) 0 var(--s2); }
+.documento :is(h2, h3)[id] { scroll-margin-top: var(--s4); }
+.documento p, .documento li { max-width: none; }
+.documento ul, .documento ol { margin: 0 0 var(--s4); padding-left: var(--s4); }
+.documento li { margin-bottom: var(--s2); }
+.documento li > ul, .documento li > ol { margin: var(--s2) 0 0; }
+.documento strong { font-weight: 640; }
+.documento hr { border: 0; border-top: 1px solid var(--filo); margin: var(--s5) 0; }
+.documento blockquote { margin: 0 0 var(--s4); padding-left: var(--s4); border-left: 3px solid var(--rigo); font-style: italic; }
+/* Indirizzi, percorsi e identificativi dentro il testo: Inter su una banda,
+   non un quarto font. Vanno a capo dove serve, sugli schermi stretti. */
+.documento code {
+  font: 500 16px/1.4 var(--sans); background: var(--banda);
+  padding: 0 var(--s1); border-radius: 2px; overflow-wrap: anywhere;
+}
+.documento .data { margin-bottom: var(--s5); }
+.documento .meta { font: 400 14px/1.6 var(--sans); color: var(--inchiostro-2); }
+.documento .meta code { font-size: 14px; }
+.documento .callout {
+  background: var(--banda); border-left: 3px solid var(--rigo);
+  padding: var(--s3) var(--s4); margin: 0 0 var(--s4);
+}
+.documento .note {
+  font: 400 16px/1.55 var(--sans); color: var(--inchiostro-2);
+  border-left: 3px solid var(--filo-foglio); padding: var(--s2) var(--s3); margin: 0 0 var(--s4);
+}
+/* Le tabelle dei documenti legali arrivano a quattro colonne: sugli schermi
+   stretti scorrono dentro il loro contenitore invece di allargare la pagina. */
+.documento .table-wrap { overflow-x: auto; margin: 0 0 var(--s4); }
+.documento table { border-collapse: collapse; width: 100%; font: 400 14px/1.5 var(--sans); }
+.documento .table-wrap table { min-width: 34rem; }
+.documento th, .documento td {
+  text-align: left; vertical-align: top;
+  padding: var(--s2) var(--s3) var(--s2) 0; border-bottom: 1px solid var(--filo);
+}
+.documento thead th { font-weight: 700; border-bottom: 2px solid var(--inchiostro); }
+.documento table code { font-size: 14px; }
+
+/* ------------------------------- telefono ------------------------------- */
+@media (max-width: 860px) {
+  .servizio-testa { padding-block: var(--s5) var(--s4); }
+  .riga, .notizia { grid-template-columns: 1fr; gap: var(--s3); padding-block: var(--s4); }
+  .documento-pagina { padding-block: var(--s4) var(--s6); }
+  .ritorno { margin-bottom: var(--s4); }
+  .documento-griglia { grid-template-columns: 1fr; gap: var(--s4); }
+  .indice {
+    position: static; max-height: none; overflow: visible;
+    border-block: 1px solid var(--filo); padding-block: var(--s3);
+  }
+  .indice a { padding-block: var(--s2); }
+  .documento h2 { margin-top: var(--s5); }
+}
+/* Il listino su schermi stretti: ogni piano diventa un blocco, con la sua
+   etichetta davanti a ogni dato. L'intestazione resta per chi non la vede. */
+@media (max-width: 700px) {
+  .piani thead { position: absolute; left: -9999px; }
+  .piani tr { display: block; padding-block: var(--s3); border-bottom: 1px solid var(--filo); }
+  .piani th, .piani td { display: block; padding: 0 0 var(--s1); border: 0; white-space: normal; }
+  .piani td[data-etichetta]::before { content: attr(data-etichetta) ': '; color: var(--inchiostro-2); }
+  .piani .prezzo::before { content: none; }
+}
+/* Sotto i 360 px un nome che non va a capo ("Portfolio Manager") a 40 px
+   sfora la pagina: misurato a 320 px sulla pagina dei prezzi (336 su 320). */
+@media (max-width: 359px) {
+  .servizio-testa h1 { font-size: 31px; }
+}
+@media (max-width: 520px) {
+  .voci { grid-template-columns: 1fr; }
+  .voci dt { padding-bottom: 0; }
+  .voci dd { border-top: 0; padding-top: 0; }
+  .voci dt:first-of-type + dd { border-top: 0; }
+  .indirizzo { font-size: 21px; }
+}

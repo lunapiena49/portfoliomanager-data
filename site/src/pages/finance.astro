@@ -1,12 +1,10 @@
 ---
 /**
- * `/finance` - il Portfolio Manager (divisione Finance).
- *
- * E' la landing che fino a S11 stava sulla radice: stesso componente, stesse
- * sezioni, nessuna riscrittura. Cambia solo l'indirizzo, perche' la radice ora
- * appartiene allo studio e non a uno dei due prodotti.
+ * `/finance` - PORTFOLIO MANAGER (divisione Finance). Dal rifacimento S384 e'
+ * l'articolo lungo sul telaio nuovo: il capitolo col telefono, i broker, dove
+ * stanno i dati, il listino, le domande. Le altre cinque lingue restano sul
+ * telaio vecchio finche' i loro testi non sono scritti (corsia B5).
  */
-import it from '../i18n/it';
-import LandingPage from '../components/LandingPage.astro';
+import PaginaFinance from '../components/giorno/finance/PaginaFinance.astro';
 ---
-<LandingPage t={it} lang="it" />
+<PaginaFinance lingua="it" />

@@ -1,83 +1,47 @@
 ---
-title: "Por qué construí PluriFin"
-summary: "La historia personal detrás de una app privacy-first para inversores retail, y por qué un desarrollador puede permitirse un plan de 4,99 EUR/año."
+title: "Portfolio Manager está construida sobre tres prohibiciones"
+summary: "Sin almacén de carteras, sin conexión con las cuentas, sin inteligencia artificial sin la clave de quien la usa. La lista de precios de cuatro líneas sale de ahí."
 publishedAt: 2026-05-07
+updatedAt: 2026-11-11
 author:
-  name: "Filippo Salemi"
-  role: "Founder, PluriFin"
+  name: "PluriFin"
+  role: "Redacción"
 lang: es
-tags: ["founder", "story", "personal-finance"]
+tags: ["portfolio-manager", "privacidad", "precios"]
 ---
 
-Trabajo en PluriFin desde hace unos 18 meses, en part-time, mientras mi trabajo
-principal sigue siendo el de desarrollador de software en una empresa italiana. La
-app no nació como producto comercial: nació como herramienta personal para
-seguir una cartera multi-broker que cada año se hacía más difícil de gestionar
-con herramientas generalistas.
+Las apps de finanzas se presentan con la lista de lo que hacen. Portfolio Manager, la app de PluriFin Finance, se entiende antes por lo que no puede hacer. No tiene un almacén donde guardar las carteras, no se conecta a las cuentas y no usa la inteligencia artificial sin una clave del usuario. Son tres prohibiciones, y la lista de precios de cuatro líneas es su consecuencia.
 
-## El problema
+## Primera prohibición: ningún almacén de carteras
 
-Tenía posiciones distribuidas en 4 brokers (Interactive Brokers, Trade Republic,
-Fineco y Directa) en 3 divisas (EUR, USD, GBP), con activos de naturaleza mixta
-(acciones individuales, ETFs cotizados en USA, ETFs UCITS, algún ETP cripto,
-fondos de obligaciones). Cada broker exporta en un formato CSV distinto, cada
-broker tiene su granularidad de transacción, y cada broker tiene su interpretación
-de "coste medio de adquisición" y "P&amp;L realizado".
+La cartera se queda en el teléfono de su dueño, cifrada con AES-256, con la clave custodiada por el sistema operativo. PluriFin no conserva las carteras y no pide abrir una cuenta. Para verificar la prueba y la suscripción le bastan una huella anónima del dispositivo y el recibo de la compra.
 
-Las herramientas generalistas que probé (plantillas de Google Sheets, algunos
-servicios web italianos) o no entendían los CSV multi-broker, o requerían
-entregar las credenciales API a un servicio cloud de terceros. Ninguna de las
-dos era aceptable: las hojas de cálculo se vuelven inmanejables superadas las
-~30 posiciones, y dar un token API read-only a un servicio no auditable es un
-tradeoff que no estoy dispuesto a aceptar.
+Una app de finanzas gratuita que conserva las carteras en sus servidores tiene un coste que cubrir. Antes de instalarla conviene preguntar con qué lo cubre.
 
-## La respuesta personal y luego el producto
+Dos cosas hay que decirlas con todas las letras. La demo web guarda los datos en el navegador, sin cifrar: sirve para ver cómo es la app, no para custodiar una cartera de verdad. Los informes de fallos (Firebase Crashlytics) se envían únicamente si el usuario activa el diagnóstico en los ajustes, y no contienen datos de la cartera.
 
-PluriFin nació como proyecto interno con tres restricciones rígidas:
+La salida está tan prevista como la entrada: «Exportar mis datos» genera un archivo JSON con todo el contenido, y «Borrar todos los datos» lo elimina del teléfono.
 
-1. **Los datos viven en el dispositivo del usuario**, en almacenamiento cifrado
-   AES-256. Sin nube PluriFin obligatoria. La exportación GDPR está a un clic.
-2. **La app nunca habla con un broker en nombre del usuario**. Todo ocurre mediante
-   importación de archivos CSV/PDF que el usuario descarga de su broker. Sin
-   claves API de terceros custodiadas por PluriFin.
-3. **Las funciones IA son opcionales y usan claves del usuario**. Si quieres el
-   análisis Gemini, introduces tu clave API; queda en el keystore de tu
-   dispositivo.
+## Segunda prohibición: ninguna conexión con las cuentas
 
-Cuando vi que el producto podía ser útil a más gente que a mí, decidí publicarlo.
-El modelo comercial es deliberadamente low-friction:
+La app no pide las credenciales de ningún bróker y no ejecuta órdenes. Los datos entran porque los trae su dueño, archivo a archivo. Portfolio Manager reconoce los CSV de once brókeres, muestra una vista previa de las filas que hay que corregir y gestiona los duplicados antes de guardar. Para los demás intermediarios hay un lector genérico, y de los PDF la app intenta extraer la tabla.
 
-- 7 días de prueba gratis sin tarjeta
-- 4,99 EUR/año para Single, 9,99 EUR/año para Family
-- Lifetime pago único a 29,99 EUR (Single) o 49,99 EUR (Family)
+Es más lento que una conexión automática. Es también la razón por la que nadie tiene que entregar a PluriFin las credenciales de su banco.
 
-Sin "early bird", sin "primeros N usuarios", sin promos que segmenten. Mismo
-precio para todos, hoy y siempre.
+## Tercera prohibición: la inteligencia artificial, solo con la clave del usuario
 
-## Por qué tan barato
+El análisis con inteligencia artificial es opcional. Usa Google Gemini con una clave que el usuario introduce personalmente y que custodia el sistema operativo del teléfono. Quien lo activa envía a Google la pregunta y la composición de la cartera: títulos, cantidades, precios medios. La petición sale del teléfono y no pasa por PluriFin, que no la conserva.
 
-La app cuesta 25 USD pago único de Play Console y ~0 EUR de hosting (Cloudflare
-free tier para el Worker y GitHub Pages para el sitio). No hay inversores a los
-que devolver capital, no hay churn que combatir con descuentos, no hay equipo
-que pagar. El objetivo es cubrir los costes operativos y mantener viva una
-comunidad de usuarios que aprecien un enfoque honesto al ahorro.
+Las respuestas son ideas generadas por un modelo, no asesoramiento financiero personalizado, y pueden contener errores. Las decisiones siguen siendo de quien invierte.
 
-Si PluriFin algún día cesara las operaciones, la exportación GDPR te devuelve
-todos tus datos en un único JSON portable -- y los planes Lifetime siguen
-accesibles para siempre en tu cuenta de Google.
+## La lista de precios que sale de ahí
 
-## Qué esperar en los próximos meses
+Una empresa que no conserva las carteras no paga por conservarlas, y una que no muestra publicidad no tiene anunciantes a los que contentar. Queda una app, con su precio: siete días de prueba sin tarjeta de crédito y, después, cuatro planes, los mismos para todos, de 4,99 euros al año a 49,99 euros una sola vez para la familia.
 
-- **Q2 2026**: lanzamiento en Play Store (Android), webapp gratuita ya en vivo
-- **Q3 2026**: feedback recogido del Closed Testing, hotfix para los crashes residuales
-- **Q4 2026 / Q1 2027**: aumento del número de brokers soportados (prioridad: feedback de usuarios)
-- **Fase 2 (post-ingresos)**: iOS, Apple Pay, marca EUIPO, eventual seguro RC Tech
+Terminada la prueba queda una versión gratuita. Las posiciones se introducen a mano, el rebalanceo y los datos de mercado siguen funcionando; la importación desde los brókeres, los objetivos y la inteligencia artificial se detienen hasta que se elige un plan. La lista de precios completa, con renovaciones y reembolsos, está en la página [Precios](/es/pricing).
 
-Si quieres seguir el desarrollo en tiempo real, el repo público
-[portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data)
-aloja la pipeline de datos de mercado y el sitio que estás leyendo. El código de
-la app Android permanece closed-source por motivos de compliance (claves de
-firma, anti-piracy, integridad del contexto Play Billing), pero las specs del
-formato CSV de los brokers y las plantillas de documentos legales son públicas.
+## Dónde comprobar lo que aquí se dice
 
-Hasta pronto.
+El código de este sitio y el flujo de datos de mercado son públicos en el repositorio [portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data). Lo que la app hace con los datos está escrito por extenso en la [política de privacidad](/es/privacy), en seis idiomas. La [demo web](/app/) se abre en el navegador sin instalar nada.
+
+*Artículo del 7 de mayo de 2026, reescrito el 11 de noviembre de 2026 con los hechos de hoy.*

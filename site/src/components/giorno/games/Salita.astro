@@ -1,0 +1,85 @@
+---
+/**
+ * IL PALCO DELLA SALITA: la camera sale tutta la Torre, dodici Ascese e la
+ * cima, mentre si scende nella pagina.
+ *
+ * SOLO LE PRIME (decisione dell'utente, S384): hanno il loro fregio e le loro
+ * finestre le prime MOSTRATE Ascese, quelle gia' in gioco. Le altre e la cima
+ * sono una sagoma scura della Torre: un contorno pieno, senza immagine
+ * propria. Di un'Ascesa non mostrata nel sito non c'e' nessun file.
+ *
+ * Tre strati di profondita': il cielo lontano (sale piano, dalle nubi basse
+ * alla luna), la torre, e le nubi vicine (passano piu' in fretta). Le
+ * finestre si accendono tratto per tratto: ogni tratto mostrato e' la sua
+ * resa spenta con sopra la sola luce, la cui opacita' segue la quota. Il
+ * binario a destra dice a che Ascesa si e'. In basso a sinistra, il dado.
+ *
+ * Le immagini sono riduzioni dei fondi VIGENTI del gioco, rigenerabili con
+ * `node strumenti/torre.mjs` (registro: src/assets/torre/PROVENIENZA.json).
+ * La resa spenta, la sola luce, la sagoma e la composizione delle nubi vicine
+ * sono fatte per il sito: non sono asset di gioco.
+ *
+ * Decorativo: `aria-hidden`. Senza script, o con movimento ridotto, la camera
+ * e' ferma sull'ultima Ascesa mostrata, con le sue finestre accese, e il dado
+ * e' fermo sul sei (RIPOSO in salita-conti.mjs).
+ */
+import type { ImageMetadata } from 'astro';
+import type { Testi } from '../../../i18n/testi';
+import Dado from './Dado.astro';
+import { ASCESE, MOSTRATE } from './salita-conti.mjs';
+
+interface Props {
+  t: Testi;
+}
+const p = Astro.props.t.home.games.palco;
+
+const file = import.meta.glob<{ default: ImageMetadata }>('../../../assets/torre/*.webp', { eager: true });
+function immagine(nome: string): ImageMetadata {
+  const modulo = file[`../../../assets/torre/${nome}.webp`];
+  if (!modulo) throw new Error(`manca src/assets/torre/${nome}.webp: lancia node strumenti/torre.mjs`);
+  return modulo.default;
+}
+const celate = MOSTRATE < ASCESE;
+/* Dall'alto in basso: l'ordine in cui stanno nella pagina. Un'Ascesa non
+   mostrata non ha immagini sue: `null`, e al suo posto va la sagoma. */
+const tratti = Array.from({ length: ASCESE }, (_, k) => ASCESE - k).map((n) =>
+  n <= MOSTRATE
+    ? { spenta: immagine(`spr_tower_seg_a${n}_spenta`), luce: immagine(`spr_tower_seg_a${n}_luce`) }
+    : null,
+);
+const sagoma = celate ? immagine('spr_tower_seg_a2_sagoma') : null;
+const cielo = immagine('spr_tower_sky');
+const guglia = immagine(celate ? 'spr_summit_corvax_sagoma' : 'spr_summit_corvax');
+/* A riposo la camera e' ferma sull'ultima Ascesa mostrata: l'etichetta la nomina. */
+const riposo = celate ? `${p.ascesa} ${MOSTRATE}` : p.cima;
+const piede = immagine('spr_clouds_base');
+const nube = immagine('spr_seal_clouds');
+const tacche = Array.from({ length: ASCESE });
+---
+<div class="volta" data-scena-salita aria-hidden="true">
+  <img class="volta-cielo" src={cielo.src} width={cielo.width} height={cielo.height} alt="" decoding="async" />
+  <div class="fusto">
+    <img class="guglia" src={guglia.src} width={guglia.width} height={guglia.height} alt="" loading="lazy" decoding="async" />
+    {tratti.map((s) => s ? (
+      <div class="tratto">
+        <img src={s.spenta.src} width={s.spenta.width} height={s.spenta.height} alt="" loading="lazy" decoding="async" />
+        <img class="lume" src={s.luce.src} width={s.luce.width} height={s.luce.height} alt="" loading="lazy" decoding="async" />
+      </div>
+    ) : sagoma && (
+      <div class="tratto tratto-celato">
+        <img src={sagoma.src} width={sagoma.width} height={sagoma.height} alt="" loading="lazy" decoding="async" />
+      </div>
+    ))}
+    <img class="piede" src={piede.src} width={piede.width} height={piede.height} alt="" loading="lazy" decoding="async" />
+    <img class="nube nube-alta" src={nube.src} width={nube.width} height={nube.height} alt="" loading="lazy" decoding="async" />
+    <img class="nube nube-mezza" src={nube.src} width={nube.width} height={nube.height} alt="" loading="lazy" decoding="async" />
+    <img class="nube nube-bassa" src={nube.src} width={nube.width} height={nube.height} alt="" loading="lazy" decoding="async" />
+  </div>
+  <p class="quota-salita" data-quota data-ascesa={p.ascesa} data-cima={p.cima}>{riposo}</p>
+  <div class="binario">
+    <i class="binario-cima"></i>
+    {tacche.map(() => <span class="tacca"></span>)}
+    <b class="binario-corsa"></b>
+  </div>
+  <Dado />
+</div>

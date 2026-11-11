@@ -1,0 +1,730 @@
+/* ===========================================================================
+   IL GIORNO DI PLURIFIN - fondamenta del sito rifatto in S384.
+
+   La pagina e' una giornata. Finance sta di giorno, su carta da registro;
+   a meta' scende la sera; ROLLQUEST sta di notte, con le finestre accese.
+   Canone: le linee guida di marchio (par. 4 e 5). Gli hex della notte sono
+   quelli del canone artistico del gioco, invariati.
+
+   Questo foglio NON usa Tailwind e non dipende da global.css: le pagine nuove
+   importano solo questo, le vecchie solo quello, finche' la migrazione non e'
+   finita. Niente attributi `style` nelle pagine nuove: la politica di
+   sicurezza dei contenuti li vieta. I valori per elemento stanno qui, per
+   posizione (:nth-child); quelli che cambiano con lo scorrimento li scrive lo
+   script con setProperty.
+
+   Scala degli spazi: 4 8 16 24 40 64 104. Serif: 19 / 27 / 50 / 98 (testo,
+   sommario, titolo di capitolo, titolo). Sans: 14 e 16, e basta.
+   =========================================================================== */
+
+/* Font self-hosted, nessun CDN: un CDN vedrebbe l'IP di ogni visitatore.
+   Licenze: public/assets/fonts/LICENSE.txt (SIL OFL 1.1 per tutti e tre). */
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/assets/fonts/newsreader-latin.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Newsreader';
+  src: url('/assets/fonts/newsreader-italic-latin.woff2') format('woff2');
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('/assets/fonts/inter-latin.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Baloo 2';
+  src: url('/assets/fonts/baloo2-latin.woff2') format('woff2');
+  font-weight: 400 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---- il giorno: la carta del registro ---- */
+  --carta: #EEF2EA;
+  --banda: #E2EBDF;
+  --foglio: #FAFCF8;
+  --inchiostro: #12211B;
+  --inchiostro-2: #44524A;
+  --verde: #0A6B4C;        /* link e rubriche sulla carta */
+  --rigo: #0B7F5A;         /* SOLO righe e segni: 4,41:1, mai testo */
+  --blu: #1565C0;          /* accento e azione di Finance */
+  --blu-premuto: #0F4F9C;
+  --sopra-blu: #FFFFFF;
+  --rosso: #B3261E;        /* numeri negativi */
+  --filo: rgba(18, 33, 27, .22);
+  --filo-foglio: rgba(18, 33, 27, .34);
+  --ombra-foglio: rgba(18, 33, 27, .12);
+
+  /* ---- la notte: il canone del gioco, hex invariati ---- */
+  --notte: #1E1830;
+  --indaco: #2B3566;
+  --luna: #A8B8E0;
+  --ambra: #FFC24B;
+  --arancio: #FF8A3D;
+  --crema: #FFF6EA;
+  --ink: #14101F;
+  --astrale-alto: #B58CFF;
+  --astrale: #AB84F1;
+  --astrale-ombra: #9C78DD;
+
+  --serif: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --gioco: 'Baloo 2', 'Inter', ui-sans-serif, system-ui, sans-serif;
+
+  --s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px; --s6: 64px; --s7: 104px;
+  --colonna: 34rem;
+  --anello: var(--blu);
+  --palco-h: 100vh;
+
+  color-scheme: light;
+}
+@supports (height: 100svh) {
+  :root { --palco-h: 100svh; }
+}
+
+/* Il LUME: chi preferisce lo scuro legge le pagine diurne a lume di lampada.
+   Non c'e' un interruttore: giorno e notte sono del racconto, non del tema. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --carta: #12211B;
+    --banda: #1A2D25;
+    --foglio: #203429;
+    --inchiostro: #EEF2EA;
+    --inchiostro-2: #B7C6BB;
+    --verde: #5BFCBE;
+    --rigo: #26D896;
+    --blu: #8CC8F8;
+    --blu-premuto: #B3DBFB;
+    --sopra-blu: #0B1F17;
+    --rosso: #FFA79E;
+    --filo: rgba(238, 242, 234, .26);
+    --filo-foglio: rgba(238, 242, 234, .36);
+    --ombra-foglio: rgba(0, 0, 0, .4);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--carta);
+  color: var(--inchiostro);
+  font-family: var(--serif);
+  font-size: 19px;
+  line-height: 1.62;
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(21, 101, 192, .18);
+}
+p { margin: 0 0 var(--s4); max-width: var(--colonna); text-wrap: pretty; }
+h1, h2, h3 { margin: 0; font-weight: 560; text-wrap: balance; }
+h1 { font-size: clamp(44px, 6.6vw, 98px); line-height: .98; letter-spacing: -.022em; max-width: 13.5em; }
+h2 { font-size: clamp(31px, 3.7vw, 50px); line-height: 1.06; letter-spacing: -.016em; max-width: 13em; margin-bottom: var(--s4); scroll-margin-top: var(--s4); }
+h3 { font-size: 27px; line-height: 1.2; margin-bottom: var(--s3); }
+a { color: var(--verde); text-underline-offset: 3px; text-decoration-thickness: 1px; touch-action: manipulation; }
+a:hover { text-decoration-thickness: 2px; }
+a:active { color: var(--inchiostro); }
+img { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--anello); outline-offset: 3px; border-radius: 2px; }
+
+.nome { white-space: nowrap; }
+
+.salta {
+  position: absolute; left: -9999px; top: var(--s3); z-index: 20;
+  background: var(--inchiostro); color: var(--carta);
+  padding: var(--s2) var(--s3); font: 600 16px var(--sans);
+}
+.salta:focus { left: var(--s3); }
+
+.margini {
+  width: min(1180px, 100% - 48px);
+  margin-inline: auto;
+  padding-inline: env(safe-area-inset-left, 0) env(safe-area-inset-right, 0);
+}
+
+/* ------------------------------- testata ------------------------------- */
+.testata {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s4);
+  padding-block: var(--s4);
+  font: 500 16px var(--sans);
+}
+.marchio {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  color: var(--inchiostro); text-decoration: none;
+  font: 700 19px var(--sans); letter-spacing: -.02em;
+}
+.marchio img { width: 30px; height: 30px; display: block; }
+.testata nav { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; }
+.testata nav a { color: var(--inchiostro); text-decoration: none; padding-block: var(--s2); }
+.testata nav a:hover { text-decoration: underline; }
+.testata nav a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 2px; }
+
+.lingue { position: relative; }
+.lingue summary {
+  cursor: pointer; list-style: none; padding-block: var(--s2);
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 3px;
+}
+.lingue summary::-webkit-details-marker { display: none; }
+.lingue[open] summary { text-decoration-thickness: 2px; }
+.lingue ul {
+  position: absolute; right: 0; top: 100%; z-index: 10;
+  margin: 0; padding: var(--s2) 0; list-style: none; min-width: 10rem;
+  background: var(--foglio); border: 1px solid var(--filo-foglio);
+}
+.lingue li a { display: block; padding: var(--s2) var(--s3); }
+.lingue li a:hover { background: var(--banda); }
+
+/* ------------------------------- apertura ------------------------------- */
+.apertura { padding-block: var(--s6) var(--s7); border-top: 1px solid var(--inchiostro); }
+.occhiello { font-style: italic; color: var(--inchiostro-2); margin-bottom: var(--s3); max-width: none; }
+.sommario {
+  font-style: italic; font-size: clamp(21px, 2vw, 27px); line-height: 1.38;
+  max-width: 31em; margin: var(--s5) 0 0;
+}
+.rubrica { font: 600 16px var(--sans); color: var(--verde); margin-bottom: var(--s3); }
+
+.casa {
+  padding-block: var(--s6); border-top: 1px solid var(--filo);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: var(--s6);
+}
+.casa h2 { margin: 0; }
+.casa p:last-child { margin-bottom: 0; }
+
+/* ---------------- il capitolo: testo che scorre, palco fisso ----------------
+   La corsa e' corta di proposito: fra un passo e l'altro non deve restare una
+   schermata vuota (S384, rifinitura). */
+.capitolo { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 0 var(--s6); }
+.passo { min-height: 68vh; display: flex; flex-direction: column; justify-content: center; padding-block: var(--s5); }
+.passo:first-child { min-height: 78vh; }
+.palco { position: sticky; top: 0; height: var(--palco-h); display: grid; place-items: center; }
+
+/* Finance: il modulo continuo. I fori di trascinamento bordano il capitolo. */
+/* `clip` taglia i fogli sparsi che escono dal capitolo SENZA farne un
+   contenitore di scorrimento (con `hidden` il palco smetterebbe di restare fisso). */
+.finance { border-top: 1px solid var(--filo); position: relative; --anello: var(--blu); overflow-x: clip; }
+.finance::before, .finance::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 14px;
+  background: radial-gradient(circle at 7px 14px, var(--filo) 0 3.5px, transparent 4px) 0 0 / 14px 28px repeat-y;
+}
+.finance::before { left: 6px; }
+.finance::after { right: 6px; }
+.finance .rubrica { color: var(--blu); }
+.finance a { color: var(--blu); }
+
+.avviso {
+  font: 500 14px/1.5 var(--sans); color: var(--inchiostro-2);
+  border-left: 3px solid var(--rigo); padding-left: var(--s3);
+}
+
+.azione {
+  display: inline-block; font: 600 16px var(--sans);
+  padding: 13px 20px; border-radius: 3px;
+  background: var(--blu); color: var(--sopra-blu); text-decoration: none;
+  touch-action: manipulation;
+}
+.finance .azione, .azione:active { color: var(--sopra-blu); }
+.azione:hover { background: var(--blu-premuto); }
+.azione:active { transform: translateY(1px); }
+.azioni { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; }
+
+.listino {
+  width: 100%; max-width: var(--colonna); border-collapse: collapse;
+  font: 500 16px var(--sans); font-variant-numeric: tabular-nums;
+  margin-bottom: var(--s4);
+}
+.listino caption { caption-side: bottom; text-align: left; font-size: 14px; color: var(--inchiostro-2); padding-top: var(--s2); }
+.listino th, .listino td { text-align: left; padding: var(--s2) var(--s3); }
+.listino td:last-child, .listino th:last-child { text-align: right; white-space: nowrap; }
+.listino thead th { border-bottom: 2px solid var(--inchiostro); font-weight: 700; }
+.listino tbody tr:nth-child(odd) { background: var(--banda); }
+
+/* ---- il palco di Finance: undici estratti che diventano un portafoglio ----
+   Tre numeri, scritti dallo script: --a (0..1) raccoglie i fogli sparsi in una
+   pila ordinata; --p (0..1) li posa uno dopo l'altro nelle righe del
+   portafoglio, mentre il totale si somma; --q (0..1) chiude il portafoglio
+   dentro il telefono. SENZA script valgono 1: il portafoglio e' gia' riunito,
+   gia' sul telefono.
+   Le misure della scena sono in em: un solo font-size la ridimensiona intera.
+   Solo transform e opacity. Nessun filtro e nessuna opacita' sui contenitori
+   preserve-3d: appiattirebbero la scena. */
+.estratti {
+  --a: 1; --p: 1; --q: 1; --k: 1;
+  --riga: 2.3em; --passo: 2.44em; --meta: calc(var(--passo) * 5);
+  --ombra-carta: rgba(18, 33, 27, .3);
+  width: 27.2em; max-width: 100%; position: relative;
+  font-family: var(--sans); font-size: clamp(13px, 1.6vh, 16px); color: var(--inchiostro);
+  perspective: 86em; perspective-origin: 50% 38%;
+}
+@media (prefers-color-scheme: dark) {
+  .estratti { --ombra-carta: rgba(0, 0, 0, .55); }
+}
+.registro {
+  position: relative; transform-style: preserve-3d;
+  transform:
+    rotateX(calc(14deg * (1 - var(--p))))
+    rotateY(calc(-18deg * (1 - var(--p))))
+    scale(calc(1 - .07 * var(--q)));
+}
+/* Testata e totale compaiono quando atterra il primo foglio. */
+.registro-testa, .registro-totale {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: .57em 1.14em; font-weight: 700; font-variant-numeric: tabular-nums;
+  opacity: clamp(0, calc(var(--p) * 9), 1);
+}
+.registro-testa { border-bottom: 2px solid var(--inchiostro); }
+.registro-totale { border-top: 2px solid var(--inchiostro); font-size: 1.14em; padding-inline: 1em; }
+.registro-nota { font-size: 1em; color: var(--inchiostro-2); padding: .29em 1.14em 0; margin: 0; opacity: clamp(0, calc(var(--p) * 9), 1); }
+.fogli { list-style: none; margin: 0; padding: 0; position: relative; height: calc(var(--passo) * 11); transform-style: preserve-3d; }
+/* Ogni foglio ha tre posti: SPARSO (--sx --sy --sz e le sue rotazioni), nella
+   PILA al centro (--mx --my --mz --mr, derivati dalla sua posizione), nella sua
+   RIGA (--i). --s dice quanto e' ancora sparso, --m quanto e' in pila, --t
+   quanto e' atterrato: i fogli atterrano uno dopo l'altro (gli stessi due
+   numeri, 2.1 e .11, stanno in palco-conti.mjs: SCALA_FOGLI). */
+.foglio {
+  --t: clamp(0, calc(var(--p) * 2.1 - var(--i) * .11), 1);
+  --s: calc((1 - var(--a)) * var(--k));
+  --m: calc(var(--a) * (1 - var(--t)));
+  --mx: calc((var(--i) - 5) * .42em);
+  --my: calc((var(--i) - 5) * 1.62em - 5em);
+  --mz: calc(var(--i) * .5em);
+  --mr: calc((var(--i) - 5) * .55deg);
+  position: absolute; left: 0; top: 0; width: 100%; height: var(--riga);
+  display: flex; align-items: center; justify-content: space-between; padding: 0 1.14em;
+  background: var(--foglio); border: 1px solid var(--filo-foglio);
+  font-weight: 600; font-variant-numeric: tabular-nums; white-space: nowrap;
+  transform-origin: 50% 0;
+  transform:
+    translate3d(
+      calc(var(--sx) * var(--s) + var(--mx) * var(--m)),
+      calc(var(--meta) * (1 - var(--t)) + var(--sy) * var(--s) + var(--my) * var(--m) + var(--i) * var(--passo) * var(--t)),
+      calc(var(--sz) * var(--s) + var(--mz) * var(--m)))
+    rotateX(calc(var(--rx) * (1 - var(--a))))
+    rotateY(calc(var(--ry) * (1 - var(--a))))
+    rotateZ(calc(var(--rz) * (1 - var(--a)) + var(--mr) * var(--m)));
+  will-change: transform;
+}
+.foglio:nth-child(even) { background: var(--banda); }
+.foglio-valore { font-weight: 500; opacity: var(--t); }
+/* Il corpo del foglio: le righe dell'estratto sotto l'intestazione, con lo
+   spessore di tre pagine e l'ombra che il foglio getta finche' e' sollevato.
+   Si richiude mentre il foglio atterra nella sua riga. */
+.foglio::after {
+  content: ''; position: absolute; left: -1px; right: -1px; top: 100%; height: 8.3em;
+  background: repeating-linear-gradient(to bottom, var(--foglio) 0 .93em, var(--banda) .93em 1em);
+  border: 1px solid var(--filo-foglio); border-top: 0;
+  box-shadow:
+    0 2px 0 -1px var(--foglio), 0 3px 0 -1px var(--filo-foglio),
+    0 5px 0 -2px var(--foglio), 0 6px 0 -2px var(--filo-foglio),
+    0 1.7em 2.3em -1.1em var(--ombra-carta);
+  transform-origin: 50% 0; transform: scaleY(calc(1 - var(--t))); opacity: calc(1 - var(--t));
+}
+.foglio:nth-child(1)  { --i: 0;  --sx: -1.6em; --sy: -15.6em; --sz: 5em;     --rx: 24deg;  --ry: -20deg; --rz: -8deg; }
+.foglio:nth-child(2)  { --i: 1;  --sx: 9.4em;  --sy: -11.8em; --sz: -10.7em; --rx: -14deg; --ry: 26deg;  --rz: 6deg; }
+.foglio:nth-child(3)  { --i: 2;  --sx: 1.2em;  --sy: -6.4em;  --sz: 7em;     --rx: 32deg;  --ry: 12deg;  --rz: 10deg; }
+.foglio:nth-child(4)  { --i: 3;  --sx: 8em;    --sy: -2.6em;  --sz: -15.7em; --rx: -22deg; --ry: -28deg; --rz: -5deg; }
+.foglio:nth-child(5)  { --i: 4;  --sx: -.8em;  --sy: 2.2em;   --sz: 2.9em;   --rx: 16deg;  --ry: 32deg;  --rz: 12deg; }
+.foglio:nth-child(6)  { --i: 5;  --sx: 10.7em; --sy: 5em;     --sz: 9em;     --rx: -30deg; --ry: -10deg; --rz: -11deg; }
+.foglio:nth-child(7)  { --i: 6;  --sx: -2.6em; --sy: 9.4em;   --sz: -18.6em; --rx: 20deg;  --ry: 24deg;  --rz: 7deg; }
+.foglio:nth-child(8)  { --i: 7;  --sx: 6.4em;  --sy: 11.6em;  --sz: 6em;     --rx: -18deg; --ry: -32deg; --rz: -9deg; }
+.foglio:nth-child(9)  { --i: 8;  --sx: -1.2em; --sy: 14.4em;  --sz: -6.4em;  --rx: 28deg;  --ry: 16deg;  --rz: 5deg; }
+.foglio:nth-child(10) { --i: 9;  --sx: 8.6em;  --sy: -18.4em; --sz: 7em;     --rx: -24deg; --ry: 22deg;  --rz: -13deg; }
+.foglio:nth-child(11) { --i: 10; --sx: 3.3em;  --sy: 17.6em;  --sz: -2.9em;  --rx: 14deg;  --ry: -24deg; --rz: 9deg; }
+
+/* Il telefono arriva di tre quarti e piu' grande del portafoglio, mostra il
+   fianco, e si stringe intorno alle righe senza mai attraversarle: resta li'.
+   L'opacita' sta sulle sue due parti, non sul contenitore, che deve restare
+   in tre dimensioni. */
+.telefono {
+  position: absolute; inset: -2.15em -1.57em -4.4em; pointer-events: none;
+  transform-style: preserve-3d;
+  transform:
+    rotateY(calc(-32deg * (1 - var(--q))))
+    rotateX(calc(9deg * (1 - var(--q))))
+    scale(calc(1 + .36 * (1 - var(--q))));
+}
+.telefono-cornice {
+  position: absolute; inset: 0;
+  border: .64em solid var(--inchiostro); border-radius: 2.7em;
+  opacity: clamp(0, calc(var(--q) * 5), 1);
+}
+.telefono-cornice::before {
+  content: ''; position: absolute; left: 50%; top: .64em; width: 3.86em; height: .36em; margin-left: -1.93em;
+  border-radius: .2em; background: var(--inchiostro);
+}
+.telefono-fianco {
+  position: absolute; right: 0; top: 2.7em; bottom: 2.7em; width: 1.1em;
+  background: var(--inchiostro-2);
+  transform-origin: 100% 50%; transform: rotateY(-90deg);
+  opacity: clamp(0, calc(var(--q) * 5), 1);
+}
+.sigillo {
+  position: absolute; left: 0; right: 0; bottom: -3.14em; margin: 0; max-width: none;
+  display: flex; align-items: center; justify-content: center; gap: .57em;
+  font: 600 1em var(--sans); color: var(--verde);
+  opacity: clamp(0, calc((var(--q) - .7) * 3.4), 1);
+}
+.sigillo svg { width: 1em; height: 1em; display: block; }
+
+/* ------------------- il listino di mercato, da build ------------------- */
+.mercato { background: var(--banda); border-block: 1px solid var(--filo); padding-block: var(--s5); }
+.mercato-griglia { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s5) var(--s6); align-items: start; }
+.mercato h2 { font-size: 27px; line-height: 1.2; margin-bottom: var(--s2); }
+.mercato-nota { font: 400 14px/1.5 var(--sans); color: var(--inchiostro-2); margin: 0; }
+.mercato-seduta { font: 600 16px var(--sans); margin-bottom: var(--s3); }
+.mercato-tabelle { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); }
+.quotazioni { width: 100%; border-collapse: collapse; font: 500 16px var(--sans); font-variant-numeric: tabular-nums; }
+.quotazioni caption { text-align: left; font-weight: 700; padding-bottom: var(--s2); border-bottom: 2px solid var(--inchiostro); }
+.quotazioni th, .quotazioni td { padding: var(--s2) 0; text-align: right; border-bottom: 1px solid var(--filo); }
+.quotazioni th[scope='row'] { text-align: left; font-weight: 600; }
+.quotazioni thead th { font-size: 14px; font-weight: 500; color: var(--inchiostro-2); }
+.quotazioni thead th:first-child { text-align: left; }
+.su { color: var(--verde); }
+.giu { color: var(--rosso); }
+
+/* ---------------- l'imbrunire: dalla carta alla notte ----------------
+   SENZA script (e con il movimento ridotto) e' una fascia di colore con la sua
+   frase. Quando lo script parte mette `palchi-vivi` sulla radice e la fascia
+   diventa una scena fissa guidata da un solo numero, --d (0..1): il sole
+   scende sotto il bordo, la carta si fa tramonto, crepuscolo e poi buio,
+   escono le stelle, arriva la frase. E' il momento forte della pagina: l'unico
+   in cui cambia tutto lo schermo. Solo opacity e transform. */
+.imbrunire {
+  --d: 1;
+  height: 120vh; position: relative;
+  background: linear-gradient(to bottom, var(--carta) 0%, #D7DBE6 20%, #9C96C2 46%, #51467D 70%, var(--notte) 100%);
+}
+@media (prefers-color-scheme: dark) {
+  .imbrunire { background: linear-gradient(to bottom, var(--carta) 0%, #1B2630 34%, #2A2548 66%, var(--notte) 100%); }
+}
+.imbrunire-scena { height: 100%; }
+.imbrunire p {
+  position: sticky; top: 62vh; margin: 0 auto; max-width: none; text-align: center;
+  font-style: italic; font-size: clamp(26px, 3.4vw, 46px); line-height: 1.15; color: var(--crema);
+  padding-inline: var(--s4);
+}
+.sera { display: none; }
+
+.palchi-vivi .imbrunire { height: 230vh; background: var(--notte); }
+.palchi-vivi .imbrunire-scena {
+  position: sticky; top: 0; height: var(--schermo-h, 100vh); overflow: hidden;
+  background: var(--carta);
+  display: grid; place-items: center;
+}
+@supports (height: 100svh) {
+  .palchi-vivi .imbrunire-scena { --schermo-h: 100svh; }
+}
+.palchi-vivi .sera { display: block; position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+.sera-strato, .sera-bagliore, .sera .stelle { position: absolute; left: 0; top: 0; width: 100%; height: 100%; }
+/* Tre cieli sovrapposti che si danno il cambio. I colori sono le tappe
+   dell'imbrunire del canone di marchio (par. 4.4), nessuno nuovo. */
+.sera-tramonto {
+  background: linear-gradient(to bottom, #9C96C2 0%, #D7DBE6 62%, var(--carta) 100%);
+  opacity: clamp(0, calc(var(--d) * 3.6), 1);
+}
+.sera-crepuscolo {
+  background: linear-gradient(to bottom, var(--notte) 0%, #51467D 52%, #9C96C2 100%);
+  opacity: clamp(0, calc((var(--d) - .24) * 3.4), 1);
+}
+.sera-buio {
+  background: var(--notte);
+  opacity: clamp(0, calc((var(--d) - .52) * 3.4), 1);
+}
+@media (prefers-color-scheme: dark) {
+  .sera-tramonto { background: linear-gradient(to bottom, #2A2548 0%, #1B2630 62%, var(--carta) 100%); }
+  .sera-crepuscolo { background: linear-gradient(to bottom, var(--notte) 0%, #2A2548 60%, #1B2630 100%); }
+}
+/* Il chiarore sull'orizzonte: sale mentre il sole scende, poi si spegne. */
+.sera-bagliore {
+  background: radial-gradient(ellipse 78% 52% at 62% 100%, rgba(255, 138, 61, .78) 0%, rgba(255, 194, 75, .42) 40%, rgba(255, 194, 75, 0) 74%);
+  opacity: clamp(0, min(calc(var(--d) * 3.4), calc((.74 - var(--d)) * 3.4)), 1);
+}
+/* Il sole: un disco piatto come la luna del gioco. Scende sotto il bordo. */
+.sera-sole {
+  position: absolute; left: 62%; top: 22%;
+  width: clamp(76px, 11vw, 150px); height: clamp(76px, 11vw, 150px);
+  margin-left: calc(clamp(76px, 11vw, 150px) / -2);
+  border-radius: 50%; background: var(--ambra);
+  transform: translate3d(calc(var(--d) * 5vw), calc(var(--d) * 150vh), 0);
+}
+.sera-sole::after {
+  content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  border-radius: 50%; background: var(--arancio);
+  opacity: clamp(0, calc(var(--d) * 3), 1);
+}
+.sera .stelle { opacity: clamp(0, calc((var(--d) - .5) * 3), 1); transform: none; }
+.sera .stelle-fitte { opacity: clamp(0, calc((var(--d) - .66) * 3.4), 1); }
+.palchi-vivi .imbrunire p {
+  position: relative; top: auto; z-index: 1;
+  opacity: clamp(0, calc((var(--d) - .5) * 4), 1);
+}
+
+/* Le stelle: punti di luce, i colori del cielo del gioco. Due strati: i
+   primi compaiono presto, i fitti dopo. Usati dall'imbrunire e dal palco
+   della torre. */
+.stelle {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%;
+  background-image:
+    radial-gradient(circle at 7% 12%, var(--crema) 0 1.5px, transparent 2.1px),
+    radial-gradient(circle at 21% 31%, var(--luna) 0 1.3px, transparent 1.9px),
+    radial-gradient(circle at 36% 9%, var(--luna) 0 1.8px, transparent 2.4px),
+    radial-gradient(circle at 48% 24%, var(--crema) 0 1.3px, transparent 1.9px),
+    radial-gradient(circle at 63% 14%, var(--luna) 0 1.5px, transparent 2.1px),
+    radial-gradient(circle at 78% 33%, var(--crema) 0 1.8px, transparent 2.4px),
+    radial-gradient(circle at 91% 8%, var(--luna) 0 1.3px, transparent 1.9px),
+    radial-gradient(circle at 14% 54%, var(--luna) 0 1.5px, transparent 2.1px),
+    radial-gradient(circle at 87% 58%, var(--crema) 0 1.3px, transparent 1.9px),
+    radial-gradient(circle at 55% 47%, var(--luna) 0 1.3px, transparent 1.9px);
+}
+.stelle-fitte {
+  background-image:
+    radial-gradient(circle at 3% 38%, var(--luna) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 12% 22%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 27% 16%, var(--crema) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 31% 44%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 42% 36%, var(--luna) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 58% 6%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 69% 27%, var(--crema) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 74% 49%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 83% 19%, var(--luna) 0 1.1px, transparent 1.7px),
+    radial-gradient(circle at 95% 41%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 46% 62%, var(--luna) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 19% 68%, var(--crema) 0 1.1px, transparent 1.7px);
+}
+
+/* ------------------------ Games: la notte e la salita ------------------------ */
+.notte { background: var(--notte); color: var(--crema); --anello: var(--ambra); }
+.notte a { color: var(--ambra); }
+.notte a:active { color: var(--crema); }
+.notte .rubrica { color: var(--ambra); }
+.notte h2 { font-family: var(--gioco); font-weight: 800; letter-spacing: -.01em; line-height: 1.02; }
+
+/* --p (0..1) e' la salita della camera. SENZA script vale 1: la camera e' in
+   cima, tutte le finestre accese, la luna alta, il dado fermo sul sei.
+   Dal fondo al davanti: stelle, luna, nubi lontane, foschia, banco dietro,
+   torre, banco davanti, scala con l'etichetta, dado. Piu' uno strato e'
+   vicino, piu' scende in fretta mentre la camera sale. */
+.cielo {
+  --p: 1; --lato: 60px; --nube: #252E5C;
+  position: sticky; top: 0; height: var(--palco-h); overflow: hidden;
+  background: var(--notte);
+  border-inline: 1px solid rgba(168, 184, 224, .18);
+}
+.cielo .stelle { opacity: clamp(.3, calc(var(--p) * 1.5), 1); transform: translate3d(0, calc(var(--p) * 2%), 0); }
+.cielo .stelle-fitte { opacity: clamp(0, calc((var(--p) - .3) * 2.2), 1); transform: translate3d(0, calc(var(--p) * 4%), 0); }
+/* La luna del gioco: un disco piatto. Sale da dietro le nubi lontane. */
+.luna {
+  position: absolute; left: 8%; top: 9%;
+  width: clamp(48px, 7vw, 84px); height: clamp(48px, 7vw, 84px);
+  border-radius: 50%; background: var(--luna);
+  transform: translate3d(calc((1 - var(--p)) * 3vw), calc((1 - var(--p)) * var(--palco-h) * .66), 0);
+}
+/* Strato lontano: le nubi in fondo al cielo del gioco (il terzo basso dello
+   sprite del cielo, sfumato in alto nello stesso colore del fondo). */
+.lontano {
+  position: absolute; left: 0; right: 0; bottom: 0; height: 0; padding-top: 70.4%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 20%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 20%);
+  transform: translate3d(0, calc(var(--p) * 56%), 0);
+}
+.lontano img { position: absolute; left: 0; bottom: 0; width: 100%; height: auto; max-width: none; display: block; }
+/* I banchi di nubi vicine: copie delle nubi del sigillo del gioco, accostate
+   e alcune specchiate, a tutta larghezza. Uno dietro la torre, uno davanti: il
+   piede della torre sta fra i due. Quello davanti poggia su una base piena del
+   colore delle nubi (campionato dallo sprite). */
+.banco { position: absolute; left: 0; right: 0; bottom: 0; pointer-events: none; }
+.banco img { position: absolute; display: block; height: auto; max-width: none; }
+/* Quello dietro e' schiarito (un filtro fermo, calcolato una volta): fra le
+   nubi lontane, chiare, e quelle davanti, scure, fa il tono di mezzo. */
+.banco-dietro { height: 30%; filter: brightness(1.24) saturate(.92); transform: translate3d(0, calc(var(--p) * var(--palco-h) * .62), 0); }
+.banco-dietro img:nth-child(1) { left: -20%; bottom: 4%; width: 62%; }
+.banco-dietro img:nth-child(2) { left: 30%; bottom: 20%; width: 52%; transform: scaleX(-1); }
+.banco-dietro img:nth-child(3) { left: 62%; bottom: 0; width: 64%; }
+.banco-davanti { height: 26%; transform: translate3d(0, calc(var(--p) * var(--palco-h) * 1.15), 0); }
+.banco-davanti::before { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 22%; background: var(--nube); }
+.banco-davanti img:nth-child(1) { left: -28%; bottom: -60%; width: 70%; }
+.banco-davanti img:nth-child(2) { left: 18%; bottom: -68%; width: 76%; transform: scaleX(-1); }
+.banco-davanti img:nth-child(3) { left: 58%; bottom: -56%; width: 68%; }
+.banco-davanti img:nth-child(4) { left: -8%; bottom: -96%; width: 116%; transform: scaleX(-1); }
+/* Strato di mezzo: la torre. La camera sale: la torre scende. */
+.torre {
+  position: absolute; left: 50%; top: 0; width: min(380px, 76%);
+  transform: translate3d(-50%, calc((var(--p) - 1) * (100% - var(--palco-h))), 0);
+  will-change: transform;
+}
+.torre img { display: block; width: 100%; height: auto; }
+.torre .cima { transform: scale(1.15); transform-origin: 50% 100%; }
+.segmento { position: relative; margin-top: -1px; }
+/* Le finestre si accendono quando la camera arriva al tratto. */
+.segmento .accesa { position: absolute; left: 0; top: 0; opacity: clamp(0, calc((var(--p) - var(--soglia)) * 7), 1); }
+.segmento:nth-of-type(1) { --soglia: .58; }
+.segmento:nth-of-type(2) { --soglia: .3; }
+.segmento:nth-of-type(3) { --soglia: .04; }
+/* La scala della salita: una riga sul bordo destro con le tacche dei tre
+   tratti e della cima. L'etichetta dell'Ascesa la percorre dal basso in alto. */
+.scala {
+  position: absolute; right: var(--s3); top: 14%; height: 66%; width: 1px;
+  background: rgba(168, 184, 224, .38);
+}
+.scala i { position: absolute; left: -3px; width: 7px; height: 1px; background: var(--luna); }
+.scala i:nth-child(1) { bottom: 0; }
+.scala i:nth-child(2) { bottom: 30%; }
+.scala i:nth-child(3) { bottom: 60%; }
+.scala i:nth-child(4) { bottom: 90%; }
+.quota {
+  position: absolute; right: calc(var(--s3) + var(--s3)); top: 14%; margin: -14px 0 0; max-width: none;
+  font: 700 16px/20px var(--gioco); color: var(--crema); white-space: nowrap;
+  background: rgba(20, 16, 31, .78); padding: var(--s1) var(--s2); border-radius: 3px;
+  transform: translate3d(0, calc((1 - var(--p)) * var(--palco-h) * .66), 0);
+}
+/* Il segnaposto dell'etichetta sulla scala. */
+.quota::after {
+  content: ''; position: absolute; right: -20px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px;
+  border-radius: 50%; background: var(--ambra);
+}
+
+/* Il dado del gioco: un cubo unico a facce piatte, contorno dentro la faccia.
+   Tira tre volte lungo il bordo basso del palco: due rotolate verso destra e
+   una verso il fondo della scena, un quarto di giro ogni lato percorso. Gli
+   angoli li scrive lo script; SENZA script e' fermo, con il sei in alto. */
+.dado-pista { position: absolute; left: 7%; right: 16%; bottom: 7%; height: var(--lato); }
+.dado-carrello {
+  position: absolute; left: 0; bottom: 0; width: var(--lato); height: var(--lato);
+  transform:
+    translate3d(var(--dado-x, 0px), calc(var(--dado-fondo, 0) * var(--lato) * -.46), 0)
+    scale(calc(1 - .1 * var(--dado-fondo, 0)));
+}
+.dado-alone {
+  position: absolute; left: -30%; right: -30%; bottom: -22%; height: 44%;
+  background: radial-gradient(closest-side, rgba(155, 107, 255, .6), rgba(155, 107, 255, 0));
+}
+.dado-salto { position: absolute; left: 0; top: 0; width: 100%; height: 100%; perspective: 620px; transform: translate3d(0, var(--dado-y, 0px), 0); }
+.dado {
+  position: relative; width: 100%; height: 100%; transform-style: preserve-3d;
+  transform:
+    rotateX(-32deg) rotateY(24deg)
+    rotateZ(var(--r3, 270deg)) rotateX(var(--r2, 90deg)) rotateZ(var(--r1, 270deg));
+}
+.faccia {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; padding: 16%;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+  box-shadow: inset 0 0 0 3px var(--ink);
+  background: var(--astrale-ombra);
+}
+/* La luce sulla faccia, a tre toni piatti: la scrive lo script mentre il dado
+   rotola; il markup porta gia' quella dello stato di riposo. */
+.faccia[data-luce='1'] { background: var(--astrale); }
+.faccia[data-luce='2'] { background: var(--astrale-alto); }
+.faccia span { display: grid; place-items: center; }
+.faccia i { width: 72%; height: 72%; border-radius: 50%; background: var(--ink); }
+.faccia:nth-child(1) { transform: translateZ(calc(var(--lato) / 2)); }
+.faccia:nth-child(2) { transform: rotateY(90deg) translateZ(calc(var(--lato) / 2)); }
+.faccia:nth-child(3) { transform: rotateY(180deg) translateZ(calc(var(--lato) / 2)); }
+.faccia:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--lato) / 2)); }
+.faccia:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--lato) / 2)); }
+.faccia:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--lato) / 2)); }
+
+/* ------------------------------- colophon ------------------------------- */
+.colophon {
+  background: var(--ink); color: var(--luna);
+  font: 400 16px/1.55 var(--sans); padding-block: var(--s6);
+  --anello: var(--ambra);
+}
+.colophon a { color: var(--crema); }
+.colophon a:active { color: var(--ambra); }
+.colophon-riga { max-width: 40rem; color: var(--crema); font-family: var(--serif); font-size: 19px; }
+.colophon-griglia { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); margin-top: var(--s5); }
+.colophon h2 { font: 600 14px var(--sans); letter-spacing: 0; color: var(--luna); margin-bottom: var(--s2); max-width: none; }
+.colophon ul { list-style: none; margin: 0; padding: 0; }
+.colophon li { padding-block: var(--s1); }
+.colophon-diritti { margin: var(--s5) 0 0; max-width: none; font-size: 14px; }
+
+/* ------------------------- pagina non trovata ------------------------- */
+.smarrita { padding-block: var(--s6) var(--s7); border-top: 1px solid var(--inchiostro); }
+.smarrita h1 { font-size: clamp(40px, 5.4vw, 72px); }
+.smarrita-lingue { margin-top: var(--s6); display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+.smarrita-lingue h2 { font-size: 27px; line-height: 1.2; margin-bottom: var(--s2); }
+.smarrita-lingue p { font-size: 16px; font-family: var(--sans); line-height: 1.5; margin-bottom: var(--s2); }
+
+/* ------------------------------- telefono ------------------------------- */
+@media (max-width: 860px) {
+  body { font-size: 18px; }
+  .margini { width: calc(100% - 40px); }
+  .testata { flex-wrap: wrap; gap: var(--s2) var(--s4); }
+  /* in alto, non al centro: col menu delle lingue aperto nel flusso le altre
+     voci della riga resterebbero a mezz'altezza accanto all'elenco */
+  .testata nav { gap: var(--s3); align-items: flex-start; }
+  /* Il menu delle lingue aperto resta NEL FLUSSO. Ancorato al bordo destro del
+     suo titolo, quando la riga della testata va a capo il titolo finisce a
+     sinistra e l'elenco usciva dallo schermo (misurato a 360 px col menu
+     aperto: voci fra -67 e -2 px, in ogni pagina e in ogni lingua). Nel
+     flusso non puo' uscire: la riga si allunga e basta. */
+  .lingue ul { position: static; margin-top: var(--s2); }
+  /* Il prezzo nel listino puo' andare a capo fra l'importo e il periodo.
+     Senza, "49,99 EUR em pagamento unico" (portoghese) e "en un pago unico"
+     (spagnolo) su una riga sola allargavano la tabella oltre lo schermo:
+     misurato, la prima pagina portoghese usciva di 25 px a 360 e la pagina
+     Finance di 71 px a 320. L'importo resta intero: fra cifra e simbolo c'e'
+     uno spazio non separabile. */
+  .listino td:last-child, .listino th:last-child { white-space: normal; }
+  .casa { grid-template-columns: 1fr; gap: var(--s3); }
+  .capitolo { grid-template-columns: 1fr; }
+  /* I palchi sul telefono: scena in alto, a tutta larghezza, composta per
+     390 e 320 px (non ridotta dal desktop); il testo le scorre sotto. */
+  :root { --palco-h: 56vh; }
+  .palco, .cielo { order: -1; z-index: 2; margin-inline: -20px; }
+  .palco { background: var(--carta); border-bottom: 1px solid var(--filo); overflow: hidden; }
+  /* La scena dei fogli sta tutta nel palco: il suo font-size viene dall'altezza. */
+  .estratti {
+    --k: .5; --riga: 1.95em; --passo: 2.05em;
+    width: 23em; max-width: 78vw;
+    font-size: min(12.5px, calc((var(--palco-h) - 24px) / 36.5));
+  }
+  .registro-nota { display: none; }
+  .passo, .passo:first-child { min-height: 50vh; }
+  .finance::before, .finance::after { display: none; }
+  .torre { left: 47%; width: min(300px, 80%); }
+  .cielo { --lato: 44px; border-inline: 0; }
+  .luna { left: 6%; }
+  .quota { font-size: 14px; }
+  /* Il palco del telefono e' quasi quadrato: i banchi di nubi, larghi quanto
+     lui, verrebbero alti mezzo palco. Si stringono intorno al piede. */
+  .banco { transform-origin: 50% 100%; }
+  .banco-dietro { transform: translate3d(0, calc(var(--p) * var(--palco-h) * .62), 0) scale(.74); }
+  .banco-davanti { transform: translate3d(0, calc(var(--p) * var(--palco-h) * 1.15), 0) scale(.74); }
+  .mercato-griglia { grid-template-columns: 1fr; }
+  .colophon-griglia { grid-template-columns: 1fr; gap: var(--s4); }
+}
+@supports (height: 100svh) {
+  @media (max-width: 860px) { :root { --palco-h: 56svh; } }
+}
+/* Telefoni bassi: il palco prende un po' piu' di schermo, il dado si stringe. */
+@media (max-width: 860px) and (max-height: 620px) {
+  :root { --palco-h: 60vh; }
+}
+@supports (height: 100svh) {
+  @media (max-width: 860px) and (max-height: 620px) { :root { --palco-h: 60svh; } }
+}
+@media (max-width: 360px) {
+  .cielo { --lato: 38px; }
+}
+@media (max-width: 520px) {
+  .mercato-tabelle { grid-template-columns: 1fr; gap: var(--s4); }
+}
+
+/* ------------------------- movimento ridotto ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .imbrunire { height: 44vh; }
+  .imbrunire p { position: static; padding-top: 24vh; }
+}

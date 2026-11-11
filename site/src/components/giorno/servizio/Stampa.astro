@@ -1,0 +1,71 @@
+---
+/**
+ * STAMPA (`/press`): fatti che si possono verificare, due testi pronti da
+ * citare, i materiali, l'indirizzo. Fino a S383 questa pagina diceva che
+ * PluriFin era "un'app Android" con "lancio Q2 2026": qui i fatti arrivano
+ * da `testi/<lingua>.ts`, e ognuno ha la sua fonte in SITO_A_FATTI.md.
+ *
+ * La forma giuridica sta fra i fatti dell'azienda, dopo il paese: chi scrive
+ * "azienda" deve poter scrivere anche che il titolare e' una persona fisica.
+ */
+import type { Locale } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { POSTA } from '../../../lib/stato';
+import Prosa from '../Prosa.astro';
+import Servizio from './Servizio.astro';
+import Voci from './Voci.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const s = t.stampa;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+/* Le voci dell'azienda con la forma giuridica subito dopo il paese (la terza). */
+const azienda = [...s.inBreve.voci.slice(0, 3), s.formaGiuridica, ...s.inBreve.voci.slice(3)];
+/* I primi due materiali sono file del sito: il termine diventa il collegamento. */
+const materiali = [`${base}/assets/favicon.svg`, `${base}/assets/og-image.png`];
+---
+<Servizio t={t} lingua={lingua} rotta="press" meta={s.meta} occhiello={s.occhiello} titolo={s.titolo} sommario={s.sommario}>
+  <section class="riga" id="azienda">
+    <h2><Prosa testo={s.inBreve.titolo} /></h2>
+    <div><Voci voci={azienda} /></div>
+  </section>
+
+  <section class="riga" id="finance">
+    <h2><Prosa testo={s.finance.titolo} /></h2>
+    <div><Voci voci={s.finance.voci} /></div>
+  </section>
+
+  <section class="riga" id="games">
+    <h2><Prosa testo={s.games.titolo} /></h2>
+    <div><Voci voci={s.games.voci} /></div>
+  </section>
+
+  <section class="riga" id="testi-pronti">
+    <h2>{s.pronti.titolo}</h2>
+    <div>
+      <p>{s.pronti.premessa}</p>
+      <p class="pronto"><Prosa testo={s.pronti.riga} /></p>
+      <p class="pronto"><Prosa testo={s.pronti.paragrafo} /></p>
+    </div>
+  </section>
+
+  <section class="riga" id="materiali">
+    <h2>{s.materiali.titolo}</h2>
+    <div>
+      <Voci voci={s.materiali.voci} collegamenti={materiali} />
+      <p class="nota"><Prosa testo={s.materiali.uso} /></p>
+    </div>
+  </section>
+
+  <section class="riga" id="contatto">
+    <h2>{s.contatto.titolo}</h2>
+    <div>
+      <p class="indirizzo"><a href={`mailto:${POSTA.stampa}`} translate="no">{POSTA.stampa}</a></p>
+      <p>{s.contatto.testo}</p>
+    </div>
+  </section>
+</Servizio>

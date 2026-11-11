@@ -1,0 +1,26 @@
+---
+/**
+ * LE DOMANDE sul prodotto: una lista di domande e risposte, tutte visibili.
+ * Niente fisarmoniche: le risposte sono corte, e un testo che si legge senza
+ * toccare nulla non ha bisogno di script.
+ *
+ * Riusabile: la pagina Finance la monta in coda all'articolo; una pagina delle
+ * domande puo' montarla cosi' com'e'.
+ */
+import '../../../styles/finance.css';
+import type { Domanda } from '../../../i18n/testi';
+import Prosa from '../Prosa.astro';
+
+interface Props {
+  voci: Domanda[];
+}
+const { voci } = Astro.props;
+---
+<dl class="fin-domande">
+  {voci.map((v) => (
+    <div>
+      <dt><Prosa testo={v.domanda} /></dt>
+      <dd><Prosa testo={v.risposta} /></dd>
+    </div>
+  ))}
+</dl>

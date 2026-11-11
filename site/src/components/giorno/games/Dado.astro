@@ -1,0 +1,29 @@
+---
+/**
+ * IL DADO DELLA SALITA: un cubo vero a sei facce (le opposte sommano sette),
+ * a toni piatti e contorno d'inchiostro come il dado del gioco.
+ *
+ * A ogni capitolo si ferma con in alto la faccia del capitolo: uno al primo,
+ * sei all'ultimo. Le rotazioni le scrive `salita.ts`; qui c'e' lo stato di
+ * riposo, calcolato in build con gli stessi conti: fermo sul sei. I tre toni
+ * (`data-tono`) dipendono da come il cubo e' girato rispetto alla luce.
+ */
+import { FACCE, FERMATE, toni } from './salita-conti.mjs';
+
+const PUNTI: Record<number, number[]> = {
+  1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8],
+};
+const celle = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const riposo = FERMATE[FERMATE.length - 1];
+const tono = toni(riposo.rx, riposo.rz);
+---
+<div class="tiro">
+  <div class="tiro-ombra"></div>
+  <div class="tiro-salto">
+    <div class="cubo">
+      {FACCE.map((f, i) => (
+        <div class="lato" data-tono={tono[i]}>{celle.map((c) => <span>{PUNTI[f.punti].includes(c) && <i></i>}</span>)}</div>
+      ))}
+    </div>
+  </div>
+</div>

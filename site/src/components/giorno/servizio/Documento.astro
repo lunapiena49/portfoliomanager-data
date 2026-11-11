@@ -1,0 +1,63 @@
+---
+/**
+ * IL DOCUMENTO: la pelle delle pagine di lettura lunga, cioe' i documenti
+ * legali e gli articoli delle Notizie. Testata, un rimando, l'indice a
+ * sinistra, il testo in una colonna sola, colophon.
+ *
+ * E' SOLO la pelle. Il testo arriva dallo slot cosi' com'e': i documenti
+ * legali non si riscrivono qui (il loro sorgente sono i file di
+ * assets/legal/ dell'app, con la loro versione). Le classi che quel testo
+ * porta gia' (`meta`, `callout`, `note`, `table-wrap`) sono vestite in
+ * styles/servizio.css sotto `.documento`.
+ *
+ * Nessuno script: l'indice e' un elenco di ancore, e resta fermo a fianco
+ * del testo con il solo CSS.
+ */
+import '../../../styles/servizio.css';
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import Pagina from '../../../layouts/Pagina.astro';
+import Testata from '../Testata.astro';
+import Colophon from '../Colophon.astro';
+
+interface Props {
+  lingua: Locale;
+  titolo: string;
+  /** Le voci dell'indice: l'ancora e la sua etichetta. */
+  indice: Array<{ id: string; label: string }>;
+  /** La rotta senza prefisso di lingua: serve al menu delle lingue. */
+  rotta: string;
+  descrizione?: string;
+  /** false = pagina senza gemelle nelle altre lingue (un articolo). */
+  gemelle?: boolean;
+  corrente?: 'finance' | 'games' | 'casa' | 'notizie';
+  /** Dove riporta il rimando in testa. Senza, alla prima pagina. */
+  ritorno?: { href: string; etichetta: string };
+}
+const { lingua, titolo, indice, rotta, descrizione, gemelle = true, corrente, ritorno } = Astro.props;
+const t = testi(lingua);
+const scheda = titolo.includes('PluriFin') ? titolo : `${titolo} | PluriFin`;
+const indietro = ritorno ?? { href: localePath(lingua), etichetta: t.legali.ritorno };
+---
+<Pagina titolo={scheda} descrizione={descrizione ?? titolo} lingua={lingua} gemelle={gemelle}>
+  <Testata t={t} lingua={lingua} rotta={rotta} corrente={corrente} />
+  <main id="testo" class="margini documento-pagina">
+    <p class="ritorno"><a href={indietro.href}>{indietro.etichetta}</a></p>
+    <div class:list={['documento-griglia', indice.length === 0 && 'intera']}>
+      {indice.length > 0 && (
+        <nav class="indice" aria-label={t.legali.indice}>
+          <p class="indice-titolo">{t.legali.indice}</p>
+          <ul>
+            {indice.map((voce) => <li><a href={`#${voce.id}`}>{voce.label}</a></li>)}
+          </ul>
+        </nav>
+      )}
+      <article class="documento">
+        <h1>{titolo}</h1>
+        <slot />
+      </article>
+    </div>
+  </main>
+  <Colophon t={t} lingua={lingua} rotta={rotta} />
+</Pagina>

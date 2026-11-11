@@ -1,28 +1,9 @@
 ---
 /**
- * `/` - LA SOGLIA. L'ingresso del sito.
- *
- * Fino a S11 questa rotta era la landing del Portfolio Manager. Ora il PM ha la
- * sua pagina (`/finance`) e la radice appartiene allo STUDIO: la soglia, e poi
- * la home aziendale. Chi arriva da un motore di ricerca su /finance non passa
- * di qui, ed e' giusto: la soglia e' un ingresso, non un pedaggio.
+ * `/` - LA PRIMA PAGINA. Fino a S383 qui c'era la Soglia: un ingresso con il
+ * bottone "Entra" prima di qualunque testo. Dal rifacimento S384 la radice e'
+ * l'articolo d'apertura, e `/home` rimanda qui (astro.config.mjs, redirects).
  */
-import it from '../i18n/it';
-import Layout from '../layouts/Layout.astro';
-import Soglia from '../components/Soglia.astro';
-
-const t = it;
+import Home from '../components/giorno/Home.astro';
 ---
-<Layout
-  title={`PluriFin — ${t.company.gate.kicker}`}
-  description={t.company.gate.line1}
-  ogTitle="PluriFin"
-  ogDescription={t.company.gate.line1}
-  lang="it"
-  section="company"
-  pageType="organization"
->
-  <main id="main">
-    <Soglia t={t} lang="it" />
-  </main>
-</Layout>
+<Home lingua="it" />

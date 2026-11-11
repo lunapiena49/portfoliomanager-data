@@ -1,0 +1,36 @@
+---
+/**
+ * LA PAGINA NON TROVATA. Prima non esisteva: rispondeva la 404 di GitHub
+ * Pages, senza marchio e senza una strada per tornare. E' una sola per tutte
+ * le lingue (v. src/i18n/smarrita.ts): l'italiano in testa, le altre cinque
+ * sotto, ognuna con il suo `lang`.
+ */
+import { LOCALES, LOCALE_NAMES, localePath } from '../i18n/lingue';
+import { SMARRITA } from '../i18n/smarrita';
+import { testi } from '../i18n/testi';
+import Pagina from '../layouts/Pagina.astro';
+import Testata from '../components/giorno/Testata.astro';
+import Colophon from '../components/giorno/Colophon.astro';
+
+const t = testi('it');
+const it = SMARRITA.it;
+const altre = LOCALES.filter((l) => l !== 'it');
+---
+<Pagina titolo={`${it.titolo} | PluriFin`} descrizione={it.testo} lingua="it" gemelle={false} indicizza={false}>
+  <Testata t={t} lingua="it" />
+  <main id="testo" class="margini smarrita">
+    <h1>{it.titolo}</h1>
+    <p class="sommario">{it.testo}</p>
+    <p><a class="azione" href={localePath('it')}>{it.ritorno}</a></p>
+    <div class="smarrita-lingue">
+      {altre.map((l) => (
+        <section lang={l}>
+          <h2>{SMARRITA[l].titolo}</h2>
+          <p>{SMARRITA[l].testo}</p>
+          <p><a href={localePath(l)} hreflang={l}>{SMARRITA[l].ritorno} ({LOCALE_NAMES[l]})</a></p>
+        </section>
+      ))}
+    </div>
+  </main>
+  <Colophon t={t} lingua="it" />
+</Pagina>

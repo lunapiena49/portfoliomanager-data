@@ -1,0 +1,80 @@
+---
+/**
+ * IL PALCO DELLA PAGINA FINANCE: gli undici estratti conto volano in
+ * prospettiva dentro un telefono vero (uno spessore, non una cornice), che
+ * intanto si gira di fronte e si accende sulle schermate VERE dell'app.
+ *
+ * Le schermate sono un gruppo di pulsanti di opzione: funzionano da sole,
+ * senza JavaScript e con il movimento ridotto. Lo script (telefono.ts)
+ * spunta quella del passo che si sta leggendo e scrive `--u` e `--v`;
+ * posizioni, rotazioni e opacita' le deriva src/styles/finance.css.
+ * Senza script vale lo stato di riposo: estratti dentro, telefono acceso
+ * sulla prima schermata.
+ *
+ * Le immagini sono catture dell'app, solo ridotte: `node strumenti/schermate.mjs`
+ * (registro: src/assets/pm/<lingua>/PROVENIENZA.json). Mostrano il portafoglio
+ * dimostrativo dell'app, e il palco lo dichiara ("Dati di esempio").
+ * I fogli degli estratti sono decorativi (`aria-hidden`): i nomi dei broker
+ * stanno nell'elenco piu' sotto.
+ */
+import type { ImageMetadata } from 'astro';
+import type { Locale } from '../../../i18n/lingue';
+import type { Testi } from '../../../i18n/testi';
+import { BROKER } from '../../../lib/broker';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+}
+const { t, lingua } = Astro.props;
+const p = t.finance.palco;
+
+/* L'ordine e' quello di strumenti/schermate.mjs e di `finance.palco.schermate`. */
+const NOMI = ['portafoglio', 'mercato', 'ribilanciamento', 'analisi'] as const;
+const TUTTE = import.meta.glob<{ default: ImageMetadata }>('../../../assets/pm/*/*.webp', { eager: true });
+const immagini = NOMI.map((nome) => {
+  const modulo = TUTTE[`../../../assets/pm/${lingua}/${nome}.webp`];
+  if (!modulo) {
+    throw new Error(
+      `schermata mancante: src/assets/pm/${lingua}/${nome}.webp ` +
+        `(node strumenti/schermate.mjs <cartella v9> ${lingua}, poi GUARDARE le catture)`,
+    );
+  }
+  return modulo.default;
+});
+if (p.schermate.length !== NOMI.length) {
+  throw new Error(`finance.palco.schermate ha ${p.schermate.length} voci, le schermate sono ${NOMI.length}`);
+}
+const strati = [0, 1, 2, 3, 4, 5];
+---
+<div class="palco">
+  <fieldset class="fin-scena" data-scena-telefono>
+    <legend class="fin-legenda">{p.titolo}</legend>
+    <div class="fin-griglia">
+      {p.schermate.map((_s, i) => (
+        <input class="fin-scelta" type="radio" name="schermata" id={`schermata-${i + 1}`} checked={i === 0} />
+      ))}
+      <div class="fin-spazio">
+        <div class="fin-ombra"></div>
+        <div class="fin-telefono">
+          {strati.map(() => <span class="fin-strato"></span>)}
+          <div class="fin-fronte">
+            <div class="fin-schermo">
+              {immagini.map((img, i) => (
+                <img class="fin-schermata" src={img.src} width={img.width} height={img.height} alt={p.schermate[i].descrizione} loading="lazy" decoding="async" />
+              ))}
+              <div class="fin-carta"></div>
+            </div>
+          </div>
+        </div>
+        <ol class="fin-fogli" aria-hidden="true">
+          {BROKER.map((b) => <li class="fin-foglio" translate="no">{b.nome}</li>)}
+        </ol>
+      </div>
+      <div class="fin-schede">
+        {p.schermate.map((s, i) => <label for={`schermata-${i + 1}`}>{s.termine}</label>)}
+      </div>
+      <p class="fin-nota">{t.comune.datiEsempio}</p>
+    </div>
+  </fieldset>
+</div>

@@ -1,10 +1,11 @@
 Fonts bundled with the PluriFin site
 ====================================
 
-Inter    -- Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)
-Baloo 2  -- Copyright (c) 2019 The Baloo 2 Project Authors (https://github.com/EkType/Baloo2)
+Inter      -- Copyright (c) 2016 The Inter Project Authors (https://github.com/rsms/inter)
+Baloo 2    -- Copyright (c) 2019 The Baloo 2 Project Authors (https://github.com/EkType/Baloo2)
+Newsreader -- Copyright 2020 The Newsreader Project Authors (http://github.com/productiontype/Newsreader)
 
-Both are licensed under the SIL Open Font License, Version 1.1, reproduced below.
+All three are licensed under the SIL Open Font License, Version 1.1, reproduced below.
 They are SELF-HOSTED on purpose: PluriFin is privacy-first, and serving fonts from a
 third-party CDN would expose visitor IP addresses to that CDN. Self-hosting keeps the
 third-party list in the privacy policy accurate.

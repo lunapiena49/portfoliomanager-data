@@ -1,0 +1,44 @@
+---
+/**
+ * IL TELAIO DELLE PAGINE DI SERVIZIO (S384, corsia B3): testata, la testa
+ * della pagina (occhiello, titolo, sommario), il contenuto a righe, colophon.
+ *
+ * Pagine sobrie per scelta: nessun palco, nessuno scorrimento guidato, nessuno
+ * script. Il testo arriva da `testi/<lingua>.ts`; qui non si scrive una frase.
+ */
+import '../../../styles/servizio.css';
+import type { Locale } from '../../../i18n/lingue';
+import type { Meta, Testi } from '../../../i18n/testi';
+import Pagina from '../../../layouts/Pagina.astro';
+import Testata from '../Testata.astro';
+import Colophon from '../Colophon.astro';
+import Prosa from '../Prosa.astro';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+  /** La rotta della pagina senza prefisso di lingua (es. 'about'). */
+  rotta: string;
+  meta: Meta;
+  occhiello: string;
+  titolo: string;
+  sommario: string;
+  /** La sezione della testata in cui ci si trova, se e' una delle quattro. */
+  corrente?: 'finance' | 'games' | 'casa' | 'notizie';
+}
+const { t, lingua, rotta, meta, occhiello, titolo, sommario, corrente } = Astro.props;
+/* Il titolo della scheda porta sempre il nome della casa, una volta sola. */
+const scheda = meta.titolo.includes('PluriFin') ? meta.titolo : `${meta.titolo} | PluriFin`;
+---
+<Pagina titolo={scheda} descrizione={meta.descrizione} lingua={lingua}>
+  <Testata t={t} lingua={lingua} rotta={rotta} corrente={corrente} />
+  <main id="testo" class="margini servizio">
+    <header class="servizio-testa">
+      <p class="occhiello"><Prosa testo={occhiello} /></p>
+      <h1><Prosa testo={titolo} /></h1>
+      <p class="sommario"><Prosa testo={sommario} /></p>
+    </header>
+    <slot />
+  </main>
+  <Colophon t={t} lingua={lingua} rotta={rotta} />
+</Pagina>

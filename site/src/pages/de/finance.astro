@@ -1,6 +1,8 @@
 ---
-// `/de/finance` - il Portfolio Manager (divisione Finance).
-import de from '../../i18n/de';
-import LandingPage from '../../components/LandingPage.astro';
+/**
+ * `/de/finance` - Portfolio Manager (divisione Finance), in tedesco. La pagina e' una riga: struttura in
+ * `src/components/giorno/finance/PaginaFinance.astro`, testo in `src/i18n/testi/de.ts`.
+ */
+import PaginaFinance from '../../components/giorno/finance/PaginaFinance.astro';
 ---
-<LandingPage t={de} lang="de" />
+<PaginaFinance lingua="de" />

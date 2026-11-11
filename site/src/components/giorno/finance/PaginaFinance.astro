@@ -1,0 +1,155 @@
+---
+/**
+ * LA PAGINA DI PORTFOLIO MANAGER (S384, corsia B1): un articolo lungo.
+ * Apertura; il capitolo che scorre accanto al palco del telefono (gli undici
+ * estratti che entrano nell'app, poi le schermate vere); i broker; dove stanno
+ * i dati; quanto costa, col listino a quattro righe; come provarla; le domande
+ * sul prodotto; l'avvertenza. Una sola struttura per tutte le lingue: la pagina
+ * di ogni lingua e' una riga che passa la lingua qui.
+ *
+ * Il testo e' tutto nel DOM e si legge senza JavaScript. Cio' che manda a
+ * Google Play (pulsante e frase) esce solo con `pmSuPlay`.
+ */
+import '../../../styles/finance.css';
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { BROKER } from '../../../lib/broker';
+import { demoUrl, pmPlayUrl, pmSuPlay } from '../../../lib/stato';
+import Pagina from '../../../layouts/Pagina.astro';
+import Testata from '../Testata.astro';
+import Colophon from '../Colophon.astro';
+import Prosa from '../Prosa.astro';
+import PalcoTelefono from './PalcoTelefono.astro';
+import Listino from './Listino.astro';
+import Domande from './Domande.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const f = t.finance;
+const ROTTA = 'finance';
+
+/* I passi del capitolo: un paragrafo per passo. Il primo capitolo (l'import)
+   muove gli estratti verso il telefono; dal secondo in poi ogni passo dice al
+   palco quali schermate attraversa. L'ultimo paragrafo e' quello dell'analisi:
+   prende l'ultima schermata; quelli prima si dividono le altre. */
+const QUANTE = f.palco.schermate.length;
+const prime = Array.from({ length: Math.max(1, QUANTE - 1) }, (_x, i) => i).join(' ');
+const passi = f.capitoli.flatMap((capitolo, c) =>
+  capitolo.paragrafi.map((paragrafo, p) => {
+    const ultimoDelCapitolo = p === capitolo.paragrafi.length - 1;
+    const ultimoCapitolo = c === f.capitoli.length - 1;
+    let schermi: string | undefined;
+    if (c > 0) schermi = ultimoCapitolo && ultimoDelCapitolo && capitolo.paragrafi.length > 1 ? String(QUANTE - 1) : prime;
+    return {
+      id: p === 0 ? capitolo.id : undefined,
+      titolo: p === 0 ? capitolo.titolo : undefined,
+      paragrafo,
+      fogli: c === 0,
+      schermi,
+      avviso: c === 0 && ultimoDelCapitolo,
+    };
+  }),
+);
+---
+<Pagina titolo={f.meta.titolo} descrizione={f.meta.descrizione} lingua={lingua} tipo="software">
+  <Testata t={t} lingua={lingua} rotta={ROTTA} corrente="finance" />
+  <main id="testo" class="fin-pagina">
+    <section class="margini apertura fin-apertura">
+      <p class="occhiello"><Prosa testo={f.occhiello} /></p>
+      <h1><Prosa testo={f.titolo} /></h1>
+      <p class="sommario"><Prosa testo={f.sommario} /></p>
+      <p class="azioni">
+        {pmSuPlay && <a class="azione" href={pmPlayUrl} rel="noopener noreferrer">{t.comune.azioni.play}</a>}
+        <a class={pmSuPlay ? undefined : 'azione'} href={demoUrl}>{t.comune.azioni.demo}</a>
+      </p>
+    </section>
+
+    <section class="finance" data-telefono>
+      <div class="margini capitolo">
+        <div>
+          {passi.map((passo) => (
+            <div class="passo fin-passo" data-passo data-fogli={passo.fogli ? '' : undefined} data-schermi={passo.schermi}>
+              {passo.titolo && <h2 id={passo.id}><Prosa testo={passo.titolo} /></h2>}
+              <p><Prosa testo={passo.paragrafo} /></p>
+              {passo.avviso && <p class="avviso"><Prosa testo={t.comune.avvisoFinance} /></p>}
+            </div>
+          ))}
+        </div>
+        <PalcoTelefono t={t} lingua={lingua} />
+      </div>
+    </section>
+
+    <section class="margini fin-sezione" id="broker">
+      <h2><Prosa testo={f.broker.titolo} /></h2>
+      <div>
+        <ul class="fin-broker" role="list">
+          {BROKER.map((b) => <li translate="no">{b.nome}</li>)}
+        </ul>
+        <p><Prosa testo={f.broker.generico} /></p>
+      </div>
+    </section>
+
+    <section class="margini fin-sezione" id="dati">
+      <div class="fin-testa">
+        <h2>{f.dati.titolo}</h2>
+        <p>{f.dati.premessa}</p>
+      </div>
+      <div>
+        <dl class="fin-dati">
+          {f.dati.voci.map((v) => (
+            <div>
+              <dt><Prosa testo={v.termine} /></dt>
+              <dd><Prosa testo={v.descrizione} /></dd>
+            </div>
+          ))}
+        </dl>
+        <p>{f.dati.chiusa}</p>
+        <p><a href={localePath(lingua, 'privacy')}>{t.comune.colophon.voci.informativa}</a></p>
+      </div>
+    </section>
+
+    <section class="fin-prezzi" id="prezzi">
+      <div class="margini fin-sezione">
+        <div>
+          <h2>{f.prezzi.titolo}</h2>
+          <p>{f.prezzi.testo}</p>
+          <p><a href={localePath(lingua, 'pricing')}>{t.comune.azioni.prezzi}</a></p>
+        </div>
+        <Listino t={t} />
+      </div>
+    </section>
+
+    <section class="margini fin-sezione" id="provare">
+      <h2>{f.provare.titolo}</h2>
+      <div>
+        <p>{f.provare.demo}</p>
+        {pmSuPlay && <p>{f.provare.suPlay}</p>}
+        <p class="azioni">
+          {pmSuPlay && <a class="azione" href={pmPlayUrl} rel="noopener noreferrer">{t.comune.azioni.play}</a>}
+          <a class={pmSuPlay ? undefined : 'azione'} href={demoUrl}>{t.comune.azioni.demo}</a>
+        </p>
+      </div>
+    </section>
+
+    <section class="margini fin-sezione" id="domande">
+      <div class="fin-testa">
+        <h2>{t.domande.titolo}</h2>
+        <p>{t.domande.sommario}</p>
+      </div>
+      <Domande voci={t.domande.voci} />
+    </section>
+
+    <div class="margini fin-coda">
+      <p class="avviso"><Prosa testo={t.comune.avvisoFinanceLungo} /></p>
+    </div>
+  </main>
+  <Colophon t={t} lingua={lingua} rotta={ROTTA} />
+</Pagina>
+
+<script>
+  import './telefono.ts';
+</script>

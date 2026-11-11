@@ -1,0 +1,71 @@
+---
+/**
+ * PREZZI (`/pricing`): il listino intero di Portfolio Manager, poi i dettagli.
+ *
+ * Gli importi vivono in `testi/<lingua>.ts` e li presidia il listino canonico
+ * dell'app (scripts/legal/check_listino.py): qui non se ne scrive nessuno.
+ * La frase e il pulsante che mandano a Google Play compaiono solo con
+ * `pmSuPlay` (lib/stato.ts): finche' e' falso l'invito e' la demo web, e la
+ * pagina dice con `primaDellaScheda` che gli acquisti si aprono con la
+ * pubblicazione (S384, lotto TESTO-IT-2).
+ */
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { demoUrl, pmPlayUrl, pmSuPlay } from '../../../lib/stato';
+import Prosa from '../Prosa.astro';
+import Servizio from './Servizio.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const p = t.prezzi;
+---
+<Servizio t={t} lingua={lingua} rotta="pricing" corrente="finance" meta={p.meta} occhiello={p.occhiello} titolo={p.titolo} sommario={p.sommario}>
+  <table class="piani" id="piani">
+    <caption>{p.nota}</caption>
+    <thead>
+      <tr>
+        <th scope="col">{p.colonne.piano}</th>
+        <th scope="col">{p.colonne.prezzo}</th>
+        <th scope="col">{p.colonne.perChi}</th>
+        <th scope="col">{p.colonne.rinnovo}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {p.piani.map((piano) => (
+        <tr>
+          <th scope="row">{piano.nome}</th>
+          <td class="prezzo">{piano.prezzo}</td>
+          <td data-etichetta={p.colonne.perChi}>{piano.perChi}</td>
+          <td data-etichetta={p.colonne.rinnovo}>{piano.rinnovo}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+
+  {p.capitoli.map((capitolo) => (
+    <section class="riga" id={capitolo.id}>
+      <h2><Prosa testo={capitolo.titolo} /></h2>
+      <div>{capitolo.paragrafi.map((par) => <p><Prosa testo={par} /></p>)}</div>
+    </section>
+  ))}
+
+  <section class="riga" id="provare">
+    <h2><Prosa testo={t.finance.provare.titolo} /></h2>
+    <div>
+      {!pmSuPlay && <p>{p.primaDellaScheda}</p>}
+      <p><Prosa testo={t.finance.provare.demo} /></p>
+      {pmSuPlay && <p>{p.suPlay}</p>}
+      <p class="azioni">
+        {pmSuPlay && <a class="azione" href={pmPlayUrl} rel="noopener noreferrer">{t.comune.azioni.play}</a>}
+        <a class={pmSuPlay ? undefined : 'azione'} href={demoUrl}>{t.comune.azioni.demo}</a>
+        <a href={localePath(lingua, 'terms')}>{t.comune.colophon.voci.termini}</a>
+        <a href={localePath(lingua, 'faq')}>{t.comune.colophon.voci.domande}</a>
+      </p>
+      <p class="avviso"><Prosa testo={t.comune.avvisoFinanceLungo} /></p>
+    </div>
+  </section>
+</Servizio>

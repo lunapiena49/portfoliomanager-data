@@ -1,6 +1,8 @@
 ---
-// `/de/games` - ROLLQUEST (divisione Games). In sviluppo: nessuno store.
-import de from '../../i18n/de';
-import GamesPage from '../../components/GamesPage.astro';
+/**
+ * `/de/games` - ROLLQUEST (divisione Games), in tedesco. La pagina e' una riga: struttura in
+ * `src/components/giorno/games/Games.astro`, testo in `src/i18n/testi/de.ts`.
+ */
+import Games from '../../components/giorno/games/Games.astro';
 ---
-<GamesPage t={de} lang="de" />
+<Games lingua="de" />

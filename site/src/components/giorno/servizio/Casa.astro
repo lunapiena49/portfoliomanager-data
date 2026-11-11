@@ -1,0 +1,70 @@
+---
+/**
+ * LA CASA (`/about`): chi guida PluriFin, chi risponde davanti alla legge, le
+ * due divisioni, il metodo, che cosa la casa non fa, a chi scrivere.
+ *
+ * La riga "Chi risponde davanti alla legge" viene subito dopo "Chi la guida":
+ * i testi narrativi dicono "azienda" e "fondatore e CEO" (decisione
+ * dell'utente), i documenti legali dicono persona fisica. La pagina lo
+ * dichiara in chiaro e non scrive nessuna forma societaria.
+ */
+import type { Locale } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { POSTA } from '../../../lib/stato';
+import Prosa from '../Prosa.astro';
+import Servizio from './Servizio.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const c = t.casa;
+const col = t.comune.colophon;
+const posta = [
+  { etichetta: col.informazioni, indirizzo: POSTA.informazioni },
+  { etichetta: col.stampa, indirizzo: POSTA.stampa },
+  { etichetta: col.privacy, indirizzo: POSTA.privacy },
+  { etichetta: col.giochi, indirizzo: POSTA.giochi },
+];
+---
+<Servizio t={t} lingua={lingua} rotta="about" corrente="casa" meta={c.meta} occhiello={c.occhiello} titolo={c.titolo} sommario={c.sommario}>
+  {c.capitoli.map((capitolo, i) => (
+    <Fragment>
+      <section class="riga" id={capitolo.id}>
+        <h2><Prosa testo={capitolo.titolo} /></h2>
+        <div>{capitolo.paragrafi.map((p) => <p><Prosa testo={p} /></p>)}</div>
+      </section>
+      {i === 0 && (
+        <section class="riga" id="titolare">
+          <h2>{c.titolare.titolo}</h2>
+          <div><p><Prosa testo={c.titolare.testo} /></p></div>
+        </section>
+      )}
+    </Fragment>
+  ))}
+
+  <section class="riga" id="non-fa">
+    <h2><Prosa testo={c.nonFa.titolo} /></h2>
+    <div>
+      <ul class="elenco">
+        {c.nonFa.voci.map((v) => <li><Prosa testo={v} /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="riga" id="contatti">
+    <h2><Prosa testo={c.contatti.titolo} /></h2>
+    <div>
+      <p>{c.contatti.testo}</p>
+      <dl class="voci">
+        {posta.map((p) => (
+          <Fragment>
+            <dt>{p.etichetta}</dt>
+            <dd><a href={`mailto:${p.indirizzo}`} translate="no">{p.indirizzo}</a></dd>
+          </Fragment>
+        ))}
+      </dl>
+    </div>
+  </section>
+</Servizio>

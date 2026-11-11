@@ -1,0 +1,24 @@
+---
+/**
+ * IL SEGNO DEL CAPITOLO: la faccia del dado con i punti del capitolo. E' lo
+ * stesso numero su cui si ferma il dado del palco quando si legge quel
+ * capitolo: la pagina si sale un dado alla volta. Decorativo (`aria-hidden`):
+ * il titolo si legge senza.
+ */
+interface Props {
+  n: 1 | 2 | 3 | 4 | 5 | 6;
+}
+const { n } = Astro.props;
+const POSTI = [
+  [6.6, 6.6], [12, 6.6], [17.4, 6.6],
+  [6.6, 12], [12, 12], [17.4, 12],
+  [6.6, 17.4], [12, 17.4], [17.4, 17.4],
+];
+const PUNTI: Record<number, number[]> = {
+  1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8],
+};
+---
+<svg class="segno" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+  <rect x="1.5" y="1.5" width="21" height="21" rx="4.5" fill="none" stroke="currentColor" stroke-width="2" />
+  {PUNTI[n].map((c) => <circle cx={POSTI[c][0]} cy={POSTI[c][1]} r="2.1" fill="currentColor" />)}
+</svg>

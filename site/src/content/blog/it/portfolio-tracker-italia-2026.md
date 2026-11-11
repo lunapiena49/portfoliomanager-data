@@ -1,167 +1,62 @@
 ---
-title: "Come tracciare il tuo portafoglio investimenti in Italia nel 2026"
-summary: "Una guida pratica per smettere di tenere posizioni su Excel, scegliere uno strumento privacy-first e capire cosa cercare in un portfolio tracker per il mercato italiano."
-publishedAt: 2026-05-02
+title: "Cinque domande da fare a un’app prima di affidarle il portafoglio"
+summary: "Dove finiscono i dati, come entrano gli estratti conto, chi legge le domande all’intelligenza artificiale, che cosa l’app non fa e quanto costa. Con le risposte di Portfolio Manager."
+publishedAt: 2026-05-03
+updatedAt: 2026-11-11
 author:
-  name: "Filippo Salemi"
-  role: "Founder, PluriFin"
+  name: "PluriFin"
+  role: "Redazione"
 lang: "it"
-tags: ["portfolio-tracker", "investimenti", "guida", "italia", "etf", "privacy"]
+tags: ["portfolio-tracker", "investimenti", "guida", "privacy"]
 draft: false
 ---
 
-Tracciare il proprio portafoglio investimenti suona banale finché non si
-prova a farlo davvero. Multi-broker, valute diverse, ETF accumulating vs
-distributing, dividendi reinvestiti, fiscalità italiana sui capital gain
-e sul bollo titoli, magari un ETF americano non armonizzato che ti
-costringe a tirare fuori il quadro RW: la cosa scala male su Excel più
-in fretta di quanto pensi.
+Tenere in un foglio di calcolo un portafoglio diviso fra più broker vuol dire riscrivere a mano ciò che ogni estratto conto dice a modo suo. Chi si stanca cerca un’app, e prima di caricarci gli estratti conto conviene farle cinque domande. Sotto ciascuna c’è la risposta di Portfolio Manager, l’app di PluriFin Finance: chi legge può verificarla sulla demo web e sull’informativa, e pretendere la stessa chiarezza dalle altre.
 
-Questo articolo nasce dall'esperienza di costruire **Portfolio Manager**
-sotto il brand **PluriFin** -- un'app gratuita su Google Play (con un
-anno Premium a 4,99 EUR) che ho scritto per togliermi il problema di
-dosso. Qui sotto trovi i criteri pratici che uso per scegliere uno
-strumento di tracking, validi indipendentemente dall'app che alla fine
-adotti.
+## 1. Dove finiscono i dati
 
-## 1. La domanda zero: dove vivono i tuoi dati?
+Le risposte possibili sono tre:
 
-Prima di tutto: dove vanno a finire le tue posizioni quando le inserisci?
+- **Sui server di chi produce l’app**: comodo per chi usa più dispositivi, ma il portafoglio abita in casa d’altri
+- **Sul dispositivo, in chiaro**: è il caso del foglio di calcolo, leggibile da ogni programma che ha accesso ai file
+- **Sul dispositivo, cifrati**: la chiave nasce sul telefono e lì resta
 
-Le opzioni concrete sono tre:
+Portfolio Manager sta nella terza. Portafogli, posizioni e obiettivi restano sul telefono, cifrati con AES-256, con la chiave custodita dal sistema operativo. PluriFin non ha un archivio in cui tenerli e non chiede di aprire un account. Fa eccezione la demo web, e lo dichiara: i suoi dati restano nel browser, senza cifratura.
 
-- **Sui server dell'app** (modello SaaS classico). Comodo per
-  multi-device, ma significa fidarsi della loro security: data breach,
-  accesso da parte di dipendenti, vincoli legali del paese di hosting,
-  pagamento mensile/annuale per restare attivi.
-- **Sul tuo dispositivo, in chiaro** (Excel, Numbers, Google Sheets).
-  Qualsiasi app che ottiene accesso al file system o all'account Google
-  vede tutto.
-- **Sul tuo dispositivo, cifrati** (modello local-first). Dati protetti
-  da una chiave generata sul tuo device, niente upload, niente account.
+Un’app gratuita che conserva i portafogli sui propri server ha un costo da coprire. La domanda successiva è con che cosa lo copre.
 
-PluriFin sta nella terza categoria. Non c'è un server PluriFin a cui i
-tuoi dati vengono mandati: tutto vive nel keystore di sistema (Android
-Keystore / iOS Keychain / DPAPI Windows) cifrato AES-256.
+## 2. Come entrano gli estratti conto
 
-Se vuoi capire come un'app fa la cosa giusta su questo fronte, leggi il
-campo "Data Safety" su Play Store: quante voci sono "Data not
-collected" vs "Data shared with third parties"? Una vera app local-first
-ha tutto il primo blocco vuoto.
+Le strade sono due: consegnare all’app le credenziali del broker, oppure importare i file che il broker esporta. Portfolio Manager conosce solo la seconda: non si collega ai conti e non esegue ordini.
 
-## 2. Import dai broker: il vero collo di bottiglia
+L’app legge i CSV di undici broker: Interactive Brokers, Charles Schwab, Fidelity, TD Ameritrade (oggi parte di Charles Schwab), E*TRADE, Robinhood, Vanguard, DEGIRO, Trading 212, XTB e Revolut. Per gli altri c’è un lettore generico, a cui bastano il simbolo del titolo e una colonna fra quantità, valore e prezzo. Accetta anche i PDF, da cui prova a estrarre la tabella.
 
-Inserire 80 posizioni a mano è tedioso e fragile. Ogni broker pubblica
-estratti in formato proprio:
+A qualunque app va chiesto se l’import del proprio estratto conto si può provare prima di pagare. In Portfolio Manager sì: i sette giorni di prova hanno tutte le funzioni e non chiedono una carta di credito. Nella demo web no: lì le posizioni si inseriscono a mano, cinque al massimo.
 
-- **IBKR**: CSV "Activity Statement" + PDF complesso
-- **Schwab / Fidelity / E*TRADE**: CSV con colonne disordinate
-- **DEGIRO / Trading 212 / XTB**: CSV europei con virgola decimale
-- **Revolut**: CSV con valuta in colonna separata
-- **Robinhood / Vanguard**: CSV americano, settlement date diversa da
-  trade date
-- **TD Ameritrade**: CSV legacy, colonne miste
+## 3. Chi legge le domande fatte all’intelligenza artificiale
 
-Un buon portfolio tracker nel 2026 deve riconoscere automaticamente il
-formato e mappare i campi senza farti aprire il CSV in Excel per
-sistemarlo. PluriFin supporta 11 broker al lancio più un parser
-generico per CSV custom (vedi `formati_brokers.md` nel repo per la lista
-completa). Se non vedi il tuo broker, il parser generico ti permette di
-mappare ogni colonna.
+Un’analisi del portafoglio scritta da un modello richiede di mandare il portafoglio a chi gestisce il modello. Conviene sapere per quali server passa e chi lo conserva.
 
-Domanda da fare prima di scaricare un'app:
+In Portfolio Manager l’analisi è facoltativa e usa Google Gemini, con una chiave che l’utente inserisce di persona. La domanda e la composizione del portafoglio (titoli, quantità, prezzi medi) vanno dal telefono a Google senza passare da PluriFin, che non le conserva. Lo stesso vale per i prezzi in tempo reale: i simboli dei titoli vanno al fornitore che l’utente sceglie.
 
-> Posso provare l'import del MIO estratto del MIO broker prima di
-> pagare?
+## 4. Che cosa l’app non fa
 
-Se la risposta è no, lascia perdere: scoprirai che funziona male
-proprio sull'unico broker che ti interessa.
+Portfolio Manager non esegue ordini e non è un broker. Le analisi dell’intelligenza artificiale sono spunti generati da un modello: non sono consulenza finanziaria personalizzata e possono contenere errori.
 
-## 3. Privacy delle chiavi API per AI e dati real-time
+L’app non calcola nemmeno le imposte. Guadagni e perdite mostrati sono conti aritmetici: prezzo corrente meno prezzo medio, per la quantità. Non considerano la tassazione delle plusvalenze, il bollo sui titoli né la compensazione delle minusvalenze. Per la dichiarazione dei redditi l’avvertenza finanziaria dell’app rimanda a un commercialista o a un CAF abilitato.
 
-I migliori tracker oggi integrano:
+Per portare i dati altrove c’è “Esporta i miei dati”, che produce un file JSON con tutto il contenuto.
 
-- Modelli **AI** per analisi del portafoglio (Gemini, Claude, GPT)
-- **Prezzi real-time** da provider come EODHD, FMP, Alpha Vantage
+## 5. Quanto costa, e che cosa succede quando si smette di pagare
 
-Domanda critica: **chi paga la chiamata API e dove va la chiave**?
+Il vizio del settore è la prova che chiede la carta e l’abbonamento che parte da solo quando nessuno guarda. In Portfolio Manager la prova dura sette giorni e non conosce la carta di chi la usa: quando finisce, nessun addebito parte da solo.
 
-PluriFin segue il principio "bring your own key" (BYOK):
+Poi ci sono quattro piani, gli stessi per tutti, da 4,99 euro l’anno a 49,99 euro una volta sola per la famiglia. Nessun piano contiene pubblicità. Rinnovi, disdetta e rimborsi sono nella pagina [Prezzi](/pricing).
 
-- La chiave AI / market data è inserita da te, salvata nel keystore di
-  sistema
-- Le chiamate vanno **direttamente** dal tuo dispositivo al provider
-  (Google Gemini, EODHD, FMP), senza passare da un server PluriFin
-- Tu paghi al provider quello che usi (di solito 0 EUR per il free tier)
-- PluriFin non sa cosa chiedi all'AI né quanto
+Finita la prova resta una versione gratuita. Le posizioni si inseriscono a mano, ribilanciamento e dati di mercato continuano a funzionare; l’import dai broker, gli obiettivi e l’intelligenza artificiale si fermano finché non si sceglie un piano. In ogni caso i dati restano sul telefono, esportabili.
 
-Il modello "tutto incluso" che ti fa pagare 9 EUR/mese per "AI
-unlimited" in genere significa: i tuoi prompt passano per i loro server,
-vengono loggati, il margine paga la loro chiave Gemini condivisa.
+## Da dove cominciare
 
-## 4. Fiscalità italiana: cosa il tracker NON farà per te
+La [demo web](/app/) si apre nel browser senza installare nulla, con limiti dichiarati: cinque posizioni inserite a mano, niente import, niente obiettivi e niente intelligenza artificiale. Chi resta al foglio di calcolo può portarsi via le cinque domande: valgono per qualunque app.
 
-Spoiler: nessun portfolio tracker italiano (né PluriFin) sostituisce un
-commercialista per la dichiarazione dei redditi. La normativa cambia
-ogni anno e i casi limite sono troppi:
-
-- Capital gain 26% vs 12,5% (titoli di Stato e equiparati)
-- Bollo titoli 0,2% annuo
-- IVAFE per attività detenute all'estero
-- Compensazione minusvalenze per 4 anni
-- ETF UCITS vs non-UCITS, "armonizzati" vs "non armonizzati"
-- Quadro RW per chi ha conti broker esteri
-- PIR e fondi pensione con regimi agevolati
-- Doppia imposizione USA (W-8BEN)
-
-Quello che un buon tracker DEVE darti per il commercialista:
-
-- Export annuale di tutte le transazioni in CSV
-- Plus/minusvalenze raw (prezzo vendita - prezzo medio) * quantità
-- Lista degli strumenti con ISIN e flag UCITS / non-UCITS se nota
-
-Quello che un tracker NON deve farti credere di calcolare:
-
-- Aliquote effettive
-- Detrazioni
-- Imposte dovute
-
-Se un'app pubblicizza "calcolo automatico dell'imposta sui capital
-gain", verifica con cautela: di solito significa "applichiamo il 26% a
-tutto" e ignora gli edge case.
-
-## 5. Costi: il modello "una tantum molto basso" funziona
-
-Il pricing di PluriFin è pensato per togliere l'attrito:
-
-- **Web demo gratuita** per provarla nel browser (max 5 posizioni, no
-  import)
-- **7 giorni di prova gratuita** sull'app Android, **senza carta
-  upfront**
-- **4,99 EUR / anno** dopo il trial
-
-Il prezzo così basso non è marketing: è che l'app è local-first, non
-ha server, e quindi non ha costi ricorrenti che giustifichino una
-subscription da 5-10 EUR/mese. La promessa è che il prezzo è lo stesso
-per tutti: niente "primi N utenti", niente promozioni che segmentano.
-
-## Cosa fare adesso
-
-Se vuoi provare PluriFin:
-
-1. Apri la **web demo** gratuita (no install): puoi inserire fino a 5
-   posizioni manuali e vedere subito come funziona la UI
-2. Se ti convince, scarica l'app Android (link in basso quando l'app
-   sarà live su Play) e importa il tuo CSV vero
-3. Hai 7 giorni gratis, senza carta. Se non ti convince, basta chiudere
-   e l'abbonamento non parte
-
-Se vuoi rimanere su Excel ma applicare i criteri qui sopra: bene lo
-stesso, l'importante è che tu sappia dove vivono i tuoi dati e cosa
-serve davvero al tuo commercialista.
-
----
-
-*Articolo informativo. PluriFin non fornisce consulenza finanziaria. Per
-decisioni di investimento consulta un consulente abilitato all'Albo OCF
-(<https://www.organismocf.it>).*
+*Articolo del 3 maggio 2026, riscritto l’11 novembre 2026 sui fatti di oggi. Portfolio Manager è uno strumento informativo: i suoi contenuti non costituiscono consulenza finanziaria, fiscale o legale.*

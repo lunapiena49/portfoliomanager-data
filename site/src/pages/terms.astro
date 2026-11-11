@@ -1,6 +1,5 @@
 ---
-import it from '../i18n/it';
-import LegalLayout from '../layouts/LegalLayout.astro';
+import Documento from '../components/giorno/servizio/Documento.astro';
 
 const toc = [
   { id: 'acceptance', label: '1. Accettazione' },
@@ -12,7 +11,7 @@ const toc = [
   { id: 'contact', label: '7. Contatti' },
 ];
 ---
-<LegalLayout t={it} lang="it" pageTitle="Termini di servizio" tocItems={toc}>
+<Documento lingua="it" rotta="terms" titolo="Termini di servizio" indice={toc}>
   <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
 
   <h2 id="acceptance">1. Accettazione dei termini</h2>
@@ -55,4 +54,4 @@ const toc = [
     Il testo definitivo dei Termini di servizio e' in fase di revisione legale (Wave W3 del piano di sviluppo).
     Il presente testo e' una versione preliminare informativa.
   </div>
-</LegalLayout>
+</Documento>

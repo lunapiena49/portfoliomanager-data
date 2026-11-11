@@ -1,0 +1,14 @@
+---
+/**
+ * Un testo con i nomi propri marcati: PluriFin, Portfolio Manager, ROLLQUEST
+ * non si traducono e non si spezzano a capo. Le stringhe dei testi restano
+ * testo semplice: il markup lo mette questo componente, mai chi scrive.
+ */
+interface Props {
+  testo: string;
+}
+const NOMI = ['Portfolio Manager', 'ROLLQUEST', 'PluriFin'];
+const taglio = new RegExp(`(${NOMI.join('|')})`);
+const pezzi = Astro.props.testo.split(taglio).filter((p) => p !== '');
+---
+{pezzi.map((p) => (NOMI.includes(p) ? <span class="nome" translate="no">{p}</span> : p))}

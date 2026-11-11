@@ -1,0 +1,78 @@
+---
+/**
+ * "DAL LISTINO": tre rialzi e tre ribassi della seduta, estratti in BUILD dal
+ * flusso pubblico (src/lib/listino.mjs spiega perche' non nel browser).
+ * Nella pagina finiscono solo testo e numeri, formattati nella lingua.
+ * Se il flusso manca o non regge alla validazione il blocco non si pubblica:
+ * meglio nessun listino che un listino a meta'.
+ */
+import type { Locale } from '../../i18n/lingue';
+import type { Testi } from '../../i18n/testi';
+import { candidati, leggi } from '../../lib/listino.mjs';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+}
+const { t, lingua } = Astro.props;
+const m = t.home.mercato;
+const esito = leggi(candidati(process.cwd()));
+if (esito.listino === null) {
+  console.warn(`[plurifin:listino] blocco non pubblicato: ${esito.motivo}`);
+}
+const listino = esito.listino;
+const giorno = listino
+  ? new Intl.DateTimeFormat(lingua, { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+      .format(new Date(`${listino.data}T00:00:00Z`))
+  : '';
+const prezzo = (v: number, valuta: string) =>
+  new Intl.NumberFormat(lingua, { style: 'currency', currency: valuta }).format(v);
+const percento = new Intl.NumberFormat(lingua, {
+  style: 'percent', minimumFractionDigits: 2, maximumFractionDigits: 2, signDisplay: 'always',
+});
+/** Una riga del listino, come la rende `leggi` dopo la validazione. */
+interface Riga {
+  simbolo: string;
+  prezzo: number;
+  valuta: string;
+  variazione: number;
+}
+const tabelle: { titolo: string; righe: Riga[]; classe: string }[] = listino
+  ? [
+      { titolo: m.rialzi, righe: listino.rialzi, classe: 'su' },
+      { titolo: m.ribassi, righe: listino.ribassi, classe: 'giu' },
+    ]
+  : [];
+---
+{listino && (
+  <section class="mercato" aria-labelledby="mercato-titolo">
+    <div class="margini mercato-griglia">
+      <div>
+        <h2 id="mercato-titolo">{m.titolo}</h2>
+        <p class="mercato-nota">{m.nota}</p>
+      </div>
+      <div>
+        <p class="mercato-seduta">{m.seduta} <time datetime={listino.data}>{giorno}</time></p>
+        <div class="mercato-tabelle">
+          {tabelle.map((tab) => (
+            <table class="quotazioni">
+              <caption>{tab.titolo}</caption>
+              <thead>
+                <tr><th scope="col">{m.colonne.titolo}</th><th scope="col">{m.colonne.chiusura}</th><th scope="col">{m.colonne.variazione}</th></tr>
+              </thead>
+              <tbody>
+                {tab.righe.map((r) => (
+                  <tr>
+                    <th scope="row" translate="no">{r.simbolo}</th>
+                    <td>{prezzo(r.prezzo, r.valuta)}</td>
+                    <td class={tab.classe}>{percento.format(r.variazione / 100)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+)}

@@ -1,0 +1,33 @@
+{
+  "larghezza": 488,
+  "schermate": {
+    "portafoglio": {
+      "sorgente": "marketing/screenshots/v9/fr_01_home_populated.png",
+      "sha256_sorgente": "3c95fdbe405270433db417a2906a69b26517cf64eedeea7c4b166147dfa21ce3",
+      "larghezza": 488,
+      "altezza": 1084,
+      "sha256_uscita": "c4ec10d6d87276a1d578913b9cca1eedfa94105e9234b5b74e30d11593c1a4f6"
+    },
+    "mercato": {
+      "sorgente": "marketing/screenshots/v9/fr_02_market.png",
+      "sha256_sorgente": "1b4874d29d3f4bba82140e388d90bee1d056f5b1cddc84611e0c48164771293b",
+      "larghezza": 488,
+      "altezza": 1084,
+      "sha256_uscita": "d84f534856c6b1d289d3b11e4acff3f3a334b230d58681ce587063c5ed124de9"
+    },
+    "ribilanciamento": {
+      "sorgente": "marketing/screenshots/v9/fr_03_rebalance.png",
+      "sha256_sorgente": "ed656c20233bd2fec86bdee18ebdf18bece94929f3f38433184d8b35dc24c218",
+      "larghezza": 488,
+      "altezza": 1084,
+      "sha256_uscita": "9c8063b41c6724b387f66d8f287d858fdf5548b3a000eeb0004c86d6c1fdf3f2"
+    },
+    "analisi": {
+      "sorgente": "marketing/screenshots/v9/fr_08_ai_analysis.png",
+      "sha256_sorgente": "75c19e6e558f30df297c819af173b43540f489f9373c02a6b6d9af7b769b23cc",
+      "larghezza": 488,
+      "altezza": 1084,
+      "sha256_uscita": "aabe0f61285274f60cabaaa30c146ea86cc44f6343bc6de3e90ac0afc3a4985d"
+    }
+  }
+}

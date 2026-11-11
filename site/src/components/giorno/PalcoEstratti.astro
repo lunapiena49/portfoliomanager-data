@@ -1,0 +1,52 @@
+---
+/**
+ * IL PALCO DI FINANCE: undici estratti conto sparsi in prospettiva che,
+ * scorrendo, si raccolgono in una pila, atterrano uno dopo l'altro nelle
+ * righe di un solo portafoglio mentre il totale si somma, e infine si
+ * chiudono dentro un telefono. E' il mestiere dell'app, mostrato.
+ *
+ * Decorativo: `aria-hidden`. Tutto cio' che dice e' gia' nel testo accanto.
+ * Gli importi sono di ESEMPIO e la scena lo dichiara. Posizioni e rotazioni
+ * stanno in giorno.css (:nth-child): qui non c'e' un solo attributo style.
+ * `data-centesimi` e `data-totale` servono allo script per sommare il totale
+ * mentre i fogli atterrano; senza script il totale e' gia' quello finale.
+ */
+import type { Locale } from '../../i18n/lingue';
+import type { Testi } from '../../i18n/testi';
+import { BROKER, totaleEsempio } from '../../lib/broker';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+}
+const { t, lingua } = Astro.props;
+const p = t.home.finance.palco;
+const numero = new Intl.NumberFormat(lingua, {
+  minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: 'always',
+});
+const totale = numero.format(totaleEsempio());
+---
+<div class="palco" aria-hidden="true">
+  <div class="estratti" data-scena>
+    <div class="registro">
+      <div class="registro-testa"><span>{p.testa}</span><span>{p.valuta}</span></div>
+      <ol class="fogli">
+        {BROKER.map((b) => (
+          <li class="foglio" data-centesimi={Math.round(b.esempio * 100)}><span translate="no">{b.nome}</span><span class="foglio-valore">{numero.format(b.esempio)}</span></li>
+        ))}
+      </ol>
+      <div class="registro-totale"><span>{p.totale}</span><span data-totale={totale}>{totale}</span></div>
+      <p class="registro-nota">{t.comune.datiEsempio}</p>
+    </div>
+    <div class="telefono">
+      <span class="telefono-cornice"></span>
+      <span class="telefono-fianco"></span>
+    </div>
+    <p class="sigillo">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="5" y="11" width="14" height="9" rx="1.5"></rect><path d="M8 11V8a4 4 0 0 1 8 0v3"></path>
+      </svg>
+      {p.sigillo}
+    </p>
+  </div>
+</div>

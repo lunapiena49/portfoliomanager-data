@@ -1,6 +1,5 @@
 ---
-import fr from '../../i18n/fr';
-import LegalLayout from '../../layouts/LegalLayout.astro';
+import Documento from '../../components/giorno/servizio/Documento.astro';
 
 // CONTENT = the privacy policy bundled in the app, assets/legal/fr/privacy_policy.md:
 // same version, same text, rendered block by block (S343). Never edit the
@@ -23,7 +22,7 @@ const toc = [
   { id: "s13", label: "13. Juridiction et loi applicable" },
 ];
 ---
-<LegalLayout t={fr} lang="fr" pageTitle="Politique de Confidentialité -- Portfolio Manager by PluriFin" tocItems={toc}>
+<Documento lingua="fr" rotta="privacy" titolo="Politique de Confidentialité -- Portfolio Manager by PluriFin" indice={toc}>
   <p class="meta"><strong>Version</strong>: 1.0.3<br /><strong>Dernière mise à jour</strong>: 2026-09-21<br /><strong>Langue originale</strong>: Italien (version contraignante pour la juridiction)</p>
   <hr />
   <h2 id="s1">1. Responsable du traitement</h2>
@@ -170,4 +169,4 @@ const toc = [
   </ul>
   <h2 id="s13">13. Juridiction et loi applicable</h2>
   <p>Loi italienne et RGPD. Pour consommateurs: for du consommateur selon D.Lgs. 206/2005 (Italie) ou règles nationales plus protectrices.</p>
-</LegalLayout>
+</Documento>
