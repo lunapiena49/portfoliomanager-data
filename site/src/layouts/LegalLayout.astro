@@ -172,6 +172,25 @@ const homeUrl = localePath(lang);
     color: var(--text-2);
     margin: 20px 0;
   }
+  /* Tabelle (S343): la privacy ora rende PER INTERO il documento dell'app
+     (assets/legal/<L>/privacy_policy.md), che ha da 3 a 5 tabelle fino a 4
+     colonne. Prima di questa regola nessuna pagina del sito aveva tabelle
+     (censito: zero `<table` e zero tabelle markdown in site/src). Su mobile la
+     tabella scorre dentro il suo contenitore invece di allargare la pagina. */
+  :global(.prose .table-wrap) { overflow-x: auto; margin: 12px 0 20px; }
+  :global(.prose table) { border-collapse: collapse; width: 100%; font-size: 14px; line-height: 1.5; }
+  :global(.prose th), :global(.prose td) {
+    border: 1px solid var(--divider);
+    padding: 8px 10px;
+    text-align: left;
+    vertical-align: top;
+    color: var(--text-2);
+  }
+  :global(.prose th) { background: var(--surface); color: var(--text); font-weight: 600; }
+  /* Solo l'a-capo, niente cambio di font: `press` usa gia' <code> dentro
+     .prose e non deve cambiare aspetto. Serve ai percorsi lunghi della privacy
+     (es. `lunapiena49.github.io/portfoliomanager-data/app/`) su schermi stretti. */
+  :global(.prose code) { overflow-wrap: anywhere; }
 
   .mini-footer {
     background: #0E1116;
