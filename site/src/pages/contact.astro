@@ -1,7 +1,8 @@
 ---
-// `/contact` - v. ContactPage.astro: il form Formspree con l'ID segnaposto e'
-// stato rimosso (diceva "Messaggio inviato!" e non consegnava a nessuno).
-import it from '../i18n/it';
-import ContactPage from '../components/ContactPage.astro';
+/**
+ * `/contact` - CONTATTI. Quattro indirizzi, nessun modulo (v. Contatti.astro:
+ * il modulo di prima diceva "Messaggio inviato!" e non consegnava a nessuno).
+ */
+import Contatti from '../components/giorno/servizio/Contatti.astro';
 ---
-<ContactPage t={it} lang="it" />
+<Contatti lingua="it" />

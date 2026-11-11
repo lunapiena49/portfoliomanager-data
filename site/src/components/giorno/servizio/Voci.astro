@@ -1,0 +1,24 @@
+---
+/**
+ * UN ELENCO DESCRITTIVO: termine e spiegazione, una riga per voce. E' il modo
+ * in cui queste pagine danno i fatti: come le partite di un registro.
+ * `collegamenti` (facoltativo) trasforma il termine di una voce in un
+ * collegamento, per posizione: serve ai materiali per la stampa.
+ */
+import type { Voce } from '../../../i18n/testi';
+import Prosa from '../Prosa.astro';
+
+interface Props {
+  voci: Voce[];
+  collegamenti?: Array<string | undefined>;
+}
+const { voci, collegamenti = [] } = Astro.props;
+---
+<dl class="voci">
+  {voci.map((v, i) => (
+    <Fragment>
+      <dt>{collegamenti[i] ? <a href={collegamenti[i]}>{v.termine}</a> : v.termine}</dt>
+      <dd><Prosa testo={v.descrizione} /></dd>
+    </Fragment>
+  ))}
+</dl>

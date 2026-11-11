@@ -1,0 +1,74 @@
+---
+/**
+ * IL COLOPHON: chi guida, a chi scrivere, le pagine di servizio, i documenti
+ * legali, le lingue. Frasi e indirizzi, non una griglia di parole.
+ */
+import type { Locale } from '../../i18n/lingue';
+import { LOCALES, LOCALE_NAMES, duePunti, localePath } from '../../i18n/lingue';
+import type { Testi } from '../../i18n/testi';
+import { POSTA, repoPubblico } from '../../lib/stato';
+import Prosa from './Prosa.astro';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+  rotta?: string;
+  lingue?: Locale[];
+}
+const { t, lingua, rotta = '', lingue = LOCALES } = Astro.props;
+const c = t.comune.colophon;
+/* I due punti dopo un'etichetta, nella tipografia della lingua (in francese
+   li precede uno spazio insecabile: "Langues :", non "Langues:"). */
+const dp = duePunti(lingua);
+const posta = [
+  { etichetta: c.stampa, indirizzo: POSTA.stampa },
+  { etichetta: c.informazioni, indirizzo: POSTA.informazioni },
+  { etichetta: c.privacy, indirizzo: POSTA.privacy },
+  { etichetta: c.giochi, indirizzo: POSTA.giochi },
+];
+const pagine = [
+  { etichetta: c.voci.prezzi, rotta: 'pricing' },
+  { etichetta: c.voci.domande, rotta: 'faq' },
+  { etichetta: c.voci.stampa, rotta: 'press' },
+  { etichetta: c.voci.contatti, rotta: 'contact' },
+];
+const legali = [
+  { etichetta: c.voci.informativa, rotta: 'privacy' },
+  { etichetta: c.voci.termini, rotta: 'terms' },
+  { etichetta: c.voci.avvertenza, rotta: 'disclaimer' },
+  { etichetta: c.voci.dmca, rotta: 'dmca' },
+];
+---
+<footer class="colophon">
+  <div class="margini">
+    <p class="colophon-riga"><Prosa testo={c.riga} /></p>
+    <div class="colophon-griglia">
+      <div>
+        <h2>{t.comune.azioni.scrivi}</h2>
+        <ul>
+          {posta.map((p) => (
+            <li>{p.etichetta}{dp} <a href={`mailto:${p.indirizzo}`} translate="no">{p.indirizzo}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <h2>{c.pagine}</h2>
+        <ul>
+          {pagine.map((p) => <li><a href={localePath(lingua, p.rotta)}>{p.etichetta}</a></li>)}
+          <li><a href={repoPubblico} rel="noopener noreferrer">{c.voci.codice}</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>{c.legali}</h2>
+        <ul>
+          {legali.map((p) => <li><a href={localePath(lingua, p.rotta)}>{p.etichetta}</a></li>)}
+        </ul>
+      </div>
+    </div>
+    <p class="colophon-diritti" id="lingue">
+      {c.lingue}{dp} {LOCALE_NAMES[lingua]}{lingue.filter((l) => l !== lingua).map((l) => (
+        <Fragment>, <a href={localePath(l, rotta)} lang={l} hreflang={l}>{LOCALE_NAMES[l]}</a></Fragment>
+      ))}. {c.diritti}
+    </p>
+  </div>
+</footer>

@@ -1,5 +1,8 @@
 ---
-import it from '../i18n/it';
-import FAQPageContent from '../components/FAQPageContent.astro';
+/**
+ * `/faq` - DOMANDE. Domande e risposte stanno in `testi/<lingua>.ts`; la
+ * pagina e' una riga (v. Domande.astro).
+ */
+import Domande from '../components/giorno/servizio/Domande.astro';
 ---
-<FAQPageContent t={it} lang="it" />
+<Domande lingua="it" />

@@ -1,0 +1,282 @@
+/* ===========================================================================
+   GAMES - la pagina di ROLLQUEST (S384, corsia B2). Tutta di notte.
+
+   Si appoggia a giorno.css (token, tipografia, testata, colophon, .notte) e
+   aggiunge solo cio' che e' della salita: la griglia a tappe, il palco con la
+   Torre intera, il binario delle Ascese, il dado a sei fermate, la scheda.
+   I nomi delle classi sono propri di questa pagina: i palchi della prima
+   pagina (.cielo, .torre, .dado...) non si toccano e non si riusano.
+
+   Niente attributi `style`: i valori per elemento stanno qui, per posizione
+   (:nth-of-type); quelli che cambiano con lo scorrimento li scrive
+   `salita.ts` con setProperty sul palco:
+     --p   0..1   la camera lungo la torre (0 = alla base, 1 = in cima)
+     --q   0..12  la quota in segmenti: accende finestre e tacche
+     --rx --rz    le rotazioni del dado, in gradi
+     --su  0..1   quanto il dado e' alzato da terra, in lati
+   Senza script, o con movimento ridotto, valgono i numeri di riposo scritti
+   su `.volta` (RIPOSO nei conti): camera ferma sull'ultima Ascesa mostrata,
+   le sue finestre accese, dado fermo sul sei.
+
+   SOLO LE PRIME (S384): hanno fregio e finestre le prime otto Ascese; le
+   altre quattro e la cima sono una sagoma scura (`.tratto-celato`).
+
+   Scala degli spazi e taglie: quelle di giorno.css (4 8 16 24 40 64 104).
+   =========================================================================== */
+
+/* La notte copre anche lo scorrimento elastico, sopra e sotto la pagina. */
+body:has(.games-pagina) { background: #1E1830; }
+
+/* Qui i token del giorno prendono i valori della notte: testata, menu delle
+   lingue, anello del fuoco e fili leggono questi, senza regole in piu'. */
+.games-pagina {
+  --carta: var(--notte);
+  --banda: #332B52;
+  --foglio: #2A2344;
+  --inchiostro: var(--crema);
+  --inchiostro-2: var(--luna);
+  --verde: var(--ambra);
+  --filo: rgba(168, 184, 224, .24);
+  --filo-foglio: rgba(168, 184, 224, .4);
+  --anello: var(--ambra);
+  --dado-lato: 84px;
+  --pietra: #3A2F5C;
+}
+
+.games-pagina h1 {
+  font-family: var(--gioco); font-weight: 800;
+  font-size: clamp(40px, 4.5vw, 68px); line-height: 1.02; letter-spacing: -.012em;
+  max-width: 12em;
+}
+.games-pagina .sommario { margin-top: var(--s4); }
+/* Il marchio e' un collegamento: senza questa riga prenderebbe l'ambra dei link. */
+.games-pagina .marchio { color: var(--crema); }
+
+/* ----------------------- la griglia: testo a tappe, palco fisso ----------------------- */
+.salita { border-top: 1px solid var(--filo); }
+.salita-griglia { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 var(--s6); }
+.tappa {
+  min-height: 76vh; display: flex; flex-direction: column; justify-content: center;
+  padding-block: var(--s5);
+}
+.tappa-apertura { min-height: calc(100vh - 88px); padding-top: var(--s4); }
+.tappa h2 { scroll-margin-top: var(--s5); }
+.tappa p:last-child { margin-bottom: 0; }
+
+/* Il segno del capitolo: la faccia del dado, nel colore del dado. */
+.segno {
+  width: .76em; height: .76em; margin-right: .36em; vertical-align: -.04em;
+  color: var(--astrale-alto);
+}
+
+/* La scheda: i fatti in due colonne, fili sottili. */
+.scheda {
+  margin: 0 0 var(--s4); max-width: var(--colonna);
+  font: 400 16px/1.5 var(--sans); border-top: 2px solid var(--crema);
+}
+.scheda div {
+  display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: var(--s3);
+  padding-block: var(--s2); border-bottom: 1px solid var(--filo);
+}
+.scheda dt { color: var(--luna); font-weight: 600; }
+.scheda dd { margin: 0; }
+.games-pagina .azioni { font: 600 16px var(--sans); margin-bottom: var(--s5); }
+.games-pagina .didascalia { font: 400 14px/1.5 var(--sans); color: var(--luna); }
+
+/* ------------------------------ il palco: la volta ------------------------------ */
+/* A RIPOSO la camera e' ferma sull'ultima Ascesa mostrata: `--camera` mette
+   quel punto del fusto alla mezzeria del palco, a ogni larghezza (il percento
+   e' dell'altezza del fusto). `--q` accende finestre e tacche fino all'ottava
+   e nessuna oltre; `--p` (sette dodicesimi) mette il lume del binario sulla
+   tacca dell'ottava; `--cielo` tiene il cielo un dodicesimo piu' su, perche'
+   la luna stia tutta dentro il palco invece che a filo del bordo alto. */
+.volta {
+  --p: .5833; --q: 7.11; --rx: 2430deg; --rz: 0deg; --su: 0;
+  --camera: calc(var(--palco-h) * .5 - 40.3846%);
+  --cielo: .6667;
+  position: sticky; top: 0; height: var(--palco-h); overflow: hidden;
+  background: linear-gradient(to bottom, var(--notte) 0%, var(--indaco) 100%);
+  border-inline: 1px solid rgba(168, 184, 224, .18);
+}
+/* Quando lo script e' partito la camera e il cielo seguono lo scorrimento. */
+.volta[data-viva] { --camera: calc((var(--p) - 1) * (103.6% - var(--palco-h))); --cielo: var(--p); }
+/* Dove lo script partira', la pagina si apre gia' alla base, a finestre
+   spente e col dado in bilico: niente salto dal riposo alla base al primo
+   fotogramma, e le immagini piu' in alto non si scaricano per niente. */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  .volta:not([data-viva]) {
+    --p: 0; --q: 0; --rx: 45deg; --rz: 35deg; --su: .3;
+    --camera: calc((var(--p) - 1) * (103.6% - var(--palco-h))); --cielo: var(--p);
+  }
+  .volta:not([data-viva]) .quota-salita { visibility: hidden; }
+}
+
+/* Strato lontano: il cielo del gioco, piu' alto del palco. Alla base si vedono
+   le sue nubi basse, in cima la luna: percorre il 39,4% della propria altezza. */
+.volta-cielo {
+  position: absolute; left: 0; top: 0; width: 100%; height: 165%; max-width: none;
+  /* Ancorato a sinistra: la luna del cielo sta li', e non va tagliata. */
+  object-fit: cover; object-position: 0 0;
+  transform: translateY(calc((var(--cielo) - 1) * 39.4%));
+}
+
+/* Strato di mezzo: la torre. La camera sale: la torre scende. */
+.fusto {
+  position: absolute; left: 50%; top: 0; width: min(380px, 68%);
+  /* 103.6% (in `--camera`, su `.volta`): sotto il primo segmento ci sono le
+     nubi e la base sospesa (BASE nei conti). Alla partenza la camera
+     inquadra quelle. */
+  transform: translate(-50%, var(--camera));
+  will-change: transform;
+}
+.fusto img { display: block; width: 100%; height: auto; }
+/* La guglia e' disegnata piu' stretta del fusto: 609 px contro 711. */
+.guglia { transform: scale(1.167); transform-origin: 50% 100%; }
+/* Il fondo color pietra tiene il posto del tratto finche' l'immagine arriva. */
+.tratto {
+  position: relative; margin-top: -1px;
+  background: linear-gradient(to right, transparent 17.6%, var(--pietra) 17.6%, var(--pietra) 82.4%, transparent 82.4%);
+}
+/* Un'Ascesa non mostrata: la sola sagoma, nell'inchiostro dei contorni. Il
+   posto dell'immagine in arrivo lo tiene lo stesso inchiostro, non la pietra. */
+.tratto-celato {
+  background: linear-gradient(to right, transparent 17.6%, var(--ink) 17.6%, var(--ink) 82.4%, transparent 82.4%);
+}
+/* La luce delle finestre: si accende quando la quota arriva al tratto. */
+.lume {
+  position: absolute; left: 0; top: 0;
+  opacity: 1;
+  opacity: clamp(0, calc((var(--q) - var(--soglia)) * 4), 1);
+}
+/* Il primo tratto dall'alto e' l'Ascesa 12, l'ultimo la 1. La soglia della 1
+   e' 0,04; delle altre e' (Ascesa - 1,55): la regola di `soglia()` nei conti. */
+.tratto:nth-of-type(1), .tacca:nth-of-type(1) { --soglia: 10.45; }
+.tratto:nth-of-type(2), .tacca:nth-of-type(2) { --soglia: 9.45; }
+.tratto:nth-of-type(3), .tacca:nth-of-type(3) { --soglia: 8.45; }
+.tratto:nth-of-type(4), .tacca:nth-of-type(4) { --soglia: 7.45; }
+.tratto:nth-of-type(5), .tacca:nth-of-type(5) { --soglia: 6.45; }
+.tratto:nth-of-type(6), .tacca:nth-of-type(6) { --soglia: 5.45; }
+.tratto:nth-of-type(7), .tacca:nth-of-type(7) { --soglia: 4.45; }
+.tratto:nth-of-type(8), .tacca:nth-of-type(8) { --soglia: 3.45; }
+.tratto:nth-of-type(9), .tacca:nth-of-type(9) { --soglia: 2.45; }
+.tratto:nth-of-type(10), .tacca:nth-of-type(10) { --soglia: 1.45; }
+.tratto:nth-of-type(11), .tacca:nth-of-type(11) { --soglia: .45; }
+.tratto:nth-of-type(12), .tacca:nth-of-type(12) { --soglia: .04; }
+
+/* La base: continua il primo segmento. Le sue nubi si saldano a quelle
+   dipinte al piede del segmento; sotto, il moncone della torre sospesa. */
+.fusto .piede { position: absolute; left: 0; top: 100%; margin-top: -1px; }
+/* Nel gioco queste nubi arrivano ai bordi dello schermo; qui il palco e' piu'
+   largo della torre e finirebbero a filo dell'immagine. Sfumano ai lati: il
+   fusto (dal 17% all'83% della larghezza) resta intero. */
+.fusto .piede, .tratto:nth-of-type(12) img {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 15%, #000 85%, transparent 100%);
+}
+/* Strato vicino: tre nubi lungo la salita. Stanno appese alla torre a una
+   certa altezza (--alt) e in piu' scorrono di 150vh per unita' di salita:
+   passano davanti piu' in fretta della torre. --c e' la salita a cui la nube
+   e' al centro del palco. */
+.fusto .nube {
+  position: absolute; top: var(--alt); width: 62%; max-width: none; opacity: .92;
+  transform: translateY(calc((var(--p) - var(--c)) * 150vh));
+}
+.nube-alta { --alt: 22%; --c: .83; left: -34%; }
+.nube-mezza { --alt: 47%; --c: .58; left: 70%; }
+.nube-bassa { --alt: 72%; --c: .33; left: -30%; }
+
+/* L'etichetta dell'Ascesa. */
+.quota-salita {
+  /* In alto a destra, sopra il binario: a sinistra passa la luna del cielo. */
+  position: absolute; right: var(--s3); top: var(--s3); z-index: 3; margin: 0; max-width: none;
+  font: 700 16px var(--gioco); color: var(--crema);
+  background: rgba(20, 16, 31, .72); padding: var(--s1) var(--s3); border-radius: 3px;
+}
+
+/* Il binario: dodici tacche e la cima. Il lume sale con la camera, le tacche
+   passate restano accese. */
+.binario {
+  position: absolute; right: var(--s4); top: 12%; bottom: 13%; width: 16px; z-index: 3;
+  display: flex; flex-direction: column; justify-content: space-between; align-items: center;
+}
+.binario::before {
+  content: ''; position: absolute; left: 50%; top: 12px; bottom: 0; width: 2px; margin-left: -1px;
+  background: rgba(168, 184, 224, .3);
+}
+.binario-cima {
+  width: 0; height: 0;
+  border-left: 6px solid transparent; border-right: 6px solid transparent;
+  border-bottom: 12px solid rgba(168, 184, 224, .85);
+}
+.tacca { position: relative; width: 12px; height: 2px; background: rgba(168, 184, 224, .85); }
+.tacca::after {
+  content: ''; position: absolute; inset: 0; background: var(--ambra);
+  opacity: 1;
+  opacity: clamp(0, calc((var(--q) - var(--soglia)) * 4), 1);
+}
+.binario-corsa {
+  position: absolute; inset: 12px 0 0;
+  transform: translateY(calc((1 - var(--p)) * 100%));
+}
+.binario-corsa::before {
+  content: ''; position: absolute; left: 50%; top: -5px; width: 10px; height: 10px; margin-left: -5px;
+  border-radius: 50%; background: var(--ambra); box-shadow: 0 0 0 4px rgba(255, 194, 75, .22);
+}
+
+/* ------------------------------------ il dado ------------------------------------ */
+/* Un cubo unico a facce piatte, contorno dentro la faccia: il dado del gioco.
+   Sta in basso a sinistra, davanti a tutto. La vista (-34, 32) e' la stessa di
+   VISTA nei conti. */
+.tiro {
+  position: absolute; left: 7%; bottom: 13%; z-index: 4;
+  width: var(--dado-lato); height: var(--dado-lato);
+}
+.tiro-ombra {
+  position: absolute; left: -30%; right: -30%; bottom: -26%; height: 44%;
+  background: radial-gradient(closest-side, rgba(155, 107, 255, .6), rgba(155, 107, 255, 0));
+  transform: scale(calc(1 - var(--su) * .3)); opacity: calc(1 - var(--su) * .45);
+}
+.tiro-salto {
+  position: absolute; inset: 0; perspective: 700px;
+  transform: translateY(calc(var(--su) * var(--dado-lato) * -1));
+}
+.cubo {
+  position: relative; width: 100%; height: 100%; transform-style: preserve-3d;
+  transform: rotateX(-34deg) rotateY(32deg) rotateX(var(--rx)) rotateZ(var(--rz));
+}
+.lato {
+  position: absolute; inset: 0; padding: 15%;
+  display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr);
+  background: var(--astrale); box-shadow: inset 0 0 0 3px var(--ink);
+  backface-visibility: hidden;
+}
+.lato[data-tono='alto'] { background: var(--astrale-alto); }
+.lato[data-tono='ombra'] { background: var(--astrale-ombra); }
+.lato span { display: grid; place-items: center; }
+.lato i { width: 70%; height: 70%; border-radius: 50%; background: var(--ink); }
+/* Ordine delle facce: davanti, destra, dietro, sinistra, sopra, sotto. */
+.lato:nth-child(1) { transform: translateZ(calc(var(--dado-lato) / 2)); }
+.lato:nth-child(2) { transform: rotateY(90deg) translateZ(calc(var(--dado-lato) / 2)); }
+.lato:nth-child(3) { transform: rotateY(180deg) translateZ(calc(var(--dado-lato) / 2)); }
+.lato:nth-child(4) { transform: rotateY(-90deg) translateZ(calc(var(--dado-lato) / 2)); }
+.lato:nth-child(5) { transform: rotateX(90deg) translateZ(calc(var(--dado-lato) / 2)); }
+.lato:nth-child(6) { transform: rotateX(-90deg) translateZ(calc(var(--dado-lato) / 2)); }
+
+/* ------------------------------------ telefono ------------------------------------ */
+/* Il palco sale sopra il testo e ci resta: mezza finestra di torre, mezza di
+   lettura. Le tappe non hanno piu' un'altezza imposta: il testo detta il passo. */
+@media (max-width: 860px) {
+  .salita-griglia { grid-template-columns: 1fr; }
+  .volta {
+    order: -1; z-index: 2; margin-inline: -20px; border-inline: 0;
+    border-bottom: 1px solid var(--filo);
+  }
+  .games-pagina { --dado-lato: 54px; }
+  .fusto { width: min(250px, 60%); }
+  .tiro { left: 6%; bottom: 9%; }
+  .binario { right: var(--s3); top: 14%; bottom: 10%; }
+  .tappa, .tappa-apertura { min-height: 0; justify-content: flex-start; padding-block: var(--s5); }
+  .tappa-apertura { padding-top: var(--s4); }
+  .tappa-scheda { padding-bottom: var(--s6); }
+  .scheda div { grid-template-columns: 6.5rem minmax(0, 1fr); }
+}

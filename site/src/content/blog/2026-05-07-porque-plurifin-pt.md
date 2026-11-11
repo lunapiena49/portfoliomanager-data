@@ -1,86 +1,47 @@
 ---
-title: "Porque construí a PluriFin"
-summary: "A história pessoal por trás de uma app privacy-first para investidores retalhistas, e como um programador único pode oferecer um plano a 4,99 EUR/ano."
+title: "O Portfolio Manager assenta em três proibições"
+summary: "Nenhum arquivo das carteiras, nenhuma ligação às contas, nenhuma inteligência artificial sem a chave de quem a usa. O preçário de quatro linhas vem daí."
 publishedAt: 2026-05-07
+updatedAt: 2026-11-11
 author:
-  name: "Filippo Salemi"
-  role: "Founder, PluriFin"
+  name: "PluriFin"
+  role: "Redação"
 lang: pt
-tags: ["founder", "story", "personal-finance"]
+tags: ["portfolio-manager", "privacidade", "preços"]
 ---
 
-Trabalho na PluriFin há cerca de 18 meses, em part-time, enquanto o meu
-trabalho principal continua a ser programador de software numa empresa
-italiana. A app não nasceu como produto comercial: nasceu como ferramenta
-pessoal para seguir uma carteira multi-broker que ano após ano se tornava
-mais difícil de gerir com ferramentas generalistas.
+As apps de finanças apresentam-se com a lista do que fazem. O Portfolio Manager, a app da PluriFin Finance, percebe-se mais depressa pelo que não pode fazer. Não tem um arquivo onde guardar as carteiras, não se liga às contas e não usa inteligência artificial sem uma chave do utilizador. São três proibições, e o preçário de quatro linhas é a consequência delas.
 
-## O problema
+## Primeira proibição: nenhum arquivo das carteiras
 
-Tinha posições distribuídas por 4 brokers (Interactive Brokers, Trade Republic,
-Fineco e Directa) em 3 moedas (EUR, USD, GBP), com ativos de natureza mista
-(ações individuais, ETFs cotados nos EUA, ETFs UCITS, alguns ETP cripto,
-fundos de obrigações). Cada broker exporta num formato CSV diferente, cada
-broker tem a sua granularidade de transação, e cada broker tem a sua
-interpretação de "custo médio de aquisição" e "P&amp;L realizado".
+A carteira fica no telemóvel de quem a possui, cifrada com AES-256, com a chave à guarda do sistema operativo. A PluriFin não conserva as carteiras e não pede que se crie uma conta. Para verificar o teste e a subscrição bastam-lhe um identificador anónimo do dispositivo e o recibo da compra.
 
-As ferramentas generalistas que tinha experimentado (templates Google Sheets,
-alguns serviços web italianos) ou não percebiam os CSV multi-broker, ou
-exigiam entregar as credenciais API a um serviço cloud terceiro. Nenhuma das
-duas opções era aceitável para mim: as folhas de cálculo tornam-se
-ingerenciáveis para além de ~30 posições, e dar um token API read-only a um
-serviço não auditável é um tradeoff que não estou disposto a aceitar.
+Uma app de finanças gratuita que conserva as carteiras nos seus servidores tem um custo a cobrir. Antes de a instalar, convém perguntar com que o cobre.
 
-## A resposta pessoal e depois o produto
+Duas coisas têm de ser ditas por inteiro. A demo web guarda os dados no navegador, sem cifragem: serve para ver como a app é feita, não para guardar uma carteira verdadeira. Os relatórios de falhas (Firebase Crashlytics) só partem se o utilizador ativar o diagnóstico nas definições, e não contêm dados da carteira.
 
-A PluriFin nasceu como projeto interno com três restrições rígidas:
+A saída está tão prevista como a entrada: «Exportar os meus dados» gera um ficheiro JSON com todo o conteúdo, «Limpar todos os dados» elimina-o do telemóvel.
 
-1. **Os dados vivem no dispositivo do utilizador**, em armazenamento cifrado
-   AES-256. Sem cloud PluriFin obrigatória. A exportação GDPR está a um clique
-   de distância.
-2. **A app nunca fala com um broker em nome do utilizador**. Tudo acontece via
-   importação de ficheiros CSV/PDF que o utilizador descarrega do seu broker.
-   Sem chaves API de terceiros guardadas pela PluriFin.
-3. **As funções IA são opcionais e usam chaves do utilizador**. Se queres a
-   análise Gemini, introduzes a tua chave API; permanece no keystore do teu
-   dispositivo.
+## Segunda proibição: nenhuma ligação às contas
 
-Quando percebi que o produto podia ser útil a mais alguém além de mim, decidi
-publicá-lo. O modelo comercial é deliberadamente low-friction:
+A app não pede as credenciais de uma corretora e não executa ordens. Os dados entram porque os traz quem os possui, um ficheiro de cada vez. O Portfolio Manager reconhece os CSV de onze corretoras, mostra uma pré-visualização das linhas a corrigir e trata dos duplicados antes de guardar. Para os outros intermediários há um leitor genérico, e dos PDF a app tenta extrair a tabela.
 
-- 7 dias de teste grátis sem cartão
-- 4,99 EUR/ano para Single, 9,99 EUR/ano para Família
-- Lifetime pagamento único 29,99 EUR (Single) ou 49,99 EUR (Família)
+É mais lento do que uma ligação automática. É também a razão pela qual ninguém tem de entregar à PluriFin as credenciais do seu banco.
 
-Sem "early bird", sem "primeiros N utilizadores", sem promoções que segmentem.
-Mesmo preço para todos, hoje e sempre.
+## Terceira proibição: inteligência artificial só com a chave do utilizador
 
-## Porque tão barato
+A análise com inteligência artificial é facultativa. Usa o Google Gemini com uma chave que o utilizador introduz pessoalmente, à guarda do sistema operativo do telemóvel. Quem a ativa envia à Google a pergunta e a composição da carteira: títulos, quantidades, preços médios. O pedido parte do telemóvel e não passa pela PluriFin, que não o conserva.
 
-A app custa 25 USD pagamento único de Play Console e ~0 EUR de hosting
-(Cloudflare free tier para o Worker e GitHub Pages para o site). Não há
-investidores a quem devolver capital, não há churn a combater com descontos,
-não há equipa a pagar. O objetivo é cobrir os custos operacionais e manter
-viva uma comunidade de utilizadores que apreciam uma abordagem honesta à
-poupança.
+As respostas são pistas geradas por um modelo, não aconselhamento financeiro personalizado, e podem conter erros. As decisões continuam a ser de quem investe.
 
-Se a PluriFin um dia parar as operações, a exportação GDPR devolve todos os
-teus dados num único JSON portável -- e os planos Lifetime permanecem
-acessíveis para sempre na tua conta Google.
+## O preçário que daí resulta
 
-## O que esperar nos próximos meses
+Uma empresa que não conserva as carteiras não paga para as conservar, e uma que não mostra publicidade não tem anunciantes para contentar. Fica uma app, com o seu preço. São sete dias de teste sem cartão de crédito e, depois, quatro planos, os mesmos para todos, de 4,99 euros por ano a 49,99 euros de uma só vez para a família.
 
-- **Q2 2026**: lançamento Play Store (Android), webapp gratuita já em direto
-- **Q3 2026**: feedback recolhido do Closed Testing, hotfixes para crashes residuais
-- **Q4 2026 / Q1 2027**: aumento do número de brokers suportados (prioridade: feedback dos utilizadores)
-- **Fase 2 (pós-receita)**: iOS, Apple Pay, marca EUIPO, eventual seguro RC Tech
+Terminado o teste, fica uma versão gratuita. As posições introduzem-se à mão, o rebalanceamento e os dados de mercado continuam a funcionar; a importação das corretoras, os objetivos e a inteligência artificial param até se escolher um plano. O preçário completo, com renovações e reembolsos, está na página [Preços](/pt/pricing).
 
-Para acompanhar o desenvolvimento em tempo real, o repositório público
-[portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data)
-aloja a pipeline dos dados de mercado e o site que estás a ler. O código da
-app Android permanece closed-source por razões de compliance (chaves de
-assinatura, anti-piracy, integridade do contexto Play Billing), mas as
-especs de formato CSV dos brokers e os templates dos documentos legais
-são públicos.
+## Onde verificar o que aqui está escrito
 
-Até breve.
+O código deste site e o fluxo dos dados de mercado são públicos no repositório [portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data). O que a app faz com os dados está escrito por extenso na [política de privacidade](/pt/privacy), em seis línguas. A [demo web](/app/) abre-se no navegador sem instalar nada.
+
+*Artigo de 7 de maio de 2026, reescrito a 11 de novembro de 2026 com os factos de hoje.*

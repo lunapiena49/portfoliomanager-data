@@ -1,0 +1,85 @@
+---
+/**
+ * LA PAGINA DI GAMES: ROLLQUEST, tutta di notte. Si legge salendo: il testo
+ * scorre a sinistra, a destra la camera sale la Torre, le finestre si
+ * accendono tratto per tratto e il dado si ferma, capitolo per capitolo,
+ * sulla faccia del capitolo. Sei capitoli, sei facce: "la torre si sale un
+ * dado alla volta" e' il titolo, ed e' anche come funziona la pagina.
+ *
+ * IL GIOCO E' IN SVILUPPO: niente store, niente data, niente lista d'attesa.
+ * La pagina dice che cosa sara' e a che punto e'.
+ *
+ * Una sola struttura per tutte le lingue: la pagina di ogni lingua e' una
+ * riga che passa la lingua qui. I testi stanno in `src/i18n/testi/<lingua>.ts`
+ * (sezione `games`; la scheda dei fatti e' la stessa della pagina Stampa).
+ */
+import '../../../styles/games.css';
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import Pagina from '../../../layouts/Pagina.astro';
+import Testata from '../Testata.astro';
+import Colophon from '../Colophon.astro';
+import Prosa from '../Prosa.astro';
+import Salita from './Salita.astro';
+import Segno from './Segno.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const g = t.games;
+const fatti = t.stampa.games;
+type Punti = 1 | 2 | 3 | 4 | 5 | 6;
+/* I capitoli dell'articolo, poi lo stato: cinque tappe. La sesta e' la scheda. */
+const capitoli = [
+  ...g.capitoli.map((c) => ({ id: c.id, titolo: c.titolo, paragrafi: c.paragrafi })),
+  { id: 'stato', titolo: g.stato.titolo, paragrafi: g.stato.paragrafi },
+];
+---
+<Pagina titolo={g.meta.titolo} descrizione={g.meta.descrizione} lingua={lingua} tipo="gioco">
+  <div class="notte games-pagina">
+    <Testata t={t} lingua={lingua} rotta="games" corrente="games" />
+    <main id="testo">
+      <article class="salita" data-salita>
+        <div class="margini salita-griglia">
+          <div class="salita-testo">
+            <header class="tappa tappa-apertura" data-tappa>
+              <p class="occhiello"><Prosa testo={g.occhiello} /></p>
+              <h1><Prosa testo={g.titolo} /></h1>
+              <p class="sommario"><Prosa testo={g.sommario} /></p>
+            </header>
+
+            {capitoli.map((c, i) => (
+              <section class="tappa" data-tappa aria-labelledby={`t-${c.id}`}>
+                <h2 id={`t-${c.id}`}><Segno n={(i + 1) as Punti} />{c.titolo}</h2>
+                {c.paragrafi.map((p) => <p><Prosa testo={p} /></p>)}
+              </section>
+            ))}
+
+            <section class="tappa tappa-scheda" data-tappa aria-labelledby="t-fatti">
+              <h2 id="t-fatti"><Segno n={6} /><Prosa testo={fatti.titolo} /></h2>
+              <dl class="scheda">
+                {fatti.voci.map((v) => (
+                  <div><dt>{v.termine}</dt><dd><Prosa testo={v.descrizione} /></dd></div>
+                ))}
+              </dl>
+              <p class="azioni">
+                <a href={localePath(lingua, 'blog')}>{t.comune.azioni.notizie}</a>
+                <a href={localePath(lingua, 'contact')}><Prosa testo={t.comune.azioni.scrivi} /></a>
+              </p>
+              <p class="didascalia"><Prosa testo={g.immagini} /></p>
+            </section>
+          </div>
+          <Salita t={t} />
+        </div>
+      </article>
+    </main>
+  </div>
+  <Colophon t={t} lingua={lingua} rotta="games" />
+</Pagina>
+
+<script>
+  import './salita.ts';
+</script>

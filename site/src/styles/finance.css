@@ -1,0 +1,251 @@
+/* ===========================================================================
+   LA PAGINA FINANCE - corsia B1 del rifacimento S384 ("Il giorno di PluriFin").
+
+   Token, tipografia, testata, colophon, `.capitolo`, `.passo`, `.palco`,
+   `.listino`, `.avviso`, `.azione` vengono da giorno.css: qui c'e' solo cio'
+   che e' della pagina di Portfolio Manager, con il prefisso `fin-`.
+   Scala degli spazi: 4 8 16 24 40 64 104. Sans: 14 e 16. Niente attributi
+   `style`: i valori per elemento stanno qui, per posizione (:nth-child);
+   quelli che cambiano con lo scorrimento li scrive telefono.ts.
+
+   Le regole che devono vincere su giorno.css portano un antenato in piu'
+   (`.finance .fin-passo`, `.fin-prezzi .fin-listino`): l'ordine dei due fogli
+   nel pacchetto non e' una garanzia.
+   =========================================================================== */
+
+.fin-pagina { --anello: var(--blu); }
+.fin-pagina a { color: var(--blu); }
+.fin-pagina a:active { color: var(--inchiostro); }
+.fin-pagina .azione, .fin-pagina .azione:active { color: var(--sopra-blu); }
+
+/* ------------------------------- apertura ------------------------------- */
+.fin-pagina .fin-apertura h1 { font-size: clamp(40px, 5.4vw, 72px); line-height: 1.02; max-width: 15em; }
+.fin-apertura .azioni { margin: var(--s5) 0 0; }
+
+/* -------------------- il capitolo accanto al telefono -------------------- */
+.finance .fin-passo { min-height: 74vh; }
+.finance .fin-passo:first-child { min-height: 86vh; }
+.finance .fin-passo:last-child { min-height: 92vh; }
+
+/* ---- il palco: undici estratti entrano in un telefono, che si accende ----
+   --u (0..1): gli estratti volano dentro lo schermo e il telefono si gira di
+               fronte. SENZA script vale 1: estratti dentro, telefono acceso.
+   --v (0..1): quanto del capitolo e' passato; il telefono compie un lento giro.
+   --linea:    la riga di lettura (frazione della finestra): la legge lo script.
+   Solo transform e opacity. Nessun filtro e nessuna opacita' sui contenitori
+   preserve-3d: appiattirebbero la scena. */
+.fin-scena {
+  --u: 1; --v: 0; --k: 1; --f: 1; --linea: .55;
+  --sw: min(244px, 30vh, 60vw);
+  --sh: calc(var(--sw) * 2400 / 1080);
+  --cornice: 10px; --spessore: 14px; --raggio: 34px;
+  --scocca: var(--inchiostro);
+  --fianco: #33443B;
+  border: 0; margin: 0; padding: 0; min-width: 0;
+  font: 500 14px/1.5 var(--sans); color: var(--inchiostro);
+}
+@media (prefers-color-scheme: dark) {
+  .fin-scena { --fianco: #B7C6BB; }
+}
+.fin-legenda {
+  position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.fin-griglia { display: grid; justify-items: center; gap: var(--s2); position: relative; }
+.fin-scelta { position: absolute; left: 0; top: 0; width: 1px; height: 1px; margin: 0; opacity: 0; pointer-events: none; }
+
+.fin-spazio {
+  position: relative;
+  width: calc(var(--sw) + 2 * var(--cornice));
+  height: calc(var(--sh) + 2 * var(--cornice));
+  perspective: 1300px; perspective-origin: 50% 40%;
+}
+.fin-ombra {
+  position: absolute; left: 4%; right: 4%; bottom: -5%; height: 9%;
+  background: radial-gradient(closest-side, var(--ombra-foglio), transparent);
+  transform: scaleX(calc(.7 + .3 * var(--u)));
+}
+.fin-telefono {
+  position: absolute; inset: 0; transform-style: preserve-3d;
+  transform:
+    rotateX(calc(9deg * (1 - var(--u))))
+    rotateY(calc(-36deg * (1 - var(--u)) + 18deg * (.5 - var(--v)) * var(--u)))
+    scale(calc(.88 + .12 * var(--u)));
+}
+/* Lo spessore: sei lamine uguali impilate lungo la profondita'. */
+.fin-strato { position: absolute; inset: 0; border-radius: var(--raggio); background: var(--fianco); }
+.fin-strato:nth-child(1) { transform: translateZ(calc(var(--spessore) * -.5)); background: var(--scocca); }
+.fin-strato:nth-child(2) { transform: translateZ(calc(var(--spessore) * -.3)); }
+.fin-strato:nth-child(3) { transform: translateZ(calc(var(--spessore) * -.1)); }
+.fin-strato:nth-child(4) { transform: translateZ(calc(var(--spessore) * .1)); }
+.fin-strato:nth-child(5) { transform: translateZ(calc(var(--spessore) * .3)); }
+.fin-strato:nth-child(6) { transform: translateZ(calc(var(--spessore) * .5)); }
+.fin-fronte {
+  position: absolute; inset: 0; border-radius: var(--raggio); background: var(--scocca);
+  transform: translateZ(calc(var(--spessore) * .5 + 1px));
+}
+.fin-schermo {
+  position: absolute; inset: var(--cornice); overflow: hidden;
+  border-radius: calc(var(--raggio) - var(--cornice)); background: #F7F8FA;
+}
+.fin-schermata {
+  position: absolute; left: 0; top: 0; width: 100%; height: 100%; max-width: none;
+  object-fit: cover; opacity: 0; transition: opacity 220ms ease-out;
+}
+.fin-scelta:nth-of-type(1):checked ~ .fin-spazio .fin-schermata:nth-of-type(1),
+.fin-scelta:nth-of-type(2):checked ~ .fin-spazio .fin-schermata:nth-of-type(2),
+.fin-scelta:nth-of-type(3):checked ~ .fin-spazio .fin-schermata:nth-of-type(3),
+.fin-scelta:nth-of-type(4):checked ~ .fin-spazio .fin-schermata:nth-of-type(4) { opacity: 1; }
+/* Lo schermo spento: carta da registro, finche' gli estratti non sono entrati. */
+.fin-carta {
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(to bottom, var(--foglio) 0 21px, var(--banda) 21px 22px);
+  opacity: clamp(0, calc((.97 - var(--u)) * 10), 1);
+}
+
+/* Gli undici estratti. --e e' l'avanzamento del singolo foglio: partono in
+   fila (--d), cosi' entrano uno dopo l'altro e non tutti insieme. */
+.fin-fogli {
+  list-style: none; margin: 0; padding: 0; position: absolute; inset: 0;
+  transform-style: preserve-3d; pointer-events: none;
+}
+.fin-foglio {
+  --e: clamp(0, calc((var(--u) - var(--d)) * 2.2), 1);
+  position: absolute; left: 50%; top: 42%;
+  min-width: 132px; height: 28px; padding: 0 var(--s2);
+  display: flex; align-items: center;
+  background: var(--foglio); border: 1px solid var(--filo-foglio);
+  box-shadow: 0 1px 0 var(--ombra-foglio);
+  font-weight: 600; white-space: nowrap;
+  transform:
+    translate3d(
+      calc(-50% + var(--sx) * var(--k) * (1 - var(--e))),
+      calc(var(--sy) * var(--k) * (1 - var(--e))),
+      calc(24px + var(--sz) * (1 - var(--e))))
+    rotateX(calc(var(--rx) * (1 - var(--e))))
+    rotateY(calc(var(--ry) * (1 - var(--e))))
+    rotateZ(calc(var(--rz) * (1 - var(--e))))
+    scale(calc(var(--f) * (1 - .7 * var(--e))));
+  opacity: clamp(0, calc((1 - var(--e)) * 4), 1);
+}
+.fin-foglio:nth-child(even) { background: var(--banda); }
+/* Il corpo del foglio: le righe dell'estratto sotto l'intestazione. */
+.fin-foglio::after {
+  content: ''; position: absolute; left: -1px; right: -1px; top: 100%; height: 72px;
+  background: repeating-linear-gradient(to bottom, var(--foglio) 0 11px, var(--banda) 11px 12px);
+  border: 1px solid var(--filo-foglio); border-top: 0;
+}
+.fin-foglio:nth-child(1)  { --d: 0;   --sx: -170px; --sy: -200px; --sz: 60px;  --rx: 18deg;  --ry: -28deg; --rz: -9deg; }
+.fin-foglio:nth-child(2)  { --d: .05; --sx: 160px;  --sy: -150px; --sz: 140px; --rx: -14deg; --ry: 30deg;  --rz: 7deg; }
+.fin-foglio:nth-child(3)  { --d: .1;  --sx: -190px; --sy: -60px;  --sz: 220px; --rx: 24deg;  --ry: 18deg;  --rz: 11deg; }
+.fin-foglio:nth-child(4)  { --d: .15; --sx: 185px;  --sy: -20px;  --sz: 90px;  --rx: -20deg; --ry: -24deg; --rz: -6deg; }
+.fin-foglio:nth-child(5)  { --d: .2;  --sx: -150px; --sy: 80px;   --sz: 180px; --rx: 14deg;  --ry: 34deg;  --rz: 13deg; }
+.fin-foglio:nth-child(6)  { --d: .25; --sx: 150px;  --sy: 110px;  --sz: 260px; --rx: -26deg; --ry: -14deg; --rz: -10deg; }
+.fin-foglio:nth-child(7)  { --d: .3;  --sx: -185px; --sy: 150px;  --sz: 110px; --rx: 22deg;  --ry: 26deg;  --rz: 8deg; }
+.fin-foglio:nth-child(8)  { --d: .35; --sx: 180px;  --sy: 120px;  --sz: 40px;  --rx: -16deg; --ry: -30deg; --rz: -12deg; }
+.fin-foglio:nth-child(9)  { --d: .4;  --sx: -60px;  --sy: -260px; --sz: 200px; --rx: 28deg;  --ry: 12deg;  --rz: 5deg; }
+.fin-foglio:nth-child(10) { --d: .45; --sx: 120px;  --sy: -230px; --sz: 150px; --rx: -22deg; --ry: 20deg;  --rz: -8deg; }
+.fin-foglio:nth-child(11) { --d: .5;  --sx: 0px;    --sy: -310px; --sz: 90px;  --rx: 12deg;  --ry: -18deg; --rz: 4deg; }
+
+/* Le schede: quale schermata guarda il telefono. */
+.fin-schede { display: flex; flex-wrap: wrap; justify-content: center; gap: 0 var(--s3); }
+.fin-schede label {
+  display: flex; align-items: center; min-height: 44px; padding: 0 var(--s1);
+  font-weight: 600; color: var(--inchiostro-2); cursor: pointer; touch-action: manipulation;
+  box-shadow: inset 0 -2px 0 transparent;
+  transition: color 160ms ease-out, box-shadow 160ms ease-out;
+}
+.fin-schede label:hover { color: var(--inchiostro); }
+.fin-schede label:active { color: var(--blu); }
+.fin-scelta:nth-of-type(1):checked ~ .fin-schede label:nth-of-type(1),
+.fin-scelta:nth-of-type(2):checked ~ .fin-schede label:nth-of-type(2),
+.fin-scelta:nth-of-type(3):checked ~ .fin-schede label:nth-of-type(3),
+.fin-scelta:nth-of-type(4):checked ~ .fin-schede label:nth-of-type(4) {
+  color: var(--inchiostro); box-shadow: inset 0 -2px 0 var(--blu);
+}
+.fin-scelta:nth-of-type(1):focus-visible ~ .fin-schede label:nth-of-type(1),
+.fin-scelta:nth-of-type(2):focus-visible ~ .fin-schede label:nth-of-type(2),
+.fin-scelta:nth-of-type(3):focus-visible ~ .fin-schede label:nth-of-type(3),
+.fin-scelta:nth-of-type(4):focus-visible ~ .fin-schede label:nth-of-type(4) {
+  outline: 2px solid var(--anello); outline-offset: 3px; border-radius: 2px;
+}
+.fin-nota { margin: 0; max-width: none; color: var(--inchiostro-2); }
+
+/* ----------------------- le sezioni dopo il capitolo ----------------------- */
+.fin-sezione {
+  padding-block: var(--s6); border-top: 1px solid var(--filo);
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: var(--s5) var(--s6); align-items: start;
+}
+.fin-sezione h2 { margin: 0; }
+.fin-sezione p:last-child { margin-bottom: 0; }
+.fin-sezione h2 + p { margin-top: var(--s4); }
+.fin-testa p { font-style: italic; color: var(--inchiostro-2); }
+
+/* I broker: righe di registro, due colonne. */
+.fin-broker {
+  list-style: none; margin: 0 0 var(--s4); padding: 0;
+  display: grid; grid-template-columns: 1fr 1fr; column-gap: var(--s5);
+  font: 600 16px/1.5 var(--sans); border-top: 2px solid var(--inchiostro);
+}
+.fin-broker li { padding: var(--s2) 0; border-bottom: 1px solid var(--filo); }
+
+/* Dove stanno i dati: un verbale, voce per voce. */
+.fin-dati { margin: 0 0 var(--s4); border-top: 2px solid var(--inchiostro); }
+.fin-dati > div {
+  display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 5fr); gap: var(--s1) var(--s4);
+  padding: var(--s3) 0; border-bottom: 1px solid var(--filo);
+}
+.fin-dati dt { font: 600 16px/1.5 var(--sans); padding-top: 4px; }
+.fin-dati dd { margin: 0; }
+
+/* Quanto costa: la banda del registro, col listino a quattro righe. */
+.fin-prezzi { background: var(--banda); border-block: 1px solid var(--filo); }
+.fin-prezzi .fin-sezione { border-top: 0; }
+.fin-prezzi + .fin-sezione { border-top: 0; }
+.fin-prezzi .fin-listino { margin: 0; max-width: none; }
+.fin-prezzi .fin-listino th, .fin-prezzi .fin-listino td { padding: var(--s2) var(--s3); vertical-align: top; }
+.fin-prezzi .fin-listino tbody th { font-weight: 600; }
+.fin-prezzi .fin-listino tbody td { font-weight: 600; }
+.fin-prezzi .fin-listino tbody tr:nth-child(odd) { background: var(--foglio); }
+.fin-prezzi .fin-listino tbody tr:nth-child(even) { background: transparent; }
+.fin-prezzi .fin-listino caption { padding-inline: var(--s3); }
+.fin-per-chi { display: block; font-weight: 400; font-size: 14px; color: var(--inchiostro-2); }
+
+/* Le domande: tutte visibili, una riga di registro ciascuna. */
+.fin-domande { margin: 0; border-top: 2px solid var(--inchiostro); }
+.fin-domande > div { padding: var(--s3) 0; border-bottom: 1px solid var(--filo); }
+.fin-domande dt { font-weight: 600; margin-bottom: var(--s1); }
+.fin-domande dd { margin: 0; max-width: var(--colonna); }
+
+.fin-coda { padding-block: var(--s5) var(--s7); border-top: 1px solid var(--filo); }
+.fin-coda .avviso { margin: 0; max-width: 46rem; }
+
+/* ------------------------------- telefono ------------------------------- */
+@media (max-width: 860px) {
+  .finance .fin-passo, .finance .fin-passo:first-child { min-height: 58vh; }
+  .finance .fin-passo:last-child { min-height: 70vh; }
+  .fin-scena {
+    --k: .5; --f: .78; --linea: .76;
+    --sw: min(150px, 14.5vh);
+    --cornice: 7px; --spessore: 10px; --raggio: 24px;
+  }
+  .fin-foglio { min-width: 96px; height: 22px; }
+  .fin-foglio::after { height: 48px; }
+  .fin-schede { gap: 0 var(--s2); }
+  .fin-nota { display: none; }
+  .fin-sezione { grid-template-columns: 1fr; gap: var(--s3); padding-block: var(--s5); }
+  .fin-dati > div { grid-template-columns: 1fr; }
+  .fin-dati dt { padding-top: 0; }
+}
+@media (max-width: 380px) {
+  .fin-scena { --sw: min(150px, 12.5vh); }
+  /* "Portfolio Manager" non va a capo: a 40 px non entra in 280. */
+  .fin-pagina .fin-apertura h1 { font-size: 34px; }
+  .fin-broker { grid-template-columns: 1fr; }
+}
+
+/* ------------------------- movimento ridotto ------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fin-schermata, .fin-schede label { transition: none; }
+}

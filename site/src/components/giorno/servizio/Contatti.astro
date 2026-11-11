@@ -1,0 +1,38 @@
+---
+/**
+ * CONTATTI (`/contact`): quattro indirizzi, ciascuno con cio' a cui serve.
+ *
+ * Nessun modulo: quello di prima rispondeva "Messaggio inviato!" e non
+ * consegnava a nessuno. Gli indirizzi sono i quattro alias di `lib/stato.ts`.
+ * Per le richieste sui dati la pagina indica `privacy@`: l'alias `gdpr@`, che
+ * l'informativa nomina, non ha l'instradamento verificato (audit del sito,
+ * rilievo M10), e una richiesta con termini di legge non deve potersi perdere.
+ */
+import type { Locale } from '../../../i18n/lingue';
+import { localePath } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import { POSTA } from '../../../lib/stato';
+import Prosa from '../Prosa.astro';
+import Servizio from './Servizio.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const c = t.contatti;
+/* Stesso ordine delle voci in `contatti.voci`: informazioni, stampa, privacy, Games. */
+const indirizzi = [POSTA.informazioni, POSTA.stampa, POSTA.privacy, POSTA.giochi];
+---
+<Servizio t={t} lingua={lingua} rotta="contact" meta={c.meta} occhiello={c.occhiello} titolo={c.titolo} sommario={c.sommario}>
+  {c.voci.map((v, i) => (
+    <section class="riga">
+      <h2><Prosa testo={v.termine} /></h2>
+      <div>
+        <p class="indirizzo"><a href={`mailto:${indirizzi[i]}`} translate="no">{indirizzi[i]}</a></p>
+        <p><Prosa testo={v.descrizione} /></p>
+        {i === 2 && <p class="nota"><a href={localePath(lingua, 'privacy')}>{t.comune.colophon.voci.informativa}</a></p>}
+      </div>
+    </section>
+  ))}
+</Servizio>

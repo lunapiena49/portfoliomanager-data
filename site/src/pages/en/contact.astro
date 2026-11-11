@@ -1,7 +1,8 @@
 ---
-// `/en/contact` - prima era 404: la pagina esisteva solo in italiano, ma il
-// footer ci linkava da ogni pagina in ogni lingua.
-import en from '../../i18n/en';
-import ContactPage from '../../components/ContactPage.astro';
+/**
+ * `/en/contact` - contatti, in inglese. La pagina e' una riga: struttura in
+ * `src/components/giorno/servizio/Contatti.astro`, testo in `src/i18n/testi/en.ts`.
+ */
+import Contatti from '../../components/giorno/servizio/Contatti.astro';
 ---
-<ContactPage t={en} lang="en" />
+<Contatti lingua="en" />

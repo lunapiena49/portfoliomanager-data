@@ -1,0 +1,48 @@
+---
+/**
+ * LA TESTATA: marchio, quattro sezioni, lingua. Non e' fissa: sta in cima
+ * alla pagina e la lascia scorrere. Il menu delle lingue e' un <details>:
+ * funziona senza JavaScript.
+ */
+import type { Locale } from '../../i18n/lingue';
+import { LOCALES, LOCALE_NAMES, duePunti, localePath } from '../../i18n/lingue';
+import type { Testi } from '../../i18n/testi';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+  /** La rotta di questa pagina senza prefisso di lingua ('' per la prima). */
+  rotta?: string;
+  /** La sezione in cui ci si trova, se e' una delle quattro. */
+  corrente?: 'finance' | 'games' | 'casa' | 'notizie';
+  /** Le lingue in cui la pagina esiste: le altre non si offrono. */
+  lingue?: Locale[];
+}
+const { t, lingua, rotta = '', corrente, lingue = LOCALES } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const voci = [
+  { chiave: 'finance', rotta: 'finance', etichetta: t.comune.nav.finance },
+  { chiave: 'games', rotta: 'games', etichetta: t.comune.nav.games },
+  { chiave: 'casa', rotta: 'about', etichetta: t.comune.nav.casa },
+  { chiave: 'notizie', rotta: 'blog', etichetta: t.comune.nav.notizie },
+] as const;
+---
+<a class="salta" href="#testo">{t.comune.salta}</a>
+<header class="margini testata">
+  <a class="marchio" href={localePath(lingua)} translate="no">
+    <img src={`${base}/assets/favicon.svg`} alt="" width="30" height="30" />PluriFin
+  </a>
+  <nav aria-label={t.comune.navEtichetta}>
+    {voci.map((v) => (
+      <a href={localePath(lingua, v.rotta)} aria-current={corrente === v.chiave ? 'page' : undefined}>{v.etichetta}</a>
+    ))}
+    <details class="lingue">
+      <summary aria-label={`${t.comune.lingua}${duePunti(lingua)} ${LOCALE_NAMES[lingua]}`}>{LOCALE_NAMES[lingua]}</summary>
+      <ul>
+        {lingue.filter((l) => l !== lingua).map((l) => (
+          <li><a href={localePath(l, rotta)} lang={l} hreflang={l}>{LOCALE_NAMES[l]}</a></li>
+        ))}
+      </ul>
+    </details>
+  </nav>
+</header>

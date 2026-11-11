@@ -1,6 +1,8 @@
 ---
-// `/fr/contact` - prima era 404.
-import fr from '../../i18n/fr';
-import ContactPage from '../../components/ContactPage.astro';
+/**
+ * `/fr/contact` - contatti, in francese. La pagina e' una riga: struttura in
+ * `src/components/giorno/servizio/Contatti.astro`, testo in `src/i18n/testi/fr.ts`.
+ */
+import Contatti from '../../components/giorno/servizio/Contatti.astro';
 ---
-<ContactPage t={fr} lang="fr" />
+<Contatti lingua="fr" />

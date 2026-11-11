@@ -1,6 +1,5 @@
 ---
-import it from '../i18n/it';
-import LegalLayout from '../layouts/LegalLayout.astro';
+import Documento from '../components/giorno/servizio/Documento.astro';
 
 const toc = [
   { id: 'scope', label: '1. Ambito di applicazione' },
@@ -11,7 +10,7 @@ const toc = [
   { id: 'contact', label: '6. Contatti' },
 ];
 ---
-<LegalLayout t={it} lang="it" pageTitle="Disclaimer finanziario" tocItems={toc}>
+<Documento lingua="it" rotta="disclaimer" titolo="Disclaimer finanziario" indice={toc}>
   <p class="meta">Ultimo aggiornamento: 28 aprile 2026 · Versione 1.0</p>
 
   <div class="callout">
@@ -72,4 +71,4 @@ const toc = [
     Il testo definitivo del disclaimer e' in fase di revisione legale (Wave W3 del piano di sviluppo).
     Il presente testo e' una versione preliminare informativa.
   </div>
-</LegalLayout>
+</Documento>

@@ -1,6 +1,8 @@
 ---
-// `/es/contact` - prima era 404.
-import es from '../../i18n/es';
-import ContactPage from '../../components/ContactPage.astro';
+/**
+ * `/es/contact` - contatti, in spagnolo. La pagina e' una riga: struttura in
+ * `src/components/giorno/servizio/Contatti.astro`, testo in `src/i18n/testi/es.ts`.
+ */
+import Contatti from '../../components/giorno/servizio/Contatti.astro';
 ---
-<ContactPage t={es} lang="es" />
+<Contatti lingua="es" />

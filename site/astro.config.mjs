@@ -4,10 +4,11 @@ import { defineConfig } from 'astro/config';
 // games.html ne conteneva 56, per il 26% del suo peso. Restano nei sorgenti;
 // `compressHTML` non li tocca (comprime gli spazi, non rimuove i commenti).
 import stripHtmlComments from './integrations/strip-html-comments.mjs';
-// Il reset di Tailwind (`list-style:none`) toglie a Safari+VoiceOver la
-// semantica di lista: 73 contenitori su 227 avevano il `role="list"` scritto a
-// mano, 154 no. Si marca in build perche' meta' di quelle liste nasce dal
-// markdown dei post e dei legali e non ha un sorgente su cui scrivere.
+// `list-style: none` toglie a Safari+VoiceOver la semantica di lista. Il
+// telaio di S384 lo usa su colophon, indice dei documenti, elenco delle
+// notizie e menu delle lingue (prima lo imponeva a tutte il reset di
+// Tailwind): il ruolo si marca in build, perche' meta' delle liste nasce dal
+// markdown degli articoli e dei legali e non ha un sorgente su cui scrivere.
 import roleList from './integrations/role-list.mjs';
 
 // The production site lives at the root of plurifin.app (custom domain on
@@ -19,10 +20,14 @@ import roleList from './integrations/role-list.mjs';
 const SITE_URL = process.env.SITE_URL ?? 'https://plurifin.app';
 const SITE_BASE = process.env.SITE_BASE ?? '/';
 
-// Tailwind 3 runs as a plain PostCSS plugin (postcss.config.cjs) since the
-// Astro 6 upgrade: the @astrojs/tailwind integration is deprecated and only
-// supports astro<=5. Base styles were already off (applyBaseStyles: false);
-// src/styles/global.css keeps carrying the @tailwind directives.
+// S384, corsia B6: Tailwind e' uscito insieme al telaio vecchio (Layout.astro,
+// global.css, tailwind.config.mjs, @tailwindcss/vite). Il sito ha quattro
+// fogli scritti a mano (src/styles/{giorno,finance,games,servizio}.css) e
+// nessun processore di CSS oltre a quello di Vite.
+
+/** Le cinque lingue col prefisso: l'italiano sta alla radice. */
+const LINGUE_COL_PREFISSO = ['en', 'es', 'fr', 'de', 'pt'];
+
 export default defineConfig({
   site: SITE_URL,
   base: SITE_BASE,
@@ -37,6 +42,12 @@ export default defineConfig({
   // ma utenti che digitano /it/<page> per simmetria con /en|es|fr|de|pt/
   // ricevevano 404. Static redirects emettono HTML meta-refresh stub.
   redirects: {
+    // S384: la Soglia e' uscita, la prima pagina e' `/`. `/home` resta come
+    // rimando (stub meta-refresh: GitHub Pages non fa 301). Vale per ogni
+    // lingua: `/en/home` era la prima pagina inglese del sito di prima ed e'
+    // nei segnalibri e nei motori; ora rimanda a `/en`.
+    '/home': '/',
+    ...Object.fromEntries(LINGUE_COL_PREFISSO.map((l) => [`/${l}/home`, `/${l}`])),
     '/it': '/',
     '/it/faq': '/faq',
     '/it/about': '/about',
@@ -54,6 +65,40 @@ export default defineConfig({
     // directly to a single .html file without trailing-slash redirects.
     format: 'file',
   },
+  // S384 - POLITICA DI SICUREZZA DEI CONTENUTI, generata dal build.
+  // Su questa origine la demo /app/ tiene chiavi API e portafogli nel browser:
+  // uno script estraneo sul sito li leggerebbe. Astro calcola l'hash di ogni
+  // script e foglio di stile che emette e scrive un <meta http-equiv>; tutto
+  // cio' che non ha un hash e non viene da questa origine non parte.
+  // `frame-ancestors` e le altre intestazioni non valgono in un <meta>: si
+  // mettono in Cloudflare (Transform Rules). La politica e' una sola per
+  // tutte le pagine: la deroga agli attributi `style` che il telaio vecchio
+  // si prendeva in Layout.astro (direttiva `style-src-attr`) e' uscita con
+  // lui (corsia B6), e un contratto sul sito costruito vieta che torni.
+  security: {
+    csp: {
+      algorithm: 'SHA-256',
+      directives: [
+        "default-src 'self'",
+        "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'self'",
+        "object-src 'none'",
+        "base-uri 'none'",
+        "form-action 'none'",
+        "frame-src 'none'",
+        'upgrade-insecure-requests',
+      ],
+      scriptDirective: { resources: ["'self'"] },
+      styleDirective: { resources: ["'self'"] },
+    },
+  },
+  // Gli articoli delle Notizie sono markdown. L'evidenziatore di codice
+  // predefinito (Shiki) colora con attributi `style` in linea, che la politica
+  // qui sopra blocca: Astro lo segnalava a ogni build. Nessun articolo ha
+  // blocchi di codice; l'evidenziatore si spegne, cosi' un blocco futuro esce
+  // come testo semplice invece che come stile vietato.
+  markdown: { syntaxHighlight: false },
   compressHTML: true,
   integrations: [stripHtmlComments(), roleList()],
   output: 'static',

@@ -1,6 +1,5 @@
 ---
-import en from '../../i18n/en';
-import LegalLayout from '../../layouts/LegalLayout.astro';
+import Documento from '../../components/giorno/servizio/Documento.astro';
 
 const toc = [
   { id: 'scope', label: '1. Scope' },
@@ -11,7 +10,7 @@ const toc = [
   { id: 'contact', label: '6. Contact' },
 ];
 ---
-<LegalLayout t={en} lang="en" pageTitle="Financial disclaimer" tocItems={toc}>
+<Documento lingua="en" rotta="disclaimer" titolo="Financial disclaimer" indice={toc}>
   <p class="meta">Last updated: 28 April 2026 · Version 1.0</p>
 
   <div class="callout">
@@ -60,4 +59,4 @@ const toc = [
     The final disclaimer is under legal review (Wave W3 of the development plan).
     This text is a preliminary informational version.
   </div>
-</LegalLayout>
+</Documento>

@@ -1,0 +1,51 @@
+---
+/**
+ * NOTIZIE (`/blog`): gli articoli nella lingua della pagina, dal piu' recente.
+ *
+ * Fino a S383 la pagina italiana elencava gli articoli di TUTTE le lingue: lo
+ * stesso pezzo sei volte. Ogni lingua elenca i suoi; se non ne ha, lo dice.
+ * Le date le scrive Intl nella lingua della pagina, non una stringa a mano.
+ */
+import { getCollection } from 'astro:content';
+import type { Locale } from '../../../i18n/lingue';
+import { duePunti } from '../../../i18n/lingue';
+import { testi } from '../../../i18n/testi';
+import Servizio from './Servizio.astro';
+
+interface Props {
+  lingua: Locale;
+}
+const { lingua } = Astro.props;
+const t = testi(lingua);
+const n = t.notizie;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const articoli = (await getCollection('blog', ({ data }) => !data.draft && data.lang === lingua)).sort(
+  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
+);
+/* Le date di pubblicazione sono giorni senza ora: si leggono in UTC, cosi' il
+   giorno non cambia con il fuso della macchina che costruisce. */
+const giorno = new Intl.DateTimeFormat(lingua, { dateStyle: 'long', timeZone: 'UTC' });
+---
+<Servizio t={t} lingua={lingua} rotta="blog" corrente="notizie" meta={n.meta} occhiello={n.occhiello} titolo={n.titolo} sommario={n.sommario}>
+  {articoli.length === 0 ? (
+    <div class="riga"><p>{n.vuoto}</p></div>
+  ) : (
+    <ul class="notizie">
+      {articoli.map((a) => (
+        <li class="notizia">
+          <p class="data">
+            <span>{n.pubblicato} <time datetime={a.data.publishedAt.toISOString().slice(0, 10)}>{giorno.format(a.data.publishedAt)}</time></span>
+            <span translate="no">{a.data.author.name}</span>
+          </p>
+          <div>
+            <h2><a href={`${base}/blog/${a.id}`}>{a.data.title}</a></h2>
+            <p>{a.data.summary}</p>
+            <p><a href={`${base}/blog/${a.id}`} aria-label={`${n.leggi}${duePunti(lingua)} ${a.data.title}`}>{n.leggi}</a></p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )}
+  <p class="nota"><a href={`${base}/blog/rss-${lingua}.xml`} translate="no">RSS</a></p>
+</Servizio>

@@ -1,6 +1,5 @@
 ---
-import fr from '../../i18n/fr';
-import LegalLayout from '../../layouts/LegalLayout.astro';
+import Documento from '../../components/giorno/servizio/Documento.astro';
 
 const toc = [
   { id: 'scope', label: '1. Champ d\'application' },
@@ -10,7 +9,7 @@ const toc = [
   { id: 'contact', label: '5. Contact' },
 ];
 ---
-<LegalLayout t={fr} lang="fr" pageTitle="DMCA / Retrait" tocItems={toc}>
+<Documento lingua="fr" rotta="dmca" titolo="DMCA / Retrait" indice={toc}>
   <p class="meta">Derniere mise a jour: 2 mai 2026 - Version 1.0</p>
 
   <div class="callout">
@@ -68,4 +67,4 @@ const toc = [
     anglais) et les procedures internes, consultez le document legal a
     <a href="/legal/fr/dmca.html">/legal/fr/dmca.html</a>.
   </div>
-</LegalLayout>
+</Documento>

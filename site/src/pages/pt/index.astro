@@ -1,22 +1,8 @@
 ---
-// `/pt` - la soglia. La radice appartiene allo STUDIO: il Portfolio Manager ha
-// la sua pagina in `/pt/finance`.
-import pt from '../../i18n/pt';
-import Layout from '../../layouts/Layout.astro';
-import Soglia from '../../components/Soglia.astro';
-
-const t = pt;
+/**
+ * `/pt` - la prima pagina, in portoghese. La pagina e' una riga: struttura in
+ * `src/components/giorno/Home.astro`, testo in `src/i18n/testi/pt.ts`.
+ */
+import Home from '../../components/giorno/Home.astro';
 ---
-<Layout
-  title={`PluriFin — ${t.company.gate.kicker}`}
-  description={t.company.gate.line1}
-  ogTitle="PluriFin"
-  ogDescription={t.company.gate.line1}
-  lang="pt"
-  section="company"
-  pageType="organization"
->
-  <main id="main">
-    <Soglia t={t} lang="pt" />
-  </main>
-</Layout>
+<Home lingua="pt" />

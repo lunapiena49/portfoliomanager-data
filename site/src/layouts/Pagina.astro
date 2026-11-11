@@ -1,0 +1,187 @@
+---
+/**
+ * IL TELAIO DEL SITO (S384, "Il giorno di PluriFin"). Dalla corsia B6 e'
+ * l'unico: Layout.astro, il suo foglio di stile e Tailwind sono usciti quando
+ * tutte e sei le lingue sono passate qui.
+ *
+ * Che cosa e' cambiato rispetto al telaio di prima:
+ *  - niente script in linea e niente attributi `style`: la politica di
+ *    sicurezza dei contenuti (security.csp in astro.config.mjs) li vieta;
+ *  - niente interruttore del tema: giorno e notte sono del racconto. Chi
+ *    preferisce lo scuro riceve il "lume" da prefers-color-scheme;
+ *  - niente rivelazioni allo scorrimento: il testo e' visibile senza
+ *    JavaScript (prima ne spariva fino al 100% di una pagina);
+ *  - il canonical della prima pagina e' `/`, non `/index`.
+ */
+import '../styles/giorno.css';
+import type { Locale } from '../i18n/lingue';
+import { LOCALES } from '../i18n/lingue';
+import { datiStrutturati } from '../lib/dati-strutturati.mjs';
+import { pmSuPlay, POSTA } from '../lib/stato';
+
+export type Tipo = 'organizzazione' | 'software' | 'gioco' | 'pagina';
+
+interface Props {
+  titolo: string;
+  descrizione: string;
+  lingua: Locale;
+  tipo?: Tipo;
+  /** false = pagina senza gemelle nelle altre lingue: niente hreflang. */
+  gemelle?: boolean;
+  /** false = pagina da non indicizzare (la 404). */
+  indicizza?: boolean;
+  /** Le lingue in cui questa pagina esiste gia' nel telaio nuovo. */
+  lingue?: Locale[];
+}
+
+const {
+  titolo,
+  descrizione,
+  lingua,
+  tipo = 'pagina',
+  gemelle = true,
+  indicizza = true,
+  lingue = LOCALES,
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const sito = ((import.meta.env.SITE_URL as string | undefined) ?? 'https://plurifin.app').replace(/\/$/, '');
+
+/* La rotta si ricava dall'indirizzo vero. `build.format: 'file'`: gli
+   indirizzi non hanno lo slash finale, e la prima pagina e' `/`, mai `/index`. */
+let percorso = Astro.url.pathname;
+if (base && percorso.startsWith(base)) percorso = percorso.slice(base.length);
+percorso = percorso.replace(/^\/+/, '').replace(/\/+$/, '').replace(/\.html$/, '');
+const pezzi = percorso ? percorso.split('/') : [];
+const haLingua = pezzi.length > 0 && (LOCALES as string[]).includes(pezzi[0]) && pezzi[0] !== 'it';
+const rotta = (haLingua ? pezzi.slice(1) : pezzi).join('/').replace(/(^|\/)index$/, '');
+
+function indirizzo(l: Locale, r: string): string {
+  const coda = [l === 'it' ? '' : l, r].filter(Boolean).join('/');
+  return coda ? `${sito}/${coda}` : `${sito}/`;
+}
+
+/* Il canonical e' l'INDIRIZZO VERO della pagina, letto dal percorso: non si
+   ricompone da lingua e rotta. Un articolo delle Notizie vive a
+   `/blog/<id>` in qualunque lingua sia scritto: ricomposto, quello spagnolo
+   dichiarava `/es/blog/<id>`, che non esiste (rilievo dei traduttori, S384). */
+const proprio = pezzi.join('/').replace(/(^|\/)index$/, '');
+const canonico = proprio ? `${sito}/${proprio}` : `${sito}/`;
+/* Una pagina con gemelle sta per forza sotto il prefisso della sua lingua:
+   se non e' cosi' gli hreflang mentirebbero, e la build si ferma qui. */
+if (gemelle && canonico !== indirizzo(lingua, rotta)) {
+  throw new Error(
+    `Pagina.astro: la pagina ${canonico} si dichiara in lingua "${lingua}" ma non sta sotto il suo prefisso ` +
+      `(atteso ${indirizzo(lingua, rotta)}): correggi la lingua passata o metti gemelle={false}`,
+  );
+}
+const immagine = `${sito}/assets/og-image.png`;
+
+const editore = {
+  '@type': 'Organization',
+  name: 'PluriFin',
+  url: sito,
+  founder: { '@type': 'Person', name: 'Filippo Salemi' },
+  address: { '@type': 'PostalAddress', addressCountry: 'IT' },
+};
+
+let dati: Record<string, unknown>;
+if (tipo === 'organizzazione') {
+  dati = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'PluriFin',
+    url: sito,
+    logo: `${sito}/assets/favicon.svg`,
+    image: immagine,
+    description: descrizione,
+    email: POSTA.informazioni,
+    founder: { '@type': 'Person', name: 'Filippo Salemi', jobTitle: 'CEO' },
+    address: { '@type': 'PostalAddress', addressCountry: 'IT' },
+  };
+} else if (tipo === 'software') {
+  /* L'offerta dichiarata e' quella che esiste: la demo web gratuita. I piani
+     a pagamento entrano nei dati strutturati solo quando la scheda di Google
+     Play c'e' (pmSuPlay): dichiararli prima sarebbe markup ingannevole. */
+  dati = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Portfolio Manager',
+    applicationCategory: 'FinanceApplication',
+    operatingSystem: pmSuPlay ? 'Android, Web' : 'Web',
+    url: canonico,
+    image: immagine,
+    description: descrizione,
+    inLanguage: lingua,
+    publisher: editore,
+    offers: [
+      {
+        '@type': 'Offer',
+        price: '0.00',
+        priceCurrency: 'EUR',
+        availability: 'https://schema.org/InStock',
+        name: 'Web demo',
+      },
+    ],
+  };
+} else if (tipo === 'gioco') {
+  dati = {
+    '@context': 'https://schema.org',
+    '@type': 'VideoGame',
+    name: 'ROLLQUEST',
+    url: canonico,
+    image: immagine,
+    description: descrizione,
+    gamePlatform: 'Android',
+    inLanguage: LOCALES,
+    publisher: editore,
+  };
+} else {
+  dati = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: titolo,
+    url: canonico,
+    description: descrizione,
+    inLanguage: lingua,
+    isPartOf: { '@type': 'WebSite', name: 'PluriFin', url: sito },
+  };
+}
+---
+<!DOCTYPE html>
+<html lang={lingua} dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{titolo}</title>
+  <meta name="description" content={descrizione} />
+  <link rel="canonical" href={canonico} />
+  <meta name="robots" content={indicizza ? 'index, follow' : 'noindex'} />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content={canonico} />
+  <meta property="og:title" content={titolo} />
+  <meta property="og:description" content={descrizione} />
+  <meta property="og:image" content={immagine} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={lingua} />
+  <meta property="og:site_name" content="PluriFin" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  {gemelle && lingue.map((l) => <link rel="alternate" hreflang={l} href={indirizzo(l, rotta)} />)}
+  {gemelle && <link rel="alternate" hreflang="x-default" href={indirizzo('it', rotta)} />}
+
+  <link rel="icon" type="image/svg+xml" href={`${base}/assets/favicon.svg`} />
+  <link rel="apple-touch-icon" href={`${base}/assets/apple-touch-icon.png`} />
+  <link rel="preload" as="font" type="font/woff2" href={`${base}/assets/fonts/newsreader-latin.woff2`} crossorigin />
+
+  <meta name="theme-color" content="#EEF2EA" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#12211B" media="(prefers-color-scheme: dark)" />
+
+  <script type="application/ld+json" set:html={datiStrutturati(dati)} />
+</head>
+<body>
+  <slot />
+</body>
+</html>

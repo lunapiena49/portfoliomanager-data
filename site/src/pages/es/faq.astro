@@ -1,5 +1,8 @@
 ---
-import es from '../../i18n/es';
-import FAQPageContent from '../../components/FAQPageContent.astro';
+/**
+ * `/es/faq` - domande, in spagnolo. La pagina e' una riga: struttura in
+ * `src/components/giorno/servizio/Domande.astro`, testo in `src/i18n/testi/es.ts`.
+ */
+import Domande from '../../components/giorno/servizio/Domande.astro';
 ---
-<FAQPageContent t={es} lang="es" />
+<Domande lingua="es" />

@@ -1,79 +1,47 @@
 ---
-title: "Perché ho costruito PluriFin"
-summary: "La storia personale dietro un'app per investitori retail privacy-first, e perché un singolo sviluppatore può permettersi di proporre un piano da 4,99 EUR/anno."
+title: "Portfolio Manager è costruita su tre divieti"
+summary: "Niente archivio dei portafogli, niente collegamento ai conti, niente intelligenza artificiale senza la chiave di chi la usa. Il listino di quattro righe viene da lì."
 publishedAt: 2026-05-07
+updatedAt: 2026-11-11
 author:
-  name: "Filippo Salemi"
-  role: "Founder, PluriFin"
+  name: "PluriFin"
+  role: "Redazione"
 lang: it
-tags: ["founder", "story", "personal-finance"]
+tags: ["portfolio-manager", "privacy", "prezzi"]
 ---
 
-Lavoro su PluriFin da circa 18 mesi, in part-time, mentre il mio lavoro principale resta
-quello di sviluppatore software in un'azienda italiana. L'app non è nata come prodotto
-commerciale: è nata come strumento personale per tracciare un portafoglio multi-broker
-che ogni anno diventava più difficile da gestire con strumenti generalisti.
+Le app di finanza si presentano con l’elenco di ciò che fanno. Portfolio Manager, l’app di PluriFin Finance, si capisce prima da ciò che non può fare. Non ha un archivio in cui tenere i portafogli, non si collega ai conti e non usa l’intelligenza artificiale senza una chiave dell’utente. Sono tre divieti, e il listino di quattro righe ne è la conseguenza.
 
-## Il problema
+## Primo divieto: nessun archivio dei portafogli
 
-Avevo posizioni distribuite su 4 broker (Interactive Brokers, Trade Republic, Fineco e
-Directa) in 3 valute (EUR, USD, GBP), con asset di natura mista (azioni singole, ETF
-quotati USA, ETF UCITS, qualche ETP crypto, fondi obbligazionari). Ogni broker esporta
-in un formato CSV diverso, ogni broker ha la sua granularità di transazione, e ogni
-broker ha una sua interpretazione di "costo medio di carico" e "P&amp;L realizzato".
+Il portafoglio resta sul telefono di chi lo possiede, cifrato con AES-256, con la chiave custodita dal sistema operativo. PluriFin non conserva i portafogli e non chiede di aprire un account. Per verificare la prova e l’abbonamento le bastano un’impronta anonima del dispositivo e la ricevuta dell’acquisto.
 
-I tool generalisti che avevo provato (Google Sheets templates, alcuni servizi web italiani)
-o non capivano i CSV multi-broker, o richiedevano di consegnare le credenziali API a un
-servizio cloud terzo. Nessuno dei due era accettabile per me: i fogli di calcolo
-diventavano ingestibili oltre le ~30 posizioni, e dare un read-only token API a un
-servizio non auditable è un tradeoff che non sono disposto a fare.
+Un’app di finanza gratuita che conserva i portafogli sui propri server ha un costo da coprire. Prima di installarla conviene chiedere con che cosa lo copre.
 
-## La risposta personale e poi il prodotto
+Due cose vanno dette per intero. La demo web tiene i dati nel browser, senza cifratura: serve a vedere com’è fatta l’app, non a custodire un portafoglio vero. I rapporti sui crash (Firebase Crashlytics) partono soltanto se l’utente accende la diagnostica dalle impostazioni, e non contengono dati di portafoglio.
 
-PluriFin è nato come progetto interno con tre vincoli rigidi:
+L’uscita è prevista quanto l’entrata: “Esporta i miei dati” produce un file JSON con tutto il contenuto, “Cancella tutti i dati” lo elimina dal telefono.
 
-1. **I dati vivono sul dispositivo dell'utente**, in storage cifrato AES-256. Niente cloud
-   PluriFin obbligatorio. L'export GDPR è a un click di distanza.
-2. **L'app non parla mai con un broker per conto dell'utente**. Tutto avviene tramite
-   import di file CSV/PDF che l'utente scarica dal suo broker. Niente API key di terzi
-   custodite da PluriFin.
-3. **Le funzioni AI sono opzionali e usano chiavi dell'utente**. Se vuoi l'analisi Gemini,
-   inserisci la tua chiave API; resta nel keystore del tuo dispositivo.
+## Secondo divieto: nessun collegamento ai conti
 
-Quando ho realizzato che il prodotto poteva essere utile a più di me, ho deciso di
-pubblicarlo. Il modello commerciale è deliberatamente low-friction:
+L’app non chiede le credenziali di un broker e non esegue ordini. I dati entrano perché li porta chi li possiede, un file alla volta. Portfolio Manager riconosce i CSV di undici broker, mostra un’anteprima delle righe da correggere e gestisce i doppioni prima di salvare. Per gli altri intermediari c’è un lettore generico, e dai PDF l’app prova a estrarre la tabella.
 
-- 7 giorni di trial gratuito senza carta
-- 4,99 EUR/anno per Single, 9,99 EUR/anno per Family
-- Lifetime una tantum a 29,99 EUR (Single) o 49,99 EUR (Family)
+È più lento di un collegamento automatico. È anche il motivo per cui nessuno deve consegnare a PluriFin le credenziali della propria banca.
 
-Niente "early bird", niente "primi N utenti", niente promo che differenziano. Stesso prezzo
-per tutti, oggi e in futuro.
+## Terzo divieto: l’intelligenza artificiale solo con la chiave dell’utente
 
-## Perché così poco
+L’analisi con l’intelligenza artificiale è facoltativa. Usa Google Gemini con una chiave che l’utente inserisce di persona, custodita dal sistema operativo del telefono. Chi la accende manda a Google la domanda e la composizione del portafoglio: titoli, quantità, prezzi medi. La richiesta parte dal telefono e non passa da PluriFin, che non la conserva.
 
-L'app costa 25 USD una tantum di Play Console e ~0 EUR di hosting (Cloudflare free tier per
-il Worker e GitHub Pages per il sito). Non ci sono investitori da remunerare, non c'è
-churn da combattere con sconti, non c'è un team da pagare. L'obiettivo è coprire i costi
-operativi e tenere viva una community di utenti che apprezzano un approccio onesto al
-risparmio.
+Le risposte sono spunti generati da un modello, non consulenza finanziaria personalizzata, e possono contenere errori. Le decisioni restano di chi investe.
 
-Se PluriFin un giorno dovesse cessare le operazioni, l'export GDPR ti restituisce tutti
-i tuoi dati in un singolo JSON portabile -- e i piani Lifetime restano accessibili a vita
-sul tuo Google account.
+## Il listino che ne discende
 
-## Cosa aspettarsi nei prossimi mesi
+Un’azienda che non conserva i portafogli non paga per conservarli, e una che non mostra pubblicità non ha inserzionisti da accontentare. Resta un’app, con il suo prezzo: sette giorni di prova senza carta di credito, poi quattro piani, gli stessi per tutti, da 4,99 euro l’anno a 49,99 euro una volta sola per la famiglia.
 
-- **Q2 2026**: lancio Play Store (Android), webapp gratuita già live
-- **Q3 2026**: feedback raccolta da Closed Testing, hotfix sui crash residui
-- **Q4 2026 / Q1 2027**: aumento del numero di broker supportati (priorità: feedback utenti)
-- **Fase 2 (post-revenue)**: iOS, Apple Pay, marchio EUIPO, eventuale assicurazione RC Tech
+Finita la prova resta una versione gratuita. Le posizioni si inseriscono a mano, ribilanciamento e dati di mercato continuano a funzionare; l’import dai broker, gli obiettivi e l’intelligenza artificiale si fermano finché non si sceglie un piano. Il listino completo, con rinnovi e rimborsi, è nella pagina [Prezzi](/pricing).
 
-Se vuoi seguire lo sviluppo in tempo reale, il repository pubblico
-[portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data) ospita la
-pipeline dei dati di mercato e il sito che stai leggendo. Il codice dell'app Android resta
-closed-source per ragioni di compliance (chiavi di firma, anti-piracy, integrità del
-contesto Play Billing) ma le specifiche di formato dei CSV broker e i template dei
-documenti legali sono pubblici.
+## Dove controllare ciò che è scritto qui
 
-A presto.
+Il codice di questo sito e il flusso dei dati di mercato sono pubblici nel repository [portfoliomanager-data](https://github.com/lunapiena49/portfoliomanager-data). Che cosa l’app fa con i dati è scritto per esteso nell’[informativa sulla privacy](/privacy), in sei lingue. La [demo web](/app/) si apre nel browser senza installare nulla.
+
+*Articolo del 7 maggio 2026, riscritto l’11 novembre 2026 sui fatti di oggi.*

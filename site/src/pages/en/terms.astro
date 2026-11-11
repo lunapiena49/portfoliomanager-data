@@ -1,6 +1,5 @@
 ---
-import en from '../../i18n/en';
-import LegalLayout from '../../layouts/LegalLayout.astro';
+import Documento from '../../components/giorno/servizio/Documento.astro';
 
 const toc = [
   { id: 'acceptance', label: '1. Acceptance' },
@@ -12,7 +11,7 @@ const toc = [
   { id: 'contact', label: '7. Contact' },
 ];
 ---
-<LegalLayout t={en} lang="en" pageTitle="Terms of Service" tocItems={toc}>
+<Documento lingua="en" rotta="terms" titolo="Terms of Service" indice={toc}>
   <p class="meta">Last updated: 28 April 2026 · Version 1.0</p>
 
   <h2 id="acceptance">1. Acceptance</h2>
@@ -53,4 +52,4 @@ const toc = [
     The final Terms of Service are under legal review (Wave W3 of the development plan).
     This text is a preliminary informational version.
   </div>
-</LegalLayout>
+</Documento>

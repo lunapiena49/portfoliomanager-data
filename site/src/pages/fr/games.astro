@@ -1,6 +1,8 @@
 ---
-// `/fr/games` - ROLLQUEST (divisione Games). In sviluppo: nessuno store.
-import fr from '../../i18n/fr';
-import GamesPage from '../../components/GamesPage.astro';
+/**
+ * `/fr/games` - ROLLQUEST (divisione Games), in francese. La pagina e' una riga: struttura in
+ * `src/components/giorno/games/Games.astro`, testo in `src/i18n/testi/fr.ts`.
+ */
+import Games from '../../components/giorno/games/Games.astro';
 ---
-<GamesPage t={fr} lang="fr" />
+<Games lingua="fr" />

@@ -1,0 +1,89 @@
+---
+/**
+ * IL PALCO DI GAMES: la camera sale la Torre del gioco. Sei profondita', dal
+ * fondo al davanti: le stelle che compaiono, la luna che sale, le nubi
+ * lontane, un banco di nubi dietro la torre, la torre con le finestre che si
+ * accendono tratto per tratto, un banco di nubi davanti. Sul bordo destro la
+ * scala della salita con l'etichetta dell'Ascesa che avanza; in basso il dado
+ * che tira tre volte e si ferma sul numero dell'Ascesa.
+ *
+ * Le immagini sono riduzioni dei fondi VIGENTI del gioco, rigenerabili con
+ * `node strumenti/torre.mjs` (registro: src/assets/torre/PROVENIENZA.json).
+ * Ogni tratto e' la sua resa spenta con sopra la sola luce delle finestre: le
+ * stesse due rese della pagina di Games. Rese per il solo sito, dichiarate:
+ * delle nubi lontane si usa il terzo basso del cielo del gioco; i banchi
+ * vicini sono copie delle nubi del sigillo accostate; luna e stelle sono forme
+ * CSS con i colori del cielo del gioco.
+ * Decorativo: `aria-hidden`. Senza script la camera e' in cima, le finestre
+ * sono accese, la luna e' alta e il dado e' fermo sul sei.
+ */
+import type { Testi } from '../../i18n/testi';
+import { FACCE_DADO, TIRI, luciDado } from '../../lib/palco-conti.mjs';
+import cielo from '../../assets/torre/spr_tower_sky.webp';
+import cima from '../../assets/torre/spr_summit_corvax.webp';
+import nube from '../../assets/torre/spr_seal_clouds.webp';
+import a1s from '../../assets/torre/spr_tower_seg_a1_spenta.webp';
+import a1l from '../../assets/torre/spr_tower_seg_a1_luce.webp';
+import a2s from '../../assets/torre/spr_tower_seg_a2_spenta.webp';
+import a2l from '../../assets/torre/spr_tower_seg_a2_luce.webp';
+import a3s from '../../assets/torre/spr_tower_seg_a3_spenta.webp';
+import a3l from '../../assets/torre/spr_tower_seg_a3_luce.webp';
+
+interface Props {
+  t: Testi;
+}
+const p = Astro.props.t.home.games.palco;
+/* Dall'alto in basso: l'ordine in cui stanno nella pagina. */
+const tratti = [
+  { spenta: a3s, luce: a3l },
+  { spenta: a2s, luce: a2l },
+  { spenta: a1s, luce: a1l },
+];
+/* I punti di ogni faccia su una griglia tre per tre. */
+const PUNTI: Record<number, number[]> = {
+  1: [4], 2: [0, 8], 3: [0, 4, 8], 4: [0, 2, 6, 8], 5: [0, 2, 4, 6, 8], 6: [0, 2, 3, 5, 6, 8],
+};
+const celle = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+/* La luce sulle facce a tiri finiti: e' lo stato di riposo, quello senza script. */
+const riposo = luciDado(90 * TIRI[0].quarti, 90 * TIRI[1].quarti, 90 * TIRI[2].quarti);
+const tacche = [0, 1, 2, 3];
+const dietro = [0, 1, 2];
+const davanti = [0, 1, 2, 3];
+---
+<div class="cielo" data-scena aria-hidden="true">
+  <div class="stelle"></div>
+  <div class="stelle stelle-fitte"></div>
+  <div class="luna"></div>
+  <div class="lontano">
+    <img src={cielo.src} width={cielo.width} height={cielo.height} alt="" loading="lazy" decoding="async" />
+  </div>
+  <div class="banco banco-dietro">
+    {dietro.map(() => <img src={nube.src} width={nube.width} height={nube.height} alt="" loading="lazy" decoding="async" />)}
+  </div>
+  <div class="torre">
+    <img class="cima" src={cima.src} width={cima.width} height={cima.height} alt="" loading="lazy" decoding="async" />
+    {tratti.map((s) => (
+      <div class="segmento">
+        <img src={s.spenta.src} width={s.spenta.width} height={s.spenta.height} alt="" loading="lazy" decoding="async" />
+        <img class="accesa" src={s.luce.src} width={s.luce.width} height={s.luce.height} alt="" loading="lazy" decoding="async" />
+      </div>
+    ))}
+  </div>
+  <div class="banco banco-davanti">
+    {davanti.map(() => <img src={nube.src} width={nube.width} height={nube.height} alt="" loading="lazy" decoding="async" />)}
+  </div>
+  <div class="scala">{tacche.map(() => <i></i>)}</div>
+  <p class="quota" data-quota data-ascesa={p.ascesa} data-cima={p.cima}>{p.cima}</p>
+  <div class="dado-pista">
+    <div class="dado-carrello">
+      <div class="dado-alone"></div>
+      <div class="dado-salto">
+        <div class="dado">
+          {FACCE_DADO.map((n, i) => (
+            <div class="faccia" data-luce={riposo[i]}>{celle.map((c) => <span>{PUNTI[n].includes(c) && <i></i>}</span>)}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

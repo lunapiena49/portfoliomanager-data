@@ -1,0 +1,55 @@
+---
+/**
+ * `/blog/<articolo>` - UN ARTICOLO DELLE NOTIZIE, sul telaio nuovo (S384).
+ *
+ * Serve gli articoli di tutte le lingue che hanno un dizionario
+ * (src/i18n/testi/<lingua>.ts): dalla corsia B6 sono tutte e sei, e la rotta
+ * transitoria `[...slug].astro` del telaio vecchio e' uscita. L'indirizzo di
+ * un articolo e' `/blog/<id>` in qualunque lingua sia scritto: e' anche il
+ * suo canonical (v. Pagina.astro).
+ *
+ * Un articolo non ha gemelli nelle altre lingue: niente hreflang, e il menu
+ * delle lingue porta all'elenco delle notizie di ciascuna.
+ */
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import { localePath } from '../../i18n/lingue';
+import { LINGUE_PRONTE, testi } from '../../i18n/testi';
+import Documento from '../../components/giorno/servizio/Documento.astro';
+
+export async function getStaticPaths() {
+  const articoli = await getCollection('blog', ({ data }) => !data.draft && LINGUE_PRONTE.includes(data.lang));
+  return articoli.map((articolo) => ({
+    params: { articolo: articolo.id },
+    props: { articolo },
+  }));
+}
+
+interface Props {
+  articolo: CollectionEntry<'blog'>;
+}
+
+const { articolo } = Astro.props;
+const { Content, headings } = await render(articolo);
+const lingua = articolo.data.lang;
+const t = testi(lingua);
+
+const indice = headings.filter((h) => h.depth === 2).map((h) => ({ id: h.slug, label: h.text }));
+/* Giorni senza ora: letti in UTC, il giorno non cambia con il fuso di chi costruisce. */
+const giorno = new Intl.DateTimeFormat(lingua, { dateStyle: 'long', timeZone: 'UTC' });
+---
+<Documento
+  lingua={lingua}
+  rotta="blog"
+  corrente="notizie"
+  titolo={articolo.data.title}
+  descrizione={articolo.data.summary}
+  indice={indice}
+  gemelle={false}
+  ritorno={{ href: localePath(lingua, 'blog'), etichetta: t.notizie.ritorno }}
+>
+  <p class="data">
+    <span>{t.notizie.pubblicato} <time datetime={articolo.data.publishedAt.toISOString().slice(0, 10)}>{giorno.format(articolo.data.publishedAt)}</time></span>
+    <span translate="no">{articolo.data.author.name}</span>
+  </p>
+  <Content />
+</Documento>

@@ -1,0 +1,33 @@
+---
+/**
+ * IL LISTINO di Portfolio Manager: quattro righe, una per piano. Ogni riga
+ * dice il piano, per chi vale e quanto costa; il rinnovo sta nella pagina dei
+ * prezzi. Importi e identificativi vengono dal testo (`prezzi.piani`), che il
+ * presidio del listino dell'app tiene allineato al listino canonico.
+ *
+ * Riusabile: la pagina Finance lo monta nel capitolo "Quanto costa"; una pagina
+ * dei prezzi puo' montarlo cosi' com'e'.
+ */
+import '../../../styles/finance.css';
+import type { Testi } from '../../../i18n/testi';
+
+interface Props {
+  t: Testi;
+}
+const { t } = Astro.props;
+const z = t.prezzi;
+---
+<table class="listino fin-listino">
+  <caption>{z.nota}</caption>
+  <thead>
+    <tr><th scope="col">{z.colonne.piano}</th><th scope="col">{z.colonne.prezzo}</th></tr>
+  </thead>
+  <tbody>
+    {z.piani.map((piano) => (
+      <tr>
+        <th scope="row">{piano.nome}<span class="fin-per-chi">{piano.perChi}</span></th>
+        <td>{piano.prezzo}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
