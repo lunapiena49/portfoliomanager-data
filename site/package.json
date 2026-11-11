@@ -11,7 +11,7 @@
     "test:dist": "node --test integrations/costruito/*.test.mjs"
   },
   "dependencies": {
-    "astro": "^7.3.8"
+    "astro": "^7.4.7"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
