@@ -269,6 +269,8 @@ const fr: Testi = {
       descrizione:
         'ROLLQUEST est le jeu de plateau numérique de PluriFin Games : un dé, un anneau de quatorze cases, une tour à gravir. En développement pour Android, en six langues.',
     },
+    /* L'alt dell'insegna: il marchio del gioco (W3 AVORIO, S387). */
+    marchio: 'ROLLQUEST',
     occhiello: 'PluriFin Games, en développement',
     titolo: 'ROLLQUEST hisse le jeu de plateau au sommet d’une tour',
     sommario:
@@ -480,11 +482,19 @@ const fr: Testi = {
         { termine: 'Logo', descrizione: 'Le glyphe de PluriFin, au format SVG.' },
         { termine: 'Image pour les réseaux sociaux', descrizione: '1200 par 630 pixels, au format PNG.' },
         {
+          termine: 'Logo du jeu',
+          descrizione: 'Le nom de ROLLQUEST sur sa plaque nocturne, pour les fonds clairs, au format PNG.',
+        },
+        {
+          termine: 'Logo du jeu, sans fond',
+          descrizione: 'Le même logo sur fond transparent, pour les fonds sombres, au format PNG.',
+        },
+        {
           termine: 'Captures d’écran et autre matériel',
           descrizione: 'Sur demande, en écrivant à l’adresse presse.',
         },
       ],
-      uso: 'On peut utiliser le logo et les captures d’écran dans les articles et les critiques qui parlent de PluriFin. Le glyphe ne se redessine pas et ne se recolore pas.',
+      uso: 'On peut utiliser le logo et les captures d’écran dans les articles et les critiques qui parlent de PluriFin. Le glyphe ne se redessine pas et ne se recolore pas. Le logo de ROLLQUEST ne se redessine pas, ne se recolore pas et ne se sépare pas de son dé.',
     },
     contatto: {
       titolo: 'Contact presse',

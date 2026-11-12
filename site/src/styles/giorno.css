@@ -508,6 +508,14 @@ img { max-width: 100%; }
 .notte a:active { color: var(--crema); }
 .notte .rubrica { color: var(--ambra); }
 .notte h2 { font-family: var(--gioco); font-weight: 800; letter-spacing: -.01em; line-height: 1.02; }
+/* L'insegna: il marchio di ROLLQUEST (W3 AVORIO, S387), un'immagine e non un
+   testo in un font. Sta solo sulla notte (la regola e' legata a .notte): il fronte Crema tiene 15,97:1 su
+   Notte e 1,06:1 su Carta (registro: src/assets/marchio/PROVENIENZA.json).
+   Area di rispetto = meta' dell'altezza delle maiuscole = 5,2% della
+   larghezza: a 420 px sono 22 px, e lo spazio sotto ne lascia 24. Mai sotto
+   160 px di larghezza: 280 e' la piu' stretta che il telaio le da'. */
+.notte .insegna { margin: 0 0 var(--s4); max-width: none; line-height: 0; }
+.notte .insegna img { display: block; width: min(100%, 420px); height: auto; }
 
 /* --p (0..1) e' la salita della camera. SENZA script vale 1: la camera e' in
    cima, tutte le finestre accese, la luna alta, il dado fermo sul sei.

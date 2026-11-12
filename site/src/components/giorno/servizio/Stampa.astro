@@ -25,8 +25,15 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 /* Le voci dell'azienda con la forma giuridica subito dopo il paese (la terza). */
 const azienda = [...s.inBreve.voci.slice(0, 3), s.formaGiuridica, ...s.inBreve.voci.slice(3)];
-/* I primi due materiali sono file del sito: il termine diventa il collegamento. */
-const materiali = [`${base}/assets/favicon.svg`, `${base}/assets/og-image.png`];
+/* I primi quattro materiali sono file del sito: il termine diventa il
+   collegamento. Il terzo e il quarto sono il marchio di ROLLQUEST (W3 AVORIO,
+   S387): sulla sua targa notturna per i fondi chiari, senza fondo per gli scuri. */
+const materiali = [
+  `${base}/assets/favicon.svg`,
+  `${base}/assets/og-image.png`,
+  `${base}/assets/rollquest-wordmark-targa.png`,
+  `${base}/assets/rollquest-wordmark.png`,
+];
 ---
 <Servizio t={t} lingua={lingua} rotta="press" meta={s.meta} occhiello={s.occhiello} titolo={s.titolo} sommario={s.sommario}>
   <section class="riga" id="azienda">

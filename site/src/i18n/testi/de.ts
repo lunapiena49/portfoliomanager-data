@@ -271,6 +271,8 @@ const de: Testi = {
       descrizione:
         'ROLLQUEST ist das digitale Brettspiel von PluriFin Games: ein Würfel, ein Ring aus vierzehn Feldern, ein Turm zum Erklimmen. In Entwicklung für Android, in sechs Sprachen.',
     },
+    /* L'alt dell'insegna: il marchio del gioco (W3 AVORIO, S387). */
+    marchio: 'ROLLQUEST',
     occhiello: 'PluriFin Games, in Entwicklung',
     titolo: 'ROLLQUEST bringt das Brettspiel auf die Spitze eines Turms',
     sommario:
@@ -483,11 +485,19 @@ const de: Testi = {
         { termine: 'Logo', descrizione: 'Das Signet von PluriFin, im SVG-Format.' },
         { termine: 'Bild für soziale Medien', descrizione: '1200 × 630 Pixel, im PNG-Format.' },
         {
+          termine: 'Logo des Spiels',
+          descrizione: 'Der Name ROLLQUEST auf seiner Nachthimmel-Plakette, für helle Hintergründe, im PNG-Format.',
+        },
+        {
+          termine: 'Logo des Spiels, ohne Hintergrund',
+          descrizione: 'Dasselbe Logo mit transparentem Hintergrund, für dunkle Hintergründe, im PNG-Format.',
+        },
+        {
           termine: 'Screenshots und Weiteres',
           descrizione: 'Auf Anfrage, per E-Mail an die Presseadresse.',
         },
       ],
-      uso: 'Logo und Screenshots dürfen in Artikeln und Rezensionen über PluriFin verwendet werden. Das Signet wird weder nachgezeichnet noch umgefärbt.',
+      uso: 'Logo und Screenshots dürfen in Artikeln und Rezensionen über PluriFin verwendet werden. Das Signet wird weder nachgezeichnet noch umgefärbt. Das Logo von ROLLQUEST wird weder nachgezeichnet noch umgefärbt noch von seinem Würfel getrennt.',
     },
     contatto: {
       titolo: 'Pressekontakt',

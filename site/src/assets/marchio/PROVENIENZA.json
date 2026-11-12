@@ -1,0 +1,32 @@
+{
+  "decisione": "D-S387-SPLASH-WORDMARK-SCELTO (W3 AVORIO, portata: Ovunque); D-S387-MARCHIO-TARGA-SUI-CHIARI; D-S387-MARCHIO-SOCIAL-CON-GLIFO",
+  "file": {
+    "public/assets/og-rollquest.png": {
+      "altezza": 630,
+      "larghezza": 1200,
+      "sha256": "0a27414a1d84c3a5e4355117a3b1daeed5f241d02f91f10a4911247d278074a9"
+    },
+    "public/assets/rollquest-wordmark-targa.png": {
+      "altezza": 522,
+      "larghezza": 1840,
+      "sha256": "e756bce540b161a8a2813224e7d17ef0c1285a37e4acdc54f7cc280fbfd5ae20"
+    },
+    "public/assets/rollquest-wordmark.png": {
+      "altezza": 522,
+      "larghezza": 1840,
+      "sha256": "563aee4f8e2b0ea8fe9456b8c7221b1d78b75f760e70a5af1e9801e0acd264fd"
+    },
+    "src/assets/marchio/rollquest-wordmark.webp": {
+      "altezza": 176,
+      "larghezza": 840,
+      "sha256": "1d5bf91de87d1e9374baed401fb6b7a1db55b756a6457a663d81459ab8b76ca3"
+    }
+  },
+  "generato_da": "rollquest/art/tools/marchio_rollquest.py",
+  "larghezza_minima_px_css": 160,
+  "rispetto_su_maiuscola": 0.5,
+  "sorgente": {
+    "file": "rollquest/art/export/marchio/rollquest_wordmark_master.png",
+    "sha256": "c2e4e11616c743612f90def1b32a7157ee0a889db4dc32d19e809c3a8a87e241"
+  }
+}
