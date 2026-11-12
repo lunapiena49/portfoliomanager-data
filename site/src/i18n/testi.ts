@@ -151,6 +151,11 @@ export interface Testi {
   };
 
   games: Articolo & {
+    /** L'alt dell'insegna: l'immagine del marchio del gioco (W3 AVORIO, S387),
+     *  in testa alla pagina di Games e alla sezione Games della prima pagina.
+     *  E' il NOME, uguale nelle sei lingue (l'alt di un logo dice cio' che il
+     *  logo scrive, non "il logo di": revisione di design S387, WMFIX). */
+    marchio: string;
     stato: { titolo: string; paragrafi: string[] };
     /** La didascalia delle immagini della pagina (corsia B2): da dove
      *  vengono e che cosa e' una resa fatta per il sito. */

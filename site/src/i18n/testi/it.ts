@@ -272,6 +272,8 @@ const it: Testi = {
       descrizione:
         'ROLLQUEST è il gioco da tavolo digitale di PluriFin Games: un dado, un anello di quattordici caselle, una torre da salire. In sviluppo per Android, in sei lingue.',
     },
+    /* L'alt dell'insegna: il marchio del gioco (W3 AVORIO, S387). */
+    marchio: 'ROLLQUEST',
     occhiello: 'PluriFin Games, in sviluppo',
     titolo: 'ROLLQUEST porta il gioco da tavolo in cima a una torre',
     sommario:
@@ -484,11 +486,19 @@ const it: Testi = {
         { termine: 'Marchio', descrizione: 'Il glifo di PluriFin, in formato SVG.' },
         { termine: 'Immagine per i social', descrizione: '1200 per 630 pixel, in formato PNG.' },
         {
+          termine: 'Marchio del gioco',
+          descrizione: 'Il nome di ROLLQUEST sulla sua targa notturna, per i fondi chiari, in formato PNG.',
+        },
+        {
+          termine: 'Marchio del gioco, senza fondo',
+          descrizione: 'Lo stesso marchio a fondo trasparente, per i fondi scuri, in formato PNG.',
+        },
+        {
           termine: 'Schermate e altro materiale',
           descrizione: 'A richiesta, scrivendo all’indirizzo della stampa.',
         },
       ],
-      uso: 'Marchio e schermate si possono usare in articoli e recensioni che parlano di PluriFin. Il glifo non si ridisegna e non si ricolora.',
+      uso: 'Marchio e schermate si possono usare in articoli e recensioni che parlano di PluriFin. Il glifo non si ridisegna e non si ricolora. Il marchio di ROLLQUEST non si ridisegna, non si ricolora e non si separa dal suo dado.',
     },
     contatto: {
       titolo: 'Contatto per la stampa',

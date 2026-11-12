@@ -16,6 +16,9 @@ import Prosa from './Prosa.astro';
 import PalcoEstratti from './PalcoEstratti.astro';
 import PalcoTorre from './PalcoTorre.astro';
 import Mercato from './Mercato.astro';
+/* L'insegna: il marchio di ROLLQUEST (W3 AVORIO), in testa al capitolo di
+   Games. Registro: src/assets/marchio/PROVENIENZA.json. */
+import insegna from '../../assets/marchio/rollquest-wordmark.webp';
 
 interface Props {
   lingua: Locale;
@@ -96,6 +99,7 @@ const ultimoGames = h.games.passi.length - 1;
         <div>
           {h.games.passi.map((passo, i) => (
             <div class="passo">
+              {i === 0 && <p class="insegna"><img src={insegna.src} width={insegna.width} height={insegna.height} alt={t.games.marchio} loading="lazy" decoding="async" /></p>}
               {i === 0 && <p class="rubrica">{h.games.rubrica}</p>}
               {i === 0 && <h2><Prosa testo={h.games.titolo} /></h2>}
               {passo.map((p) => <p><Prosa testo={p} /></p>)}

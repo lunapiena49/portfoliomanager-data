@@ -23,6 +23,10 @@ import Colophon from '../Colophon.astro';
 import Prosa from '../Prosa.astro';
 import Salita from './Salita.astro';
 import Segno from './Segno.astro';
+/* L'insegna: il marchio del gioco (W3 AVORIO). Rigenerabile con
+   `python art/tools/marchio_rollquest.py` del repo del gioco (registro:
+   src/assets/marchio/PROVENIENZA.json). */
+import insegna from '../../../assets/marchio/rollquest-wordmark.webp';
 
 interface Props {
   lingua: Locale;
@@ -46,6 +50,7 @@ const capitoli = [
         <div class="margini salita-griglia">
           <div class="salita-testo">
             <header class="tappa tappa-apertura" data-tappa>
+              <p class="insegna"><img src={insegna.src} width={insegna.width} height={insegna.height} alt={g.marchio} decoding="async" /></p>
               <p class="occhiello"><Prosa testo={g.occhiello} /></p>
               <h1><Prosa testo={g.titolo} /></h1>
               <p class="sommario"><Prosa testo={g.sommario} /></p>

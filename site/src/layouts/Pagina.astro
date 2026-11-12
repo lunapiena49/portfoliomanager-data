@@ -75,7 +75,10 @@ if (gemelle && canonico !== indirizzo(lingua, rotta)) {
       `(atteso ${indirizzo(lingua, rotta)}): correggi la lingua passata o metti gemelle={false}`,
   );
 }
-const immagine = `${sito}/assets/og-image.png`;
+/* L'immagine social: quella di PluriFin, salvo sulle pagine del gioco, che
+   portano il marchio di ROLLQUEST (W3 AVORIO, S387) sul cielo di Games. Stessa
+   taglia, 1200 per 630. */
+const immagine = `${sito}/assets/${tipo === 'gioco' ? 'og-rollquest.png' : 'og-image.png'}`;
 
 const editore = {
   '@type': 'Organization',
