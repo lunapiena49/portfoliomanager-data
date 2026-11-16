@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-11-15T02:08:05.649751+00:00",
+  "generated_at_utc": "2026-11-16T02:24:09.764741+00:00",
   "source": "EODHD_BULK_LAST_DAY",
   "timeframes": [
     "1D",
@@ -54,9 +54,9 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 2550,
-          "eligible_before_filters": 48035,
-          "eligible_after_price_filter": 42204,
-          "eligible_after_dollar_volume_filter": 6573,
+          "eligible_before_filters": 49144,
+          "eligible_after_price_filter": 42633,
+          "eligible_after_dollar_volume_filter": 6574,
           "eligible_after_investor_filters": 2609,
           "filters": {
             "min_price": 5.0,
@@ -79,7 +79,7 @@
           },
           "investor_grade_diagnostics": {
             "skipped_below_investor_price": 484,
-            "skipped_below_investor_dollar_volume": 3469,
+            "skipped_below_investor_dollar_volume": 3470,
             "skipped_above_change_cap": 1,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 10
@@ -1725,9 +1725,9 @@
               "name": "TECL",
               "price": 141.65,
               "close": 141.65,
-              "volume": 1034500,
-              "dollar_volume": 146536925.0,
-              "dollarVolume": 146536925.0,
+              "volume": 1037117,
+              "dollar_volume": 146907623.05,
+              "dollarVolume": 146907623.05,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "USD",
@@ -1791,8 +1791,8 @@
         },
         "5D": {
           "eligible_symbols": 1692,
-          "eligible_before_filters": 47965,
-          "eligible_after_price_filter": 42158,
+          "eligible_before_filters": 49063,
+          "eligible_after_price_filter": 42577,
           "eligible_after_dollar_volume_filter": 6564,
           "eligible_after_investor_filters": 1698,
           "filters": {
@@ -3528,8 +3528,8 @@
         },
         "1M": {
           "eligible_symbols": 1676,
-          "eligible_before_filters": 47774,
-          "eligible_after_price_filter": 42006,
+          "eligible_before_filters": 48865,
+          "eligible_after_price_filter": 42423,
           "eligible_after_dollar_volume_filter": 6532,
           "eligible_after_investor_filters": 1680,
           "filters": {
@@ -4995,9 +4995,9 @@
               "name": "TECL",
               "price": 141.65,
               "close": 141.65,
-              "volume": 1034500,
-              "dollar_volume": 146536925.0,
-              "dollarVolume": 146536925.0,
+              "volume": 1037117,
+              "dollar_volume": 146907623.05,
+              "dollarVolume": 146907623.05,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "USD",
@@ -5265,8 +5265,8 @@
         },
         "1Y": {
           "eligible_symbols": 1000,
-          "eligible_before_filters": 42508,
-          "eligible_after_price_filter": 37280,
+          "eligible_before_filters": 43489,
+          "eligible_after_price_filter": 37630,
           "eligible_after_dollar_volume_filter": 6093,
           "eligible_after_investor_filters": 1000,
           "filters": {
@@ -7010,9 +7010,9 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 806,
-          "eligible_before_filters": 6755,
-          "eligible_after_price_filter": 6513,
-          "eligible_after_dollar_volume_filter": 2087,
+          "eligible_before_filters": 6758,
+          "eligible_after_price_filter": 6516,
+          "eligible_after_dollar_volume_filter": 2089,
           "eligible_after_investor_filters": 847,
           "filters": {
             "min_price": 5.0,
@@ -7034,8 +7034,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 90,
-            "skipped_below_investor_dollar_volume": 1149,
+            "skipped_below_investor_price": 91,
+            "skipped_below_investor_dollar_volume": 1150,
             "skipped_above_change_cap": 1,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -7574,9 +7574,9 @@
               "name": "CRPR",
               "price": 765.0,
               "close": 765.0,
-              "volume": 69067,
-              "dollar_volume": 52836255.0,
-              "dollarVolume": 52836255.0,
+              "volume": 69585,
+              "dollar_volume": 53232525.0,
+              "dollarVolume": 53232525.0,
               "market_cap": 0,
               "marketCap": 0,
               "currency": "GBP",
@@ -8747,9 +8747,9 @@
         },
         "5D": {
           "eligible_symbols": 563,
-          "eligible_before_filters": 6740,
-          "eligible_after_price_filter": 6501,
-          "eligible_after_dollar_volume_filter": 2082,
+          "eligible_before_filters": 6742,
+          "eligible_after_price_filter": 6502,
+          "eligible_after_dollar_volume_filter": 2084,
           "eligible_after_investor_filters": 572,
           "filters": {
             "min_price": 5.0,
@@ -8771,8 +8771,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 89,
-            "skipped_below_investor_dollar_volume": 1416,
+            "skipped_below_investor_price": 90,
+            "skipped_below_investor_dollar_volume": 1417,
             "skipped_above_change_cap": 5,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -10484,9 +10484,9 @@
         },
         "1M": {
           "eligible_symbols": 562,
-          "eligible_before_filters": 6695,
-          "eligible_after_price_filter": 6458,
-          "eligible_after_dollar_volume_filter": 2069,
+          "eligible_before_filters": 6697,
+          "eligible_after_price_filter": 6459,
+          "eligible_after_dollar_volume_filter": 2071,
           "eligible_after_investor_filters": 567,
           "filters": {
             "min_price": 5.0,
@@ -10508,8 +10508,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 89,
-            "skipped_below_investor_dollar_volume": 1405,
+            "skipped_below_investor_price": 90,
+            "skipped_below_investor_dollar_volume": 1406,
             "skipped_above_change_cap": 8,
             "skipped_below_history_depth": 0,
             "skipped_excluded_pattern": 0
@@ -12221,9 +12221,9 @@
         },
         "1Y": {
           "eligible_symbols": 362,
-          "eligible_before_filters": 6127,
-          "eligible_after_price_filter": 5910,
-          "eligible_after_dollar_volume_filter": 1991,
+          "eligible_before_filters": 6130,
+          "eligible_after_price_filter": 5912,
+          "eligible_after_dollar_volume_filter": 1993,
           "eligible_after_investor_filters": 362,
           "filters": {
             "min_price": 5.0,
@@ -12245,8 +12245,8 @@
             ]
           },
           "investor_grade_diagnostics": {
-            "skipped_below_investor_price": 80,
-            "skipped_below_investor_dollar_volume": 1527,
+            "skipped_below_investor_price": 81,
+            "skipped_below_investor_dollar_volume": 1528,
             "skipped_above_change_cap": 20,
             "skipped_below_history_depth": 2,
             "skipped_excluded_pattern": 0
@@ -17661,8 +17661,8 @@
       "timeframes": {
         "1D": {
           "eligible_symbols": 136,
-          "eligible_before_filters": 2620,
-          "eligible_after_price_filter": 2513,
+          "eligible_before_filters": 2622,
+          "eligible_after_price_filter": 2515,
           "eligible_after_dollar_volume_filter": 600,
           "eligible_after_investor_filters": 138,
           "filters": {
@@ -20591,8 +20591,8 @@
         },
         "1M": {
           "eligible_symbols": 79,
-          "eligible_before_filters": 2574,
-          "eligible_after_price_filter": 2469,
+          "eligible_before_filters": 2575,
+          "eligible_after_price_filter": 2470,
           "eligible_after_dollar_volume_filter": 597,
           "eligible_after_investor_filters": 79,
           "filters": {
@@ -21937,8 +21937,8 @@
         },
         "1Y": {
           "eligible_symbols": 39,
-          "eligible_before_filters": 2288,
-          "eligible_after_price_filter": 2193,
+          "eligible_before_filters": 2289,
+          "eligible_after_price_filter": 2194,
           "eligible_after_dollar_volume_filter": 558,
           "eligible_after_investor_filters": 39,
           "filters": {
@@ -38747,7 +38747,7 @@
     }
   ],
   "counts": {
-    "input_rows": 71231,
+    "input_rows": 72345,
     "markets": 8
   },
   "market": "US",
@@ -40393,9 +40393,9 @@
       "name": "TECL",
       "price": 141.65,
       "close": 141.65,
-      "volume": 1034500,
-      "dollar_volume": 146536925.0,
-      "dollarVolume": 146536925.0,
+      "volume": 1037117,
+      "dollar_volume": 146907623.05,
+      "dollarVolume": 146907623.05,
       "market_cap": 0,
       "marketCap": 0,
       "currency": "USD",
