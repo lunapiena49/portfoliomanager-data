@@ -1,7 +1,7 @@
 # Conditions de Service -- Portfolio Manager by PluriFin
 
-**Version**: 1.1.0
-**Dernière mise à jour**: 2026-08-15
+**Version**: 1.1.2
+**Dernière mise à jour**: 2026-11-22
 **Langue originale**: Italien (version contraignante pour la juridiction)
 
 ---
@@ -43,8 +43,9 @@ Family Group).
 
 | Niveau | Coût | Modèle | Fonctions |
 |---|---|---|---|
-| Webapp démo | Gratuit | n/a | Max 5 positions manuelles, sans import, marché hebdo, IA et objectifs verrouillés |
+| Webapp démo | Gratuit | n/a | Max 5 positions manuelles ; données de marché publiques et rééquilibrage disponibles ; sans import, IA ni objectifs |
 | Trial Android (7 jours) | Gratuit, sans carte | n/a | Premium complet pendant 7 jours |
+| Version gratuite Android (après le trial) | Gratuit | n/a | Positions manuelles sans limite de nombre, données de marché publiques et rééquilibrage ; import CSV/PDF, objectifs et IA nécessitent Premium |
 | Premium Single Annual | EUR 4,99/an | Renouvellement annuel automatique | Tout débloqué, compte Google unique |
 | Premium Single Lifetime | EUR 29,99 paiement unique | Paiement unique, **sans renouvellement** | Tout débloqué à vie, compte Google unique |
 | Premium Family Annual | EUR 9,99/an | Renouvellement annuel automatique | Tout débloqué pour Account Holder + jusqu'à 5 Family Members du même Google Family Group |
@@ -73,8 +74,11 @@ Play). PluriFin ne reçoit aucune donnée carte.
 pénalité. Les abonnements Lifetime **ne se renouvellent pas** et ne
 génèrent aucun prélèvement récurrent.
 
-**Remboursement -- abonnements Annual**: politique Google Play. Sous
-48h: automatique via compte Google. Au-delà: discrétion Google.
+**Remboursement -- abonnements Annual**: la demande se fait auprès de
+Google Play, depuis l'historique des commandes du compte Google Play. Google
+décide selon ses propres règles de remboursement : ce n'est pas automatique
+et cela ne dépend pas de PluriFin, qui peut transmettre la demande à Google
+mais ne contrôle pas la décision.
 
 **Remboursement -- abonnements Lifetime et droit de rétractation 14
 jours**: en tant que contenu numérique fourni sur support non matériel
@@ -98,7 +102,8 @@ confidentialité RGPD. L'accès Family cesse automatiquement en cas de:
 suppression du Member du Google Family Group, résiliation de
 l'abonnement, expiration naturelle de l'Annual sans renouvellement,
 résolution ex sec. 10. L'Account Holder est civilement responsable de
-l'usage de l'App par les Family Members.
+l'usage de l'App par les Family Members dans les limites prévues par la
+réglementation applicable.
 
 **Changement de prix**: s'applique uniquement aux abonnements **Annual**
 (Single et Family). Préavis 30 jours via app + email. Les abonnements
@@ -137,14 +142,21 @@ PluriFin N'est PAS responsable, dans les limites légales, de:
 - Erreurs/retards/inexactitudes des données marché tiers
 - Erreurs, hallucinations, données obsolètes des réponses IA
 - Erreurs de parsing CSV/PDF
-- Indisponibilité backend (Cloudflare Worker)
+- Indisponibilité ou erreurs de Google Play dans la transmission à l'App de
+  l'état d'un achat ou d'un abonnement
 - Perte de données locales par désinstallation/dysfonctionnement
 - Compromission de l'appareil (root, jailbreak, malware)
 
 ### 7.3 Plafond quantitatif
 
-Responsabilité max de PluriFin = plus élevé entre **EUR 50,00** et le
-montant payé dans les 12 mois précédant l'événement.
+En tout état de cause, et sous réserve des exclusions légales en cas de dol
+ou de faute lourde (art. 1229 du Code civil italien), l'éventuelle
+responsabilité totale de PluriFin envers l'Utilisateur, pour quelque cause
+que ce soit, est limitée au plus élevé des montants suivants :
+
+- **EUR 50,00** (cinquante euros)
+- Le montant effectivement payé par l'Utilisateur pour l'abonnement Premium
+  au cours des 12 mois précédant l'événement
 
 ### 7.4 Droits du consommateur non excludables
 
@@ -159,7 +171,7 @@ EODHD/FMP terms. PluriFin ne répond pas de leurs dysfonctionnements.
 
 ## 9. Modifications des Conditions
 
-Avis via app (re-consent) et bannière site (30 jours). Si non accepté,
+Avis via app (re-consent). Si non accepté,
 désinstaller et demander remboursement à Google.
 
 ## 10. Résolution
@@ -195,6 +207,8 @@ exclusif de **Milan (Italie)**, conformément aux arts. 18 et 20 du
 Code de procédure civile italien en tant que for du titulaire ayant son
 siège en Italie.
 
+En cas de divergence entre les versions linguistiques du présent document, le texte italien prévaut.
+
 ## 15. ADR
 
 Plateforme RLL Commission Européenne:
@@ -206,7 +220,7 @@ Si une clause est invalide, les autres restent en vigueur.
 
 ## 17. Communications
 
-PluriFin -> Utilisateur: in-app, email (si fourni), bannière site.
+PluriFin -> Utilisateur: in-app (écran de consentement), email (si fourni), site web.
 Utilisateur -> PluriFin: emails section 12 Privacy Policy.
 
 ## 18. Versionnement

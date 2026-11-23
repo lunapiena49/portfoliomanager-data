@@ -1,7 +1,7 @@
 # Disclaimer Financiero -- Portfolio Manager by PluriFin
 
-**Versión**: 1.0.0
-**Última actualización**: 2026-05-02
+**Versión**: 1.0.1
+**Última actualización**: 2026-11-22
 **Idioma original**: Italiano (versión vinculante para la jurisdicción)
 
 ---
@@ -127,8 +127,8 @@ El Usuario declara y acepta que:
 
 ## 11. Menores
 
-App **no destinada a menores de 18**. Content rating Play "Everyone /
-18+". Padres/tutores responsables.
+App **no destinada a menores de 18**. Público: solo adultos (18+).
+Padres/tutores responsables.
 
 ## 12. Geolocalización
 
@@ -151,6 +151,8 @@ y settings.
 ## 14. Jurisdicción
 
 Ley italiana. Disputas: véase ToS.
+
+En caso de discrepancia entre las versiones lingüísticas del presente documento, prevalece el texto italiano.
 
 ## 15. Contactos
 
