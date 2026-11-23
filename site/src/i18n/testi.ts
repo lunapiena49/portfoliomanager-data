@@ -82,6 +82,15 @@ export interface Testi {
     avvisoFinance: string;
     avvisoFinanceLungo: string;
     datiEsempio: string;
+    /** L'avviso di 30 giorni sui documenti legali di Portfolio Manager
+     *  (src/lib/avviso-legale.mjs). `frase` contiene `{data}`; le chiavi di
+     *  `documenti` sono i file pubblicati in /legal/<lingua>/. */
+    avvisoLegale: {
+      etichetta: string;
+      frase: string;
+      documenti: { privacy: string; terms: string; disclaimer: string };
+      e: string;
+    };
     colophon: {
       riga: string;
       stampa: string;

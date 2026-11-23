@@ -1,7 +1,7 @@
 # Financial Disclaimer -- Portfolio Manager by PluriFin
 
-**Version**: 1.0.0
-**Last update**: 2026-07-14
+**Version**: 1.0.1
+**Last update**: 2026-11-22
 **Original language**: Italian (binding version for jurisdiction)
 
 ---
@@ -212,8 +212,8 @@ The User **declares and accepts** that:
 
 ## 11. Minors
 
-The App is **not intended for users under 18**. Play Store content
-rating is "Everyone / 18+" as recommended for financial apps. Parents and
+The App is **not intended for users under 18**. Audience: adults only
+(18+). Parents and
 guardians are responsible for any access by minors; PluriFin cannot
 verify the actual user's age.
 
@@ -252,6 +252,8 @@ features: only legal-document viewing and settings remain available.
 
 This Disclaimer is governed by **Italian law**. For disputes, the
 provisions of the Terms of Service (`legal/terms_of_service.md`) apply.
+
+In case of discrepancy between the language versions of this document, the Italian text prevails.
 
 ## 15. Contacts
 

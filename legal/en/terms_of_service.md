@@ -1,7 +1,7 @@
 # Terms of Service -- Portfolio Manager by PluriFin
 
-**Version**: 1.1.0
-**Last update**: 2026-08-15
+**Version**: 1.1.2
+**Last update**: 2026-11-22
 **Original language**: Italian (binding version for jurisdiction)
 
 ---
@@ -69,8 +69,9 @@ up to 6 accounts in a Google Family Group).
 
 | Tier | Cost | Model | Features |
 |---|---|---|---|
-| Web demo | Free | n/a | Max 5 manual positions, no CSV/PDF import, weekly market data, goals locked, AI locked |
+| Web demo | Free | n/a | Max 5 manual positions; public market data and rebalancing available; CSV/PDF import, goals and AI not available |
 | Android trial (7 days) | Free, **no card required upfront** | n/a | All Premium features active for 7 days from first launch |
+| Android free version (after the trial) | Free | n/a | Manual positions with no limit on their number, public market data and rebalancing; CSV/PDF import, goals and AI require Premium |
 | Premium Single Annual | EUR 4.99 / year | Auto-renewing yearly | All features unlocked, single Google account |
 | Premium Single Lifetime | EUR 29.99 one-time | One-time payment, **no renewal** | All features unlocked for life, single Google account |
 | Premium Family Annual | EUR 9.99 / year | Auto-renewing yearly | All features unlocked for Account Holder + up to 5 Family Members in the same Google Family Group |
@@ -129,10 +130,11 @@ and access is for life.
 For **Single Annual** and **Family Annual** subscriptions, refunds
 follow Google Play Store policy:
 
-- **Within 48 hours** of purchase: automatic refund via Google Play
-  (`Account > Order history > Request refund`)
-- **After 48 hours**: refund only at Google's discretion. PluriFin can
-  forward the request but does not control the decision.
+- Refunds are requested from Google Play, from the order history of the
+  user's Google Play account. Google decides under its own refund rules: the
+  refund is not automatic and does not depend on PluriFin.
+- PluriFin can forward the request to Google but does not control the
+  decision.
 
 The User may disable renewal at any time without penalty (section 4.4).
 
@@ -289,13 +291,13 @@ for:
 - Financial losses of any size, including loss of capital, lost profit, lost
   opportunity
 - Errors, delays, unavailability or inaccuracy of market data provided by
-  third parties (EODHD, FMP, Google Finance)
+  third parties (EODHD, FMP and the other providers of Privacy Policy section 3.5)
 - Errors, hallucinations, outdated or misleading content in AI model
   responses (Gemini)
 - Parsing errors of broker CSV/PDF statements (formats change without
   notice)
-- Backend (Cloudflare Worker) unavailability and consequent temporary
-  blocking of subscription validation
+- Unavailability or errors of Google Play in reporting to the App the status
+  of a purchase or a subscription
 - Local data loss due to uninstall, device malfunction, missing User backup
 - Compromise of the User's device (root, jailbreak, malware)
 
@@ -339,10 +341,8 @@ malfunctions, modifications, suspensions or terminations decided by them.
 
 ## 9. Changes to the Terms
 
-PluriFin can change these Terms. Material changes will be notified:
-
-- In app, via re-consent screen on the first launch after the update
-- On the marketing site, with a banner for 30 days
+PluriFin can change these Terms. Material changes will be notified in app,
+via re-consent screen on the first launch after the update.
 
 If the User does not accept the changes they may uninstall the App and
 request a refund of the unused subscription via Google Play, per Play
@@ -416,6 +416,8 @@ For non-consumer Users (professional use), the exclusive forum is
 **Milan (Italy)**, per arts. 18 and 20 of the Italian Code of Civil
 Procedure as the forum of the controller domiciled in Italy.
 
+In case of discrepancy between the language versions of this document, the Italian text prevails.
+
 ## 15. Alternative dispute resolution (ADR)
 
 The consumer User may use the EU Commission ODR platform:
@@ -430,9 +432,9 @@ remaining clauses stay in force.
 
 PluriFin's communications to the User happen via:
 
-- In app (notifications, consent screens, banners)
+- In app (consent screens)
 - Email if the User has provided one
-- Marketing site (public banner)
+- Marketing site
 
 User communications to PluriFin via email to the appropriate address (see
 section 12 of the Privacy Policy).

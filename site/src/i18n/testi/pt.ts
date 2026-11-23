@@ -42,6 +42,12 @@ const pt: Testi = {
     avvisoFinanceLungo:
       'O Portfolio Manager é uma ferramenta informativa. Os conteúdos e as análises apresentados, incluindo os gerados por inteligência artificial, não constituem aconselhamento financeiro, fiscal ou jurídico nos termos do Texto Único das Finanças italiano (D.Lgs. 58/1998) ou de normas equivalentes. A PluriFin não gere capitais e não executa ordens. As decisões de investimento tomam-se com um profissional habilitado.',
     datiEsempio: 'Dados de exemplo.',
+    avvisoLegale: {
+      etichetta: 'Aviso sobre os documentos legais',
+      frase: 'Em {data}, a PluriFin publicou novas versões de três documentos da app Portfolio Manager:',
+      documenti: { privacy: 'Política de privacidade', terms: 'Termos de serviço', disclaimer: 'Disclaimer financeiro' },
+      e: ' e ',
+    },
     colophon: {
       riga: 'A PluriFin foi fundada e é dirigida por Filippo Salemi, em Itália.',
       stampa: 'Imprensa',
@@ -95,7 +101,7 @@ const pt: Testi = {
         ],
         [
           'A carteira fica no telemóvel, cifrada com AES-256. A PluriFin não tem um arquivo onde a guardar e não pede que se crie uma conta: não há nada para roubar onde não há nada em depósito.',
-          'À PluriFin a carteira nunca chega. Para verificar o teste e a subscrição bastam um identificador anónimo do dispositivo e o recibo da compra. A análise com inteligência artificial é facultativa: quem a ativa envia a pergunta e a composição da carteira ao Google Gemini, com uma chave que introduz pessoalmente.',
+          'À PluriFin a carteira nunca chega. O teste e a subscrição ficam registados apenas no dispositivo: a app não envia à PluriFin nem o recibo da compra nem um identificador do dispositivo. A análise com inteligência artificial é facultativa: quem a ativa envia a pergunta e a composição da carteira ao Google Gemini, com uma chave que introduz pessoalmente.',
         ],
         [
           'O preçário tem quatro linhas. Depois de sete dias de teste sem cartão de crédito, escolhe-se: uma subscrição anual ou um só pagamento, para sempre. O plano Família vale para quem compra e para os membros do seu grupo familiar da Google, até cinco.',
@@ -130,8 +136,8 @@ const pt: Testi = {
           'As casas não são todas iguais: numa combate-se, outra esconde um baú, outra oferece um talismã a escolher entre três cartas, e algumas estão queimadas e não dão nada. Fechada a volta, sobe-se um andar.',
         ],
         [
-          'Quem não gasta completa todos os conteúdos. Compram-se comodidade, estética e Astralitas, com um teto de 20 euros por mês: quem compra chega mais cedo, não aonde os outros não podem chegar.',
-          'Dito por inteiro: as Astralitas são a moeda do jogo e pagam também baús de conteúdo aleatório, e é por isso que a classificação etária é 16+. O vício do setor é o jogo sem teto, em que a conta se descobre no fim do mês. A PluriFin escreve o seu teto aqui, onde qualquer pessoa lho poderá atirar à cara.',
+          'Quem não gasta completa todos os conteúdos. Compram-se Astralitas, aspetos estéticos e a Mochila do Aventureiro. O teto aplica-se às Astralitas compradas: 2000 em 30 dias. Onde se paga em euros, o teto é de 20 euros. Os aspetos e a Mochila pagam-se à parte, fora do teto. Quem compra chega mais cedo, não aonde os outros não podem chegar.',
+          'Dito por inteiro: as Astralitas são a moeda premium do jogo e pagam também baús de conteúdo aleatório. Compram-se com dinheiro real, e é por isso que o jogo se destina apenas a adultos (18+). O vício do setor é o jogo sem teto, em que a conta se descobre no fim do mês. A PluriFin escreve o seu teto aqui, onde qualquer pessoa lho poderá atirar à cara.',
         ],
         [
           'O mundo é um conto de fadas sombrio, ilustrado: pedra, vitrais, luz de lanterna, e nunca o horror. Rollo, os inimigos, a torre e os dados são originais, desenhados para este jogo, que sairá em seis línguas.',
@@ -193,7 +199,7 @@ const pt: Testi = {
         {
           termine: 'À PluriFin',
           descrizione:
-            'A carteira, nunca. Para verificar o teste de sete dias e a subscrição bastam um identificador anónimo do dispositivo e o recibo da compra.',
+            'A carteira, nunca. Nem o recibo da compra nem um identificador do dispositivo: o teste de sete dias e a subscrição ficam registados apenas aí.',
         },
         {
           termine: 'A terceiros, só se o utilizador o ativar',
@@ -294,7 +300,7 @@ const pt: Testi = {
         titolo: 'A regra do dinheiro',
         paragrafi: [
           'Quem não gasta completa todos os conteúdos do jogo. É a restrição com que a PluriFin equilibra a economia: cada alteração tem de ser verificada contra esse jogador, com um simulador, antes de chegar aos jogadores.',
-          'Compram-se comodidade, estética e Astralitas, com um teto de 20 euros por mês: quem compra chega mais cedo, não aonde os outros não podem chegar. Dito por inteiro: as Astralitas são a moeda do jogo e pagam tudo, incluindo baús de conteúdo aleatório. É por isso que a classificação etária é 16+, enquanto o conteúdo continua a ser um conto de fadas sem horror e sem sangue.',
+          'Compram-se Astralitas, aspetos estéticos e a Mochila do Aventureiro. O teto aplica-se às Astralitas compradas: 2000 em 30 dias. Onde se paga em euros, o teto é de 20 euros. Os aspetos e a Mochila pagam-se à parte, fora do teto. Quem compra chega mais cedo, não aonde os outros não podem chegar. Dito por inteiro: as Astralitas são a moeda premium do jogo e pagam também baús de conteúdo aleatório. Compram-se com dinheiro real, e é por isso que o jogo se destina apenas a adultos (18+). O conteúdo, por sua vez, continua a ser um conto de fadas sem horror e sem sangue.',
           'Hoje o ROLLQUEST está em desenvolvimento e ainda não vende nada. O vício do setor é o jogo sem teto, em que a conta se descobre no fim do mês. Aqui o teto existe e está escrito nesta página, onde qualquer pessoa o poderá atirar à cara da PluriFin.',
         ],
       },
@@ -311,7 +317,7 @@ const pt: Testi = {
       titolo: 'Em que ponto está',
       paragrafi: [
         'O ROLLQUEST está em desenvolvimento. Não tem data de lançamento, e a PluriFin não inventa uma para encher uma linha: vai anunciá-la nas Notícias quando houver alguma coisa para jogar.',
-        'Neste site não há lista de espera em que se inscrever. O jogo está declarado para jogadores a partir dos dezasseis anos e sairá em seis línguas: italiano, inglês, espanhol, francês, alemão e português.',
+        'Neste site não há lista de espera em que se inscrever. O jogo destina-se apenas a adultos (18+) e sairá em seis línguas: italiano, inglês, espanhol, francês, alemão e português.',
         'O estúdio é pequeno e pensa em grande: um mundo inteiro, uma torre que não acaba no primeiro chefe, e a pretensão de ficar na mesma prateleira dos jogos feitos por cem pessoas.',
       ],
     },
@@ -331,7 +337,7 @@ const pt: Testi = {
     occhiello: 'A casa',
     titolo: 'PluriFin, duas divisões e um só modo de ganhar dinheiro',
     sommario:
-      'Uma empresa italiana, fundada e dirigida por Filippo Salemi, que faz uma app de finanças pessoais e um jogo de tabuleiro. Quando pede dinheiro, diz primeiro quanto: um preçário de quatro linhas para a app, um teto de 20 euros por mês para o jogo.',
+      'Uma empresa italiana, fundada e dirigida por Filippo Salemi, que faz uma app de finanças pessoais e um jogo de tabuleiro. Quando pede dinheiro, diz primeiro quanto. Para a app, um preçário de quatro linhas. Para o jogo, um teto de 2000 Astralitas compradas em 30 dias. Onde se paga em euros, o teto é de 20 euros. Os aspetos e a Mochila do Aventureiro pagam-se à parte.',
     capitoli: [
       {
         id: 'fondatore',
@@ -458,12 +464,12 @@ const pt: Testi = {
         { termine: 'Plataforma', descrizione: 'Android.' },
         { termine: 'Motor', descrizione: 'Unity.' },
         { termine: 'Línguas', descrizione: 'Seis.' },
-        { termine: 'Público', descrizione: 'Jogadores a partir dos dezasseis anos.' },
+        { termine: 'Público', descrizione: 'Apenas adultos (18+).' },
         { termine: 'Estado', descrizione: 'Em desenvolvimento. Nenhuma data anunciada.' },
         {
           termine: 'Regra',
           descrizione:
-            'Quem não gasta completa todos os conteúdos e quem gasta tem um teto de 20 euros por mês: a regra inteira, baús de conteúdo aleatório incluídos, está no capítulo do dinheiro da página Games.',
+            'Quem não gasta completa todos os conteúdos. Quem compra Astralitas tem um teto de 2000 em 30 dias. Onde se paga em euros, o teto é de 20 euros. Os aspetos e a Mochila do Aventureiro pagam-se à parte, fora do teto. A regra inteira, baús de conteúdo aleatório incluídos, está no capítulo do dinheiro da página Games.',
         },
       ],
     },

@@ -2,7 +2,7 @@
 title: "O Portfolio Manager assenta em três proibições"
 summary: "Nenhum arquivo das carteiras, nenhuma ligação às contas, nenhuma inteligência artificial sem a chave de quem a usa. O preçário de quatro linhas vem daí."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Redação"
@@ -14,7 +14,7 @@ As apps de finanças apresentam-se com a lista do que fazem. O Portfolio Manager
 
 ## Primeira proibição: nenhum arquivo das carteiras
 
-A carteira fica no telemóvel de quem a possui, cifrada com AES-256, com a chave à guarda do sistema operativo. A PluriFin não conserva as carteiras e não pede que se crie uma conta. Para verificar o teste e a subscrição bastam-lhe um identificador anónimo do dispositivo e o recibo da compra.
+A carteira fica no telemóvel de quem a possui, cifrada com AES-256, com a chave à guarda do sistema operativo. A PluriFin não conserva as carteiras e não pede que se crie uma conta. O teste e a subscrição ficam registados apenas no dispositivo: não lhe chegam nem o recibo da compra nem um identificador do dispositivo.
 
 Uma app de finanças gratuita que conserva as carteiras nos seus servidores tem um custo a cobrir. Antes de a instalar, convém perguntar com que o cobre.
 

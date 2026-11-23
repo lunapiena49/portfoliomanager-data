@@ -2,7 +2,7 @@
 title: "Portfolio Manager è costruita su tre divieti"
 summary: "Niente archivio dei portafogli, niente collegamento ai conti, niente intelligenza artificiale senza la chiave di chi la usa. Il listino di quattro righe viene da lì."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Redazione"
@@ -14,7 +14,7 @@ Le app di finanza si presentano con l’elenco di ciò che fanno. Portfolio Mana
 
 ## Primo divieto: nessun archivio dei portafogli
 
-Il portafoglio resta sul telefono di chi lo possiede, cifrato con AES-256, con la chiave custodita dal sistema operativo. PluriFin non conserva i portafogli e non chiede di aprire un account. Per verificare la prova e l’abbonamento le bastano un’impronta anonima del dispositivo e la ricevuta dell’acquisto.
+Il portafoglio resta sul telefono di chi lo possiede, cifrato con AES-256, con la chiave custodita dal sistema operativo. PluriFin non conserva i portafogli e non chiede di aprire un account. Prova e abbonamento restano registrati solo sul dispositivo: non le arrivano né la ricevuta dell’acquisto né un identificativo del dispositivo.
 
 Un’app di finanza gratuita che conserva i portafogli sui propri server ha un costo da coprire. Prima di installarla conviene chiedere con che cosa lo copre.
 

@@ -2,7 +2,7 @@
 title: "Portfolio Manager ist auf drei Verboten gebaut"
 summary: "Kein Archiv der Portfolios, keine Anbindung an die Depots, keine künstliche Intelligenz ohne den Schlüssel derer, die sie nutzen. Daraus folgt die Preisliste mit vier Zeilen."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Redaktion"
@@ -14,7 +14,7 @@ Finanz-Apps stellen sich mit der Liste dessen vor, was sie können. Portfolio Ma
 
 ## Erstes Verbot: kein Archiv der Portfolios
 
-Das Portfolio bleibt auf dem Telefon der Person, der es gehört, verschlüsselt mit AES-256; den Schlüssel verwahrt das Betriebssystem. PluriFin speichert keine Portfolios und verlangt kein Nutzerkonto. Um Testphase und Abo zu prüfen, genügen dem Unternehmen ein anonymer Geräte-Fingerabdruck und der Kaufbeleg.
+Das Portfolio bleibt auf dem Telefon der Person, der es gehört, verschlüsselt mit AES-256; den Schlüssel verwahrt das Betriebssystem. PluriFin speichert keine Portfolios und verlangt kein Nutzerkonto. Testphase und Abo werden nur auf dem Gerät gespeichert: Weder der Kaufbeleg noch eine Gerätekennung gehen an das Unternehmen.
 
 Eine kostenlose Finanz-App, die Portfolios auf eigenen Servern speichert, hat Kosten zu decken. Vor der Installation lohnt die Frage, womit sie das tut.
 

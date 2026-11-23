@@ -104,14 +104,21 @@
 .indice a { display: block; padding: var(--s1) var(--s3); color: var(--inchiostro); text-decoration: none; }
 .indice a:hover { text-decoration: underline; }
 
-.documento { min-width: 0; max-width: 40rem; }
+/* S398: una parola che non entra nella riga va a capo dentro la colonna.
+   Misurato a 320 px: "Fehler/Verzoegerungen/Ungenauigkeiten" (de/terms 1.1.2)
+   non ha punti di a capo (la barra non ne offre) e spingeva la pagina 19 px
+   oltre la finestra. break-word agisce solo dove la parola sporgerebbe: le
+   altre righe restano identiche. Il testo legale non si tocca. */
+.documento { min-width: 0; max-width: 40rem; overflow-wrap: break-word; }
 .documento h1 {
   font-size: clamp(31px, 3.7vw, 50px); line-height: 1.06; letter-spacing: -.016em;
   margin-bottom: var(--s4); max-width: none;
 }
 .documento h2 { font-size: 27px; line-height: 1.2; letter-spacing: -.008em; margin: var(--s6) 0 var(--s3); max-width: none; }
 .documento h3 { font: 600 16px/1.4 var(--sans); margin: var(--s5) 0 var(--s2); }
-.documento :is(h2, h3)[id] { scroll-margin-top: var(--s4); }
+/* S398: i Termini dell'app hanno un terzo livello (4.5.1 ...). */
+.documento h4 { font: 600 14px/1.4 var(--sans); color: var(--inchiostro-2); margin: var(--s4) 0 var(--s2); }
+.documento :is(h2, h3, h4)[id] { scroll-margin-top: var(--s4); }
 .documento p, .documento li { max-width: none; }
 .documento ul, .documento ol { margin: 0 0 var(--s4); padding-left: var(--s4); }
 .documento li { margin-bottom: var(--s2); }

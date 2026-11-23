@@ -20,6 +20,14 @@ on:
                                  # policies (found in S6, cause found in S10).
       - '.github/workflows/site-deploy.yml'
   workflow_dispatch:
+  # S389 (NU-S389-PM-BANNER-1-0-4): a rebuild of its own every day, right
+  # after midnight in Rome (23:10 UTC = 00:10 CET). Pages that depend on the
+  # build date - the 30-day legal notice of site/src/lib/avviso-legale.mjs -
+  # change on the first build after their end. Before, the only daily rebuild
+  # was the dispatch from market-data-snapshot.yml, which runs only when that
+  # deploy succeeds (measured: no site-deploy run on 2026-11-10).
+  schedule:
+    - cron: '10 23 * * *'
 
 # S384 (security audit, lot S3): least privilege PER JOB. The default is
 # read-only; each job declares what it needs. Before, every job held

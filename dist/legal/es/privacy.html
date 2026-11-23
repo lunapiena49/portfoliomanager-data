@@ -29,7 +29,7 @@
 
     </nav>
 <h1>Política de Privacidad -- Portfolio Manager by PluriFin</h1>
-<p><strong>Versión</strong>: 1.0.3 <strong>Última actualización</strong>: 2026-09-21 <strong>Idioma original</strong>: Italiano (versión vinculante para la jurisdicción)</p>
+<p><strong>Versión</strong>: 1.0.5 <strong>Última actualización</strong>: 2026-11-22 <strong>Idioma original</strong>: Italiano (versión vinculante para la jurisdicción)</p>
 <hr/>
 <h2>1. Responsable del tratamiento</h2>
 <ul>
@@ -55,26 +55,27 @@
 <li>La app <strong>no comparte datos con anunciantes</strong>. No hay publicidad.</li>
 <li>Existen <strong>funcionalidades opcionales</strong> que, si el usuario las activa,</li>
 </ul>
-<p>transmiten datos a procesadores de terceros: IA Gemini, precios de   mercado en tiempo real (EODHD/FMP), validación de suscripción (Cloudflare   Worker). Cada una requiere acción explícita del usuario.</p>
+<p>transmiten datos a procesadores de terceros: IA Gemini y precios de   mercado en tiempo real de los proveedores que el usuario configura con su   propia clave (EODHD, FMP y los demás de la sección 3.5). Cada una requiere   acción explícita del usuario.</p>
+<ul>
+<li>La prueba gratuita y la suscripción se registran **solo en el</li>
+</ul>
+<p>dispositivo**: la app no envía a servidores de PluriFin ni el recibo de   compra ni un identificador del dispositivo (secciones 3.2 y 3.3).</p>
 <ul>
 <li>El usuario puede exportar y borrar todos los datos en cualquier momento</li>
 </ul>
 <p>desde Ajustes, sin necesidad de contactar al responsable.</p>
 <h2>3. Categorías de datos tratados</h2>
 <h3>3.1 Datos locales en el dispositivo</h3>
-<p>Cifrados con Hive AES-256 + clave en el keystore del sistema operativo:</p>
+<p>Se quedan <strong>solo</strong> en el dispositivo, en un archivo local cifrado (Hive AES-256 con clave en el keystore del sistema operativo):</p>
 <p>| Categoría | Ejemplos | Base jurídica | Conservación | |---|---|---|---| | Datos de cartera | nombre, ticker, cantidad, precio medio, broker, fecha | art. 6.1.b RGPD | Hasta borrado por usuario | | Objetivos financieros | título, importe meta, vencimiento, aportaciones | art. 6.1.b RGPD | Hasta borrado por usuario | | Preferencias | idioma, divisa, tema, notificaciones, modo demo | art. 6.1.b RGPD | Hasta desinstalación | | Auditoría de consentimientos | timestamp, versión documento, decisión (aceptar/rechazar), hash texto | art. 6.1.c RGPD | Hasta borrado o desinstalación | | Claves API del usuario | claves de los proveedores activados: Gemini, EODHD, FMP, Alpha Vantage, Twelve Data, Finnhub, Polygon.io, Marketstack, Tiingo, Nasdaq Data Link (introducidas manualmente) | art. 6.1.b RGPD | Hasta eliminación por usuario |</p>
-<p>Todo en <code>flutter_secure_storage</code> (Android Keystore / iOS Keychain / DPAPI).</p>
-<h3>3.2 Datos vía Play Store (Google)</h3>
-<p>PluriFin recibe de Google solo:</p>
-<ul>
-<li><code>purchaseToken</code> (token de compra) -- validación suscripción</li>
-<li><code>productId</code> -- identificación producto</li>
-<li><code>device_id_hash</code> (HMAC-SHA256 con sal del servidor) -- gestión del trial</li>
-</ul>
-<p>PluriFin <strong>no</strong> recibe nombre, email, dirección ni datos de pago.</p>
-<h3>3.3 Validación suscripción (Cloudflare Worker)</h3>
-<p>Datos enviados al Worker: <code>device_id_hash</code>, <code>purchase_token</code>, <code>product_id</code>, JWT firmado. Respuesta: JWT Ed25519. Sin PII. El hash no es identificador personal sin la sal del servidor.</p>
+<p>Cifrado AES-256 en modo CBC; la clave de 32 bytes está en el keystore del sistema (Android Keystore / iOS Keychain / DPAPI). La integridad de cada registro se comprueba con un código CRC32: detecta un registro dañado o leído con la clave equivocada. No es una firma criptográfica (no es un HMAC) y no protege frente a una modificación hecha a propósito por quien ya tiene acceso a los archivos de la app. Las claves API se guardan en <code>flutter_secure_storage</code>, que usa el mismo keystore.</p>
+<p>Quedan en cambio <strong>sin cifrar</strong>, en las preferencias del sistema reservadas a la app (SharedPreferences), algunos ajustes técnicos sin datos de cartera: el idioma elegido (que la biblioteca de traducciones, easy_localization, también guarda aquí), la elección sobre el diagnóstico de fallos, el fin de la introducción inicial, la lectura de las pantallas informativas, los indicadores de migraciones internas ya hechas y los contadores que deciden cuándo pedir una reseña en Google Play (número de importaciones, número de posiciones introducidas a mano, fecha de la última petición).</p>
+<h3>3.2 Compras a través de Google Play</h3>
+<p>El pago lo gestiona por completo Google Play: PluriFin <strong>no</strong> recibe nombre, email, dirección ni datos de pago.</p>
+<p>Tras una compra, Google Play comunica a la app, en el dispositivo, el resultado y el identificador del producto comprado (<code>productId</code>: una de las cuatro variantes Premium, anual o de por vida, individual o familiar). La app guarda la suscripción activa en el archivo local cifrado (sección 3.1). En esta versión la app <strong>no</strong> envía el recibo de compra (<code>purchaseToken</code>) ni otros datos de la compra a servidores de PluriFin: el recibo vuelve solo a Google Play, que lo usa para confirmar la compra.</p>
+<h3>3.3 Prueba gratuita y huella del dispositivo (solo Android)</h3>
+<p>En el primer arranque la app inicia la prueba gratuita de 7 días y la registra solo en el dispositivo. Para ello calcula un <code>device_id_hash</code>: la huella SHA-256 de un valor aleatorio de 32 bytes, generado en la primera ejecución y guardado en el keystore del sistema (<code>flutter_secure_storage</code>). La huella <strong>no</strong> deriva del Android ID ni de otros identificadores del dispositivo o del usuario, y no usa valores facilitados por un servidor.</p>
+<p>La huella se queda en el archivo local cifrado junto con las fechas de inicio y fin de la prueba; en esta versión <strong>no</strong> se envía a PluriFin ni a terceros. Al desinstalar la app se borra el valor aleatorio, y una nueva instalación genera una huella distinta.</p>
 <h3>3.4 Datos a Gemini (solo si el usuario activa)</h3>
 <p>Si el usuario introduce su clave Gemini y abre el chat IA, el prompt (pregunta + estructura de cartera anónima: ticker, cantidad, precio medio, asignación %) se transmite directamente a Google Gemini. Aplican los <a href="https://ai.google.dev/terms">Google Gemini API Terms</a>. PluriFin no intermedia ni almacena.</p>
 <h3>3.5 Datos a los proveedores de mercado (solo si el usuario activa)</h3>
@@ -100,7 +101,7 @@
 </ol>
 <p>El usuario puede eliminar la clave o desactivar el proveedor en cualquier momento.</p>
 <h2>4. Subprocesadores</h2>
-<p>| Subprocesador | Finalidad | Datos | Cuándo | |---|---|---|---| | Google Play Billing | Pago y suscripción | purchaseToken, productId | Solo si compra | | Google Gemini API | Análisis IA | Prompt + cartera anónima | Solo si activa | | EODHD | Precios real-time e históricos | Lista tickers | Solo si activa | | FMP | Precios real-time, fundamentales | Lista tickers | Solo si activa | | Alpha Vantage | Precios históricos | Lista tickers | Solo si activa | | Twelve Data | Precios real-time e históricos | Lista tickers | Solo si activa | | Finnhub | Precios real-time | Lista tickers | Solo si activa | | Polygon.io | Precios históricos | Lista tickers | Solo si activa | | Marketstack | Precios end-of-day | Lista tickers | Solo si activa | | Tiingo | Precios real-time e históricos | Lista tickers | Solo si activa | | Nasdaq Data Link | Precios históricos | Lista tickers | Solo si activa | | Stooq | Descarga CSV pública precios históricos | Lista tickers (sin API key) | Solo si activa Stooq | | Google Ireland Limited -- Firebase Crashlytics | Diagnóstica anónima de crash | Stack trace ofuscado, modelo de dispositivo, OS, versión de la app, Firebase Installation ID anónimo | Solo si el usuario activa "Diagnóstica crash anónima" en Ajustes &gt; Privacidad. Desactivada por defecto. Los informes generados mientras la opción está desactivada (crashes y fallos de arranque gestionados) permanecen en el dispositivo a cargo del SDK y se transmiten solo después de que el usuario la active. | | Google LLC -- Google Analytics for Firebase (GA4) | Preparación futura para analítica agregada de estabilidad (propiedad GA4 vinculada al proyecto Firebase) | <strong>Ningún dato transmitido en la versión 1.0.0+10</strong> (el SDK <code>firebase_analytics</code> no está en pubspec). Cuando <code>firebase_analytics</code> se integre en una versión futura, GA4 recibirá eventos auto-recogidos (vistas de pantalla, app_start/app_foreground, <code>app_exception</code> agregado desde Crashlytics). El usuario será re-consentido en ese momento | Inactivo en la versión 1.0.0+10. Se activará solo después de una actualización futura de la app + re-consentimiento del usuario. | | Cloudflare Worker | Validación suscripción | device_id_hash, purchase_token, JWT | Siempre (gating subscription) | | GitHub Pages | Hosting legal/webapp/sitio | IP request HTTP | En cada visita |</p>
+<p>| Subprocesador | Finalidad | Datos | Cuándo | |---|---|---|---| | Google Play Billing | Pago y suscripción | Datos de pago y de la compra, tratados por Google: PluriFin no los recibe | Solo si compra | | Google Gemini API | Análisis IA | Prompt + cartera anónima | Solo si activa | | EODHD | Precios real-time e históricos | Lista tickers | Solo si activa | | FMP | Precios real-time, fundamentales | Lista tickers | Solo si activa | | Alpha Vantage | Precios históricos | Lista tickers | Solo si activa | | Twelve Data | Precios real-time e históricos | Lista tickers | Solo si activa | | Finnhub | Precios real-time | Lista tickers | Solo si activa | | Polygon.io | Precios históricos | Lista tickers | Solo si activa | | Marketstack | Precios end-of-day | Lista tickers | Solo si activa | | Tiingo | Precios real-time e históricos | Lista tickers | Solo si activa | | Nasdaq Data Link | Precios históricos | Lista tickers | Solo si activa | | Stooq | Descarga CSV pública precios históricos | Lista tickers (sin API key) | Solo si activa Stooq | | Google Ireland Limited -- Firebase Crashlytics | Diagnóstica anónima de crash | Stack trace ofuscado, modelo de dispositivo, OS, versión de la app, Firebase Installation ID anónimo | Solo si el usuario activa "Diagnóstica crash anónima" en Ajustes &gt; Privacidad. Desactivada por defecto. Los informes generados mientras la opción está desactivada (crashes y fallos de arranque gestionados) permanecen en el dispositivo a cargo del SDK y se transmiten solo después de que el usuario la active. | | Google LLC -- Google Analytics for Firebase (GA4) | Preparación futura para analítica agregada de estabilidad (propiedad GA4 vinculada al proyecto Firebase) | <strong>Ningún dato transmitido en la versión 1.0.0+10</strong> (el SDK <code>firebase_analytics</code> no está en pubspec). Cuando <code>firebase_analytics</code> se integre en una versión futura, GA4 recibirá eventos auto-recogidos (vistas de pantalla, app_start/app_foreground, <code>app_exception</code> agregado desde Crashlytics). El usuario será re-consentido en ese momento | Inactivo en la versión 1.0.0+10. Se activará solo después de una actualización futura de la app + re-consentimiento del usuario. | | Cloudflare, Inc. -- red delante del dominio <code>plurifin.app</code> | Entrega del sitio, documentos legales, webapp demo y datos de mercado públicos | Registros técnicos de acceso (IP, user-agent, hora) | Cada vez que la app o el navegador descargan un recurso del dominio <code>plurifin.app</code> | | GitHub Pages | Hosting legal/webapp/sitio | IP request HTTP | En cada visita |</p>
 <h2>5. Transferencias fuera de la UE</h2>
 <p>Google, Cloudflare y GitHub son sociedades USA. Transferencias bajo:</p>
 <ul>
@@ -113,10 +114,10 @@
 <p>| Derecho | Cómo ejercerlo | |---|---| | Acceso | Ajustes &gt; Privacidad &gt; Exportar mis datos (ZIP) | | Rectificación | Edición directa en la app | | Supresión | Ajustes &gt; Privacidad &gt; Borrar todos los datos / desinstalar | | Limitación | Desactivar funciones opcionales | | Portabilidad | Ajustes &gt; Privacidad &gt; Exportar (JSON+CSV) | | Oposición | Desactivar funciones opcionales | | Reclamación | <a href="https://www.garanteprivacy.it/">Garante (Italia)</a>, AEPD (España) o autoridad nacional |</p>
 <p>Solicitudes: <code>gdpr@plurifin.app</code>. Respuesta en 30 días (art. 12.3 RGPD).</p>
 <h2>7. Conservación</h2>
-<p>Datos locales hasta borrado por el usuario. Auditoría consentimientos: hasta export y borrado explícitos. Subprocesadores: política propia.</p>
+<p>Datos locales hasta borrado por el usuario. Auditoría consentimientos: hasta export y borrado explícitos. Prueba gratuita y suscripción: solo en el dispositivo (secciones 3.2 y 3.3), sin copia en PluriFin. Subprocesadores: política propia.</p>
 <h2>8. Seguridad</h2>
 <ul>
-<li>Hive AES-256 + HMAC-SHA256</li>
+<li>Hive AES-256 (CBC) con control de integridad CRC32 (no un HMAC)</li>
 <li><code>flutter_secure_storage</code> para claves API</li>
 <li>HTTPS solo (TLS 1.2+)</li>
 <li><code>FLAG_SECURE</code> Android en páginas sensibles</li>
@@ -125,11 +126,11 @@
 <li>Obfuscation Dart en releases</li>
 </ul>
 <h2>9. Menores (art. 8 RGPD)</h2>
-<p>App no destinada a menores de 18 años. Content rating Play Store "18+". Padres/tutores pueden solicitar borrado en <code>gdpr@plurifin.app</code>.</p>
+<p>App no destinada a menores de 18 años. Público: solo adultos (18+). Padres/tutores pueden solicitar borrado en <code>gdpr@plurifin.app</code>.</p>
 <h2>10. Cookies</h2>
 <p>App móvil: ninguna cookie. Webapp: <code>localStorage</code> + cookie técnica GitHub Pages. Sitio vitrina: GoatCounter self-hosted (sin cookie, sin fingerprinting).</p>
 <h2>11. Cambios</h2>
-<p>Notificación vía app (re-consent), banner en sitio (30 días), email newsletter. Versiones anteriores en repo <code>lunapiena49/portfoliomanager-data</code>, historial Git.</p>
+<p>Notificación vía app (re-consent). Versiones anteriores en repo <code>lunapiena49/portfoliomanager-data</code>, historial Git.</p>
 <h2>12. Contactos</h2>
 <ul>
 <li>RGPD: <code>gdpr@plurifin.app</code></li>
@@ -140,6 +141,7 @@
 </ul>
 <h2>13. Jurisdicción y ley aplicable</h2>
 <p>Ley italiana y RGPD. Para consumidores, fuero del consumidor según D.Lgs. 206/2005 (Italia) o equivalentes nacionales más protectores.</p>
+<p>En caso de discrepancia entre las versiones lingüísticas del presente documento, prevalece el texto italiano.</p>
 
     <footer class="doc-footer">
       <p><a href="./index.html">Index</a> | <a href="/legal/">All languages</a> | <a href="/">Back to PluriFin home</a></p>
