@@ -2,7 +2,7 @@
 title: "Portfolio Manager is built on three bans"
 summary: "No archive of portfolios, no connection to accounts, no artificial intelligence without the user’s own key. The four-line price list follows from there."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Editorial team"
@@ -14,7 +14,7 @@ Finance apps introduce themselves with a list of what they do. Portfolio Manager
 
 ## First ban: no archive of portfolios
 
-The portfolio stays on its owner’s phone, encrypted with AES-256, with the key guarded by the operating system. PluriFin does not store portfolios and does not ask anyone to open an account. To verify the trial and the subscription it needs only an anonymous device fingerprint and the purchase receipt.
+The portfolio stays on its owner’s phone, encrypted with AES-256, with the key guarded by the operating system. PluriFin does not store portfolios and does not ask anyone to open an account. The trial and the subscription are recorded only on the device: it receives neither the purchase receipt nor an identifier for the device.
 
 A free finance app that stores portfolios on its own servers has a cost to cover. Before installing it, it is worth asking what covers that cost.
 

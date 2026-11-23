@@ -36,6 +36,10 @@ body {
   font-size: 16px;
   line-height: 1.6;
   -webkit-text-size-adjust: 100%;
+  /* S398: a 320 px "Nutzungsbedingungen" nel titolo e
+     "Fehler/Verzoegerungen/Ungenauigkeiten" (de) sporgevano di 6-20 px.
+     break-word spezza solo la parola che non entra. */
+  overflow-wrap: break-word;
 }
 
 .container {
@@ -115,6 +119,9 @@ code {
   background: var(--color-block-bg);
   padding: 1px 5px;
   border-radius: 4px;
+  /* S398: URL lunghi in code (terms 4.5.1, privacy) spingevano la pagina
+     fino a 120 px oltre la finestra a 320-360 px. */
+  overflow-wrap: anywhere;
 }
 
 pre {

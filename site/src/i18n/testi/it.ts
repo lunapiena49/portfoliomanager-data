@@ -48,6 +48,12 @@ const it: Testi = {
     avvisoFinanceLungo:
       'Portfolio Manager è uno strumento informativo. I contenuti e le analisi mostrati, comprese quelle generate dall’intelligenza artificiale, non costituiscono consulenza finanziaria, fiscale o legale ai sensi del Testo unico della finanza (D.Lgs. 58/1998) o di norme analoghe. PluriFin non gestisce capitali e non esegue ordini. Le decisioni di investimento si prendono con un professionista abilitato.',
     datiEsempio: 'Dati di esempio.',
+    avvisoLegale: {
+      etichetta: 'Avviso sui documenti legali',
+      frase: 'Il {data} PluriFin ha pubblicato le nuove versioni di tre documenti dell’app Portfolio Manager:',
+      documenti: { privacy: 'Privacy Policy', terms: 'Termini di servizio', disclaimer: 'Disclaimer finanziario' },
+      e: ' e ',
+    },
     colophon: {
       riga: 'PluriFin è fondata e guidata da Filippo Salemi, in Italia.',
       stampa: 'Stampa',
@@ -101,7 +107,7 @@ const it: Testi = {
         ],
         [
           'Il portafoglio resta sul telefono, cifrato con AES-256. PluriFin non ha un archivio in cui tenerlo e non chiede di aprire un account: non c’è niente da rubare dove non c’è niente in deposito.',
-          'A PluriFin il portafoglio non arriva mai. Per verificare la prova e l’abbonamento bastano un’impronta anonima del dispositivo e la ricevuta dell’acquisto. L’analisi con l’intelligenza artificiale è facoltativa: chi la accende manda la domanda e la composizione del portafoglio a Google Gemini, con una chiave che inserisce di persona.',
+          'A PluriFin il portafoglio non arriva mai. Prova e abbonamento restano registrati solo sul dispositivo: l’app non manda a PluriFin né la ricevuta dell’acquisto né un identificativo del dispositivo. L’analisi con l’intelligenza artificiale è facoltativa: chi la accende manda la domanda e la composizione del portafoglio a Google Gemini, con una chiave che inserisce di persona.',
         ],
         [
           'Il listino ha quattro righe. Dopo sette giorni di prova senza carta di credito si sceglie: un abbonamento annuale oppure un pagamento solo, per sempre. Il piano Famiglia vale per chi acquista e per i membri del suo gruppo Famiglia di Google, fino a cinque.',
@@ -136,8 +142,8 @@ const it: Testi = {
           'Le caselle non sono tutte uguali: su una si combatte, un’altra nasconde un forziere, un’altra offre un talismano da scegliere fra tre carte, e qualcuna è bruciata e non dà niente. Chiuso il giro, si sale di un piano.',
         ],
         [
-          'Chi non spende completa ogni contenuto. Si comprano comodità, estetica e Astraliti, con un tetto di 20 euro al mese: chi compra arriva prima, non dove gli altri non possono arrivare.',
-          'Detto per intero: gli Astraliti sono la valuta del gioco e pagano anche scrigni dal contenuto casuale, ed è per questo che l’etichetta è 16+. Il vizio del settore è il gioco senza tetto, in cui il conto si scopre a fine mese. PluriFin il suo tetto lo scrive qui, dove chiunque potrà rinfacciarglielo.',
+          'Chi non spende completa ogni contenuto. Si comprano Astraliti, skin estetiche e lo Zaino dell’Avventuriero. Il tetto vale per gli Astraliti comprati: 2.000 in 30 giorni. Dove si paga in euro, il tetto vale 20 euro. Skin e Zaino si pagano a parte, fuori dal tetto. Chi compra arriva prima, non dove gli altri non possono arrivare.',
+          'Detto per intero: gli Astraliti sono la valuta premium del gioco e pagano anche scrigni dal contenuto casuale. Si comprano con soldi veri, ed è per questo che il pubblico è di soli adulti (18+). Il vizio del settore è il gioco senza tetto, in cui il conto si scopre a fine mese. PluriFin il suo tetto lo scrive qui, dove chiunque potrà rinfacciarglielo.',
         ],
         [
           'Il mondo è una fiaba oscura illustrata: pietra, vetrate, luce di lanterna, e mai l’orrore. Rollo, i nemici, la torre e i dadi sono originali, disegnati per questo gioco, che uscirà in sei lingue.',
@@ -199,7 +205,7 @@ const it: Testi = {
         {
           termine: 'A PluriFin',
           descrizione:
-            'Il portafoglio, mai. Per verificare la prova di sette giorni e l’abbonamento bastano un’impronta anonima del dispositivo e la ricevuta dell’acquisto.',
+            'Il portafoglio, mai. E nemmeno la ricevuta dell’acquisto o un identificativo del dispositivo: la prova di sette giorni e l’abbonamento restano registrati solo lì.',
         },
         {
           termine: 'A terzi, solo se l’utente lo accende',
@@ -300,7 +306,7 @@ const it: Testi = {
         titolo: 'La regola dei soldi',
         paragrafi: [
           'Chi non spende completa ogni contenuto del gioco. È il vincolo con cui PluriFin bilancia l’economia: ogni modifica va verificata contro di lui, con un simulatore, prima di arrivare ai giocatori.',
-          'Si comprano comodità, estetica e Astraliti, con un tetto di 20 euro al mese: chi compra arriva prima, non dove gli altri non possono arrivare. Detto per intero: gli Astraliti sono la valuta del gioco e pagano tutto, compresi scrigni dal contenuto casuale. È per questo che l’etichetta è 16+, mentre il contenuto resta una fiaba senza orrore e senza sangue.',
+          'Si comprano Astraliti, skin estetiche e lo Zaino dell’Avventuriero. Il tetto vale per gli Astraliti comprati: 2.000 in 30 giorni. Dove si paga in euro, il tetto vale 20 euro. Skin e Zaino si pagano a parte, fuori dal tetto. Chi compra arriva prima, non dove gli altri non possono arrivare. Detto per intero: gli Astraliti sono la valuta premium del gioco e pagano anche scrigni dal contenuto casuale. Si comprano con soldi veri, ed è per questo che il pubblico è di soli adulti (18+). Il contenuto, invece, resta una fiaba senza orrore e senza sangue.',
           'Oggi ROLLQUEST è in sviluppo e non vende ancora niente. Il vizio del settore è il gioco senza tetto, in cui il conto si scopre a fine mese. Qui il tetto c’è ed è scritto in questa pagina, dove chiunque potrà rinfacciarlo a PluriFin.',
         ],
       },
@@ -317,7 +323,7 @@ const it: Testi = {
       titolo: 'A che punto è',
       paragrafi: [
         'ROLLQUEST è in sviluppo. Non ha una data di uscita, e PluriFin non ne inventa una per riempire una riga: la annuncerà nelle Notizie quando ci sarà qualcosa da giocare.',
-        'Su questo sito non c’è una lista d’attesa a cui iscriversi. Il gioco è dichiarato per giocatori dai sedici anni in su e uscirà in sei lingue: italiano, inglese, spagnolo, francese, tedesco e portoghese.',
+        'Su questo sito non c’è una lista d’attesa a cui iscriversi. Il pubblico è di soli adulti (18+) e il gioco uscirà in sei lingue: italiano, inglese, spagnolo, francese, tedesco e portoghese.',
         'Lo studio è piccolo e ragiona in grande: un mondo intero, una torre che non finisce al primo boss, e la pretesa di stare sullo stesso scaffale dei giochi fatti da cento persone.',
       ],
     },
@@ -337,7 +343,7 @@ const it: Testi = {
     occhiello: 'La casa',
     titolo: 'PluriFin, due divisioni e un solo modo di guadagnare',
     sommario:
-      'Un’azienda italiana, fondata e guidata da Filippo Salemi, che costruisce un’app per la finanza personale e un gioco da tavolo. Quando chiede soldi dice prima quanto: un listino di quattro righe per l’app, un tetto di 20 euro al mese per il gioco.',
+      'Un’azienda italiana, fondata e guidata da Filippo Salemi, che costruisce un’app per la finanza personale e un gioco da tavolo. Quando chiede soldi dice prima quanto. Per l’app, un listino di quattro righe. Per il gioco, un tetto di 2.000 Astraliti comprati in 30 giorni. Dove si paga in euro, il tetto vale 20 euro. Skin e Zaino dell’Avventuriero si pagano a parte.',
     capitoli: [
       {
         id: 'fondatore',
@@ -464,12 +470,12 @@ const it: Testi = {
         { termine: 'Piattaforma', descrizione: 'Android.' },
         { termine: 'Motore', descrizione: 'Unity.' },
         { termine: 'Lingue', descrizione: 'Sei.' },
-        { termine: 'Pubblico', descrizione: 'Giocatori dai sedici anni in su.' },
+        { termine: 'Pubblico', descrizione: 'Solo adulti (18+).' },
         { termine: 'Stato', descrizione: 'In sviluppo. Nessuna data annunciata.' },
         {
           termine: 'Regola',
           descrizione:
-            'Chi non spende completa ogni contenuto e chi spende ha un tetto di 20 euro al mese: la regola intera, scrigni dal contenuto casuale compresi, è nel capitolo dei soldi della pagina Games.',
+            'Chi non spende completa ogni contenuto. Chi compra Astraliti ha un tetto di 2.000 in 30 giorni. Dove si paga in euro, il tetto vale 20 euro. Skin e Zaino dell’Avventuriero si pagano a parte, fuori dal tetto. La regola intera, scrigni dal contenuto casuale compresi, è nel capitolo dei soldi della pagina Games.',
         },
       ],
     },

@@ -1,7 +1,7 @@
 # Termos de Serviço -- Portfolio Manager by PluriFin
 
-**Versão**: 1.1.0
-**Última atualização**: 2026-08-15
+**Versão**: 1.1.2
+**Última atualização**: 2026-11-22
 **Idioma original**: Italiano (versão vinculante)
 
 ---
@@ -43,8 +43,9 @@ Google Family Group).
 
 | Nível | Custo | Modelo | Funções |
 |---|---|---|---|
-| Webapp demo | Grátis | n/a | Max 5 posições manuais, sem import, mercado semanal, IA e objetivos bloqueados |
+| Webapp demo | Grátis | n/a | Max 5 posições manuais; dados de mercado públicos e rebalanceamento disponíveis; sem import, IA nem objetivos |
 | Trial Android (7 dias) | Grátis, sem cartão | n/a | Premium completo durante 7 dias |
+| Versão gratuita Android (após o trial) | Grátis | n/a | Posições manuais sem limite de número, dados de mercado públicos e rebalanceamento; import CSV/PDF, objetivos e IA exigem Premium |
 | Premium Single Annual | EUR 4,99/ano | Renovação automática anual | Tudo desbloqueado, uma só conta Google |
 | Premium Single Lifetime | EUR 29,99 pagamento único | Pagamento único, **sem renovação** | Tudo desbloqueado vitalício, uma só conta Google |
 | Premium Family Annual | EUR 9,99/ano | Renovação automática anual | Tudo desbloqueado para Account Holder + até 5 Family Members do mesmo Google Family Group |
@@ -74,8 +75,10 @@ PluriFin não recebe dados de cartão.
 momento sem penalização. As subscrições Lifetime **não se renovam** e
 não geram débitos recorrentes.
 
-**Reembolso -- subscrições Annual**: política Google Play. Nas
-primeiras 48h: automático via conta Google. Depois: ao critério Google.
+**Reembolso -- subscrições Annual**: pede-se ao Google Play, a partir do
+histórico de encomendas da conta Google Play. A Google decide segundo as
+suas próprias regras de reembolso: não é automático e não depende da
+PluriFin, que pode reencaminhar o pedido à Google mas não controla a decisão.
 
 **Reembolso -- subscrições Lifetime e direito de livre resolução 14
 dias**: enquanto conteúdo digital fornecido em suporte não material nos
@@ -99,7 +102,7 @@ RGPD. O acesso Family cessa automaticamente em caso de: remoção do
 Member do Google Family Group, cancelamento da subscrição, expiração
 natural do Annual sem renovação, resolução nos termos da sec. 10. O
 Account Holder é civilmente responsável pelo uso da App pelos Family
-Members.
+Members nos limites previstos pela legislação aplicável.
 
 **Alteração de preço**: aplica-se apenas a subscrições **Annual**
 (Single e Family). Aviso 30 dias antes via app + email. As subscrições
@@ -136,14 +139,21 @@ PluriFin NÃO é responsável, nos limites legais, por:
 - Erros/atrasos/inexatidões em dados de mercado de terceiros
 - Erros, alucinações, dados desatualizados em respostas IA
 - Erros de parsing CSV/PDF
-- Indisponibilidade backend (Cloudflare Worker)
+- Indisponibilidade ou erros do Google Play ao comunicar à App o estado de
+  uma compra ou de uma subscrição
 - Perda de dados locais por desinstalação/avaria
 - Comprometimento do dispositivo (root, jailbreak, malware)
 
 ### 7.3 Limite quantitativo
 
-Responsabilidade máxima de PluriFin = maior entre **EUR 50,00** e o
-montante pago nos 12 meses anteriores ao evento.
+Em qualquer caso, e sem prejuízo das exclusões legais por dolo ou culpa grave
+(art. 1229 do Código Civil italiano), a eventual responsabilidade total da
+PluriFin perante o Utilizador, por qualquer causa, está limitada ao maior
+entre:
+
+- **EUR 50,00** (cinquenta euros)
+- O montante efetivamente pago pelo Utilizador pela subscrição Premium nos
+  12 meses anteriores ao evento
 
 ### 7.4 Direitos do consumidor não excluíveis
 
@@ -158,7 +168,7 @@ EODHD/FMP. PluriFin não responde pelos seus malfuncionamentos.
 
 ## 9. Alterações dos Termos
 
-Aviso via app (re-consent) e banner site (30 dias). Se não aceito,
+Aviso via app (re-consent). Se não aceito,
 desinstalar e pedir reembolso ao Google.
 
 ## 10. Resolução
@@ -193,6 +203,8 @@ Lei italiana. Para consumidores: foro do consumidor (art. 66-bis D.Lgs.
 exclusivo de **Milão (Itália)**, nos termos dos arts. 18 e 20 do Código
 de Processo Civil italiano como foro do titular com sede em Itália.
 
+Em caso de divergência entre as versões linguísticas do presente documento, prevalece o texto italiano.
+
 ## 15. ADR
 
 Plataforma RAL da Comissão Europeia:
@@ -204,7 +216,7 @@ Se uma cláusula for inválida, as restantes mantêm-se.
 
 ## 17. Comunicações
 
-PluriFin -> Utilizador: in-app, email (se fornecido), banner site.
+PluriFin -> Utilizador: in-app (ecrã de consentimento), email (se fornecido), site.
 Utilizador -> PluriFin: emails secção 12 Privacy Policy.
 
 ## 18. Versionamento

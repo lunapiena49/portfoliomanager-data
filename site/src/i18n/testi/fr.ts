@@ -45,6 +45,12 @@ const fr: Testi = {
     avvisoFinanceLungo:
       'Portfolio Manager est un outil d’information. Les contenus et les analyses affichés, y compris ceux que génère l’intelligence artificielle, ne constituent pas un conseil financier, fiscal ou juridique au sens du texte unique italien de la finance (TUF, D.Lgs. 58/1998) ou de règles analogues. PluriFin ne gère pas de capitaux et n’exécute aucun ordre. Les décisions d’investissement se prennent avec un professionnel habilité.',
     datiEsempio: 'Données d’exemple.',
+    avvisoLegale: {
+      etichetta: 'Avis sur les documents juridiques',
+      frase: 'Le {data}, PluriFin a publié de nouvelles versions de trois documents de l’application Portfolio Manager :',
+      documenti: { privacy: 'Politique de confidentialité', terms: 'Conditions de service', disclaimer: 'Avertissement financier' },
+      e: ' et ',
+    },
     colophon: {
       riga: 'PluriFin est fondée et dirigée par Filippo Salemi, en Italie.',
       stampa: 'Presse',
@@ -98,7 +104,7 @@ const fr: Testi = {
         ],
         [
           'Le portefeuille reste sur le téléphone, chiffré en AES-256. PluriFin n’a pas d’archives où le conserver et ne demande pas d’ouvrir un compte : il n’y a rien à voler là où rien n’est déposé.',
-          'Le portefeuille n’arrive jamais chez PluriFin. Pour vérifier l’essai et l’abonnement, une empreinte anonyme de l’appareil et le reçu de l’achat suffisent. L’analyse par intelligence artificielle est facultative : qui l’active envoie sa question et la composition du portefeuille à Google Gemini, avec une clé qu’il saisit lui-même.',
+          'Le portefeuille n’arrive jamais chez PluriFin. L’essai et l’abonnement sont enregistrés uniquement sur l’appareil : l’app n’envoie à PluriFin ni le reçu de l’achat ni un identifiant de l’appareil. L’analyse par intelligence artificielle est facultative : qui l’active envoie sa question et la composition du portefeuille à Google Gemini, avec une clé qu’il saisit lui-même.',
         ],
         [
           'La grille tarifaire tient en quatre lignes. Après sept jours d’essai sans carte bancaire, on choisit : un abonnement annuel ou un paiement unique, pour toujours. La formule Famille vaut pour l’acheteur et pour les membres de son groupe familial Google, cinq au plus.',
@@ -133,8 +139,8 @@ const fr: Testi = {
           'Les cases ne se valent pas : sur l’une on se bat, une autre cache un coffre au trésor, une autre encore offre un talisman à choisir parmi trois cartes, et quelques-unes, brûlées, ne donnent rien. La boucle bouclée, on monte d’un étage.',
         ],
         [
-          'Qui ne dépense rien termine tous les contenus. On achète du confort, des cosmétiques et des Astralites, avec un plafond de 20 euros par mois : qui achète arrive plus tôt, pas là où les autres ne peuvent pas arriver.',
-          'Pour tout dire : les Astralites sont la monnaie du jeu et paient aussi des coffres au contenu aléatoire, et c’est pour cela que le jeu porte la mention 16+. Le vice du secteur, c’est le jeu sans plafond, où l’addition se découvre à la fin du mois. Son plafond, PluriFin l’écrit ici, où n’importe qui pourra le lui mettre sous le nez.',
+          'Qui ne dépense rien termine tous les contenus. On achète des Astralites, des apparences cosmétiques et le Sac de l’Aventurier. Le plafond s’applique aux Astralites achetées : 2 000 en 30 jours. Là où l’on paie en euros, le plafond est de 20 euros. Les apparences et le Sac se paient à part, hors plafond. Qui achète arrive plus tôt, pas là où les autres ne peuvent pas arriver.',
+          'Pour tout dire : les Astralites sont la monnaie premium du jeu et paient aussi des coffres au contenu aléatoire. Elles s’achètent avec de l’argent réel, et c’est pour cela que le jeu s’adresse aux adultes uniquement (18+). Le vice du secteur, c’est le jeu sans plafond, où l’addition se découvre à la fin du mois. Son plafond, PluriFin l’écrit ici, où n’importe qui pourra le lui mettre sous le nez.',
         ],
         [
           'Le monde est un conte sombre illustré : pierre, vitraux, lumière de lanterne, et jamais l’horreur. Rollo, les ennemis, la tour et les dés sont originaux, dessinés pour ce jeu, qui sortira en six langues.',
@@ -196,7 +202,7 @@ const fr: Testi = {
         {
           termine: 'À PluriFin',
           descrizione:
-            'Le portefeuille, jamais. Pour vérifier l’essai de sept jours et l’abonnement, une empreinte anonyme de l’appareil et le reçu de l’achat suffisent.',
+            'Le portefeuille, jamais. Ni le reçu de l’achat, ni un identifiant de l’appareil : l’essai de sept jours et l’abonnement sont enregistrés uniquement là.',
         },
         {
           termine: 'À des tiers, seulement si l’utilisateur l’active',
@@ -297,7 +303,7 @@ const fr: Testi = {
         titolo: 'La règle de l’argent',
         paragrafi: [
           'Qui ne dépense rien termine tous les contenus du jeu. C’est la contrainte avec laquelle PluriFin équilibre l’économie : chaque modification se vérifie d’abord sur ce joueur-là, au simulateur, avant d’arriver chez les joueurs.',
-          'On achète du confort, des cosmétiques et des Astralites, avec un plafond de 20 euros par mois : qui achète arrive plus tôt, pas là où les autres ne peuvent pas arriver. Pour tout dire : les Astralites sont la monnaie du jeu et paient tout, y compris des coffres au contenu aléatoire. C’est pour cela que le jeu porte la mention 16+, alors que son contenu reste un conte sans horreur et sans sang.',
+          'On achète des Astralites, des apparences cosmétiques et le Sac de l’Aventurier. Le plafond s’applique aux Astralites achetées : 2 000 en 30 jours. Là où l’on paie en euros, le plafond est de 20 euros. Les apparences et le Sac se paient à part, hors plafond. Qui achète arrive plus tôt, pas là où les autres ne peuvent pas arriver. Pour tout dire : les Astralites sont la monnaie premium du jeu et paient aussi des coffres au contenu aléatoire. Elles s’achètent avec de l’argent réel, et c’est pour cela que le jeu s’adresse aux adultes uniquement (18+). Son contenu, en revanche, reste un conte sans horreur et sans sang.',
           'Aujourd’hui, ROLLQUEST est en développement et ne vend encore rien. Le vice du secteur, c’est le jeu sans plafond, où l’addition se découvre à la fin du mois. Ici, le plafond existe et il est écrit sur cette page, où n’importe qui pourra le mettre sous le nez de PluriFin.',
         ],
       },
@@ -314,7 +320,7 @@ const fr: Testi = {
       titolo: 'Où en est le jeu',
       paragrafi: [
         'ROLLQUEST est en développement. Il n’a pas de date de sortie, et PluriFin n’en invente pas une pour remplir une ligne : elle l’annoncera dans les Actualités quand il y aura de quoi jouer.',
-        'Ce site n’a pas de liste d’attente où s’inscrire. Le jeu est déclaré pour des joueurs de seize ans et plus et sortira en six langues : italien, anglais, espagnol, français, allemand et portugais.',
+        'Ce site n’a pas de liste d’attente où s’inscrire. Le jeu s’adresse aux adultes uniquement (18+) et sortira en six langues : italien, anglais, espagnol, français, allemand et portugais.',
         'Le studio est petit et voit grand : un monde entier, une tour qui ne s’arrête pas au premier boss, et la prétention de figurer dans le même rayon que les jeux faits par cent personnes.',
       ],
     },
@@ -333,7 +339,7 @@ const fr: Testi = {
     occhiello: 'La maison',
     titolo: 'PluriFin, deux divisions et une seule façon de gagner de l’argent',
     sommario:
-      'Une entreprise italienne, fondée et dirigée par Filippo Salemi, qui construit une application de finances personnelles et un jeu de plateau. Quand elle demande de l’argent, elle dit d’abord combien : une grille de quatre lignes pour l’application, un plafond de 20 euros par mois pour le jeu.',
+      'Une entreprise italienne, fondée et dirigée par Filippo Salemi, qui construit une application de finances personnelles et un jeu de plateau. Quand elle demande de l’argent, elle dit d’abord combien. Pour l’application, une grille de quatre lignes. Pour le jeu, un plafond de 2 000 Astralites achetées en 30 jours. Là où l’on paie en euros, le plafond est de 20 euros. Les apparences et le Sac de l’Aventurier se paient à part.',
     capitoli: [
       {
         id: 'fondatore',
@@ -460,12 +466,12 @@ const fr: Testi = {
         { termine: 'Plateforme', descrizione: 'Android.' },
         { termine: 'Moteur', descrizione: 'Unity.' },
         { termine: 'Langues', descrizione: 'Six.' },
-        { termine: 'Public', descrizione: 'Joueurs de seize ans et plus.' },
+        { termine: 'Public', descrizione: 'Adultes uniquement (18+).' },
         { termine: 'État', descrizione: 'En développement. Aucune date annoncée.' },
         {
           termine: 'Règle',
           descrizione:
-            'Qui ne dépense rien termine tous les contenus et qui dépense a un plafond de 20 euros par mois : la règle entière, coffres au contenu aléatoire compris, figure dans le chapitre sur l’argent de la page Games.',
+            'Qui ne dépense rien termine tous les contenus. Qui achète des Astralites a un plafond de 2 000 en 30 jours. Là où l’on paie en euros, le plafond est de 20 euros. Les apparences et le Sac de l’Aventurier se paient à part, hors plafond. La règle entière, coffres au contenu aléatoire compris, figure dans le chapitre sur l’argent de la page Games.',
         },
       ],
     },

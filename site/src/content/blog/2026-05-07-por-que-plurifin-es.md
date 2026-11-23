@@ -2,7 +2,7 @@
 title: "Portfolio Manager está construida sobre tres prohibiciones"
 summary: "Sin almacén de carteras, sin conexión con las cuentas, sin inteligencia artificial sin la clave de quien la usa. La lista de precios de cuatro líneas sale de ahí."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Redacción"
@@ -14,7 +14,7 @@ Las apps de finanzas se presentan con la lista de lo que hacen. Portfolio Manage
 
 ## Primera prohibición: ningún almacén de carteras
 
-La cartera se queda en el teléfono de su dueño, cifrada con AES-256, con la clave custodiada por el sistema operativo. PluriFin no conserva las carteras y no pide abrir una cuenta. Para verificar la prueba y la suscripción le bastan una huella anónima del dispositivo y el recibo de la compra.
+La cartera se queda en el teléfono de su dueño, cifrada con AES-256, con la clave custodiada por el sistema operativo. PluriFin no conserva las carteras y no pide abrir una cuenta. La prueba y la suscripción se registran solo en el dispositivo: no le llegan ni el recibo de la compra ni un identificador del dispositivo.
 
 Una app de finanzas gratuita que conserva las carteras en sus servidores tiene un coste que cubrir. Antes de instalarla conviene preguntar con qué lo cubre.
 

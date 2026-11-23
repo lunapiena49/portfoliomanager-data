@@ -7,6 +7,7 @@
 import type { Locale } from '../../i18n/lingue';
 import { LOCALES, LOCALE_NAMES, duePunti, localePath } from '../../i18n/lingue';
 import type { Testi } from '../../i18n/testi';
+import AvvisoLegale from './AvvisoLegale.astro';
 
 interface Props {
   t: Testi;
@@ -46,3 +47,4 @@ const voci = [
     </details>
   </nav>
 </header>
+<AvvisoLegale t={t} lingua={lingua} />

@@ -6,6 +6,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { documento } from '../../src/lib/avviso-legale.mjs';
 
 const QUI = path.dirname(fileURLToPath(import.meta.url));
 const SITO = path.resolve(QUI, '..', '..');
@@ -18,6 +19,9 @@ const testoVisibile = (html) =>
 const fogli = (html) => [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((m) => pagina(m[1].replace(/^\//, ''))).join('\n');
 const pmSuPlay = /export const pmSuPlay = true;/.test(readFileSync(path.join(SITO, 'src', 'lib', 'stato.ts'), 'utf8'));
 const linguePronte = readdirSync(path.join(SITO, 'src', 'i18n', 'testi')).map((f) => f.replace('.ts', ''));
+
+const tabelleSorgente = (l) =>
+  (readFileSync(path.join(SITO, 'src', 'pages', ...(l === 'it' ? [] : [l]), 'privacy.astro'), 'utf8').match(/<div class="table-wrap">/g) ?? []).length;
 
 const SERVIZIO = { about: 'about', press: 'press', pricing: 'pricing', faq: 'faq', contact: 'contact', blog: 'blog' };
 const LEGALI = ['privacy', 'terms', 'disclaimer', 'dmca'];
@@ -155,26 +159,53 @@ test('legali: il testo e\' quello di prima, con la sua versione, le sue tabelle 
   const testo = testoVisibile(privacy);
   assert.equal((privacy.match(/<h2 id="s\d+"/g) ?? []).length, 13);
   assert.equal((privacy.match(/<nav class="indice"[\s\S]*?<\/nav>/)[0].match(/<li/g) ?? []).length, 13);
-  assert.ok((privacy.match(/<div class="table-wrap">/g) ?? []).length >= 5);
+  // S398: le tabelle sono quelle della pagina sorgente (che e' la resa del .md
+  // dell'app, integrations/privacy-pagine.test.mjs); la 1.0.5 ne ha una in meno
+  // della 1.0.4 (sez. 3.2: niente piu' token e impronta inviati), un minimo
+  // fisso le avrebbe date per perse o, peggio, avrebbe chiesto quelle vecchie.
+  assert.equal((privacy.match(/<div class="table-wrap">/g) ?? []).length, tabelleSorgente('it'));
   assert.match(testo, /Versione : \d+\.\d+\.\d+/);
   for (const frase of ['Forma giuridica : persona fisica (sviluppatore indipendente)', 'gdpr@plurifin.app', 'Titolare del trattamento']) {
     assert.ok(testo.includes(frase), `privacy: manca ${frase}`);
   }
-  for (const [r, frase] of [['terms', 'Non esegue ordini di acquisto o vendita di strumenti finanziari'], ['disclaimer', 'Non costituiscono:'], ['dmca', 'legal@plurifin.app']]) {
+  // S398 (PM_TERMINI): /terms e /disclaimer non sono piu' il testo breve del
+  // sito "Versione 1.0, 28 aprile 2026" ma la resa dei .md dell'app
+  // (integrations/privacy-pagine.test.mjs). Qui, sul costruito: la testata
+  // porta versione e data annunciate, e una frase per documento c'e'.
+  for (const r of ['terms', 'disclaimer']) {
+    assert.deepEqual(testataCostruita(pagina(`${r}.html`)), testataAnnunciata(r), `${r}: testata diversa dal documento annunciato`);
+  }
+  for (const [r, frase] of [['terms', 'Le comunicazioni di PluriFin all\'Utente avvengono:'], ['disclaimer', 'L\'App non calcola la fiscalit'], ['dmca', 'legal@plurifin.app']]) {
     assert.ok(testoVisibile(pagina(`${r}.html`)).includes(frase), `${r}: manca ${frase}`);
   }
 });
+
+/** Version and date in the <p class="meta"> of a built legal page. */
+function testataCostruita(html) {
+  const m = /<p class="meta"><strong>[^<]+<\/strong>: ([0-9.]+)<br\s*\/?><strong>[^<]+<\/strong>: (\d{4}-\d{2}-\d{2})(?:<br|<\/p>)/.exec(html);
+  return m ? { versione: m[1], aggiornato: m[2] } : null;
+}
+const testataAnnunciata = (r) => ({ versione: documento(r).versione, aggiornato: documento(r).aggiornato });
 
 test('le altre cinque lingue: servizio e legali sul telaio nuovo, coi legali interi come prima', () => {
   // S384, corsia B6: prima bastava che le pagine "costruissero ancora, ognuna
   // sul suo telaio". Ora stanno tutte sul nuovo, e dei legali (di cui e' cambiato
   // solo l'involucro) si verifica che il documento sia rimasto intero.
   const sezioniItaliane = (pagina('privacy.html').match(/<h2 id="s\d+"/g) ?? []).length;
-  // Le tabelle dell'informativa, lingua per lingua, CONTATE sulla build del
-  // telaio vecchio prima dello scambio dell'involucro: l'inglese ne ha cinque
-  // come l'italiano, le altre quattro lingue tre (sono testi piu' corti: e' un
-  // fatto dei documenti, segnalato all'utente, non di questa pagina).
-  const tabelle = { en: 5, es: 3, fr: 3, de: 3, pt: 3 };
+  const versionePrivacy = (html) => (html.match(/<p class="meta"><strong>[^<]+<\/strong>: (\d+\.\d+\.\d+)<br/) ?? [])[1];
+  const versioneItaliana = versionePrivacy(pagina('privacy.html'));
+  assert.match(versioneItaliana ?? '', /^\d+\.\d+\.\d+$/, 'privacy italiana: versione nella testa');
+  // S398 (PM_PRIVACY): legate solo all'italiano, sei pagine rimaste a 1.0.4
+  // con l'app a 1.0.5 erano verdi. Ora l'italiano porta la versione e la data
+  // dell'informativa annunciata (src/lib/avviso-legale.mjs), le altre lingue
+  // seguono l'italiano qui sotto.
+  const dataPrivacy = (html) => (html.match(/<p class="meta"><strong>[^<]+<\/strong>: [^<]+<br\s*\/?><strong>[^<]+<\/strong>: (\d{4}-\d{2}-\d{2})<br/) ?? [])[1];
+  assert.equal(versioneItaliana, documento('privacy').versione, 'privacy italiana: versione diversa da quella annunciata');
+  assert.equal(dataPrivacy(pagina('privacy.html')), documento('privacy').aggiornato, 'privacy italiana: data diversa da quella annunciata');
+  // Le tabelle dell'informativa, lingua per lingua: fino alla 1.0.4 numeri
+  // scritti qui (en 5, le altre 3); dal S398 quelle della pagina sorgente di
+  // ogni lingua (1.0.5: it ed en 4, le altre 3, testi piu' corti: e' un fatto
+  // dei documenti, non di questa pagina).
   for (const l of ['en', 'es', 'fr', 'de', 'pt']) {
     for (const r of ['about', 'press', 'pricing', 'faq', 'contact', 'blog', 'privacy', 'terms', 'disclaimer', 'dmca']) {
       const file = path.join(l, `${r}.html`);
@@ -190,13 +221,23 @@ test('le altre cinque lingue: servizio e legali sul telaio nuovo, coi legali int
     const privacy = pagina(path.join(l, 'privacy.html'));
     assert.equal((privacy.match(/<h2 id="s\d+"/g) ?? []).length, sezioniItaliane, `${l}/privacy: sezioni`);
     assert.equal((privacy.match(/<nav class="indice"[\s\S]*?<\/nav>/)[0].match(/<li/g) ?? []).length, sezioniItaliane, `${l}/privacy: indice`);
-    assert.equal((privacy.match(/<div class="table-wrap">/g) ?? []).length, tabelle[l], `${l}/privacy: tabelle`);
-    assert.match(testoVisibile(privacy), /1\.0\.3/, `${l}/privacy: versione`);
+    assert.equal((privacy.match(/<div class="table-wrap">/g) ?? []).length, tabelleSorgente(l), `${l}/privacy: tabelle`);
+    // S389 (B1 di DOCREV_TESTIPUB2): prima un letterale (/1\.0\.3/) che ogni
+    // nuova versione rompeva. Ora la versione di ogni lingua deve essere QUELLA
+    // dell'italiano (lingua di riferimento): una traduzione rimasta indietro,
+    // o senza versione, fa rosso.
+    assert.equal(versionePrivacy(privacy), versioneItaliana, `${l}/privacy: versione diversa dall'italiano`);
+    assert.equal(dataPrivacy(privacy), documento('privacy').aggiornato, `${l}/privacy: data diversa da quella annunciata`);
     assert.ok(testoVisibile(privacy).includes('gdpr@plurifin.app'), `${l}/privacy: indirizzo del titolare`);
     for (const r of ['terms', 'disclaimer', 'dmca']) {
       const html = pagina(path.join(l, `${r}.html`));
       assert.ok(/<article class="documento">\s*<h1>[^<]+<\/h1>\s*<p class="meta">/.test(html), `${l}/${r}: documento senza testa`);
       assert.ok((html.match(/<h2 id="/g) ?? []).length >= 1, `${l}/${r}: documento senza sezioni`);
+      if (r !== 'dmca') {
+        assert.deepEqual(testataCostruita(html), testataAnnunciata(r), `${l}/${r}: testata diversa dal documento annunciato`);
+        const sezioniIt = (pagina(`${r}.html`).match(/<h2 id="s\d+"/g) ?? []).length;
+        assert.equal((html.match(/<h2 id="s\d+"/g) ?? []).length, sezioniIt, `${l}/${r}: sezioni diverse dall'italiano`);
+      }
     }
     assert.ok(testoVisibile(pagina(path.join(l, 'dmca.html'))).includes('legal@plurifin.app'), `${l}/dmca: indirizzo`);
   }

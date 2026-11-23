@@ -1,0 +1,42 @@
+---
+/**
+ * L'AVVISO DI 30 GIORNI SUI DOCUMENTI LEGALI DI PORTFOLIO MANAGER
+ * (D-S397-PM-AVVISO-SITO-NUOVO-30). Date, regola e perche':
+ * src/lib/avviso-legale.mjs (un solo punto di verita': `pubblicato`).
+ * Sta sotto la testata di ogni pagina, dopo il collegamento "salta al testo"
+ * (che resta il primo elemento raggiungibile da tastiera) e prima del testo.
+ * HTML semplice, nessuno script: si spegne alla prima build dopo la fine, e
+ * non c'e' finche' i documenti non sono pubblicati.
+ */
+import type { Locale } from '../../i18n/lingue';
+import type { Testi } from '../../i18n/testi';
+import {
+  AVVISO_LEGALE,
+  adessoDellaBuild,
+  avvisoAttivo,
+  documento,
+  indirizzoDocumento,
+  pezziFrase,
+} from '../../lib/avviso-legale.mjs';
+
+interface Props {
+  t: Testi;
+  lingua: Locale;
+}
+const { t, lingua } = Astro.props;
+const a = t.comune.avvisoLegale;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const attivo = avvisoAttivo(adessoDellaBuild(process.env));
+if (a.frase.split('{data}').length !== 2) {
+  throw new Error(`AvvisoLegale: la frase "${lingua}" deve contenere {data} una volta sola: ${a.frase}`);
+}
+// Articolo eliso dell'italiano ("L'8") e "1er" del francese: src/lib/avviso-legale.mjs.
+const { prima, data, dopo } = attivo ? pezziFrase(lingua, a.frase) : { prima: '', data: '', dopo: '' };
+const href = (id: string) => `${base}${indirizzoDocumento(lingua, id)}`;
+const nome = (id: 'privacy' | 'terms' | 'disclaimer') => `${a.documenti[id]} ${documento(id).versione}`;
+---
+{attivo && (
+  <aside class="margini avviso-legale" aria-label={a.etichetta}>
+    <p>{prima}<time datetime={AVVISO_LEGALE.pubblicato}>{data}</time>{dopo} <a href={href('privacy')}>{nome('privacy')}</a>, <a href={href('terms')}>{nome('terms')}</a>{a.e}<a href={href('disclaimer')}>{nome('disclaimer')}</a>.</p>
+  </aside>
+)}

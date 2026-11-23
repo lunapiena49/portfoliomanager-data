@@ -1,7 +1,7 @@
 # Nutzungsbedingungen -- Portfolio Manager by PluriFin
 
-**Version**: 1.1.0
-**Letzte Aktualisierung**: 2026-08-15
+**Version**: 1.1.2
+**Letzte Aktualisierung**: 2026-11-22
 **Originalsprache**: Italienisch (verbindliche Fassung)
 
 ---
@@ -42,8 +42,9 @@ Family Group).
 
 | Stufe | Kosten | Modell | Funktionen |
 |---|---|---|---|
-| Webapp Demo | Gratis | n/a | Max 5 manuelle Positionen, kein Import, wöchentl. Markt, KI/Ziele gesperrt |
+| Webapp Demo | Gratis | n/a | Max 5 manuelle Positionen; öffentliche Marktdaten und Rebalancing verfügbar; kein Import, keine KI, keine Ziele |
 | Trial Android (7 Tage) | Gratis, ohne Karte | n/a | Premium komplett für 7 Tage |
+| Kostenlose Android-Version (nach dem Trial) | Gratis | n/a | Manuelle Positionen ohne Begrenzung der Anzahl, öffentliche Marktdaten und Rebalancing; CSV/PDF-Import, Ziele und KI erfordern Premium |
 | Premium Single Annual | EUR 4,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet, ein Google-Konto |
 | Premium Single Lifetime | EUR 29,99 einmalig | Einmalzahlung, **keine Verlängerung** | Alles lebenslang freigeschaltet, ein Google-Konto |
 | Premium Family Annual | EUR 9,99/Jahr | Autom. jährliche Verlängerung | Alles freigeschaltet für Account Holder + bis zu 5 Family Members derselben Google Family Group |
@@ -74,8 +75,11 @@ Jederzeit kündbar in
 Lifetime-Abonnements **werden nicht verlängert** und verursachen keine
 wiederkehrenden Abbuchungen.
 
-**Erstattung -- Annual-Abonnements**: Google Play Policy. Innerhalb 48h:
-automatisch via Google-Konto. Danach: nach Googles Ermessen.
+**Erstattung -- Annual-Abonnements**: Die Erstattung wird bei Google Play
+beantragt, über den Bestellverlauf des Google-Play-Kontos. Google entscheidet
+nach seinen eigenen Erstattungsregeln: Sie erfolgt nicht automatisch und
+hängt nicht von PluriFin ab; PluriFin kann den Antrag an Google weiterleiten,
+hat aber keinen Einfluss auf die Entscheidung.
 
 **Erstattung -- Lifetime-Abonnements und 14-tägiges Widerrufsrecht**:
 als auf einem nicht-körperlichen Datenträger gelieferte digitale Inhalte
@@ -101,7 +105,8 @@ DSGVO-Datenschutzrechte. Der Family-Zugang erlischt automatisch bei:
 Entfernung des Members aus der Google Family Group, Kündigung des
 Abonnements, natürlichem Ablauf des Annual ohne Verlängerung, Beendigung
 gemäß Abschn. 10. Der Account Holder haftet zivilrechtlich für die
-Nutzung der App durch die Family Members.
+Nutzung der App durch die Family Members innerhalb der vom anwendbaren
+Recht vorgesehenen Grenzen.
 
 **Preisänderung**: gilt nur für **Annual**-Abonnements (Single und
 Family). Mitteilung 30 Tage vorher via App + E-Mail.
@@ -140,14 +145,21 @@ PluriFin haftet NICHT, in den gesetzlichen Grenzen, für:
 - Fehler/Verzögerungen/Ungenauigkeiten in Marktdaten Dritter
 - Fehler, Halluzinationen, veraltete Daten in KI-Antworten
 - Fehler beim CSV/PDF-Parsing
-- Backend-Nichtverfügbarkeit (Cloudflare Worker)
+- Nichtverfügbarkeit oder Fehler von Google Play bei der Übermittlung des
+  Status eines Kaufs oder Abonnements an die App
 - Lokaler Datenverlust durch Deinstallation/Störung
 - Gerätekompromittierung (Root, Jailbreak, Malware)
 
 ### 7.3 Quantitative Höchstgrenze
 
-Maximale Haftung von PluriFin = höherer Wert aus **EUR 50,00** oder im
-12-Monats-Zeitraum vor dem Ereignis gezahltem Betrag.
+In jedem Fall und unbeschadet der gesetzlichen Ausschlüsse bei Vorsatz oder
+grober Fahrlässigkeit (Art. 1229 des italienischen Zivilgesetzbuchs) ist die
+etwaige Gesamthaftung von PluriFin gegenüber dem Nutzer, gleich aus welchem
+Grund, auf den höheren der folgenden Beträge begrenzt:
+
+- **EUR 50,00** (fünfzig Euro)
+- Der vom Nutzer in den 12 Monaten vor dem Ereignis tatsächlich für das
+  Premium-Abonnement gezahlte Betrag
 
 ### 7.4 Nicht-ausschließbare Verbraucherrechte
 
@@ -162,7 +174,7 @@ EODHD/FMP. PluriFin haftet nicht für deren Störungen.
 
 ## 9. Änderung der Bedingungen
 
-Mitteilung via App (Re-Consent) und Site-Banner (30 Tage). Bei
+Mitteilung via App (Re-Consent). Bei
 Nichtannahme: Deinstallation und Erstattungsantrag bei Google.
 
 ## 10. Beendigung
@@ -198,6 +210,8 @@ ausschließlicher Gerichtsstand **Mailand (Italien)** gemäß Art. 18 und
 20 der italienischen Zivilprozessordnung als Gerichtsstand des in Italien
 ansässigen Verantwortlichen.
 
+Bei Abweichungen zwischen den Sprachfassungen dieses Dokuments hat der italienische Text Vorrang.
+
 ## 15. ADR
 
 ODR-Plattform der EU-Kommission:
@@ -209,7 +223,7 @@ Bei Unwirksamkeit einer Klausel bleiben die übrigen wirksam.
 
 ## 17. Kommunikation
 
-PluriFin -> Nutzer: in-app, E-Mail (falls angegeben), Site-Banner.
+PluriFin -> Nutzer: in-app (Einwilligungsbildschirm), E-Mail (falls angegeben), Website.
 Nutzer -> PluriFin: E-Mails Abschnitt 12 Privacy Policy.
 
 ## 18. Versionierung

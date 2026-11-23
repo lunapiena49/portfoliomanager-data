@@ -38,8 +38,13 @@ test('games: politica di sicurezza a hash, senza unsafe-*, senza attributi style
 test('games: il testo c\'e\' tutto senza JavaScript, una sola h1, sei capitoli', () => {
   const h = html();
   const testo = testoVisibile(h);
-  for (const frase of ['porta il gioco da tavolo in cima a una torre', 'Come si gioca', 'La regola dei soldi', 'A che punto', 'Giocatori dai sedici anni in su', 'non vengono dal gioco']) {
+  for (const frase of ['porta il gioco da tavolo in cima a una torre', 'Come si gioca', 'La regola dei soldi', 'A che punto', 'Solo adulti (18+)', 'pubblico è di soli adulti (18+)', 'Il tetto vale per gli Astraliti comprati: 2.000 in 30 giorni', 'il tetto vale 20 euro', 'Skin e Zaino si pagano a parte, fuori dal tetto', 'non vengono dal gioco']) {
     assert.ok(testo.includes(frase), `manca: ${frase}`);
+  }
+  // S389 (NU-S389-TETTO-SKIN-ZAINO, "Tetto solo Astraliti"): gli Astraliti non
+  // "pagano tutto" (skin e Zaino si pagano in denaro, fuori dal tetto).
+  for (const vecchia of ['16+', 'etichetta prevista', 'Etichetta prevista', 'content rating', 'pagano tutto']) {
+    assert.ok(!testo.includes(vecchia), `resta: ${vecchia}`);
   }
   assert.ok(testo.split(' ').length > 500, 'pagina troppo corta');
   assert.equal(conta(h, /<h1[\s>]/g), 1);
@@ -142,7 +147,12 @@ test('games: in sviluppo, quindi niente store, niente moduli, niente date', () =
   const h = html();
   assert.ok(!/play\.google\.com|apps\.apple\.com/.test(h), 'collegamento a uno store');
   assert.ok(!/<form|<input|<button/.test(h.replace(/<header[\s\S]*?<\/header>/, '')), 'un modulo o un bottone nella pagina');
-  assert.ok(!/\b20(2[6-9]|3\d)\b/.test(testoVisibile(h).replace(/© 2026 PluriFin/, '')), 'una data nel testo');
+  // L'avviso di 30 giorni sui documenti legali di Portfolio Manager
+  // (AvvisoLegale.astro, sotto la testata di ogni pagina) porta la data di
+  // pubblicazione dei documenti, non una data del gioco: si toglie quel solo blocco, una volta,
+  // come il colophon. Una data nel testo di Games resta vietata.
+  const senzaAvviso = h.replace(/<aside class="margini avviso-legale"[\s\S]*?<\/aside>/, '');
+  assert.ok(!/\b20(2[6-9]|3\d)\b/.test(testoVisibile(senzaAvviso).replace(/© 2026 PluriFin/, '')), 'una data nel testo');
 });
 
 test('games: la pagina e i file che chiama (font esclusi) restano sotto 450 KB', () => {

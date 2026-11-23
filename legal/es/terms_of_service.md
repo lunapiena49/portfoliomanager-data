@@ -1,7 +1,7 @@
 # Términos de Servicio -- Portfolio Manager by PluriFin
 
-**Versión**: 1.1.0
-**Última actualización**: 2026-08-15
+**Versión**: 1.1.2
+**Última actualización**: 2026-11-22
 **Idioma original**: Italiano (versión vinculante para la jurisdicción)
 
 ---
@@ -42,8 +42,9 @@ Google vs hasta 6 cuentas en un Google Family Group).
 
 | Tier | Coste | Modelo | Funciones |
 |---|---|---|---|
-| Webapp demo | Gratis | n/a | Max 5 posiciones manuales, sin import, mercado semanal, IA y objetivos bloqueados |
+| Webapp demo | Gratis | n/a | Max 5 posiciones manuales; datos de mercado públicos y rebalanceo disponibles; sin import, IA ni objetivos |
 | Trial Android (7 días) | Gratis, sin tarjeta | n/a | Premium completo durante 7 días |
+| Versión gratuita Android (tras el trial) | Gratis | n/a | Posiciones manuales sin límite de número, datos de mercado públicos y rebalanceo; import CSV/PDF, objetivos e IA requieren Premium |
 | Premium Single Annual | EUR 4,99/año | Renovación automática anual | Todo desbloqueado, una sola cuenta Google |
 | Premium Single Lifetime | EUR 29,99 pago único | Pago único, **sin renovación** | Todo desbloqueado de por vida, una sola cuenta Google |
 | Premium Family Annual | EUR 9,99/año | Renovación automática anual | Todo desbloqueado para el Account Holder + hasta 5 Family Members del mismo Google Family Group |
@@ -71,8 +72,10 @@ Play). PluriFin no recibe datos de tarjeta.
 momento sin penalización. Los abonamientos Lifetime **no se renuevan**
 y no generan cargos recurrentes.
 
-**Reembolso -- abonamientos Annual**: política Google Play. Dentro de
-48h: automático vía cuenta Google. Después: a discreción de Google.
+**Reembolso -- abonamientos Annual**: se pide a Google Play, desde el
+historial de pedidos de la cuenta Google Play. Decide Google según sus
+propias reglas de reembolso: no es automático y no depende de PluriFin, que
+puede reenviar la petición a Google pero no controla la decisión.
 
 **Reembolso -- abonamientos Lifetime y derecho de desistimiento 14
 días**: en cuanto contenido digital suministrado en soporte no material
@@ -95,7 +98,7 @@ GDPR. El acceso Family cesa automáticamente con: remoción del Member
 del Google Family Group, cancelación del abonamiento, expiración
 natural del Annual sin renovación, resolución ex sec. 10. El Account
 Holder es civilmente responsable del uso de la App por parte de los
-Family Members.
+Family Members dentro de los límites previstos por la normativa aplicable.
 
 **Cambio de precio**: aplica solo a abonamientos **Annual** (Single y
 Family). Aviso 30 días antes vía app + email. Los abonamientos
@@ -132,14 +135,21 @@ PluriFin NO es responsable, en los límites máximos legales, de:
 - Errores/retrasos/inexactitudes en datos de mercado de terceros
 - Errores, alucinaciones o datos obsoletos en respuestas IA
 - Errores en parseo de extractos CSV/PDF
-- Indisponibilidad backend (Cloudflare Worker)
+- Indisponibilidad o errores de Google Play al comunicar a la App el estado
+  de una compra o de una suscripción
 - Pérdida de datos locales por desinstalación o mal funcionamiento
 - Compromiso del dispositivo (root, jailbreak, malware)
 
 ### 7.3 Límite cuantitativo
 
-Responsabilidad máxima de PluriFin = mayor entre **EUR 50,00** y la suma
-pagada en los 12 meses anteriores al evento.
+En todo caso, y sin perjuicio de las exclusiones legales por dolo o culpa
+grave (art. 1229 del Código Civil italiano), la eventual responsabilidad
+total de PluriFin frente al Usuario, por cualquier causa, se limita al mayor
+entre:
+
+- **EUR 50,00** (cincuenta euros)
+- El importe efectivamente pagado por el Usuario por la suscripción Premium
+  en los 12 meses anteriores al evento
 
 ### 7.4 Derechos del consumidor no excluibles
 
@@ -154,7 +164,7 @@ EODHD/FMP terms. PluriFin no responde por sus malfuncionamientos.
 
 ## 9. Cambios en los Términos
 
-Aviso vía app (re-consent) y banner en sitio (30 días). Si no acepta,
+Aviso vía app (re-consent). Si no acepta,
 puede desinstalar y solicitar reembolso a Google.
 
 ## 10. Resolución
@@ -191,6 +201,8 @@ fuero exclusivo de **Milán (Italia)**, conforme a los arts. 18 y 20 del
 Código de Procedimiento Civil italiano como fuero del titular con sede
 en Italia.
 
+En caso de discrepancia entre las versiones lingüísticas del presente documento, prevalece el texto italiano.
+
 ## 15. ADR
 
 Plataforma ODR de la Comisión Europea:
@@ -202,7 +214,7 @@ Si una cláusula es inválida, las restantes permanecen vigentes.
 
 ## 17. Comunicaciones
 
-PluriFin -> Usuario: in-app, email (si proporcionado), banner sitio.
+PluriFin -> Usuario: in-app (pantalla de consentimiento), email (si proporcionado), sitio web.
 Usuario -> PluriFin: emails sección 12 Privacy Policy.
 
 ## 18. Versionado

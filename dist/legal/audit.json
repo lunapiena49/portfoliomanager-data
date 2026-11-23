@@ -1,100 +1,100 @@
 {
-    "generated_at":  "2026-09-22T18:33:44Z",
+    "generated_at":  "2026-11-23T08:19:55Z",
     "docs":  {
                  "privacy":  {
                                  "it":  {
                                             "output_path":  "dist\\legal\\it\\privacy.html",
                                             "source_path":  "assets\\legal\\it\\privacy_policy.md",
-                                            "sha256":  "6e91c1415e9c07276b6a52a0911b9d310fdcba037a739990ee5419bde92185aa"
+                                            "sha256":  "9be027b35b5b283b0c59f5a0db988ce00a8a41041f77f904d79d02ac576bd0e2"
                                         },
                                  "es":  {
                                             "output_path":  "dist\\legal\\es\\privacy.html",
                                             "source_path":  "assets\\legal\\es\\privacy_policy.md",
-                                            "sha256":  "7e22bb81d26684588cc8a24181f9ecef49d2916d0fd41fb7e816d7ec5a75435a"
+                                            "sha256":  "9540d57961e579e7c2d0d74d09c0f8c30077609037575bb2c2bd1ba2a96120f5"
                                         },
                                  "fr":  {
                                             "output_path":  "dist\\legal\\fr\\privacy.html",
                                             "source_path":  "assets\\legal\\fr\\privacy_policy.md",
-                                            "sha256":  "b5dd1b83ca72b30f51886c3ab3d2e577955ce0410702f9c0f99a118aab7d7ee6"
+                                            "sha256":  "de09158e72c00a1d5c646d176bf008aa69b763858adce377665989ad4952bdf4"
                                         },
                                  "pt":  {
                                             "output_path":  "dist\\legal\\pt\\privacy.html",
                                             "source_path":  "assets\\legal\\pt\\privacy_policy.md",
-                                            "sha256":  "42d7941db2918e375749ae73350b346d67db6469958b02f4fdd1a9d2acb10863"
+                                            "sha256":  "e86a5b5795168d422d043fe00fc680fde7a0206917d65d6e5f26777e1965a341"
                                         },
                                  "de":  {
                                             "output_path":  "dist\\legal\\de\\privacy.html",
                                             "source_path":  "assets\\legal\\de\\privacy_policy.md",
-                                            "sha256":  "2b2a678d60eae2acfa28519a84b8dda8900e09db9fa8686c0d9626920029b665"
+                                            "sha256":  "652c1d851972c3392dd84e7dcc050a12aa331b0b04fbae86ddff3493d9efce8a"
                                         },
                                  "en":  {
                                             "output_path":  "dist\\legal\\en\\privacy.html",
                                             "source_path":  "assets\\legal\\en\\privacy_policy.md",
-                                            "sha256":  "9657c721892dcaa48a525ae4cbb5b445736356f0ef9d6cac593bbd72a219ef3c"
+                                            "sha256":  "d37c639a0cad26fd4cc7e832f5eb73a7adbab6218fa4fa36b898617504f9bb6e"
                                         }
                              },
                  "disclaimer":  {
                                     "it":  {
                                                "output_path":  "dist\\legal\\it\\disclaimer.html",
                                                "source_path":  "assets\\legal\\it\\disclaimer_financial.md",
-                                               "sha256":  "9a7fcf04e5b566a107255310438ec06625e8c9a2e1bbf767508c3d46f49a6ee0"
+                                               "sha256":  "f126384430a941d21c41515ab81de4fcd10bbac007423cd9b4083cc7dd09d210"
                                            },
                                     "es":  {
                                                "output_path":  "dist\\legal\\es\\disclaimer.html",
                                                "source_path":  "assets\\legal\\es\\disclaimer_financial.md",
-                                               "sha256":  "9dc22309c595fcfa9b37d2dcddaf90757dc9831985f4b20b309a98e8aecb3d6c"
+                                               "sha256":  "0dd182a3a283af0f35937c7d8afb561ea2ceee77f189cd9282487123246ecd5d"
                                            },
                                     "fr":  {
                                                "output_path":  "dist\\legal\\fr\\disclaimer.html",
                                                "source_path":  "assets\\legal\\fr\\disclaimer_financial.md",
-                                               "sha256":  "38fbed915533e35de8a71e0ecc76f2f101dad538b0b3124f16bf4af65518d3bb"
+                                               "sha256":  "38f2ab52fd856231a19b72e673405c5e8af1b0270bca98921a3f90b1900c5f89"
                                            },
                                     "pt":  {
                                                "output_path":  "dist\\legal\\pt\\disclaimer.html",
                                                "source_path":  "assets\\legal\\pt\\disclaimer_financial.md",
-                                               "sha256":  "1723f8a3efa59ffabdc7b651243324b7225ebdbe5286868a1786099636551ed2"
+                                               "sha256":  "321e88ab67d94e7ca500001c6bb75a2ec2202b831a582ef45581ccef06b8248f"
                                            },
                                     "de":  {
                                                "output_path":  "dist\\legal\\de\\disclaimer.html",
                                                "source_path":  "assets\\legal\\de\\disclaimer_financial.md",
-                                               "sha256":  "45219543282b65ca19f75bfcd29668d2b6280bd263d69797ad5e62328d5c357f"
+                                               "sha256":  "6e42ee86a2dd5843f5c12846f11bfa0ae62064bc7e913be7c1528eb48b90d2c2"
                                            },
                                     "en":  {
                                                "output_path":  "dist\\legal\\en\\disclaimer.html",
                                                "source_path":  "assets\\legal\\en\\disclaimer_financial.md",
-                                               "sha256":  "3793707f0140d4ebddfd9daa41ae94517214beedab2458efbda930553f18e2bb"
+                                               "sha256":  "a6aaf92c8d2764debe299bceb37bb9613f5051fc728e34e74bf5c03330885f93"
                                            }
                                 },
                  "terms":  {
                                "it":  {
                                           "output_path":  "dist\\legal\\it\\terms.html",
                                           "source_path":  "assets\\legal\\it\\terms_of_service.md",
-                                          "sha256":  "6f5ee01358c82c193f5e305f369b7ea46beac74df5e2ca938e69b602c3074f14"
+                                          "sha256":  "48a03e6738d6c23df1439ff6068e6247ce09eaf480c2c8c2460741f5e487d482"
                                       },
                                "es":  {
                                           "output_path":  "dist\\legal\\es\\terms.html",
                                           "source_path":  "assets\\legal\\es\\terms_of_service.md",
-                                          "sha256":  "aedac121ad1bcac455e152b885a86f9896f56b9228c45ed5f59da0563eab0d7f"
+                                          "sha256":  "2c689db39ff3e7433be78cbd5f43f77b9bee26b6e7e91361fc894b821a9a2256"
                                       },
                                "fr":  {
                                           "output_path":  "dist\\legal\\fr\\terms.html",
                                           "source_path":  "assets\\legal\\fr\\terms_of_service.md",
-                                          "sha256":  "1b5a892e97e22a0f68019ccae4939a9ee06fc7fca3c03e65386d28d109777abe"
+                                          "sha256":  "c05675b1a8dcacd93ebe4d11542b2e6eef3d3aed4e2f5c42b54678685739786a"
                                       },
                                "pt":  {
                                           "output_path":  "dist\\legal\\pt\\terms.html",
                                           "source_path":  "assets\\legal\\pt\\terms_of_service.md",
-                                          "sha256":  "2080fe601cd211952dbcbb1f2e1e1026468297ae1f0b866023b2d955f69af2ae"
+                                          "sha256":  "c2f8e419bca4f4714fef621ad2128a828bcb6fe35fd7ff3f221d7e7c84828476"
                                       },
                                "de":  {
                                           "output_path":  "dist\\legal\\de\\terms.html",
                                           "source_path":  "assets\\legal\\de\\terms_of_service.md",
-                                          "sha256":  "a7c8395a9c780c4e8e7d2be1c391d2c1ef735e860499911cea64370946ce68dc"
+                                          "sha256":  "7759a1d042037b90c6a0cc416dedc664629b0b02b368ef8ce3e3295e69dfe7c2"
                                       },
                                "en":  {
                                           "output_path":  "dist\\legal\\en\\terms.html",
                                           "source_path":  "assets\\legal\\en\\terms_of_service.md",
-                                          "sha256":  "0cf7c54c1f8a5fe846834d9e596a3782d25d7438bd401c4b4eaff9fbfae15d6c"
+                                          "sha256":  "07652227f553724b88d3ec25b582ac9bf59a2a9a2f210fc6890d94bd0364a4b4"
                                       }
                            }
              }

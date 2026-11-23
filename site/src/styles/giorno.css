@@ -170,6 +170,21 @@ img { max-width: 100%; }
 .testata nav a:hover { text-decoration: underline; }
 .testata nav a[aria-current='page'] { text-decoration: underline; text-decoration-thickness: 2px; }
 
+/* L'avviso di 30 giorni sui documenti legali (AvvisoLegale.astro, S389).
+   Colori dalle variabili del tema: sulla carta, nel lume e nella notte di
+   Games restano le coppie testo/fondo che il sito usa gia'. */
+.avviso-legale {
+  margin-block: 0 var(--s4);
+  padding: var(--s3) var(--s4);
+  background: var(--banda);
+  color: var(--inchiostro);
+  border-inline-start: 4px solid var(--rigo);
+  border-radius: 2px;
+  font: 400 16px/1.5 var(--sans);
+  overflow-wrap: break-word;
+}
+.avviso-legale p { margin: 0; max-width: none; }
+
 .lingue { position: relative; }
 .lingue summary {
   cursor: pointer; list-style: none; padding-block: var(--s2);

@@ -325,8 +325,12 @@ test('finance: ogni lingua mostra le sue quattro schermate, non quelle italiane'
 // minore). Misurato alla consegna (S384, corsia B6) sulle sei lingue, in KB,
 // massimo fra le lingue: prima pagina 499,1; finance 522,4; games 727,4;
 // pagine di servizio e legali da 393,7 a 400,6; informativa 415,8. Le soglie
-// sono quel massimo piu' un margine sotto il 5%.
-const SOGLIE = { '': 520, finance: 545, games: 760, about: 415, press: 415, pricing: 415, faq: 415, contact: 415, blog: 415, privacy: 435, terms: 415, disclaimer: 415, dmca: 415 };
+// sono quel massimo piu' un margine sotto il 5%. S398 (PM_TERMINI): /terms e
+// /disclaimer sono ora la resa dei documenti dell'app, lunghi come
+// l'informativa; rimisurati con la stessa regola: Termini 417,4 (it), disclaimer
+// 407,6 (it), informativa 417,2. I Termini prendono la soglia dell'informativa
+// (435, +4,2%); il disclaimer resta sotto la sua.
+const SOGLIE = { '': 520, finance: 545, games: 760, about: 415, press: 415, pricing: 415, faq: 415, contact: 415, blog: 415, privacy: 435, terms: 435, disclaimer: 415, dmca: 415 };
 
 /** Byte della pagina e di tutto cio' che chiama (immagini pigre comprese). */
 export function peso(rel) {

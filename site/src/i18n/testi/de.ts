@@ -47,6 +47,12 @@ const de: Testi = {
     avvisoFinanceLungo:
       'Portfolio Manager ist ein Informationswerkzeug. Die gezeigten Inhalte und Analysen, auch die von künstlicher Intelligenz erzeugten, sind keine Finanz-, Steuer- oder Rechtsberatung im Sinne des italienischen Finanzmarktgesetzes Testo unico della finanza (D.Lgs. 58/1998) oder vergleichbarer Vorschriften. PluriFin verwaltet kein Kapital und führt keine Orders aus. Anlageentscheidungen trifft man gemeinsam mit einer zugelassenen Fachperson.',
     datiEsempio: 'Beispieldaten.',
+    avvisoLegale: {
+      etichetta: 'Hinweis zu den Rechtsdokumenten',
+      frase: 'Am {data} hat PluriFin neue Fassungen von drei Dokumenten der App Portfolio Manager veröffentlicht:',
+      documenti: { privacy: 'Datenschutzerklärung', terms: 'Nutzungsbedingungen', disclaimer: 'Finanz-Disclaimer' },
+      e: ' und ',
+    },
     colophon: {
       riga: 'Filippo Salemi hat PluriFin in Italien gegründet und führt das Haus.',
       stampa: 'Presse',
@@ -100,7 +106,7 @@ const de: Testi = {
         ],
         [
           'Das Portfolio bleibt auf dem Telefon, verschlüsselt mit AES-256. PluriFin hat kein Archiv, in dem es liegen könnte, und verlangt kein Nutzerkonto: Wo nichts lagert, gibt es nichts zu stehlen.',
-          'Bei PluriFin kommt das Portfolio nie an. Um Testphase und Abo zu prüfen, genügen ein anonymer Geräte-Fingerabdruck und der Kaufbeleg. Die Analyse mit künstlicher Intelligenz ist freiwillig: Wer sie einschaltet, schickt die Frage und die Zusammensetzung des Portfolios an Google Gemini, mit einem selbst eingetragenen Schlüssel.',
+          'Bei PluriFin kommt das Portfolio nie an. Testphase und Abo werden nur auf dem Gerät gespeichert: Die App schickt PluriFin weder den Kaufbeleg noch eine Gerätekennung. Die Analyse mit künstlicher Intelligenz ist freiwillig: Wer sie einschaltet, schickt die Frage und die Zusammensetzung des Portfolios an Google Gemini, mit einem selbst eingetragenen Schlüssel.',
         ],
         [
           'Die Preisliste hat vier Zeilen. Nach sieben Tagen Testphase ohne Kreditkarte wird gewählt: ein Jahresabo oder eine einzige Zahlung, für immer. Der Familientarif gilt für die Person, die kauft, und für bis zu fünf Mitglieder ihrer Google-Familiengruppe.',
@@ -135,8 +141,8 @@ const de: Testi = {
           'Die Felder sind nicht alle gleich: Auf einem wird gekämpft, ein anderes verbirgt eine Truhe, ein weiteres bietet einen Talisman zur Wahl aus drei Karten, und manches ist verbrannt und gibt nichts her. Ist die Runde geschlossen, geht es eine Etage höher.',
         ],
         [
-          'Wer nichts ausgibt, spielt jeden Inhalt durch. Kaufen lassen sich Komfort, Optik und Astraliten, bis zu einer Obergrenze von 20 Euro im Monat: Wer kauft, kommt früher an, aber nirgends hin, wo die anderen nicht auch hinkommen.',
-          'Im Klartext: Astraliten sind die Währung des Spiels und bezahlen auch Truhen mit zufälligem Inhalt, deshalb trägt das Spiel die Alterskennzeichnung 16+. Das Laster der Branche ist das Spiel ohne Obergrenze, bei dem die Rechnung erst am Monatsende auffällt. PluriFin schreibt seine Obergrenze hierhin, wo sie dem Haus jeder vorhalten kann.',
+          'Wer nichts ausgibt, spielt jeden Inhalt durch. Kaufen lassen sich Astraliten, kosmetische Skins und der Abenteurer-Rucksack. Die Obergrenze gilt für gekaufte Astraliten: 2.000 in 30 Tagen. Wo in Euro bezahlt wird, liegt sie bei 20 Euro. Skins und Rucksack werden getrennt bezahlt, außerhalb der Obergrenze. Wer kauft, kommt früher an, aber nirgends hin, wo die anderen nicht auch hinkommen.',
+          'Im Klartext: Astraliten sind die Premiumwährung des Spiels und bezahlen auch Truhen mit zufälligem Inhalt. Sie werden mit echtem Geld gekauft, deshalb richtet sich das Spiel nur an Erwachsene (18+). Das Laster der Branche ist das Spiel ohne Obergrenze, bei dem die Rechnung erst am Monatsende auffällt. PluriFin schreibt seine Obergrenze hierhin, wo sie dem Haus jeder vorhalten kann.',
         ],
         [
           'Die Welt ist ein dunkles, illustriertes Märchen: Stein, Buntglas, Laternenlicht, und nie das Grauen. Rollo, die Gegner, der Turm und die Würfel sind Originale, gezeichnet für dieses Spiel, das in sechs Sprachen erscheinen wird.',
@@ -198,7 +204,7 @@ const de: Testi = {
         {
           termine: 'An PluriFin',
           descrizione:
-            'Das Portfolio: nie. Um die siebentägige Testphase und das Abo zu prüfen, genügen ein anonymer Geräte-Fingerabdruck und der Kaufbeleg.',
+            'Das Portfolio: nie. Auch nicht der Kaufbeleg oder eine Gerätekennung: Die siebentägige Testphase und das Abo werden nur auf dem Gerät gespeichert.',
         },
         {
           termine: 'An Dritte, nur wenn Nutzer es einschalten',
@@ -299,7 +305,7 @@ const de: Testi = {
         titolo: 'Die Regel fürs Geld',
         paragrafi: [
           'Wer nichts ausgibt, spielt jeden Inhalt des Spiels durch. Das ist die Vorgabe, nach der PluriFin die Spielökonomie austariert: Jede Änderung wird mit einem Simulator an genau diesem Spieler geprüft, bevor sie bei den Spielern ankommt.',
-          'Kaufen lassen sich Komfort, Optik und Astraliten, bis zu einer Obergrenze von 20 Euro im Monat: Wer kauft, kommt früher an, aber nirgends hin, wo die anderen nicht auch hinkommen. Im Klartext: Astraliten sind die Währung des Spiels und bezahlen alles, auch Truhen mit zufälligem Inhalt. Deshalb trägt das Spiel die Alterskennzeichnung 16+, während der Inhalt ein Märchen ohne Grauen und ohne Blut bleibt.',
+          'Kaufen lassen sich Astraliten, kosmetische Skins und der Abenteurer-Rucksack. Die Obergrenze gilt für gekaufte Astraliten: 2.000 in 30 Tagen. Wo in Euro bezahlt wird, liegt sie bei 20 Euro. Skins und Rucksack werden getrennt bezahlt, außerhalb der Obergrenze. Wer kauft, kommt früher an, aber nirgends hin, wo die anderen nicht auch hinkommen. Im Klartext: Astraliten sind die Premiumwährung des Spiels und bezahlen auch Truhen mit zufälligem Inhalt. Sie werden mit echtem Geld gekauft, deshalb richtet sich das Spiel nur an Erwachsene (18+). Der Inhalt dagegen bleibt ein Märchen ohne Grauen und ohne Blut.',
           'Heute ist ROLLQUEST in Entwicklung und verkauft noch nichts. Das Laster der Branche ist das Spiel ohne Obergrenze, bei dem die Rechnung erst am Monatsende auffällt. Hier gibt es die Obergrenze, und sie steht auf dieser Seite, wo jeder sie PluriFin vorhalten kann.',
         ],
       },
@@ -316,7 +322,7 @@ const de: Testi = {
       titolo: 'Wo es steht',
       paragrafi: [
         'ROLLQUEST ist in Entwicklung. Einen Erscheinungstermin gibt es nicht, und PluriFin erfindet keinen, um eine Zeile zu füllen: Das Haus gibt ihn unter „Neues“ bekannt, sobald es etwas zu spielen gibt.',
-        'Auf dieser Website gibt es keine Warteliste, in die man sich eintragen könnte. Das Spiel ist für Spieler ab sechzehn Jahren ausgewiesen und erscheint in sechs Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch und Portugiesisch.',
+        'Auf dieser Website gibt es keine Warteliste, in die man sich eintragen könnte. Das Spiel richtet sich nur an Erwachsene (18+) und erscheint in sechs Sprachen: Italienisch, Englisch, Spanisch, Französisch, Deutsch und Portugiesisch.',
         'Das Studio ist klein und denkt groß: eine ganze Welt, ein Turm, der nicht beim ersten Boss endet, und der Anspruch, im selben Regal zu stehen wie Spiele, an denen hundert Leute gebaut haben.',
       ],
     },
@@ -336,7 +342,7 @@ const de: Testi = {
     occhiello: 'Das Haus',
     titolo: 'PluriFin, zwei Sparten und nur eine Art zu verdienen',
     sommario:
-      'Ein italienisches Unternehmen, gegründet und geführt von Filippo Salemi, das eine App für die privaten Finanzen und ein Brettspiel baut. Wenn es Geld verlangt, sagt es vorher, wie viel: eine Preisliste mit vier Zeilen für die App, eine Obergrenze von 20 Euro im Monat für das Spiel.',
+      'Ein italienisches Unternehmen, gegründet und geführt von Filippo Salemi, das eine App für die privaten Finanzen und ein Brettspiel baut. Wenn es Geld verlangt, sagt es vorher, wie viel. Für die App eine Preisliste mit vier Zeilen. Für das Spiel eine Obergrenze von 2.000 gekauften Astraliten in 30 Tagen. Wo in Euro bezahlt wird, liegt sie bei 20 Euro. Skins und Abenteurer-Rucksack werden getrennt bezahlt.',
     capitoli: [
       {
         id: 'fondatore',
@@ -463,12 +469,12 @@ const de: Testi = {
         { termine: 'Plattform', descrizione: 'Android.' },
         { termine: 'Engine', descrizione: 'Unity.' },
         { termine: 'Sprachen', descrizione: 'Sechs.' },
-        { termine: 'Zielgruppe', descrizione: 'Spieler ab sechzehn Jahren.' },
+        { termine: 'Zielgruppe', descrizione: 'Nur Erwachsene (18+).' },
         { termine: 'Stand', descrizione: 'In Entwicklung. Kein Termin angekündigt.' },
         {
           termine: 'Regel',
           descrizione:
-            'Wer nichts ausgibt, spielt jeden Inhalt durch, und wer Geld ausgibt, hat eine Obergrenze von 20 Euro im Monat: Die ganze Regel, Truhen mit zufälligem Inhalt eingeschlossen, steht im Geldkapitel der Games-Seite.',
+            'Wer nichts ausgibt, spielt jeden Inhalt durch. Wer Astraliten kauft, hat eine Obergrenze von 2.000 in 30 Tagen. Wo in Euro bezahlt wird, liegt sie bei 20 Euro. Skins und Abenteurer-Rucksack werden getrennt bezahlt, außerhalb der Obergrenze. Die ganze Regel, Truhen mit zufälligem Inhalt eingeschlossen, steht im Geldkapitel der Games-Seite.',
         },
       ],
     },

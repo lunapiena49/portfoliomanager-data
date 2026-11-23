@@ -2,7 +2,7 @@
 title: "Portfolio Manager repose sur trois interdits"
 summary: "Pas d’archives des portefeuilles, pas de connexion aux comptes, pas d’intelligence artificielle sans la clé de l’utilisateur. La grille tarifaire de quatre lignes vient de là."
 publishedAt: 2026-05-07
-updatedAt: 2026-11-11
+updatedAt: 2026-11-22
 author:
   name: "PluriFin"
   role: "Rédaction"
@@ -14,7 +14,7 @@ Les applications de finance se présentent par la liste de ce qu’elles font. P
 
 ## Premier interdit : pas d’archives des portefeuilles
 
-Le portefeuille reste sur le téléphone de son propriétaire, chiffré en AES-256, avec une clé gardée par le système d’exploitation. PluriFin ne conserve pas les portefeuilles et ne demande pas d’ouvrir un compte. Pour vérifier l’essai et l’abonnement, il lui suffit d’une empreinte anonyme de l’appareil et du reçu de l’achat.
+Le portefeuille reste sur le téléphone de son propriétaire, chiffré en AES-256, avec une clé gardée par le système d’exploitation. PluriFin ne conserve pas les portefeuilles et ne demande pas d’ouvrir un compte. L’essai et l’abonnement sont enregistrés uniquement sur l’appareil : ni le reçu de l’achat ni un identifiant de l’appareil ne lui parviennent.
 
 Une application de finance gratuite qui conserve les portefeuilles sur ses propres serveurs a un coût à couvrir. Avant de l’installer, mieux vaut demander avec quoi elle le couvre.
 
